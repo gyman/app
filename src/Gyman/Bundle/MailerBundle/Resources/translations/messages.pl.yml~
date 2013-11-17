@@ -1,0 +1,12 @@
+mailing.contact.subject: '[gyman.pl] Formularz kontaktowy'
+mailing.registration_successful.subject: '[gyman.pl] Zarejestrowałeś u nas nowe konto'
+mailing.registeredSuccess.para01: 'Dziękujemy za rejestrację! Wszystko przebiegło w porządku :)'
+mailing.registeredSuccess.para02: 'Twoje dane dostępowe'
+mailing.registeredSuccess.para03: 'Zapisz lub wydrukuj te wiadomość.'
+mailing.registeredSuccess.para04: 'W razie problemów zawsze możesz skorzystać z'
+mailing.registeredSuccess.username: 'nazwa użytkownika'
+mailing.registeredSuccess.password: hasło
+mailing.registeredSuccess.link: 'przypominanie hasła'
+resetting.email.subject: 'Witaj %username%!'
+resetting.email.message: "Cześć %username%!\n\nAby zresetować hasło - proszę przejść do %confirmationUrl%\n\nPozdrawiamy,\nZespół.\n"
+user.notice.password_resetted_succesfuly: "Twoje hasło zostało zmienione! :)"

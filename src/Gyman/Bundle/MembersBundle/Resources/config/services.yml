@@ -1,0 +1,30 @@
+parameters:
+    member_entity.class: Gyman\Bundle\MembersBundle\Entity\Member
+    member_manager.class: Gyman\Bundle\MembersBundle\Services\Manager\MemberManager
+    member_repository.class: Gyman\Bundle\MembersBundle\Entity\MemberRepository
+
+services:
+    member_repository:
+        class:          "%member_repository.class%"
+        factory_service: doctrine
+        factory_method:  getRepository
+        arguments: [ "%member_entity.class%" ]
+
+    member_manager:
+        class:          "%member_manager.class%"
+        parent:         base_manager
+        calls:
+             - [ setClass, [%member_entity.class%] ]
+             - [ setRepository, ["@member_repository"] ]
+
+    dende.upload_listener:
+        class: Gyman\Bundle\MembersBundle\Services\Listener\UploadListener
+        arguments: [@doctrine]
+        tags:
+            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
+
+    dende.image_rescale_listener:
+        class: Gyman\Bundle\MembersBundle\Services\Listener\ImageRescaleListener
+        arguments: [@doctrine]
+        tags:
+            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}

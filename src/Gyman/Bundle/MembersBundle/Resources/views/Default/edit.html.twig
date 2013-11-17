@@ -1,0 +1,110 @@
+<form id="memberForm"
+      class="form-horizontal row-fluid"
+      action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}"
+      method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }}
+    {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
+
+    <div class="span4">
+        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
+    </div>
+
+    <div class="span8">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#detailsPane">
+                    <span class="icon16 icomoon-icon-home-6 "></span>
+                    Szczegóły
+                </a>
+            </li>
+            {% if voucher is defined and voucher is not null %}
+            <li>
+                <a data-toggle="tab" href="#voucherPane">
+                    <span class="icon16 icomoon-icon-equalizer-2"></span>
+                    Karnet
+                </a>
+            </li>
+            {% endif %}
+            {% if isNew is not defined %}
+            <li>
+                <a data-toggle="tab" href="#sellPane">
+                    <span class="icon16 icomoon-icon-cart"></span>
+                    Sprzedaż
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#entriesPane">
+                    <span class="icon16 icomoon-icon-enter"></span>
+                    Wejścia
+                </a>
+            </li>
+            {% endif %}
+            <li>
+                <a data-toggle="tab" href="#additionalsPane">
+                    <span class="icon16 icomoon-icon-fire"></span>
+                    Dodatkowe
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="detailsPane" class="tab-pane fade in active">
+                {% include 'MembersBundle:Default:Modal/_details.html.twig' with {'form' : form} %}
+            </div>
+            {% if voucher is defined and voucher is not null %}
+            <div class="tab-pane fade in" id="voucherPane">
+                 {{ render(controller('VouchersBundle:Default:voucherInfoInMemberModal', { 'voucher': voucher })) }}
+            </div>
+            {% endif %}
+            <div class="tab-pane fade in" id="sellPane">
+                {% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}
+            </div>
+            <div class="tab-pane fade in" id="entriesPane">
+                {% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}
+            </div>
+            <div class="tab-pane fade in" id="additionalsPane">
+                {% include 'MembersBundle:Default:Modal/_additional.html.twig' with {'form' : form} %}
+            </div>
+        </div>
+        {% block memberToolbox %}
+        <div class="pull-right hideForNewMember" id="memberModalToolbox">
+            <a href="{{ path("_voucher_new",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-signup"></i> Karnet</a>
+            <a href="{{ path("_entrance_add",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-enter"></i> Wejście</a>
+        </div>
+        {% endblock memberToolbox %}
+    </div>
+    <div class="hidden">
+    {{ form_rest(form) }}
+    </div>
+</form>
+
+{% block modal %}
+<div class="hidden" id="ui-editMemberData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block modalTitle %}Edycja użytkownika {{member.getName()}}{%endblock modalTitle%}</h3>
+    </div>
+    <div class="modal-footer">
+        <form id="deleteForm" class="pull-left">
+            <label>
+                <input type="checkbox" id="deleteCheckbox" />
+                Usuń użytkownika
+            </label>
+        </form>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+
+<script src="{{ asset('/assets/js/members.min.js') }}"></script>
+
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-editMemberData");
+        modal.setModalWindowClass("editMemberModal");
+
+        window.editMemberModal = new EditMember();
+    });
+</script>
+{% endblock javascript %}

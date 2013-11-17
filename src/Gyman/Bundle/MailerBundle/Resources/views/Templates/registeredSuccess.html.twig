@@ -1,0 +1,13 @@
+{% extends "MailerBundle::layout.html.twig" %}
+
+{% block content %}
+    <p>{{ 'mailing.registeredSuccess.para01'|trans }}</p>
+    <p>{{ 'mailing.registeredSuccess.para02'|trans }}:</p>
+    <ul>
+        <li>{{ 'mailing.registeredSuccess.username'|trans }}: <strong>{{ username }}</strong>
+        <li>{{ 'mailing.registeredSuccess.password'|trans }}: <strong>{{ password }}</strong>
+    </ul>
+    <p>{{ 'mailing.registeredSuccess.para03'|trans }}</p>
+    {# todo: add path to password recovery #}
+    <p>{{ 'mailing.registeredSuccess.para04'|trans }} <a href="#">{{ 'mailing.registeredSuccess.link'|trans }}</a>.</p>
+{% endblock %}

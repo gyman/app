@@ -1,0 +1,7 @@
+{% autoescape false %}
+Imię i nazwisko;Początek karnetu;Koniec karnetu;Cena;Data sprzedaży;Pozostałe wejścia;Liczba wejść
+{% for voucher in data %}
+{{ voucher.getMember().getName() }};{{voucher.getStartDate()|date("Y-m-d")}};{{voucher.getEndDate()|date("Y-m-d")}};{{voucher.getPrice()}};{{voucher.getCreated()|date("Y-m-d H:i:s")}};{{voucher.getAmountLeft()}};{{voucher.getAmount()}}
+{% endfor %}
+;;;{{priceSum}};;;
+{% endautoescape %}

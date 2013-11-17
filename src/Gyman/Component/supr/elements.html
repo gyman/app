@@ -1,0 +1,1792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Supr admin</title>
+    <meta name="author" content="SuggeElson" />
+    <meta name="description" content="Supr admin template - new premium responsive admin template. This template is designed to help you build the site administration without losing valuable time.Template contains all the important functions which must have one backend system.Build on great twitter boostrap framework" />
+    <meta name="keywords" content="admin, admin template, admin theme, responsive, responsive admin, responsive admin template, responsive theme, themeforest, 960 grid system, grid, grid theme, liquid, masonry, jquery, administration, administration template, administration theme, mobile, touch , responsive layout, boostrap, twitter boostrap" />
+    <meta name="application-name" content="Supr admin template" />
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Force IE9 to render in normla mode -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Le styles -->
+
+    <!-- Use new way for google web fonts 
+    http://www.smashingmagazine.com/2012/07/11/avoiding-faux-weights-styles-google-web-fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Text -->
+    <!--[if lt IE 9]>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+    <!-- Core stylesheets do not remove -->
+    <link id="bootstrap" href="css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-responsive" href="css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/supr-theme/jquery.ui.supr.css" rel="stylesheet" type="text/css"/>
+    <link href="css/icons.css" rel="stylesheet" type="text/css" />
+
+    <!-- Plugin stylesheets -->
+    <link href="plugins/misc/qtip/jquery.qtip.css" rel="stylesheet" type="text/css" />    
+    <link href="plugins/misc/prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/misc/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/forms/uniform/uniform.default.css" type="text/css" rel="stylesheet" />
+        
+    <!-- Main stylesheets -->
+    <link href="css/main.css" rel="stylesheet" type="text/css" /> 
+
+    <!-- Custom stylesheets ( Put your own changes here ) -->
+    <link href="css/custom.css" rel="stylesheet" type="text/css" /> 
+
+    <!--[if IE 8]><link href="css/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="js/libs/excanvas.min.js"></script>
+      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script type="text/javascript" src="js/libs/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57-precomposed.png" />
+    
+    <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+    <meta name="application-name" content="Supr"/> 
+    <meta name="msapplication-TileColor" content="#3399cc"/> 
+
+    <!-- Load modernizr first -->
+    <script type="text/javascript" src="js/libs/modernizr.js"></script>
+
+    </head>
+      
+    <body>
+
+    <!-- loading animation -->
+    <div id="qLoverlay"></div>
+    <div id="qLbar"></div>
+    
+    <div id="header">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+              <div class="container-fluid">
+                <a class="brand" href="dashboard.html">Supr.<span class="slogan">admin</span></a>
+                <div class="nav-no-collapse">
+                    <ul class="nav">
+                        <li><a href="dashboard.html"><span class="icon16 icomoon-icon-screen-2"></span> <span class="txt">Dashboard</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-cog"></span><span class="txt"> Settings</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul>
+                                        <li>                                                    
+                                            <a href="#"><span class="icon16 icomoon-icon-equalizer"></span>Site config</a>
+                                        </li>
+                                        <li>                                                    
+                                            <a href="#"><span class="icon16 icomoon-icon-wrench"></span>Plugins</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-image-2"></span>Themes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-envelop"></span><span class="txt">Messages</span><span class="notification">8</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul class="messages">    
+                                        <li class="header"><strong>Messages</strong> (10) emails and (2) PM</li>
+                                        <li>
+                                           <span class="icon"><span class="icon16 icomoon-icon-user-plus"></span></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>Sammy Morerira</strong></a><span class="time">35 min ago</span></span>
+                                            <span class="msg">I have question about new function ...</span>
+                                        </li>
+                                        <li>
+                                           <span class="icon avatar"><img src="images/avatar.jpg" alt="" /></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>George Michael</strong></a><span class="time">1 hour ago</span></span>
+                                            <span class="msg">I need to meet you urgent please call me ...</span>
+                                        </li>
+                                        <li>
+                                            <span class="icon"><span class="icon16 icomoon-icon-envelop"></span></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>Ivanovich</strong></a><span class="time">1 day ago</span></span>
+                                            <span class="msg">I send you my suggestion, please look and ...</span>
+                                        </li>
+                                        <li class="view-all"><a href="#">View all messages <span class="icon16 icomoon-icon-arrow-right-8"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                  
+                    <ul class="nav pull-right usernav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul class="notif">
+                                        <li class="header"><strong>Notifications</strong> (3) items</li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-user-plus"></span></span>
+                                                <span class="event">1 User is registred</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-bubble-3"></span></span>
+                                                <span class="event">Jony add 1 comment</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-new"></span></span>
+                                                <span class="event">admin Julia added post</span>
+                                            </a>
+                                        </li>
+                                        <li class="view-all"><a href="#">View all notifications <span class="icon16 icomoon-icon-arrow-right-8"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+                                <img src="images/avatar.jpg" alt="" class="image" /> 
+                                <span class="txt">admin@supr.com</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-user-plus"></span>Edit profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-bubble-2"></span>Approve comments</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-plus"></span>Add user</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="index.html"><span class="icon16 icomoon-icon-exit"></span><span class="txt"> Logout</span></a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+              </div>
+            </div><!-- /navbar-inner -->
+          </div><!-- /navbar --> 
+
+    </div><!-- End #header -->
+
+    <div id="wrapper">
+
+        <!--Responsive navigation button-->  
+        <div class="resBtn">
+            <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+        </div>
+        <!--Sidebar collapse button-->  
+        <div class="collapseBtn leftbar">
+             <a href="#" class="tipR" title="Hide sidebar"><span class="icon12 minia-icon-layout"></span></a>
+        </div>
+        
+        <!--Sidebar background-->
+        <div id="sidebarbg"></div>
+        <!--Sidebar content-->
+        <div id="sidebar">
+
+            <div class="shortcuts">
+                <ul>
+                    <li><a href="support.html" title="Support section" class="tip"><span class="icon24 icomoon-icon-support"></span></a></li>
+                    <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database"></span></a></li>
+                    <li><a href="charts.html" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+                    <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
+                </ul>
+            </div><!-- End search -->            
+
+            <div class="sidenav">
+
+                <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+                    <h5 class="title" style="margin-bottom:0">Navigation</h5>
+                </div><!-- End .sidenav-widget -->
+
+                <div class="mainnav">
+                    <ul>
+                        <li><a href="charts.html"><span class="icon16 icomoon-icon-stats-up"></span>Charts</a></li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-list"></span>Forms</a>
+                            <ul class="sub">
+                                <li><a href="forms.html"><span class="icon16 icomoon-icon-file"></span>Forms Stuff</a></li>
+                                <li><a href="forms-validation.html"><span class="icon16 icomoon-icon-file"></span>Validation</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-table-2"></span>Tables</a>
+                            <ul class="sub">
+                                <li><a href="tables.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Static</a></li>
+                                <li><a href="data-table.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Data table</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-equalizer-2"></span>UI Elements</a>
+                            <ul class="sub">
+                                <li><a href="icons.html"><span class="icon16 icomoon-icon-rocket"></span>Icons</a></li>
+                                <li><a href="buttons.html"><span class="icon16 icomoon-icon-file"></span>Buttons</a></li>
+                                <li><a href="elements.html"><span class="icon16 icomoon-icon-cogs"></span>Elements</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="typo.html"><span class="icon16 icomoon-icon-font"></span>Typography</a></li>
+                        <li><a href="grid.html"><span class="icon16 icomoon-icon-grid"></span>Grid</a></li>
+                        <li><a href="calendar.html"><span class="icon16 icomoon-icon-calendar"></span>Calendar</a></li>
+                        <li>
+                            <a href="widgets.html"><span class="icon16 icomoon-icon-cube"></span>Widgets<span class="notification green">35</span></a>
+                        </li>
+                        <li><a href="file.html"><span class="icon16 icomoon-icon-upload"></span>File Manager</a></li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-file"></span>Error pages<span class="notification">6</span></a>
+                            <ul class="sub">
+                                <li><a href="403.html"><span class="icon16 icomoon-icon-file"></span>Error 403</a></li>
+                                <li><a href="404.html"><span class="icon16 icomoon-icon-file"></span>Error 404</a></li>
+                                <li><a href="405.html"><span class="icon16 icomoon-icon-file"></span>Error 405</a></li>
+                                <li><a href="500.html"><span class="icon16 icomoon-icon-file"></span>Error 500</a></li>
+                                <li><a href="503.html"><span class="icon16 icomoon-icon-file"></span>Error 503</a></li>
+                                <li><a href="offline.html"><span class="icon16 icomoon-icon-file"></span>Offline page</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-folder"></span>Other pages<span class="notification blue">11</span></a>
+                            <ul class="sub">
+                                <li><a href="invoice.html"><span class="icon16 icomoon-icon-file"></span>Invoice page</a></li>
+                                <li><a href="profile.html"><span class="icon16 icomoon-icon-file"></span>User profile</a></li>
+                                <li><a href="search.html"><span class="icon16 icomoon-icon-search-3"></span>Search page</a></li>
+                                <li><a href="email.html"><span class="icon16 icomoon-icon-envelop"></span>Email page</a></li>
+                                <li><a href="support.html"><span class="icon16  icomoon-icon-support"></span>Support page</a></li>
+                                <li><a href="faq.html"><span class="icon16 icomoon-icon-attachment"></span>FAQ page</a></li>
+                                <li><a href="structure.html"><span class="icon16 icomoon-icon-file"></span>Blank page</a></li>
+                                <li><a href="fixed-topbar.html"><span class="icon16 icomoon-icon-file"></span>Fixed topbar</a></li>
+                                <li><a href="right-sidebar.html"><span class="icon16 icomoon-icon-file"></span>Right sidebar</a></li>
+                                <li><a href="two-sidebars.html"><span class="icon16 icomoon-icon-file"></span>Two sidebars</a></li>
+                                <li><a href="drag.html"><span class="icon16 icomoon-icon-move"></span>Drag &amp; Drop <span class="notification red">new</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- End sidenav -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Monthly Bandwidth Transfer</h5>
+                <div class="content">
+                    <span class="icon16 icomoon-icon-loop left"></span>
+                    <div class="progress progress-mini progress-danger left tip" title="87%">
+                      <div class="bar" style="width: 87%;"></div>
+                    </div>
+                    <span class="percent">87%</span>
+                    <div class="stat">19419.94 / 12000 MB</div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Disk Space Usage</h5>
+                <div class="content">
+                    <span class="icon16  icomoon-icon-storage-2 left"></span>
+                    <div class="progress progress-mini progress-success left tip" title="16%">
+                      <div class="bar" style="width: 16%;"></div>
+                    </div>
+                    <span class="percent">16%</span>
+                    <div class="stat">304.44 / 8000 MB</div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Ad sense stats</h5>
+                <div class="content">
+                    
+                    <div class="stats">
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Advert View</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-eye left"></span>
+                            <div class="number">21,501</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up-2 green"></span>
+                                5%
+                            </div>
+                            <span id="stat1" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Clicks</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-thumbs-up left"></span>
+                            <div class="number">308</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down-2 red"></span>
+                                8%
+                            </div>
+                            <span id="stat2" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Page CTR</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-heart left"></span>
+                            <div class="number">4%</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down-2 red"></span>
+                                1%
+                            </div>
+                            <span id="stat3" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Earn money</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-coin left"></span>
+                            <div class="number">$376</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up-2 green"></span>
+                                26%
+                            </div>
+                            <span id="stat4" class="spark"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Right now</h5>
+                <div class="content">
+                    <div class="rightnow">
+                        <ul class="unstyled">
+                            <li><span class="number">34</span><span class="icon16 icomoon-icon-new"></span>Posts</li>
+                            <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>Pages</li>
+                            <li><span class="number">14</span><span class="icon16 icomoon-icon-list-2"></span>Categories</li>
+                            <li><span class="number">201</span><span class="icon16 icomoon-icon-tag"></span>Tags</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+        </div><!-- End #sidebar -->
+
+        <!--Body content-->
+        <div id="content" class="clearfix">
+            <div class="contentwrapper"><!--Content wrapper-->
+
+                <div class="heading">
+
+                    <h3>UI elements</h3>                    
+
+                    <div class="resBtnSearch">
+                        <a href="#"><span class="icon16 icomoon-icon-search-3"></span></a>
+                    </div>
+
+                    <div class="search">
+
+                        <form id="searchform" action="search.html">
+                            <input type="text" id="tipue_search_input" class="top-search" placeholder="Search here ..." />
+                            <input type="submit" id="tipue_search_button" class="search-btn" value=""/>
+                        </form>
+                
+                    </div><!-- End search -->
+                    
+                    <ul class="breadcrumb">
+                        <li>You are here:</li>
+                        <li>
+                            <a href="#" class="tip" title="back to dashboard">
+                                <span class="icon16 icomoon-icon-screen-2"></span>
+                            </a> 
+                            <span class="divider">
+                                <span class="icon16 icomoon-icon-arrow-right-3"></span>
+                            </span>
+                        </li>
+                        <li class="active">UI elements</li>
+                    </ul>
+
+                </div><!-- End .heading-->
+                    
+                <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Regular tabs</h4>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <ul id="myTab" class="nav nav-tabs pattern">
+                                    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                                    <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#dropdown1" data-toggle="tab">@fat</a></li>
+                                            <li><a href="#dropdown2" data-toggle="tab">@mdo</a></li>
+                                         </ul>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="home">
+                                        <p>Raw denim you probably haven't heard of them jean shorts Austin. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="profile">
+                                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="dropdown1">
+                                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="dropdown2">
+                                        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- End .span6 -->  
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Tabs on the Bottom </h4>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div class="tabbable tabs-below">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <p>Raw denim you probably haven't heard of them jean shorts Austin. </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                           <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+                                          <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                        </div>
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
+                                        <li><a href="#tab3" data-toggle="tab">Tab 3</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- End .span6 -->  
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>With gradient</h4>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <ul id="myTab1" class="nav nav-tabs">
+                                    <li class="active"><a href="#home1" data-toggle="tab">Home</a></li>
+                                    <li><a href="#profile1" data-toggle="tab">Profile</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#dropdown3" data-toggle="tab">@fat</a></li>
+                                            <li><a href="#dropdown4" data-toggle="tab">@mdo</a></li>
+                                         </ul>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="home1">
+                                        <p>Raw denim you probably haven't heard of them jean shorts Austin. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="profile1">
+                                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="dropdown3">
+                                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="dropdown4">
+                                        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- End .span6 -->  
+
+                        <div class="span6">                            
+
+                             <div class="page-header">
+                                <h4>Tabs on the left</h4>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div class="tabbable tabs-left">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab4" data-toggle="tab">Tab 1</a></li>
+                                        <li class=""><a href="#tab5" data-toggle="tab">Tab 2</a></li>
+                                        <li class=""><a href="#tab6" data-toggle="tab">Tab 3</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab4">
+                                            <p>Raw denim you probably haven't heard of them jean shorts Austin, accusamus mcsweeney's marfa nulla single-origin coffee, ethical wes anderson tofu before they sold out </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab5">
+                                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid,lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab6">
+                                            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End .span6 -->  
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+
+                            <div class="page-header">
+                                <h4>Buttons with notification</h4>
+                            </div>
+
+                            <div class="centerContent">
+                                <ul class="bigBtnIcon">
+                                    <li>
+                                        <a href="#" title="I`m with gradient" class="tipB">
+                                            <span class="icon icomoon-icon-users"></span>
+                                            <span class="txt">Users</span>
+                                            <span class="notification">5</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon icomoon-icon-support"></span>
+                                            <span class="txt">Support tickets</span>
+                                            <span class="notification blue">12</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="I`m with pattern" class="pattern tipB">
+                                            <span class="icon icomoon-icon-bubbles-2"></span>
+                                            <span class="txt">New Comments</span>
+                                            <span class="notification green">23</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon icomoon-icon-basket"></span>
+                                            <span class="txt">Orders</span>
+                                            <span class="notification">+5</span>
+                                        </a>
+                                    </li> 
+                                </ul>
+                            </div><!-- End .span6 -->  
+
+                        </div><!-- End .span6 -->  
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Tabs on the right</h4>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div class="tabbable tabs-right">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab7" data-toggle="tab">Tab 1</a></li>
+                                        <li><a href="#tab8" data-toggle="tab">Tab 2</a></li>
+                                        <li><a href="#tab9" data-toggle="tab">Tab 3</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab7">
+                                             <p>Raw denim you probably haven't heard of them jean shorts Austin, accusamus mcsweeney's marfa nulla single-origin coffee, ethical wes anderson tofu before they sold out </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab8">
+                                           <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid,lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                        </div>
+                                        <div class="tab-pane" id="tab9">
+                                            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End .span6 -->  
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Accordion</h4>
+                            </div>
+                            <div class="accordion" id="accordion2">
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                  Collapsible Group Item #1
+                                </a>
+                              </div>
+                              <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                  Collapsible Group Item #2
+                                </a>
+                              </div>
+                              <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                  Curabitur pulvinar magna a risus pulvinar mollis. Duis a est odio. Vivamus dui dui, consectetur vitae cursus dignissim, facilisis nec nulla. Sed laoreet fermentum sem, ut aliquam dui imperdiet nec. Suspendisse vitae erat enim. Morbi congue aliquam lectus, at commodo purus dapibus nec. Nullam sodales fermentum aliquet. Nunc quis ligula enim. Maecenas metus risus, egestas ut commodo eget, bibendum nec nisi
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                                  Collapsible Group Item #3
+                                </a>
+                              </div>
+                              <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                 Donec libero nisi, volutpat eu egestas vel, molestie vitae ante. Nam tortor risus, tincidunt et accumsan ac, vehicula eget metus. Aenean nec nibh ac nibh dignissim feugiat ac eget tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis auctor neque, vel varius nulla faucibus nec. Sed quam elit, mattis blandit suscipit at, lacinia sed urna. Suspendisse facilisis turpis vitae nisl rutrum at commodo ante euismod.
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="page-header">
+                           <h4>Toggle</h4>
+                        </div>
+                        <div class="accordion" id="accordion1">
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne1">
+                                  Collapsible Group Item #1
+                                </a>
+                              </div>
+                              <div id="collapseOne1" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseTwo2">
+                                  Collapsible Group Item #2
+                                </a>
+                              </div>
+                              <div id="collapseTwo2" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                  Curabitur pulvinar magna a risus pulvinar mollis. Duis a est odio. Vivamus dui dui, consectetur vitae cursus dignissim, facilisis nec nulla. Sed laoreet fermentum sem, ut aliquam dui imperdiet nec. Suspendisse vitae erat enim. Morbi congue aliquam lectus, at commodo purus dapibus nec. Nullam sodales fermentum aliquet. Nunc quis ligula enim. Maecenas metus risus, egestas ut commodo eget, bibendum nec nisi.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseThree3">
+                                  Collapsible Group Item #3
+                                </a>
+                              </div>
+                              <div id="collapseThree3" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                 Donec libero nisi, volutpat eu egestas vel, molestie vitae ante. Nam tortor risus, tincidunt et accumsan ac, vehicula eget metus. Aenean nec nibh ac nibh dignissim feugiat ac eget tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis auctor neque, vel varius nulla faucibus nec. Sed quam elit, mattis blandit suscipit at, lacinia sed urna. Suspendisse facilisis turpis vitae nisl rutrum at commodo ante euismod.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>With pattern and open 3 section </h4>
+                            </div>
+                            <div class="accordion pattern" id="accordion3">
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#One">
+                                  Collapsible Group Item #1
+                                </a>
+                              </div>
+                              <div id="One" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#Two">
+                                  Collapsible Group Item #2
+                                </a>
+                              </div>
+                              <div id="Two" class="accordion-body collapse" style="height: 0px; ">
+                                <div class="accordion-inner">
+                                  Curabitur pulvinar magna a risus pulvinar mollis. Duis a est odio. Vivamus dui dui, consectetur vitae cursus dignissim, facilisis nec nulla. Sed laoreet fermentum sem, ut aliquam dui imperdiet nec. Suspendisse vitae erat enim. Morbi congue aliquam lectus, at commodo purus dapibus nec. Nullam sodales fermentum aliquet. Nunc quis ligula enim. Maecenas metus risus, egestas ut commodo eget, bibendum nec nisi.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-group">
+                              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#Three">
+                                  Collapsible Group Item #3
+                                </a>
+                              </div>
+                              <div id="Three" class="accordion-body in collapse" style="height: auto; ">
+                                <div class="accordion-inner">
+                                  Donec libero nisi, volutpat eu egestas vel, molestie vitae ante. Nam tortor risus, tincidunt et accumsan ac, vehicula eget metus. Aenean nec nibh ac nibh dignissim feugiat ac eget tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis auctor neque, vel varius nulla faucibus nec. Sed quam elit, mattis blandit suscipit at, lacinia sed urna. Suspendisse facilisis turpis vitae nisl rutrum at commodo ante euismod.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- End .span6 -->
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-equalizer"></span>
+                                        <span>Sliders</span>
+                                    </h4>
+
+                                </div>
+                                <div class="content">
+
+                                    <form class="form-horizontal" action="#">
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Simple slider</label>
+                                                    <div class="span8">
+                                                        <div id="slider" class="slider"></div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">With 50 increments</label>
+                                                    <div class="span8">
+                                                        <div id="slider1" class="slider"></div>
+                                                        <input type="text" id="amount" style="border:0; color:#ED7A53; font-weight:bold; box-shadow:none;" />
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Range slider</label>
+                                                    <div class="span8">
+                                                        <div id="slider-range" class="slider"></div>
+                                                        <input type="text" id="amount1" style="border:0; color:#ED7A53; font-weight:bold; box-shadow:none;" />
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">With minimum</label>
+                                                    <div class="span8">
+                                                        <div id="slider-range-min" class="slider"></div>
+                                                        <input type="text" id="amount2" style="border:0; color:#ED7A53; font-weight:bold; box-shadow:none;" />
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">With maximum</label>
+                                                    <div class="span8">
+                                                        <div id="slider-range-max" class="slider"></div>
+                                                        <input type="text" id="amount3" style="border:0; color:#ED7A53; font-weight:bold; box-shadow:none;" />
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Vertical sliders</label>
+                                                    <div class="span8">
+                                                        <div id="eq">
+                                                            <span>88</span>
+                                                            <span>77</span>
+                                                            <span>55</span>
+                                                            <span>33</span>
+                                                            <span>40</span>
+                                                            <span>45</span>
+                                                            <span>70</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Circular slider</label>
+                                                    <div class="span8">
+                                                        <div class="circular-progress-item">
+                                                            <input type="text" value="12" class="progressBlue" />
+                                                        </div>
+                                                        <div class="circular-progress-item">
+                                                            <input type="text" value="30" class="progressRed" />
+                                                        </div>
+                                                        <div class="circular-progress-item">
+                                                            <input type="text" value="50" class="progressGreen" />
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div><!-- End .box -->
+
+                            <div class="box" style="margin-top:27px;">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-busy-3"></span>
+                                        <span>Ajax loaders <small>and tabs in box</small></span>
+                                    </h4>
+
+                                </div>
+                                <div class="content noPad">  
+
+                                   <ul class="nav nav-tabs" id="myTabLoaders">
+                                       <li class="active"><a href="#circular">Circular <span class="label label-info">46</span></a></li>
+                                       <li><a href="#horizontal">Horizontal <span class="label label-info">19</span></a></li>
+                                       <li><a href="#ThirdD">3d <span class="label label-info">7</span></a></li>
+                                    </ul>
+                                     
+                                    <div class="tab-content">
+                                       <div class="tab-pane active" id="circular">
+                                           <div class="center clearfix">
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/001.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/002.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/003.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/007.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/008.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/010.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/011.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/012.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/013.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/016.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/017.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/020.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/021.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/022.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/023.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/025.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/027.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/029.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/030.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/033.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/034.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/035.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/038.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/040.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/041.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/042.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/044.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/046.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/047.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/049.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/050.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/051.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/052.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/054.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/055.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/056.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/059.gif" alt="" />
+                                                </div>
+                                                 <div class="margin padding left">
+                                                    <img src="images/loaders/circular/060.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/061.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/064.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/065.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/066.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/068.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/069.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/070.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/circular/072.gif" alt="" />
+                                                </div>
+                                            </div>
+                                       </div>
+                                       <div class="tab-pane" id="horizontal">
+                                           <div class="center clearfix">
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/004.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/005.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/006.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/009.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/014.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/018.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/024.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/031.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/032.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/036.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/037.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/043.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/045.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/048.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/053.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/057.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/058.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/062.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/horizontal/063.gif" alt="" />
+                                                </div>
+                                            </div>
+
+                                       </div>
+                                       <div class="tab-pane" id="ThirdD">
+                                            <div class="center clearfix">
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/015.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/019.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/026.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/028.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/039.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/067.gif" alt="" />
+                                                </div>
+                                                <div class="margin padding left">
+                                                    <img src="images/loaders/3d/071.gif" alt="" />
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </div>
+
+                                </div>
+
+                            </div><!-- End .box -->
+                      
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-equalizer"></span>
+                                        <span>Progress bars</span>
+                                    </h4>
+
+                                </div>
+                                <div class="content">
+
+                                    <form class="form-horizontal" action="#">
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Jquery UI bar</label>
+                                                    <div class="span8">
+                                                        <div id="progressbar"></div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress tip" title="60%">
+                                                          <div class="bar" style="width: 60%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap mini bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-mini tip" title="60%">
+                                                          <div class="bar" style="width: 60%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-mini</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap stripped bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-striped tip" title="20%">
+                                                          <div class="bar" style="width: 20%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-striped</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap animated bar
+                                                        <span class="simple-hint red">( no IE )</span>
+                                                    </label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-striped active tip" title="40%">
+                                                            <div class="bar" style="width: 40%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-striped</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap info bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-info tip" title="40%">
+                                                            <div class="bar" style="width: 40%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-info</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap success bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-success tip" title="50%">
+                                                            <div class="bar" style="width: 50%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-success</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap danger bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-danger tip" title="60%">
+                                                            <div class="bar" style="width: 60%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-danger</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Boostrap warning bar</label>
+                                                    <div class="span8">
+                                                        <div class="progress progress-warning tip" title="69%">
+                                                            <div class="bar" style="width: 69%;"></div>
+                                                        </div>
+                                                        <span class="simple-hint"><code>.progress .progress-warning</code></span>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Stacked bar</label>
+                                                    <div class="span8">
+                                                         <div class="progress">
+                                                            <div class="bar bar-success tip" style="width: 35%" title="35%"></div>
+                                                            <div class="bar bar-info tip" style="width: 20%" title="20%"></div>
+                                                            <div class="bar bar-danger tip" style="width: 10%" title="10%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Animated bar</label>
+                                                    <div class="span8">
+                                                       <div id="progress1">
+                                                            <div class="pbar"></div>
+                                                            <span class="percent1"></span>
+                                                            <div class="elapsed"></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">With delay</label>
+                                                    <div class="span8">
+                                                       <div id="progress2">
+                                                            <div class="pbar"></div>
+                                                            <span class="percent1"></span>
+                                                            <div class="elapsed"></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Updating every 2 sec</label>
+                                                    <div class="span8">
+                                                       <div id="progress3">
+                                                            <div class="pbar"></div>
+                                                            <span class="percent1"></span>
+                                                            <div class="elapsed"></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span4" for="slider">Circular progress bars</label>
+                                                    <div class="span8">
+                                                       <div class="circular-item tipB" title="Site overload">
+                                                            <span class="icon icomoon-icon-fire"></span>
+                                                            <input type="text" value="62" class="redCircle" />
+                                                        </div>
+
+                                                        <div class="circular-item tipB" title="Site average load time">
+                                                            <span class="icon icomoon-icon-busy"></span>
+                                                            <input type="text" value="12" class="blueCircle" />
+                                                        </div>
+
+                                                        <div class="circular-item tipB" title="Target complete">
+                                                            <span class="icon icomoon-icon-target-2"></span>
+                                                            <input type="text" value="94" class="greenCircle" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span6 -->
+                        
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16  icomoon-icon-comments-8"></span>
+                                        <span>Tooltips and popovers</span>
+                                    </h4>
+                                   
+                                </div>
+                                <div class="content">
+                                    <div class="center">
+
+                                        <div class="page-header">
+                                            <h4>QTip <small> tooltip plugin</small></h4>
+                                       </div>
+
+                                       <a href="#" class="btn tip marginR10 marginB10" title="Tooltip in the top">Top tooltip</a>
+                                       <a href="#" class="btn tipR marginR10 marginB10" title="Tooltip in the right">Right tooltip</a>
+                                       <a href="#" class="btn tipB marginR10 marginB10" title="Tooltip in the bottom">Bottom tooltip</a>
+                                       <a href="#" class="btn tipL marginR10 marginB10" title="Tooltip in the left">Left tooltip</a>
+
+                                       <div class="page-header">
+                                            <h4>Boostrap tooltip</h4>
+                                       </div>
+
+                                       <a href="#" class="btn btip marginR10 marginB10" rel="tooltip" data-placement="top" data-original-title="Tooltip on top">Top tooltip</a>
+                                       <a href="#" class="btn btip marginR10 marginB10" rel="tooltip" data-placement="right" data-original-title="Tooltip on right">Right tooltip</a>
+                                       <a href="#" class="btn btip marginR10 marginB10" rel="tooltip" data-placement="bottom" data-original-title="Tooltip on bottom">Bottom tooltip</a>
+                                       <a href="#" class="btn btip marginR10 marginB10" rel="tooltip" data-placement="left" data-original-title="Tooltip on left">Left tooltip</a>
+
+                                       <div class="page-header">
+                                            <h4>Popovers <small>click for action</small></h4>
+                                       </div>
+                                       <a href="#" class="btn btn-danger marginR10 marginB10" rel="popoverTop" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">Top popover</a>
+                                       <a href="#" class="btn btn-danger marginR10 marginB10" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title" data-placement="left">Left popover</a>
+                                       <a href="#" class="btn btn-danger marginR10 marginB10" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title" data-placement="right">Right popover</a>
+                                       <a href="#" class="btn btn-danger marginR10 marginB10" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title" data-placement="bottom">Bottom popover</a>
+                                   </div>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-bubbles-6"></span>
+                                        <span>Dialogs</span>
+                                    </h4>
+                                    
+                                </div>
+                                <div class="content">
+
+                                    <div class="center">
+                                        <a href="#" class="btn marginR10 marginB10" id="openDialog">Show dialog</a>
+                                        <a href="#" class="btn marginR10 marginB10" id="openModalDialog">Show Modal dialog</a>
+                                        <a href="#myModal" class="btn marginR10 marginB10" data-toggle="modal">Launch Boostrap Modal</a>
+                                    </div>
+                                    
+                                    <!-- ui dialog -->
+                                    <div id="dialog" title="Dialog Title" class="dialog">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+
+                                    <!-- ui modal dialog -->
+                                    <div id="modal" title="Dialog Title" class="dialog">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+
+                                    <!-- Boostrap modal dialog -->
+                                    <div id="myModal" class="modal hide fade" style="display: none; ">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal"><span class="icon12 minia-icon-close"></span></button>
+                                          <h3>Modal Heading</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="paddingT15 paddingB15">    
+                                              <h4>Text in a modal</h4>
+                                              <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
+                                              <h4>Popover in a modal</h4>
+                                              <p>This <a href="#" class="btn popover-test" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on hover.</p>
+
+                                              <h4>Tooltips in a modal</h4>
+                                              <p><a href="#" class="tip" title="Tooltip">This link</a> and <a href="#" class="tip" title="Tooltip">that link</a> should have tooltips on hover.</p>
+
+                                              <hr />
+
+                                              <h4>Overflowing text to show optional scrollbar</h4>
+                                              <p>We set a fixed <code>max-height</code> on the <code>.modal-body</code>. Watch it overflow with all this extra lorem ipsum text we've included.</p>
+                                              <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+                                              <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+                                              <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+                                              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+
+                                              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                            </div>
+                                    
+                                        </div>
+                                        <div class="modal-footer">
+                                          <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                          <a href="#" class="btn btn-primary">Save changes</a>
+                                        </div>
+                                      </div>
+
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="box">
+
+                                <div class="title">
+                                    <h4><span>Pines Notify</span></h4>  
+                                </div>
+
+                                <div class="content">
+                                    
+                                     <div class="center">
+                                        <a href="#" class="btn marginR10 marginB10" id="noticeR">Regular notice</a>
+                                        <a href="#" class="btn marginR10 marginB10" id="noticeS">Sticky notice</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="infoR">Regular info</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="infoS">Sticky info</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="successR">Regular Success</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="successS">Sticky Success</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="errorR">Regular Error</a> 
+                                        <a href="#" class="btn marginR10 marginB10" id="errorS">Sticky Error</a> 
+
+                                    </div>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span6 -->
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid"> 
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Images style</h4>                            
+                            </div>
+                            <div style="margin-bottom: 27px;">
+
+                                <img src="http://placehold.it/140x140" class="img-rounded marginR10">
+                                <img src="http://placehold.it/140x140" class="img-circle marginR10">
+                                <img src="http://placehold.it/140x140" class="img-polaroid marginR10">
+                                 
+                                 <pre class="prettyprint marginT10"><ol class="linenums"><li class="L0"><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"..."</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"img-rounded"</span><span class="tag">&gt;</span></li><li class="L1"><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"..."</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"img-circle"</span><span class="tag">&gt;</span></li><li class="L2"><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"..."</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"img-polaroid"</span><span class="tag">&gt;</span></li></ol></pre>
+                            </div>
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="page-header">
+                                <h4>Hero unit</h4>                            
+                            </div>
+
+                            <div class="hero-unit">
+                               <h1>Hello, world!</h1>
+                               <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                               <p><a class="btn btn-primary btn-large">Learn more</a></p>
+                            </div>
+
+                        </div><!-- End .span6 -->
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Basic pills</h4>                            
+                            </div>
+
+                            <ul class="nav nav-pills">
+                               <li class="active"><a href="#">Home</a></li>
+                               <li><a href="#">Profile</a></li>
+                               <li><a href="#">Messages</a></li>
+                            </ul>
+
+                            <div class="page-header">
+                                <h4>Stacked pills</h4>                            
+                            </div>
+
+                            <ul class="nav nav-pills nav-stacked">
+                               <li class="active"><a href="#">Home</a></li>
+                               <li><a href="#">Profile</a></li>
+                               <li><a href="#">Messages</a></li>
+                            </ul>
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="page-header">
+                                <h4>Just Well</h4>                            
+                            </div>
+
+                            <div class="well">
+                               Look, I'm in a well!
+                            </div>
+
+                            <div class="page-header">
+                                <h4>Large Well</h4>                            
+                            </div>
+                            <div class="well well-large">
+                               Look, I'm in a large well!
+                            </div>
+
+                            <div class="page-header">
+                                <h4>Small Well</h4>                            
+                            </div>
+
+                            <div class="well well-small">
+                               Look, I'm in a small well!
+                            </div>
+
+                        </div><!-- End .span6 -->
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid"> 
+                        <div class="span12">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                     <div class="page-header">
+                                        <h4>Pagination</h4>
+                                    </div>
+                                    <div class="center">
+                                        <div class="pagination">
+                                          <ul>
+                                            <li><a href="#"><span class="icon12 minia-icon-arrow-left-3"></span></a></li>
+                                            <li class="active">
+                                              <a href="#">1</a>
+                                            </li>
+                                            <li><span>...</span></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#"><span class="icon12 minia-icon-arrow-right-3"></span></a></li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- End .span4 -->
+
+                                <div class="span4">
+                                    <div class="page-header">
+                                        <h4>Pager</h4>
+                                    </div>
+                                   
+                                    <ul class="pager">
+                                        <li>
+                                            <a href="#">Previous</a>
+                                        </li>
+                                         <li>
+                                            <a href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                   
+                                </div><!-- End .span4 -->
+
+                                <div class="span4">
+                                    <div class="page-header">
+                                        <h4>Pager with aligned links</h4>
+                                    </div>
+                                    
+                                    <ul class="pager">
+                                        <li class="previous">
+                                            <a href="#">&larr; Older</a>
+                                        </li>
+                                        <li class="next">
+                                            <a href="#">Newer &rarr;</a>
+                                        </li>
+                                    </ul>
+                                    
+                                </div><!-- End .span4 -->
+                            </div><!-- End .row-fluid -->
+                        </div><!-- End .span12 -->                  
+                    </div><!-- End .row-fluid -->
+               
+                <!-- Page end here -->
+                    
+                <div class="modal fade hide" id="myModal1">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span class="icon12 minia-icon-close"></span></button>
+                        <h3>Chat layout</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="messages">
+                            <li class="user clearfix">
+                                <a href="#" class="avatar">
+                                    <img src="images/avatar2.jpeg" alt="" />
+                                </a>
+                                <div class="message">
+                                    <div class="head clearfix">
+                                        <span class="name"><strong>Lazar</strong> says:</span>
+                                        <span class="time">25 seconds ago</span>
+                                    </div>
+                                    <p>
+                                        Time to go i call you tomorrow.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="admin clearfix">
+                                <a href="#" class="avatar">
+                                    <img src="images/avatar3.jpeg" alt="" />
+                                </a>
+                                <div class="message">
+                                    <div class="head clearfix">
+                                        <span class="name"><strong>Sugge</strong> says:</span>
+                                        <span class="time">just now</span>
+                                    </div>
+                                    <p>
+                                        OK, have a nice day.
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li class="sendMsg">
+                                <form class="form-horizontal" action="#">
+                                    <textarea class="elastic" id="textarea" rows="1" placeholder="Enter your message ..." style="width:98%;"></textarea>
+                                    <button type="submit" class="btn btn-info marginT10">Send message</button>
+                                </form>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+                
+            </div><!-- End contentwrapper -->
+        </div><!-- End #content -->
+    
+    </div><!-- End #wrapper -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Important plugins put in all pages -->
+    <script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>  
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/libs/jRespond.min.js"></script>
+
+    <!-- Charts plugins -->
+    <script type="text/javascript" src="plugins/charts/sparkline/jquery.sparkline.min.js"></script><!-- Sparkline plugin -->
+    <script type="text/javascript" src="plugins/charts/knob/jquery.knob.js"></script><!-- Circular sliders and stats -->
+   
+    <!-- Misc plugins -->
+    <script type="text/javascript" src="plugins/misc/prettify/prettify.js"></script><!-- Code view plugin -->
+    <script type="text/javascript" src="plugins/misc/qtip/jquery.qtip.min.js"></script><!-- Custom tooltip plugin -->
+    <script type="text/javascript" src="plugins/misc/animated-progress-bar/jquery.progressbar.js"></script>
+    <script type="text/javascript" src="plugins/misc/pnotify/jquery.pnotify.min.js"></script>
+    <script type="text/javascript" src="plugins/misc/totop/jquery.ui.totop.min.js"></script> 
+
+    <!-- Search plugin -->
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch_data.js"></script><!-- JSON for searched results -->
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch.js"></script>
+
+    <!-- Form plugins -->
+    <script type="text/javascript" src="plugins/forms/uniform/jquery.uniform.min.js"></script>
+    
+    <!-- Init plugins -->
+    <script type="text/javascript" src="js/main.js"></script><!-- Core js functions -->
+    <script type="text/javascript" src="js/elements.js"></script><!-- Init plugins only for page -->
+   
+    </body>
+</html>

@@ -1,0 +1,13 @@
+roles.ROLE_SUPER_ADMIN: superadministrator
+dashboard_button: Pulpit nawigatora
+open_navigation: Otwórz Menu
+notification_caption: Uwaga!
+
+navigation.close: zamknij
+navigation.logged_in_as: Zalogowany jako
+navigation.edit_profile: Edytuj swój profil
+navigation.administration: Administracja
+navigation.settings: Ustawienia
+navigation.logout: Wyloguj
+
+navigation.menu: Nawigacja

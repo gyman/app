@@ -1,0 +1,132 @@
+Member01:
+    birthdate:          "1984-09-27 12:00:00"
+    deletedAt:          null
+    email:              test01@test.pl
+    foto:               null
+    gender:             male
+    name:               "Jan Kowalski"
+    notes:              notes
+    phone:              604411089
+    zipcode:            88-888
+    belt:               white
+    barcode:            abcd12301
+Member02:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test02@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Marcin Nowak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               white
+    barcode:            abcd12302
+Member03:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test03@test2.pl
+    foto:               null
+    gender:             female
+    name:               "Beata Kamińska"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12303
+Member04:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test04@test2.pl
+    foto:               null
+    gender:             female
+    name:               "Joanna Grabiec"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               brown
+    barcode:            abcd12304
+Member05:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test05@test2.pl
+    foto:               null
+    gender:             female
+    name:               "Sylwia Grzeszczak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               purple
+    barcode:            abcd12305
+Member06:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test06@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Marcin Molenda"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               black
+    barcode:            abcd12306
+Member07:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test07@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Kryspin Kryszak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               white
+    barcode:            abcd12307
+Member08:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test08@test2.pl
+    foto:               null
+    gender:             female
+    name:               "Agata Nowak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12308
+Member09:
+    birthdate:          "1990-10-15 12:00:00"
+    deletedAt:          null
+    email:              test09@test2.pl
+    foto:               null
+    gender:             female
+    name:               "Sylwia Majer"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12309
+Member10:
+    birthdate:          "1975-10-15 12:00:00"
+    deletedAt:          null
+    email:              test10@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Tomasz Marek"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+    belt:
+    barcode:            abcd12310
+Member11:
+    birthdate:          "1980-10-15 12:00:00"
+    deletedAt:          null
+    email:              test11@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Majk Wazalsky"
+    notes:              testing old voucher removal
+    phone:              500666666
+    zipcode:            88-888
+    belt:
+    barcode:            abcd12311

@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<div class="heading">
+    <h3>Harmonogram zajęć</h3>
+    <a href="{{path("_events_new")}}" id="newEventHeaderButton" class="btn pull-right createNewEvent openUrlInModal"><span class="icon32 icomoon-icon-new green"></span>Nowe wydarzenie</a>
+</div><!-- End .heading-->
+
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div id="calendar"></div>
+    </div>
+</div><!-- End .row-fluid -->
+{% endblock body %}
+
+{# javascripts #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        '@ScheduleBundle/Resources/public/js/fullcalendar.js'
+        '@ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee'
+     %}
+
+<script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+
+{# CSS #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+        'bundles/schedule/css/fullcalendar.css'
+        '@ScheduleBundle/Resources/public/less/schedule.less'
+        filter="less,cssrewrite"
+    %}
+
+<link rel="stylesheet" href="{{ asset_url }}" />
+
+    {% endstylesheets %}
+{% endblock stylesheets %}

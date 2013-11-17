@@ -1,0 +1,6 @@
+{% if voucher is not null %}
+<div class="label label-success">{{ voucher.getBarcode() }}</div>
+<div>od <strong>{{ voucher.getStartDate()|date("d.m.Y") }}</strong> do <strong>{{ voucher.getEndDate()|date("d.m.Y") }}</strong></div>
+{% else  %}
+<div class="label">brak karnetu</div>
+{% endif %}

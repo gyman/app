@@ -1,0 +1,24 @@
+{% extends "::errorLayout.html.twig" %}
+
+{% block title %}Wystąpił błąd! Strona nie istnieje - {{ parent() }}{% endblock %}
+
+{% block caption %}
+<h1>404</h1>
+<h2>Podana strona nie istnieje.</h2>
+{% endblock caption %}
+
+{% block description %}
+<h3>Cholipka</h3>
+
+<p>Strona, na którą chciałeś wejść, nie istnieje.</p>
+<ul>
+    <li>Jeżeli własnoręcznie wpisałeś adres w pasku przeglądarki, upewnij się, że jest on poprawny.</li>
+    <li>Jeżeli znalazłeś się tu po kliknięciu linki na stronie, to coś zepsuliśmy i strona nie istnieje :(</li>
+</ul>
+<b>Co robić?</b>
+<p>Tylko spokojnie!</p>
+<ul>
+    <li><a href="#" onClick="window.history.back();">idź wstecz</a> do poprzedniej strony.</li>
+    <li><a href="{{ path("frontpage_index") }}">wróć do strony głównej</a> | <a href="#">Moje konto</a></li>
+</ul>
+{% endblock description %}

@@ -1,0 +1,47 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% macro inputWidget(input) %}
+<label>
+    {{ ("user."~input.vars.label)|trans }} <span class="required">*</span>
+</label>
+{{ form_widget(input,{"attr" : { class : "form-control", placeholder : ("user."~input.vars.label)|trans}}) }}
+{% endmacro %}
+
+{% block fos_user_content %}
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="form-content login-form fos_user_resetting_reset">
+    
+    <h3 class="title">{{ "account.reset.header"|trans }}</h3>
+    
+    <p>{{ "account.reset.enter_new"|trans }}</p>
+    
+    {# todo: please override resetting form and add error bubbling #}
+    
+    {% if form.plainPassword.first.vars.errors|length %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="alert alert-danger fade in ">
+                    <i class="fa fa-envelope alert-icon"></i>
+                    <button data-dismiss="alert" class="close" type="button">×</button>
+                    <strong>{{ "user.profile.there_were_errors"|trans }}</strong>
+                    <ul>
+                        {% for error in form.plainPassword.first.vars.errors %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    {% for input in [form.plainPassword.first, form.plainPassword.second] %}
+        {{ _self.inputWidget(input) }}
+    {% endfor %}
+    
+    {{ form_rest(form) }}
+
+    <div class="buttons-box clearfix">
+      <button name="_submit" type="submit" class="btn btn-default">{{ 'resetting.reset.submit'|trans }}</button>
+      <span class="required"><b>*</b> {{ "account.reset.required_info"|trans }}</span>
+    </div>
+</form>
+{% endblock fos_user_content %}

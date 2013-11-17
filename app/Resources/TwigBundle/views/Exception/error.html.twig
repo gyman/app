@@ -1,0 +1,15 @@
+{% extends "::errorLayout.html.twig" %}
+
+{% block title %}Wystąpił błąd! ({{ status_text }}) {{ parent() }}{% endblock %}
+
+{% block caption %}
+<h1>{{ status_code }}</h1>
+<h2>{{ status_text }}</h2>
+{% endblock caption %}
+
+{% block description %}
+    <h3>O żesz...</h3>
+    <p>Nie wiem jak, ale udało Ci się coś zepsuć! Spokojnie, źródło problemu zazwyczaj znajduje się między monitorem
+        a oparciem fotela ;) Pracujemy już nad naprawą błędu. Jeśli chcesz, możesz wrócić do
+        <a href="{{ path("frontpage_index") }}">strony głównej</a>.</p>
+{% endblock description %}

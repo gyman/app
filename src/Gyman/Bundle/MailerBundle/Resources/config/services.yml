@@ -1,0 +1,27 @@
+parameters:
+    contact.template:   MailerBundle:Templates:contactMail.html.twig
+    contact.subject:    mailing.contact.subject
+
+    registration_successful.template:   MailerBundle:Templates:registeredSuccess.html.twig
+    registration_successful.subject:    mailing.registration_successful.subject
+
+services:
+    mailer.contact:
+        class:  Gyman\Bundle\MailerBundle\Service\Mailer
+        arguments: [@mailer]
+        calls:
+            - [ setTranslator, ["@translator"]]
+            - [ setTemplating, ["@templating"]]
+            - [ setSubject,['%contact.subject%']]
+            - [ setTemplate,['%contact.template%']]
+            - [ setTo,['some@email.com']]
+            
+    mailer.registration_successful:
+        class:  Gyman\Bundle\MailerBundle\Service\Mailer
+        arguments: [@mailer]
+        calls:
+            - [ setTranslator, ["@translator"]]
+            - [ setTemplating, ["@templating"]]
+            - [ setSubject,['%registration_successful.subject%']]
+            - [ setTemplate,['%registration_successful.template%']]
+            

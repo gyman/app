@@ -1,0 +1,9 @@
+<div class="control-group" data-filter-name="{{ widget }}">
+    <label for="filter_subfilters_entries" class="control-label">Data wejścia</label>
+    <div class="controls">
+        <a href="#" class="removeFilter pull-right">&times; usuń</a>
+        {{ form_widget(form.type,{attr:{class:""}}) }}
+        {{ form_widget(form.date1,{attr:{class:"input-small"}}) }}
+        {{ form_widget(form.date2,{attr:{class:"input-small"}}) }}
+    </div>
+</div>

@@ -1,0 +1,11 @@
+user-uirapuru:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: uirapuru
+  email: uirapuruadg+timesheet@gmail.com
+  plainPassword: uirapuru
+  roles: [ROLE_SUPER_ADMIN]
+  enabled: true
+  clubs:
+    - club-dende
+    - club-rio

@@ -2,132 +2,108 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Timesheet - Rio Grappling Club{% endblock %}</title>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Text -->
-        <!--[if lt IE 9]>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
-        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
-        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
-        <![endif]-->
+        <title>{% block title %}Gyman.pl{% endblock %}</title>
 
-        {% spaceless %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-        {# <link rel="stylesheet" href="{{ asset('css/supr.css') }}"> #}
+        {% if app.environment != "dev" %}
+            <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
+            <script>
+                Raven.config('{{ sentry_url }}');
+            </script>
+        {% endif %}
+
         {% block stylesheets %}
-
-        {% stylesheets
-            '@DefaultBundle/Resources/public/less/main.less'
-            filter='less,cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-
-        {% stylesheets
-            'bundles/layout/plugins/misc/qtip/jquery.qtip.css'
-            'bundles/layout/plugins/misc/fullcalendar/fullcalendar.css'
-            'bundles/layout/plugins/misc/search/tipuesearch.css'
-            'bundles/layout/plugins/forms/uniform/uniform.default.css'
-            'bundles/layout/css/supr-theme/jquery-ui-timepicker-addon.css'
-            'bundles/layout/css/supr-theme/jquery.ui.autocomplete.css'
-            'bundles/layout/css/supr-theme/jquery.ui.combobox.css'
-            'bundles/layout/css/supr-theme/jquery.ui.core.css'
-            'bundles/layout/css/supr-theme/jquery.ui.datepicker.css'
-            'bundles/layout/css/supr-theme/jquery.ui.dialog.css'
-            'bundles/layout/css/supr-theme/jquery.ui.progressbar.css'
-            'bundles/layout/css/supr-theme/jquery.ui.resizable.css'
-            'bundles/layout/css/supr-theme/jquery.ui.slider.css'
-            'bundles/layout/css/supr-theme/jquery.ui.spinner.css'
-            'bundles/layout/css/supr-theme/jquery.ui.theme.css'
-            'bundles/layout/css/supr-theme/jquery.ui.tooltip.css'
-            'bundles/layout/css/main.css'
-            'bundles/layout/css/custom.css'
-            'bundles/layout/css/ie8.css'
-            'bundles/layout/css/icons.css'
-            filter='cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+                <link rel="stylesheet" href="/assets/css/bundled.min.css" />
+                <link rel="stylesheet" href="/assets/css/main.min.css" />
         {% endblock %}
 
-        {% endspaceless %}
-
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
     </head>
+
+    {% block overraid_body %}
     <body class="{% block body_class %}{% endblock %}">
+
+        <div id="qLoverlay"></div>
+        <div id="qLbar"></div>
+
+        {% if app.user is not null %}
+            {{ include("navigation.html.twig") }}
+        {% endif %}
+
         <div id="header">
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
-                        <a href="{{ path("_members_list") }}" class="brand">RIO Grappling Club</a>
+
+                        <a href="{{ path("_dashboard_index") }}" class="brand"><img src="/assets/images/gyman_logo.png" /></a>
+
+                        <div class="nav-no-collapse">
+                            <ul class="nav pull-right usernav">
+                                <li><a href="{{ path("_dashboard_index") }}"><span class="icon16 icomoon-icon-equalizer-2"></span><span class="txt"> {{ 'dashboard_button'|trans }}</span></a></li>
+                                <li><a href="#" class="openNavigation"><span class="icon16 icomoon-icon-exit"></span><span class="txt"> {{ 'open_navigation'|trans }}</span></a></li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div><!-- /navbar-inner -->
             </div>
         </div><!-- end header -->
+
         <div id="wrapper">
-            <!--Sidebar background-->
-            <div id="sidebarbg"></div>
-            <!--Sidebar content-->
-            <div id="sidebar">
-                <div class="sidenav">
-
-                    <div style="margin: -1px 0 0 0;" class="sidebar-widget">
-                        <h5 style="margin-bottom:0" class="title">Navigation</h5>
-                    </div><!-- End .sidenav-widget -->
-
-                    <div class="mainnav">
-                        <ul>
-                            <li><a href="{{ path("_dashboard") }}"><span class="icon16 icomoon-icon-stats-up"></span>Pulpit nawigatora</a></li>
-                            <li>
-                                <a href="{{ path("_members_list") }}" class="hasUl drop"><span class="icon16 icomoon-icon-list"></span>Użytkownicy<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
-                                <ul class="sub" style="display: block;">
-                                    <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-file"></span>Lista</a></li>
-                                    <li><a href="{{ path("_members_gallery") }}"><span class="icon16 icomoon-icon-file"></span>Galeria</a></li>
-                                    <li><a href="#"><span class="icon16 icomoon-icon-file"></span>Dodaj osobę</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-stats-up"></span>Karnety</a></li>
-                            <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-stats-up"></span>Treningi</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- End sidebar content-->
-            <!--Body content-->
             <div id="content" class="clearfix">
-                <div class="contentwrapper"><!--Content wrapper-->
+
+                <div class="contentwrapper">
+                    {% block content %}
                     {% block body %}{% endblock %}
+                    {% endblock content %}
+
                 </div><!-- End contentwrapper -->
+
             </div><!-- End #content -->
         </div><!-- end wrapper -->
 
-
-        <script  type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-        <script  type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
-        {# <script src="{{ asset('js/supr.js') }}"></script> #}
         {% block javascripts %}
-        {% javascripts
-                '@LayoutBundle/Resources/public/js/jquery-migrate-1.2.1.min.js'
-                '@LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js'
-                '@LayoutBundle/Resources/public/js/libs/excanvas.min.js'
-                '@LayoutBundle/Resources/public/js/libs/jRespond.min.js'
-                '@LayoutBundle/Resources/public/js/libs/respond.min.js'
-                '@LayoutBundle/Resources/public/js/libs/modernizr.js'
-                '@LayoutBundle/Resources/public/js/jquery.blockUI.js'
-                '@LayoutBundle/Resources/public/plugins/charts/sparkline/jquery.sparkline.min.js'
-                '@LayoutBundle/Resources/public/plugins/charts/knob/jquery.knob.js'
-                '@LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.min.js'
-                '@LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js'
-                '@LayoutBundle/Resources/public/plugins/misc/totop/jquery.ui.totop.min.js'
-                '@LayoutBundle/Resources/public/plugins/forms/uniform/jquery.uniform.min.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js'
-                '@LayoutBundle/Resources/public/js/main.js'
-                '@LayoutBundle/Resources/public/js/dashboard.js'
-        %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script type="text/javascript" src="/assets/js/bundled.min.js"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
-        {% endjavascripts %}
+        {% if app.session.flashbag.has('notice') %}
+        <script>
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+            $.pnotify({
+                title: '{{ 'notification_caption'|trans }}',
+                text: '{{ flashMessage|e('js')|trans }}',
+                icon: false,
+                opacity: 0.95,
+                sticker: false,
+                history: false
+            });
+        {% endfor %}
+        </script>
+        {% endif %}
+
+        <script>
+            $(function() {
+                $("#qLoverlay,#qLbar").fadeOut(750);
+
+                $(document).on("click", "a.openNavigation", function(e) {
+                    e.preventDefault();
+                    $("#overlayNavigation").fadeIn();
+                });
+
+                $(document).on("click", "#overlayNavigation, #closeOverlayNavigation", function() {
+                    $("#overlayNavigation").fadeOut();
+                });
+            });
+        </script>
+
         {% endblock javascripts %}
 
+
+        <!-- @todo zamienić na fosjsroutingbundle -->
+        <span id="applicationData"
+              data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
+              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}" />
+
+        {% include '::modal.html.twig' %}
     </body>
+    {% endblock overraid_body %}
 </html>

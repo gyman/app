@@ -1,0 +1,33 @@
+parameters:
+    base_manager.class: Gyman\Bundle\EntriesBundle\Services\Manager\BaseManager
+    entry_entity.class: Gyman\Bundle\EntriesBundle\Entity\Entry
+    entry_manager.class: Gyman\Bundle\EntriesBundle\Services\Manager\EntryManager
+    entry_repository.class: Gyman\Bundle\EntriesBundle\Entity\EntryRepository
+
+services:
+    entry_repository:
+        class:          "%entry_repository.class%"
+        factory_service: doctrine
+        factory_method:  getRepository
+        arguments: [ "%entry_entity.class%" ]
+
+    entry_manager:
+        class:          "%entry_manager.class%"
+
+    dende.update_left_amount_listener:
+        class: Gyman\Bundle\EntriesBundle\Services\Listener\UpdateLeftAmountListener
+        # TODO: very bad, temporarily workaround of circular
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+    dende.update_last_entry_listener:
+        class: Gyman\Bundle\EntriesBundle\Services\Listener\UpdateLastEntryListener
+        # TODO: very bad, temporarily workaround of circular
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+#    validator.left_amount_validator:
+#        class: Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator
+#        tags:
+#            - { name: validator.constraint_validator, alias: left_amount_constraint }

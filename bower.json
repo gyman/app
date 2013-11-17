@@ -1,0 +1,46 @@
+{
+  "name": "app.gyman.pl",
+  "version": "0.2",
+  "homepage": "https://github.com/uirapuru/bjjTimesheet",
+  "authors": [
+    "Grzegorz Kaszuba <uirapuru@tlen.pl>"
+  ],
+  "description": "Gym and fitness club analytics",
+  "main": "web/index.php",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.0",
+    "jquery-ui": "1.10.4",
+    "bootstrap": "alonisser/bower-bootstrap-2.3.2-legacy",
+    "font-awesome": "~4.1.0",
+    "modernizr": "~2.8.3",
+    "icomoon": "https://github.com/layerssss/icomoon-bower/archive/master.zip",
+    "jquery-migrate": "1.2.1",
+    "uri.js": "~1.13.2",
+    "moment": "~2.8.3",
+    "select2": "3.4.5",
+    "bootstrap-datetimepicker": "~0.0.11",
+    "DataTables": "1.9.4",
+    "blockui": "*",
+    "pnotify": "~2.0.1",
+    "jquery.uniform": "~2.1.2",
+    "jquery.knob": "https://github.com/aterrien/jQuery-Knob/archive/master.zip",
+    "qTip": "~1.0.0",
+    "highcharts": "~4.0.4",
+    "fullcalendar": "~2.1.1",
+    "jquery-file-upload": "~9.7.1",
+    "webcam": "~1.0.0",
+    "datatables-plugins": "*"
+  }
+}

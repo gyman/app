@@ -1,0 +1,173 @@
+.navbar .nav > li > a.openNavigation
+{
+    .openNavigationBefore;
+
+    animation:mymove 5s infinite;
+    -webkit-animation:mymove 5s infinite; 
+
+    &:hover {
+        .openNavigationHover;
+    }
+}
+
+.openNavigationBefore
+{
+    -webkit-box-shadow: 0 0 2px 0 #298CAD;
+    box-shadow: 0 0 2px 0 #298CAD;
+}
+
+.openNavigationAfter
+{
+    -webkit-box-shadow: 0 0 6px 0 #298CAD;
+    box-shadow: 0 0 6px 0 #298CAD;
+}
+
+@keyframes mymove
+{
+    40%   {
+        .openNavigationBefore;
+    }
+    50% {
+        .openNavigationAfter;
+    }
+    60% {
+        .openNavigationBefore;
+    }
+}
+
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+    40%   {
+        .openNavigationBefore;
+    }
+    50% {
+        .openNavigationAfter;
+    }
+    60% {
+        .openNavigationBefore;
+    }
+}
+
+.openNavigationHover
+{
+    -webkit-box-shadow: 0 0 10px 0 #298CAD;
+    box-shadow: 0 0 10px 0 #298CAD;
+}
+
+
+div#overlayNavigation
+{
+    background: url("/assets/images/3-1.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+    z-index: 666998;
+
+    div#toolbox {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        left: 50%;
+        margin-left: -296px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width: 620px
+    }
+
+    a#closeOverlayNavigation {
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 2em;
+    }
+
+    #loggedAs {
+        img {
+            height: 48px;
+        }
+    }
+}
+
+
+div.dataTables_length {
+    margin-top: 15px;
+    margin-left: 15px;
+
+    label {
+        div.selector {
+            width: 75px;
+            select {
+                width: 75px;
+            }
+        }
+    }
+}
+
+
+table.dataTable {
+    tr
+    {
+        td {
+            vertical-align: middle;
+        }
+    }
+}
+
+.icon a {
+    text-decoration: none;
+}
+
+div.newVoucherModal.modal {
+    width: 600px;
+    margin-left: -300px;
+}
+
+div.addFilterModal.modal {
+    width: 800px;
+    margin-left: -400px;
+}
+
+div.newMemberModal.modal,
+div.editMemberModal.modal {
+    width: 1000px;
+    margin-left: -500px;
+
+    img#memberFoto {
+        max-width: 270px;
+        max-height: 200px;
+    }
+
+    .modal-body {
+        max-height: 1200px;
+    }
+
+    form#deleteUserForm {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        label {
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    
+    #memberModalToolbox {
+        margin-top: 15px;
+    }
+}
+
+
+.toolbarButton {
+    margin-top: 8px;
+}

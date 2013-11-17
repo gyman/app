@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Report</title>
+        <style>
+            #hor-minimalist-b {
+                background: none repeat scroll 0 0 #FFFFFF;
+                border-collapse: collapse;
+                font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+                font-size: 12px;
+                margin: 20px;
+                text-align: left;
+                width: 100%;
+            }
+            #hor-minimalist-b th {
+                border-bottom: 2px solid #6678B1;
+                color: #003399;
+                font-size: 14px;
+                font-weight: normal;
+                padding: 10px 8px;
+            }
+            #hor-minimalist-b td {
+                border-bottom: 1px solid #CCCCCC;
+                color: #666699;
+                padding: 6px 8px;
+            }
+            #hor-minimalist-b tbody tr:hover td {
+                color: #000099;
+            }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+    </head>
+    <body>
+        <table id="hor-minimalist-b">
+            <thead>
+                <tr>
+                    <th>Imię i nazwisko</th>
+                    <th>Początek karnetu</th>
+                    <th>Koniec karnetu</th>
+                    <th>Cena</th>
+                    <th>Data sprzedaży</th>
+                    <th>Pozostałe wejścia</th>
+                    <th>Liczba wejść</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for voucher in data %}
+                <tr>
+                    <td>{{voucher.getMember().getName() }}</td>
+                    <td>{{voucher.getStartDate()|date("Y-m-d")}}</td>
+                    <td>{{voucher.getEndDate()|date("Y-m-d")}}</td>
+                    <td>{{voucher.getPrice()}} PLN</td>
+                    <td>{{voucher.getCreated()|date("Y-m-d H:i:s")}}</td>
+                    <td>{{voucher.getAmountLeft()}}</td>
+                    <td>{{voucher.getAmount()}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong style="float:right">Suma:</strong></td>
+                    <td colspan="4">{{ priceSum }} PLN</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <script>
+            $(function() {
+//                $("#hor-minimalist-b").dataTable();
+            });
+        </script>
+    </body>
+</html>

@@ -2,14 +2,23 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
+    database_name:     ~
+    database_user:     ~
     database_password: ~
 
     mailer_transport:  smtp
-    mailer_host:       127.0.0.1
+    mailer_host:       smtp.gmail.com
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    locale:            pl
+    secret:           "nuɐǝɔo ɹóʍʇsǝzɹd oƃǝɥɔns ɐu ɯǝłąuʎłdʍ"
+
+    locale: pl
+    secret: ThisTokenIsNotSoSecretChangeIt
+    use_assetic_controller: false
+    debug_toolbar:          true
+    debug_redirects:        false
+    sentry_url:             http://0@sentry
+
+    base_url:               localhost

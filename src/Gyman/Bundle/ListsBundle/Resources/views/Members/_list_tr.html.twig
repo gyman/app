@@ -1,0 +1,65 @@
+{% spaceless %}
+<tr data-member="{{entity.getId()}}" data-barcode="{{entity.getBarcode()}}" data-details-url="{{ path("_list_members_details",{id:entity.getId()}) }}" class="memberRow">
+    <td class="beltColor {% if entity.getBelt() %}belt-{{ entity.getBelt() }}{% endif %}">
+    {# TODO: funny and ugly, gtfo with this :D #}
+        <span class="hidden">
+        {% if entity.getBelt() == 'blue' %}
+            2
+        {% elseif entity.getBelt() == 'purple' %}
+            3
+        {% elseif entity.getBelt() == 'brown' %}
+            4
+        {% elseif entity.getBelt() == 'black' %}
+            5
+        {% else %}
+            1
+        {% endif %}
+        </span>
+        <a href="{{ path("_member_starred",{id:entity.getId()}) }}" class="starToggle{{ entity.getStarred() ? " starred" : "" }}">
+            <span class="icon16 icomoon-icon-star"></span>
+            <span class="icon16 icomoon-icon-star-3"></span>
+        </a>
+    </td>
+    <td class="profileColumn">
+        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : entity } %}
+    </td>
+    <td class="voucherColumn">
+        {# { render(controller('MembersBundle:Default:currentVoucher', { 'id': entity.getId() })) } #}
+        {% if entity.getCurrentVoucher() is not null %}
+            {% set voucher = entity.getCurrentVoucher() %}
+            {% if voucher is not null and voucher.getId() %}
+                {% set endDate = voucher.getEndDate() %}
+
+                {% if endDate is not null %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
+                {%else %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
+                {%endif%}
+
+                {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
+        <div class="badge badge-important">{{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}</div>
+                {%else %}
+        <div class="badge badge-important">open</div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </td>
+    <td class="actionColumn">
+        <div class="btn-group">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#"><span class="icomoon-icon-cart"></span>Sprzedaż <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path("_voucher_new", {"id" : entity.id})}}" class="openUrlInModal"><span class="icomoon-icon-clock"></span>Karnet</a></li>
+                    {# <li><a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="openUrlInModal"><span class="icomoon-icon-barcode-2"></span>Produkt</a></li> #}
+                </ul>
+            </div>
+
+            {% if entity.hasOpenedEntry() %}
+            <a href="{{ path("_entry_close", {"id" : entity.getLastEntry().id}) }}" class="btn btn-mini openUrlInModal btn-danger"><span class="icomoon-icon-exit"></span>Wyjście</a>
+            {% else %}
+            <a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-signup"></span>Wejście</a>
+            {% endif %}
+        </div>
+    </td>
+</tr>
+{% endspaceless %}

@@ -1,0 +1,14 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="alert alert-success fade in ">
+            <i class="fa fa-exclamation-circle alert-icon"></i>
+            <button data-dismiss="alert" class="close" type="button">×</button>
+            <strong>{{ "user.profile.notice.success"|trans }}</strong>
+            <p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

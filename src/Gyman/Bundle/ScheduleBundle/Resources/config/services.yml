@@ -1,0 +1,55 @@
+parameters:
+    base_manager.class: Gyman\Bundle\DefaultBundle\Services\Manager\BaseManager
+    activity_entity.class: Gyman\Bundle\ScheduleBundle\Entity\Activity
+    activity_repository.class: Gyman\Bundle\ScheduleBundle\Entity\ActivityRepository
+    activity_manager.class: Gyman\Bundle\ScheduleBundle\Services\Manager\ActivityManager
+    event_entity.class: Gyman\Bundle\ScheduleBundle\Entity\Event
+    event_manager.class: Gyman\Bundle\ScheduleBundle\Services\Manager\EventManager
+    event_repository.class: Gyman\Bundle\ScheduleBundle\Entity\EventRepository
+    occurence_entity.class: Gyman\Bundle\ScheduleBundle\Entity\Occurence
+    occurence_repository.class: Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository
+
+services:
+    base_manager:
+        class:     "%base_manager.class%"
+        calls:
+             - [ setContainer, ["@service_container"] ]
+    activity_manager:
+        class:          "%activity_manager.class%"
+        parent:         base_manager
+        calls:
+             - [ setClass, [%activity_entity.class%] ]
+    event_manager:
+        class:          "%event_manager.class%"
+        parent:         base_manager
+        calls:
+             - [ setClass, [%event_entity.class%] ]
+
+    event_repository:
+        class:              %event_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %event_entity.class% ]
+
+    occurence_repository:
+        class:              %occurence_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %occurence_entity.class% ]
+
+    activity_repository:
+        class:              %activity_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %activity_entity.class% ]
+
+    occurences_manager:
+        class: Gyman\Bundle\ScheduleBundle\Services\Manager\OccurencesManager
+        calls:
+             - [ setEntityManager, ["@doctrine.orm.entity_manager"] ]
+             - [ setRouter, ["@router"] ]
+
+    schedule:
+        class: Gyman\Bundle\ScheduleBundle\Services\Schedule
+        calls:
+             - [ setContainer, ["@service_container"] ]

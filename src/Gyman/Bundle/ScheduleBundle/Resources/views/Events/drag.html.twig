@@ -1,0 +1,35 @@
+<div class="alert alert-danger">
+    <strong>Uwaga!</strong>
+    Z powodu utrzymania spójności danych, wolno zmieniać jedynie przyszłe wydarzenia!
+</div>
+
+<form class="form-horizontal row-fluid" action="{{ path('_events_drag', {"occurence" : occurence.id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form(form) }}
+</form>
+
+{% block modal %}
+<div class="hidden" id="ui-editOccurenceData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Wystąpienie wydarzenia</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+{% javascripts
+    '@MembersBundle/Resources/public/coffee/members.editMember.coffee'
+    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-editOccurenceData");
+        modal.setModalWindowClass("editOccurenceData");
+    });
+</script>
+{% endblock javascript %}

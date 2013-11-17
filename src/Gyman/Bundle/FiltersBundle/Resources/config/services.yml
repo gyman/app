@@ -1,0 +1,133 @@
+parameters:
+  filter_provider.lists:
+    - members
+    - vouchers
+    - entries
+services:
+  filter_provider:
+    class: Gyman\Bundle\FiltersBundle\Services\FilterProvider
+    arguments:
+      - @service_container
+
+  filter_repository:
+    class: Gyman\Bundle\FiltersBundle\Entity\FilterRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method:  getRepository
+    arguments:
+        - Gyman\Bundle\FiltersBundle\Entity\Filter
+
+  filters.abstract:
+    class: Gyman\Bundle\FiltersBundle\Filters\AbstractSubfilter
+
+  filters.activities:
+    class: Gyman\Bundle\FiltersBundle\Filters\Activities
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+
+  filters.age:
+    class: Gyman\Bundle\FiltersBundle\Filters\Age
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+
+  filters.belt:
+    class: Gyman\Bundle\FiltersBundle\Filters\Belt
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+
+  filters.current_voucher:
+    class: Gyman\Bundle\FiltersBundle\Filters\CurrentVoucher
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.checked_in:
+    class: Gyman\Bundle\FiltersBundle\Filters\CheckedIn
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.registration_date:
+    class: Gyman\Bundle\FiltersBundle\Filters\RegistrationDate
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.search_name:
+    class: Gyman\Bundle\FiltersBundle\Filters\SearchName
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.voucher_start:
+    class: Gyman\Bundle\FiltersBundle\Filters\VoucherStart
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.voucher_end:
+    class: Gyman\Bundle\FiltersBundle\Filters\VoucherEnd
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.entry_date:
+    class: Gyman\Bundle\FiltersBundle\Filters\EntryDate
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.entry_type:
+    class: Gyman\Bundle\FiltersBundle\Filters\EntryType
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.gender:
+    class: Gyman\Bundle\FiltersBundle\Filters\Gender
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.member:
+    class: Gyman\Bundle\FiltersBundle\Filters\Member
+    tags:
+      - {name: filter}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.owner:
+    class: Gyman\Bundle\FiltersBundle\Filters\Owner
+    calls:
+      - [setSecurityContext, [@security.context]]
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}
+  filters.price:
+    class: Gyman\Bundle\FiltersBundle\Filters\Price
+    tags:
+      - {name: filter}
+      - {name: filter.list.vouchers}
+  filters.starred:
+    class: Gyman\Bundle\FiltersBundle\Filters\Starred
+    tags:
+      - {name: filter}
+      - {name: filter.list.members}
+      - {name: filter.list.vouchers}
+      - {name: filter.list.entries}

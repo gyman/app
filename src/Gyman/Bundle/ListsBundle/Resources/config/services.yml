@@ -1,0 +1,35 @@
+parameters:
+    list_parameters.class: Gyman\Bundle\ListsBundle\Services\ListParameters
+    members_list.class: Gyman\Bundle\ListsBundle\Services\MembersList
+    vouchers_list.class: Gyman\Bundle\ListsBundle\Services\VouchersList
+    entries_list.class: Gyman\Bundle\ListsBundle\Services\EntriesList
+
+services:
+    list_parameters:
+        class:          "%list_parameters.class%"
+        arguments:
+            - @service_container
+
+    members_list:
+        class:          "%members_list.class%"
+        calls:
+            - [setListParameters,[@list_parameters]]
+            - [setFilterProvider,[@filter_provider]]
+            - [setRepository,[@member_repository]]
+            - [setTemplating, [@templating]]
+
+    vouchers_list:
+        class:          "%vouchers_list.class%"
+        calls:
+            - [setListParameters,[@list_parameters]]
+            - [setFilterProvider,[@filter_provider]]
+            - [setRepository,[@voucher_repository]]
+            - [setTemplating, [@templating]]
+
+    entries_list:
+        class:          "%entries_list.class%"
+        calls:
+            - [setListParameters,[@list_parameters]]
+            - [setFilterProvider,[@filter_provider]]
+            - [setRepository,[@entry_repository]]
+            - [setTemplating, [@templating]]

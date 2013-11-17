@@ -1,0 +1,64 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+{% block body_class %}dashboard{% endblock %}
+
+{% block body %}
+
+    <div class="heading">
+
+        <h3>Pulpit nawigatora</h3>
+
+    </div><!-- End .heading-->
+
+    <div class="form-row row-fluid">
+        <div class="span6">
+            {% include "DashboardBundle:Default:activities.html.twig" %}
+            {% include "DashboardBundle:Default:hierarchy.html.twig" %}
+
+            <div class="reminder">
+                <h4>Zadania</h4>
+            </div>
+
+            <ul class="bigBtnIcon">
+                <li>
+                    <a class="tipB createNewMember openUrlInModal" href="{{path("_member_new")}}" class="tipB">
+                        <span class="icon icomoon-icon-users"></span>
+                        <span class="txt">Nowy uczestnik</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="tipB" href="#" class="tipB">
+                        <span class="icon icomoon-icon-equalizer-2"></span>
+                        <span class="txt">Wejście</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="tipB" href="#" class="tipB">
+                        <span class="icon icomoon-icon-equalizer-2"></span>
+                        <span class="txt">Sprzedaż</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="span6">
+            {% include "DashboardBundle:Default:searchUser.html.twig" %}
+
+            {% include "DashboardBundle:Default:popularActivities.html.twig" %}
+        </div>
+    </div>
+
+    <div class="form-row row-fluid">
+        <div class="span12">
+            <div id="frequencyChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {{ chart(frequencyChart) }}
+        {{ chart(popularityChart) }}
+    </script>
+{% endblock %}

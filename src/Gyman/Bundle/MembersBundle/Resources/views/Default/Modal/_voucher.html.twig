@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        {% if voucher.getEndDate() is not null %}
+        <div class="span6">
+            <div class="page-header">
+                <h4>Wykorzystane dni <small class="pull-right">z {{ totalDays }}</small></h4>
+            </div>
+            <input type="text" class="dial"
+                   value="{{ pastDays }}"
+                   data-width="120"
+                   data-angleOffset="-125"
+                   data-angleArc="250"
+                   data-fgColor="#3399CC"
+                   data-min="0"
+                   data-max="{{ totalDays }}"
+                   data-linecap="round"
+                   data-readOnly="true" disabled="DISABLED" />
+        </div>
+        {% endif %}
+
+        {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
+        <div class="span6">
+            <div class="page-header">
+                <h4>Wykorzystane wejścia <small class="pull-right">z {{ voucher.getAmount() }}</small></h4>
+            </div>
+            <input type="text" value="{{ usedEntries }}" class="dial"
+                   data-linecap="round"
+                   data-angleOffset="-125"
+                   data-angleArc="250"
+                   data-width="120"
+                   data-fgColor="#CC3333"
+                   data-min="0"
+                   data-max="{{ voucher.getAmount() }}"
+                   data-readOnly="true" disabled="DISABLED" />
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="page-header">
+                <h4>Data ważności{% if member.getCreated().getTimestamp() > 0 %}<small class="pull-right">sprzedano: {{ member.getCreated()|date("d.m.Y") }}</small>{% endif %}</h4>
+            </div>
+
+            <ul class="bigBtnIcon">
+                <li>
+                    <a class="tipB" href="#" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-23">
+                        <span class="icon icomoon-icon-arrow-first"></span>
+                        <span class="txt">{{ voucher.getStartDate()|date("d.m.Y") }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icomoon-icon-arrow-right"></span>
+                        <span class="txt">{{ voucher.getEndDate()|date("d.m.Y") }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="span6">
+            <div class="page-header">
+                <h4>Aktywności</h4>
+            </div>
+            {% if voucher.getActivities()|length > 0 %}
+                {% for activity in voucher.getActivities() %}
+                    <div class="badge badge-info">{{ activity.getName() }}</div>
+                {% endfor %}
+            {% else %}
+                    karnet typu <div class="badge badge-warning">open</div>, wszystkie zajęcia są dostępne
+            {% endif %}
+        </div>
+    </div>
+</div>

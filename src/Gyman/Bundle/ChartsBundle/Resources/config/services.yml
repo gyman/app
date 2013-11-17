@@ -1,0 +1,6 @@
+services:
+    chart:
+        class: Gyman\Bundle\ChartsBundle\Services\Chart
+        calls:
+#             - [ setContainer, ["@service_container"] ]
+             - [ setEntityManager, ["@doctrine.orm.entity_manager"] ]

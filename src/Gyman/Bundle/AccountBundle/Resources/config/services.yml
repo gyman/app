@@ -1,0 +1,29 @@
+services:
+    account_bundle.registration.form.type:
+        class: Gyman\Bundle\AccountBundle\Form\Type\RegisterType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: dende_user_registration }
+
+    account_bundle.registered_user_subscriber:
+        class: Gyman\Bundle\AccountBundle\Service\Subscriber\RegisteredUserSubscriber
+        calls:
+            - [setRouter,["@router"]]
+            - [setSession,["@session"]]
+            - [setMailer,["@mailer.registration_successful"]]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    account_bundle.updated_profile_subscriber:
+        class: Gyman\Bundle\AccountBundle\Service\Subscriber\UpdatedProfileSubscriber
+        calls:
+            - [setRouter,["@router"]]
+            - [setSession,["@session"]]
+        tags:
+            - { name: kernel.event_subscriber }
+            
+    account_bundle.profile.edit_type:
+        class: Gyman\Bundle\AccountBundle\Form\Type\UserType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - {name: form.type, alias: gyman_user_profile }

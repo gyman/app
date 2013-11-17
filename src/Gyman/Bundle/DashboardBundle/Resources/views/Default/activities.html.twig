@@ -1,0 +1,18 @@
+<div class="reminder" id="activitiesTab" data-date="{{ date|date("Y-m-d H:i:s") }}">
+    <h4><a href="#" class="prevActivityDay">&LeftTriangle;</a> <a href="#" class="nextActivityDay">&RightTriangle;</a>Zajęcia w dniu {{ date|date("d.m.Y (l)") }}:
+        <a class="icon tip" href="{{ path("_schedule_calendar") }}" oldtitle="Configure" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-clock"></span></a>
+    </h4>
+    <ul>
+        {% for occurence in occurences if occurences| length > 0%}
+            <li class="clearfix{% if occurence.isOngoing() %} ongoingEvent{% elseif occurence.isPast() %} passedEvent{% endif %}">
+                <span class="number">{{ occurence.startDate|date("H:i") }} - {{ occurence.endDate|date("H:i") }}</span>
+                <span class="txt">{{ occurence.event.activity.name }}</span>
+                {% if occurence.isOngoing() %}<span class="label label-success" style="margin-left: 10px; margin-top: 7px;">trwa</span>{% endif %}
+		{% if occurence.isPast(true) %}<span class="label" style="margin-left: 10px; margin-top: 7px;">zakonczone</span>{% endif %}
+                <a class="btn btn-warning openUrlInModal" href="{{ path("_events_show", {occurence: occurence.id}) }}">{{ occurence.entries|length }} osób</a>
+            </li>
+        {% else %}
+            <li>brak wydarzeń dla tego dnia</li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,4 +1,5 @@
 /web/bundles/
+/web/assets/
 /web/js/
 /web/css/
 /web/uploads/
@@ -12,5 +13,14 @@
 /vendor/
 /bin/
 /composer.phar
-/netbeans/
-/netbeans/private/
+phantomjsdriver.log
+app/config/behat_local.yml
+web/css/*
+!web/css/*
+/nbproject/
+/nbproject/*
+web/index.php
+bower_components/
+node_modules/
+.idea/
+phantomjsdriver.log

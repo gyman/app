@@ -1,33 +1,98 @@
+account:
+    resource: "@AccountBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+section:
+    resource: "@SectionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+club:
+    resource: "@ClubBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+chart:
+    resource: "@ChartsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+test:
+    resource: "@TestBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+reports:
+    resource: "@ReportsBundle/Controller/"
+    type:     annotation
+    prefix:   /report
+
+lists:
+    resource: "@ListsBundle/Controller/"
+    type:     annotation
+    prefix:   /list
+
+filters:
+    resource: "@FiltersBundle/Controller/"
+    type:     annotation
+    prefix:   /filter
+
+dashboard:
+    resource: "@DashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 entries:
     resource: "@EntriesBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /entries
 
 schedule:
     resource: "@ScheduleBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /schedule
 
 layout:
     resource: "@LayoutBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /layout
 
 default:
     resource: "@DefaultBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /default
 
 members:
     resource: "@MembersBundle/Controller/"
     type:     annotation
-    prefix:   /member
+    prefix:   /members
 
 vouchers:
     resource: "@VouchersBundle/Controller/"
     type:     annotation
-    prefix:   /voucher
-
+    prefix:   /vouchers
 oneup_uploader:
     resource: .
     type: uploader
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+
+#api:
+#    resource: "@ApiBundle/Controller/"
+#    type:     annotation
+
+api_members:
+    prefix:   /api
+    type:     rest
+    resource: Gyman\Bundle\ApiBundle\Controller\MemberController

@@ -1,0 +1,2804 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Supr admin</title>
+    <meta name="author" content="SuggeElson" />
+    <meta name="description" content="Supr admin template - new premium responsive admin template. This template is designed to help you build the site administration without losing valuable time.Template contains all the important functions which must have one backend system.Build on great twitter boostrap framework" />
+    <meta name="keywords" content="admin, admin template, admin theme, responsive, responsive admin, responsive admin template, responsive theme, themeforest, 960 grid system, grid, grid theme, liquid, masonry, jquery, administration, administration template, administration theme, mobile, touch , responsive layout, boostrap, twitter boostrap" />
+    <meta name="application-name" content="Supr admin template" />
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Force IE9 to render in normla mode -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Le styles -->
+
+    <!-- Use new way for google web fonts 
+    http://www.smashingmagazine.com/2012/07/11/avoiding-faux-weights-styles-google-web-fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Text -->
+    <!--[if lt IE 9]>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+    <!-- Core stylesheets do not remove -->
+    <link id="bootstrap" href="css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-responsive" href="css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/supr-theme/jquery.ui.supr.css" rel="stylesheet" type="text/css"/>
+    <link href="css/icons.css" rel="stylesheet" type="text/css" />
+
+    <!-- Plugin stylesheets -->
+    <link href="plugins/misc/qtip/jquery.qtip.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/gallery/jpages/jPages.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/gallery/pretty-photo/prettyPhoto.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/misc/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/forms/togglebutton/toggle-buttons.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/forms/uniform/uniform.default.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/misc/jqueryFileTree/jqueryFileTree.css" type="text/css" rel="stylesheet" />
+    <link href="plugins/tables/dataTables/jquery.dataTables.css" type="text/css" rel="stylesheet" />            
+    
+    <!-- Main stylesheets -->
+    <link href="css/main.css" rel="stylesheet" type="text/css" /> 
+
+    <!-- Custom stylesheets ( Put your own changes here ) -->
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
+
+    <!--[if IE 8]><link href="css/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+   
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="js/libs/excanvas.min.js"></script>
+      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script type="text/javascript" src="js/libs/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57-precomposed.png" />
+    
+    <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+    <meta name="application-name" content="Supr"/> 
+    <meta name="msapplication-TileColor" content="#3399cc"/> 
+
+    <!-- Load modernizr first -->
+    <script type="text/javascript" src="js/libs/modernizr.js"></script>
+
+    </head>
+      
+    <body>
+
+    <!-- loading animation -->
+    <div id="qLoverlay"></div>
+    <div id="qLbar"></div>
+    
+    <div id="header">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+              <div class="container-fluid">
+                <a class="brand" href="dashboard.html">Supr.<span class="slogan">admin</span></a>
+                <div class="nav-no-collapse">
+                    <ul class="nav">
+                        <li><a href="dashboard.html"><span class="icon16 icomoon-icon-screen-2"></span> <span class="txt">Dashboard</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-cog"></span><span class="txt"> Settings</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul>
+                                        <li>                                                    
+                                            <a href="#"><span class="icon16 icomoon-icon-equalizer"></span>Site config</a>
+                                        </li>
+                                        <li>                                                    
+                                            <a href="#"><span class="icon16 icomoon-icon-wrench"></span>Plugins</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-image-2"></span>Themes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-envelop"></span><span class="txt">Messages</span><span class="notification">8</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul class="messages">    
+                                        <li class="header"><strong>Messages</strong> (10) emails and (2) PM</li>
+                                        <li>
+                                           <span class="icon"><span class="icon16 icomoon-icon-user-plus"></span></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>Sammy Morerira</strong></a><span class="time">35 min ago</span></span>
+                                            <span class="msg">I have question about new function ...</span>
+                                        </li>
+                                        <li>
+                                           <span class="icon avatar"><img src="images/avatar.jpg" alt="" /></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>George Michael</strong></a><span class="time">1 hour ago</span></span>
+                                            <span class="msg">I need to meet you urgent please call me ...</span>
+                                        </li>
+                                        <li>
+                                            <span class="icon"><span class="icon16 icomoon-icon-envelop"></span></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>Ivanovich</strong></a><span class="time">1 day ago</span></span>
+                                            <span class="msg">I send you my suggestion, please look and ...</span>
+                                        </li>
+                                        <li class="view-all"><a href="#">View all messages <span class="icon16 icomoon-icon-arrow-right-8"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                  
+                    <ul class="nav pull-right usernav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul class="notif">
+                                        <li class="header"><strong>Notifications</strong> (3) items</li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-user-plus"></span></span>
+                                                <span class="event">1 User is registred</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-bubble-3"></span></span>
+                                                <span class="event">Jony add 1 comment</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-new"></span></span>
+                                                <span class="event">admin Julia added post</span>
+                                            </a>
+                                        </li>
+                                        <li class="view-all"><a href="#">View all notifications <span class="icon16 icomoon-icon-arrow-right-8"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+                                <img src="images/avatar.jpg" alt="" class="image" /> 
+                                <span class="txt">admin@supr.com</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-user-plus"></span>Edit profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-bubble-2"></span>Approve comments</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="icon16 icomoon-icon-plus"></span>Add user</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="index.html"><span class="icon16 icomoon-icon-exit"></span><span class="txt"> Logout</span></a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+              </div>
+            </div><!-- /navbar-inner -->
+          </div><!-- /navbar --> 
+
+    </div><!-- End #header -->
+
+    <div id="wrapper">
+
+        <!--Responsive navigation button-->  
+        <div class="resBtn">
+            <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+        </div>
+
+        <!--Sidebar collapse button-->  
+        <div class="collapseBtn leftbar">
+             <a href="#" class="tipR" title="Hide sidebar"><span class="icon12 minia-icon-layout"></span></a>
+        </div>
+
+        <!--Sidebar background-->
+        <div id="sidebarbg"></div>
+        <!--Sidebar content-->
+        <div id="sidebar">
+
+            <div class="shortcuts">
+                <ul>
+                    <li><a href="support.html" title="Support section" class="tip"><span class="icon24 icomoon-icon-support"></span></a></li>
+                    <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database"></span></a></li>
+                    <li><a href="charts.html" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+                    <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
+                </ul>
+            </div><!-- End search -->            
+
+            <div class="sidenav">
+
+                <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+                    <h5 class="title" style="margin-bottom:0">Navigation</h5>
+                </div><!-- End .sidenav-widget -->
+
+                <div class="mainnav">
+                    <ul>
+                        <li><a href="charts.html"><span class="icon16 icomoon-icon-stats-up"></span>Charts</a></li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-list"></span>Forms</a>
+                            <ul class="sub">
+                                <li><a href="forms.html"><span class="icon16 icomoon-icon-file"></span>Forms Stuff</a></li>
+                                <li><a href="forms-validation.html"><span class="icon16 icomoon-icon-file"></span>Validation</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-table-2"></span>Tables</a>
+                            <ul class="sub">
+                                <li><a href="tables.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Static</a></li>
+                                <li><a href="data-table.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Data table</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-equalizer-2"></span>UI Elements</a>
+                            <ul class="sub">
+                                <li><a href="icons.html"><span class="icon16 icomoon-icon-rocket"></span>Icons</a></li>
+                                <li><a href="buttons.html"><span class="icon16 icomoon-icon-file"></span>Buttons</a></li>
+                                <li><a href="elements.html"><span class="icon16 icomoon-icon-cogs"></span>Elements</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="typo.html"><span class="icon16 icomoon-icon-font"></span>Typography</a></li>
+                        <li><a href="grid.html"><span class="icon16 icomoon-icon-grid"></span>Grid</a></li>
+                        <li><a href="calendar.html"><span class="icon16 icomoon-icon-calendar"></span>Calendar</a></li>
+                        <li>
+                            <a href="widgets.html"><span class="icon16 icomoon-icon-cube"></span>Widgets<span class="notification green">35</span></a>
+                        </li>
+                        <li><a href="file.html"><span class="icon16 icomoon-icon-upload"></span>File Manager</a></li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-file"></span>Error pages<span class="notification">6</span></a>
+                            <ul class="sub">
+                                <li><a href="403.html"><span class="icon16 icomoon-icon-file"></span>Error 403</a></li>
+                                <li><a href="404.html"><span class="icon16 icomoon-icon-file"></span>Error 404</a></li>
+                                <li><a href="405.html"><span class="icon16 icomoon-icon-file"></span>Error 405</a></li>
+                                <li><a href="500.html"><span class="icon16 icomoon-icon-file"></span>Error 500</a></li>
+                                <li><a href="503.html"><span class="icon16 icomoon-icon-file"></span>Error 503</a></li>
+                                <li><a href="offline.html"><span class="icon16 icomoon-icon-file"></span>Offline page</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon16 icomoon-icon-folder"></span>Other pages<span class="notification blue">11</span></a>
+                            <ul class="sub">
+                                <li><a href="invoice.html"><span class="icon16 icomoon-icon-file"></span>Invoice page</a></li>
+                                <li><a href="profile.html"><span class="icon16 icomoon-icon-file"></span>User profile</a></li>
+                                <li><a href="search.html"><span class="icon16 icomoon-icon-search-3"></span>Search page</a></li>
+                                <li><a href="email.html"><span class="icon16 icomoon-icon-envelop"></span>Email page</a></li>
+                                <li><a href="support.html"><span class="icon16  icomoon-icon-support"></span>Support page</a></li>
+                                <li><a href="faq.html"><span class="icon16 icomoon-icon-attachment"></span>FAQ page</a></li>
+                                <li><a href="structure.html"><span class="icon16 icomoon-icon-file"></span>Blank page</a></li>
+                                <li><a href="fixed-topbar.html"><span class="icon16 icomoon-icon-file"></span>Fixed topbar</a></li>
+                                <li><a href="right-sidebar.html"><span class="icon16 icomoon-icon-file"></span>Right sidebar</a></li>
+                                <li><a href="two-sidebars.html"><span class="icon16 icomoon-icon-file"></span>Two sidebars</a></li>
+                                <li><a href="drag.html"><span class="icon16 icomoon-icon-move"></span>Drag &amp; Drop <span class="notification red">new</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- End sidenav -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Monthly Bandwidth Transfer</h5>
+                <div class="content">
+                    <span class="icon16 icomoon-icon-loop left"></span>
+                    <div class="progress progress-mini progress-danger left tip" title="87%">
+                      <div class="bar" style="width: 87%;"></div>
+                    </div>
+                    <span class="percent">87%</span>
+                    <div class="stat">19419.94 / 12000 MB</div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Disk Space Usage</h5>
+                <div class="content">
+                    <span class="icon16  icomoon-icon-storage-2 left"></span>
+                    <div class="progress progress-mini progress-success left tip" title="16%">
+                      <div class="bar" style="width: 16%;"></div>
+                    </div>
+                    <span class="percent">16%</span>
+                    <div class="stat">304.44 / 8000 MB</div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Ad sense stats</h5>
+                <div class="content">
+                    
+                    <div class="stats">
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Advert View</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-eye left"></span>
+                            <div class="number">21,501</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up-2 green"></span>
+                                5%
+                            </div>
+                            <span id="stat1" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Clicks</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-thumbs-up left"></span>
+                            <div class="number">308</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down-2 red"></span>
+                                8%
+                            </div>
+                            <span id="stat2" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Page CTR</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-heart left"></span>
+                            <div class="number">4%</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down-2 red"></span>
+                                1%
+                            </div>
+                            <span id="stat3" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Earn money</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-coin left"></span>
+                            <div class="number">$376</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up-2 green"></span>
+                                26%
+                            </div>
+                            <span id="stat4" class="spark"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+            <div class="sidebar-widget">
+                <h5 class="title">Right now</h5>
+                <div class="content">
+                    <div class="rightnow">
+                        <ul class="unstyled">
+                            <li><span class="number">34</span><span class="icon16 icomoon-icon-new"></span>Posts</li>
+                            <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>Pages</li>
+                            <li><span class="number">14</span><span class="icon16 icomoon-icon-list-2"></span>Categories</li>
+                            <li><span class="number">201</span><span class="icon16 icomoon-icon-tag"></span>Tags</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div><!-- End .sidenav-widget -->
+
+        </div><!-- End #sidebar -->
+
+        <!--Body content-->
+        <div id="content" class="clearfix">
+            <div class="contentwrapper"><!--Content wrapper-->
+
+                <div class="heading">
+
+                    <h3>Widgets</h3>                    
+
+                    <div class="resBtnSearch">
+                        <a href="#"><span class="icon16 icomoon-icon-search-3"></span></a>
+                    </div>
+
+                    <div class="search">
+
+                        <form id="searchform" action="search.html">
+                            <input type="text" id="tipue_search_input" class="top-search" placeholder="Search here ..." />
+                            <input type="submit" id="tipue_search_button" class="search-btn" value=""/>
+                        </form>
+                
+                    </div><!-- End search -->
+                    
+                    <ul class="breadcrumb">
+                        <li>You are here:</li>
+                        <li>
+                            <a href="#" class="tip" title="back to dashboard">
+                                <span class="icon16 icomoon-icon-screen-2"></span>
+                            </a> 
+                            <span class="divider">
+                                <span class="icon16 icomoon-icon-arrow-right-3"></span>
+                            </span>
+                        </li>
+                        <li class="active">Widgets</li>
+                    </ul>
+
+                </div><!-- End .heading-->
+    				
+                <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-equalizer-2"></span>
+                                        <span>With icon</span>
+                                    </h4>
+        
+                                </div>
+                                <div class="content">
+                                    <p>Box container with icon in title</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>Collapsible</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Box container without icon in title and collapsible ability </p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box closed">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-equalizer-2"></span>
+                                        <span>Closed by default</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Some content goes here.</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+                                 
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>With Loader</span>
+                                    </h4>
+                                    <span class="loader"><img src="images/loaders/circular/059.gif" width="16" height="16" alt=""></span>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Use loader icon</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-equalizer-2"></span>
+                                        <span>With labels</span>
+                                        <span class="label label-success">Success</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Use all boostrap inline labels</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>With Badge</span>
+                                        <span class="badge badge-important">6</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Use all boostrap badge</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+                                 
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>With progress bar</span>
+                                    </h4>
+                                    <div class="progress progress-mini progress-success tip" title="60%">
+                                        <div class="bar" style="width: 60%;"></div>
+                                    </div>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Use pogress bar</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left">With search field</span>
+                                        <form class="box-form right" action="">
+                                            <input type="text" class="search-query span2" placeholder="Search">
+                                        </form>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Search field in the title</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left">With sparkline</span>
+                                        <span id="stat5" class="spark"></span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Sparkline in title</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+                                 
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left">Line type spark</span>
+                                        <span id="stat6" class="spark"></span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Another Sparkline in title</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left">With button</span>
+                                        <form class="box-form right" action="">
+                                            <button class="btn btn-success btn-mini" type="submit">Done</button>
+                                        </form>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Place button in the title</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left">With checkbox</span>
+                                        <form class="box-form right" action="">
+                                            <div class="iToggle-button">
+                                                <input type="checkbox" checked="checked" class="nostyle">
+                                            </div> 
+                                        </form>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Iphone checkbox style</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+                         
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box gradient">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>With gradient</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>With gradient style</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span8">
+                            
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4 class="clearfix">
+                                        <span class="left icon16 icomoon-icon-grid-view"></span>
+                                        <span class="left">With checkboxes and mass action</span>
+                                        <form class="box-form right" action="">
+                                            <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span class="icon16 icomoon-icon-cog-2"></span>
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#"><span class="icon-pencil"></span> Edit</a></li>
+                                                <li><a href="#"><span class="icon-trash"></span> Delete</a></li>
+                                            </ul>
+                                        </form>
+                                       
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content noPad">
+                                    <table class="responsive table table-bordered" id="checkAll">
+                                        <thead>
+                                          <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                            <th id="masterCh" class="ch"><input type="checkbox" name="checkbox" value="all" class="styled" /></th>
+                                            <th>Actions</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td class="chChildren"><input type="checkbox" name="checkbox" value="1" class="styled" /></td>
+                                            <td>
+                                                <div class="controls center">
+                                                    <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                                    <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                                </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                             <td class="chChildren"><input type="checkbox" name="checkbox" value="2" class="styled" /></td>
+                                            <td>
+                                                <div class="controls center">
+                                                    <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                                    <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                                </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                            <td class="chChildren"><input type="checkbox" name="checkbox" value="3" class="styled" /></td>
+                                            <td>
+                                                <div class="controls center">
+                                                    <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                                    <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                                </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span8 -->
+                         
+                    </div><!-- End .row-fluid -->  
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="box gradient">
+
+                                <div class="title">
+                                    <h4>
+                                        <span>With custom scrollbar</span>
+                                    </h4>
+                                </div>
+                                <div class="content">
+                                    <div class="scroll" style="height:200px; overflow:auto; margin-top:10px;">                                   
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box gradient">
+
+                                <div class="title">
+                                    <h4>
+                                        <span>Horizontal scrollbar</span>
+                                    </h4>
+                                </div>
+                                <div class="content">
+                                    <div class="scroll" style="overflow:auto; margin-top:10px;">   
+                                        <div style="width:1000px;">                                
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box plain">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span>Plain box</span>
+                                    </h4>
+                                    <a href="#" class="minimize">Minimize</a>
+                                </div>
+                                <div class="content">
+                                    <p>Plain box</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                    </div><!-- End .row-fluid -->                 
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+                            <div class="page-header">
+                                <h4>Calendar widget</h4>
+                            </div>
+                            <div id="datepicker-inline"></div>
+                        </div>
+
+                        <div class="span4">
+                            <div class="todo">
+                                <h4>To Do List <a href="#" class="icon tip" title="Add task"><span class="icon16 icomoon-icon-plus"></span></a></h4>
+                                <ul>
+                                    <li class="clearfix">
+                                        <div class="txt">
+                                            Fix some bugs
+                                            <span class="by label">Admin</span>
+                                            <span class="date badge badge-important">Today</span>
+                                        </div>
+                                        <div class="controls">
+                                            <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                            <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="txt">
+                                            Add post about birds
+                                            <span class="by label">Julia</span>
+                                            <span class="date badge badge-success">Tomorrow</span>
+                                        </div>
+                                        <div class="controls">
+                                            <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                            <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="txt">
+                                            Remove some items
+                                            <span class="by label">Admin</span>
+                                            <span class="date badge badge-success">Tomorrow</span>
+                                        </div>
+                                        <div class="controls">
+                                            <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                            <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="txt">
+                                            Staff party
+                                            <span class="by label">Admin</span>
+                                            <span class="date badge badge-info">08.08.2012</span>
+                                        </div>
+                                        <div class="controls">
+                                            <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                            <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="txt">
+                                            Shedule backup
+                                            <span class="by label">Steve</span>
+                                            <span class="date badge badge-info">08.08.2012</span>
+                                        </div>
+                                        <div class="controls">
+                                            <a href="#" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a>
+                                            <a href="#" title="Remove task" class="tip"><span class="icon12 icomoon-icon-remove"></span></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="span4">
+                            <div class="page-header">
+                                <h4>Vital stats</h4>
+                            </div>
+                            <div class="vital-stats">
+                                <ul class="unstyled">
+                                    <li>
+                                        <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 81% Clicks
+                                        <span class="pull-right strong">567</span>
+                                        <div class="progress progress-striped ">
+                                            <div class="bar" style="width: 81%;"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 72% Uniquie Clicks
+                                        <span class="pull-right strong">507</span>
+                                        <div class="progress progress-success progress-striped ">
+                                            <div class="bar" style="width: 72%;"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="icon24 icomoon-icon-arrow-down-2 red"></span> 53% Impressions
+                                        <span class="pull-right strong">457</span>
+                                        <div class="progress progress-warning progress-striped ">
+                                            <div class="bar" style="width: 53%;"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 3% Online Users
+                                        <span class="pull-right strong">8</span>
+                                        <div class="progress progress-danger progress-striped ">
+                                            <div class="bar" style="width: 3%;"></div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="reminder">
+                                <h4>Things you need to do 
+                                    <a href="#" class="icon tip" title="Configure"><span class="icon16 icomoon-icon-cog-2"></span></a>
+                                </h4>
+                                <ul>
+                                    <li class="clearfix">
+                                        <div class="icon">
+                                            <span class="icon32 icomoon-icon-basket gray"></span>
+                                        </div>
+                                        <span class="number">7</span> 
+                                        <span class="txt">Pending Orders</span>
+                                        <a class="btn btn-warning">go</a>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="icon">
+                                            <span class="icon32 icomoon-icon-support red"></span>
+                                        </div>
+                                        <span class="number">3</span> 
+                                        <span class="txt">Support Tickets </span>
+                                        <a class="btn btn-warning">go</a>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="icon">
+                                            <span class="icon32 icomoon-icon-new green"></span>
+                                        </div>
+                                        <span class="number">5</span> 
+                                        <span class="txt">New Invoices </span>
+                                        <a class="btn btn-warning">go</a>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="icon">
+                                            <span class="icon32 icomoon-icon-bubbles-2 blue"></span>
+                                        </div>
+                                        <span class="number">13</span> 
+                                        <span class="txt">Review Comments</span> 
+                                        <a class="btn btn-warning">go</a>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="icon">
+                                            <span class="icon32 icomoon-icon-cog dark"></span>
+                                        </div>
+                                        <span class="number">2</span> 
+                                        <span class="txt">Settings to Change </span>
+                                        <a class="btn btn-warning">go</a>
+                                    </li>                                   
+                                </ul>
+                            </div><!-- End .reminder -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="sparkStats">
+                                <h4>Sparkline stats <a href="#" class="icon tip" title="Configure"><span class="icon16 icomoon-icon-cog-2"></span></a></h4>
+                                <ul class="unstyled">
+                                    <li><span class="sparkLine1"></span> Visits: <span class="number">509</span></li>
+                                    <li>
+                                        <span class="sparkLine2"></span>
+                                        Unique Visitors: 
+                                        <span class="number">389</span>
+                                    </li>
+                                    <li><span class="sparkLine3"></span> 
+                                        Pageviews: 
+                                        <span class="number">731</span>
+                                    </li>
+                                    <li><span class="sparkLine4"></span>
+                                        Pages / Visit: 
+                                        <span class="number">1.44</span>
+                                    </li>
+                                    <li><span class="sparkLine5"></span>
+                                        Avg. Visit Duration: 
+                                        <span class="number">00:01:21</span>
+                                    </li>
+                                    <li><span class="sparkLine6"></span>
+                                        Bounce Rate: <span class="number">68.37%</span>
+                                    </li>
+                                    <li><span class="sparkLine7"></span>
+                                        % New Visits: 
+                                        <span class="number">76.23%</span>
+                                    </li>
+
+                                </ul>
+                            </div><!-- End .sparkStats -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span4">
+
+                            <div class="box gradient">
+
+                                <div class="title">
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-bubbles-6"></span>
+                                        <span>Send PM <small>with typeahead</small></span>
+                                    </h4>
+                                </div>
+                                <div class="content">
+                                    <form class="form-horizontal" action="#">
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span12 lDir" for="normal">Username</label>
+                                                    <input type="text" data-provide="typeahead" class="findUser span12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span12 lDir" for="textarea">Message</label>
+                                                    <textarea class="span12 elastic" id="textarea" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12 controls">
+                                                <button type="submit" class="btn right marginT10">Send PM</button>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+                        
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="page-header">
+                                <h4>Gallery View <small>with pagination</small></h4>
+                            </div>
+
+                            <!-- item container -->
+                            <ul id="itemContainer" class="galleryView center">
+                                                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/1.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/1.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/2.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/2.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/3.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/3.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/4.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/4.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/5.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/5.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/7.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/7.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/8.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/8.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/9.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/9.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/10.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/10.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/11.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/11.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/12.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/12.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/13.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/13.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/14.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/14.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/15.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/15.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/16.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/16.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/17.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/17.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/18.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/18.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/19.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/19.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="images/gallery/20.jpg" rel="prettyPhoto" title="Title for image">
+                                        <img src="images/gallery/preload.png" data-original="images/gallery/thumbnails/20.jpg" alt="Image name">
+                                    </a>
+                                    <div class="actionBtn">
+                                        <a href="#" class="edit"><span class="icon16 icomoon-icon-pencil-2 white"></span></a>
+                                        <a href="#" class="delete"><span class="icon16 icomoon-icon-cancel-4 white"></span></a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                             <!-- navigation holder -->
+                             <div class="center">
+                                <div class="holder"></div>
+                             </div>
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+                            <div class="box gradient">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-power"></span>
+                                        <span>Recent activity</span>
+                                    </h4>
+                                    
+                                </div>
+                                <div class="content noPad">
+                                    <ul class="activity">
+                                        <li>
+                                            <span class="icon16 icomoon-icon-plus gray"></span>
+                                            <a href="#"><strong>SuggeElson</strong></a> add <a href="#">3 users</a> 
+                                            <a href="#" class="btn btn-mini">Take action</a>
+                                            <small>23 seconds ago</small>
+                                        </li>
+                                        <li>
+                                            <span class="icon16 icomoon-icon-envelop gray"></span>
+                                            <a href="#"><strong>Ivanna</strong></a> send <a href="#">1 message and 1 PM</a> 
+                                            <a href="#" class="btn btn-mini">Read messages</a>
+                                            <small>5 minutes ago</small>
+                                        </li>
+                                        <li>
+                                            <span class="icon16 icomoon-icon-images gray"></span>
+                                            <a href="#"><strong>Joan Novotny</strong></a> delete <a href="#">5 pictures</a> 
+                                            <a href="#" class="btn btn-mini">Undo delete</a>
+                                            <small>1 hour ago</small>
+                                        </li>
+                                        <li>
+                                            <span class="icon16 icomoon-icon-upload gray"></span>
+                                            <a href="#"><strong>Admin Julia</strong></a> upload <a href="#">2 files</a> 
+                                            <a href="#" class="btn btn-mini">View files</a>
+                                            <small>2 days ago</small>
+                                        </li>
+                                        <li>
+                                            <span class="icon16 icomoon-icon-bubbles-2 gray"></span>
+                                            <a href="#"><strong>User Rayan</strong></a> post <a href="#">1 comment</a> 
+                                            <a href="#" class="btn btn-mini">View comment</a>
+                                            <small>1 week ago</small>
+                                        </li>
+                                        <li>
+                                            <span class="icon16 icomoon-icon-copy gray"></span>
+                                            <a href="#"><strong>SuggeElson</strong></a> add <a href="#">3 posts</a> 
+                                            <a href="#" class="btn btn-mini">View posts</a>
+                                            <small>1 month ago</small>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+
+                            </div><!-- End .box -->
+                        </div><!-- End .span6 -->
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+                            <div class="box gradient">
+
+                                <div class="title">
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-users"></span>
+                                        <span>Recent users</span>
+                                    </h4>
+                                </div>
+                                <div class="content noPad">
+                                    <ul class="recent-users">
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <img src="images/avatar2.jpeg" alt="avatar" />
+                                            </span>
+
+                                            <a href="#" class="name"><strong>Lazar</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-success">Online</span>
+                                                <small>23 seconds ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <span class="icon32 icomoon-icon-user gray"></span>
+                                            </span>
+
+                                            <a href="#" class="name"><strong>SuggeElson</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-success">Online</span>
+                                                <small>2 minutes ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <span class="icon32 icomoon-icon-user gray"></span>
+                                            </span>
+
+                                            <a href="#" class="name"><strong>Jonny</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-important">Offline</span>
+                                                <small>1 hour ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <span class="icon32 icomoon-icon-user gray"></span>
+                                            </span>
+
+                                            <a href="#" class="name"><strong>Julia</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-success">Online</span>
+                                                <small>21 hours ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <span class="icon32 icomoon-icon-user gray"></span>
+                                            </span>
+
+                                            <a href="#" class="name"><strong>Mickey</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-important">Offline</span>
+                                                <small>2 days ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                        <li class="clearfix">
+                                            <span class="avatar">
+                                                <span class="icon32 icomoon-icon-user gray"></span>
+                                            </span>
+
+                                            <a href="#" class="name"><strong>Rayan Faith</strong></a>
+                                            <div class="action">
+                                                <a href="#" class="btn btn-mini">Profile</a>
+                                                <a href="#" class="btn btn-mini">Send PM</a>
+                                            </div>
+                                            <div class="status">
+                                                <span class="label label-important">Offline</span>
+                                                <small>1 week ago</small>
+                                            </div>
+                                            <a href="#" class="email">info@somemail.com</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                        <div class="span8">
+                            <div class="box gradient">
+                                <div class="title">
+                                    <h4><span>Wizzard</span></h4>
+                                </div>
+                                <div class="content noPad clearfix">
+                                    <form id="wizard" class="form-horizontal">
+                                        <div class="msg"></div>
+                                        <div class="wizard-steps clearfix"></div>
+
+                                        <div class="step" id="first">
+                                            <span class="step-info" data-num="1" data-text="Read this and go to next"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, ducimus, maxime fugiat unde inventore aspernatur mollitia dolor nesciunt facere eum libero repudiandae quisquam deserunt facilis magni error aut reprehenderit!</p>
+                                        </div>
+                                        <div class="step" id="second">
+                                            <span class="step-info" data-num="2" data-text="Second step is important"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ex impedit quae expedita blanditiis veniam perspiciatis odit nesciunt hic in eos magnam ea est? Neque, nostrum ratione quisquam dolore veritatis quae totam pariatur deleniti quasi ut provident quam maxime doloribus corporis animi labore magni architecto soluta modi velit quidem assumenda odit consequuntur iure expedita harum eveniet dolorum fugit excepturi incidunt est a repellat aut ducimus consequatur repudiandae doloremque ipsam. Voluptas, vel, quis, dolores, iusto velit nulla molestiae placeat aperiam cupiditate perferendis ducimus alias ratione esse earum at repellat laboriosam deleniti ut quod quos odio architecto quisquam pariatur nesciunt reprehenderit ipsum.</p>
+                                        </div>
+                                        <div class="step" id="third">
+                                            <span class="step-info" data-num="3" data-text="Don`t forget to read me"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, aperiam, voluptatum aspernatur eos impedit repellat odit quibusdam asperiores sed dignissimos repellendus neque vitae optio eligendi soluta inventore at autem velit reprehenderit beatae! Dolor, temporibus, magni officia cum dolorem reprehenderit laboriosam minus perspiciatis at consectetur sed molestiae quis neque expedita voluptatum blanditiis vero modi earum quo illum ipsum quidem eius beatae!</p>
+                                        </div>
+                                        <div class="step submit_step" id="last">
+                                            <span class="step-info" data-num="4" data-text="Finish is here, congrats"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, eius, inventore, molestiae perspiciatis maiores ab nam ipsam accusantium accusamus dolorum cum in sapiente dolores temporibus incidunt nesciunt asperiores quos non?</p>
+                                        </div>
+                                        <div class="form-actions full">
+                                            <button class="btn pull-left" type="reset"> Back </button>
+                                            <button class="btn pull-right" type="submit"> Next </button>
+                                        </div>
+                                    </form>     
+                                </div>
+
+                            </div><!-- End .box -->
+                        </div><!-- End .span8 -->
+
+                        <div class="span8">
+                            <div class="box gradient">
+                                <div class="title">
+                                    <h4><span>Vertical Wizzard</span></h4>
+                                </div>
+                                <div class="content noPad clearfix">
+                                   <form id="wizard1" class="form-horizontal">
+                                        <div class="msg"></div>
+                                        <div class="wizard-steps clearfix"></div>
+
+                                        <div class="step" id="first">
+                                            <span class="step-info" data-num="1" data-text="Read this and go to next"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores maxime molestias cum iusto harum. Ipsam, delectus repellat magnam voluptates veritatis temporibus pariatur laboriosam aperiam? Distinctio, repellat, minima quam reiciendis provident ad consectetur ipsam voluptatem illum asperiores unde voluptate voluptatibus magnam quo quia deserunt quibusdam quaerat aliquam dolore cum est ipsum optio temporibus repudiandae incidunt nesciunt tempora accusamus ex facere fugiat libero dolores rerum illo iste laudantium corporis sapiente blanditiis. Sapiente, assumenda, natus delectus obcaecati temporibus officia iusto! Nisi, assumenda, eum quibusdam reiciendis nostrum sunt pariatur repudiandae omnis a nulla natus veritatis quasi dignissimos error ipsam laudantium eius sapiente voluptatum obcaecati laboriosam provident quam harum maiores nihil saepe sit mollitia delectus non officiis officia doloremque quisquam recusandae illum. Nihil, fugiat inventore totam nesciunt excepturi eos quis officiis fugit sit temporibus nemo neque unde odio ipsum maiores! Accusamus, mollitia, velit, quisquam, earum cupiditate nostrum vel iusto fuga nihil unde impedit soluta numquam?</p>
+                                        </div>
+                                        <div class="step" id="second">
+                                            <span class="step-info" data-num="2" data-text="Second step is important"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ex impedit quae expedita blanditiis veniam perspiciatis odit nesciunt hic in eos magnam ea est? Neque, nostrum ratione quisquam dolore veritatis quae totam pariatur deleniti quasi ut provident quam maxime doloribus corporis animi labore magni architecto soluta modi velit quidem assumenda odit consequuntur iure expedita harum eveniet dolorum fugit excepturi incidunt est a repellat aut ducimus consequatur repudiandae doloremque ipsam. Voluptas, vel, quis, dolores, iusto velit nulla molestiae placeat aperiam cupiditate perferendis ducimus alias ratione esse earum at repellat laboriosam deleniti ut quod quos odio architecto quisquam pariatur nesciunt reprehenderit ipsum.</p>
+                                        </div>
+                                        <div class="step" id="third">
+                                            <span class="step-info" data-num="3" data-text="Don`t forget to read me"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, aperiam, voluptatum aspernatur eos impedit repellat odit quibusdam asperiores sed dignissimos repellendus neque vitae optio eligendi soluta inventore at autem velit reprehenderit beatae! Dolor, temporibus, magni officia cum dolorem reprehenderit laboriosam minus perspiciatis at consectetur sed molestiae quis neque expedita voluptatum blanditiis vero modi earum quo illum ipsum quidem eius beatae!</p>
+                                        </div>
+                                        <div class="step submit_step" id="last">
+                                            <span class="step-info" data-num="4" data-text="Finish is here, congrats"></span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, eius, inventore, molestiae perspiciatis maiores ab nam ipsam accusantium accusamus dolorum cum in sapiente dolores temporibus incidunt nesciunt asperiores quos non?</p>
+                                        </div>
+                                        <div class="form-actions full">
+                                            <button class="btn pull-left" type="reset"> Back </button>
+                                            <button class="btn pull-right" type="submit"> Next </button>
+                                        </div>
+                                    </form>                                            
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span8 -->
+                        
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            
+                            <div class="box gradient">
+                                <div class="title">
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-vcard"></span>
+                                        <span>Contacts widget</span>
+                                    </h4>
+                                </div>
+                                <div class="content noPad clearfix">
+                                    <table cellpadding="0" cellspacing="0" border="0" class="responsive contactTable display table table-bordered" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Position</th>
+                                                <th>Phone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>Joan Storm</td>
+                                                <td>joan@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>Web desinger</td>
+                                                <td>040 775 333</td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td>Nikolas</td>
+                                                <td>niko@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>Html coder</td>
+                                                <td>040 744 111</td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td>Rayan Clark</td>
+                                                <td>info@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>Web desinger</td>
+                                                <td>040 775 333</td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td>Stephanie</td>
+                                                <td>stef@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>Html coder</td>
+                                                <td>040 744 111</td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td>Lazar Angelov</td>
+                                                <td>lazar@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>Instructor</td>
+                                                <td>040 775 333</td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td>Marry Williams</td>
+                                                <td>will@gmail.com <a href="#" class="btn btn-mini">Send mail</a> <a href="#" class="btn btn-mini">PM</a></td>
+                                                <td>SEO</td>
+                                                <td>040 744 111</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Position</th>
+                                                <th>Phone</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span6 -->
+
+                        <div class="span6">
+
+                            <div class="box gradient">
+                                <div class="title">
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-bubbles-6"></span>
+                                        <span>Messages layout</span>
+                                    </h4>
+                                </div>
+                                <div class="content noPad">
+
+                                    <ul class="messages">
+                                        <li class="user clearfix">
+                                            <a href="#" class="avatar">
+                                                <img src="images/avatar2.jpeg" alt="" />
+                                            </a>
+                                            <div class="message">
+                                                <div class="head clearfix">
+                                                    <span class="name"><strong>Lazar</strong> says:</span>
+                                                    <span class="time">25 seconds ago</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="admin clearfix">
+                                            <a href="#" class="avatar">
+                                                <img src="images/avatar3.jpeg" alt="" />
+                                            </a>
+                                            <div class="message">
+                                                <div class="head clearfix">
+                                                    <span class="name"><strong>Sugge</strong> says:</span>
+                                                    <span class="time">just now</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua.
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <li class="sendMsg">
+                                            <form class="form-horizontal" action="#">
+                                                <textarea class="elastic" id="textarea" rows="1" placeholder="Enter your message ..." style="width:98%;"></textarea>
+                                                <button type="submit" class="btn btn-info marginT10">Send message</button>
+                                            </form>
+                                        </li>
+                                        
+                                    </ul>
+
+                                </div>
+
+                            </div><!-- End .box -->
+
+
+                        </div><!-- End .span6 -->
+
+
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+
+                            <div class="page-header">
+                                <h4>Typeahead <small>(autocomplete)</small></h4>
+                            </div>
+
+                            <div class="well">
+                                <input type="text" data-provide="typeahead" class="typeahead span12" />
+                                <span class="hint red">type 'a'</span>
+                            </div>
+
+                            <div class="page-header">
+                                <h4>JQuery autocomplete </h4>
+                            </div>
+
+                            <div class="well">
+                                <input type="text" id="autocomplete" class="span12" />
+                                <span class="hint red">type 'a'</span>
+                            </div>
+
+                            <div class="page-header">
+                                <h4>JQuery Combobox </h4>
+                            </div>
+
+                            <div class="well">
+                                <select class="nostyle" id="combobox">
+                                    <option value="">Select one...</option>
+                                    <option value="ActionScript">ActionScript</option>
+                                    <option value="AppleScript">AppleScript</option>
+                                    <option value="Asp">Asp</option>
+                                    <option value="BASIC">BASIC</option>
+                                    <option value="C">C</option>
+                                    <option value="C++">C++</option>
+                                    <option value="Clojure">Clojure</option>
+                                    <option value="COBOL">COBOL</option>
+                                    <option value="ColdFusion">ColdFusion</option>
+                                    <option value="Erlang">Erlang</option>
+                                    <option value="Fortran">Fortran</option>
+                                    <option value="Groovy">Groovy</option>
+                                    <option value="Haskell">Haskell</option>
+                                    <option value="Java">Java</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Lisp">Lisp</option>
+                                    <option value="Perl">Perl</option>
+                                    <option value="PHP">PHP</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Ruby">Ruby</option>
+                                    <option value="Scala">Scala</option>
+                                    <option value="Scheme">Scheme</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="span8">
+
+                            <div class="page-header">
+                                <h4>Carousel <small>(bootstrap carousel)</small></h4>
+                            </div>
+
+                            <div id="myCarousel" class="carousel slide">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="active item">
+                                       <img src="images/image.jpg" alt="" />
+                                    </div>
+                                    <div class="item">
+                                        <img src="images/image2.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <!-- Carousel nav -->
+                                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                            </div>
+
+                        </div>
+                    </div><!-- End .row-fluid -->
+
+                    <div class="row-fluid">
+
+                        <div class="span6">
+
+                            <div class="box gradient">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 icomoon-icon-tree-view"></span>
+                                        <span>File tree</span>
+                                    </h4>
+                                    
+                                </div>
+                                <div class="content">
+                                    <div id="file-tree"></div>
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span4 -->
+
+                    </div><!-- End .row-fluid -->
+               
+    			<!-- Page end here -->
+    				
+                <div class="modal fade hide" id="myModal1">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Chat layout</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="messages">
+                            <li class="user clearfix">
+                                <a href="#" class="avatar">
+                                    <img src="images/avatar2.jpeg" alt="" />
+                                </a>
+                                <div class="message">
+                                    <div class="head clearfix">
+                                        <span class="name"><strong>Lazar</strong> says:</span>
+                                        <span class="time">25 seconds ago</span>
+                                    </div>
+                                    <p>
+                                        Time to go i call you tomorrow.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="admin clearfix">
+                                <a href="#" class="avatar">
+                                    <img src="images/avatar3.jpeg" alt="" />
+                                </a>
+                                <div class="message">
+                                    <div class="head clearfix">
+                                        <span class="name"><strong>Sugge</strong> says:</span>
+                                        <span class="time">just now</span>
+                                    </div>
+                                    <p>
+                                        OK, have a nice day.
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li class="sendMsg">
+                                <form class="form-horizontal" action="#">
+                                    <textarea class="elastic" id="textarea" rows="1" placeholder="Enter your message ..." style="width:98%;"></textarea>
+                                    <button type="submit" class="btn btn-info marginT10">Send message</button>
+                                </form>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+
+            </div><!-- End contentwrapper -->
+        </div><!-- End #content -->
+    
+    </div><!-- End #wrapper -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Important plugins put in all pages -->
+    <script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>  
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/libs/jRespond.min.js"></script>
+
+    <!-- Charts plugins -->
+    <script type="text/javascript" src="plugins/charts/sparkline/jquery.sparkline.min.js"></script><!-- Sparkline plugin -->
+   
+    <!-- Misc plugins -->
+    <script type="text/javascript" src="plugins/misc/nicescroll/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="plugins/misc/qtip/jquery.qtip.min.js"></script><!-- Custom tooltip plugin -->
+    <script type="text/javascript" src="plugins/misc/totop/jquery.ui.totop.min.js"></script> 
+    <script type="text/javascript" src="plugins/misc/jqueryFileTree/jqueryFileTree.js"></script> 
+    <script type="text/javascript" src="plugins/misc/pnotify/jquery.pnotify.min.js"></script>
+
+    <!-- Search plugin -->
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch_data.js"></script><!-- JSON for searched results -->
+    <script type="text/javascript" src="plugins/misc/search/tipuesearch.js"></script>
+
+    <!-- Form plugins -->
+    <script type="text/javascript" src="plugins/forms/togglebutton/jquery.toggle.buttons.js"></script>
+    <script type="text/javascript" src="plugins/forms/uniform/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="plugins/forms/wizard/jquery.bbq.js"></script>
+    <script type="text/javascript" src="plugins/forms/wizard/jquery.form.js"></script>
+    <script type="text/javascript" src="plugins/forms/wizard/jquery.form.wizard.js"></script>
+    
+    <!-- Gallery plugins -->
+    <script type="text/javascript" src="plugins/gallery/lazy-load/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" src="plugins/gallery/jpages/jPages.min.js"></script>
+    <script type="text/javascript" src="plugins/gallery/pretty-photo/jquery.prettyPhoto.js"></script>
+
+    <!-- Table plugins -->
+    <script type="text/javascript" src="plugins/tables/dataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="plugins/tables/responsive-tables/responsive-tables.js"></script><!-- Make tables responsive -->
+
+    <!-- Init plugins -->
+    <script type="text/javascript" src="js/main.js"></script><!-- Core js functions -->
+    <script type="text/javascript" src="js/widgets.js"></script><!-- Init plugins only for page -->
+   
+    </body>
+</html>

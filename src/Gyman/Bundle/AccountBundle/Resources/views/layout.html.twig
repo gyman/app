@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block main %}
+
+<div class="breadcrumb-box breadcrumb-none"></div>
+
+<section id="main" class="page ">
+  <header class="page-header">
+    <div class="container">
+      <h1 class="title">{% block mainCaption %}title{% endblock %}</h1>
+    </div>	
+  </header>
+  <div class="container">
+    <div class="row">
+      <article class="col-sm-9 col-md-9 content">
+		{% block content %}{% endblock content %}
+      </article><!-- .content -->
+	  <div id="sidebar" class="sidebar col-sm-3 col-md-3">
+		<aside class="widget menu">
+		  <header>
+			<h3 class="title">{{ "profile_menu.caption"|trans }}</h3>
+		  </header>
+		  <nav>
+                    {{ knp_menu_render('AccountBundle:Builder:navigation', {
+                        'template': 'AccountBundle::navigation.html.twig',
+                        'currentAsLink' : true,
+                        'depth' : 2,
+                        'currentClass' : 'active'
+                    }) }}
+		  </nav>
+		</aside><!-- .menu-->
+	  </div>
+    </div>
+  </div>
+</section><!-- #main -->
+{% endblock %}

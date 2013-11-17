@@ -1,0 +1,6 @@
+<div class="clearfix" data-member-edit-url="{{ path("_member_edit", {"id" : member.id}) }}">
+    <a class="name openUrlInModal" href="{{ path("_member_edit", {"id" : member.id}) }}"><strong>{{ member.name }}</strong></a>
+    <div class="status">
+        <small>{{member.getBarcode() }}</small>
+    </div>
+</div>

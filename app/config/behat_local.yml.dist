@@ -1,0 +1,8 @@
+default:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'http://bjj.local/app_test.php/'
+            #browser_name: phantomjs
+            browser_name: firefox
+            selenium2:
+                wd_host: http://localhost:4444/wd/hub

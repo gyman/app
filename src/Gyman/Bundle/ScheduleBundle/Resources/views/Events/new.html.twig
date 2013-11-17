@@ -1,0 +1,42 @@
+{% block form %}
+<form id="newEventForm" action="{{ path("_events_new") }}" class="form form-horizontal" method="POST">
+{{ form_row(form.activity) }}
+{{ form_row(form.newActivity) }}
+{{ form_row(form.eventType) }}
+{{ form_row(form.startDate) }}
+{{ form_row(form.duration) }}
+{{ form_row(form.endDate) }}
+{{ form_row(form.days) }}
+{{ form_rest(form) }}
+</form>
+{% endblock form %}
+
+{% block modal %}
+<div class="hidden" id="ui-newEventData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Nowe wydarzenie</h3>
+    </div>
+    <div class="modal-footer">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary" id="saveFormInModal">Zapisz</a>
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+{% javascripts
+    '@ScheduleBundle/Resources/public/coffee/schedule.newEvent.coffee'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-newEventData");
+        modal.setModalWindowClass("newEvent");
+
+        window.newEventModal = new NewEvent();
+    });
+</script>
+{% endblock javascript %}

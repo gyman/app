@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<orm-designer version="2.3.4.871" name="BjjTimesheet" mvc="Symfony2" orm="Doctrine2" uuid="4cd3ed65-0673-4167-9aad-241e97d063d1">
+  <external-module storage-path="src/Dende/VouchersBundle/Entity/Entity.module.xml"/>
+  <module name="tmp" uuid="634cddb8-b0b3-4725-a918-4d44e1698cb9">
+    <entity name="Gyman\Bundle\ScheduleBundle\Entity\Activity" uuid="4b15f8f9-393b-4790-a3a4-a69014ec21fa"/>
+  </module>
+  <visual-data>
+    <entity uuid="127d02c1-2105-4631-b92a-8f4670d7d6a4" position-x="356" position-y="40" size-x="0" size-x2="98" size-y="0" size-y2="87"/>
+    <entity uuid="3af2fb8f-c499-41e8-bf41-10acf4319df5" position-x="622" position-y="40" size-x="0" size-x2="105" size-y="0" size-y2="269"/>
+    <entity uuid="4b15f8f9-393b-4790-a3a4-a69014ec21fa" position-x="20" position-y="40" size-x="0" size-x2="171" size-y="0" size-y2="20"/>
+    <project uuid="4cd3ed65-0673-4167-9aad-241e97d063d1" size-x="0" size-x2="1180" size-y="0" size-y2="1247"/>
+    <module uuid="6022721d-ca77-4cc6-8eab-3036c10d14ae" bk-color="4294114555" position-x="50" position-y="50" size-x="0" size-x2="1080" size-y="0" size-y2="947"/>
+    <module uuid="634cddb8-b0b3-4725-a918-4d44e1698cb9" bk-color="4294769148" position-x="50" position-y="1097" size-x="0" size-x2="211" size-y="0" size-y2="100"/>
+    <entity uuid="642ba6ce-b685-4c5e-952a-416c15057a2a" position-x="830" position-y="658" size-x="0" size-x2="230" size-y="0" size-y2="74"/>
+    <entity uuid="69b4fe72-9c22-4992-88c4-a145c88a7a39" position-x="892" position-y="350" size-x="0" size-x2="118" size-y="0" size-y2="143"/>
+    <entity uuid="82cadca7-629f-4293-a997-139db9f54c59" position-x="82" position-y="40" size-x="0" size-x2="105" size-y="0" size-y2="171"/>
+    <entity uuid="86625e16-d345-459f-93d7-c9012334bc83" position-x="892" position-y="40" size-x="0" size-x2="105" size-y="0" size-y2="87"/>
+    <entity uuid="bc607847-7eb2-4ba9-9329-1db037a7015b" position-x="622" position-y="658" size-x="0" size-x2="105" size-y="0" size-y2="171"/>
+    <entity uuid="bdf3c7dc-8944-4919-9de4-6f490f01980d" position-x="90" position-y="658" size-x="0" size-x2="89" size-y="0" size-y2="31"/>
+    <entity uuid="cc42a519-83b1-40f1-bf34-eeffdcc3df54" position-x="721" position-y="350" size-x="0" size-x2="105" size-y="0" size-y2="143"/>
+    <entity uuid="dd0d9303-6903-47ad-9bc9-cd63055699c4" position-x="375" position-y="658" size-x="0" size-x2="59" size-y="0" size-y2="20"/>
+    <entity uuid="e4e99014-0c91-45d3-9ee8-dbf57087c8ae" position-x="115" position-y="349" size-x="0" size-x2="40" size-y="0" size-y2="20"/>
+    <entity uuid="e6575826-d597-4e34-ad4f-7ba95e209c64" position-x="376" position-y="349" size-x="0" size-x2="57" size-y="0" size-y2="20"/>
+  </visual-data>
+</orm-designer>

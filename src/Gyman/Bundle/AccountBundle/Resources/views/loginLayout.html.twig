@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block overraid_body %}
+<body class="page-login-promo blur-page" data-blur-image="img/content/bg-login.jpg" data-blur-amount="1">
+
+<div class="page-box">
+
+<header class="header header-three">
+  <div class="container">
+    <div class="row">
+      <div class="logo-box col-sm-12 col-md-12">
+        <div class="logo">
+		  <a href="/">
+			<img src="{{ asset("/img/gyman_logo.png") }}" class="logo-img" alt="">
+		  </a>
+		</div>
+      </div>
+    </div><!--.row -->
+  </div>
+</header><!-- .header -->
+
+<div class="container-fluid">
+
+    <div class="loginContainer">
+        {% block fos_user_content %}{% endblock fos_user_content %}
+    </div>
+
+</div>
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}
+
+</body>
+{% endblock %}
+    

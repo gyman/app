@@ -1,0 +1,39 @@
+{% extends "ListsBundle::layout.html.twig" %}
+
+{% block body_class %}membersList{% endblock %}
+
+{% block headingTitle %}Członkowie klubu{% endblock %}
+{% block buttonPath %}{{path("_member_new")}}{% endblock %}
+{% block buttonClasses %}createNewMember openUrlInModal{% endblock %}
+{% block buttonLabel %}Nowa osoba{% endblock %}
+
+{% block listHeaderRightToolbox %}
+<div class="pull-right" id="chooseMembersListForm">
+    <a class="icomoon-icon-list green"  href="{{ path("_list_members") }}"></a>
+    <a class="icomoon-icon-grid green" href="{{ path("_list_members_gallery") }}"></a>
+</div>
+
+{% block filterButton %}
+<div class="pull-left">
+    <a id="filterModalButton" href="{{ path("_filter_new",{"listname" : "members"}) }}" class="btn btn-link openUrlInModal">
+        <span class="icon16 icomoon-icon-cog-2"></span><span class="icon16 caret"></span>
+    </a>
+</div>
+{% endblock filterButton %}
+{% endblock %}
+
+{% block listTitle %}Lista osób{% endblock%}
+{% block listTableId %}membersList{% endblock %}
+{% block listTableClass %}table table-bordered{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_list_members_datasource", {_format: "json"}) }}"{% endblock %}
+
+{% block listTabs %}{% include "FiltersBundle:Default:_tabs.html.twig" with {"filter": filter, "listname" :listname} %}{% endblock listTabs %}
+
+{% block listThead %}
+<tr>
+    <th class="beltColor"></th>
+    <th>Imię i nazwisko</th>
+    <th>Karnet</th>
+    <th>Akcje</th>
+</tr>
+{% endblock %}
