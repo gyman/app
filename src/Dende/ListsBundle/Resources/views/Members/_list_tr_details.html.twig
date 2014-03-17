@@ -35,15 +35,30 @@
             </dd>
             {% endif %}
 
+            {% if member.getLastEntry() is not null %}
+            {% set entry = member.getLastEntry() %}
+            <dt>Godzina wejścia:</dt>
+            <dd>
+               {{ entry.getStartDate()|date("H:i") }}
+            </dd>
+            <dt>Zajęcia:</dt>
+            <dd>
+               {{ entry.getActivity().getName }}
+            </dd>
+            {% endif %}
+
             <dt>Zarejestrowany:</dt>
             <dd>{{ member.getCreated()|date("d.m.Y") }}</dd>
 
             <dt>Notatki:</dt>
             <dd>{{ member.getNotes() }}</dd>
+
+            <dt>Stan portfela:</dt>
+            <dd>0.00 PLN</dd>
         </dl>
     </div>
     <div class="span4">
-        
+
     </div>
     <div class="span2">
         <div class="memberActions">

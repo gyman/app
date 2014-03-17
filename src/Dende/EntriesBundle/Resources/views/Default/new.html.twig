@@ -58,7 +58,7 @@
 {% endif %}
 
 {% block modal %}
-<div class="hidden" id="ui-editEntryData">
+<div class="hidden" id="ui-newEntryData">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>{% block modalTitle %}Dodaj wejście dla {{ member.getName() }}{%endblock modalTitle%}</h3>
@@ -81,7 +81,7 @@
 <script>
     $(function() {
 
-        modal.setupFromNode("div#ui-editEntryData");
+        modal.setupFromNode("div#ui-newEntryData");
         modal.setModalWindowClass("editEntryModal");
 
         window.editEntryModal = new EditEntry();

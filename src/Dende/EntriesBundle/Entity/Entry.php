@@ -47,6 +47,13 @@ class Entry {
     private $activity;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="entries")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="SET NULL")
+     
+     */
+    private $event;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher", inversedBy="entries")
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -63,10 +70,22 @@ class Entry {
     /**
      * @var string $entryPrice
      *
-     * @ORM\Column(name="entry_price", type="string", nullable=true)
-     * @Assert\RegEx("/^\d+(\.\d\d){0,1}$/")
+     * @ORM\Column(name="entry_price", type="decimal", scale=2, nullable=true)
+     * @Assert\Regex("/^\d+(\.\d\d){0,1}$/")
      */
     private $entryPrice;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="startDate", type="datetime", nullable = true)
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="endDate", type="datetime", nullable = true)
+     */
+    private $endDate;
 
     /**
      * @var DateTime $created
@@ -91,6 +110,22 @@ class Entry {
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getStartDate() {
+        return $this->startDate;
+    }
+
+    public function getEndDate() {
+        return $this->endDate;
+    }
+
+    public function setStartDate(\DateTime $startDate) {
+        $this->startDate = $startDate;
+    }
+
+    public function setEndDate(\DateTime $endDate) {
+        $this->endDate = $endDate;
+    }
+
     public function getEntryPrice() {
         return $this->entryPrice;
     }
@@ -172,5 +207,18 @@ class Entry {
         return $this;
     }
 
+    public function getEvent() {
+        return $this->event;
+    }
+
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
 // </editor-fold>
+
+    public function isOpened() {
+        return !is_null($this->getStartDate()) && is_null($this->getEndDate());
+    }
+
 }

@@ -13,6 +13,7 @@
         <parameter key="filter.age.class">Dende\FiltersBundle\Filters\Age</parameter>
         <parameter key="filter.belt.class">Dende\FiltersBundle\Filters\Belt</parameter>
         <parameter key="filter.current_voucher.class">Dende\FiltersBundle\Filters\CurrentVoucher</parameter>
+        <parameter key="filter.checked_in.class">Dende\FiltersBundle\Filters\CheckedIn</parameter>
         <parameter key="filter.entry_date.class">Dende\FiltersBundle\Filters\EntryDate</parameter>
         <parameter key="filter.entry_type.class">Dende\FiltersBundle\Filters\EntryType</parameter>
         <parameter key="filter.gender.class">Dende\FiltersBundle\Filters\Gender</parameter>
@@ -61,6 +62,10 @@
             <tag name="members" />
             <tag name="vouchers" />
             <tag name="entries" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.checked_in" class="%filter.checked_in.class%">
+            <tag name="members" />
             <tag name="filter" />
         </service>
         <service id="filters.registration_date" class="%filter.registration_date.class%">

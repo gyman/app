@@ -51,7 +51,14 @@ class @Filter
       dropdownAutoWidth : true
       containerCss : 
         width : "120px"  
+
+  # checked in filter handler
         
+  checkedInSubfilterHandler: () =>
+    $("#filter_subfilters_checkedIn_checkedIn").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
   # member filter handler
         
   memberSubfilterHandler: () =>

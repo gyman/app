@@ -46,8 +46,19 @@
     </td>
     <td class="actionColumn">
         <div class="btn-group">
-            <a href="{{ path("_voucher_new", {"id" : entity.id})}}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-clock"></span>+ Karnet</a>
-            <a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-signup "></span>+ Wejście</a>
+            <div class="btn-group">
+                <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#"><span class="icomoon-icon-cart"></span>Sprzedaż <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path("_voucher_new", {"id" : entity.id})}}" class="openUrlInModal"><span class="icomoon-icon-clock"></span>Karnet</a></li>
+                    <li><a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="openUrlInModal"><span class="icomoon-icon-barcode-2"></span>Produkt</a></li>
+                </ul>
+            </div>
+
+            {% if entity.hasOpenedEntry() %}
+            <a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="btn btn-mini openUrlInModal btn-danger"><span class="icomoon-icon-exit"></span>Wyjście</a>
+            {% else %}
+            <a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-signup"></span>Wejście</a>
+            {% endif %}
         </div>
     </td>
 </tr>

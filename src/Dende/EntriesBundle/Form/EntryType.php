@@ -12,6 +12,7 @@ use Dende\ScheduleBundle\Entity\ActivityRepository;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Dende\ScheduleBundle\Form\DataTransformer\ActivityTransformer;
+use Dende\ScheduleBundle\Entity\Activity;
 
 class EntryType extends AbstractType {
 // <editor-fold defaultstate="collapsed" desc="fields">
@@ -259,7 +260,7 @@ class EntryType extends AbstractType {
         $this->loadTodayActivities();
 
         return array(
-            "Trwające"   => $this->getCurrentActivities()->toArray(),
+            "Trwające (±15min.)"   => $this->getCurrentActivities()->toArray(),
             "Dzisiejsze" => $this->getTodayActivities()->toArray(),
             "Karnet"     => $this->getVoucherActivities()->toArray(),
             "Wszystkie"  => $this->getAllActivities()->toArray()
@@ -272,7 +273,7 @@ class EntryType extends AbstractType {
      * @return array
      */
     protected function loadCurrentActivities() {
-        $currentEventsCollection = $this->getEventRepository()->getCurrentEvents();
+        $currentEventsCollection = $this->getEventRepository()->getCurrentEvents(15);
 
         if (count($currentEventsCollection) > 0)
         {
@@ -280,7 +281,7 @@ class EntryType extends AbstractType {
             foreach ($currentEventsCollection as $event) {
                 /** @var Activity Description */
                 $activity = $event->getActivity();
-                $this->getCurrentActivities()->offsetSet($activity->getId(), $activity->getName());
+                $this->getCurrentActivities()->offsetSet($activity->getId(), $this->getLabel($activity));
             }
         }
     }
@@ -316,7 +317,7 @@ class EntryType extends AbstractType {
         if (count($activitiesCollection) > 0)
         {
             foreach ($activitiesCollection as $activity) {
-                $this->getTodayActivities()->offsetSet($activity->getId(), $activity->getName());
+                $this->getTodayActivities()->offsetSet($activity->getId(), $this->getLabel($activity));
             }
         }
     }
@@ -347,6 +348,24 @@ class EntryType extends AbstractType {
         {
             return "paid";
         }
+    }
+
+    protected function getLabel(Activity $activity) {
+        $name = $activity->getName();
+
+        $events = $activity->getEvents();
+
+        foreach ($events as $event) {
+            /** @var Event $event * */
+            if ($event->getDayOfWeek() === strtolower(date("l")))
+            {
+                $start = $event->getStartHour();
+                $end = $event->getEndHour();
+                return sprintf("%s (%s-%s)", $name, $start, $end);
+            }
+        }
+
+        return $name;
     }
 
 }

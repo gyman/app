@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Dende\DefaultBundle\Lib\Globals;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
+use Dende\EntriesBundle\Entity\Entry;
 
 /**
  * Member
@@ -124,6 +125,7 @@ class Member {
     protected $currentVoucher;
 
     /**
+     * @var Entry $lastEntry
      * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
      * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
@@ -437,10 +439,18 @@ class Member {
         return $this;
     }
 
+    /**
+     * 
+     * @return Entry
+     */
     public function getLastEntry() {
         return $this->lastEntry;
     }
 
+    /**
+     * 
+     * @return Member
+     */
     public function setLastEntry($lastEntry) {
         $this->lastEntry = $lastEntry;
         return $this;
@@ -450,6 +460,10 @@ class Member {
 
     public function __construct() {
         $this->vouchers = new ArrayCollection();
+    }
+
+    public function hasOpenedEntry() {
+        return !is_null($this->getLastEntry()) && $this->getLastEntry()->isOpened();
     }
 
 }

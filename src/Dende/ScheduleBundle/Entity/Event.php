@@ -12,8 +12,8 @@ use Dende\ScheduleBundle\Entity\Activity;
  * @ORM\Table("events")
  * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
  */
-class Event
-{
+class Event {
+
     /**
      * @var integer
      *
@@ -28,6 +28,11 @@ class Event
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $activity;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="event")
+     */
+    private $entries;
 
     /**
      * @var string
@@ -50,14 +55,12 @@ class Event
      */
     private $endHour;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -67,10 +70,9 @@ class Event
      * @param Activity $activity
      * @return Event
      */
-    public function setActivity(Activity $activity)
-    {
+    public function setActivity(Activity $activity) {
         $this->activity = $activity;
-    
+
         return $this;
     }
 
@@ -79,8 +81,7 @@ class Event
      *
      * @return integer 
      */
-    public function getActivity()
-    {
+    public function getActivity() {
         return $this->activity;
     }
 
@@ -90,10 +91,9 @@ class Event
      * @param string $dayOfWeek
      * @return Event
      */
-    public function setDayOfWeek($dayOfWeek)
-    {
+    public function setDayOfWeek($dayOfWeek) {
         $this->dayOfWeek = $dayOfWeek;
-    
+
         return $this;
     }
 
@@ -102,8 +102,7 @@ class Event
      *
      * @return string
      */
-    public function getDayOfWeek()
-    {
+    public function getDayOfWeek() {
         return $this->dayOfWeek;
     }
 
@@ -113,10 +112,9 @@ class Event
      * @param string $startHour
      * @return Event
      */
-    public function setStartHour($startHour)
-    {
+    public function setStartHour($startHour) {
         $this->startHour = $startHour;
-    
+
         return $this;
     }
 
@@ -125,8 +123,7 @@ class Event
      *
      * @return string 
      */
-    public function getStartHour()
-    {
+    public function getStartHour() {
         return $this->startHour;
     }
 
@@ -136,10 +133,9 @@ class Event
      * @param string $endHour
      * @return Event
      */
-    public function setEndHour($endHour)
-    {
+    public function setEndHour($endHour) {
         $this->endHour = $endHour;
-    
+
         return $this;
     }
 
@@ -148,8 +144,8 @@ class Event
      *
      * @return string 
      */
-    public function getEndHour()
-    {
+    public function getEndHour() {
         return $this->endHour;
     }
+
 }

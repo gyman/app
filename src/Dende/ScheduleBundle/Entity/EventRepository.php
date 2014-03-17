@@ -12,9 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventRepository extends EntityRepository {
 
-    public function getCurrentEvents() {
+    /**
+     * 
+     * @param int $timeOffsetInMinutes
+     * @return DoctrineCollection
+     */
+    public function getCurrentEvents($timeOffsetInMinutes = null) {
         $dayOfWeek = strtolower(date('l'));
-        $hour = date('H:i');
+
+        if ($timeOffsetInMinutes)
+        {
+            $hour = date('H:i',strtotime(sprintf("+%d minutes",$timeOffsetInMinutes)));
+        }
+        else
+        {
+            $hour = date('H:i');
+        }
 
         $queryBuilder = $this->createQueryBuilder("e")
                 ->where("e.dayOfWeek = :day")
@@ -40,12 +53,12 @@ class EventRepository extends EntityRepository {
 
     public function getTodayEvents() {
         $queryBuilder = $this->createQueryBuilder("e");
-        
+
         $queryBuilder->where("e.dayOfWeek = :day");
         $queryBuilder->setParameter("day", strtolower(date("l")));
-        
+
         $query = $queryBuilder->getQuery();
-        
+
         return $query->execute();
     }
 

@@ -15,42 +15,135 @@ th.beltColor {
 
 table#membersList {
     tbody {
-        td.beltColor {
-            width: @beltColumnWidth;
-            background-color: white;
-
-            &.belt-white {
-                background-color: white;
-            }
-
-            &.belt-blue {
-                background-color: blue;
-            }
-            &.belt-purple {
-                background-color: purple;
-            }
-            &.belt-brown {
-                background-color: #800000;
-            }
-            &.belt-black {
-                background-color: black;
-            }
-        }
-
         tr {
-            td {
-                vertical-align: middle;
-            }
-        }
+            &.memberRow {
 
-        td.lastEntryColumn {
-            width: 200px;
-        }
-        td.voucherColumn {
-            width: 200px;
-        }
-        td.actionColumn {
-            width: 200px;
+            }
+            &.entityDetails {
+                td  {
+                    div.entityDetailsContent {
+                        min-height: 24px;
+                        position: relative;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+
+                        div.blockUI.blockElement {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            margin-left: -12px;
+                            margin-top: -12px;
+                        }
+
+                        div.memberActions {
+                            margin: 10px 20px;
+                        }
+                    }
+                }
+            }
+
+            td {
+                &.profileColumn {
+                    cursor: pointer;
+                    .avatar  {
+                        border: 1px solid #E3E2E2;
+                        border-radius: 2px;
+                        float: left;
+                        height: 40px;
+                        margin-left: 15px;
+                        padding: 2px;
+                        width: 40px;
+                        overflow: hidden;
+
+                        img {
+                            height: 60px;
+                        }
+                    }
+
+                    .name {
+                        float: left;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+
+                    .email {
+                        float: left;
+                        margin-left: 10px;
+                        margin-top: 2px;
+                    }
+
+                    text-align: left;
+
+                    div.status {
+                        float: right;
+                        margin-right: 15px;
+                        margin-top: 2px;
+
+                        small {
+                            color: #999999;
+                            font-size: 11px;
+                        }
+                    }
+
+                    a.btn.editMember {
+                        opacity: 0.3;
+                    }
+
+                    &:hover a.btn.editMember {
+                        opacity: 1
+                    }
+
+                    .action {
+                        text-align: left;
+                    }
+
+                    a.editMember.thumbnail {
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                    }
+                }
+
+                &.beltColor {
+                    width: @beltColumnWidth;
+                    background-color: white;
+
+                    &.belt-white {
+                        background-color: white;
+                    }
+
+                    &.belt-blue {
+                        background-color: blue;
+                    }
+                    &.belt-purple {
+                        background-color: purple;
+                    }
+                    &.belt-brown {
+                        background-color: #800000;
+                    }
+                    &.belt-black {
+                        background-color: black;
+                    }
+                }
+
+
+                &.lastEntryColumn {
+                    width: 200px;
+                }
+                &.voucherColumn {
+                    width: 200px;
+                }
+                &.actionColumn {
+                    width: 200px;
+
+                    .btn-group {
+                        .dropdown-toggle {
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

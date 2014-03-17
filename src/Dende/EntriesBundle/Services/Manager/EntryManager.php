@@ -18,7 +18,7 @@ class EntryManager extends BaseManager {
         $entry = new Entry();
 
         $entry->setEntryPrice(15);
-        
+        $entry->setStartDate(new \DateTime());
         return $entry;
     }
 

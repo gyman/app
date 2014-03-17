@@ -407,7 +407,7 @@ $(document).ready ->
   window.modal = new Modal
             
   $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) ->
-    e.stopPropagation()
+    # e.stopPropagation()
     e.preventDefault()
     href = $(this).attr "href"
     modal.showFromUrl(href)

@@ -2,8 +2,8 @@ $ ->
       
   # unrolling the details
 
-  $(document).on "click", "#membersList tbody tr", (e) ->
-    $tr = $(this)
+  $(document).on "click", "#membersList tbody tr td.profileColumn", (e) ->
+    $tr = $(e.currentTarget).parents "tr"
     if $tr.data "detailsOpened"
       $tr.data "detailsOpened", false
       $tr.siblings(".entityDetails").remove()
