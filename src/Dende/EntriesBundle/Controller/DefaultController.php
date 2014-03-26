@@ -49,7 +49,7 @@ class DefaultController extends Controller {
             $entry->setVoucher($currentVoucher);
         }
 
-        $entryType = new EntryType($this->get("event_repository"), $this->get("activity_repository"));
+        $entryType = new EntryType($this->get("event_repository"));
         $form = $this->createForm($entryType, $entry);
 
         if ($request->getMethod() == 'POST')
@@ -62,7 +62,11 @@ class DefaultController extends Controller {
                 {
                     $entry->setVoucher(null);
                 }
-
+                
+                if ($form["entryType"]->getData() != "paid")
+                {
+                    $entry->setEntryPrice(null);
+                }
 
                 $this->get('entry_manager')->save($entry);
             }

@@ -11,8 +11,11 @@ use Dende\ScheduleBundle\Entity\EventRepository;
 use Dende\ScheduleBundle\Entity\ActivityRepository;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Dende\ScheduleBundle\Form\DataTransformer\ActivityTransformer;
+use Dende\ScheduleBundle\Form\DataTransformer\EventTransformer;
 use Dende\ScheduleBundle\Entity\Activity;
+use Dende\MembersBundle\Form\DataTransformer\DateToStringTransformer;
+use Dende\ScheduleBundle\Entity\Event;
+use Symfony\Component\Form\FormInterface;
 
 class EntryType extends AbstractType {
 // <editor-fold defaultstate="collapsed" desc="fields">
@@ -25,12 +28,6 @@ class EntryType extends AbstractType {
 
     /**
      *
-     * @var ActivityRepository
-     */
-    private $activityRepository;
-
-    /**
-     *
      * @var Entry 
      */
     private $entry;
@@ -39,25 +36,25 @@ class EntryType extends AbstractType {
      *
      * @var ArrayCollection 
      */
-    private $currentActivities;
+    private $currentEvents;
 
     /**
      *
      * @var ArrayCollection 
      */
-    private $voucherActivities;
+    private $voucherEvents;
 
     /**
      *
      * @var ArrayCollection 
      */
-    private $allActivities;
+    private $allEvents;
 
     /**
      *
      * @var ArrayCollection 
      */
-    private $todayActivities;
+    private $todayEvents;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
@@ -66,35 +63,27 @@ class EntryType extends AbstractType {
      * 
      * @return ArrayCollection
      */
-    public function getTodayActivities() {
-        return $this->todayActivities;
+    public function getTodayEvents() {
+        return $this->todayEvents;
     }
 
     /**
      * 
-     * @param \Doctrine\Common\Collections\ArrayCollection $todayActivities
+     * @param \Doctrine\Common\Collections\ArrayCollection $todayEvents
      * @return \Dende\EntriesBundle\Form\EntryType
      */
-    public function setTodayActivities(ArrayCollection $todayActivities) {
-        $this->todayActivities = $todayActivities;
+    public function setTodayEvents(ArrayCollection $todayEvents) {
+        $this->todayEvents = $todayEvents;
         return $this;
     }
 
     /**
      * 
-     * @return ActivityRepository
-     */
-    public function getActivityRepository() {
-        return $this->activityRepository;
-    }
-
-    /**
-     * 
-     * @param \Dende\ScheduleBundle\Entity\ActivityRepository $activityRepository
+     * @param \Dende\ScheduleBundle\Entity\ActivityRepository $eventRepository
      * @return \Dende\EntriesBundle\Form\EntryType
      */
-    public function setActivityRepository(ActivityRepository $activityRepository) {
-        $this->activityRepository = $activityRepository;
+    public function setActivityRepository(ActivityRepository $eventRepository) {
+        $this->eventRepository = $eventRepository;
         return $this;
     }
 
@@ -102,8 +91,8 @@ class EntryType extends AbstractType {
      * 
      * @return ArrayCollection
      */
-    public function getCurrentActivities() {
-        return $this->currentActivities;
+    public function getCurrentEvents() {
+        return $this->currentEvents;
     }
 
     /**
@@ -146,58 +135,57 @@ class EntryType extends AbstractType {
      * 
      * @return ArrayCollection
      */
-    public function getVoucherActivities() {
-        return $this->voucherActivities;
+    public function getVoucherEvents() {
+        return $this->voucherEvents;
     }
 
     /**
      * 
      * @return ArrayCollection
      */
-    public function getAllActivities() {
-        return $this->allActivities;
+    public function getAllEvents() {
+        return $this->allEvents;
     }
 
     /**
      * 
-     * @param \Doctrine\Common\Collections\ArrayCollection $voucherActivities
+     * @param \Doctrine\Common\Collections\ArrayCollection $voucherEvents
      * @return \Dende\EntriesBundle\Form\EntryType
      */
-    public function setVoucherActivities(ArrayCollection $voucherActivities) {
-        $this->voucherActivities = $voucherActivities;
+    public function setVoucherEvents(ArrayCollection $voucherEvents) {
+        $this->voucherEvents = $voucherEvents;
         return $this;
     }
 
     /**
      * 
-     * @param \Doctrine\Common\Collections\ArrayCollection $restActivities
+     * @param \Doctrine\Common\Collections\ArrayCollection $restEvents
      * @return \Dende\EntriesBundle\Form\EntryType
      */
-    public function setAllActivities(ArrayCollection $restActivities) {
-        $this->allActivities = $restActivities;
+    public function setAllEvents(ArrayCollection $restEvents) {
+        $this->allEvents = $restEvents;
         return $this;
     }
 
     /**
      * 
-     * @param \Doctrine\Common\Collections\ArrayCollection $currentActivities
+     * @param \Doctrine\Common\Collections\ArrayCollection $currentEvents
      * @return \Dende\EntriesBundle\Form\EntryType
      */
-    public function setCurrentActivities(ArrayCollection $currentActivities) {
-        $this->currentActivities = $currentActivities;
+    public function setCurrentEvents(ArrayCollection $currentEvents) {
+        $this->currentEvents = $currentEvents;
         return $this;
     }
 
 // </editor-fold>
 
-    public function __construct(EventRepository $eventRepository, ActivityRepository $activityRepository) {
+    public function __construct(EventRepository $eventRepository) {
         $this->setEventRepository($eventRepository);
-        $this->setActivityRepository($activityRepository);
 
-        $this->currentActivities = new ArrayCollection();
-        $this->voucherActivities = new ArrayCollection();
-        $this->allActivities = new ArrayCollection();
-        $this->todayActivities = new ArrayCollection();
+        $this->currentEvents = new ArrayCollection();
+        $this->voucherEvents = new ArrayCollection();
+        $this->allEvents = new ArrayCollection();
+        $this->todayEvents = new ArrayCollection();
     }
 
     /**
@@ -205,6 +193,7 @@ class EntryType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        $eventRepository = $this->getEventRepository();
 
         if ($options["data"] instanceof Entry)
         {
@@ -212,12 +201,13 @@ class EntryType extends AbstractType {
         }
 
         $builder
-                ->add($builder->create('activity', "choice", array(
-                            'multiple' => false,
-                            'choices'  => $this->getActivities(),
-                        ))
-                        ->addModelTransformer(new ActivityTransformer($this->getActivityRepository()))
-                )
+                ->add('startDate', "datetime", array(
+                    "widget" => "single_text",
+                    "format" => "dd.MM.yyyy H:mm",
+                    "attr"   => array(
+                        "readonly" => "READONLY",
+                    )
+                ))
                 ->add('entryType', 'choice', array(
                     'choices'  => $this->getChoices()->toArray(),
                     'data'     => $this->getDefaultChoice(),
@@ -225,6 +215,33 @@ class EntryType extends AbstractType {
                 ))
                 ->add('entryPrice', 'text')
         ;
+
+
+        $formModifier = function (FormInterface $form, \DateTime $startDate, EventRepository $eventRepository) {
+            $events = $eventRepository->getEventsForDate($startDate);
+            
+            $form->add('event', "entity", [
+                'class' => "ScheduleBundle:Event",
+                'multiple' => false,
+                'choices' => $events,
+                'property' => 'activity.name'
+                    ]);
+        };
+
+
+        $builder->addEventListener(
+                FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier, $eventRepository) {
+            $data = $event->getData();
+            $formModifier($event->getForm(), $data->getStartDate(), $eventRepository);
+        }
+        );
+
+        $builder->get('startDate')->addEventListener(
+                FormEvents::POST_SUBMIT, function (FormEvent $event) use ($formModifier, $eventRepository) {
+            $startDate = $event->getForm()->getData();
+            $formModifier($event->getForm()->getParent(), $startDate, $eventRepository);
+        }
+        );
     }
 
     /**
@@ -243,28 +260,29 @@ class EntryType extends AbstractType {
         return 'dende_entriesbundle_entry';
     }
 
-    public function getActivities() {
+    public function getEvents() {
 
 //        $voucher = $this->getEntry()->getVoucher();
 //
-//        if ($voucher && count($voucher->getActivities()) > 0)
+//        if ($voucher && count($voucher->getEvents()) > 0)
 //        {
-//            $this->loadVoucherActivities();
-//            return $this->getVoucherActivities()->toArray();
+//            $this->loadVoucherEvents();
+//            return $this->getVoucherEvents()->toArray();
 //        }
 //        else
 //        {
-        $this->loadCurrentActivities();
-        $this->loadVoucherActivities();
-        $this->loadAllActivities();
-        $this->loadTodayActivities();
+//        $this->loadCurrentEvents();
+//        $this->loadVoucherEvents();
+//        $this->loadAllEvents();
+        $this->loadTodayEvents();
 
-        return array(
-            "Trwające (±15min.)"   => $this->getCurrentActivities()->toArray(),
-            "Dzisiejsze" => $this->getTodayActivities()->toArray(),
-            "Karnet"     => $this->getVoucherActivities()->toArray(),
-            "Wszystkie"  => $this->getAllActivities()->toArray()
-        );
+        return $this->getTodayEvents()->toArray();
+//        return array(
+//            "Trwające (±15min.)" => $this->getCurrentEvents()->toArray(),
+//            "Dzisiejsze"         => $this->getTodayEvents()->toArray(),
+//            "Karnet"             => $this->getVoucherEvents()->toArray(),
+//            "Wszystkie" => $this->getAllEvents()->toArray()
+//        );
 //        }
     }
 
@@ -272,7 +290,7 @@ class EntryType extends AbstractType {
      * 
      * @return array
      */
-    protected function loadCurrentActivities() {
+    protected function loadCurrentEvents() {
         $currentEventsCollection = $this->getEventRepository()->getCurrentEvents(15);
 
         if (count($currentEventsCollection) > 0)
@@ -280,47 +298,49 @@ class EntryType extends AbstractType {
             /** @var Event Description */
             foreach ($currentEventsCollection as $event) {
                 /** @var Activity Description */
-                $activity = $event->getActivity();
-                $this->getCurrentActivities()->offsetSet($activity->getId(), $this->getLabel($activity));
+                $event = $event->getActivity();
+                $this->getCurrentEvents()->offsetSet($event->getId(), $this->getLabel($event));
             }
         }
     }
 
-    protected function loadVoucherActivities() {
+    protected function loadVoucherEvents() {
         /** @var Voucher */
         $voucher = $this->getEntry()->getVoucher();
 
-        if ($voucher && count($voucher->getActivities()) > 0)
+        if ($voucher && count($voucher->getEvents()) > 0)
         {
-            $voucherActivitiesCollection = $voucher->getActivities();
+            $voucherEventsCollection = $voucher->getEvents();
             /** @var Activity Description */
-            foreach ($voucherActivitiesCollection as $activity) {
-                $this->getVoucherActivities()->offsetSet($activity->getId(), $activity->getName());
+            foreach ($voucherEventsCollection as $event) {
+                $this->getVoucherEvents()->offsetSet($event->getId(), $event->getName());
             }
         }
     }
 
-    protected function loadAllActivities() {
-        $activitiesCollection = $this->getActivityRepository()->getAllActivities();
+    protected function loadAllEvents() {
+        $activitiesCollection = $this->getEventRepository()->getAllUniqueEvents();
 
         if (count($activitiesCollection) > 0)
         {
-            foreach ($activitiesCollection as $activity) {
-                $this->getAllActivities()->offsetSet($activity->getId(), $activity->getName());
+            foreach ($activitiesCollection as $event) {
+                $this->getAllEvents()->offsetSet($event->getId(), $event->getName());
             }
         }
     }
 
-    protected function loadTodayActivities() {
-        $activitiesCollection = $this->getActivityRepository()->getTodayActivities();
+    protected function loadTodayEvents() {
+        $eventsCollection = $this->getEventRepository()->getTodayEvents();
 
-        if (count($activitiesCollection) > 0)
+        if (count($eventsCollection) > 0)
         {
-            foreach ($activitiesCollection as $activity) {
-                $this->getTodayActivities()->offsetSet($activity->getId(), $this->getLabel($activity));
+            foreach ($eventsCollection as $event) {
+                $this->getTodayEvents()->offsetSet($event["id"], $this->getLabel($event));
             }
         }
     }
+
+// </editor-fold>
 
     protected function getChoices() {
         $choices = new ArrayCollection(array(
@@ -350,22 +370,20 @@ class EntryType extends AbstractType {
         }
     }
 
-    protected function getLabel(Activity $activity) {
-        $name = $activity->getName();
+    protected function getLabelOld(Event $event) {
+        $name = $event->getActivity()->getName();
+        $start = $event->getStartHour();
+        $end = $event->getEndHour();
 
-        $events = $activity->getEvents();
+        return sprintf("(%s-%s) %s", $start, $end, $name);
+    }
 
-        foreach ($events as $event) {
-            /** @var Event $event * */
-            if ($event->getDayOfWeek() === strtolower(date("l")))
-            {
-                $start = $event->getStartHour();
-                $end = $event->getEndHour();
-                return sprintf("%s (%s-%s)", $name, $start, $end);
-            }
-        }
+    protected function getLabel($event) {
+        $name = $event["name"];
+        $start = $event["startHour"];
+        $end = $event["endHour"];
 
-        return $name;
+        return sprintf("(%s-%s) %s", $start, $end, $name);
     }
 
 }

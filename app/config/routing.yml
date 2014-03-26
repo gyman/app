@@ -51,3 +51,7 @@ vouchers:
 oneup_uploader:
     resource: .
     type: uploader
+    
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    

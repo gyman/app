@@ -37,14 +37,18 @@
 
             {% if member.getLastEntry() is not null %}
             {% set entry = member.getLastEntry() %}
-            <dt>Godzina wejścia:</dt>
-            <dd>
-               {{ entry.getStartDate()|date("H:i") }}
-            </dd>
-            <dt>Zajęcia:</dt>
-            <dd>
-               {{ entry.getActivity().getName }}
-            </dd>
+                <dt>Godzina wejścia:</dt>
+                <dd>
+                   {{ entry.getStartDate()|date("H:i") }}
+                </dd>
+                <dt>Zajęcia:</dt>
+                <dd>
+                {% if entry.getEvent() is not null %}
+                   {{ entry.getEvent().getActivity().getName }}
+                {% else %}
+                    wejście poza zajęciami
+                {% endif %}
+                </dd>
             {% endif %}
 
             <dt>Zarejestrowany:</dt>

@@ -16,7 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
+//            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new Dende\MembersBundle\MembersBundle(),
             new Dende\VouchersBundle\VouchersBundle(),
             new Dende\DefaultBundle\DefaultBundle(),
@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new Dende\FiltersBundle\FiltersBundle(),
             new Dende\ListsBundle\ListsBundle(),
             new Dende\ReportsBundle\ReportsBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

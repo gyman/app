@@ -24,6 +24,8 @@
         {% endstylesheets %}
 
         {% stylesheets
+            'bundles/default/js/plugins/select2-3.4.5/select2.css'
+            'bundles/default/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'
             'bundles/layout/plugins/misc/qtip/jquery.qtip.css'
             'bundles/layout/plugins/misc/fullcalendar/fullcalendar.css'
             'bundles/layout/plugins/misc/search/tipuesearch.css'
@@ -32,7 +34,6 @@
             'bundles/layout/css/supr-theme/jquery.ui.autocomplete.css'
             'bundles/layout/css/supr-theme/jquery.ui.combobox.css'
             'bundles/layout/css/supr-theme/jquery.ui.core.css'
-            'bundles/layout/css/supr-theme/jquery.ui.datepicker.css'
             'bundles/layout/css/supr-theme/jquery.ui.dialog.css'
             'bundles/layout/css/supr-theme/jquery.ui.progressbar.css'
             'bundles/layout/css/supr-theme/jquery.ui.resizable.css'
@@ -83,13 +84,20 @@
             </div><!-- End #content -->
         </div><!-- end wrapper -->
 
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
-        <script  type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-        <script  type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
         {# <script src="{{ asset('js/supr.js') }}"></script> #}
         {% block javascripts %}
         {% javascripts
-                '@LayoutBundle/Resources/public/js/jquery-migrate-1.2.1.min.js'
+                '@DefaultBundle/Resources/public/js/vendor/jquery-1.11.0.min.js'
+                '@DefaultBundle/Resources/public/js/vendor/jquery-ui-1.10.4.custom.min.js'
+                '@DefaultBundle/Resources/public/js/vendor/jquery-migrate-1.2.1.min.js'
+                '@DefaultBundle/Resources/public/js/vendor/bootstrap.min.js'
+                '@DefaultBundle/Resources/public/js/vendor/moment-with-langs.min.js'
+                '@DefaultBundle/Resources/public/js/plugins/select2-3.4.5/select2.js'
+                '@DefaultBundle/Resources/public/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
+
                 '@LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js'
                 '@LayoutBundle/Resources/public/js/libs/excanvas.min.js'
                 '@LayoutBundle/Resources/public/js/libs/jRespond.min.js'
@@ -97,14 +105,11 @@
                 '@LayoutBundle/Resources/public/js/libs/modernizr.js'
                 '@LayoutBundle/Resources/public/js/jquery.blockUI.js'
                 '@LayoutBundle/Resources/public/js/libs/jquery.knob.js'
-                '@LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.min.js'
                 '@LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js'
                 '@LayoutBundle/Resources/public/plugins/misc/totop/jquery.ui.totop.min.js'
                 '@LayoutBundle/Resources/public/plugins/forms/uniform/jquery.uniform.min.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js'
-                '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js'
                 '@LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js'
+                
                 '@DefaultBundle/Resources/public/coffee/configs.coffee'
                 '@DefaultBundle/Resources/public/coffee/modal.coffee'
                 '@DefaultBundle/Resources/public/coffee/main.coffee'
@@ -112,6 +117,7 @@
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+
 
         {% if app.session.flashbag.has('notice') %}
         <script>

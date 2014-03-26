@@ -5,6 +5,8 @@ namespace Dende\ScheduleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
 
 class ScheduleController extends Controller {
 
@@ -39,6 +41,19 @@ class ScheduleController extends Controller {
         $eventsJson = json_encode($eventsArray);
 
         return array("eventJson" => $eventsJson);
+    }
+
+    /**
+     * @Route("/events/{date}",name="_schedule_getEventsForDate")
+     * @ParamConverter("date", options={"format": "Y-m-d H:i"})
+     * Template()
+     */
+    public function getEventsForDateAction(\DateTime $date) {
+        $serializer = $this->get("jms_serializer");
+        $eventRepository = $this->get("event_repository");
+        
+        $events = $eventRepository->getEventsForDateArray($date);
+        return new Response($serializer->serialize($events, "json"));
     }
 
 }

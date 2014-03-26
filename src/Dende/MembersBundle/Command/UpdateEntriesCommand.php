@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Doctrine\ORM\QueryBuilder;
 
 class UpdateEntriesCommand extends ContainerAwareCommand {
 
@@ -20,40 +20,62 @@ class UpdateEntriesCommand extends ContainerAwareCommand {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $em = $this->getContainer()->get("doctrine")->getManager();
-        
+
         $now = new \DateTime();
         $memberRepository = $this->getContainer()->get("member_repository");
-        
-        $members = $memberRepository->getQuery("m")
+
+        /** @var QueryBuilder $query * */
+        $query = $memberRepository->getQuery("m");
+
+        $members = $query->select("m")
+                        ->addSelect("l")
+                        ->addSelect("a")
+                        ->addSelect("e")
+                        ->join("m.lastEntry", "l")
+                        ->join("l.activity", "a")
+                        ->join("a.events", "e")
                         ->where("m.lastEntry is not null")
+                        ->andWhere("e.dayOfWeek = dayname(l.startDate)")
                         ->getQuery()->execute();
-       
+
         if (count($members) == 0)
         {
             return;
         }
 
         $ids = array();
+        $now = new \DateTime();
 
         foreach ($members as $member) {
-            /** @var Member $member */
-            
-            /** @var Entry $entry */
-            $entry = $member->getLastEntry();
+            /** @var \Dende\MembersBundle\Entity\Member $member * */
+            $lastEntry = $member->getLastEntry();
 
-            
-            var_dump($entry);
-            
-//            $member->setLastEntry(null);
-//            $ids[] = $member->getId();
-//            $em->persist($member);
+            $lastEvent = $lastEntry
+                    ->getActivity()
+                    ->getEvents()
+                    ->first();
+
+            $endDate = new \DateTime($lastEntry->getStartDate()->format("Y-m-d " . $lastEvent->getEndHour()));
+            $endDate->add(new \DateInterval("PT15M"));
+
+            $diff = $endDate->getTimestamp() - $now->getTimestamp();
+
+            if ($diff <= 0)
+            {
+                $member->setLastEntry(null);
+                $lastEntry->setEndDate($endDate);
+
+                $em->persist($member);
+                $em->persist($lastEntry);
+            }
         }
 
-//        $em->flush();
+        $em->flush();
 
         $message = sprintf("Found and updated %d members", count($ids));
 
         $output->writeln($message);
         $this->getContainer()->get("logger")->info($message, $ids);
     }
+
 }

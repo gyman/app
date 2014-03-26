@@ -3,6 +3,7 @@
 namespace Dende\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * EventRepository
@@ -22,7 +23,7 @@ class EventRepository extends EntityRepository {
 
         if ($timeOffsetInMinutes)
         {
-            $hour = date('H:i',strtotime(sprintf("+%d minutes",$timeOffsetInMinutes)));
+            $hour = date('H:i', strtotime(sprintf("+%d minutes", $timeOffsetInMinutes)));
         }
         else
         {
@@ -52,14 +53,43 @@ class EventRepository extends EntityRepository {
     }
 
     public function getTodayEvents() {
+        $now = new \DateTime();
+        $query = $this->getEventsForDateQuery($now);
+
+        return $query->execute();
+    }
+
+    public function getEventsForDateArray(\DateTime $date) {
+        $query = $this->getEventsForDateQuery($date);
+        return $query->execute([]);
+    }
+
+    public function getEventsForDate(\DateTime $date) {
         $queryBuilder = $this->createQueryBuilder("e");
-
-        $queryBuilder->where("e.dayOfWeek = :day");
-        $queryBuilder->setParameter("day", strtolower(date("l")));
-
+        $queryBuilder
+                ->join("e.activity", "a")
+                ->where("e.dayOfWeek = :day")
+                ->setParameter("day", strtolower($date->format("l")));
         $query = $queryBuilder->getQuery();
 
         return $query->execute();
+    }
+
+    /**
+     * 
+     * @param \DateTime $date
+     * @return QueryBuilder
+     */
+    private function getEventsForDateQuery(\DateTime $date) {
+        $queryBuilder = $this->createQueryBuilder("e");
+        $queryBuilder
+                ->select("e.id, e.startHour, e.endHour, a.name")
+                ->join("e.activity", "a")
+                ->where("e.dayOfWeek = :day")
+                ->setParameter("day", strtolower($date->format("l")));
+        $query = $queryBuilder->getQuery();
+
+        return $query;
     }
 
 }

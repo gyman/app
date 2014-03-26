@@ -5,12 +5,15 @@ namespace Dende\ScheduleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dende\ScheduleBundle\Entity\Activity;
+use Gedmo\Mapping\Annotation as Gedmo;
+use DateTime;
 
 /**
  * Event
  *
  * @ORM\Table("events")
  * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Event {
 
@@ -54,6 +57,27 @@ class Event {
      * @ORM\Column(name="end_hour", type="string", length=255)
      */
     private $endHour;
+
+    /**
+     * @var DateTime $created
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var DateTime $modified
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     */
+    private $modified;
+
+    /**
+     * @var Datetime $deletedAt
+     *
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private $deletedAt;
 
     /**
      * Get id
@@ -146,6 +170,38 @@ class Event {
      */
     public function getEndHour() {
         return $this->endHour;
+    }
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getModified() {
+        return $this->modified;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+    }
+
+    public function setCreated(DateTime $created) {
+        $this->created = $created;
+    }
+
+    public function setModified(DateTime $modified) {
+        $this->modified = $modified;
+    }
+
+    public function setDeletedAt(Datetime $deletedAt) {
+        $this->deletedAt = $deletedAt;
     }
 
 }

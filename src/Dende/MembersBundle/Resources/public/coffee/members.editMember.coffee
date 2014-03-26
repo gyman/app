@@ -90,8 +90,14 @@ class @EditMember
       type: @form.attr "method"
   
   initDatepickers: () =>
-    $("#dende_membersbundle_member_birthdate",@$modalWindow).datepicker
-      dateFormat: "dd.mm.yy"
+    $("#dende_membersbundle_member_birthdate",@$modalWindow).datetimepicker
+      format: 'dd.mm.yyyy'
+      endDate: new Date()
+      weekStart: 1
+      autoclose: true
+      pickerPosition: "bottom-left"
+      minView: 2
+      maxView: 2
   
   openTabWithError: () =>
     paneId = "#" + @$modalWindow.find("div.control-group.error").first().parents(".tab-pane").prop("id");

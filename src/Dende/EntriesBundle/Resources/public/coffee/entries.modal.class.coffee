@@ -13,16 +13,14 @@ window.setupEntriesModal = ->
   # event na liście
   
   $(document).off("click.openAddEntranceModal.button").on "click.openAddEntranceModal.button",".addEntrance", (e) ->
-    console.log "button"
     href = $(this).attr "href"
     setupClickEvent(e,href)
     
   $(document).off("click.openAddEntranceModal.keytype").on "click.openAddEntranceModal.keytype", (e,href) ->
-    console.log "keytype"
     setupClickEvent(e,href)
     
-  $entranceModal.on "shown", () ->
-    $("input#dende_entriesbundle_entry_entryDate").datetimepicker
-      dateFormat: "dd.mm.yy"
+  # $entranceModal.on "shown", () ->
+  #  $("input#dende_entriesbundle_entry_entryDate",@$modalWindow).datepicker
+  #    dateFormat: "dd.mm.yyyy"
   
   # event w modalu

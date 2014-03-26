@@ -83,7 +83,9 @@ doctrine:
 #            StofDoctrineExtensionsBundle: ~
         entity_managers:
             default:
-#                dql:
+                dql:
+                    datetime_functions:
+                        dayname: Dende\MembersBundle\DQL\Dayname
 #                    numeric_functions:
 #                        cast:   Dende\FiltersBundle\DQL\CastFunction
                 auto_mapping: true
@@ -127,3 +129,5 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             
+fos_js_routing:
+    routes_to_expose: [.*]
