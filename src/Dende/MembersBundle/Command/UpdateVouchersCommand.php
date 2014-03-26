@@ -29,16 +29,36 @@ class UpdateVouchersCommand extends ContainerAwareCommand {
                         ))
                         ->getQuery()->execute();
 
-        if (count($members) == 0)
-        {
-            return;
-        }
+
 
         $ids = array();
+        
+        if (count($members) > 0)
+        {
+                foreach ($members as $member) {
+                    $member->setCurrentVoucher(null);
+                    $em->persist($member);
+                }
+        }
+        /** vouchers that were sold with date in future */
 
-        foreach ($members as $member) {
-            $member->setCurrentVoucher(null);
-            $em->persist($member);
+        $voucherRepository = $this->getContainer()->get("voucher_repository");
+        $vouchers = $voucherRepository->getQuery("v")
+                        ->where("v.startDate <= :now")
+                        ->andWhere("v.endDate >= :now or v.endDate is null")
+                        ->setParameters(array(
+                            "now" => $now,
+                        ))
+                        ->getQuery()->execute();
+                        
+        if (count($vouchers) > 0)
+        {
+                foreach($vouchers as $voucher) {
+                        $member = $voucher->getMember();
+                        $member->setCurrentVoucher($voucher);
+                        $em->persist($member);
+                        $ids[] = $voucher->getId();
+                }
         }
 
         $em->flush();

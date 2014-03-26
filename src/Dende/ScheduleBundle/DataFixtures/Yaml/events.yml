@@ -34,72 +34,82 @@ bjjKids002:
     dayOfWeek:  wednesday
     startHour:  17:00
     endHour:    18:00
-        
+bjjKids003:
+    activity:   bjjKids
+    dayOfWeek:  saturday
+    startHour:  11:00
+    endHour:    12:00
+            
 mmaMixed001:
     activity:   mmaMixed
     dayOfWeek:  monday
     startHour:  18:00
-    endHour:    19:00
+    endHour:    19:30
 mmaMixed002:
     activity:   mmaMixed
     dayOfWeek:  wednesday
     startHour:  18:00
-    endHour:    19:00
+    endHour:    19:30
         
 bjjIntermediate001:
     activity:   bjjIntermediate
     dayOfWeek:  monday
-    startHour:  19:00
-    endHour:    20:00
+    startHour:  19:30
+    endHour:    20:30
 bjjIntermediate002:
     activity:   bjjIntermediate
-    dayOfWeek:  thursday
-    startHour:  18:00
-    endHour:    19:00
-    
+    dayOfWeek:  wednesday
+    startHour:  19:30
+    endHour:    20:30
+bjjIntermediate003:
+    activity:   bjjIntermediate
+    dayOfWeek:  friday
+    startHour:  19:30
+    endHour:    20:30
+
 bjjBegginers001:
     activity:   bjjBegginers
     dayOfWeek:  wednesday
-    startHour:  19:00
-    endHour:    20:00
+    startHour:  19:30
+    endHour:    20:30
 bjjBegginers002:
     activity:   bjjBegginers
     dayOfWeek:  friday
-    startHour:  19:00
-    endHour:    20:00
+    startHour:  19:30
+    endHour:    20:30
 
 nogiAdvanced001:
     activity:   nogiAdvanced
     dayOfWeek:  tuesday
-    startHour:  19:00
-    endHour:    20:30
+    startHour:  20:30
+    endHour:    22:00
 nogiAdvanced002:
     activity:   nogiAdvanced
     dayOfWeek:  thursday
-    startHour:  19:00
-    endHour:    20:30
+    startHour:  20:30
+    endHour:    22:00
         
 boxWoman001:
     activity:   boxWoman
     dayOfWeek:  tuesday
     startHour:  18:00
-    endHour:    19:00
+    endHour:    19:30
 boxWoman002:
     activity:   boxWoman
     dayOfWeek:  friday
     startHour:  18:00
-    endHour:    19:00
+    endHour:    19:30
         
 bjjAdvanced001:
     activity:   bjjAdvanced
     dayOfWeek:  monday
-    startHour:  20:00
-    endHour:    21:30
+    startHour:  20:30
+    endHour:    22:00
 bjjAdvanced002:
     activity:   bjjAdvanced
     dayOfWeek:  wednesday
-    startHour:  20:00
-    endHour:    21:30
+    startHour:  20:30
+    endHour:    22:00
     
 mmaAdvanced001:
     activity:   mmaAdvanced
@@ -115,8 +125,8 @@ mmaAdvanced002:
 free001:
     activity:   free
     dayOfWeek:  friday
-    startHour:  20:00
-    endHour:    21:30
+    startHour:  20:30
+    endHour:    22:00
     
 crossfit001:
     activity:   crossfit
