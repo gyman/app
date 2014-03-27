@@ -1,141 +1,206 @@
+### BJJ PORANNE
+### pon, śro, pią: 9:00 - 10:30
+### wto, czw: 12:00 - 13:30
+
 bjjMorning001:
     activity:   bjjMorning
-    dayOfWeek:  monday
-    startHour:  09:00
-    endHour:    10:30
+    startDate:	2014-03-24 09:00
+    duration:	90
+    interval:   604800
+    type:       recurring
 bjjMorning002:
     activity:   bjjMorning
-    dayOfWeek:  tuesday
-    startHour:  12:00
-    endHour:    13:30
+    startDate:	2014-03-26 09:00
+    duration:	90
+    interval:   604800
+    type:       recurring
 bjjMorning003:
     activity:   bjjMorning
-    dayOfWeek:  wednesday
-    startHour:  09:00
-    endHour:    10:30
+    startDate:	2014-03-28 09:00
+    duration:	90
+    interval:   604800
+    type:       recurring
 bjjMorning004:
     activity:   bjjMorning
-    dayOfWeek:  thursday
-    startHour:  12:00
-    endHour:    13:30
+    startDate:	2014-03-25 12:00
+    duration:	90
+    interval:   604800
+    type:       recurring
 bjjMorning005:
     activity:   bjjMorning
-    dayOfWeek:  friday
-    startHour:  09:00
-    endHour:    10:30
+    startDate:	2014-03-27 12:00
+    duration:	90
+    interval:   604800
+    type:       recurring
+
+### BJJ DZIECI
+### pon, śro: 12:00 - 13:00
+### sob: 11:00 - 12:00
 
 bjjKids001:
     activity:   bjjKids
-    dayOfWeek:  monday
-    startHour:  17:00
-    endHour:    18:00
+    startDate:	2014-03-24 12:00
+    duration:	60
+    interval:   604800
+    type:       recurring
 bjjKids002:
     activity:   bjjKids
-    dayOfWeek:  wednesday
-    startHour:  17:00
-    endHour:    18:00
+    startDate:	2014-03-26 12:00
+    duration:	60
+    interval:   604800
+    type:       recurring
 bjjKids003:
     activity:   bjjKids
-    dayOfWeek:  saturday
-    startHour:  11:00
-    endHour:    12:00
+    startDate:	2014-03-29 11:00
+    duration:	60
+    interval:   604800
+    type:       recurring
+
+### MMA mieszana
+### pon, śro: 18:00 - 19:30
             
 mmaMixed001:
     activity:   mmaMixed
-    dayOfWeek:  monday
-    startHour:  18:00
-    endHour:    19:30
+    startDate:	2014-03-24 18:00
+    duration:	90
+    interval:   604800
+    type:       recurring
+    
 mmaMixed002:
     activity:   mmaMixed
-    dayOfWeek:  wednesday
-    startHour:  18:00
-    endHour:    19:30
+    startDate:	2014-03-26 18:00
+    duration:	90
+    interval:   604800
+    type:       recurring
+        
+### BJJ ŚREDNIOZAAWANSOWANI
+### pon, śro, pią : 19:30 - 20:30
         
 bjjIntermediate001:
     activity:   bjjIntermediate
-    dayOfWeek:  monday
-    startHour:  19:30
-    endHour:    20:30
+    startDate:	2014-03-24 19:30
+    duration:	60
+    interval:   604800
+    type:       recurring
 bjjIntermediate002:
     activity:   bjjIntermediate
-    dayOfWeek:  wednesday
-    startHour:  19:30
-    endHour:    20:30
+    startDate:	2014-03-26 19:30
+    duration:	60
+    interval:   604800
+    type:       recurring
 bjjIntermediate003:
     activity:   bjjIntermediate
-    dayOfWeek:  friday
-    startHour:  19:30
-    endHour:    20:30
-
+    startDate:	2014-03-28 19:30
+    duration:	60
+    interval:   604800
+    type:       recurring
+    
+### BJJ POCZĄTKUJĄCY
+### wto, czw : 19:30 - 20:30
+    
 bjjBegginers001:
     activity:   bjjBegginers
-    dayOfWeek:  wednesday
-    startHour:  19:30
-    endHour:    20:30
+    startDate:	2014-03-25 19:30
+    duration:	60
+    interval:   604800
+    type:       recurring
 bjjBegginers002:
     activity:   bjjBegginers
-    dayOfWeek:  friday
-    startHour:  19:30
-    endHour:    20:30
+    startDate:	2014-03-27 19:30
+    duration:	60
+    interval:   604800
+    type:       recurring
 
+### NO-GI ZAAWANSOWANI
+### wto, czw: 20:30 - 22:00
+    
 nogiAdvanced001:
     activity:   nogiAdvanced
-    dayOfWeek:  tuesday
-    startHour:  20:30
-    endHour:    22:00
+    startDate:	2014-03-25 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
 nogiAdvanced002:
     activity:   nogiAdvanced
-    dayOfWeek:  thursday
-    startHour:  20:30
-    endHour:    22:00
-        
+    startDate:	2014-03-27 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
+    
+### KOBIETY BOKS    
+### wto, pią: 18:00 - 19:30
+
 boxWoman001:
     activity:   boxWoman
-    dayOfWeek:  tuesday
-    startHour:  18:00
-    endHour:    19:30
+    startDate:	2014-03-25 18:00
+    duration:	90
+    interval:   604800
+    type:       recurring
 boxWoman002:
     activity:   boxWoman
-    dayOfWeek:  friday
-    startHour:  18:00
-    endHour:    19:30
-        
+    startDate:	2014-03-28 18:00
+    duration:	90
+    interval:   604800
+    type:       recurring        
+
+### BJJ ZAAWANSOWANI
+### pon, śro: 20:30 - 22:00
+
 bjjAdvanced001:
     activity:   bjjAdvanced
-    dayOfWeek:  monday
-    startHour:  20:30
-    endHour:    22:00
+    startDate:	2014-03-24 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
 bjjAdvanced002:
     activity:   bjjAdvanced
-    dayOfWeek:  wednesday
-    startHour:  20:30
-    endHour:    22:00
+    startDate:	2014-03-26 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
     
+### MMA ZAAWANSOWANI    
+### wto, czw: 20:30 - 22:00
+
 mmaAdvanced001:
     activity:   mmaAdvanced
-    dayOfWeek:  tuesday
-    startHour:  20:30
-    endHour:    22:00
+    startDate:	2014-03-25 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
 mmaAdvanced002:
     activity:   mmaAdvanced
-    dayOfWeek:  thursday
-    startHour:  20:30
-    endHour:    22:00
-        
+    startDate:	2014-03-27 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring     
+
+### WOLNA MATA
+### pią: 20:30 - 22:00
+    
 free001:
     activity:   free
-    dayOfWeek:  friday
-    startHour:  20:30
-    endHour:    22:00
+    startDate:	2014-03-28 20:30
+    duration:	90
+    interval:   604800
+    type:       recurring
+    
+### CROSSFIT
+### pią: 17:00 - 18:00
     
 crossfit001:
     activity:   crossfit
-    dayOfWeek:  friday
-    startHour:  17:00
-    endHour:    18:00
-        
+    startDate:	2014-03-28 17:00
+    duration:	60
+    interval:   604800
+    type:       recurring        
+    
+### SPARINGI
+### sob: 12:00 - 13:30
+    
 sparings001:
     activity:   sparings
-    dayOfWeek:  saturday
-    startHour:  12:00
-    endHour:    13:30
+    startDate:	2014-03-29 12:00
+    duration:	90
+    interval:   604800
+    type:       recurring

@@ -114,7 +114,7 @@ class Voucher {
     /**
      * @var Datetime $deletedAt
      *
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     private $deletedAt;
 

@@ -14,8 +14,17 @@ use DateTime;
  * @ORM\Table("events")
  * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="event_type", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "recurring" = "Dende\ScheduleBundle\Entity\RecurringEvent",
+ *      "single" = "Dende\ScheduleBundle\Entity\SingleEvent",
+ *      "incycle" = "Dende\ScheduleBundle\Entity\IncycleEvent",
+ *      "hidden" = "Dende\ScheduleBundle\Entity\HiddenEvent"
+ * })
  */
 class Event {
+    // <editor-fold defaultstate="collapsed" desc="members">
 
     /**
      * @var integer
@@ -24,66 +33,64 @@ class Event {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $activity;
+    protected $activity;
 
     /**
      * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="event")
      */
-    private $entries;
+    protected $entries;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="day_of_week", type="string", columnDefinition="enum('monday','tuesday','wednesday','thursday','friday','saturday','sunday')", nullable=true)
+     * @var \DateTime
+     * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
-    private $dayOfWeek;
+    protected $startDate;
 
     /**
-     * @var string
-     * @Assert\Regex("/\d\d:\d\d/")
-     * @ORM\Column(name="start_hour", type="string", length=255)
+     * @var \DateTime
+     * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
-    private $startHour;
+    private $endDate;
 
     /**
-     * @var string
-     * @Assert\Regex("/\d\d:\d\d/")
-     * @ORM\Column(name="end_hour", type="string", length=255)
+     * @var integer 
+     * @ORM\Column(name="duration", type="integer", nullable = false)
      */
-    private $endHour;
+    protected $duration;
 
     /**
      * @var DateTime $created
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created;
+    protected $created;
 
     /**
      * @var DateTime $modified
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     * @ORM\Column(name="modified_at", type="datetime", nullable=false)
      */
-    private $modified;
+    protected $modified;
 
     /**
      * @var Datetime $deletedAt
      *
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
-    private $deletedAt;
-
+    protected $deletedAt; // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="setters and getters">
     /**
      * Get id
      *
      * @return integer 
      */
+
     public function getId() {
         return $this->id;
     }
@@ -109,67 +116,20 @@ class Event {
         return $this->activity;
     }
 
-    /**
-     * Set dayOfWeek
-     *
-     * @param string $dayOfWeek
-     * @return Event
-     */
-    public function setDayOfWeek($dayOfWeek) {
-        $this->dayOfWeek = $dayOfWeek;
-
-        return $this;
+    public function getStartDate() {
+        return $this->startDate;
     }
 
-    /**
-     * Get dayOfWeek
-     *
-     * @return string
-     */
-    public function getDayOfWeek() {
-        return $this->dayOfWeek;
+    public function getDuration() {
+        return $this->duration * 60;
     }
 
-    /**
-     * Set startHour
-     *
-     * @param string $startHour
-     * @return Event
-     */
-    public function setStartHour($startHour) {
-        $this->startHour = $startHour;
-
-        return $this;
+    public function setStartDate(\DateTime $startDate) {
+        $this->startDate = $startDate;
     }
 
-    /**
-     * Get startHour
-     *
-     * @return string 
-     */
-    public function getStartHour() {
-        return $this->startHour;
-    }
-
-    /**
-     * Set endHour
-     *
-     * @param string $endHour
-     * @return Event
-     */
-    public function setEndHour($endHour) {
-        $this->endHour = $endHour;
-
-        return $this;
-    }
-
-    /**
-     * Get endHour
-     *
-     * @return string 
-     */
-    public function getEndHour() {
-        return $this->endHour;
+    public function setDuration($duration) {
+        $this->duration = $duration;
     }
 
     public function getEntries() {
@@ -204,4 +164,5 @@ class Event {
         $this->deletedAt = $deletedAt;
     }
 
+// </editor-fold>
 }

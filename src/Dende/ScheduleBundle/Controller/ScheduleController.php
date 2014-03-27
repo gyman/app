@@ -15,25 +15,38 @@ class ScheduleController extends Controller {
      * @Template()
      */
     public function indexAction() {
+        $serializer = $this->get("jms_serializer");
         $currentYear = date("Y");
         $currentWeekNumber = date("W");
 
-        $events = $this->get("event_repository")->getAllEvents();
+        $events = $this->get("event_repository")->getAllEventsForWeek($currentYear, $currentWeekNumber);
 
-        $eventsArray = array();
+        $eventsArray = [];
 
-        foreach ($events as $event) {
-            $weekdaynumber = date("N", strtotime("last " . $event->getDayOfWeek()));
-            $startDateString = sprintf("%s-W%s-%s %s", $currentYear, $currentWeekNumber, $weekdaynumber, $event->getStartHour());
-            $endDateString = sprintf("%s-W%s-%s %s", $currentYear, $currentWeekNumber, $weekdaynumber, $event->getEndHour());
+        $colors = ["#ddffff", "#ffddff", "#ffffdd", "#ddffdd", "#ffdddd"];
 
-            $eventObject = array(
-                "id"     => $event->getId(),
-                "title"  => $event->getActivity()->getName(),
-                "allDay" => false,
-                "start"  => strtotime($startDateString),
-                "end"    => strtotime($endDateString),
-            );
+        foreach ($events as $i => $event) {
+            $description = "";
+
+            if ($event instanceof \Dende\ScheduleBundle\Entity\RecurringEvent)
+            {
+                $startDate = $event->getOccurenceForWeekNumber($currentYear, $currentWeekNumber);
+            }
+            else
+            {
+                $startDate = $event->getStartDate();
+                $description = sprintf(" (%s)", $event->getDescription());
+            }
+
+            $eventObject = [
+                "id"        => $event->getId(),
+                "title"     => $event->getActivity()->getName() . $description,
+                "allDay"    => false,
+                "start"     => $startDate->getTimestamp(),
+                "end"       => $startDate->getTimestamp() + $event->getDuration(),
+                "color"     => $colors[$i % 5],
+                "textColor" => "#000000"
+            ];
 
             array_push($eventsArray, $eventObject);
         }
@@ -51,7 +64,7 @@ class ScheduleController extends Controller {
     public function getEventsForDateAction(\DateTime $date) {
         $serializer = $this->get("jms_serializer");
         $eventRepository = $this->get("event_repository");
-        
+
         $events = $eventRepository->getEventsForDateArray($date);
         return new Response($serializer->serialize($events, "json"));
     }
