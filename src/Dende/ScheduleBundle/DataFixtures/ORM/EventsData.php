@@ -44,6 +44,11 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface {
         $event->setDuration($duration);
         $event->setInterval($interval);
 
+        if (isset($endDate))
+        {
+            $event->setEndDate(new DateTime($endDate));
+        }
+
         $this->manager->persist($event);
 
 

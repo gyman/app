@@ -16,6 +16,7 @@ class IncycleEvent extends SingleEvent {
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     protected $recurringEvent;
+    protected $type = "incycle";
 
     public function getRecurringEvent() {
         return $this->recurringEvent;

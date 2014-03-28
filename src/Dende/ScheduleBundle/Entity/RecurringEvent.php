@@ -18,6 +18,8 @@ class RecurringEvent extends Event {
      * @ORM\Column(name="time_interval", type="integer", nullable = true)
      */
     private $interval; // </editor-fold>
+    
+    protected $type = "recurring";
 
     // <editor-fold defaultstate="collapsed" desc="getters and setters">
 
@@ -46,14 +48,14 @@ class RecurringEvent extends Event {
      */
     public function getOccurenceForWeekNumber($year, $weekNumber) {
         $weekStart = new \DateTime(sprintf("%d-W%d-1", $year, $weekNumber));
-        $eventDate = $this->getStartDate()->getTimestamp();
+        $eventDate = $this->getStartDate();
+        $interval = new \DateInterval(sprintf("PT%dS", $this->getInterval()));
 
-        while ($eventDate < $weekStart->getTimestamp()) {
-            $eventDate+=$this->getInterval();
+        while ($eventDate->getTimestamp() < $weekStart->getTimestamp()) {
+            $eventDate->add($interval);
         }
 
-        $date = new DateTime();
-        return $date->setTimestamp($eventDate);
+        return $eventDate;
     }
 
 }

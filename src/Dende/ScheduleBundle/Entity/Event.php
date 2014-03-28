@@ -56,7 +56,7 @@ class Event {
      * @var \DateTime
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
-    private $endDate;
+    protected $endDate;
 
     /**
      * @var integer 
@@ -84,13 +84,19 @@ class Event {
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt; // </editor-fold>
+    protected $type = "";
+
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getType() {
+        return $this->type;
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-
     public function getId() {
         return $this->id;
     }

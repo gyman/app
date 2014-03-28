@@ -57,18 +57,20 @@ class EventRepository extends EntityRepository {
      * @param integer $weekNumber
      * @return type
      */
-    public function getAllEventsForWeek($year,$weekNumber) {
-        
-        $weekStart = new \DateTime(sprintf("%d-W%d-1",$year,$weekNumber));
-        $weekEnd = new \DateTime(sprintf("%d-W%d-0",$year,$weekNumber+1));
-        
-        $queryBuilder = $this->createQueryBuilder("e");
-        $queryBuilder->where("e.startDate >= :weekStart");
-        $queryBuilder->andWhere("e.endDate <= :weekEnd or e.endDate is null");
-        $queryBuilder->setParameters([
+    public function getAllEventsForWeek($year, $weekNumber) {
+        $weekStart = new \DateTime(sprintf("%d-W%d-1", $year, $weekNumber));
+        $weekEnd = new \DateTime(sprintf("%d-W%d-0 23:59:59", $year, $weekNumber + 1));
+
+        $queryBuilder = $this->createQueryBuilder("e")
+                ->select("e", "a HIDDEN")
+                ->leftJoin("e.activity", "a")
+                ->where("e.startDate <= :weekEnd and e.endDate is null")
+                ->orWhere("e.startDate <= :weekEnd and e.endDate is not null and e.endDate >= :weekStart")
+                ->setParameters([
             "weekStart" => $weekStart,
-            "weekEnd" => $weekEnd
-        ]);
+            "weekEnd"   => $weekEnd
+                ])
+        ;
         $query = $queryBuilder->getQuery();
 
         return $query->execute();
