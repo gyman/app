@@ -12,4 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Description extends EventMeta {
 
+    public function getDescription() {
+        return $this->getValue();
+    }
+
 }

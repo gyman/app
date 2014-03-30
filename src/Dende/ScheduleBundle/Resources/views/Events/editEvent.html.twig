@@ -5,10 +5,7 @@
     <h3>Edytuj wydarzenie</h3>                    
 </div><!-- End .heading-->
 
-{{ dump(date) }}
-{% for meta in event.getMeta() if meta.getKey() == "description" %}
-    {{ meta.getValue() }}
-{% endfor %}
+{{ dump(event.getDescriptionForDate(date)) }}
 
 {% endblock body %}
 

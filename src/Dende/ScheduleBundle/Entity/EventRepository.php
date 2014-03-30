@@ -4,6 +4,7 @@ namespace Dende\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * EventRepository
@@ -62,16 +63,22 @@ class EventRepository extends EntityRepository {
         $weekEnd = new \DateTime(sprintf("%d-W%02d-0 23:59:59", $year, $weekNumber + 1));
 
         $qb = $this->createQueryBuilder("e");
+        $exp = $qb->expr();
 
         $qb->select("e", "a HIDDEN", "m HIDDEN")
                 ->leftJoin("e.activity", "a")
-                ->leftJoin("e.meta", "m")
-                ->where($qb->expr()->orX(
-                                $qb->expr()->andX("e.startDate <= :weekEnd", "e.endDate is null"), $qb->expr()->andX("e.startDate <= :weekEnd", "e.endDate >= :weekStart")
+                ->leftJoin("e.meta", "m", Join::WITH, $exp->andX(
+                                $exp->eq("e.id", "m.event"), $exp->between("m.startDate", ":weekStart", ":weekEnd")
                 ))
-                ->andWhere($qb->expr()->orX(
-                                "m.startDate IS NULL", "m.startDate BETWEEN :weekStart AND :weekEnd"
-                ))
+                ->where(
+                        $exp->orX(
+                                $exp->andX(
+                                        $exp->lte("e.startDate", ":weekEnd"), $exp->isNull("e.endDate")
+                                ), $exp->andX(
+                                        $exp->lte("e.startDate", ":weekEnd"), $exp->gte("e.endDate", ":weekStart")
+                                )
+                        )
+                )
                 ->setParameters([
                     "weekStart" => $weekStart,
                     "weekEnd"   => $weekEnd

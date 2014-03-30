@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Dende\ScheduleBundle\Entity\Activity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Event
@@ -103,7 +105,7 @@ class Event {
     public function setExclusionList(\DateTime $exclusionList) {
         $this->exclusionList = $exclusionList;
     }
-    
+
     public function getType() {
         return $this->type;
     }
@@ -195,4 +197,28 @@ class Event {
     }
 
 // </editor-fold>
+
+    function __construct() {
+        $this->entries = new ArrayCollection();
+        $this->meta = new ArrayCollection();
+    }
+
+    function getDescriptionForDate(DateTime $date) {
+        $criteria = Criteria::create();
+        $criteria->where(
+                Criteria::expr()->andX(
+                        Criteria::expr()->eq("key", "description"), Criteria::expr()->eq("startDate", $date)
+                )
+        );
+
+        $result = $this->meta->matching($criteria);
+
+        if (count($result) == 0)
+        {
+            return null;
+        }
+
+        return $result->first()->getDescription();
+    }
+
 }

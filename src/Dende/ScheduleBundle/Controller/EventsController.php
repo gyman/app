@@ -84,15 +84,21 @@ class EventsController extends Controller {
             return new Response();
         }
 
+        $em = $this->getDoctrine()->getManager();
+
         $diff = new \DateInterval(sprintf("PT%dM", abs($minutes)));
         $diff->invert = $minutes < 0;
 
-        $newStartDate = clone($event->getStartDate());
-        $newStartDate->add($diff);
+        $event->setStartDate(
+                clone($event->getStartDate()->add($diff))
+        );
 
-        $event->setStartDate($newStartDate);
-
-        $em = $this->getDoctrine()->getManager();
+        foreach ($event->getMeta() as $eventMeta) {
+            $eventMeta->setStartDate(
+                    clone($eventMeta->getStartDate()->add($diff))
+            );
+            $em->persist($eventMeta);
+        }
 
         $em->persist($event);
         $em->flush();
