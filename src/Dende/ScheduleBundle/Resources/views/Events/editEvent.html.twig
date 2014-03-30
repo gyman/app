@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<div class="heading">
+    <h3>Edytuj wydarzenie</h3>                    
+</div><!-- End .heading-->
+
+{{ dump(date) }}
+{% for meta in event.getMeta() if meta.getKey() == "description" %}
+    {{ meta.getValue() }}
+{% endfor %}
+
+{% endblock body %}
+
+
+{# javascripts #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+     %}
+
+<script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+
+{# CSS #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter='cssrewrite'
+        filter="cssrewrite"
+    %}
+
+<link rel="stylesheet" href="{{ asset_url }}" />
+
+    {% endstylesheets %}
+{% endblock stylesheets %}

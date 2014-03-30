@@ -1,5 +1,17 @@
 $ ->
+  uri = new URI window.location.href
+  fragment = new URI(uri.fragment()).search(true)
+
+  if fragment.year? and fragment.week?
+    calendarDate = moment().year(fragment.year).isoWeek(fragment.week)  
+  else 
+    calendarDate = moment()
+    
   $('#calendar').fullCalendar
+    weekNumberCalculation: "iso"
+    year:   calendarDate.year()
+    month:  calendarDate.month()
+    date:   calendarDate.date()
     header:
       left: 'title'
       center: 'prevYear,prev,today,next,nextYear'
@@ -37,10 +49,17 @@ $ ->
     defaultView: "agendaWeek"
     firstDay: 1
     events: (start, end, callback) ->
+      week = moment(start).isoWeek()
+      year = moment(start).year()
+      
       $.ajax
-        url: Routing.generate('_events_getWeek', {week: moment(start).isoWeek(), year: moment(end).year()})
+        url: Routing.generate('_events_getWeek', {week: week, year: year})
         dataType: 'json',
         success: (result) ->
+          uri.removeFragment("week").addFragment "week", week
+          uri.removeFragment("year").addFragment "year", year
+          window.location.href = uri
+          
           if callback
             callback result
     timeFormat: 'H:mm{ - H:mm}'
@@ -96,7 +115,7 @@ $ ->
       "Gru"
     ]
     eventClick: (event, element) ->
-      event.title = "CLICKED!";
+      # event.title = "CLICKED!";
       # $('#calendar').fullCalendar('updateEvent', event);
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
       $.ajax 

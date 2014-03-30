@@ -1,0 +1,24 @@
+eventMeta001:
+    eventReference:     bjjMorning001
+    startDate:          2014-03-31 09:00
+    key:                description
+    value:              "Jakiś opis tylko dla tego jednego eventu"
+    type:               description
+eventMeta002:
+    eventReference:     bjjMorning001
+    startDate:          2014-04-06 09:00
+    key:                description
+    value:              "Drugi opis dla eventu"
+    type:               description
+eventMeta003:
+    eventReference:     bjjMorning002
+    startDate:          2014-04-02 09:00
+    key:                description
+    value:              "Jakiś inny opis"
+    type:               description
+eventMeta004:
+    eventReference:     bjjMorning002
+    startDate:          2014-04-09 09:00
+    key:                deleted
+    value:              DELETED
+    type:               deleted

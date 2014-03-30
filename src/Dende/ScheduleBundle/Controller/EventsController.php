@@ -28,7 +28,6 @@ class EventsController extends Controller {
     }
 
     private function prepareEvents($events, $year, $week) {
-
         $eventsArray = [];
 
         $colors = [
@@ -61,7 +60,7 @@ class EventsController extends Controller {
                 "color"     => $colors[$i % $countColors],
                 "textColor" => "#000000",
                 "type"      => $event->getType(),
-                "url"       => $this->generateUrl("_events_edit", ["event" => $event->getId()])
+                "url"       => $this->generateUrl("_events_edit", ["event" => $event->getId(), "date" => $startDate->format("Y-m-d H:i")])
             ];
 
             array_push($eventsArray, $eventObject);
@@ -150,13 +149,12 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/edit",name="_events_edit")
+     * @Route("/events/{event}/date/{date}/edit",name="_events_edit")
      * @ParamConverter("event", class="ScheduleBundle:Event")
+     * @Template()
      */
-    public function editEventAction(Event\Event $event, Request $request) {
-        die(var_dump($event));
-
-        return new Response();
+    public function editEventAction(Event\Event $event, \DateTime $date, Request $request) {
+        return array("event" => $event, "date" => $date);
     }
 
 }

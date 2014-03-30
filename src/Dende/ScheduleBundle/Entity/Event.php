@@ -19,8 +19,6 @@ use DateTime;
  * @ORM\DiscriminatorMap({
  *      "recurring" = "Dende\ScheduleBundle\Entity\RecurringEvent",
  *      "single" = "Dende\ScheduleBundle\Entity\SingleEvent",
- *      "incycle" = "Dende\ScheduleBundle\Entity\IncycleEvent",
- *      "hidden" = "Dende\ScheduleBundle\Entity\HiddenEvent"
  * })
  */
 class Event {
@@ -47,6 +45,11 @@ class Event {
     protected $entries;
 
     /**
+     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\EventMeta", mappedBy="event")
+     */
+    protected $meta;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
@@ -57,6 +60,12 @@ class Event {
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
     protected $endDate;
+
+    /**
+     * @var \DateTime[]
+     * @ORM\Column(name="exclusion_list", type="string", nullable = true)
+     */
+    protected $exclusionList;
 
     /**
      * @var integer 
@@ -87,7 +96,14 @@ class Event {
     protected $type = "";
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getExclusionList() {
+        return $this->exclusionList;
+    }
 
+    public function setExclusionList(\DateTime $exclusionList) {
+        $this->exclusionList = $exclusionList;
+    }
+    
     public function getType() {
         return $this->type;
     }
@@ -111,6 +127,14 @@ class Event {
         $this->activity = $activity;
 
         return $this;
+    }
+
+    public function getMeta() {
+        return $this->meta;
+    }
+
+    public function setMeta($meta) {
+        $this->meta = $meta;
     }
 
     /**

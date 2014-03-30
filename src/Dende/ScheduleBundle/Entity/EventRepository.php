@@ -58,20 +58,26 @@ class EventRepository extends EntityRepository {
      * @return type
      */
     public function getAllEventsForWeek($year, $weekNumber) {
-        $weekStart = new \DateTime(sprintf("%d-W%d-1", $year, $weekNumber));
-        $weekEnd = new \DateTime(sprintf("%d-W%d-0 23:59:59", $year, $weekNumber + 1));
+        $weekStart = new \DateTime(sprintf("%d-W%02d-1", $year, $weekNumber));
+        $weekEnd = new \DateTime(sprintf("%d-W%02d-0 23:59:59", $year, $weekNumber + 1));
 
-        $queryBuilder = $this->createQueryBuilder("e")
-                ->select("e", "a HIDDEN")
+        $qb = $this->createQueryBuilder("e");
+
+        $qb->select("e", "a HIDDEN", "m HIDDEN")
                 ->leftJoin("e.activity", "a")
-                ->where("e.startDate <= :weekEnd and e.endDate is null")
-                ->orWhere("e.startDate <= :weekEnd and e.endDate is not null and e.endDate >= :weekStart")
+                ->leftJoin("e.meta", "m")
+                ->where($qb->expr()->orX(
+                                $qb->expr()->andX("e.startDate <= :weekEnd", "e.endDate is null"), $qb->expr()->andX("e.startDate <= :weekEnd", "e.endDate >= :weekStart")
+                ))
+                ->andWhere($qb->expr()->orX(
+                                "m.startDate IS NULL", "m.startDate BETWEEN :weekStart AND :weekEnd"
+                ))
                 ->setParameters([
-            "weekStart" => $weekStart,
-            "weekEnd"   => $weekEnd
+                    "weekStart" => $weekStart,
+                    "weekEnd"   => $weekEnd
                 ])
         ;
-        $query = $queryBuilder->getQuery();
+        $query = $qb->getQuery();
 
         return $query->execute();
     }
