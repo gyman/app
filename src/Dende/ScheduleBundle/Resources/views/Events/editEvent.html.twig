@@ -5,7 +5,15 @@
     <h3>Edytuj wydarzenie</h3>                    
 </div><!-- End .heading-->
 
+<p>
+desciption:
 {{ dump(event.getDescriptionForDate(date)) }}
+</p>
+
+<p>
+is deleted for dates:
+{{ dump(event.getDeletedEvents()) }}
+</p>
 
 {% endblock body %}
 

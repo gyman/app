@@ -42,7 +42,14 @@ class EventsController extends Controller {
             if ($event instanceof \Dende\ScheduleBundle\Entity\RecurringEvent)
             {
                 $startDate = $event->getOccurenceForWeekNumber($year, $week);
-                $description = sprintf("» %s", $event->getActivity()->getName());
+
+                if ($event->isDeletedForDate($startDate))
+                {
+                    continue;
+                }
+
+                $description = $event->getDescriptionForDate($startDate) ? sprintf("%s \n(%s)", $event->getActivity()->getName(), $event->getDescriptionForDate($startDate))
+                            : sprintf("» %s", $event->getActivity()->getName());
             }
             else
             {
@@ -50,6 +57,7 @@ class EventsController extends Controller {
                 $description = $event->getDescription() ? sprintf("%s \n(%s)", $event->getActivity()->getName(), $event->getDescription())
                             : $event->getActivity()->getName();
             }
+
 
             $eventObject = [
                 "id"        => $event->getId(),

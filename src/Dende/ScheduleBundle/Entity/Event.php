@@ -221,4 +221,12 @@ class Event {
         return $result->first()->getDescription();
     }
 
+    function getDeletedEvents() {
+        return new ArrayCollection(
+                array_filter($this->getMeta()->toArray(), function($meta) {
+                    return $meta->getKey() == "deleted";
+                })
+        );
+    }
+
 }

@@ -6,6 +6,7 @@ use Dende\ScheduleBundle\Entity\Event;
 use \DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
@@ -18,7 +19,6 @@ class RecurringEvent extends Event {
      * @ORM\Column(name="time_interval", type="integer", nullable = true)
      */
     private $interval; // </editor-fold>
-    
     protected $type = "recurring";
 
     // <editor-fold defaultstate="collapsed" desc="getters and setters">
@@ -56,6 +56,30 @@ class RecurringEvent extends Event {
         }
 
         return $eventDate;
+    }
+
+    public function isDeletedForDate(DateTime $date) {
+        if ($this->meta->count() == 0)
+        {
+            return false;
+        }
+
+        $result = array_filter($this->meta->toArray(), function(EventMeta $meta) use ($date) {
+            $isDeleted = $meta->getKey() == "deleted";
+            $isDateSame = $meta->getStartDate()->getTimestamp() == $date->getTimestamp();
+            if (!$isDeleted || !$isDateSame)
+            {
+                return false;
+            }
+            return true;
+        });
+
+        if (count($result) == 0)
+        {
+            return false;
+        }
+
+        return true;
     }
 
 }

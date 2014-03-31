@@ -14,7 +14,7 @@ class ScheduleController extends Controller {
      * @Route("/calendar",name="_schedule_calendar")
      * @Template()
      */
-    public function indexAction() {
+    public function calendarAction() {
         return array();
     }
 
