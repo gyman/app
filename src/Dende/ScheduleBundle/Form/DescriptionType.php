@@ -1,0 +1,38 @@
+<?php
+
+namespace Dende\ScheduleBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dende\MembersBundle\Form\DataTransformer\DateToStringTransformer;
+
+class DescriptionType extends AbstractType {
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+                ->add('value', "textarea", [])
+        ;
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults(array(
+            'data_class' => 'Dende\ScheduleBundle\Entity\Description'
+        ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'dende_schedulebundle_description';
+    }
+
+}

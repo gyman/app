@@ -9,14 +9,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Dende\ScheduleBundle\Entity as Event;
+use Dende\ScheduleBundle\Form\EventType;
 
 /**
- * @Route("/schedule",name="_events_getWeek")
+ * @Route("/event",name="_events_getWeek")
  */
 class EventsController extends Controller {
 
     /**
-     * @Route("/events/year/{year}/week/{week}",name="_events_getWeek")
+     * @Route("/year/{year}/week/{week}",name="_events_getWeek")
      * @Template()
      */
     public function getEventsForWeekAction($year, $week) {
@@ -64,7 +65,7 @@ class EventsController extends Controller {
                 "title"     => $description,
                 "allDay"    => false,
                 "start"     => $startDate->getTimestamp(),
-                "end"       => $startDate->getTimestamp() + $event->getDuration(),
+                "end"       => $startDate->getTimestamp() + ($event->getDuration() * 60),
                 "color"     => $colors[$i % $countColors],
                 "textColor" => "#000000",
                 "type"      => $event->getType(),
@@ -78,7 +79,7 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/drag",name="_events_drag")
+     * @Route("/{event}/drag",name="_events_drag")
      * @ParamConverter("event", class="ScheduleBundle:Event")
      * Template()
      */
@@ -115,7 +116,7 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/resize",name="_events_resize")
+     * @Route("/{event}/resize",name="_events_resize")
      * @ParamConverter("event", class="ScheduleBundle:Event")
      * Template()
      */
@@ -138,7 +139,7 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/delete",name="_events_delete")
+     * @Route("/{event}/delete",name="_events_delete")
      * @ParamConverter("event", class="ScheduleBundle:Event")
      * Template()
      */
@@ -150,7 +151,7 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/delete",name="_events_delete_one")
+     * @Route("/{event}/delete",name="_events_delete_one")
      * @ParamConverter("event", class="ScheduleBundle:Event")
      * Template()
      */
@@ -163,12 +164,41 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/events/{event}/date/{date}/edit",name="_events_edit")
+     * @Route("/{event}/date/{date}/edit",name="_events_edit")
      * @ParamConverter("event", class="ScheduleBundle:Event")
      * @Template()
      */
-    public function editEventAction(Event\Event $event, \DateTime $date, Request $request) {
-        return array("event" => $event, "date" => $date);
+    public function editAction(Event\Event $event, \DateTime $date, Request $request) {
+        $response = new Response(
+                'Content', 200, array('content-type' => 'text/html')
+        );
+
+        $form = $this->createForm(new EventType(), $event);
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $this->getDoctrine()->getManager()->persist($event);
+            }
+            else
+            {
+                $response->setStatusCode(400);
+            }
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $response->setContent(
+                        $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
+                            'form'  => $form->createView(),
+                            'event' => $event,
+                            'date'  => $date
+                                )
+                        )
+        );
     }
 
 }

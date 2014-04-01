@@ -83,8 +83,6 @@ class DefaultController extends Controller {
             if ($form->isValid())
             {
                 $memberManager->save($member);
-
-                $request->getSession()->getFlashBag()->add('notice', 'Dodano nowego użytkownika!');
             }
             else
             {

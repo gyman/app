@@ -153,7 +153,7 @@ class Event {
     }
 
     public function getDuration() {
-        return $this->duration * 60;
+        return $this->duration;
     }
 
     public function setStartDate(\DateTime $startDate) {
