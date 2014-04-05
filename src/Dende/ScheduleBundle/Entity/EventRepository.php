@@ -65,10 +65,10 @@ class EventRepository extends EntityRepository {
         $qb = $this->createQueryBuilder("e");
         $exp = $qb->expr();
 
-        $qb->select("e", "a HIDDEN", "m HIDDEN")
+        $qb->select("e", "a HIDDEN", "o HIDDEN")
                 ->leftJoin("e.activity", "a")
-                ->leftJoin("e.meta", "m", Join::WITH, $exp->andX(
-                                $exp->eq("e.id", "m.event"), $exp->between("m.startDate", ":weekStart", ":weekEnd")
+                ->leftJoin("e.occurences", "o", Join::WITH, $exp->andX(
+                                $exp->eq("e.id", "o.event"), $exp->between("o.startDate", ":weekStart", ":weekEnd")
                 ))
                 ->where(
                         $exp->orX(

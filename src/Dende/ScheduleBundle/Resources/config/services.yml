@@ -43,14 +43,21 @@ services:
         factory_method:     getRepository
         arguments:          [ %activity_entity.class% ]
         
-    schedule_event_subscriber:
-        class: Dende\ScheduleBundle\Services\Subscriber\ScheduleEventSubscriber
+    occurences_manager:
+        class: Dende\ScheduleBundle\Services\OccurencesManager
+        calls:
+             - [ setEntityManager, ["@doctrine.orm.entity_manager"] ]
+             - [ setRouter, ["@router"] ]
+#             - [ setOccurenceRepository, ["@occurence_repository"] ]
+        
+#    schedule_event_subscriber:
+#        class: Dende\ScheduleBundle\Services\Subscriber\ScheduleEventSubscriber
 #        arguments:
 #            - @service_container
 #        calls:
 #             - [ setOccurenceRepository, ["@occurence_repository"] ]
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
+#        tags:
+#            - { name: doctrine.event_subscriber, connection: default }
 
 #    schedule_event_listener:
 #        class: Dende\ScheduleBundle\Services\Listener\EventInsertListener

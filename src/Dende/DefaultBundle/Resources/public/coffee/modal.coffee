@@ -117,23 +117,39 @@ class @Modal
     $.get url, (response) =>
       @setBody response
   
-  showFromUrl: (url) =>
+  showFromUrl: (url,postData) =>
+    if postData?
+      method = "post"
+    else
+      method = "get"
+
     if @isOpened == true
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
-        $.get url, (response) =>
-          window.modal.setBody response
-          window.modal.show()
+        $.ajax(
+          url: url
+          data: postData
+          dataType: "html"
+          type: method
+        ).success((response) =>
+          @setBody response
+          @show()
           window.modal.getModal().off("hidden.imidiateShow")
-        .error () =>
+        ).error () =>
           @memberNotFound()
+          
       @hide()
     else
-      $.get url, (response) =>
+      $.ajax(
+        url: url
+        data: postData
+        type: method
+        dataType: "html"
+      ).success((response) =>
         @setBody response
         @show()
-      .error () =>
-        @memberNotFound()
-        
+      ).error () =>
+        @memberNotFound()    
+    
   memberNotFound: =>
     alert "Nie znaleziono takiego uczestnika"
         

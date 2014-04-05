@@ -5,7 +5,7 @@
     <h3>Edytuj wydarzenie</h3>                    
 </div><!-- End .heading-->
 
-<form action="{{ path("_events_edit",{event: event.getId(), date: date.format("Y-m-d H:i")}) }}" class="form form-horizontal">
+<form action="{{ path("_events_new",{event: event.getId(), date: date.format("Y-m-d H:i")}) }}" class="form form-horizontal">
 {{ form(form) }}
     <div class="control-group">
         <div class="controls">
@@ -13,19 +13,6 @@
         </div>
     </div>
 </form>
-
-{#
-<p>
-desciption:
-{{ dump(event.getDescriptionForDate(date)) }}
-</p>
-
-<p>
-is deleted for dates:
-{{ dump(event.getDeletedEvents()) }}
-</p>
-#}
-
 {% endblock body %}
 
 

@@ -60,7 +60,6 @@ class ScheduleEventSubscriber implements EventSubscriber {
             next($days);
         }
 
-
         $event->setOccurences($collection);
     }
 

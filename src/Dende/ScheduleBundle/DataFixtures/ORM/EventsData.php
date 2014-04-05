@@ -8,8 +8,26 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Dende\ScheduleBundle\Entity as Schedule;
 use Symfony\Component\Yaml\Yaml;
 use DateTime;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class EventsData extends AbstractFixture implements OrderedFixtureInterface {
+class EventsData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     *
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null) {
+        $this->container = $container;
+    }
 
     private $manager;
 
@@ -61,6 +79,7 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface {
 
         $this->manager->persist($event);
 
+        $this->container->get('occurences_manager')->addOccurencesForEvent($event);
 
         return $event;
     }

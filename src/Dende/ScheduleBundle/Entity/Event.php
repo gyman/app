@@ -42,7 +42,7 @@ class Event {
     protected $activity;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event")
      */
     protected $occurences;
 
@@ -177,6 +177,8 @@ class Event {
         $this->type = $type;
         return $this;
     }
+    
+    
 
 // </editor-fold>
 
@@ -184,32 +186,6 @@ class Event {
         $this->entries = new ArrayCollection();
         $this->meta = new ArrayCollection();
         $this->endDate = new DateTime("2015-12-31 23:59:59");
-    }
-
-    function getDescriptionForDate(DateTime $date) {
-        $criteria = Criteria::create();
-        $criteria->where(
-                Criteria::expr()->andX(
-                        Criteria::expr()->eq("key", "description"), Criteria::expr()->eq("startDate", $date)
-                )
-        );
-
-        $result = $this->meta->matching($criteria);
-
-        if (count($result) == 0)
-        {
-            return null;
-        }
-
-        return $result->first()->getDescription();
-    }
-
-    function getDeletedEvents() {
-        return new ArrayCollection(
-                array_filter($this->getMeta()->toArray(), function($meta) {
-                    return $meta->getKey() == "deleted";
-                })
-        );
     }
 
 }

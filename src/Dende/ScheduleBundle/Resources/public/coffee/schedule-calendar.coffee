@@ -118,18 +118,17 @@ $ ->
       # event.title = "CLICKED!";
       # $('#calendar').fullCalendar('updateEvent', event);
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
-      $.ajax 
-        url: Routing.generate('_events_drag', {event: event.id})
-        data:
-          delta:
-            days: dayDelta
-            minutes: minuteDelta
-        type: 'POST'
-        dataType: 'json'
+      url = Routing.generate('_events_drag', {occurence: event.id})
+      params =
+        delta:
+          days: dayDelta
+          minutes: minuteDelta
+      modal.showFromUrl(url,params)
+
     eventResize: (event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view) ->
-      $.ajax 
-        url: Routing.generate('_events_resize', {event: event.id})
-        data:
-          duration: moment.duration(moment(event.end).diff(event.start)).asMinutes()
-        type: 'POST'
-        dataType: 'json'
+      url = Routing.generate('_events_resize', {occurence: event.id})
+      params =
+        duration: moment.duration(moment(event.end).diff(event.start)).asMinutes()
+      modal.showFromUrl(url,params)
+
+        
