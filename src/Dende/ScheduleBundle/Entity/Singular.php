@@ -8,12 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
+ * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\OccurenceRepository")
  */
-class Description extends EventMeta {
-
-    public function getDescription() {
-        return $this->getValue();
-    }
+class Singular extends Occurence {
 
 }

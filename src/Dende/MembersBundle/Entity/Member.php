@@ -147,11 +147,6 @@ class Member {
     private $nameSlug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
-     */
-    private $entries;
-
-    /**
      * @var DateTime $created
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime", nullable=false)
@@ -212,15 +207,6 @@ class Member {
 
     public function setBarcode($barcode) {
         $this->barcode = $barcode;
-        return $this;
-    }
-
-    public function getEntries() {
-        return $this->entries;
-    }
-
-    public function setEntries($entries) {
-        $this->entries = $entries;
         return $this;
     }
 

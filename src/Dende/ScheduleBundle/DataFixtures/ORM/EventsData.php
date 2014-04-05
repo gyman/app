@@ -34,19 +34,29 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface {
         extract($params);
 
         switch ($type) {
-            case "recurring":
-                $event = new Schedule\RecurringEvent();
+            case "single":
+                $event = new Schedule\Single();
+                break;
+            case "weekly":
+                $event = new Schedule\Weekly();
                 break;
         }
 
         $event->setActivity($this->getReference($activity));
         $event->setStartDate(new DateTime($startDate));
-        $event->setDuration($duration);
-        $event->setInterval($interval);
+        $event->setEndDate(isset($endDate) ? new DateTime($endDate) : new DateTime("2015-12-31 23:59:59"));
 
-        if (isset($endDate))
+        $event->setDuration($duration);
+
+        if ($event instanceof Schedule\Weekly)
         {
-            $event->setEndDate(new DateTime($endDate));
+            $event->setSunday(isset($sunday) ? $sunday : false);
+            $event->setMonday(isset($monday) ? $monday : false);
+            $event->setTuesday(isset($tuesday) ? $tuesday : false);
+            $event->setWednesday(isset($wednesday) ? $wednesday : false);
+            $event->setThursday(isset($thursday) ? $thursday : false);
+            $event->setFriday(isset($friday) ? $friday : false);
+            $event->setSaturday(isset($saturday) ? $saturday : false);
         }
 
         $this->manager->persist($event);

@@ -9,21 +9,21 @@ use Dende\ScheduleBundle\Entity as Schedule;
 use Symfony\Component\Yaml\Yaml;
 use DateTime;
 
-class EventsMetaData extends AbstractFixture implements OrderedFixtureInterface {
+class OccurencesData extends AbstractFixture implements OrderedFixtureInterface {
 
     private $manager;
 
     public function load(ObjectManager $manager) {
-        $this->manager = $manager;
-
-        $value = Yaml::parse(file_get_contents(__DIR__ . '/../Yaml/eventsMeta.yml'));
-
-        foreach ($value as $key => $params) {
-            $eventMetaObject = $this->insertEventMeta($params);
-            $this->addReference($key, $eventMetaObject);
-        }
-
-        $this->manager->flush();
+//        $this->manager = $manager;
+//
+//        $value = Yaml::parse(file_get_contents(__DIR__ . '/../Yaml/occurences.yml'));
+//
+//        foreach ($value as $key => $params) {
+//            $eventMetaObject = $this->insertEventMeta($params);
+//            $this->addReference($key, $eventMetaObject);
+//        }
+//
+//        $this->manager->flush();
     }
 
     public function getOrder() {

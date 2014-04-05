@@ -19,8 +19,8 @@ use Doctrine\Common\Collections\Criteria;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="event_type", type="string")
  * @ORM\DiscriminatorMap({
- *      "recurring" = "Dende\ScheduleBundle\Entity\RecurringEvent",
- *      "single" = "Dende\ScheduleBundle\Entity\SingleEvent",
+ *      "single" = "Dende\ScheduleBundle\Entity\Single",
+ *      "weekly" = "Dende\ScheduleBundle\Entity\Weekly",
  * })
  */
 class Event {
@@ -42,14 +42,9 @@ class Event {
     protected $activity;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event", cascade={"persist", "remove", "merge"})
      */
-    protected $entries;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\EventMeta", mappedBy="event")
-     */
-    protected $meta;
+    protected $occurences;
 
     /**
      * @var \DateTime
@@ -62,12 +57,6 @@ class Event {
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
     protected $endDate;
-
-    /**
-     * @var \DateTime[]
-     * @ORM\Column(name="exclusion_list", type="string", nullable = true)
-     */
-    protected $exclusionList;
 
     /**
      * @var integer 
@@ -98,74 +87,29 @@ class Event {
     protected $type = "";
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
-    public function getExclusionList() {
-        return $this->exclusionList;
-    }
 
-    public function setExclusionList(\DateTime $exclusionList) {
-        $this->exclusionList = $exclusionList;
-    }
-
-    public function getType() {
-        return $this->type;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
     public function getId() {
         return $this->id;
     }
 
-    /**
-     * Set activity
-     *
-     * @param Activity $activity
-     * @return Event
-     */
-    public function setActivity(Activity $activity) {
-        $this->activity = $activity;
-
-        return $this;
-    }
-
-    public function getMeta() {
-        return $this->meta;
-    }
-
-    public function setMeta($meta) {
-        $this->meta = $meta;
-    }
-
-    /**
-     * Get activity
-     *
-     * @return integer 
-     */
     public function getActivity() {
         return $this->activity;
+    }
+
+    public function getOccurences() {
+        return $this->occurences;
     }
 
     public function getStartDate() {
         return $this->startDate;
     }
 
+    public function getEndDate() {
+        return $this->endDate;
+    }
+
     public function getDuration() {
         return $this->duration;
-    }
-
-    public function setStartDate(\DateTime $startDate) {
-        $this->startDate = $startDate;
-    }
-
-    public function setDuration($duration) {
-        $this->duration = $duration;
-    }
-
-    public function getEntries() {
-        return $this->entries;
     }
 
     public function getCreated() {
@@ -180,20 +124,58 @@ class Event {
         return $this->deletedAt;
     }
 
-    public function setEntries($entries) {
-        $this->entries = $entries;
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setActivity($activity) {
+        $this->activity = $activity;
+        return $this;
+    }
+
+    public function setOccurences($occurences) {
+        $this->occurences = $occurences;
+        return $this;
+    }
+
+    public function setStartDate(\DateTime $startDate) {
+        $this->startDate = $startDate;
+        return $this;
+    }
+
+    public function setEndDate(\DateTime $endDate) {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
+    public function setDuration($duration) {
+        $this->duration = $duration;
+        return $this;
     }
 
     public function setCreated(DateTime $created) {
         $this->created = $created;
+        return $this;
     }
 
     public function setModified(DateTime $modified) {
         $this->modified = $modified;
+        return $this;
     }
 
     public function setDeletedAt(Datetime $deletedAt) {
         $this->deletedAt = $deletedAt;
+        return $this;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
     }
 
 // </editor-fold>
@@ -201,6 +183,7 @@ class Event {
     function __construct() {
         $this->entries = new ArrayCollection();
         $this->meta = new ArrayCollection();
+        $this->endDate = new DateTime("2015-12-31 23:59:59");
     }
 
     function getDescriptionForDate(DateTime $date) {

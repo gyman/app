@@ -23,7 +23,7 @@ class UpdateLastEntryListener {
         if ($entity instanceof Entry)
         {
             /** @var Member */
-            $member = $entity->getMember();
+            $member = $entity->getVoucher()->getMember();
             $member->setLastEntry($entity);
             $this->container->get("member_manager")->save($member);
 

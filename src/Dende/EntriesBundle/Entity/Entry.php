@@ -32,14 +32,6 @@ class Entry {
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $member;
-
-    /**
      * @Validate\ActivityConstraint
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
@@ -47,17 +39,16 @@ class Entry {
     private $activity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="entries")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="SET NULL")
-     
-     */
-    private $event;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher", inversedBy="entries")
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $voucher;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Occurence", inversedBy="entries")
+     * @ORM\JoinColumn(name="occurence_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $occurence;
 
     /**
      * @var string $entryType
@@ -110,74 +101,36 @@ class Entry {
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
-    public function getStartDate() {
-        return $this->startDate;
-    }
-
-    public function getEndDate() {
-        return $this->endDate;
-    }
-
-    public function setStartDate(\DateTime $startDate) {
-        $this->startDate = $startDate;
-    }
-
-    public function setEndDate(\DateTime $endDate) {
-        $this->endDate = $endDate;
-    }
-
-    public function getEntryPrice() {
-        return $this->entryPrice;
-    }
-
-    public function setEntryPrice($entryPrice) {
-        $this->entryPrice = $entryPrice;
-        return $this;
-    }
-
-    public function getEntryType() {
-        return $this->entryType;
-    }
-
-    public function setEntryType($entryType) {
-        $this->entryType = $entryType;
-        return $this;
-    }
-
-    public function getVoucher() {
-        return $this->voucher;
-    }
-
-    public function setVoucher($voucher) {
-        $this->voucher = $voucher;
-        return $this;
+    public function getId() {
+        return $this->id;
     }
 
     public function getActivity() {
         return $this->activity;
     }
 
-    public function setActivity($activity) {
-        $this->activity = $activity;
-        return $this;
+    public function getVoucher() {
+        return $this->voucher;
     }
 
-    public function getMember() {
-        return $this->member;
+    public function getOccurence() {
+        return $this->occurence;
     }
 
-    public function setMember($member) {
-        $this->member = $member;
-        return $this;
+    public function getEntryType() {
+        return $this->entryType;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId() {
-        return $this->id;
+    public function getEntryPrice() {
+        return $this->entryPrice;
+    }
+
+    public function getStartDate() {
+        return $this->startDate;
+    }
+
+    public function getEndDate() {
+        return $this->endDate;
     }
 
     public function getCreated() {
@@ -192,6 +145,46 @@ class Entry {
         return $this->deletedAt;
     }
 
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setActivity($activity) {
+        $this->activity = $activity;
+        return $this;
+    }
+
+    public function setVoucher($voucher) {
+        $this->voucher = $voucher;
+        return $this;
+    }
+
+    public function setOccurence($occurence) {
+        $this->occurence = $occurence;
+        return $this;
+    }
+
+    public function setEntryType($entryType) {
+        $this->entryType = $entryType;
+        return $this;
+    }
+
+    public function setEntryPrice($entryPrice) {
+        $this->entryPrice = $entryPrice;
+        return $this;
+    }
+
+    public function setStartDate(\DateTime $startDate) {
+        $this->startDate = $startDate;
+        return $this;
+    }
+
+    public function setEndDate(\DateTime $endDate) {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
     public function setCreated(DateTime $created) {
         $this->created = $created;
         return $this;
@@ -202,17 +195,9 @@ class Entry {
         return $this;
     }
 
-    public function setDeletedAt(Datetime $deleted) {
-        $this->deletedAt = $deleted;
+    public function setDeletedAt(Datetime $deletedAt) {
+        $this->deletedAt = $deletedAt;
         return $this;
-    }
-
-    public function getEvent() {
-        return $this->event;
-    }
-
-    public function setEvent($event) {
-        $this->event = $event;
     }
 
 // </editor-fold>

@@ -6,6 +6,8 @@ parameters:
     event_entity.class: Dende\ScheduleBundle\Entity\Event
     event_manager.class: Dende\ScheduleBundle\Services\Manager\EventManager
     event_repository.class: Dende\ScheduleBundle\Entity\EventRepository
+    occurence_entity.class: Dende\ScheduleBundle\Entity\Occurence
+    occurence_repository.class: Dende\ScheduleBundle\Entity\OccurenceRepository
 
 services:
     base_manager:
@@ -28,9 +30,31 @@ services:
         factory_service:    doctrine
         factory_method:     getRepository
         arguments:          [ %event_entity.class% ]
+    
+    occurence_repository:
+        class:              %occurence_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %occurence_entity.class% ]
              
     activity_repository:
         class:              %activity_repository.class%
         factory_service:    doctrine
         factory_method:     getRepository
         arguments:          [ %activity_entity.class% ]
+        
+    schedule_event_subscriber:
+        class: Dende\ScheduleBundle\Services\Subscriber\ScheduleEventSubscriber
+#        arguments:
+#            - @service_container
+#        calls:
+#             - [ setOccurenceRepository, ["@occurence_repository"] ]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+#    schedule_event_listener:
+#        class: Dende\ScheduleBundle\Services\Listener\EventInsertListener
+#        arguments:
+#            - @occurence_repository
+#        tags:
+#            - { name: doctrine.event_listener, event: postPersist }

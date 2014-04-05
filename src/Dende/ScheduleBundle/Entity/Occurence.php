@@ -9,19 +9,19 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 
 /**
- * EventMeta
+ * OccurenceMeta
  *
- * @ORM\Table("events_meta")
- * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventMetaRepository")
+ * @ORM\Table("events_occurences")
+ * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\OccurenceRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="meta_type", type="string")
+ * @ORM\DiscriminatorColumn(name="occurence_type", type="string")
  * @ORM\DiscriminatorMap({
- *      "description" = "Dende\ScheduleBundle\Entity\Description",
- *      "deleted" = "Dende\ScheduleBundle\Entity\Deleted",
+ *      "serial" = "Dende\ScheduleBundle\Entity\Serial",
+ *      "singular" = "Dende\ScheduleBundle\Entity\Singular",
  * })
  */
-class EventMeta {
+class Occurence {
     // <editor-fold defaultstate="collapsed" desc="members">
 
     /**
@@ -34,10 +34,15 @@ class EventMeta {
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="meta")
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="occurences")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $event;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="occurence")
+     */
+    protected $entries;
 
     /**
      * @var \DateTime
@@ -46,16 +51,16 @@ class EventMeta {
     protected $startDate;
 
     /**
-     * @var string
-     * @ORM\Column(name="meta_key", type="string", nullable = false)
+     * @var integer 
+     * @ORM\Column(name="duration", type="integer", nullable = true)
      */
-    protected $key;
+    protected $duration;
 
     /**
      * @var string
-     * @ORM\Column(name="meta_value", type="string", nullable = false)
+     * @ORM\Column(name="description", type="string", nullable = true)
      */
-    protected $value;
+    protected $description;
 
     /**
      * @var DateTime $created
@@ -142,6 +147,33 @@ class EventMeta {
 
     public function setDeletedAt(Datetime $deletedAt) {
         $this->deletedAt = $deletedAt;
+    }
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function getDuration() {
+        return $this->duration;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+        return $this;
+    }
+
+    public function setDuration($duration) {
+        $this->duration = $duration;
+        return $this;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
     }
 
     // </editor-fold>
