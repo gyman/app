@@ -10,6 +10,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Dende\DefaultBundle\Validator as DefaultBundle;
 
 /**
  * Event
@@ -49,14 +50,21 @@ class Event {
 
     /**
      * @var \DateTime
-     * @Assert\DateTime()
+     * @Assert\DateTime(message="Data musi być w formacie DD.MM.RR HH:MM")
+     * @DefaultBundle\DateRangeConstraint(
+     *      min="today",
+     * )
      * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
     protected $startDate;
 
     /**
      * @var \DateTime
-     * @Assert\DateTime()
+     * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
+     * @DefaultBundle\DateRangeConstraint(
+     *      min="today",
+     *      max="+1 year +1 day"
+     * )
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
     protected $endDate;
@@ -87,9 +95,18 @@ class Event {
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt; // </editor-fold>
+    protected $event_type;
     protected $type = "";
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getEventType() {
+        return $this->event_type;
+    }
+
+    public function setEventType($eventType) {
+        $this->event_type = $eventType;
+        return $this;
+    }
 
     public function getId() {
         return $this->id;
@@ -191,12 +208,12 @@ class Event {
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata) {
-        $metadata->addPropertyConstraint('startDate', new Assert\GreaterThan(array(
-            'value' => date("Y-m-d H:i:s"),
-        )));
-        $metadata->addPropertyConstraint('endDate', new Assert\LessThan(array(
-            'value' => date("Y-m-d H:i:s", strtotime("+1 year")),
-        )));
+//        $metadata->addPropertyConstraint('startDate', new Assert\GreaterThan(array(
+//            'value' => date("Y-m-d H:i:s"),
+//        )));
+//        $metadata->addPropertyConstraint('endDate', new Assert\LessThan(array(
+//            'value' => date("Y-m-d H:i:s", strtotime("+1 year +1 day")),
+//        )));
     }
 
 }

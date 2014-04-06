@@ -93,8 +93,8 @@ class @NewEvent
       todayHighlight: true
       minuteStep: 15
       pickerPosition: "bottom-left"
-      minView: 1
-      maxView: 1
+      minView: 2
+      maxView: 2
       startDate: moment()._d
       endDate: endDate._d
       

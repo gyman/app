@@ -46,12 +46,12 @@ class EventType extends AbstractType {
                         "placeholder" => "dd.mm.yyyy"
                     ]
                 ])
-                ->add('recurrence', "choice", array(
+                ->add('event_type', "choice", array(
                     "choices"  => [
                         "weekly" => "co tydzień",
                         "single" => "nie",
                     ],
-                    "mapped"   => false,
+//                    "mapped"   => false,
                     "label"    => "Powtarza się",
                     "expanded" => true,
                     "multiple" => false,
