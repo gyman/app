@@ -142,11 +142,41 @@ class EventsController extends Controller {
 
     /**
      * @Route("/new",name="_events_new")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function newAction(Request $request) {
-        
+        $response = new Response(
+                'Content', 200, array('content-type' => 'text/html')
+        );
+
+        $event = new Event\Event();
+
+        $form = $this->createForm(new EventType(), $event);
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $this->getDoctrine()->getManager()->persist($form->getData());
+            }
+            else
+            {
+                $response->setStatusCode(400);
+            }
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $response->setContent(
+                        $this->renderView("ScheduleBundle:Events:new.html.twig", array(
+                            'form'  => $form->createView(),
+                            'event' => $event,
+                                )
+                        )
+        );
     }
 
     /**

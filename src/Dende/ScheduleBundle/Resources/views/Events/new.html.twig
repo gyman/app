@@ -1,43 +1,34 @@
-{% extends "::base.html.twig" %}
-
-{% block body %}
-<div class="heading">
-    <h3>Edytuj wydarzenie</h3>                    
-</div><!-- End .heading-->
-
-<form action="{{ path("_events_new",{event: event.getId(), date: date.format("Y-m-d H:i")}) }}" class="form form-horizontal">
+<form id="newEventForm" action="{{ path("_events_new") }}" class="form form-horizontal">
 {{ form(form) }}
-    <div class="control-group">
-        <div class="controls">
-            <button type="submit" class="btn btn-primary">Zapisz</button>
-        </div>
-    </div>
 </form>
-{% endblock body %}
 
+{% block modal %}
+<div class="hidden" id="ui-newEventData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Nowe wydarzenie</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
+{% endblock modal %}
 
-{# javascripts #}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    {% javascripts
-     %}
-
+{% block javascript %}
+{% javascripts
+    '@ScheduleBundle/Resources/public/coffee/schedule.newEvent.coffee'
+    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
+    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
+%}
 <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock javascripts %}
+{% endjavascripts %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-newEventData");
+        modal.setModalWindowClass("newEvent");
 
-{# CSS #}
+        window.newEventModal = new NewEvent();
+    });
+</script>
+{% endblock javascript %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    {% stylesheets filter='cssrewrite'
-        filter="cssrewrite"
-    %}
-
-<link rel="stylesheet" href="{{ asset_url }}" />
-
-    {% endstylesheets %}
-{% endblock stylesheets %}

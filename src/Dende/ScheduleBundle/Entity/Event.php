@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * Event
@@ -48,12 +49,14 @@ class Event {
 
     /**
      * @var \DateTime
+     * @Assert\DateTime()
      * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
     protected $startDate;
 
     /**
      * @var \DateTime
+     * @Assert\DateTime()
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
     protected $endDate;
@@ -62,7 +65,7 @@ class Event {
      * @var integer 
      * @ORM\Column(name="duration", type="integer", nullable = false)
      */
-    protected $duration;
+    protected $duration = 90;
 
     /**
      * @var DateTime $created
@@ -177,15 +180,23 @@ class Event {
         $this->type = $type;
         return $this;
     }
-    
-    
 
 // </editor-fold>
 
     function __construct() {
         $this->entries = new ArrayCollection();
         $this->meta = new ArrayCollection();
-        $this->endDate = new DateTime("2015-12-31 23:59:59");
+        $this->startDate = new DateTime();
+        $this->endDate = new DateTime("+1 year");
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata) {
+        $metadata->addPropertyConstraint('startDate', new Assert\GreaterThan(array(
+            'value' => date("Y-m-d H:i:s"),
+        )));
+        $metadata->addPropertyConstraint('endDate', new Assert\LessThan(array(
+            'value' => date("Y-m-d H:i:s", strtotime("+1 year")),
+        )));
     }
 
 }

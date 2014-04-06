@@ -5,7 +5,6 @@ namespace Dende\ScheduleBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Dende\MembersBundle\Form\DataTransformer\DateToStringTransformer;
 
 class EventType extends AbstractType {
 
@@ -16,10 +15,15 @@ class EventType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('activity', "entity", [
-                    "label"    => "Zajęcia",
-                    'class'    => 'ScheduleBundle:Activity',
-                    'property' => 'name',
-                    "attr"     => []
+                    "label"       => "Zajęcia",
+                    'class'       => 'ScheduleBundle:Activity',
+                    'property'    => 'name',
+                    "empty_value" => "wybierz...",
+                    "empty_data"  => null,
+                ])
+                ->add('new_activity', "text", [
+                    "label"  => "Nazwa zajęć",
+                    "mapped" => false
                 ])
                 ->add('startDate', "datetime", [
                     "widget"       => "single_text",
@@ -44,15 +48,14 @@ class EventType extends AbstractType {
                 ])
                 ->add('recurrence', "choice", array(
                     "choices"  => [
-                        "single"  => "nie",
-//                        "daily"   => "codziennie",
-                        "weekly"  => "co tydzień",
-//                        "monthly" => "co miesiąc"
+                        "weekly" => "co tydzień",
+                        "single" => "nie",
                     ],
                     "mapped"   => false,
                     "label"    => "Powtarza się",
                     "expanded" => true,
                     "multiple" => false,
+                    "data"     => "weekly"
                 ))
                 ->add('days', "choice", array(
                     "choices"  => [
@@ -70,29 +73,6 @@ class EventType extends AbstractType {
                     "mapped"   => false,
                     "label"    => "Dni"
                 ))
-                /*
-                ->add('months', "choice", array(
-                    "choices"  => [
-                        "styczeń",
-                        "luty",
-                        "marzec",
-                        "kwiecień",
-                        "maj",
-                        "czerwiec",
-                        "lipiec",
-                        "sierpień",
-                        "wrzesień",
-                        "październik",
-                        "listopad",
-                        "grudzień"
-                    ],
-                    "data"     => range(0, 11),
-                    "multiple" => true,
-                    "expanded" => true,
-                    "mapped"   => false,
-                    "label"    => "Miesiące"
-                ))
-                 */
         ;
     }
 

@@ -3,7 +3,7 @@
 {% block body %}
 <div class="heading">
     <h3>Harmonogram zajęć</h3>                    
-    <a href="{{path("_events_new")}}" class="btn pull-right createNewEvent openUrlInModal"><span class="icon32 icomoon-icon-new green"></span>Nowe wydarzenie</a>
+    <a href="{{path("_events_new")}}" id="newEventHeaderButton" class="btn pull-right createNewEvent openUrlInModal"><span class="icon32 icomoon-icon-new green"></span>Nowe wydarzenie</a>
 </div><!-- End .heading-->
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
@@ -23,7 +23,6 @@
 
     {% javascripts
         '@ScheduleBundle/Resources/public/js/fullcalendar.js'
-        '@ScheduleBundle/Resources/public/coffee/modal.coffee'
         '@ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee'
      %}
 
@@ -36,9 +35,10 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    {% stylesheets filter='cssrewrite'
+    {% stylesheets
         'bundles/schedule/css/fullcalendar.css'
-        filter="cssrewrite"
+        '@ScheduleBundle/Resources/public/less/schedule.less'
+        filter="less,cssrewrite"
     %}
 
 <link rel="stylesheet" href="{{ asset_url }}" />
