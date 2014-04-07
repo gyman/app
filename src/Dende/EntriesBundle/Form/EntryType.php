@@ -208,7 +208,7 @@ class EntryType extends AbstractType {
                         "readonly" => "READONLY",
                     )
                 ))
-                ->add('entryType', 'choice', array(
+                ->add('eventType', 'choice', array(
                     'choices'  => $this->getChoices()->toArray(),
                     'data'     => $this->getDefaultChoice(),
                     "expanded" => true

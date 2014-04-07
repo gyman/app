@@ -5,6 +5,8 @@ namespace Dende\ScheduleBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
+use Dende\ScheduleBundle\Entity as Event;
+use Symfony\Component\Form\Form;
 
 /**
  * EventRepository
@@ -127,6 +129,34 @@ class EventRepository extends EntityRepository {
         $query = $queryBuilder->getQuery();
 
         return $query;
+    }
+
+    public function createEntity($form) {
+        $type = ucfirst($form["event_type"]->getData());
+        $class = "\\Dende\\ScheduleBundle\\Entity\\" . $type;
+        $method = "create" . $type;
+        $object = new $class;
+        return $this->$method($form, $object);
+    }
+
+    private function createSingle(Form $form, Event\Weekly $event) {
+        return $event;
+    }
+    private function createWeekly(Form $form, Event\Weekly $event) {
+        $event->setStartDate($form["startDate"]->getData());
+        $event->setEndDate($form["endDate"]->getData());
+        $event->setDuration($form["duration"]->getData());
+        $event->setActivity($form->getData()->getActivity());
+
+        $event->setSunday($form["days"][0]->getData());
+        $event->setMonday($form["days"][1]->getData());
+        $event->setTuesday($form["days"][2]->getData());
+        $event->setWednesday($form["days"][3]->getData());
+        $event->setThursday($form["days"][4]->getData());
+        $event->setFriday($form["days"][5]->getData());
+        $event->setSaturday($form["days"][6]->getData());
+        
+        return $event;
     }
 
 }

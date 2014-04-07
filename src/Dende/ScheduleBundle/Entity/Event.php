@@ -95,18 +95,9 @@ class Event {
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt; // </editor-fold>
-    protected $event_type;
     protected $type = "";
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
-    public function getEventType() {
-        return $this->event_type;
-    }
-
-    public function setEventType($eventType) {
-        $this->event_type = $eventType;
-        return $this;
-    }
 
     public function getId() {
         return $this->id;

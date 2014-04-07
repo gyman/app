@@ -160,7 +160,9 @@ class EventsController extends Controller {
 
             if ($form->isValid())
             {
-                $this->getDoctrine()->getManager()->persist($form->getData());
+                $event = $this->get("event_repository")->createEntity($form);
+                $this->getDoctrine()->getManager()->persist($event);
+                $this->container->get('occurences_manager')->addOccurencesForEvent($event);
             }
             else
             {

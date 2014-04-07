@@ -51,7 +51,7 @@ class EventType extends AbstractType {
                         "weekly" => "co tydzień",
                         "single" => "nie",
                     ],
-//                    "mapped"   => false,
+                    "mapped"   => false,
                     "label"    => "Powtarza się",
                     "expanded" => true,
                     "multiple" => false,
