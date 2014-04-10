@@ -27,7 +27,8 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "friendsofsymfony/jsrouting-bundle": "*",
-        "jms/serializer-bundle": "*"
+        "jms/serializer-bundle": "*",
+        "raven/raven": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.5.*",

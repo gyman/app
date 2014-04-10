@@ -5,7 +5,7 @@ namespace Dende\ScheduleBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
-use Dende\ScheduleBundle\Entity as Event;
+use Dende\ScheduleBundle\Entity as Schedule;
 use Symfony\Component\Form\Form;
 
 /**
@@ -104,6 +104,7 @@ class EventRepository extends EntityRepository {
     }
 
     public function getEventsForDate(\DateTime $date) {
+        throw new Exception("deprecated");
         $queryBuilder = $this->createQueryBuilder("e");
         $queryBuilder
                 ->join("e.activity", "a")
@@ -120,12 +121,17 @@ class EventRepository extends EntityRepository {
      * @return QueryBuilder
      */
     private function getEventsForDateQuery(\DateTime $date) {
+        $start = clone($date);
+        $end = clone($date);
         $queryBuilder = $this->createQueryBuilder("e");
         $queryBuilder
-                ->select("e.id, e.startHour, e.endHour, a.name")
                 ->join("e.activity", "a")
-                ->where("e.dayOfWeek = :day")
-                ->setParameter("day", strtolower($date->format("l")));
+                ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
+                ->setParameters([
+                    "start" => $start->modify("00:00:00"),
+                    "end"   => $end->modify("23:59:59"),
+        ]);
+
         $query = $queryBuilder->getQuery();
 
         return $query;
@@ -139,23 +145,24 @@ class EventRepository extends EntityRepository {
         return $this->$method($form, $object);
     }
 
-    private function createSingle(Form $form, Event\Weekly $event) {
+    private function createSingle(Form $form, Schedule\Weekly $event) {
         return $event;
     }
-    private function createWeekly(Form $form, Event\Weekly $event) {
+
+    private function createWeekly(Form $form, Schedule\Weekly $event) {
         $event->setStartDate($form["startDate"]->getData());
         $event->setEndDate($form["endDate"]->getData());
         $event->setDuration($form["duration"]->getData());
         $event->setActivity($form->getData()->getActivity());
 
-        $event->setSunday($form["days"][0]->getData());
-        $event->setMonday($form["days"][1]->getData());
-        $event->setTuesday($form["days"][2]->getData());
-        $event->setWednesday($form["days"][3]->getData());
-        $event->setThursday($form["days"][4]->getData());
-        $event->setFriday($form["days"][5]->getData());
-        $event->setSaturday($form["days"][6]->getData());
-        
+        $event->setMonday($form["days"][0]->getData());
+        $event->setTuesday($form["days"][1]->getData());
+        $event->setWednesday($form["days"][2]->getData());
+        $event->setThursday($form["days"][3]->getData());
+        $event->setFriday($form["days"][4]->getData());
+        $event->setSaturday($form["days"][5]->getData());
+        $event->setSunday($form["days"][6]->getData());
+
         return $event;
     }
 

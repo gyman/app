@@ -45,8 +45,8 @@
             <ul>
                 {% for event in events %}
                 <li class="clearfix">
-                    <span class="number">{{ event.startHour }} - {{ event.endHour }}</span> 
-                    <span class="txt">{{ event.name }}</span>
+                    <span class="number">{{ event.occurences[0].getStartDate()|date("H:i") }} - {{ event.occurences[0].getStartDate().modify("+"~event.occurences[0].getDuration()~" minutes")|date("H:i") }}</span> 
+                    <span class="txt">{{ event.getActivity().name }}</span>
                     {# <a class="btn btn-warning" href="#">15 osób</a> #}
                 </li>               
                 {% endfor %}

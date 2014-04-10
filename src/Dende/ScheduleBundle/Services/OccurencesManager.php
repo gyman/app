@@ -38,6 +38,7 @@ class OccurencesManager {
         "#CC33B3", "#9933CC", "#4D33CC", "#CC4D33",
         "#E495AF", "#3366CC", "#33B3CC", "#66CC33",
     ]; // </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     public function getEntityManager() {
@@ -81,11 +82,13 @@ class OccurencesManager {
         $hour = $event->getStartDate()->format("H:i");
         $collection = new ArrayCollection();
 
+        $this->setupDaysArrayToNearestDay($startDate, $days);
+
         while ($startDate->getTimestamp() <= $event->getEndDate()->getTimestamp()) {
             $day = current($days) == false ? reset($days) : current($days);
             $occurence = new Entity\Serial();
 
-            $newStartDate = clone($startDate->modify(sprintf("next %s %s", $day, $hour)));
+            $newStartDate = clone($startDate->modify(sprintf("%s %s", $day, $hour)));
 
             $occurence->setStartDate($newStartDate);
             $occurence->setDuration($event->getDuration());
@@ -100,10 +103,22 @@ class OccurencesManager {
         $event->setOccurences($collection);
     }
 
+    private function setupDaysArrayToNearestDay(\DateTime $startDate, array &$days) {
+        $currentDayNumber = (int) $startDate->format("N");
+
+        while(current($days)) {
+            $weekdayNumber = key($days);
+            if($weekdayNumber >= $currentDayNumber) {
+                break;
+            }
+            next($days);
+        }
+    }
+
     private function getDays(Entity\Weekly $event) {
         $days = [];
 
-        foreach ($this->weekdays as $day) {
+        foreach ($this->weekdays as $i => $day) {
             $method = "get" . ucfirst($day);
 
             if (!method_exists($event, $method))
@@ -116,7 +131,7 @@ class OccurencesManager {
                 continue;
             }
 
-            $days[] = $day;
+            $days[$i] = $day;
         }
 
         return $days;
