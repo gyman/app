@@ -145,7 +145,11 @@ class EventRepository extends EntityRepository {
         return $this->$method($form, $object);
     }
 
-    private function createSingle(Form $form, Schedule\Weekly $event) {
+    private function createSingle(Form $form, Schedule\Single $event) {
+        $event->setStartDate($form["startDate"]->getData());
+        $event->setDuration($form["duration"]->getData());
+        $event->setActivity($form->getData()->getActivity());
+
         return $event;
     }
 

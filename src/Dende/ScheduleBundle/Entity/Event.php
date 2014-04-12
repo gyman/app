@@ -15,7 +15,7 @@ use Dende\DefaultBundle\Validator as DefaultBundle;
 /**
  * Event
  *
- * @ORM\Table("events")
+ * @ORM\Table("`events")
  * @ORM\Entity(repositoryClass="Dende\ScheduleBundle\Entity\EventRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -38,21 +38,22 @@ class Event {
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Dende\ScheduleBundle\Validator\RequiredIfNoNewActivity
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events",cascade={"all"})
+     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", nullable = false)
      */
     protected $activity;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event",cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $occurences;
 
     /**
      * @var \DateTime
-     * @Assert\DateTime(message="Data musi być w formacie DD.MM.RR HH:MM")
-     * @DefaultBundle\DateRangeConstraint(
-     *      min="today",
+     * Assert\DateTime(message="Data musi być w formacie DD.MM.RR HH:MM")
+     * DefaultBundle\DateRangeConstraint(
+     *      min="last sunday",
      * )
      * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
@@ -62,7 +63,7 @@ class Event {
      * @var \DateTime
      * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
      * @DefaultBundle\DateRangeConstraint(
-     *      min="today",
+     *      min="last sunday",
      *      max="+1 year +1 day"
      * )
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
@@ -193,7 +194,6 @@ class Event {
 
     function __construct() {
         $this->entries = new ArrayCollection();
-        $this->meta = new ArrayCollection();
         $this->startDate = new DateTime();
         $this->endDate = new DateTime("+1 year");
     }

@@ -34,7 +34,7 @@ class Occurence {
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="occurences")
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="occurences",cascade={"persist"})
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $event;

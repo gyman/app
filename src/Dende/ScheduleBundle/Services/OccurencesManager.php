@@ -70,35 +70,51 @@ class OccurencesManager {
 
 // </editor-fold>
 
-    public function addOccurencesForEvent(Entity\Weekly $event) {
-        $this->insertOccurences($event);
+    public function addOccurencesForEvent(Entity\Event $event) {
+        if ($event instanceof Entity\Single)
+        {
+            $this->insertSingleOccurence($event);
+        }
 
-        $this->entityManager->persist($event);
+        if ($event instanceof Entity\Weekly)
+        {
+            $this->insertWeeklyOccurences($event);
+        }
     }
 
-    private function insertOccurences(Entity\Weekly $event) {
+    private function insertWeeklyOccurences(Entity\Weekly $event) {
         $days = $this->getDays($event);
         $startDate = clone($event->getStartDate());
         $hour = $event->getStartDate()->format("H:i");
-        $collection = new ArrayCollection();
 
         $this->setupDaysArrayToNearestDay($startDate, $days);
-
+        
         while ($startDate->getTimestamp() <= $event->getEndDate()->getTimestamp()) {
             $day = current($days) == false ? reset($days) : current($days);
             $occurence = new Entity\Serial();
 
             $newStartDate = clone($startDate->modify(sprintf("%s %s", $day, $hour)));
-
+            $startDate->modify("+1 day");
             $occurence->setStartDate($newStartDate);
             $occurence->setDuration($event->getDuration());
             $occurence->setEvent($event);
-
-            $this->entityManager->persist($occurence);
-
-            $collection->add($occurence);
+            $this->getEntityManager()->persist($occurence);
+            $this->getEntityManager()->flush();
+            $occurence = null;
             next($days);
         }
+    }
+
+    private function insertSingleOccurence(Entity\Single $event) {
+        $startDate = clone($event->getStartDate());
+        $collection = new ArrayCollection();
+
+        $occurence = new Entity\Singular();
+        $occurence->setStartDate($startDate);
+        $occurence->setDuration($event->getDuration());
+        $occurence->setEvent($event);
+        
+        $collection->add($occurence);
 
         $event->setOccurences($collection);
     }
@@ -106,9 +122,10 @@ class OccurencesManager {
     private function setupDaysArrayToNearestDay(\DateTime $startDate, array &$days) {
         $currentDayNumber = (int) $startDate->format("N");
 
-        while(current($days)) {
+        while (current($days)) {
             $weekdayNumber = key($days);
-            if($weekdayNumber >= $currentDayNumber) {
+            if ($weekdayNumber >= $currentDayNumber)
+            {
                 break;
             }
             next($days);

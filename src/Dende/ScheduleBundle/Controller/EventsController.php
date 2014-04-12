@@ -84,11 +84,11 @@ class EventsController extends Controller {
 //        $em->flush();
 
         return $response->setContent(
-                        $this->renderView("ScheduleBundle:Events:drag.html.twig", array(
-                            "form"      => $form->createView(),
-                            "occurence" => $occurence
-                                )
-                        )
+                $this->renderView("ScheduleBundle:Events:drag.html.twig", array(
+                    "form"      => $form->createView(),
+                    "occurence" => $occurence
+                    )
+                )
         );
     }
 
@@ -147,7 +147,7 @@ class EventsController extends Controller {
      */
     public function newAction(Request $request) {
         $response = new Response(
-                'Content', 200, array('content-type' => 'text/html')
+            'Content', 200, array('content-type' => 'text/html')
         );
 
         $event = new Event\Event();
@@ -161,8 +161,18 @@ class EventsController extends Controller {
             if ($form->isValid())
             {
                 $event = $this->get("event_repository")->createEntity($form);
-                $this->getDoctrine()->getManager()->persist($event);
+                
+                if($newActivityName = $form->get("newActivity")->getData())
+                {
+                    $activity = new Event\Activity();
+                    $activity->setName($newActivityName);
+                    
+                    $event->setActivity($activity);
+                }
+                
                 $this->container->get('occurences_manager')->addOccurencesForEvent($event);
+                
+                $this->getDoctrine()->getManager()->persist($event);
             }
             else
             {
@@ -173,11 +183,11 @@ class EventsController extends Controller {
         $this->getDoctrine()->getManager()->flush();
 
         return $response->setContent(
-                        $this->renderView("ScheduleBundle:Events:new.html.twig", array(
-                            'form'  => $form->createView(),
-                            'event' => $event,
-                                )
-                        )
+                $this->renderView("ScheduleBundle:Events:new.html.twig", array(
+                    'form'  => $form->createView(),
+                    'event' => $event,
+                    )
+                )
         );
     }
 
@@ -188,7 +198,7 @@ class EventsController extends Controller {
      */
     public function editAction(Event\Occurence $occurence, Request $request) {
         $response = new Response(
-                'Content', 200, array('content-type' => 'text/html')
+            'Content', 200, array('content-type' => 'text/html')
         );
 
         $form = $this->createForm(new EventType(), $occurence);
@@ -210,12 +220,12 @@ class EventsController extends Controller {
         $this->getDoctrine()->getManager()->flush();
 
         return $response->setContent(
-                        $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
-                            'form'  => $form->createView(),
-                            'event' => $occurence,
-                            'date'  => $date
-                                )
-                        )
+                $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
+                    'form'  => $form->createView(),
+                    'event' => $occurence,
+                    'date'  => $date
+                    )
+                )
         );
     }
 

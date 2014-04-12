@@ -8,6 +8,7 @@ class @NewEvent
     @initStartDatepicker()
     @initEndDatepicker()
     @initSaveButton()
+    @initChooseType()
     ###
     @initDatepickers()
     @initActivities()
@@ -24,10 +25,27 @@ class @NewEvent
     @$activitySelect = $("#dende_schedulebundle_event_activity, #dende_membersbundle_member_gender").select2
       dropdownAutoWidth : true
       containerCss : 
-        width : "220px" 
+        width : "220px"
+        
+  initChooseType: =>
+    $weekly = "#dende_schedulebundle_event_event_type_0";
+    $single = "#dende_schedulebundle_event_event_type_1";
+    
+    $("input[name=dende_schedulebundle_event\\\[event_type\\\]]:radio").off("click.chooseEventType").on "click.chooseEventType", (e) =>
+      @updateType(e.target)
+      
+    $("input[name=dende_schedulebundle_event\\\[event_type\\\]]:radio").filter(":checked").trigger "click.chooseEventType"
   
+  updateType: (input) =>
+    if $(input).val() == "weekly"
+      $("input#dende_schedulebundle_event_endDate").parents(".control-group").show()
+      $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").show()
+    else
+      $("input#dende_schedulebundle_event_endDate").parents(".control-group").hide()
+      $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").hide()
+
   initNewActivity: =>
-    $("#dende_schedulebundle_event_new_activity").parents("div.control-group").hide()
+    $("#dende_schedulebundle_event_newActivity").parents("div.control-group").hide()
     $("a#addNewActivity").off("click.addNewActivity").on "click.addNewActivity", (e) =>
       e.preventDefault()
       @handleNewActivity()
@@ -35,7 +53,7 @@ class @NewEvent
   handleNewActivity: =>
     @$activitySelect.select2 "enable", false
     $("#dende_schedulebundle_event_activity").parents("div.control-group").hide()
-    $("#dende_schedulebundle_event_new_activity").parents("div.control-group").show()
+    $("#dende_schedulebundle_event_newActivity").parents("div.control-group").show()
   
   initSaveButton: =>
     @$saveButton = $("#saveFormInModal",@$modalWindow)
@@ -56,6 +74,7 @@ class @NewEvent
       data: data
       success: (response) =>
         @modal.hide()
+        $("#calendar").fullCalendar( 'refetchEvents' );
       error: (xhr, textStatus, errorThrown) =>
         if xhr.status == 400
           @modal.setBody xhr.responseText
@@ -66,6 +85,7 @@ class @NewEvent
       type: @form.attr "method"
   
   initStartDatepicker: () =>
+    stDate = moment().weekday(1).set('hour',0).set('minute',0)
     endDate = moment().add('y',1)
     @$datePicker = $("#eventStartDate").datetimepicker
       format: 'dd.mm.yyyy hh:ii'
@@ -77,7 +97,7 @@ class @NewEvent
       pickerPosition: "bottom-left"
       minView: 0
       maxView: 1
-      startDate: moment()._d
+      startDate: stDate._d
       endDate: endDate._d
       
     @$datePicker.on "changeDate", (ev) =>
