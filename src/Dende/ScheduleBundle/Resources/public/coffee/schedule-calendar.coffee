@@ -115,8 +115,12 @@ $ ->
       "Gru"
     ]
     eventClick: (event, element) ->
+      window.modal.showFromUrl Routing.generate("_events_edit", {event: event.id, occurence : event.occurence_id})
+
       # event.title = "CLICKED!";
       # $('#calendar').fullCalendar('updateEvent', event);
+      
+    ###
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
       url = Routing.generate('_events_drag', {occurence: event.id})
       params =
@@ -131,4 +135,4 @@ $ ->
         duration: moment.duration(moment(event.end).diff(event.start)).asMinutes()
       modal.showFromUrl(url,params)
 
-        
+    ### 

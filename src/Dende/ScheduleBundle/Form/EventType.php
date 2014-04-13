@@ -15,6 +15,32 @@ class EventType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $entity = $event->getData();
+            $form = $event->getForm();
+
+            if ($entity && !is_null($entity->getId()))
+            {
+                $form->add('editType', "choice", array(
+                    "choices"  => [
+                        "serial" => "wszystkie następne",
+                        "singular"   => "tylko to wystąpienie",
+                    ],
+                    "mapped"   => false,
+                    "label"    => "Edytuj",
+                    "expanded" => true,
+                    "multiple" => false,
+                ))->add('description', "textarea", [
+                    "label"  => "Opis",
+                    "mapped" => false,
+                    "attr"   => [
+                        "placeholder" => "opis zajęć"
+                    ]
+                ]);
+            }
+        });
+
         $builder
             ->add('activity', "entity", [
                 "label"       => "Zajęcia",
@@ -30,16 +56,16 @@ class EventType extends AbstractType {
                     "placeholder" => "wpisz nazwę nowych zajęć"
                 ]
             ])
-            ->add('event_type', "choice", array(
-                "choices"  => [
+            ->add('eventType', "choice", array(
+                "choices"    => [
                     "weekly" => "co tydzień",
                     "single" => "nie",
                 ],
-                "mapped"   => false,
-                "label"    => "Powtarza się",
-                "expanded" => true,
-                "multiple" => false,
-                "empty_data"     => "weekly"
+                "mapped"     => false,
+                "label"      => "Powtarza się",
+                "expanded"   => true,
+                "multiple"   => false,
+                "empty_data" => "weekly"
             ))
             ->add('startDate', "datetime", [
                 "widget"       => "single_text",
@@ -90,11 +116,11 @@ class EventType extends AbstractType {
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'Dende\ScheduleBundle\Entity\Event'
-        ));
-    }
+//    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+//        $resolver->setDefaults(array(
+//            'data_class' => 'Dende\ScheduleBundle\Entity\Event'
+//        ));
+//    }
 
     /**
      * @return string

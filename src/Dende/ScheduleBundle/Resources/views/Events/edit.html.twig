@@ -1,23 +1,38 @@
+{% extends "ScheduleBundle:Events:new.html.twig" %}
+
 {% block form %}
-<form id="newEventForm" action="{{ path("_events_new") }}" class="form form-horizontal" method="POST">
+<form id="newEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST">
+{% if event.id %}
+    {{ form_row(form.editType) }}
+{% endif %}
 {{ form_row(form.activity) }}
 {{ form_row(form.newActivity) }}
 {{ form_row(form.eventType) }}
+
 {{ form_row(form.startDate) }}
 {{ form_row(form.duration) }}
+
 {{ form_row(form.endDate) }}
 {{ form_row(form.days) }}
+
+{% if event.id %}
+    {{ form_row(form.description) }}
+{% endif %}
+    
 </form>
 {% endblock form %}
 
 {% block modal %}
-<div class="hidden" id="ui-newEventData">
+<div class="hidden" id="ui-editEventData">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Nowe wydarzenie</h3>
+        <h3>Edytuj wydarzenie</h3>
     </div>
     <div class="modal-footer">
         <div class="pull-right">
+        {% if event.id %}
+            <a href="#" class="btn" id="saveFormInModal">Usuń</a>
+        {% endif %}
             <a href="#" class="btn btn-primary" id="saveFormInModal">Zapisz</a>
         </div>
     </div>
@@ -27,6 +42,7 @@
 {% block javascript %}
 {% javascripts
     '@ScheduleBundle/Resources/public/coffee/schedule.newEvent.coffee'
+    '@ScheduleBundle/Resources/public/coffee/schedule.editEvent.coffee'
     '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
     '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
 %}
@@ -34,10 +50,10 @@
 {% endjavascripts %}
 <script>
     $(function() {
-        modal.setupFromNode("div#ui-newEventData");
-        modal.setModalWindowClass("newEvent");
+        modal.setupFromNode("div#ui-editEventData");
+        modal.setModalWindowClass("editEvent");
 
-        window.newEventModal = new NewEvent();
+        window.editEventModal = new EditEvent();
     });
 </script>
 {% endblock javascript %}

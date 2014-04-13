@@ -100,7 +100,6 @@ class OccurencesManager {
             $occurence->setEvent($event);
             $this->getEntityManager()->persist($occurence);
             $this->getEntityManager()->flush();
-            $occurence = null;
             next($days);
         }
     }
@@ -170,7 +169,7 @@ class OccurencesManager {
                 $duration = new \DateInterval(sprintf("PT%dM", $occurence->getDuration()));
 
                 $eventObject = [
-                    "id"           => $occurence->getId(),
+                    "id"           => $occurence->getEvent()->getId(),
                     "title"        => $description,
                     "allDay"       => false,
                     "start"        => $occurence->getStartDate()->getTimestamp(),
@@ -179,7 +178,7 @@ class OccurencesManager {
                     "textColor"    => "#000000",
                     "type"         => $event->getType(),
                     "occurence_id" => $occurence->getId(),
-                    "url"          => $this->getRouter()->generate("_events_edit", ["occurence" => $occurence->getId()])
+//                    "url"          => $this->getRouter()->generate("_events_edit", ["occurence" => $occurence->getId()])
                 ];
 
                 array_push($eventsArray, $eventObject);

@@ -8,12 +8,7 @@ class @NewEvent
     @initStartDatepicker()
     @initEndDatepicker()
     @initSaveButton()
-    @initChooseType()
-    ###
-    @initDatepickers()
-    @initActivities()
-    @initDeleteCheckbox()
-    ###
+    @initChooseEventType()
   BUTTON_SAVE_STATE: "Zapisz"
   BUTTON_SAVE_CLASS: "btn-primary"
   BUTTON_DELETE_STATE: "Usuń"
@@ -27,23 +22,25 @@ class @NewEvent
       containerCss : 
         width : "220px"
         
-  initChooseType: =>
-    $weekly = "#dende_schedulebundle_event_event_type_0";
-    $single = "#dende_schedulebundle_event_event_type_1";
+  initChooseEventType: =>
+    $weekly = "#dende_schedulebundle_event_eventType_0";
+    $single = "#dende_schedulebundle_event_eventType_1";
     
-    $("input[name=dende_schedulebundle_event\\\[event_type\\\]]:radio").off("click.chooseEventType").on "click.chooseEventType", (e) =>
-      @updateType(e.target)
-      
-    $("input[name=dende_schedulebundle_event\\\[event_type\\\]]:radio").filter(":checked").trigger "click.chooseEventType"
-  
-  updateType: (input) =>
-    if $(input).val() == "weekly"
-      $("input#dende_schedulebundle_event_endDate").parents(".control-group").show()
-      $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").show()
+    $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").off("click.chooseEventType").on "click.chooseEventType", (e) =>
+      if $(e.target).val() == "weekly"
+        $("input#dende_schedulebundle_event_endDate").parents(".control-group").show()
+        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").show()
+      else
+        $("input#dende_schedulebundle_event_endDate").parents(".control-group").hide()
+        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").hide()
+     
+    $checked = $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").filter(":checked")
+    
+    if $checked.length > 0
+      $checked.trigger "click.chooseEventType"
     else
-      $("input#dende_schedulebundle_event_endDate").parents(".control-group").hide()
-      $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").hide()
-
+      $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").filter("[value='weekly']").trigger "click.chooseEventType"
+        
   initNewActivity: =>
     $("#dende_schedulebundle_event_newActivity").parents("div.control-group").hide()
     $("a#addNewActivity").off("click.addNewActivity").on "click.addNewActivity", (e) =>

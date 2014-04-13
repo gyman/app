@@ -138,7 +138,7 @@ class EventRepository extends EntityRepository {
     }
 
     public function createEntity($form) {
-        $type = ucfirst($form["event_type"]->getData());
+        $type = ucfirst($form["eventType"]->getData());
         $class = "\\Dende\\ScheduleBundle\\Entity\\" . $type;
         $method = "create" . $type;
         $object = new $class;

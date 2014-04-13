@@ -161,17 +161,17 @@ class EventsController extends Controller {
             if ($form->isValid())
             {
                 $event = $this->get("event_repository")->createEntity($form);
-                
-                if($newActivityName = $form->get("newActivity")->getData())
+
+                if ($newActivityName = $form->get("newActivity")->getData())
                 {
                     $activity = new Event\Activity();
                     $activity->setName($newActivityName);
-                    
+
                     $event->setActivity($activity);
                 }
-                
+
                 $this->container->get('occurences_manager')->addOccurencesForEvent($event);
-                
+
                 $this->getDoctrine()->getManager()->persist($event);
             }
             else
@@ -192,16 +192,17 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/{occurence}/edit",name="_events_edit")
+     * @Route("/{event}/occurence/{occurence}/edit",name="_events_edit")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
+     * @ParamConverter("event", class="ScheduleBundle:Event")
      * @Template()
      */
-    public function editAction(Event\Occurence $occurence, Request $request) {
+    public function editAction(Event\Event $event, Event\Occurence $occurence, Request $request) {
         $response = new Response(
             'Content', 200, array('content-type' => 'text/html')
         );
 
-        $form = $this->createForm(new EventType(), $occurence);
+        $form = $this->createForm(new EventType($occurence), $event);
 
         if ($request->getMethod() == 'POST')
         {
@@ -209,7 +210,19 @@ class EventsController extends Controller {
 
             if ($form->isValid())
             {
-                $this->getDoctrine()->getManager()->persist($occurence);
+                $event = $this->get("event_repository")->createEntity($form);
+
+                if ($newActivityName = $form->get("newActivity")->getData())
+                {
+                    $activity = new Event\Activity();
+                    $activity->setName($newActivityName);
+
+                    $event->setActivity($activity);
+                }
+
+                $this->container->get('occurences_manager')->addOccurencesForEvent($event);
+
+                $this->getDoctrine()->getManager()->persist($event);
             }
             else
             {
@@ -221,9 +234,9 @@ class EventsController extends Controller {
 
         return $response->setContent(
                 $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
-                    'form'  => $form->createView(),
-                    'event' => $occurence,
-                    'date'  => $date
+                    'form'      => $form->createView(),
+                    'event'     => $event,
+                    'occurence' => $occurence,
                     )
                 )
         );
