@@ -1,12 +1,16 @@
 {% block form %}
 <form id="newEventForm" action="{{ path("_events_new") }}" class="form form-horizontal" method="POST">
-{{ form_row(form.activity) }}
-{{ form_row(form.newActivity) }}
-{{ form_row(form.eventType) }}
-{{ form_row(form.startDate) }}
-{{ form_row(form.duration) }}
-{{ form_row(form.endDate) }}
-{{ form_row(form.days) }}
+    {{ form_row(form.activity) }}
+    {{ form_row(form.newActivity) }}
+
+    {{ form_row(form.eventType) }}
+
+    {{ form_row(form.startDate) }}
+    {{ form_row(form.duration) }}
+
+    {{ form_row(form.endDate) }}
+
+    {{ form_row(form.days) }}
 </form>
 {% endblock form %}
 

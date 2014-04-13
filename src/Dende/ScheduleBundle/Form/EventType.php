@@ -7,8 +7,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dende\ScheduleBundle\Entity as Events;
 
 class EventType extends AbstractType {
+
+    /**
+     *
+     * @var Events\Occurence; 
+     */
+    private $occurence;
+
+    public function getOccurence() {
+        return $this->occurence;
+    }
+
+    public function setOccurence(Events\Occurence $occurence) {
+        $this->occurence = $occurence;
+        return $this;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -16,30 +32,7 @@ class EventType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $entity = $event->getData();
-            $form = $event->getForm();
-
-            if ($entity && !is_null($entity->getId()))
-            {
-                $form->add('editType', "choice", array(
-                    "choices"  => [
-                        "serial" => "wszystkie następne",
-                        "singular"   => "tylko to wystąpienie",
-                    ],
-                    "mapped"   => false,
-                    "label"    => "Edytuj",
-                    "expanded" => true,
-                    "multiple" => false,
-                ))->add('description', "textarea", [
-                    "label"  => "Opis",
-                    "mapped" => false,
-                    "attr"   => [
-                        "placeholder" => "opis zajęć"
-                    ]
-                ]);
-            }
-        });
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "setupFields"));
 
         $builder
             ->add('activity', "entity", [
@@ -56,17 +49,6 @@ class EventType extends AbstractType {
                     "placeholder" => "wpisz nazwę nowych zajęć"
                 ]
             ])
-            ->add('eventType', "choice", array(
-                "choices"    => [
-                    "weekly" => "co tydzień",
-                    "single" => "nie",
-                ],
-                "mapped"     => false,
-                "label"      => "Powtarza się",
-                "expanded"   => true,
-                "multiple"   => false,
-                "empty_data" => "weekly"
-            ))
             ->add('startDate', "datetime", [
                 "widget"       => "single_text",
                 "format"       => "dd.MM.yyyy HH:mm",
@@ -80,36 +62,6 @@ class EventType extends AbstractType {
             ->add('duration', "number", [
                 "label" => "Czas trwania (w minutach)",
             ])
-            ->add('endDate', "date", [
-                "widget" => "single_text",
-                "format" => "dd.MM.yyyy",
-                "label"  => "Data zakończenia",
-                "attr"   => [
-                    "placeholder" => "dd.mm.yyyy"
-                ]
-            ])
-            ->add('days', "choice", array(
-                "choices"  => [
-                    "monday"    => "poniedziałek",
-                    "tuesday"   => "wtorek",
-                    "wednesday" => "środa",
-                    "thursday"  => "czwartek",
-                    "friday"    => "piątek",
-                    "saturday"  => "sobota",
-                    "sunday"    => "niedziela",
-                ],
-                "data"     => [
-                    "monday",
-                    "tuesday",
-                    "wednesday",
-                    "thursday",
-                    "friday",
-                ],
-                "multiple" => true,
-                "expanded" => true,
-                "mapped"   => false,
-                "label"    => "Dni"
-            ))
         ;
     }
 
@@ -127,6 +79,98 @@ class EventType extends AbstractType {
      */
     public function getName() {
         return 'dende_schedulebundle_event';
+    }
+
+    public function setupFields(FormEvent $event) {
+        $entity = $event->getData();
+        $form = $event->getForm();
+
+        // editing (old) entity
+        if ($entity && !is_null($entity->getId()))
+        {
+            // event is weekly
+            if ($entity instanceof Events\Weekly)
+            {
+                // occurence is serial
+                if ($this->getOccurence() instanceof Events\Serial)
+                {
+                    $form->add('editType', "choice", array(
+                        "choices"  => [
+                            "serial"   => "wszystkie następne",
+                            "singular" => "tylko to wystąpienie",
+                        ],
+                        "mapped"   => false,
+                        "label"    => "Edytuj",
+                        "expanded" => true,
+                        "multiple" => false,
+                    ));
+                }
+                
+                $this->setupEndDate($form);
+                $this->setupDays($form);
+            }
+
+            $form->add('description', "textarea", [
+                "label"  => "Opis",
+                "mapped" => false,
+                "attr"   => [
+                    "placeholder" => "opis zajęć"
+                ]
+            ]);
+        }
+        else // new entity
+        {
+            $form->add('eventType', "choice", array(
+                "choices"    => [
+                    "weekly" => "co tydzień",
+                    "single" => "nie",
+                ],
+                "mapped"     => false,
+                "label"      => "Powtarza się",
+                "expanded"   => true,
+                "multiple"   => false,
+                "empty_data" => "weekly"
+            ));
+
+            $this->setupDays($form);
+            $this->setupEndDate($form);
+        }
+    }
+
+    private function setupEndDate($form) {
+        $form->add('endDate', "date", [
+            "widget" => "single_text",
+            "format" => "dd.MM.yyyy",
+            "label"  => "Data zakończenia",
+            "attr"   => [
+                "placeholder" => "dd.mm.yyyy"
+            ]
+        ]);
+    }
+
+    private function setupDays($form) {
+        $form->add('days', "choice", array(
+            "choices"  => [
+                "monday"    => "poniedziałek",
+                "tuesday"   => "wtorek",
+                "wednesday" => "środa",
+                "thursday"  => "czwartek",
+                "friday"    => "piątek",
+                "saturday"  => "sobota",
+                "sunday"    => "niedziela",
+            ],
+            "data"     => [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+            ],
+            "multiple" => true,
+            "expanded" => true,
+            "mapped"   => false,
+            "label"    => "Dni"
+        ));
     }
 
 }

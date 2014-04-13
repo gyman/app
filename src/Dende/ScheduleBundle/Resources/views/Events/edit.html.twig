@@ -2,23 +2,31 @@
 
 {% block form %}
 <form id="newEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST">
-{% if event.id %}
-    {{ form_row(form.editType) }}
-{% endif %}
-{{ form_row(form.activity) }}
-{{ form_row(form.newActivity) }}
-{{ form_row(form.eventType) }}
+    {% if form.editType is defined %}
+        {{ form_row(form.editType) }}
+    {% endif %}
 
-{{ form_row(form.startDate) }}
-{{ form_row(form.duration) }}
+    {{ form_row(form.activity) }}
+    {{ form_row(form.newActivity) }}
 
-{{ form_row(form.endDate) }}
-{{ form_row(form.days) }}
+    {% if form.eventType is defined %}
+        {{ form_row(form.eventType) }}
+    {% endif %}
 
-{% if event.id %}
-    {{ form_row(form.description) }}
-{% endif %}
-    
+    {{ form_row(form.startDate) }}
+    {{ form_row(form.duration) }}
+
+    {% if form.endDate is defined %}
+        {{ form_row(form.endDate) }}
+    {% endif %}
+
+    {% if form.days is defined %}
+        {{ form_row(form.days) }}
+    {% endif %}
+
+    {% if form.description is defined %}
+        {{ form_row(form.description) }}
+    {% endif %}
 </form>
 {% endblock form %}
 

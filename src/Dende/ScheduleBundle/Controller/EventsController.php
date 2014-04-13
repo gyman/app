@@ -201,8 +201,11 @@ class EventsController extends Controller {
         $response = new Response(
             'Content', 200, array('content-type' => 'text/html')
         );
-
-        $form = $this->createForm(new EventType($occurence), $event);
+        
+        $eventType = new EventType();
+        $eventType->setOccurence($occurence);
+        
+        $form = $this->createForm($eventType, $event);
 
         if ($request->getMethod() == 'POST')
         {
