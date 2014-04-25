@@ -2,11 +2,19 @@ a#newEventHeaderButton {
     margin-top: 8px;
 }
 
-#modalWindow.newEvent {
-    .modal-body {
-        max-height: 600px;
+#modalWindow { 
+    &.newEvent {
+        .modal-body {
+            max-height: 600px;
+        }
+    }
+    &.editEvent {
+        .modal-body {
+            max-height: 600px;
+        }
     }
 }
+
 
 input#dende_schedulebundle_event_startDate,
 input#dende_schedulebundle_event_endDate
@@ -17,4 +25,13 @@ input#dende_schedulebundle_event_endDate
     {
         height: 18px;
     }
+}
+.fc-event-time {
+    font-weight: bold;
+}
+.fc-event-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 16px;
+    font-family: Georgia
 }

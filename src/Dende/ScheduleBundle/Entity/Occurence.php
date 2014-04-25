@@ -22,6 +22,10 @@ use DateTime;
  * })
  */
 class Occurence {
+    
+    const SERIAL = "serial";
+    const SINGULAR = "singular";
+    
     // <editor-fold defaultstate="collapsed" desc="members">
 
     /**

@@ -26,6 +26,11 @@ use Dende\DefaultBundle\Validator as DefaultBundle;
  * })
  */
 class Event {
+
+    const SUPER = "event";
+    const WEEKLY = "weekly";
+    const SINGLE = "single";
+
     // <editor-fold defaultstate="collapsed" desc="members">
 
     /**
@@ -38,8 +43,11 @@ class Event {
     protected $id;
 
     /**
-     * @Dende\ScheduleBundle\Validator\RequiredIfNoNewActivity
+     * Dende\ScheduleBundle\Validator\RequiredIfNoNewActivity
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events",cascade={"all"})
+     * @Assert\NotBlank(
+     *  groups={"dbActivity"}
+     * )
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", nullable = false)
      */
     protected $activity;
@@ -55,6 +63,9 @@ class Event {
      * DefaultBundle\DateRangeConstraint(
      *      min="last sunday",
      * )
+     * @Assert\NotBlank(
+     *  groups={"new","edit"}
+     * )
      * @ORM\Column(name="start_date", type="datetime", nullable = false)
      */
     protected $startDate;
@@ -66,12 +77,18 @@ class Event {
      *      min="last sunday",
      *      max="+1 year +1 day"
      * )
+     * @Assert\NotBlank(
+     *  groups={"serial","weekly"}
+     * )
      * @ORM\Column(name="end_date", type="datetime", nullable = true)
      */
     protected $endDate;
 
     /**
      * @var integer 
+     * @Assert\NotBlank(
+     *  groups={"default","new", "edit"}
+     * )
      * @ORM\Column(name="duration", type="integer", nullable = false)
      */
     protected $duration = 90;
@@ -96,7 +113,7 @@ class Event {
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt; // </editor-fold>
-    protected $type = "";
+    protected $type = "event";
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
@@ -155,12 +172,13 @@ class Event {
         return $this;
     }
 
-    public function setStartDate(\DateTime $startDate) {
+    public function setStartDate($startDate) {
+        
         $this->startDate = $startDate;
         return $this;
     }
 
-    public function setEndDate(\DateTime $endDate) {
+    public function setEndDate($endDate) {
         $this->endDate = $endDate;
         return $this;
     }
@@ -205,6 +223,22 @@ class Event {
 //        $metadata->addPropertyConstraint('endDate', new Assert\LessThan(array(
 //            'value' => date("Y-m-d H:i:s", strtotime("+1 year +1 day")),
 //        )));
+    }
+
+    public function isNew() {
+        return $this->getId() === null;
+    }
+
+    public function isWeekly() {
+        return $this->getType() === self::WEEKLY;
+    }
+
+    public function isSuper() {
+        return $this->getType() === self::SUPER;
+    }
+
+    public function isSingle() {
+        return $this->getType() === self::SINGLE;
     }
 
 }

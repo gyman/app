@@ -82,13 +82,28 @@ class OccurencesManager {
         }
     }
 
+    public function updateOccurencesForEvent(Entity\Event $event) {
+        $occurences = $event->getOccurences();
+        die(var_dump($occurences));
+        
+//        if ($event instanceof Entity\Single)
+//        {
+//            $this->insertSingleOccurence($event);
+//        }
+
+        if ($event instanceof Entity\Weekly)
+        {
+            $this->insertWeeklyOccurences($event);
+        }
+    }
+
     private function insertWeeklyOccurences(Entity\Weekly $event) {
         $days = $this->getDays($event);
         $startDate = clone($event->getStartDate());
         $hour = $event->getStartDate()->format("H:i");
 
         $this->setupDaysArrayToNearestDay($startDate, $days);
-        
+
         while ($startDate->getTimestamp() <= $event->getEndDate()->getTimestamp()) {
             $day = current($days) == false ? reset($days) : current($days);
             $occurence = new Entity\Serial();
@@ -112,7 +127,7 @@ class OccurencesManager {
         $occurence->setStartDate($startDate);
         $occurence->setDuration($event->getDuration());
         $occurence->setEvent($event);
-        
+
         $collection->add($occurence);
 
         $event->setOccurences($collection);
@@ -165,7 +180,7 @@ class OccurencesManager {
         foreach ($events as $i => $event) {
             $occurences = $event->getOccurences();
             foreach ($occurences as $j => $occurence) {
-                $description = sprintf("%s \n(%s)", $event->getActivity()->getName(), $occurence->getDescription());
+                $description = sprintf("%s", $event->getActivity()->getName());
                 $duration = new \DateInterval(sprintf("PT%dM", $occurence->getDuration()));
 
                 $eventObject = [

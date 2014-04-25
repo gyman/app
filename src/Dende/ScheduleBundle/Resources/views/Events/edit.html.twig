@@ -1,7 +1,22 @@
 {% extends "ScheduleBundle:Events:new.html.twig" %}
 
 {% block form %}
-<form id="newEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST">
+<div class="alert alert-info">
+    {% if "Single" not in eventType and "Singular" in occurenceType %} 
+    Edytujesz pojedyncze wystąpienie cyklicznego wydarzenia<br />
+    (należy od serii, ale różni się od niej w szczegółach).
+    {%endif%}
+
+    {% if "Single" not in eventType and "Serial" in occurenceType %} 
+    Edytujesz wystąpienie cyklicznego wydarzenia<br />
+    (jest identyczne jak pozostałe wystąpienia).
+    {%endif%}
+
+    {% if "Single" in eventType %} 
+    Edytujesz pojedyncze wydarzenie.
+    {%endif%}
+</div>
+<form id="editEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST">
     {% if form.editType is defined %}
         {{ form_row(form.editType) }}
     {% endif %}
@@ -27,6 +42,8 @@
     {% if form.description is defined %}
         {{ form_row(form.description) }}
     {% endif %}
+
+    {{ form_rest(form) }}
 </form>
 {% endblock form %}
 
@@ -38,9 +55,6 @@
     </div>
     <div class="modal-footer">
         <div class="pull-right">
-        {% if event.id %}
-            <a href="#" class="btn" id="saveFormInModal">Usuń</a>
-        {% endif %}
             <a href="#" class="btn btn-primary" id="saveFormInModal">Zapisz</a>
         </div>
     </div>

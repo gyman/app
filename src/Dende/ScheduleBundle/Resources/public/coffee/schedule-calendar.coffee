@@ -44,7 +44,7 @@ $ ->
             backgroundColor:  'rgba(0,0,0,0.2)'
       else
         $("#calendar").unblock()
-    editable: true,
+    editable: false,
     allDaySlot: false
     defaultView: "agendaWeek"
     firstDay: 1

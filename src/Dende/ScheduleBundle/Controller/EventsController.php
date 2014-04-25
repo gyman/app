@@ -36,6 +36,7 @@ class EventsController extends Controller {
      * Template()
      */
     public function dragEventAction(Event\Occurence $occurence, Request $request) {
+        throw new \Exception("not working now");
         $delta = $request->get("delta");
         $days = intval($delta["days"]);
         $minutes = intval($delta["minutes"]) + $days * 24 * 60;
@@ -98,6 +99,7 @@ class EventsController extends Controller {
      * Template()
      */
     public function resizeEventAction(Event\Occurence $occurence, Request $request) {
+        throw new \Exception("not working now");
         $duration = (int) $request->get("duration");
 
         if ($duration == 0)
@@ -201,10 +203,10 @@ class EventsController extends Controller {
         $response = new Response(
             'Content', 200, array('content-type' => 'text/html')
         );
-        
+
         $eventType = new EventType();
         $eventType->setOccurence($occurence);
-        
+
         $form = $this->createForm($eventType, $event);
 
         if ($request->getMethod() == 'POST')
@@ -223,7 +225,7 @@ class EventsController extends Controller {
                     $event->setActivity($activity);
                 }
 
-                $this->container->get('occurences_manager')->addOccurencesForEvent($event);
+                $this->container->get('occurences_manager')->updateOccurencesForEvent($event);
 
                 $this->getDoctrine()->getManager()->persist($event);
             }
@@ -237,9 +239,11 @@ class EventsController extends Controller {
 
         return $response->setContent(
                 $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
-                    'form'      => $form->createView(),
-                    'event'     => $event,
-                    'occurence' => $occurence,
+                    'form'          => $form->createView(),
+                    'event'         => $event,
+                    'occurence'     => $occurence,
+                    'eventType'     => get_class($event),
+                    'occurenceType' => get_class($occurence),
                     )
                 )
         );

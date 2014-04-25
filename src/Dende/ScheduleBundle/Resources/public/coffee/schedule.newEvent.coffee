@@ -9,12 +9,15 @@ class @NewEvent
     @initEndDatepicker()
     @initSaveButton()
     @initChooseEventType()
+    
   BUTTON_SAVE_STATE: "Zapisz"
   BUTTON_SAVE_CLASS: "btn-primary"
   BUTTON_DELETE_STATE: "Usuń"
   BUTTON_DELETE_CLASS: "btn-danger"
    
   $saveButton: null
+         
+  form: $("form#newEventForm",@$modalWindow)
          
   initSelects: =>
     @$activitySelect = $("#dende_schedulebundle_event_activity, #dende_membersbundle_member_gender").select2
@@ -47,6 +50,11 @@ class @NewEvent
       e.preventDefault()
       @handleNewActivity()
       
+    newActivity = $("#dende_schedulebundle_event_newActivity").val()
+    console.log newActivity
+    
+    $("a#addNewActivity").trigger "click" if newActivity.length > 0
+      
   handleNewActivity: =>
     @$activitySelect.select2 "enable", false
     $("#dende_schedulebundle_event_activity").parents("div.control-group").hide()
@@ -58,7 +66,6 @@ class @NewEvent
         
   handleSaveButton: (e) =>
     e.preventDefault()
-    @form = $("form#newEventForm",@$modalWindow)
     container = $(".modal-body",@$modalWindow)
     action = @form.attr "action"
     data = @form.serialize()

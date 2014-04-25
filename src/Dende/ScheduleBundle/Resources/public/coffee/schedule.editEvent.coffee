@@ -1,7 +1,9 @@
 class @EditEvent extends @NewEvent
   constructor: ()->
     super()
-    @initChooseEditType()
+    # @initChooseEditType()
+  
+  form: $("form#editEventForm",@$modalWindow)
   
   initChooseEditType: =>
     $serial = $("#dende_schedulebundle_event_editType_0");
