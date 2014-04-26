@@ -37,8 +37,8 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface, Con
         $value = Yaml::parse(file_get_contents(__DIR__ . '/../Yaml/events.yml'));
 
         foreach ($value as $key => $params) {
-            $activityObject = $this->insertActivity($params);
-            $this->addReference($key, $activityObject);
+            $event = $this->insertEvent($params);
+            $this->addReference($key, $event);
         }
 
         $this->manager->flush();
@@ -48,7 +48,7 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface, Con
         return 200;
     }
 
-    private function insertActivity($params) {
+    private function insertEvent($params) {
         extract($params);
 
         switch ($type) {
@@ -79,7 +79,7 @@ class EventsData extends AbstractFixture implements OrderedFixtureInterface, Con
 
         $this->manager->persist($event);
 
-        $this->container->get('occurences_manager')->addOccurencesForEvent($event);
+         $this->container->get('occurences_manager')->addOccurencesForEvent($event);
 
         return $event;
     }

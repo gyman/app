@@ -166,8 +166,16 @@ class EventsController extends Controller {
 
                 if ($newActivityName = $form->get("newActivity")->getData())
                 {
-                    $activity = new Event\Activity();
-                    $activity->setName($newActivityName);
+                    /** @var $activity Event\Activity */
+                    if ($activity = $this->get("activity_repository")->findOneByName($newActivityName))
+                    {
+                        ;
+                    }
+                    else
+                    {
+                        $activity = new Event\Activity();
+                        $activity->setName($newActivityName);
+                    }
 
                     $event->setActivity($activity);
                 }

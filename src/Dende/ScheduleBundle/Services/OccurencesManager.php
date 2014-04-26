@@ -113,10 +113,13 @@ class OccurencesManager {
             $occurence->setStartDate($newStartDate);
             $occurence->setDuration($event->getDuration());
             $occurence->setEvent($event);
+            
             $this->getEntityManager()->persist($occurence);
-            $this->getEntityManager()->flush();
+            
             next($days);
         }
+        
+        $this->getEntityManager()->flush();
     }
 
     private function insertSingleOccurence(Entity\Single $event) {

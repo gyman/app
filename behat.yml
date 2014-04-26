@@ -5,8 +5,6 @@ default:
     paths:
         features: src/Dende
         bootstrap: src/Dende
-#    context:
-#        class: Remedy\TestBundle\Features\Context\FeatureContext
     extensions:
         Behat\Symfony2Extension\Extension:
             kernel:
@@ -16,3 +14,8 @@ default:
         Behat\MinkExtension\Extension:
             default_session: selenium2
             javascript_session: selenium2
+        VIPSoft\DoctrineDataFixturesExtension\Extension:
+          lifetime:    scenario
+          autoload:    true
+          directories: ~
+          fixtures: ~
