@@ -181,4 +181,9 @@ class Occurence {
     }
 
     // </editor-fold>
+    
+    public function isPast()
+    {
+        return $this->getStartDate()->getTimestamp() < time();
+    }
 }

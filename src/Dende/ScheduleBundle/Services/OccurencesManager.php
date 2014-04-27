@@ -7,9 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Dende\ScheduleBundle\Services\OccurencesManager;
+use Symfony\Component\Form\Form;
 
 class OccurencesManager {
 // <editor-fold defaultstate="collapsed" desc="members">
+
+    /**
+     *
+     * @var Form 
+     */
+    private $form;
 
     /**
      *
@@ -39,7 +46,45 @@ class OccurencesManager {
         "#E495AF", "#3366CC", "#33B3CC", "#66CC33",
     ]; // </editor-fold>
 
+    /**
+     *
+     * @var Entity\Occurence 
+     */
+    private $occurence;
+
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    /**
+     * 
+     * @return Entity\Occurence
+     */
+    public function getOccurence() {
+        return $this->occurence;
+    }
+
+    /**
+     * 
+     * @param \Dende\ScheduleBundle\Entity\Occurence $occurence
+     * @return \Dende\ScheduleBundle\Services\OccurencesManager
+     */
+    public function setOccurence(Entity\Occurence $occurence) {
+        $this->occurence = $occurence;
+        return $this;
+    }
+
+    public function getForm() {
+        return $this->form;
+    }
+
+    /**
+     * 
+     * @param \Symfony\Component\Form\Form $form
+     * @return \Dende\ScheduleBundle\Services\OccurencesManager
+     */
+    public function setForm(Form $form) {
+        $this->form = $form;
+        return $this;
+    }
 
     public function getEntityManager() {
         return $this->entityManager;
@@ -82,16 +127,36 @@ class OccurencesManager {
         }
     }
 
-    public function updateOccurencesForEvent(Entity\Event $event) {
-        $occurences = $event->getOccurences();
-        die(var_dump($occurences));
-        
-//        if ($event instanceof Entity\Single)
-//        {
-//            $this->insertSingleOccurence($event);
-//        }
+    public function updateOccurencesForEvent(Entity\Event $event, Entity\Occurence $editedOccurence, Form $form) {
+        $this->setForm($form);
 
-        if ($event instanceof Entity\Weekly)
+        if ($editedOccurence->isPast())
+        {
+            throw new \Exception("Cannot edit past occurences");
+        }
+
+        $this->setOccurence($editedOccurence);
+
+        $startDate = $editedOccurence->getStartDate();
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->delete()
+            ->from("ScheduleBundle:Occurence", "o")
+            ->where("o.event = :event")
+            ->andWhere("o.startDate >= :start")
+            ->setParameters([
+                "event" => $event,
+                "start" => $startDate
+        ]);
+
+        $qb->getQuery()->execute();
+
+        if ($event instanceof Entity\Single)
+        {
+            $this->insertSingleOccurence($event);
+        }
+        else if ($event instanceof Entity\Weekly)
         {
             $this->insertWeeklyOccurences($event);
         }
@@ -99,7 +164,16 @@ class OccurencesManager {
 
     private function insertWeeklyOccurences(Entity\Weekly $event) {
         $days = $this->getDays($event);
-        $startDate = clone($event->getStartDate());
+
+        if ($occurence = $this->getOccurence())
+        {
+            $startDate = clone($occurence->getStartDate());
+        }
+        else
+        {
+            $startDate = clone($event->getStartDate());
+        }
+
         $hour = $event->getStartDate()->format("H:i");
 
         $this->setupDaysArrayToNearestDay($startDate, $days);
@@ -113,13 +187,11 @@ class OccurencesManager {
             $occurence->setStartDate($newStartDate);
             $occurence->setDuration($event->getDuration());
             $occurence->setEvent($event);
-            
+
             $this->getEntityManager()->persist($occurence);
-            
+
             next($days);
         }
-        
-        $this->getEntityManager()->flush();
     }
 
     private function insertSingleOccurence(Entity\Single $event) {
@@ -130,6 +202,11 @@ class OccurencesManager {
         $occurence->setStartDate($startDate);
         $occurence->setDuration($event->getDuration());
         $occurence->setEvent($event);
+
+        if ($form = $this->getForm())
+        {
+            $occurence->setDescription($form->get("description")->getData());
+        }
 
         $collection->add($occurence);
 
@@ -151,6 +228,11 @@ class OccurencesManager {
 
     private function getDays(Entity\Weekly $event) {
         $days = [];
+
+        if ($form = $this->getForm())
+        {
+            return $form["days"]->getData();
+        }
 
         foreach ($this->weekdays as $i => $day) {
             $method = "get" . ucfirst($day);

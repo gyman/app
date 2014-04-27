@@ -163,25 +163,8 @@ class EventsController extends Controller {
             if ($form->isValid())
             {
                 $event = $this->get("event_repository")->createEntity($form);
-
-                if ($newActivityName = $form->get("newActivity")->getData())
-                {
-                    /** @var $activity Event\Activity */
-                    if ($activity = $this->get("activity_repository")->findOneByName($newActivityName))
-                    {
-                        ;
-                    }
-                    else
-                    {
-                        $activity = new Event\Activity();
-                        $activity->setName($newActivityName);
-                    }
-
-                    $event->setActivity($activity);
-                }
-
+                $this->setNewActivityToEvent($event, $form);
                 $this->container->get('occurences_manager')->addOccurencesForEvent($event);
-
                 $this->getDoctrine()->getManager()->persist($event);
             }
             else
@@ -202,6 +185,16 @@ class EventsController extends Controller {
     }
 
     /**
+     * @Route("/{event}/occurence/{occurence}/show",name="_events_show")
+     * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
+     * @ParamConverter("event", class="ScheduleBundle:Event")
+     * @Template()
+     */
+    public function showAction(Event\Event $event, Event\Occurence $occurence, Request $request) {
+        throw new \Exception("not implemented");
+    }
+
+    /**
      * @Route("/{event}/occurence/{occurence}/edit",name="_events_edit")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
      * @ParamConverter("event", class="ScheduleBundle:Event")
@@ -211,6 +204,14 @@ class EventsController extends Controller {
         $response = new Response(
             'Content', 200, array('content-type' => 'text/html')
         );
+        
+        if ($occurence->isPast())
+        {
+            return $this->forward("ScheduleBundle:Events:Show",[
+                "event" => $event->getId(),
+                "occurence" => $occurence->getId()
+            ]);
+        }
 
         $eventType = new EventType();
         $eventType->setOccurence($occurence);
@@ -222,19 +223,9 @@ class EventsController extends Controller {
             $form->handleRequest($request);
 
             if ($form->isValid())
-            {
-                $event = $this->get("event_repository")->createEntity($form);
-
-                if ($newActivityName = $form->get("newActivity")->getData())
-                {
-                    $activity = new Event\Activity();
-                    $activity->setName($newActivityName);
-
-                    $event->setActivity($activity);
-                }
-
-                $this->container->get('occurences_manager')->updateOccurencesForEvent($event);
-
+            {                
+                $this->setNewActivityToEvent($event, $form);
+                $this->container->get('occurences_manager')->updateOccurencesForEvent($event, $occurence, $form);
                 $this->getDoctrine()->getManager()->persist($event);
             }
             else
@@ -255,6 +246,24 @@ class EventsController extends Controller {
                     )
                 )
         );
+    }
+
+    private function setNewActivityToEvent(Event\Event $event, $form) {
+        if ($newActivityName = $form->get("newActivity")->getData())
+        {
+            /** @var $activity Event\Activity */
+            if ($activity = $this->get("activity_repository")->findOneByName($newActivityName))
+            {
+                ;
+            }
+            else
+            {
+                $activity = new Event\Activity();
+                $activity->setName($newActivityName);
+            }
+
+            $event->setActivity($activity);
+        }
     }
 
 }

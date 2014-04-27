@@ -2,13 +2,20 @@
 
 {% block form %}
 <div class="alert alert-info">
+    <dl>
+        <dt>Informacja o wydarzeniu:</dt>
+        <dd> Zajęcia {{ event.getActivity().getName() }} od {{ event.getStartDate()|date("d.m.Y") }} do {{ event.getEndDate()|date("d.m.Y") }} o godz. {{ event.getStartDate()|date("H:i") }}, 
+            wybrałeś wystąpienie dla dnia {{ occurence.getStartDate()|date("d.m.Y") }}
+        </dd>
+    </dl>
+
     {% if "Single" not in eventType and "Singular" in occurenceType %} 
-    Edytujesz pojedyncze wystąpienie cyklicznego wydarzenia<br />
-    (należy od serii, ale różni się od niej w szczegółach).
+    Edytujesz pojedyncze wystąpienie cyklicznego wydarzenia 
+    (należy do serii, ale różni się od niej w szczegółach).
     {%endif%}
 
     {% if "Single" not in eventType and "Serial" in occurenceType %} 
-    Edytujesz wystąpienie cyklicznego wydarzenia<br />
+    Edytujesz wystąpienie cyklicznego wydarzenia 
     (jest identyczne jak pozostałe wystąpienia).
     {%endif%}
 

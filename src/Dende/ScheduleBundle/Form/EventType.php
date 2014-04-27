@@ -54,16 +54,6 @@ class EventType extends AbstractType {
                     "placeholder" => "wpisz nazwę nowych zajęć"
                 ]
             ])
-            ->add('startDate', "datetime", [
-                "widget"       => "single_text",
-                "format"       => "dd.MM.yyyy HH:mm",
-                "with_minutes" => true,
-                "with_seconds" => false,
-                "label"        => "Data i godzina rozpoczęcia",
-                "attr"         => [
-                    "placeholder" => "dd.mm.yyyy hh:mm"
-                ]
-            ])
             ->add('duration', "number", [
                 "label" => "Czas trwania (w minutach)",
             ])
@@ -79,6 +69,19 @@ class EventType extends AbstractType {
         ]);
     }
 
+    private function setupStartDateFromEvent($form) {
+        $form->add('startDate', "datetime", [
+            "widget"       => "single_text",
+            "format"       => "dd.MM.yyyy HH:mm",
+            "with_minutes" => true,
+            "with_seconds" => false,
+            "label"        => "Data i godzina rozpoczęcia",
+            "attr"         => [
+                "placeholder" => "dd.mm.yyyy hh:mm"
+            ]
+        ]);
+    }
+
     /**
      * @return \Closure
      */
@@ -91,7 +94,14 @@ class EventType extends AbstractType {
 
             if ($event->isNew())
             {
-                $eventType = $form->getRoot()->get("eventType")->getData();
+                if ($form->getRoot()->has("eventType"))
+                {
+                    $eventType = $form->getRoot()->get("eventType")->getData();
+                }
+                else
+                {
+                    $eventType = Events\Event::SINGLE;
+                }
 
                 $validationGroups[] = "new";
 
@@ -107,7 +117,14 @@ class EventType extends AbstractType {
             }
             else
             {
-                $editType = $form->getRoot()->get("editType")->getData();
+                if ($form->getRoot()->has("editType"))
+                {
+                    $editType = $form->getRoot()->get("editType")->getData();
+                }
+                else
+                {
+                    $editType = Events\Occurence::SINGULAR;
+                }
 
                 $validationGroups[] = "edit";
 
@@ -153,6 +170,7 @@ class EventType extends AbstractType {
         {
             $this->setupEventType($form);
             $this->setupDays($form);
+            $this->setupStartDateFromEvent($form);
             $this->setupEndDate($form);
         }
         else
@@ -168,6 +186,7 @@ class EventType extends AbstractType {
             }
 
             $this->setupDescription($form);
+            $this->setupStartDateFromEvent($form);
         }
     }
 
@@ -181,6 +200,7 @@ class EventType extends AbstractType {
     private function setupDescription(Form $form) {
         $form->add('description', "textarea", [
             "label"  => "Opis",
+            "data" => $this->getOccurence()->getDescription(),
             "mapped" => false,
             "attr"   => [
                 "placeholder" => "opis zajęć"
@@ -193,14 +213,18 @@ class EventType extends AbstractType {
      */
     private function setupEditType(Form $form) {
         $form->add('editType', "choice", [
-            "choices"  => [
-                Events\Occurence::SERIAL   => "wszystkie następne",
+            "choices"     => [
+                Events\Occurence::SERIAL   => "to wystąpienie i wszystkie następne",
                 Events\Occurence::SINGULAR => "tylko to wystąpienie",
             ],
-            "mapped"   => false,
-            "label"    => "Edytuj",
-            "expanded" => true,
-            "multiple" => false,
+            "empty_data"  => Events\Occurence::SINGULAR,
+            "mapped"      => false,
+            "label"       => "Edytuj",
+            "expanded"    => true,
+            "multiple"    => false,
+            "constraints" => [
+                new NotBlank(["groups" => ["edit"]])
+            ]
         ]);
     }
 
@@ -217,7 +241,7 @@ class EventType extends AbstractType {
             "label"       => "Powtarza się",
             "expanded"    => true,
             "multiple"    => false,
-            "empty_data"  => "weekly",
+            "empty_data"  => Events\Event::WEEKLY,
             "constraints" => [
                 new NotBlank(["groups" => ["new"]])
             ]

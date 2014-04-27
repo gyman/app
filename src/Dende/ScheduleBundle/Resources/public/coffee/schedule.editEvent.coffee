@@ -1,7 +1,7 @@
 class @EditEvent extends @NewEvent
   constructor: ()->
     super()
-    # @initChooseEditType()
+    @initChooseEditType()
   
   form: $("form#editEventForm",@$modalWindow)
   

@@ -89,7 +89,7 @@ class @NewEvent
       type: @form.attr "method"
   
   initStartDatepicker: () =>
-    stDate = moment().weekday(1).set('hour',0).set('minute',0)
+    stDate = moment().set('hour',0).set('minute',0)
     endDate = moment().add('y',1)
     @$datePicker = $("#eventStartDate").datetimepicker
       format: 'dd.mm.yyyy hh:ii'
