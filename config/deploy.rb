@@ -25,9 +25,16 @@ set :ssh_options, {
     :auth_methods => ["publickey"],
 }
 
-# before "deploy:restart", "deploy:install"
+before "deploy:install", "deploy:setParameter"
+before "deploy:restart", "deploy:install"
 after "deploy:install", "app:deploy"
 
+namespace :deploy do
+    desc "setup parameters.yml"
+    task :setParameter do
+        run "mv #{current_path}/app/config/parameters.dev.yml #{current_path}/app/config/parameters.yml"
+    end
+end
 namespace :deploy do
     desc "run composer install and ensure all dependencies are installed"
     task :install do

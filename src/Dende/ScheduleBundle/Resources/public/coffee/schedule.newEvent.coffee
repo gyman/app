@@ -2,7 +2,6 @@ class @NewEvent
   constructor: ()->
     @modal = window.modal
     @$modalWindow = @modal.getModal()
-    @initSelects()
     @initNewActivity()
     @setupSpinner()
     @initStartDatepicker()
@@ -18,12 +17,6 @@ class @NewEvent
   $saveButton: null
          
   form: $("form#newEventForm",@$modalWindow)
-         
-  initSelects: =>
-    @$activitySelect = $("#dende_schedulebundle_event_activity, #dende_membersbundle_member_gender").select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "220px"
         
   initChooseEventType: =>
     $weekly = "#dende_schedulebundle_event_eventType_0";
@@ -45,15 +38,21 @@ class @NewEvent
       $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").filter("[value='weekly']").trigger "click.chooseEventType"
         
   initNewActivity: =>
+    return unless $("#dende_schedulebundle_event_activity").length > 0
+    
+    @$activitySelect = $("#dende_schedulebundle_event_activity").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "220px"
+  
     $("#dende_schedulebundle_event_newActivity").parents("div.control-group").hide()
     $("a#addNewActivity").off("click.addNewActivity").on "click.addNewActivity", (e) =>
       e.preventDefault()
       @handleNewActivity()
       
     newActivity = $("#dende_schedulebundle_event_newActivity").val()
-    console.log newActivity
-    
-    $("a#addNewActivity").trigger "click" if newActivity.length > 0
+
+    $("a#addNewActivity").trigger "click"
       
   handleNewActivity: =>
     @$activitySelect.select2 "enable", false

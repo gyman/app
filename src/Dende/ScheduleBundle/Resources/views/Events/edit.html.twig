@@ -23,13 +23,15 @@
     Edytujesz pojedyncze wydarzenie.
     {%endif%}
 </div>
-<form id="editEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST">
+<form id="editEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST" data-occurence="{{ occurenceSerialized }}"  data-event="{{ eventSerialized }}">
     {% if form.editType is defined %}
         {{ form_row(form.editType) }}
     {% endif %}
 
-    {{ form_row(form.activity) }}
-    {{ form_row(form.newActivity) }}
+    {% if form.activity is defined %}
+        {{ form_row(form.activity) }}
+        {{ form_row(form.newActivity) }}
+    {% endif %}
 
     {% if form.eventType is defined %}
         {{ form_row(form.eventType) }}

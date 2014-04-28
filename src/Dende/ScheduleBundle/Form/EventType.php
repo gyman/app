@@ -40,20 +40,6 @@ class EventType extends AbstractType {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "setupConditionalFields"));
 
         $builder
-            ->add('activity', "entity", [
-                "label"       => "Zajęcia",
-                'class'       => 'ScheduleBundle:Activity',
-                'property'    => 'name',
-                "empty_value" => "wybierz...",
-                "empty_data"  => null,
-            ])
-            ->add('newActivity', "text", [
-                "label"  => "Nazwa zajęć",
-                "mapped" => false,
-                "attr"   => [
-                    "placeholder" => "wpisz nazwę nowych zajęć"
-                ]
-            ])
             ->add('duration', "number", [
                 "label" => "Czas trwania (w minutach)",
             ])
@@ -77,7 +63,8 @@ class EventType extends AbstractType {
             "with_seconds" => false,
             "label"        => "Data i godzina rozpoczęcia",
             "attr"         => [
-                "placeholder" => "dd.mm.yyyy hh:mm"
+                "placeholder" => "dd.mm.yyyy hh:mm",
+                "readonly"    => "READONLY"
             ]
         ]);
     }
@@ -139,6 +126,15 @@ class EventType extends AbstractType {
                 }
             }
 
+            $this->validationGroupActivity($form, $validationGroups);
+
+            return $validationGroups;
+        };
+    }
+
+    private function validationGroupActivity(Form $form, array &$validationGroups) {
+        if ($form->getRoot()->has("activity") && $form->getRoot()->has("newActivity"))
+        {
             if ($form->getRoot()->get("newActivity")->getData() !== null)
             {
                 $validationGroups[] = "newActivity";
@@ -147,9 +143,7 @@ class EventType extends AbstractType {
             {
                 $validationGroups[] = "dbActivity";
             }
-
-            return $validationGroups;
-        };
+        }
     }
 
     /**
@@ -168,6 +162,7 @@ class EventType extends AbstractType {
 
         if ($event->isNew())
         {
+            $this->setupActivity($form);
             $this->setupEventType($form);
             $this->setupDays($form);
             $this->setupStartDateFromEvent($form);
@@ -200,7 +195,7 @@ class EventType extends AbstractType {
     private function setupDescription(Form $form) {
         $form->add('description', "textarea", [
             "label"  => "Opis",
-            "data" => $this->getOccurence()->getDescription(),
+            "data"   => $this->getOccurence()->getDescription(),
             "mapped" => false,
             "attr"   => [
                 "placeholder" => "opis zajęć"
@@ -249,6 +244,27 @@ class EventType extends AbstractType {
     }
 
     /**
+     * 
+     * @param \Symfony\Component\Form\Form $form
+     */
+    private function setupActivity(Form $form) {
+        $form->add('activity', "entity", [
+                "label"       => "Zajęcia",
+                'class'       => 'ScheduleBundle:Activity',
+                'property'    => 'name',
+                "empty_value" => "wybierz...",
+                "empty_data"  => null,
+            ])
+            ->add('newActivity', "text", [
+                "label"  => "Nazwa zajęć",
+                "mapped" => false,
+                "attr"   => [
+                    "placeholder" => "wpisz nazwę nowych zajęć"
+                ]
+        ]);
+    }
+
+    /**
      * @param \Symfony\Component\Form\Form $form
      */
     private function setupEndDate(Form $form) {
@@ -257,7 +273,8 @@ class EventType extends AbstractType {
             "format" => "dd.MM.yyyy",
             "label"  => "Data zakończenia",
             "attr"   => [
-                "placeholder" => "dd.mm.yyyy"
+                "placeholder" => "dd.mm.yyyy",
+                "readonly"    => "READONLY"
             ]
         ]);
     }

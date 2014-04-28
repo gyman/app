@@ -204,29 +204,42 @@ class EventsController extends Controller {
         $response = new Response(
             'Content', 200, array('content-type' => 'text/html')
         );
-        
+
         if ($occurence->isPast())
         {
-            return $this->forward("ScheduleBundle:Events:Show",[
-                "event" => $event->getId(),
-                "occurence" => $occurence->getId()
+            return $this->forward("ScheduleBundle:Events:Show", [
+                    "event"     => $event->getId(),
+                    "occurence" => $occurence->getId()
             ]);
         }
 
         $eventType = new EventType();
         $eventType->setOccurence($occurence);
 
+        $originalStartDate = clone($event->getStartDate());
+
         $form = $this->createForm($eventType, $event);
 
-        if ($request->getMethod() == 'POST')
+        if ($request->isMethod('POST'))
         {
             $form->handleRequest($request);
 
             if ($form->isValid())
-            {                
+            {
                 $this->setNewActivityToEvent($event, $form);
-                $this->container->get('occurences_manager')->updateOccurencesForEvent($event, $occurence, $form);
-                $this->getDoctrine()->getManager()->persist($event);
+
+                if ($form->has("editType") && $form->get("editType")->getData() == Event\Occurence::SERIAL)
+                {
+                    $this->container->get('occurences_manager')->updateOccurencesForEvent($event, $occurence, $form);
+                    $this->getDoctrine()->getManager()->persist($event);
+                }
+                else if ($form->has("editType") && $form->get("editType")->getData() == Event\Occurence::SINGULAR)
+                {
+                    $occurence->setStartDate($form->get("startDate")->getData());
+                    $occurence->setDuration($form->get("duration")->getData());
+                    $occurence->setDescription($form->get("description")->getData());
+                    $this->getDoctrine()->getManager()->persist($occurence);
+                }
             }
             else
             {
@@ -238,18 +251,20 @@ class EventsController extends Controller {
 
         return $response->setContent(
                 $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
-                    'form'          => $form->createView(),
-                    'event'         => $event,
-                    'occurence'     => $occurence,
-                    'eventType'     => get_class($event),
-                    'occurenceType' => get_class($occurence),
+                    'form'                => $form->createView(),
+                    'event'               => $event,
+                    'occurence'           => $occurence,
+                    'eventType'           => get_class($event),
+                    'occurenceType'       => get_class($occurence),
+                    "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
+                    "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
                     )
                 )
         );
     }
 
     private function setNewActivityToEvent(Event\Event $event, $form) {
-        if ($newActivityName = $form->get("newActivity")->getData())
+        if ($form->has("newActivity") && $newActivityName = $form->get("newActivity")->getData())
         {
             /** @var $activity Event\Activity */
             if ($activity = $this->get("activity_repository")->findOneByName($newActivityName))
