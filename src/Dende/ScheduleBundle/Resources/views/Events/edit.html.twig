@@ -63,6 +63,13 @@
         <h3>Edytuj wydarzenie</h3>
     </div>
     <div class="modal-footer">
+        <form id="deleteOccurencesForm" class="pull-left" data-deleteAction="#"> 
+            <label>
+                <input type="checkbox" id="deleteOccurenceCheckbox" />
+                <span class="serial hidden">Usuń wszystkie następne wystąpienia wydarzenia</span>
+                <span class="singular">Usuń to wystąpienie wydarzenia</span>
+            </label>
+        </form>
         <div class="pull-right">
             <a href="#" class="btn btn-primary" id="saveFormInModal">Zapisz</a>
         </div>

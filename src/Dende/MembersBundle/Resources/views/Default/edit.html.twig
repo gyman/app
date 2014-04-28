@@ -1,4 +1,9 @@
-<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
+<form id="memberForm"
+      class="form-horizontal row-fluid"
+      action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}"
+      method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }}
+    {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
+
     <div class="span4">
         {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
