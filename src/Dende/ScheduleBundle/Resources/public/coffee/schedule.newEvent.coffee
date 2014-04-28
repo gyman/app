@@ -8,12 +8,7 @@ class @NewEvent
     @initEndDatepicker()
     @initSaveButton()
     @initChooseEventType()
-    
-  BUTTON_SAVE_STATE: "Zapisz"
-  BUTTON_SAVE_CLASS: "btn-primary"
-  BUTTON_DELETE_STATE: "Usuń"
-  BUTTON_DELETE_CLASS: "btn-danger"
-   
+
   $saveButton: null
          
   form: $("form#newEventForm",@$modalWindow)
@@ -50,9 +45,8 @@ class @NewEvent
       e.preventDefault()
       @handleNewActivity()
       
-    newActivity = $("#dende_schedulebundle_event_newActivity").val()
-
-    $("a#addNewActivity").trigger "click"
+    # newActivity = $("#dende_schedulebundle_event_newActivity").val()
+    # $("a#addNewActivity").trigger "click"
       
   handleNewActivity: =>
     @$activitySelect.select2 "enable", false
