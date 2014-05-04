@@ -43,8 +43,8 @@
                 </dd>
                 <dt>Zajęcia:</dt>
                 <dd>
-                {% if entry.getEvent() is not null %}
-                   {{ entry.getEvent().getActivity().getName }}
+                {% if entry.getOccurence() is not null %}
+                   {{ entry.getOccurence().getEvent().getActivity().getName() }}
                 {% else %}
                     wejście poza zajęciami
                 {% endif %}

@@ -51,12 +51,15 @@ class DefaultController extends Controller {
 
         $voucher = $memberManager->getCurrentVoucher($member);
 
+        $totalMemberEntries = [];
+        
         return $response->setContent(
                         $this->renderView("MembersBundle:Default:edit.html.twig", array(
                             'form'     => $form->createView(),
                             'member'   => $member,
                             'voucher'  => $voucher,
                             "uploader" => $uploaderHelper,
+                            "totalMemberEntries" => $totalMemberEntries
                                 )
                         )
         );

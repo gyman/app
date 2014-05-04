@@ -32,7 +32,7 @@ class @EditEntry
   updateSelectEvent: () =>
     val = $(@startDateInputSelector).val()
     date = moment(val,"DD.MM.YYYY HH:mm").format("YYYY-MM-DD HH:mm")
-    url = Routing.generate '_schedule_getEventsForDate', {date: date}
+    url = Routing.generate '_events_getForDate', {date: date}
     $eventSelect = $(@eventSelector)
     $eventSelect.select2("destroy")
     $eventSelect.html(null)

@@ -11,19 +11,8 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
-monolog:
-    handlers:
-        main:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: debug
-#        sentry:
-#            type:  raven
-#            dsn:   'http://309f2c3e1634407c8f00ff278f087cd6:36101a1428b5484fac797c6e5cac3bcf@uirapu.ru:9000/2'
-#            level: debug
-
-#assetic:
-#    use_controller: false
+assetic:
+    use_controller: false
 
 #swiftmailer:
 #    delivery_address: me@example.com

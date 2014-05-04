@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Dende\DefaultBundle\Validator as DefaultBundle;
-
+use JMS\Serializer\Annotation as JMS;
 /**
  * Event
  *
@@ -44,6 +44,7 @@ class Event {
 
     /**
      * Dende\ScheduleBundle\Validator\RequiredIfNoNewActivity
+     * @JMS\Exclude
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events",cascade={"all"})
      * @Assert\NotBlank(
      *  groups={"dbActivity"}
@@ -53,6 +54,7 @@ class Event {
     protected $activity;
 
     /**
+     * @JMS\Exclude
      * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Occurence", mappedBy="event",cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $occurences;

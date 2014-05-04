@@ -1,7 +1,7 @@
-class @Filter
+class @Filter extends @AbstractModal
   constructor: ()->
-    @modal = window.modal
-    @$modalWindow = @modal.getModal()
+    super()
+    
     @setupAddFilterSelect()
     @setupUniform()
     @setupSaveFilterCheckbox()
@@ -115,8 +115,13 @@ class @Filter
       containerCss : 
         width : "120px"  
     
-    $([date1Selector,date2Selector].join(",")).datepicker
-      dateFormat: "dd.mm.yy"
+    $([date1Selector,date2Selector].join(",")).datetimepicker
+      format:     'dd.mm.yyyy'
+      startView:  'decade'
+      minView:    'month'
+      maxView:    'decade'
+      autoclose:  true
+      weekStart: 1
       
     $(date2Selector).hide()
       

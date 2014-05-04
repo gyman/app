@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dende\EntriesBundle\Validator as Validate;
+use Dende\MembersBundle\Entity\Member;
 
 /**
  * Entry
@@ -32,11 +33,12 @@ class Entry {
     private $id;
 
     /**
-     * @Validate\ActivityConstraint
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $activity;
+    private $member;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher", inversedBy="entries")
@@ -197,6 +199,15 @@ class Entry {
 
     public function setDeletedAt(Datetime $deletedAt) {
         $this->deletedAt = $deletedAt;
+        return $this;
+    }
+
+    public function getMember() {
+        return $this->member;
+    }
+
+    public function setMember(Member $member) {
+        $this->member = $member;
         return $this;
     }
 

@@ -131,3 +131,13 @@ stof_doctrine_extensions:
             
 fos_js_routing:
     routes_to_expose: [.*]
+    
+monolog:  
+    handlers:  
+        main:  
+            type:  stream  
+            path:  %kernel.logs_dir%/%kernel.environment%.log  
+            level: debug  
+        firephp:  
+            type:  firephp  
+            level: info 

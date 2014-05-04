@@ -5,10 +5,6 @@ parameters:
     entry_repository.class: Dende\EntriesBundle\Entity\EntryRepository
 
 services:
-#    base_manager:
-#        class:     "%base_manager.class%"
-#        calls:
-#             - [ setContainer, ["@service_container"] ]
     entry_repository:
         class:          "%entry_repository.class%"
         factory_service: doctrine
@@ -17,10 +13,6 @@ services:
         
     entry_manager:
         class:          "%entry_manager.class%"
-        parent:         base_manager
-        calls:
-             - [ setClass, [%entry_entity.class%] ]
-             - [ setRepository, ["@entry_repository"] ]
 
     dende.update_left_amount_listener:
         class: Dende\EntriesBundle\Services\Listener\UpdateLeftAmountListener

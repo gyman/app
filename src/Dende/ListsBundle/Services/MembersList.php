@@ -19,8 +19,6 @@ class MembersList extends AbstractList {
     protected function addJoins(QueryBuilder $query) {
         $query->leftJoin("m.vouchers", "v");
         $query->leftJoin("m.currentVoucher", "cv");
-        $query->leftJoin("m.entries", "e");
-        $query->leftJoin("e.activity", "a");
     }
 
     public function getSortingFunction($sortingColumnsCount, $sortingColumnArray, $sortingOrderArray) {

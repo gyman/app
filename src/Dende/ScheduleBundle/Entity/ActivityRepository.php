@@ -3,6 +3,7 @@
 namespace Dende\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * ActivityRepository
@@ -14,7 +15,7 @@ class ActivityRepository extends EntityRepository {
 
     public function getActivitiesQuery() {
         return $this->createQueryBuilder("a")
-                        ->select();
+                ->select();
     }
 
     public function getAllActivities() {
@@ -28,11 +29,10 @@ class ActivityRepository extends EntityRepository {
             }
 
             return $this->getActivitiesQuery()
-                            ->join("a.events", "e")
-                            ->where("e.dayOfWeek = :day")
-                            ->setParameter("day", $today)
-                            ->getQuery()->execute();
+                    ->join("a.events", "e")
+                    ->where("e.dayOfWeek = :day")
+                    ->setParameter("day", $today)
+                    ->getQuery()->execute();
         }
     }
-
 }

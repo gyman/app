@@ -34,10 +34,10 @@ class EventRepository extends EntityRepository {
         }
 
         $queryBuilder = $this->createQueryBuilder("e")
-                ->where("e.dayOfWeek = :day")
-                ->andWhere("e.startHour <= :hour")
-                ->andWhere("e.endHour >= :hour")
-                ->setParameters(array(
+            ->where("e.dayOfWeek = :day")
+            ->andWhere("e.startHour <= :hour")
+            ->andWhere("e.endHour >= :hour")
+            ->setParameters(array(
             "day"  => $dayOfWeek,
             "hour" => $hour
         ));
@@ -68,23 +68,23 @@ class EventRepository extends EntityRepository {
         $exp = $qb->expr();
 
         $qb->select("e", "a HIDDEN", "o HIDDEN")
-                ->leftJoin("e.activity", "a")
-                ->leftJoin("e.occurences", "o", Join::WITH, $exp->andX(
-                                $exp->eq("e.id", "o.event"), $exp->between("o.startDate", ":weekStart", ":weekEnd")
-                ))
-                ->where(
-                        $exp->orX(
-                                $exp->andX(
-                                        $exp->lte("e.startDate", ":weekEnd"), $exp->isNull("e.endDate")
-                                ), $exp->andX(
-                                        $exp->lte("e.startDate", ":weekEnd"), $exp->gte("e.endDate", ":weekStart")
-                                )
-                        )
+            ->leftJoin("e.activity", "a")
+            ->leftJoin("e.occurences", "o", Join::WITH, $exp->andX(
+                    $exp->eq("e.id", "o.event"), $exp->between("o.startDate", ":weekStart", ":weekEnd")
+            ))
+            ->where(
+                $exp->orX(
+                    $exp->andX(
+                        $exp->lte("e.startDate", ":weekEnd"), $exp->isNull("e.endDate")
+                    ), $exp->andX(
+                        $exp->lte("e.startDate", ":weekEnd"), $exp->gte("e.endDate", ":weekStart")
+                    )
                 )
-                ->setParameters([
-                    "weekStart" => $weekStart,
-                    "weekEnd"   => $weekEnd
-                ])
+            )
+            ->setParameters([
+                "weekStart" => $weekStart,
+                "weekEnd"   => $weekEnd
+            ])
         ;
         $query = $qb->getQuery();
 
@@ -104,12 +104,27 @@ class EventRepository extends EntityRepository {
     }
 
     public function getEventsForDate(\DateTime $date) {
-        throw new Exception("deprecated");
+        throw new \Exception("deprecated");
         $queryBuilder = $this->createQueryBuilder("e");
         $queryBuilder
-                ->join("e.activity", "a")
-                ->where("e.dayOfWeek = :day")
-                ->setParameter("day", strtolower($date->format("l")));
+            ->join("e.activity", "a")
+            ->where("e.dayOfWeek = :day")
+            ->setParameter("day", strtolower($date->format("l")));
+        $query = $queryBuilder->getQuery();
+
+        return $query->execute();
+    }
+
+    public function getEventsForPeriod(\DateTime $startDate, \DateTime $endDate) {
+        $queryBuilder = $this->createQueryBuilder("e");
+        $queryBuilder
+            ->select("e")
+            ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
+            ->setParameters([
+                "start" => $startDate->modify("00:00:00"),
+                "end"   => $endDate->modify("23:59:59"),
+        ]);
+
         $query = $queryBuilder->getQuery();
 
         return $query->execute();
@@ -125,11 +140,11 @@ class EventRepository extends EntityRepository {
         $end = clone($date);
         $queryBuilder = $this->createQueryBuilder("e");
         $queryBuilder
-                ->join("e.activity", "a")
-                ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
-                ->setParameters([
-                    "start" => $start->modify("00:00:00"),
-                    "end"   => $end->modify("23:59:59"),
+            ->join("e.activity", "a")
+            ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
+            ->setParameters([
+                "start" => $start->modify("00:00:00"),
+                "end"   => $end->modify("23:59:59"),
         ]);
 
         $query = $queryBuilder->getQuery();

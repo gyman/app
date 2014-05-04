@@ -49,7 +49,7 @@ class DefaultController extends Controller {
             $entry->setVoucher($currentVoucher);
         }
 
-        $entryType = new EntryType($this->get("event_repository"));
+        $entryType = new EntryType($this->get("occurence_repository"));
         $form = $this->createForm($entryType, $entry);
 
         if ($request->getMethod() == 'POST')
@@ -81,7 +81,7 @@ class DefaultController extends Controller {
                             "form"          => $form->createView(),
                             "member"        => $member,
                             "voucher"       => $currentVoucher,
-                            "currentEvents" => $this->getDoctrine()->getRepository("ScheduleBundle:Event")->getCurrentEvents()
+                            "currentEvents" => [] // $this->getDoctrine()->getRepository("ScheduleBundle:Occurence")->getCurrentEvents()
                                 )
                         )
         );

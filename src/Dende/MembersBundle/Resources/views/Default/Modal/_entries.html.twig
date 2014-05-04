@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for entry in member.getEntries() %}
+        {% for entry in totalMemberEntries %}
         <tr>
             <td>{{ entry.getCreated()|date("d.m.y (l) H:i") }}</td>
             <td>{{ entry.getActivity().getName() }}</td>

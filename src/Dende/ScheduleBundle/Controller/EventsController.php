@@ -31,6 +31,18 @@ class EventsController extends Controller {
     }
 
     /**
+     * @Route("/getDate/{date}",name="_events_getForDate")
+     * @Template()
+     */
+    public function getEventsForDateAction($date) {
+        $serializer = $this->get("jms_serializer");
+        $events = $this->get("event_repository")->getAllEventsForWeek($year, $week);
+        $eventsArray = $this->get('occurences_manager')->prepareOccurences($events);
+
+        return new Response($serializer->serialize($eventsArray, "json"), 200, ["Content-Type" => "application/json"]);
+    }
+
+    /**
      * @Route("/{occurence}/drag",name="_events_drag")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
      * Template()
@@ -216,8 +228,6 @@ class EventsController extends Controller {
         $eventType = new EventType();
         $eventType->setOccurence($occurence);
 
-        $originalStartDate = clone($event->getStartDate());
-
         $form = $this->createForm($eventType, $event);
 
         if ($request->isMethod('POST'))
@@ -245,9 +255,9 @@ class EventsController extends Controller {
             {
                 $response->setStatusCode(400);
             }
+            $this->getDoctrine()->getManager()->flush();
         }
 
-        $this->getDoctrine()->getManager()->flush();
 
         return $response->setContent(
                 $this->renderView("ScheduleBundle:Events:edit.html.twig", array(

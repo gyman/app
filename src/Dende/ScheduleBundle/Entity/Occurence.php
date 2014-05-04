@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dende\ScheduleBundle\Entity\Activity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use DateTime;
 
 /**
@@ -38,12 +39,14 @@ class Occurence {
     protected $id;
 
     /**
+     * @JMS\Exclude
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Event", inversedBy="occurences",cascade={"persist"})
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $event;
 
     /**
+     * @JMS\Exclude
      * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="occurence")
      */
     protected $entries;

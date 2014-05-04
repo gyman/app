@@ -1,4 +1,4 @@
-class @CloseVoucher
+class @CloseVoucher extends @AbstractModal
   constructor: ()->
     @modal = window.modal
     @$modalWindow = @modal.getModal()

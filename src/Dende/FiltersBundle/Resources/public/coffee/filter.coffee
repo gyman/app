@@ -130,8 +130,10 @@ class @Filter
       containerCss : 
         width : "120px"  
     
-    $([date1Selector,date2Selector].join(",")).datepicker
-      dateFormat: "dd.mm.yy"
+    $([date1Selector,date2Selector].join(",")).datetimepicker
+      format: 'dd.mm.yyyy'
+      minView: 0
+      maxView: 1
       
     $(date2Selector).hide()
       

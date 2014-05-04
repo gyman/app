@@ -24,14 +24,14 @@
         <h3>{% block title %}Nowy karnet dla {{ member.getName() }}{% endblock %}</h3>
     </div>
     <div class="modal-footer">
-        <a href="" class="btn btn-primary pull-right" id="submitVoucherFormButton">{% block button %}Sprzedaj{% endblock %}</a>
+        <a href="" class="btn btn-primary pull-right" id="saveFormInModal">{% block button %}Sprzedaj{% endblock %}</a>
     </div>
 </span>
 {% endblock %}
 
 {% block javascript %}
 {% javascripts
-    '@VouchersBundle/Resources/public/coffee/vouchers.editVoucher.coffee'
+    '@VouchersBundle/Resources/public/coffee/vouchers.newVoucher.coffee'
     '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
     '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
 %}
@@ -42,7 +42,7 @@
         modal.setupFromNode("span#ui-sellVoucherData");
         modal.setModalWindowClass("newVoucherModal");
         
-        window.editVoucherModal = new EditVoucher();
+        window.newVoucherModal = new NewVoucher();
     });
 </script>
 {% endblock javascript %}

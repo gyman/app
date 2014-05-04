@@ -1,7 +1,7 @@
-class @NewEvent
+class @NewEvent extends @AbstractModal
   constructor: ()->
-    @modal = window.modal
-    @$modalWindow = @modal.getModal()
+    super()
+    
     @initNewActivity()
     @setupSpinner()
     @initStartDatepicker()
