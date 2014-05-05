@@ -15,8 +15,8 @@ class DefaultController extends Controller {
      */
     public function indexAction() {
         $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
-        $events = $this->get("event_repository")->getTodayEvents();
-
+        $events = $this->get("schedule")->getTodayEventsForDashboard();
+        
         return array(
             "filters" => $pinnedFilters,
             "events" => $events

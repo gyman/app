@@ -89,7 +89,7 @@
 
 {% block javascript %}
 {% javascripts
-    '@EntriesBundle/Resources/public/coffee/entries.editEntry.coffee'
+    '@EntriesBundle/Resources/public/coffee/entries.newEntry.coffee'
     '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
     '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
 %}
@@ -101,7 +101,7 @@
         modal.setupFromNode("div#ui-newEntryData");
         modal.setModalWindowClass("editEntryModal");
 
-        window.editEntryModal = new EditEntry();
+        window.newEntryModal = new NewEntry();
 
         return;
     });

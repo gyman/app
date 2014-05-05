@@ -91,14 +91,18 @@ class EntryType extends AbstractType {
                 'choices'  => $this->getChoices()->toArray(),
                 'data'     => $this->getDefaultChoice(),
                 "expanded" => true,
-                "mapped"   => false
+//                "mapped"   => false
             ))
             ->add('entryPrice', 'text')
         ;
 
 
         $formModifier = function (FormInterface $form, \DateTime $startDate, OccurenceRepository $occurenceRepository) {
-            $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, clone($startDate));
+            $startDate->modify("00:00:00");
+            $endDate = clone($startDate);
+            $endDate->modify("23:59:59");
+
+            $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
 
             $form->add('occurence', "entity", [
                 'class'    => "ScheduleBundle:Occurence",
@@ -108,21 +112,39 @@ class EntryType extends AbstractType {
             ]);
         };
 
-        $occurenceRepository = $this->occurenceRepository;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "setupActivity"));
 
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier, $occurenceRepository) {
-            $data = $event->getData();
-            $formModifier($event->getForm(), $data->getStartDate(), $occurenceRepository);
-        }
-        );
+//        $builder->addEventListener(
+//            FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier, $occurenceRepository) {
+//            $data = $event->getData();
+//            $formModifier($event->getForm(), $data->goetStartDate(), $occurenceRepository);
+//        }
+//        );
+//
+//        $builder->get('startDate')->addEventListener(
+//            FormEvents::POST_SUBMIT, function (FormEvent $event) use ($formModifier, $occurenceRepository) {
+//            $startDate = $event->getForm()->getData();
+//            $formModifier($event->getForm()->getParent(), $startDate, $occurenceRepository);
+//        }
+//        );
+    }
 
-        $builder->get('startDate')->addEventListener(
-            FormEvents::POST_SUBMIT, function (FormEvent $event) use ($formModifier, $occurenceRepository) {
-            $startDate = $event->getForm()->getData();
-            $formModifier($event->getForm()->getParent(), $startDate, $occurenceRepository);
-        }
-        );
+    public function setupActivity(FormEvent $formEvent) {
+        $event = $formEvent->getData();
+        $form = $formEvent->getForm();
+
+        $startDate->modify("00:00:00");
+        $endDate = clone($startDate);
+        $endDate->modify("23:59:59");
+
+        $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
+
+        $form->add('occurence', "entity", [
+            'class'    => "ScheduleBundle:Occurence",
+            'multiple' => false,
+            'choices'  => $occurences,
+            'property' => 'event.activity.name'
+        ]);
     }
 
     /**
@@ -140,33 +162,6 @@ class EntryType extends AbstractType {
     public function getName() {
         return 'dende_entriesbundle_entry';
     }
-
-//    public function getEvents() {
-//
-////        $voucher = $this->getEntry()->getVoucher();
-////
-////        if ($voucher && count($voucher->getEvents()) > 0)
-////        {
-////            $this->loadVoucherEvents();
-////            return $this->getVoucherEvents()->toArray();
-////        }
-////        else
-////        {
-////        $this->loadCurrentEvents();
-////        $this->loadVoucherEvents();
-////        $this->loadAllEvents();
-//        $this->loadTodayEvents();
-//
-//        return $this->getTodayEvents()->toArray();
-////        return array(
-////            "Trwające (±15min.)" => $this->getCurrentEvents()->toArray(),
-////            "Dzisiejsze"         => $this->getTodayEvents()->toArray(),
-////            "Karnet"             => $this->getVoucherEvents()->toArray(),
-////            "Wszystkie" => $this->getAllEvents()->toArray()
-////        );
-////        }
-//    }
-// </editor-fold>
 
     protected function getChoices() {
         $choices = new ArrayCollection(array(

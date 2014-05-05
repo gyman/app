@@ -23,10 +23,10 @@ use DateTime;
  * })
  */
 class Occurence {
-    
+
     const SERIAL = "serial";
     const SINGULAR = "singular";
-    
+
     // <editor-fold defaultstate="collapsed" desc="members">
 
     /**
@@ -184,9 +184,24 @@ class Occurence {
     }
 
     // </editor-fold>
-    
-    public function isPast()
-    {
+
+    public function isPast() {
         return $this->getStartDate()->getTimestamp() < time();
     }
+
+    /**
+     * 
+     * @return \DateTime
+     */
+    public function getEndDate() {
+        /**
+         * @var \DateTime $endDate
+         */
+        $endDate = clone($this->getStartDate());
+        $diff = new \DateInterval(sprintf("PT%dM", abs($this->duration)));
+        $endDate->add($diff);
+
+        return $endDate;
+    }
+
 }

@@ -14,17 +14,13 @@ use Dende\ScheduleBundle\Entity\Event;
  */
 class OccurenceRepository extends EntityRepository {
 
-    public function insertWeeklyOccurencesForEvent(Event $event) {
-        var_dump($event->getId());
-    }
-
     public function getOccurencesForPeriod(\DateTime $startDate, \DateTime $endDate) {
         $queryBuilder = $this->createQueryBuilder("o");
         $queryBuilder
             ->where("o.startDate BETWEEN :start AND :end")
             ->setParameters([
-                "start" => $startDate->modify("00:00:00"),
-                "end"   => $endDate->modify("23:59:59"),
+                "start" => $startDate,
+                "end"   => $endDate,
         ]);
 
         return $queryBuilder->getQuery()->execute();

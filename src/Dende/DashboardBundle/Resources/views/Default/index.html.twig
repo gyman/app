@@ -11,12 +11,6 @@
 </div><!-- End .heading-->
 
 <div class="form-row row-fluid">
-    <div class="span12">
-        {% include "_navigation_items.html.twig" %}
-    </div>
-</div>
-
-<div class="form-row row-fluid">
 
     {% if filters|length > 0 %}
     <div class="box span6">
@@ -45,9 +39,9 @@
             <ul>
                 {% for event in events %}
                 <li class="clearfix">
-                    <span class="number">{{ event.occurences[0].getStartDate()|date("H:i") }} - {{ event.occurences[0].getStartDate().modify("+"~event.occurences[0].getDuration()~" minutes")|date("H:i") }}</span> 
-                    <span class="txt">{{ event.getActivity().name }}</span>
-                    {# <a class="btn btn-warning" href="#">15 osób</a> #}
+                    <span class="number">{{ event.startDate|date("H:i") }} - {{ event.endDate|date("H:i") }}</span> 
+                    <span class="txt">{{ event.activityName }}</span>
+                    <a class="btn btn-warning" href="#">{{ event.entriesCount }} osób</a>
                 </li>               
                 {% endfor %}
             </ul>

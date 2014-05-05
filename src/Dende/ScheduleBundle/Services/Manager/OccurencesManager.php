@@ -1,12 +1,11 @@
 <?php
 
-namespace Dende\ScheduleBundle\Services;
+namespace Dende\ScheduleBundle\Services\Manager;
 
 use Dende\ScheduleBundle\Entity as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Dende\ScheduleBundle\Services\OccurencesManager;
 use Symfony\Component\Form\Form;
 
 class OccurencesManager {

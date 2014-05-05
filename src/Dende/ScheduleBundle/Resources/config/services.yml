@@ -44,7 +44,12 @@ services:
         arguments:          [ %activity_entity.class% ]
         
     occurences_manager:
-        class: Dende\ScheduleBundle\Services\OccurencesManager
+        class: Dende\ScheduleBundle\Services\Manager\OccurencesManager
         calls:
              - [ setEntityManager, ["@doctrine.orm.entity_manager"] ]
              - [ setRouter, ["@router"] ]
+        
+    schedule:
+        class: Dende\ScheduleBundle\Services\Schedule
+        calls:
+             - [ setContainer, ["@service_container"] ]
