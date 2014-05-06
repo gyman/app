@@ -22,8 +22,15 @@ class UpdateLastEntryListener {
 
         if ($entity instanceof Entry)
         {
+            $voucher = $entity->getVoucher();
+            
+            if($voucher == null) // entry paid or free
+            {
+                return false;
+            }
+            
             /** @var Member */
-            $member = $entity->getVoucher()->getMember();
+            $member = $voucher->getMember();
             $member->setLastEntry($entity);
             $this->container->get("member_manager")->save($member);
 
