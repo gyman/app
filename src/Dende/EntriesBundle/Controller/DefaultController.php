@@ -68,7 +68,8 @@ class DefaultController extends Controller {
                     $entry->setEntryPrice(null);
                 }
 
-                $this->get('entry_manager')->save($entry);
+                $this->getDoctrine()->getManager()->persist($entry);
+                $this->getDoctrine()->getManager()->flush();
             }
             else
             {

@@ -8,6 +8,7 @@ use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dende\EntriesBundle\Validator as Validate;
 use Dende\MembersBundle\Entity\Member;
+use Dende\ScheduleBundle\Entity\Occurence;
 
 /**
  * Entry
@@ -162,7 +163,7 @@ class Entry {
         return $this;
     }
 
-    public function setOccurence($occurence) {
+    public function setOccurence(Occurence $occurence) {
         $this->occurence = $occurence;
         return $this;
     }

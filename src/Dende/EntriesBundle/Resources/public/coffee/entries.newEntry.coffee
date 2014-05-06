@@ -38,9 +38,9 @@ class @NewEntry extends @AbstractModal
     
     $.getJSON url, (result) =>
       $.each result, (i, element) ->
-        startHour = moment(element.startHour).format("HH:mm")
-        endHour = moment(element.endHour).format("HH:mm")
-        
+        startHour = moment(element.startDate).format("HH:mm")
+        endHour = moment(element.endDate).format("HH:mm")
+                
         $option = $("<option />")
         $option.attr "value", element.id
         $option.text "(#{startHour}-#{endHour}) #{element.activityName}"

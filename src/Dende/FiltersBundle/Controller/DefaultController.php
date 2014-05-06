@@ -91,7 +91,7 @@ class DefaultController extends Controller {
 
     /**
      * @Route("/new/{listname}", name="_filter_new", requirements={"listname" = "(members|vouchers|entries)"})
-     * @Template("FiltersBundle::filter.html.twig")
+     * @Template("FiltersBundle:Default:newFilter.html.twig")
      */
     public function newFilterAction(Request $request, $listname) {
         $response = new Response(
@@ -144,7 +144,7 @@ class DefaultController extends Controller {
         }
 
         return $response->setContent(
-                        $this->renderView("FiltersBundle::filter.html.twig", array(
+                        $this->renderView("FiltersBundle:Default:newFilter.html.twig", array(
                             'form'     => $form->createView(),
                             'listname' => $listname
                         ))

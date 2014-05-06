@@ -28,7 +28,7 @@ twig:
     strict_variables: %kernel.debug%
     form:
         resources:
-            - LayoutBundle:Form:fields.html.twig
+            - ::fields.html.twig
 
 # Assetic Configuration
 assetic:

@@ -52,7 +52,6 @@ class @AbstractModal
       @$saveButton.addClass @BUTTON_SAVE_CLASS
          
   handleSaveButton: (e) =>
-    e.preventDefault()
     if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
       if confirm @CONFIRM_DELETE_TEXT
         deleteAction = @form.attr "data-delete-action";
@@ -68,7 +67,7 @@ class @AbstractModal
     @modal.hide()
     datatable.fnReloadAjax() 
     
-  handleSubmitForm: (action,data, container) =>
+  handleSubmitForm: (action, data, container) =>
     $.ajax
       url: action
       data: data

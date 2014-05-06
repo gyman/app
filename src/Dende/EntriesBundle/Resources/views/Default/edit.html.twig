@@ -1,6 +1,6 @@
 <div class="alert">
     <a class="close" data-dismiss="alert" href="#">&times;</a>
-    Wszedł na zajęcia <span class="badge badge-info">{{ entry.getActivity().getName }}</span> o <strong>{{ entry.getStartDate()|date("H:i") }}</strong>
+    Wszedł na zajęcia <span class="badge badge-info">{{ entry.getOccurence().getEvent().getActivity().getName }}</span> o <strong>{{ entry.getStartDate()|date("H:i") }}</strong>
 </div>
 
 tu bedzie formularz zamykania i sprzedazy

@@ -91,28 +91,27 @@ class EntryType extends AbstractType {
                 'choices'  => $this->getChoices()->toArray(),
                 'data'     => $this->getDefaultChoice(),
                 "expanded" => true,
-//                "mapped"   => false
             ))
             ->add('entryPrice', 'text')
         ;
 
-
-        $formModifier = function (FormInterface $form, \DateTime $startDate, OccurenceRepository $occurenceRepository) {
-            $startDate->modify("00:00:00");
-            $endDate = clone($startDate);
-            $endDate->modify("23:59:59");
-
-            $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
-
-            $form->add('occurence', "entity", [
-                'class'    => "ScheduleBundle:Occurence",
-                'multiple' => false,
-                'choices'  => $occurences,
-                'property' => 'event.activity.name'
-            ]);
-        };
-
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "setupActivity"));
+
+//        $formModifier = function (FormInterface $form, \DateTime $startDate, OccurenceRepository $occurenceRepository) {
+//            $startDate->modify("00:00:00");
+//            $endDate = clone($startDate);
+//            $endDate->modify("23:59:59");
+//
+//            $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
+//
+//            $form->add('occurence', "entity", [
+//                'class'    => "ScheduleBundle:Occurence",
+//                'multiple' => false,
+//                'choices'  => $occurences,
+//                'property' => 'event.activity.name'
+//            ]);
+//        };
+
 
 //        $builder->addEventListener(
 //            FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier, $occurenceRepository) {
@@ -130,14 +129,16 @@ class EntryType extends AbstractType {
     }
 
     public function setupActivity(FormEvent $formEvent) {
-        $event = $formEvent->getData();
+        $data = $formEvent->getData();
         $form = $formEvent->getForm();
 
+        $startDate = clone($data->getStartDate());
         $startDate->modify("00:00:00");
+        
         $endDate = clone($startDate);
         $endDate->modify("23:59:59");
 
-        $occurences = $occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
+        $occurences = $this->occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
 
         $form->add('occurence', "entity", [
             'class'    => "ScheduleBundle:Occurence",

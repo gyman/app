@@ -1,11 +1,10 @@
-class @Filter
+class @NewFilterModal extends @AbstractModal
   constructor: ()->
-    @modal = window.modal
-    @$modalWindow = @modal.getModal()
+    super()
+  
     @setupAddFilterSelect()
     @setupUniform()
     @setupSaveFilterCheckbox()
-    @setupSubmitButton()
     @setupRemoveFilter()
     
   addFilterSelector: "#filter_addFilter"
@@ -14,7 +13,7 @@ class @Filter
   pinToDashboardSelector: "#filter_pinned"
   filterFormSelector: "form#filterForm"
   $form: $("form#filterForm")
-  useFilterButtonSelector: "#useFilter"
+  useFilterButtonSelector: "#saveFormInModal"
   filterTabsSelector: "ul#filterTabs"
   
   # addFilter dropdown
@@ -59,6 +58,7 @@ class @Filter
       dropdownAutoWidth : true
       containerCss : 
         width : "120px"  
+        
   # member filter handler
         
   memberSubfilterHandler: () =>
@@ -130,10 +130,14 @@ class @Filter
       containerCss : 
         width : "120px"  
     
-    $([date1Selector,date2Selector].join(",")).datetimepicker
-      format: 'dd.mm.yyyy'
-      minView: 0
-      maxView: 1
+    settings = @datetimepickerSettings
+    
+    settings.format = 'dd.mm.yyyy'
+    settings.minView = 'month'
+    settings.maxView = 'decade'
+    settings.startView = 'month'
+    
+    $([date1Selector,date2Selector].join(",")).datetimepicker settings
       
     $(date2Selector).hide()
       
@@ -248,40 +252,25 @@ class @Filter
         $groupsToHide.hide()
         
   # submission of the filter
-        
-  setupSubmitButton: =>
-    @$saveButton = $(@useFilterButtonSelector,@$modalWindow)
-    @$saveButton.off("click.filter.saveButton").on "click.filter.saveButton", (e) =>
-      e.preventDefault()
-      
-      if !@validateFilter()
+    
+  handleSaveButton: (e) =>
+    if !@validateFilter()
         return false
-        
-      action = @$form.attr "action"
-      data = @$form.serialize()
-      @modal.block()
-
-      $.ajax
-        url: action
-        data: data
-        success: (response) =>
-          if $(@saveFilterSelector).is(":checked")
-            @addFilterTab(response.data)
-          else
-            $("li",@filterTabsSelector).removeClass "active"
-          datatable.fnReloadAjax()
-          @modal.hide()
-        error: (xhr, textStatus, errorThrown) =>
-          if xhr.status == 400
-            @modal.setBody xhr.responseText
-            if $(@saveFilterSelector).is(":checked")
-              $(@filterNameSelector+", "+@pinToDashboardSelector).parents(".control-group").show()
-          else if xhr.status == 500
-            alert xhr.responseText
-        complete: =>
-          @modal.unblock()
-        type: @$form.attr "method"
-        
+    super()
+    
+  handleSubmitSuccess: (response) =>
+    if $(@saveFilterSelector).is(":checked")
+      @addFilterTab(response.data)
+    else
+      $("li",@filterTabsSelector).removeClass "active"
+    datatable.fnReloadAjax()
+    super()
+    
+  handleSubmitError: (xhr, textStatus, errorThrown) =>
+    super()
+    if $(@saveFilterSelector).is(":checked")
+      $(@filterNameSelector+", "+@pinToDashboardSelector).parents(".control-group").show()
+  
   # validate filter
   
   validateFilter: () =>

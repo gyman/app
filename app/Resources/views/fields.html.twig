@@ -88,9 +88,10 @@
         {{ block('horizontal_checkbox_row') }}
     {% else %}
 <div class="control-group">
+        {{ form_label(form) }}
     <div class="controls">
-                    {{ form_label(form) }}
-                    {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
     </div>
 </div>
     {% endif %}

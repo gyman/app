@@ -31,14 +31,16 @@
         <h3>{% block modalTitle %}Filtrowanie wyników{%endblock modalTitle%}</h3>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn btn-primary pull-right" id="useFilter">Zastosuj</a>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zastosuj</a>
     </div>
 </div>
 {% endblock modal %}
 
 {% block javascript %}
 {% javascripts
-    '@FiltersBundle/Resources/public/coffee/filter.coffee'
+    '@FiltersBundle/Resources/public/coffee/NewFilterModal.coffee'
+    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
+    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
 %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
@@ -47,7 +49,7 @@
         modal.setupFromNode("div#ui-editFilterData");
         modal.setModalWindowClass("addFilterModal");
 
-        window.filter = new Filter();
+        window.filter = new NewFilterModal();
     });
 </script>
 {% endblock javascript %}
