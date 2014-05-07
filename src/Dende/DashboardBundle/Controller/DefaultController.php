@@ -8,9 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use \DateTime;
 
-/**
- * @Route("/dashboard")
- */
 class DefaultController extends Controller {
 
     /**
@@ -32,7 +29,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/activities/{date}", name="_dashboard_getActivities")
+     * @Route("/dashboard/activities/{date}", name="_dashboard_getActivities")
      */
     public function getActivitiesAction(DateTime $date) {
         $events = $this->get("schedule")->getEventsForDashboard($date);
