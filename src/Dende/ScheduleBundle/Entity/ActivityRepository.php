@@ -15,7 +15,23 @@ class ActivityRepository extends EntityRepository {
 
     public function getActivitiesQuery() {
         return $this->createQueryBuilder("a")
-                ->select();
+                        ->select();
+    }
+
+    public function getPopularityQuery() {
+        return $this->createQueryBuilder("a")
+                        ->select("a.name", "count(en.id) as cnt")
+                        ->join("a.events", "e")
+                        ->join("e.occurences", "o")
+                        ->join("o.entries", "en")
+                        ->setMaxResults(6)
+                        ->groupBy("a.name")
+                        ->orderBy("cnt", "DESC");
+    }
+
+    public function getPopularity() {
+        $query = $this->getPopularityQuery();
+        return $query->getQuery()->execute();
     }
 
     public function getAllActivities() {
@@ -29,10 +45,11 @@ class ActivityRepository extends EntityRepository {
             }
 
             return $this->getActivitiesQuery()
-                    ->join("a.events", "e")
-                    ->where("e.dayOfWeek = :day")
-                    ->setParameter("day", $today)
-                    ->getQuery()->execute();
+                            ->join("a.events", "e")
+                            ->where("e.dayOfWeek = :day")
+                            ->setParameter("day", $today)
+                            ->getQuery()->execute();
         }
     }
+
 }

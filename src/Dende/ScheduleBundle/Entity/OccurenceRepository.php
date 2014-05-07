@@ -18,6 +18,7 @@ class OccurenceRepository extends EntityRepository {
         $queryBuilder = $this->createQueryBuilder("o");
         $queryBuilder
             ->where("o.startDate BETWEEN :start AND :end")
+            ->orderBy("o.startDate","ASC")
             ->setParameters([
                 "start" => $startDate,
                 "end"   => $endDate,

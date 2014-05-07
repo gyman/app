@@ -1,0 +1,14 @@
+<div class="reminder" id="activitiesTab" data-date="{{ date|date("Y-m-d H:i:s") }}">
+    <h4><a href="#" class="prevActivityDay">&LeftTriangle;</a> <a href="#" class="nextActivityDay">&RightTriangle;</a>Zajęcia w dniu {{ date|date("d.m.Y (l)") }}:
+        <a class="icon tip" href="{{ path("_schedule_calendar") }}" oldtitle="Configure" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-cog-2"></span></a>
+    </h4>
+    <ul>
+                {% for event in events %}
+        <li class="clearfix">
+            <span class="number">{{ event.startDate|date("H:i") }} - {{ event.endDate|date("H:i") }}</span> 
+            <span class="txt">{{ event.activityName }}</span>
+            <a class="btn btn-warning" href="#">{{ event.entriesCount }} osób</a>
+        </li>               
+                {% endfor %}
+    </ul>
+</div>

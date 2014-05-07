@@ -82,7 +82,7 @@ class EntryType extends AbstractType {
         $builder
             ->add('startDate', "datetime", array(
                 "widget" => "single_text",
-                "format" => "dd.MM.yyyy H:mm",
+                "format" => "dd.MM.yyyy HH:mm",
                 "attr"   => array(
                     "readonly" => "READONLY",
                 )

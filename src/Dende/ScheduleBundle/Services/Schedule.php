@@ -24,11 +24,13 @@ class Schedule {
      * Occurences [activityName, startDate, endDate, entriesCount]
      * @return array
      */
-    public function getTodayEventsForDashboard() {
+    public function getEventsForDashboard(DateTime $date) {
         $occurenceRepository = $this->container->get("occurence_repository");
 
-        $start = new \DateTime("today 00:00:00");
-        $end = new \DateTime("today 23:59:59");
+        $start = clone($date);
+        $start->modify("00:00:00");
+        $end = clone($date);
+        $end->modify("23:59:59");
 
         $occurences = $occurenceRepository->getOccurencesForPeriod($start, $end);
 
@@ -56,13 +58,13 @@ class Schedule {
 
     /**
      * Prepares data to display on EntryModal on event selector
-     * @param type $timestamp
+     * @param type $date
      */
-    public function getEventsForEntryEventSelector($timestamp) {
+    public function getEventsForEntryEventSelector(\DateTime $date) {
         $occurenceRepository = $this->container->get("occurence_repository");
 
-        $start = DateTime::createFromFormat('U', $timestamp);
-        $end = DateTime::createFromFormat('U', $timestamp);
+        $start = clone($date);
+        $end = clone($date);
 
         $start->modify("00:00:00");
         $end->modify("23:59:59");

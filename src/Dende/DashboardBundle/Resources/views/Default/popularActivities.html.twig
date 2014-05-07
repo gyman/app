@@ -1,0 +1,11 @@
+<div class="reminder" id="activitiesTab" data-date="{{ date|date("Y-m-d H:i:s") }}">
+    <h4>Najpopularniejsze zajęcia</h4>
+    <ul>
+                {% for activity in popularActivities %}
+        <li class="clearfix">
+            <span class="txt">{{ activity.name }}</span>
+            <a class="btn btn-warning" href="#">{{ activity.cnt}} osób</a>
+        </li>               
+                {% endfor %}
+    </ul>
+</div>

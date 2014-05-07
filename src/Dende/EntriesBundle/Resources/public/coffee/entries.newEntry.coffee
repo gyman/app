@@ -29,7 +29,7 @@ class @NewEntry extends @AbstractModal
       
   updateSelectEvent: () =>
     val = $(@startDateInputSelector).val()
-    url = Routing.generate '_events_getForDate', {timestamp: moment(val,"DD.MM.YYYY HH:mm").unix()}
+    url = Routing.generate '_events_getForDate', {date: moment(val,"DD.MM.YYYY HH:mm").format("YYYY-MM-DD")}
 
     $eventSelect = $(@eventSelector)
     $eventSelect.select2 "destroy"

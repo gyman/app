@@ -6,6 +6,7 @@ class @AbstractModal
     @form = $(".modal-body form",@$modalWindow)
     
     @datetimepickerSettings =
+      minuteStep:     15
       format:         'dd.mm.yyyy'
       weekStart:      1
       autoclose:      true

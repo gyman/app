@@ -7,13 +7,15 @@
         </tr>
     </thead>
     <tbody>
-        {% for entry in totalMemberEntries %}
-        <tr>
-            <td>{{ entry.getCreated()|date("d.m.y (l) H:i") }}</td>
-            <td>{{ entry.getActivity().getName() }}</td>
-            <td>{{ entry.getEntryType() }}</td>
-        </tr>
-        {% endfor %}
+        {% if totalMemberEntries is defined %}
+            {% for entry in totalMemberEntries %}
+            <tr>
+                <td>{{ entry.getCreated()|date("d.m.y (l) H:i") }}</td>
+                <td>{{ entry.getActivity().getName() }}</td>
+                <td>{{ entry.getEntryType() }}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
     </tbody>
 </table>
 

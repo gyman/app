@@ -1,0 +1,1 @@
+class @EditEntry extends @NewEntry

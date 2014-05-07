@@ -17,20 +17,13 @@ class UpdateLastEntryListener {
     }
 
     public function postPersist(LifecycleEventArgs $args) {
-        /** @var Voucher */
+        /** @var Entry $entity */
         $entity = $args->getEntity();
-
+        
         if ($entity instanceof Entry)
         {
-            $voucher = $entity->getVoucher();
-            
-            if($voucher == null) // entry paid or free
-            {
-                return false;
-            }
-            
             /** @var Member */
-            $member = $voucher->getMember();
+            $member = $entity->getMember();
             $member->setLastEntry($entity);
             $this->container->get("member_manager")->save($member);
 

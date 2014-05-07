@@ -31,12 +31,12 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/getDate/{timestamp}",name="_events_getForDate")
+     * @Route("/getDate/{date}",name="_events_getForDate")
      * @Template()
      */
-    public function getEventsForDateAction($timestamp) {
+    public function getEventsForDateAction(\DateTime $date) {
         $serializer = $this->get("jms_serializer");
-        $eventsArray = $this->get('schedule')->getEventsForEntryEventSelector($timestamp);
+        $eventsArray = $this->get('schedule')->getEventsForEntryEventSelector($date);
 
         return new Response($serializer->serialize($eventsArray, "json"), 200, ["Content-Type" => "application/json"]);
     }

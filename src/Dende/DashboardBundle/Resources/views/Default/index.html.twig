@@ -32,22 +32,12 @@
     {% endif %}
     {% if events|length > 0 %}
     <div class="span6">
-        <div class="reminder">
-            <h4>Zajęcia dzisiaj ({{ "now"|date("l") }}):
-                <a class="icon tip" href="{{ path("_schedule_calendar") }}" oldtitle="Configure" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-cog-2"></span></a>
-            </h4>
-            <ul>
-                {% for event in events %}
-                <li class="clearfix">
-                    <span class="number">{{ event.startDate|date("H:i") }} - {{ event.endDate|date("H:i") }}</span> 
-                    <span class="txt">{{ event.activityName }}</span>
-                    <a class="btn btn-warning" href="#">{{ event.entriesCount }} osób</a>
-                </li>               
-                {% endfor %}
-            </ul>
-        </div>
+        {% include "DashboardBundle:Default:activities.html.twig" %}
     </div>
     {% endif %}
+    <div class="span6">
+        {% include "DashboardBundle:Default:popularActivities.html.twig" %}
+    </div>
 </div>
 {% endblock body %}
 
@@ -55,6 +45,7 @@
 {{ parent() }}
 {% javascripts
     "@DashboardBundle/Resources/public/coffee/dashboard.coffee"
+    "@DashboardBundle/Resources/public/coffee/ActivityTab.coffee"
  %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
