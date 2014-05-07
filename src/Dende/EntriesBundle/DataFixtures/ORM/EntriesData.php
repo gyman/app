@@ -35,6 +35,7 @@ class EntriesData extends AbstractFixture implements OrderedFixtureInterface {
         $entry->setActivity($this->getReference($activity));
         $entry->setVoucher($this->getReference($voucher));
         $entry->setEntryType($entryType);
+        $entry->setMember($this->getReference($member));
         
         $this->manager->persist($entry);
         $this->manager->flush();

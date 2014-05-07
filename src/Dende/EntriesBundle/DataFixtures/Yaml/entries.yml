@@ -2,23 +2,29 @@ Entry001:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
 Entry002:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
 Entry003:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
 Entry004:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
 Entry005:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
 Entry006:
     activity: bjjMorning
     voucher:  Voucher04
     entryType: voucher
+    member:     Member01
