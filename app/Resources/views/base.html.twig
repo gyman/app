@@ -19,8 +19,6 @@
         <![endif]-->
 
         {% spaceless %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-        {# <link rel="stylesheet" href="{{ asset('css/supr.css') }}"> #}
         {% block stylesheets %}
 
         {% stylesheets
@@ -30,6 +28,8 @@
         {% endstylesheets %}
 
         {% stylesheets
+            'bundles/default/css/bootstrap.min.css'
+            'bundles/default/css/bootstrap-responsive.min.css'
             'bundles/default/js/plugins/select2-3.4.5/select2.css'
             'bundles/default/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'
             'bundles/layout/plugins/misc/qtip/jquery.qtip.css'
@@ -52,6 +52,7 @@
             'bundles/layout/css/custom.css'
             'bundles/layout/css/ie8.css'
             'bundles/layout/css/icons.css'
+            'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
             filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -106,6 +107,9 @@
                 '@DefaultBundle/Resources/public/js/plugins/select2-3.4.5/select2.js'
                 '@DefaultBundle/Resources/public/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
                 '@DefaultBundle/Resources/public/js/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pl.js'
+
+                '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
+                '@ListsBundle/Resources/public/coffee/reloadAjax.coffee'
 
                 '@LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js'
                 '@LayoutBundle/Resources/public/js/libs/excanvas.min.js'
