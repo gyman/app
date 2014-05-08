@@ -2,41 +2,9 @@ class @EditEvent extends @NewEvent
   constructor: ()->
     super()
     @initChooseEditType()
-    @initDeleteCheckbox()
-  
-  form: $("form#editEventForm",@$modalWindow)
-  
-  BUTTON_SAVE_STATE: "Zapisz"
-  BUTTON_SAVE_CLASS: "btn-primary"
-  BUTTON_DELETE_STATE: "Usuń"
-  BUTTON_DELETE_CLASS: "btn-danger"
-  
-  initDeleteCheckbox: =>
-    @deleteCheckbox = $("input#deleteOccurenceCheckbox",@$modalWindow)
-    @deleteCheckbox.change @handleDeleteCheckboxChange
-  
-  handleDeleteCheckboxChange: (e) =>
-    e.preventDefault()
-    if @deleteCheckbox.is ":checked"
-      @$saveButton.text @BUTTON_DELETE_STATE
-      @$saveButton.removeClass @BUTTON_SAVE_CLASS
-      @$saveButton.addClass @BUTTON_DELETE_CLASS
-    else
-      @$saveButton.text @BUTTON_SAVE_STATE
-      @$saveButton.removeClass @BUTTON_DELETE_CLASS
-      @$saveButton.addClass @BUTTON_SAVE_CLASS
-  
-  handleSaveButton: (e) =>
-    e.preventDefault()
-    if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
-      if confirm "Czy na pewno chcesz usunąć wydarzenia?"
-        deleteAction = @form.data "deleteAction"
-        $.get deleteAction, @handleDeleteAction
-    else
-      super(e)
-  
+
   handleDeleteAction: (e) =>
-    @modal.hide()
+    super()
     $("#calendar").fullCalendar( 'refetchEvents' );
   
   initChooseEditType: =>

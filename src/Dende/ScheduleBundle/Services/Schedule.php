@@ -24,7 +24,7 @@ class Schedule {
      * Occurences [activityName, startDate, endDate, entriesCount]
      * @return array
      */
-    public function getEventsForDashboard(DateTime $date) {
+    public function getOccurencesForDashboard(DateTime $date) {
         $occurenceRepository = $this->container->get("occurence_repository");
 
         $start = clone($date);
@@ -41,19 +41,7 @@ class Schedule {
             return $result;
         }
 
-        foreach ($occurences as $occurence) {
-            /**
-             * @var $occurence Occurence
-             */
-            $result[] = [
-                "activityName" => $occurence->getEvent()->getActivity()->getName(),
-                "startDate"    => $occurence->getStartDate(),
-                "endDate"      => $occurence->getEndDate(),
-                "entriesCount" => count($occurence->getEntries()),
-            ];
-        }
-
-        return $result;
+        return $occurences;
     }
 
     /**

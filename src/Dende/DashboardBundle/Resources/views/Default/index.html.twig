@@ -11,30 +11,12 @@
 </div><!-- End .heading-->
 
 <div class="form-row row-fluid">
-
-    {% if filters|length > 0 %}
-    <div class="box span6">
-        <div class="title"><h4><span>Filtry uczestników</span></h4></div>
-        <div class="content">
-            <ul class="bigBtnIcon">
-                {% for filter in filters if filter.listname == "members" %}
-                <li>
-                    <a class="tipB" href="{{ path("_filter_set",{id: filter.getId(), listname : "members"}) }}">
-                        <span class="icon icomoon-icon-stats-up"></span>
-                        {# <span class="notification">5</span> #}
-                    </a>
-                    <div>{{ filter.getName() }}</div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endif %}
-    {% if events|length > 0 %}
+    {% if occurences|length > 0 %}
     <div class="span6">
         {% include "DashboardBundle:Default:activities.html.twig" %}
     </div>
     {% endif %}
+    
     <div class="span6">
         {% include "DashboardBundle:Default:popularActivities.html.twig" %}
     </div>
@@ -50,3 +32,18 @@
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}
+
+{# CSS #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter='cssrewrite'
+        '@DashboardBundle/Resources/public/less/dashboard.less'
+        filter="cssrewrite"
+    %}
+
+<link rel="stylesheet" href="{{ asset_url }}" />
+
+    {% endstylesheets %}
+{% endblock stylesheets %}

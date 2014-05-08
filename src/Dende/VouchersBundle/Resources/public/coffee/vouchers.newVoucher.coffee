@@ -44,4 +44,4 @@ class @NewVoucher  extends @AbstractModal
     
   handleSubmitSuccess: (response) =>
     super()
-    datatable.fnReloadAjax()
+    datatable.fnReloadAjax() if datatable?

@@ -17,13 +17,13 @@ class DefaultController extends Controller {
      */
     public function indexAction() {
         $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
-        $events = $this->get("schedule")->getEventsForDashboard(new DateTime);
+        $occurences = $this->get("schedule")->getOccurencesForDashboard(new DateTime);
         $popularActivities = $this->get("activity_repository")->getPopularity();
         
         return array(
             "date"    => new DateTime,
             "filters" => $pinnedFilters,
-            "events"  => $events,
+            "occurences"  => $occurences,
             "popularActivities" => $popularActivities
         );
     }
@@ -32,14 +32,14 @@ class DefaultController extends Controller {
      * @Route("/dashboard/activities/{date}", name="_dashboard_getActivities")
      */
     public function getActivitiesAction(DateTime $date) {
-        $events = $this->get("schedule")->getEventsForDashboard($date);
+        $occurences = $this->get("schedule")->getOccurencesForDashboard($date);
 
         $response = new Response;
 
         return $response->setContent(
                 $this->renderView("DashboardBundle:Default:activities.html.twig", array(
                     "date"   => $date,
-                    "events" => $events
+                    "occurences" => $occurences
                     )
                 )
         );

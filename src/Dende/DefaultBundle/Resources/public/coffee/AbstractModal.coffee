@@ -66,7 +66,7 @@ class @AbstractModal
       
   handleDeleteAction: (e) =>
     @modal.hide()
-    datatable.fnReloadAjax() 
+    datatable.fnReloadAjax() if datatable?
     
   handleSubmitForm: (action, data, container) =>
     $.ajax

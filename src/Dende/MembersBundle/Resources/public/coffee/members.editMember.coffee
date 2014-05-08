@@ -30,7 +30,7 @@ class @EditMember extends @AbstractModal
     $tab.trigger "click"
     
   handleSubmitSuccess: (response) =>
-    datatable.fnReloadAjax()
+    datatable.fnReloadAjax() if datatable?
     @modal.hide()
     
   handleSubmitError: (xhr, textStatus, errorThrown) =>

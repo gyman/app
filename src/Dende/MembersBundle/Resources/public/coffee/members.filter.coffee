@@ -227,7 +227,7 @@ class @Filter extends @AbstractModal
             @addFilterTab(response.data)
           else
             $("li",@filterTabsSelector).removeClass "active"
-          datatable.fnReloadAjax()
+          datatable.fnReloadAjax() if datatable?
           @modal.hide()
         error: (xhr, textStatus, errorThrown) =>
           if xhr.status == 400

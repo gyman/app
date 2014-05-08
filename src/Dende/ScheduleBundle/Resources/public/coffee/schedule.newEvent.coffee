@@ -6,17 +6,9 @@ class @NewEvent extends @AbstractModal
     @setupSpinner()
     @initStartDatepicker()
     @initEndDatepicker()
-    @initSaveButton()
     @initChooseEventType()
 
-  $saveButton: null
-         
-  form: $("form#newEventForm",@$modalWindow)
-        
-  initChooseEventType: =>
-    $weekly = "#dende_schedulebundle_event_eventType_0";
-    $single = "#dende_schedulebundle_event_eventType_1";
-    
+  initChooseEventType: =>   
     $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").off("click.chooseEventType").on "click.chooseEventType", (e) =>
       if $(e.target).val() == "weekly"
         $("input#dende_schedulebundle_event_endDate").parents(".control-group").show()
@@ -52,71 +44,39 @@ class @NewEvent extends @AbstractModal
     @$activitySelect.select2 "enable", false
     $("#dende_schedulebundle_event_activity").parents("div.control-group").hide()
     $("#dende_schedulebundle_event_newActivity").parents("div.control-group").show()
-  
-  initSaveButton: =>
-    @$saveButton = $("#saveFormInModal",@$modalWindow)
-    @$saveButton.off("click.saveButton").on "click.saveButton", @handleSaveButton
-        
-  handleSaveButton: (e) =>
-    e.preventDefault()
-    container = $(".modal-body",@$modalWindow)
-    action = @form.attr "action"
-    data = @form.serialize()
-    modal.block()
-    @handleSubmitForm action, data, container
-        
-  handleSubmitForm: (action,data, container) =>
-    $.ajax
-      url: action
-      data: data
-      success: (response) =>
-        @modal.hide()
-        $("#calendar").fullCalendar( 'refetchEvents' );
-      error: (xhr, textStatus, errorThrown) =>
-        if xhr.status == 400
-          @modal.setBody xhr.responseText
-        else if xhr.status == 500
-          alert "Wystąpił błąd serwera"
-      complete: =>
-        @modal.unblock()
-      type: @form.attr "method"
-  
+    
+  handleSubmitSuccess: (response) =>
+    super()
+    $("#calendar").fullCalendar( 'refetchEvents' );
+
   initStartDatepicker: () =>
     stDate = moment().set('hour',0).set('minute',0)
     endDate = moment().add('y',1)
-    @$datePicker = $("#eventStartDate").datetimepicker
-      format: 'dd.mm.yyyy hh:ii'
-      weekStart: 1
-      autoclose: true
-      todayBtn: true
-      todayHighlight: true
-      minuteStep: 15
-      pickerPosition: "bottom-left"
-      minView: 0
-      maxView: 1
-      startDate: stDate._d
-      endDate: endDate._d
-      
-    @$datePicker.on "changeDate", (ev) =>
-      @$datePicker.datetimepicker 'hide'
+    
+    settings = @datetimepickerSettings
+    settings.format = 'dd.mm.yyyy hh:ii'
+    settings.todayBtn = true
+    settings.startView = 'month'
+    settings.minView = 'hour'
+    settings.maxView = 'year'
+    settings.startDate = stDate._d
+    settings.endDate = endDate._d
+
+    @$datePicker = $("#eventStartDate").datetimepicker settings
   
   initEndDatepicker: () =>
     endDate = moment().add('y',1)
-    @$datePicker = $("#eventEndDate").datetimepicker
-      format: 'dd.mm.yyyy'
-      weekStart: 1
-      autoclose: true
-      todayBtn: true
-      todayHighlight: true
-      minuteStep: 15
-      pickerPosition: "bottom-left"
-      minView: 2
-      maxView: 2
-      startDate: moment()._d
-      endDate: endDate._d
-      
-    @$datePicker.on "changeDate", (ev) =>
-      @$datePicker.datetimepicker 'hide'
+    
+    settings = @datetimepickerSettings
+    settings.format = 'dd.mm.yyyy'
+    settings.todayBtn = true
+    settings.startView = 'month'
+    settings.minView = 'month'
+    settings.maxView = 'year'
+    settings.startDate = moment()._d
+    settings.endDate = endDate._d
+    
+    @$datePicker = $("#eventEndDate").datetimepicker settings
     
   setupSpinner: =>
     $("#dende_schedulebundle_event_duration").spinner

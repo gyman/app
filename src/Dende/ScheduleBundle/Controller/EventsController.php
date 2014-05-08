@@ -14,7 +14,7 @@ use Dende\ScheduleBundle\Form\EventType;
 use Dende\ScheduleBundle\Form\OccurenceType;
 
 /**
- * @Route("/event",name="_events_getWeek")
+ * @Route("/event")
  */
 class EventsController extends Controller {
 
@@ -96,11 +96,11 @@ class EventsController extends Controller {
 //        $em->flush();
 
         return $response->setContent(
-                $this->renderView("ScheduleBundle:Events:drag.html.twig", array(
-                    "form"      => $form->createView(),
-                    "occurence" => $occurence
-                    )
-                )
+                        $this->renderView("ScheduleBundle:Events:drag.html.twig", array(
+                            "form"      => $form->createView(),
+                            "occurence" => $occurence
+                                )
+                        )
         );
     }
 
@@ -129,26 +129,16 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/{event}/delete",name="_events_delete")
-     * @ParamConverter("event", class="ScheduleBundle:Event")
+     * @Route("/occurence/{occurence}/delete",name="_events_delete")
+     * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
      * Template()
      */
-    public function deleteEventAction(Event\Event $event, Request $request) {
+    public function deleteEventAction(Event\Occurence $occurence) {
+        throw new Exception("finish this!");
+        die(var_dump($occurence));
+        
         $em = $this->getDoctrine()->getManager();
-        $em->remove($event);
-        $em->flush();
-        return new Response();
-    }
-
-    /**
-     * @Route("/{event}/delete",name="_events_delete_one")
-     * @ParamConverter("event", class="ScheduleBundle:Event")
-     * Template()
-     */
-    public function deleteOneEventAction(Event\Event $event, Request $request) {
-        // gets Date when should be removed and adds it to exclusion_list
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($event);
+        $em->remove($occurence);
         $em->flush();
         return new Response();
     }
@@ -160,7 +150,7 @@ class EventsController extends Controller {
      */
     public function newAction(Request $request) {
         $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
+                'Content', 200, array('content-type' => 'text/html')
         );
 
         $event = new Event\Event();
@@ -187,22 +177,28 @@ class EventsController extends Controller {
         $this->getDoctrine()->getManager()->flush();
 
         return $response->setContent(
-                $this->renderView("ScheduleBundle:Events:new.html.twig", array(
-                    'form'  => $form->createView(),
-                    'event' => $event,
-                    )
-                )
+                        $this->renderView("ScheduleBundle:Events:new.html.twig", array(
+                            'form'  => $form->createView(),
+                            'event' => $event,
+                                )
+                        )
         );
     }
 
     /**
-     * @Route("/{event}/occurence/{occurence}/show",name="_events_show")
+     * @Route("/occurence/{occurence}/show",name="_events_show")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
-     * @ParamConverter("event", class="ScheduleBundle:Event")
      * @Template()
      */
-    public function showAction(Event\Event $event, Event\Occurence $occurence, Request $request) {
-        throw new \Exception("not implemented");
+    public function showAction(Event\Occurence $occurence) {
+        $response = new Response;
+
+        return $response->setContent(
+                        $this->renderView("ScheduleBundle:Events:show.html.twig", array(
+                            'occurence' => $occurence,
+                                )
+                        )
+        );
     }
 
     /**
@@ -213,14 +209,14 @@ class EventsController extends Controller {
      */
     public function editAction(Event\Event $event, Event\Occurence $occurence, Request $request) {
         $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
+                'Content', 200, array('content-type' => 'text/html')
         );
 
         if ($occurence->isPast())
         {
             return $this->forward("ScheduleBundle:Events:Show", [
-                    "event"     => $event->getId(),
-                    "occurence" => $occurence->getId()
+                        "event"     => $event->getId(),
+                        "occurence" => $occurence->getId()
             ]);
         }
 
@@ -259,16 +255,16 @@ class EventsController extends Controller {
 
 
         return $response->setContent(
-                $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
-                    'form'                => $form->createView(),
-                    'event'               => $event,
-                    'occurence'           => $occurence,
-                    'eventType'           => get_class($event),
-                    'occurenceType'       => get_class($occurence),
-                    "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
-                    "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
-                    )
-                )
+                        $this->renderView("ScheduleBundle:Events:edit.html.twig", array(
+                            'form'                => $form->createView(),
+                            'event'               => $event,
+                            'occurence'           => $occurence,
+                            'eventType'           => get_class($event),
+                            'occurenceType'       => get_class($occurence),
+                            "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
+                            "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
+                                )
+                        )
         );
     }
 

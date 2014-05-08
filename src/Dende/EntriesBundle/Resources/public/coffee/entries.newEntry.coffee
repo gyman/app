@@ -92,4 +92,4 @@ class @NewEntry extends @AbstractModal
       
   handleSubmitSuccess: (response) =>
     super()
-    datatable.fnReloadAjax()
+    datatable.fnReloadAjax() if datatable?

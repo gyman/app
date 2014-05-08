@@ -7,11 +7,11 @@
         </tr>
     </thead>
     <tbody>
-        {% if totalMemberEntries is defined %}
-            {% for entry in totalMemberEntries %}
+        {% if member.entries|length > 0 %}
+            {% for entry in member.entries %}
             <tr>
                 <td>{{ entry.getCreated()|date("d.m.y (l) H:i") }}</td>
-                <td>{{ entry.getActivity().getName() }}</td>
+                <td>{{ entry.occurence.event.activity.name }}</td>
                 <td>{{ entry.getEntryType() }}</td>
             </tr>
             {% endfor %}

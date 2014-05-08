@@ -23,7 +23,14 @@
     Edytujesz pojedyncze wydarzenie.
     {%endif%}
 </div>
-<form id="editEventForm" action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}" class="form form-horizontal" method="POST" data-occurence="{{ occurenceSerialized }}"  data-event="{{ eventSerialized }}">
+<form
+    id="editEventForm"
+    action="{{ path("_events_edit", {occurence: occurence.id, event: event.id}) }}"
+    class="form form-horizontal" method="POST"
+    data-occurence="{{ occurenceSerialized }}" 
+    data-event="{{ eventSerialized }}"
+    data-delete-action="{{ path("_events_delete",{occurence: occurence.id}) }}"
+    >
     {% if form.editType is defined %}
         {{ form_row(form.editType) }}
     {% endif %}
@@ -65,7 +72,7 @@
     <div class="modal-footer">
         <form id="deleteOccurencesForm" class="pull-left" data-deleteAction="#"> 
             <label>
-                <input type="checkbox" id="deleteOccurenceCheckbox" />
+                <input type="checkbox" id="deleteCheckbox" />
                 <span class="serial hidden">Usuń wszystkie następne wystąpienia wydarzenia</span>
                 <span class="singular">Usuń to wystąpienie wydarzenia</span>
             </label>

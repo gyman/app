@@ -12,7 +12,7 @@ $ ->
       $tabs.removeClass "active"
       $tabs.filter(":first-child").addClass("active")
       $tab.remove()
-      datatable.fnReloadAjax()
+      datatable.fnReloadAjax() if datatable?
 
   # setting filters from tabs
 
@@ -26,7 +26,7 @@ $ ->
     $.get href, (response) =>
       $tabContainer.find("li").removeClass("active")
       $tab.addClass("active")
-      datatable.fnReloadAjax()
+      datatable.fnReloadAjax() if datatable?
 
   # adding favourites
 

@@ -263,7 +263,7 @@ class @NewFilterModal extends @AbstractModal
       @addFilterTab(response.data)
     else
       $("li",@filterTabsSelector).removeClass "active"
-    datatable.fnReloadAjax()
+    datatable.fnReloadAjax() if datatable?
     super()
     
   handleSubmitError: (xhr, textStatus, errorThrown) =>

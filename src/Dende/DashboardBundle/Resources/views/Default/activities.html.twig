@@ -3,12 +3,12 @@
         <a class="icon tip" href="{{ path("_schedule_calendar") }}" oldtitle="Configure" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-cog-2"></span></a>
     </h4>
     <ul>
-                {% for event in events %}
-        <li class="clearfix">
-            <span class="number">{{ event.startDate|date("H:i") }} - {{ event.endDate|date("H:i") }}</span> 
-            <span class="txt">{{ event.activityName }}</span>
-            <a class="btn btn-warning" href="#">{{ event.entriesCount }} osób</a>
-        </li>               
-                {% endfor %}
+        {% for occurence in occurences %}
+            <li class="clearfix{% if occurence.isPast() %} passedEvent{% endif %}">
+                <span class="number">{{ occurence.startDate|date("H:i") }} - {{ occurence.endDate|date("H:i") }}</span> 
+                <span class="txt">{{ occurence.event.activity.name }}</span>
+                <a class="btn btn-warning openUrlInModal" href="{{ path("_events_show", {occurence: occurence.id}) }}">{{ occurence.entries|length }} osób</a>
+            </li>               
+        {% endfor %}
     </ul>
 </div>
