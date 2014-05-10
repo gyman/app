@@ -3,7 +3,7 @@ class @AbstractModal
     @modal = window.modal
     @$modalWindow = @modal.getModal()
     
-    @form = $(".modal-body form",@$modalWindow)
+    @$form = $(".modal-body form",@$modalWindow)
     
     @datetimepickerSettings =
       minuteStep:     15
@@ -35,6 +35,8 @@ class @AbstractModal
 
   CONFIRM_DELETE_TEXT: "Czy na pewno skasować?"
 
+  deleteActionAttributeName: "deleteAction"
+
   initSaveButton: =>
     @$saveButton.off("click.saveButton").on "click.saveButton", @handleSaveButton       
           
@@ -55,12 +57,11 @@ class @AbstractModal
   handleSaveButton: (e) =>
     if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
       if confirm @CONFIRM_DELETE_TEXT
-        deleteAction = @form.attr "data-delete-action";
-        $.get deleteAction, @handleDeleteAction
+        $.get @$form.data(@deleteActionAttributeName), @handleDeleteAction
     else
       container = $(".modal-body",@$modalWindow)
-      action = @form.attr "action"
-      data = @form.serialize()
+      action = @$form.attr "action"
+      data = @$form.serialize()
       modal.block()
       @handleSubmitForm action, data, container
       
@@ -81,7 +82,7 @@ class @AbstractModal
           alert "Wystąpił błąd serwera"
       complete: =>
         @modal.unblock()
-      type: @form.attr "method"
+      type: @$form.attr "method"
       
   handleSubmitSuccess: (response) =>
     @modal.hide()

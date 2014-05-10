@@ -17,14 +17,28 @@ class OccurenceRepository extends EntityRepository {
     public function getOccurencesForPeriod(\DateTime $startDate, \DateTime $endDate) {
         $queryBuilder = $this->createQueryBuilder("o");
         $queryBuilder
-            ->where("o.startDate BETWEEN :start AND :end")
-            ->orderBy("o.startDate","ASC")
-            ->setParameters([
-                "start" => $startDate,
-                "end"   => $endDate,
+                ->where("o.startDate BETWEEN :start AND :end")
+                ->orderBy("o.startDate", "ASC")
+                ->setParameters([
+                    "start" => $startDate,
+                    "end"   => $endDate,
         ]);
 
         return $queryBuilder->getQuery()->execute();
+    }
+
+    public function deleteFollowing(Serial $occurence) {
+        $query = $this->getDeleteFollowingQueryBuilder($occurence);
+        return $query->getQuery()->execute();
+    }
+
+    public function getDeleteFollowingQueryBuilder(Serial $occurence) {
+        return $this->createQueryBuilder("o")
+                        ->delete()
+                        ->where("o.startDate >= :date")
+                        ->andWhere("o.event = :event")
+                        ->setParameter("date", $occurence->getStartDate())
+                        ->setParameter("event", $occurence->getEvent());
     }
 
 }

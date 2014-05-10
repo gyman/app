@@ -129,16 +129,32 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/occurence/{occurence}/delete",name="_events_delete")
+     * @Route("/occurence/{occurence}/delete/serial",name="_events_delete_serial")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
      * Template()
      */
-    public function deleteEventAction(Event\Occurence $occurence) {
-        throw new Exception("finish this!");
-        die(var_dump($occurence));
-        
+    public function deleteEventsAction(Event\Occurence $occurence) {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($occurence);
+        $this->get("occurence_repository")->deleteFollowing($occurence);        
+        return new Response();
+    }
+
+    /**
+     * @Route("/occurence/{occurence}/delete/singular",name="_events_delete_singular")
+     * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
+     * Template()
+     */
+    public function deleteAction(Event\Occurence $occurence) {
+        $event = $occurence->getEvent();
+        $em = $this->getDoctrine()->getManager();
+        if ($occurence instanceof Event\Singular)
+        {
+            $em->remove($occurence);
+        }
+        if ($event instanceof Event\Single)
+        {
+            $em->remove($event);
+        }
         $em->flush();
         return new Response();
     }
@@ -202,15 +218,16 @@ class EventsController extends Controller {
     }
 
     /**
-     * @Route("/{event}/occurence/{occurence}/edit",name="_events_edit")
+     * @Route("/occurence/{occurence}/edit",name="_events_edit")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
-     * @ParamConverter("event", class="ScheduleBundle:Event")
      * @Template()
      */
-    public function editAction(Event\Event $event, Event\Occurence $occurence, Request $request) {
+    public function editAction(Event\Occurence $occurence, Request $request) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
+
+        $event = $occurence->getEvent();
 
         if ($occurence->isPast())
         {
@@ -239,6 +256,17 @@ class EventsController extends Controller {
                     $this->getDoctrine()->getManager()->persist($event);
                 }
                 else if ($form->has("editType") && $form->get("editType")->getData() == Event\Occurence::SINGULAR)
+                {
+                    $singularOccurence = new Event\Singular;
+                    $singularOccurence->setStartDate($form->get("startDate")->getData());
+                    $singularOccurence->setDuration($form->get("duration")->getData());
+                    $singularOccurence->setDescription($form->get("description")->getData());
+                    $singularOccurence->setEvent($occurence->getEvent());
+                    
+                    $this->getDoctrine()->getManager()->remove($occurence);
+                    $this->getDoctrine()->getManager()->persist($singularOccurence);
+                }
+                else if (!$form->has("editType") && $occurence instanceof Event\Singular)
                 {
                     $occurence->setStartDate($form->get("startDate")->getData());
                     $occurence->setDuration($form->get("duration")->getData());

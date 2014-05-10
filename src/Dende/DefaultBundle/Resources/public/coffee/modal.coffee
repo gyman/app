@@ -83,7 +83,7 @@ class @Modal
     $.ajax
       url: action
       data: data
-      type: @form.attr "method"
+      type: @$form.attr "method"
       success: (response) =>
         @events.successSendFormEvent response
         @setBody response

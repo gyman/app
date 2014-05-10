@@ -141,12 +141,12 @@ class OccurencesManager {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->delete()
-            ->from("ScheduleBundle:Occurence", "o")
-            ->where("o.event = :event")
-            ->andWhere("o.startDate >= :start")
-            ->setParameters([
-                "event" => $event,
-                "start" => $startDate
+                ->from("ScheduleBundle:Occurence", "o")
+                ->where("o.event = :event")
+                ->andWhere("o.startDate >= :start")
+                ->setParameters([
+                    "event" => $event,
+                    "start" => $startDate
         ]);
 
         $qb->getQuery()->execute();
@@ -213,7 +213,7 @@ class OccurencesManager {
     }
 
     private function setupDaysArrayToNearestDay(\DateTime $startDate, array &$days) {
-        $currentDayNumber = (int) $startDate->format("N");
+        $currentDayNumber = (int) $startDate->format("N") - 1;
 
         while (current($days)) {
             $weekdayNumber = key($days);

@@ -1,43 +1,69 @@
 class @EditEvent extends @NewEvent
   constructor: ()->
     super()
+    @occurence = @$form.data("occurence")
+    @event = @$form.data("event")
     @initChooseEditType()
 
+  $editTypeRadio:     $("input[name=dende_schedulebundle_event\\\[editType\\\]]:radio")
+  $startDate:         $("input[name=dende_schedulebundle_event\\\[startDate\\\]]")
+  descriptionDiv:     $("textarea#dende_schedulebundle_event_description").parents(".control-group")
+  eventTypeDiv:       $("input[name=dende_schedulebundle_event\\\[eventType\\\]]").parents(".control-group")
+  deleteSingularSpan: "form#deleteForm span.singular"
+  deleteSerialSpan:   "form#deleteForm span.serial"
+  editTypeEventName:  "click.editType"
+  
   handleDeleteAction: (e) =>
     super()
     $("#calendar").fullCalendar( 'refetchEvents' );
   
-  initChooseEditType: =>
-    $serial = $("#dende_schedulebundle_event_editType_0");
-    $singular = $("#dende_schedulebundle_event_editType_1");
-    
-    event = $("form#editEventForm").data("event");
-    occurence = $("form#editEventForm").data("occurence");
-    
-    $("input[name=dende_schedulebundle_event\\\[editType\\\]]:radio").off("click.chooseEditType").on "click.chooseEditType", (e) =>
-      if $(e.target).val() == "singular"
-        $("textarea#dende_schedulebundle_event_description").parents(".control-group").show()
-        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").hide()
-        $("input[name=dende_schedulebundle_event\\\[eventType\\\]]").parents(".control-group").hide()
-        $("input[name=dende_schedulebundle_event\\\[endDate\\\]]").parents(".control-group").hide()
-        startDate = moment(occurence.start_date).format("DD.MM.YYYY HH:mm")
-        $("form#deleteOccurencesForm span.singular").removeClass("hidden")
-        $("form#deleteOccurencesForm span.serial").addClass("hidden")
+  setDeleteRoute: =>
+    if @$editTypeRadio.length == 0
+      if @occurence.occurence_type == "singular" 
+        @setSingularDeleteRoute()
       else
-        $("textarea#dende_schedulebundle_event_description").parents(".control-group").hide()
-        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").show()
-        $("input[name=dende_schedulebundle_event\\\[eventType\\\]]").parents(".control-group").show()
-        $("input[name=dende_schedulebundle_event\\\[endDate\\\]]").parents(".control-group").show()
-        startDate = moment(event.start_date).format("DD.MM.YYYY HH:mm")
-        $("form#deleteOccurencesForm span.singular").addClass("hidden")
-        $("form#deleteOccurencesForm span.serial").removeClass("hidden")
-     
-      $("input[name=dende_schedulebundle_event\\\[startDate\\\]]").val(startDate)
-        
-    $checked = $("input[name=dende_schedulebundle_event\\\[editType\\\]]:radio").filter(":checked")
+        @setSerialDeleteRoute()
+    else
+      if @$editTypeRadio.filter(":checked").val() == "singular"
+        @setSingularDeleteRoute()
+      else
+        @setSerialDeleteRoute()
+  
+  setSingularDeleteRoute: =>
+    @$form.data @deleteActionAttributeName, Routing.generate("_events_delete_singular",{occurence:@occurence.id})
+    
+  setSerialDeleteRoute: =>
+    @$form.data @deleteActionAttributeName, Routing.generate("_events_delete_serial",{occurence:@occurence.id})
+    
+  initChooseEditType: =>
+    @$editTypeRadio.off(@editTypeEventName).on @editTypeEventName, @handleEditTypeSwitch
+
+    $checked = @$editTypeRadio.filter(":checked")
     
     if $checked.length > 0
-      $checked.trigger "click.chooseEditType"
+      $checked.trigger @editTypeEventName
     else
-      $singular.trigger "click.chooseEditType"
-  
+      @$editTypeRadio.eq(1).trigger @editTypeEventName
+    
+  handleEditTypeSwitch: (e) =>
+    @setDeleteRoute()
+    
+    console.log @deleteSingularSpan
+    console.log @deleteSerialSpan
+    
+    if @$editTypeRadio.filter(":checked").val() == "singular" or @$editTypeRadio.filter(":checked").length == 0
+      @$startDate.val moment(@occurence.start_date).format("DD.MM.YYYY HH:mm")
+      @descriptionDiv.show()
+      @daysDiv.hide()
+      @eventTypeDiv.hide()
+      @endDateDiv.hide()
+      $(@deleteSingularSpan).removeClass("hidden")
+      $(@deleteSerialSpan).addClass("hidden")
+    else
+      @$startDate.val moment(@event.start_date).format("DD.MM.YYYY HH:mm")
+      @descriptionDiv.hide()
+      @daysDiv.show()
+      @eventTypeDiv.show()
+      @endDateDiv.show()
+      $(@deleteSingularSpan).addClass("hidden")
+      $(@deleteSerialSpan).removeClass("hidden")  
