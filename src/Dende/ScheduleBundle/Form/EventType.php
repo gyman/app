@@ -175,9 +175,9 @@ class EventType extends AbstractType {
                 if ($this->isOccurenceSerial())
                 {
                     $this->setupEditType($form);
+                    $this->setupEndDate($form);
+                    $this->setupDays($form);
                 }
-                $this->setupEndDate($form);
-                $this->setupDays($form);
             }
 
             $this->setupDescription($form);

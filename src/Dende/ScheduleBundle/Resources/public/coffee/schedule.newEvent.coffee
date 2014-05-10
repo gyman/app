@@ -8,21 +8,29 @@ class @NewEvent extends @AbstractModal
     @initEndDatepicker()
     @initChooseEventType()
 
+  $eventTypeRadio:      $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio")
+  endDateDiv:           $("input[name=dende_schedulebundle_event\\\[endDate\\\]]").parents(".control-group")
+  daysDiv:              $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group")
+  newActivityDiv:       $("#dende_schedulebundle_event_newActivity").parents(".control-group")
+  activityDiv:          $("#dende_schedulebundle_event_activity").parents(".control-group")
+  
   initChooseEventType: =>   
-    $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").off("click.chooseEventType").on "click.chooseEventType", (e) =>
-      if $(e.target).val() == "weekly"
-        $("input#dende_schedulebundle_event_endDate").parents(".control-group").show()
-        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").show()
-      else
-        $("input#dende_schedulebundle_event_endDate").parents(".control-group").hide()
-        $("input[name=dende_schedulebundle_event\\\[days\\\]\\\[\\\]]").parents(".control-group").hide()
-     
+    @$eventTypeRadio.off("click.chooseEventType").on "click.chooseEventType", @handleEventTypeSwitch
+
     $checked = $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").filter(":checked")
     
     if $checked.length > 0
       $checked.trigger "click.chooseEventType"
     else
       $("input[name=dende_schedulebundle_event\\\[eventType\\\]]:radio").filter("[value='weekly']").trigger "click.chooseEventType"
+    
+  handleEventTypeSwitch: (e) =>
+    if $(e.target).val() == "weekly"
+      @endDateDiv.show()
+      @daysDiv.show()
+    else
+      @endDateDiv.hide()
+      @daysDiv.hide()
         
   initNewActivity: =>
     return unless $("#dende_schedulebundle_event_activity").length > 0
@@ -32,18 +40,13 @@ class @NewEvent extends @AbstractModal
       containerCss : 
         width : "220px"
   
-    $("#dende_schedulebundle_event_newActivity").parents("div.control-group").hide()
-    $("a#addNewActivity").off("click.addNewActivity").on "click.addNewActivity", (e) =>
-      e.preventDefault()
-      @handleNewActivity()
+    @newActivityDiv.hide()
+    $("a#addNewActivity").off("click.addNewActivity").on "click.addNewActivity", @handleNewActivity
       
-    # newActivity = $("#dende_schedulebundle_event_newActivity").val()
-    # $("a#addNewActivity").trigger "click"
-      
-  handleNewActivity: =>
+  handleNewActivity: (e) =>
     @$activitySelect.select2 "enable", false
-    $("#dende_schedulebundle_event_activity").parents("div.control-group").hide()
-    $("#dende_schedulebundle_event_newActivity").parents("div.control-group").show()
+    @activityDiv.hide()
+    @newActivityDiv.show()
     
   handleSubmitSuccess: (response) =>
     super()

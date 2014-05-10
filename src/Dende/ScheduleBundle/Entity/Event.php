@@ -45,7 +45,7 @@ class Event {
     /**
      * Dende\ScheduleBundle\Validator\RequiredIfNoNewActivity
      * @JMS\Exclude
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events",cascade={"persist"})
      * @Assert\NotBlank(
      *  groups={"dbActivity"}
      * )

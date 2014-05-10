@@ -115,7 +115,7 @@ $ ->
       "Gru"
     ]    
     eventClick: (event, element) ->
-      window.modal.showFromUrl Routing.generate("_events_edit", {event: event.id, occurence : event.occurence_id})
+      window.modal.showFromUrl Routing.generate("_events_edit", {occurence : event.occurence_id})
 
       # event.title = "CLICKED!";
       # $('#calendar').fullCalendar('updateEvent', event);
