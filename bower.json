@@ -42,5 +42,8 @@
     "jquery-file-upload": "~9.7.1",
     "webcam": "~1.0.0",
     "datatables-plugins": "*"
+  },
+  "resolutions": {
+     "jquery": "~1.11.0"
   }
 }
