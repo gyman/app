@@ -37,7 +37,7 @@ set  :keep_releases,  3
 
 set :use_sudo,  false
 
-set :dump_assetic_assets, true
+set :dump_assetic_assets, false
 set :interactive_mode, false
 
 # Be more verbose by uncommenting the following line
