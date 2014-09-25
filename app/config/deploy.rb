@@ -11,7 +11,7 @@ set :ssh_options, {
 }
 
 set :use_composer, true
-set :composer_options,  "--no-dev --verbose --prefer-dist --optimize-autoloader"
+set :composer_options,  "--verbose --prefer-dist --optimize-autoloader"
 set :update_vendors, false
 set :vendors_mode, "install"
 set :cache_warmup, false
@@ -41,4 +41,15 @@ set :dump_assetic_assets, false
 set :interactive_mode, false
 
 # Be more verbose by uncommenting the following line
-logger.level = Logger::MAX_LEVEL
+# logger.level = Logger::MAX_LEVEL
+
+after "deploy:restart", "deploy:index"
+
+namespace :deploy do
+    # Apache needs to be restarted to make sure that the APC cache is cleared.
+    desc "Copy app.php -> index.php"
+        task :index, :except => { :no_release => true }, :roles => :app do
+            run "cp #{current_path}/web/app.php #{current_path}/web/index.php"
+            puts "--> Created index.php".green
+    end
+end
