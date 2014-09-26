@@ -47,6 +47,12 @@ after "deploy:restart", "deploy:index"
 
 namespace :deploy do
     # Apache needs to be restarted to make sure that the APC cache is cleared.
+    desc "Restart Apache"
+        task :restart, :except => { :no_release => true }, :roles => :app do
+            run "sudo /etc/init.d/apache2 restart"
+            puts "--> Apache successfully restarted".green
+    end
+
     desc "Copy app.php -> index.php"
         task :index, :except => { :no_release => true }, :roles => :app do
             run "cp #{current_path}/web/app.php #{current_path}/web/index.php"

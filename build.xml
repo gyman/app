@@ -85,9 +85,6 @@
         <exec command="${capifony_bin} deploy" checkreturn="true" output="stdout" />
         <exec command="${capifony_bin} deploy:cleanup" checkreturn="true" output="stdout" />
         <exec command="${capifony_bin} apache:restart" checkreturn="true" output="stdout" />
-        <exec command="${capifony_bin} symfony:assets:install" checkreturn="true" output="stdout" />
-        <exec command="${capifony_bin} symfony:assetic:dump" checkreturn="true" output="stdout" />
-        <exec command="${capifony_bin} symfony:cache:clear" checkreturn="true" output="stdout" />
     </target>
       
     <target name="reset-db">
