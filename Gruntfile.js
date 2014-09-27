@@ -260,6 +260,9 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.config.set('color', 0);
+    grunt.option('no-color');
+
 //    grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
