@@ -40,6 +40,9 @@
         "jms/serializer-bundle": "*",
         "raven/raven": "dev-master",
         "ob/highcharts-bundle": "1.*"
+        "vipsoft/doctrine-data-fixtures-extension": "~2",
+
+        "phing/phing": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
@@ -49,8 +52,6 @@
         "behat/mink-extension": "~1",
         "behat/mink-browserkit-driver": "~1",
         "behat/mink-selenium2-driver": "~1",
-        "vipsoft/doctrine-data-fixtures-extension": "~2",
-        "phing/phing": "*",
         "phpunit/phpunit": "4.2.*",
         "fabpot/php-cs-fixer": "~0.5",
         "phpmd/phpmd": "2.*",
