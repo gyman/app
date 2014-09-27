@@ -39,7 +39,7 @@
         "oneup/uploader-bundle": "1.0.*@dev",
         "jms/serializer-bundle": "*",
         "raven/raven": "dev-master",
-        "ob/highcharts-bundle": "1.*"
+        "ob/highcharts-bundle": "1.*",
         "vipsoft/doctrine-data-fixtures-extension": "~2",
 
         "phing/phing": "*"
