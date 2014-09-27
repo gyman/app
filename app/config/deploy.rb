@@ -3,6 +3,9 @@ set :domain,      "uirapu.ru"
 set :deploy_to,   "/var/www/app.gyman.pl"
 set :app_path,    "app"
 
+disable_log_formatters
+log_formatter(:color => :white, :priority => 120)
+
 set :user, "uirapuru"
 
 set :ssh_options, {
@@ -43,6 +46,8 @@ set :interactive_mode, false
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
 
+# Run migrations before warming the cache
+
 after "deploy:restart", "deploy:index"
 after "deploy:restart", "apache:restart"
 
@@ -56,7 +61,6 @@ namespace :apache do
 end
 
 namespace :deploy do
-
     desc "Copy app.php -> index.php"
         task :index, :except => { :no_release => true }, :roles => :app do
             run "cp #{current_path}/web/app.php #{current_path}/web/index.php"
