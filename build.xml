@@ -82,9 +82,8 @@
     </target>
         
     <target name="deploy-prod">
-        <exec command="${capifony_bin} deploy" checkreturn="true" output="stdout" />
-        <exec command="${capifony_bin} deploy:cleanup" checkreturn="true" output="stdout" />
-        <exec command="${capifony_bin} symfony:doctrine:migrations:migrate" checkreturn="true" output="stdout" />
+        <exec command="${capifony_bin} deploy" checkreturn="true" passthru="true" />
+        <exec command="${capifony_bin} deploy:cleanup" checkreturn="true" passthru="true" />
     </target>
       
     <target name="reset-db">
