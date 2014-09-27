@@ -116,3 +116,10 @@ fos_rest:
     routing_loader:
         default_format: json
         include_format: false
+
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/Migrations
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+

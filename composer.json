@@ -10,28 +10,36 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/symfony": "~2.5",
+
         "doctrine/orm": "~2.4",
         "doctrine/doctrine-bundle": "~1.2",
-        "twig/extensions": "1.0.*",
+        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+
+        "symfony/symfony": "~2.5",
         "symfony/swiftmailer-bundle": "2.3.*",
         "symfony/monolog-bundle": "2.3.*",
+        "twig/extensions": "1.0.*",
+
         "sensio/distribution-bundle": "2.3.*",
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "oneup/uploader-bundle": "1.0.*@dev",
+
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "~1.1@dev",
         "friendsofsymfony/jsrouting-bundle": "*",
-        "jms/serializer-bundle": "*",
-        "raven/raven": "dev-master",
-        "ob/highcharts-bundle": "1.*",
         "friendsofsymfony/rest-bundle": "1.3.*",
+
         "knplabs/knp-menu-bundle": "~1",
         "knplabs/knp-menu": "~1",
-        "knplabs/knp-paginator-bundle": "dev-master"
+        "knplabs/knp-paginator-bundle": "dev-master",
+
+        "incenteev/composer-parameter-handler": "~2.0",
+        "oneup/uploader-bundle": "1.0.*@dev",
+        "jms/serializer-bundle": "*",
+        "raven/raven": "dev-master",
+        "ob/highcharts-bundle": "1.*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",

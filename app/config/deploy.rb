@@ -44,14 +44,18 @@ set :interactive_mode, false
 # logger.level = Logger::MAX_LEVEL
 
 after "deploy:restart", "deploy:index"
+after "deploy:restart", "apache:restart"
 
-namespace :deploy do
+namespace :apache do
     # Apache needs to be restarted to make sure that the APC cache is cleared.
     desc "Restart Apache"
         task :restart, :except => { :no_release => true }, :roles => :app do
             run "sudo /etc/init.d/apache2 restart"
             puts "--> Apache successfully restarted".green
     end
+end
+
+namespace :deploy do
 
     desc "Copy app.php -> index.php"
         task :index, :except => { :no_release => true }, :roles => :app do
