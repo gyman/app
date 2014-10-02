@@ -3,13 +3,41 @@
 namespace Gyman\Bundle\DefaultBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContext;
 
-class Builder extends ContainerAware
+class Builder
 {
-    public function profile(FactoryInterface $factory, array $options)
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @var SecurityContext
+     */
+    private $context;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory, SecurityContext $context)
     {
-        $menu = $factory->createItem('root');
+        $this->factory = $factory;
+        $this->context = $context;
+
+        if($context->getToken()) {
+            $this->user = $context->getToken()->getUser();
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        $menu = $this->factory->createItem('root');
+
+        if(!$this->context->isGranted("ROLE_USER")) {
+            return $menu;
+        }
 
         $menu->setChildrenAttribute("class", "span6");
 
@@ -34,9 +62,13 @@ class Builder extends ContainerAware
         return $menu;
     }
 
-    public function main(FactoryInterface $factory, array $options)
+    public function main(Request $request)
     {
-        $menu = $factory->createItem('root');
+        $menu = $this->factory->createItem('root');
+
+        if(!$this->context->isGranted("ROLE_ADMIN")) {
+            return $menu;
+        }
 
         $menu->setChildrenAttribute("class", "bigBtnIcon");
 

@@ -2,6 +2,7 @@
 
 namespace Gyman\Bundle\DefaultBundle\Request;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
         $this->container = $container;
     }
 
-    public function apply(Request $request, ConfigurationInterface $configuration)
+    public function apply(Request $request, ParamConverter $configuration)
     {
         $name = $configuration->getName();
         $options = $this->getOptions($configuration);
@@ -61,7 +62,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
         $request->attributes->set($name, new ArrayCollection($result));
     }
 
-    public function supports(ConfigurationInterface $configuration)
+    public function supports(ParamConverter $configuration)
     {
         $class = $configuration->getClass();
 
