@@ -1,0 +1,6 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block label %}
+    <span class="icon {{ item.extras.icon }}"></span>
+    <span class="txt">{{ item.label|trans }}</span>
+{% endblock %}

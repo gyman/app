@@ -70,14 +70,17 @@ class @AbstractModal
     datatable.fnReloadAjax() if datatable?
     
   handleSubmitForm: (action, data, container) =>
-    $.ajax
+    $(document).ajax
       url: action
       data: data
       success: (response) =>
+        console.log "tu", response
         @handleSubmitSuccess(response)
       error: (xhr, textStatus, errorThrown) =>
         if xhr.status == 400
           @handleSubmitError xhr.responseText
+        else if xhr.status == 302
+          console.log xhr, textStatus, errorThrown
         else if xhr.status == 500
           if textStatus != null
              alert("Błąd: " + textStatus);

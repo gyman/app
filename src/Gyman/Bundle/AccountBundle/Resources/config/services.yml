@@ -27,3 +27,12 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - {name: form.type, alias: gyman_user_profile }
+
+    gyman.account.logout_handler:
+        class: Gyman\Bundle\AccountBundle\Security\LogoutHandler
+        scope: request
+        arguments:  [@request]
+        calls:
+          - [setSessionLifetime,[%session_lifetime%]]
+        tags:
+          - { name: kernel.event_listener, event: kernel.exception, method: execute, priority: 1000 }

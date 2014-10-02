@@ -4,6 +4,7 @@ security:
 
     role_hierarchy:
         ROLE_MEMBER:      ~
+
         ROLE_USER:        ~
         ROLE_OWNER:       ROLE_USER
         ROLE_MANAGER:     ROLE_OWNER
@@ -24,7 +25,9 @@ security:
            form_login:
                provider: fos_userbundle
                csrf_provider: form.csrf_provider
-           logout:       true
+           logout:
+               path:   /logout
+#               handlers: [gyman.account.logout_handler]
            anonymous:    true
 
     access_control:

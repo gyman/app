@@ -30,16 +30,6 @@ $(window).load ->
 # document ready function
 $(document).ready ->
 
-
-#-- global ajax setup --//
-
-  $.ajaxSetup
-    success: (e)->
-      # console.log "start ajax"
-    complete: (e)->
-      # console.log "finish ajax"
-  
-   
   #Auto current system in main navigation 
   #if you put site in folder not in main domain you need to specify it. example http://www.host.com/folder/site
   #put value of 1 if use absolute path links. example http://www.host.com/dashboard instead of /dashboard

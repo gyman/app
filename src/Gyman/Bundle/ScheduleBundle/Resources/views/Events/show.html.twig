@@ -44,11 +44,7 @@
 {% endblock modal %}
 
 {% block javascript %}
-    {% javascripts
-    '@ScheduleBundle/Resources/public/coffee/schedule.showEvent.coffee'
-    %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/assets/js/schedule.min.js"></script>
     <script>
         $(function() {
             modal.setupFromNode("div#ui-showEventData");

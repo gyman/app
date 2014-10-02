@@ -6,10 +6,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/entries")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class EntriesController extends Controller implements ListControllerInterface
 {
@@ -22,6 +24,7 @@ class EntriesController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/", name="_list_entries")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function indexAction(Request $request)
@@ -38,6 +41,7 @@ class EntriesController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/datasource.{_format}", name="_list_entries_datasource", defaults={"_format" = "json"}, requirements={"_format" = "json"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function datasourceAction(Request $request)

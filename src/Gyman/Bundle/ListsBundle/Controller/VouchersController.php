@@ -6,10 +6,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/vouchers")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class VouchersController extends Controller implements ListControllerInterface
 {
@@ -22,6 +24,7 @@ class VouchersController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/", name="_vouchers_list")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function indexAction(Request $request)
@@ -38,6 +41,7 @@ class VouchersController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/datasource.{_format}", name="_list_vouchers_datasource", defaults={"_format" = "json"}, requirements={"_format" = "json"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function datasourceAction(Request $request)

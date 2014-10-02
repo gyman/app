@@ -1,9 +1,14 @@
 <div class="reminder" id="searchTab" data-date="{{ date|date("Y-m-d H:i:s") }}">
-                <h4>
-                    Szukaj uczestnika
-                    <a class="icon tip" href="{{ path("_list_members") }}"><span class="icon16 icomoon-icon-users"></span></a>
-                </h4>
-                <form class="row-fluid" style="margin-top: 25px">
-                    <input class="typeahead search-query span10" placeholder="imię/nazwisko uczestnika" data-provider="typeahead" autocomplete="off" style="height: 32px">
-                </form>
-            </div>
+    <h4>Szukaj uczestnika
+
+        {% if is_granted("ROLE_ADMIN") %}
+            <a class="icon tip" href="{{ path("_list_members") }}"><span class="icon16 icomoon-icon-users"></span></a>
+        {% endif %}
+
+    </h4>
+
+    <form class="row-fluid" style="margin-top: 25px">
+        <input class="typeahead search-query span10" placeholder="imię/nazwisko uczestnika" data-provider="typeahead"
+               autocomplete="off" style="height: 32px">
+    </form>
+</div>

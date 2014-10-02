@@ -70,17 +70,17 @@ module.exports = function (grunt) {
                         'bower_components/jquery-file-upload/js/jquery.fileupload.js',
                         'bower_components/webcam/jquery.webcam.js',
                         'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
-                        'build/assets/js/global_coffee.js'
                     ],
                 },
             },
             coffee: {
                 files: {
+                    'web/assets/js/global.min.js': ['build/assets/js/global_coffee.js'],
                     'web/assets/js/dashboard.min.js': ['build/assets/js/dashboard_coffee.js'],
                     'web/assets/js/members.min.js': ['build/assets/js/members_coffee.js'],
                     'web/assets/js/lists.min.js': ['build/assets/js/lists_coffee.js'],
                     'web/assets/js/filters.min.js': ['build/assets/js/filters_coffee.js'],
-
+                    'web/assets/js/schedule.min.js': ['build/assets/js/schedule_coffee.js'],
                 },
             },
         },
@@ -89,9 +89,9 @@ module.exports = function (grunt) {
                 files: {
                     'build/assets/js/global_coffee.js': [
                         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/configs.coffee',
+                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/main.coffee',
                         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
                         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/modal.coffee',
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/main.coffee',
                         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
                         'web/bundles/lists/coffee/reloadAjax.coffee',
                     ]
@@ -129,6 +129,16 @@ module.exports = function (grunt) {
                     'build/assets/js/filters_coffee.js': [
                         "src/Gyman/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
                         "src/Gyman/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
+                    ]
+                }
+            },
+            schedule: {
+                files: {
+                    'build/assets/js/schedule_coffee.js': [
+                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
+                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
+                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
+                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
                     ]
                 }
             },

@@ -1,3 +1,6 @@
+parameters:
+  session_lifetime: 86400 # 24 hours
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -17,7 +20,9 @@ framework:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        cookie_lifetime:  %session_lifetime%
+        gc_maxlifetime: 1800
     fragments:       ~
     http_method_override: true
 

@@ -1,68 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Gyman.pl{% endblock %}</title>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Gyman.pl{% endblock %}</title>
 
-        {% if app.environment != "dev" %}
-            <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
-            <script>
-                Raven.config('{{ sentry_url }}');
-            </script>
-        {% endif %}
+    {% if app.environment != "dev" %}
+        <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
+        <script>
+            Raven.config('{{ sentry_url }}');
+        </script>
+    {% endif %}
 
-        {% block stylesheets %}
-                <link rel="stylesheet" href="/assets/css/bundled.min.css" />
-                <link rel="stylesheet" href="/assets/css/main.min.css" />
-        {% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/assets/css/bundled.min.css"/>
+        <link rel="stylesheet" href="/assets/css/main.min.css"/>
+    {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    </head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+</head>
 
-    {% block overraid_body %}
+{% block overraid_body %}
     <body class="{% block body_class %}{% endblock %}">
 
-        <div id="qLoverlay"></div>
-        <div id="qLbar"></div>
+    <div id="qLoverlay"></div>
+    <div id="qLbar"></div>
 
-        {% if app.user is not null %}
-            {{ include("navigation.html.twig") }}
-        {% endif %}
+    {% if app.user is not null %}
+        {{ include("navigation.html.twig") }}
+    {% endif %}
 
-        <div id="header">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="container-fluid">
+    <div id="header">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
 
-                        <a href="{{ path("_dashboard_index") }}" class="brand"><img src="/assets/images/gyman_logo.png" /></a>
+                    <a href="{{ path("_dashboard_index") }}" class="brand">
+                        <img src="/assets/images/gyman_logo.png" />
+                    </a>
 
-                        <div class="nav-no-collapse">
-                            <ul class="nav pull-right usernav">
-                                <li><a href="{{ path("_dashboard_index") }}"><span class="icon16 icomoon-icon-equalizer-2"></span><span class="txt"> {{ 'dashboard_button'|trans }}</span></a></li>
-                                <li><a href="#" class="openNavigation"><span class="icon16 icomoon-icon-exit"></span><span class="txt"> {{ 'open_navigation'|trans }}</span></a></li>
-                            </ul>
-                        </div>
-
+                    <div class="nav-no-collapse">
+                        <ul class="nav pull-right usernav">
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li>
+                                <a href="{{ path("_dashboard_index") }}">
+                                    <span class="icon16 icomoon-icon-equalizer-2"></span>
+                                    <span class="txt"> {{ 'dashboard_button'|trans }}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a href="#" class="openNavigation">
+                                    <span class="icon16 icomoon-icon-exit"></span>
+                                    <span class="txt"> {{ 'open_navigation'|trans }}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div><!-- /navbar-inner -->
+
+                </div>
             </div>
-        </div><!-- end header -->
+            <!-- /navbar-inner -->
+        </div>
+    </div>
+    <!-- end header -->
 
-        <div id="wrapper">
-            <div id="content" class="clearfix">
+    <div id="wrapper">
+        <div id="content" class="clearfix">
 
-                <div class="contentwrapper">
-                    {% block content %}
+            <div class="contentwrapper">
+                {% block content %}
                     {% block body %}{% endblock %}
-                    {% endblock content %}
+                {% endblock content %}
 
-                </div><!-- End contentwrapper -->
+            </div>
+            <!-- End contentwrapper -->
 
-            </div><!-- End #content -->
-        </div><!-- end wrapper -->
+        </div>
+        <!-- End #content -->
+    </div>
+    <!-- end wrapper -->
 
-        {% block javascripts %}
+    {% block javascripts %}
         <script type="text/javascript" src="/assets/js/bundled.min.js"></script>
+        <script type="text/javascript" src="/assets/js/global.min.js"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
         {% if app.session.flashbag.has('notice') %}
@@ -76,34 +96,34 @@
                 sticker: false,
                 history: false
             });
-        {% endfor %}
+            {% endfor %}
         </script>
         {% endif %}
 
         <script>
-            $(function() {
+            $(function () {
                 $("#qLoverlay,#qLbar").fadeOut(750);
 
-                $(document).on("click", "a.openNavigation", function(e) {
+                $(document).on("click", "a.openNavigation", function (e) {
                     e.preventDefault();
                     $("#overlayNavigation").fadeIn();
                 });
 
-                $(document).on("click", "#overlayNavigation, #closeOverlayNavigation", function() {
+                $(document).on("click", "#overlayNavigation, #closeOverlayNavigation", function () {
                     $("#overlayNavigation").fadeOut();
                 });
             });
         </script>
 
-        {% endblock javascripts %}
+    {% endblock javascripts %}
 
 
-        <!-- @todo zamienić na fosjsroutingbundle -->
+    <!-- @todo zamienić na fosjsroutingbundle -->
         <span id="applicationData"
               data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
-              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}" />
+              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}"/>
 
-        {% include '::modal.html.twig' %}
+    {% include '::modal.html.twig' %}
     </body>
-    {% endblock overraid_body %}
+{% endblock overraid_body %}
 </html>

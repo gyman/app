@@ -1,4 +1,7 @@
 roles.ROLE_SUPER_ADMIN: superadministrator
+roles.ROLE_ADMIN:       administrator
+roles.ROLE_USER:        użytkownik
+
 dashboard_button: Pulpit nawigatora
 open_navigation: Otwórz Menu
 notification_caption: Uwaga!

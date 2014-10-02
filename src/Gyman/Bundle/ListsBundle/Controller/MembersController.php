@@ -52,6 +52,7 @@ class MembersController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/gallery", name="_list_members_gallery")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template("ListsBundle:Members:gallery.html.twig")
      */
     public function galleryAction(Request $request)
@@ -64,6 +65,7 @@ class MembersController extends Controller implements ListControllerInterface
 
     /**
      * @Route("/member/{id}/details", name="_list_members_details")
+     * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("member", class="MembersBundle:Member")
      */
     public function detailsAction(Member $member)
