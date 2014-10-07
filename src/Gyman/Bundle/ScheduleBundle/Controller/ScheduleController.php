@@ -12,7 +12,6 @@ class ScheduleController extends Controller
 {
     /**
      * @Route("/calendar",name="_schedule_calendar")
-     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function calendarAction()

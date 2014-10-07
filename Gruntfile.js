@@ -26,7 +26,9 @@ module.exports = function (grunt) {
                 src: [
                     'build/assets/css/main.css',
                     'build/assets/css/filters.css',
-                    'build/assets/css/lists.css'
+                    'build/assets/css/lists.css',
+                    'build/assets/css/schedule.css',
+
                 ],
                 dest: 'web/assets/css/main.min.css'
             },
@@ -51,6 +53,7 @@ module.exports = function (grunt) {
                         "bower_components/bootstrap/js/bootstrap-typeahead.js",
                         "bower_components/bootstrap/js/bootstrap-popover.js",
                         "bower_components/uri.js/src/URI.js",
+                        "bower_components/uri.js/src/URI.fragmentQuery.js",
                         "bower_components/moment/min/moment-with-locales.js",
                         "bower_components/select2/select2.js",
                         "bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
@@ -183,6 +186,47 @@ module.exports = function (grunt) {
                 dest: 'build/assets/css/bundled.css',
                 nonull: true
             },
+            "dev-js-bundled": {
+                src: [
+                    'bower_components/jquery/dist/jquery.js',
+                    'bower_components/jquery-ui/ui/jquery-ui.js',
+                    'bower_components/jquery-migrate/jquery-migrate.min.js',
+                    "bower_components/bootstrap/js/bootstrap-alert.js",
+                    "bower_components/bootstrap/js/bootstrap-button.js",
+                    "bower_components/bootstrap/js/bootstrap-carousel.js",
+                    "bower_components/bootstrap/js/bootstrap-collapse.js",
+                    "bower_components/bootstrap/js/bootstrap-dropdown.js",
+                    "bower_components/bootstrap/js/bootstrap-modal.js",
+                    "bower_components/bootstrap/js/bootstrap-scrollspy.js",
+                    "bower_components/bootstrap/js/bootstrap-tab.js",
+                    "bower_components/bootstrap/js/bootstrap-tooltip.js",
+                    "bower_components/bootstrap/js/bootstrap-transition.js",
+                    "bower_components/bootstrap/js/bootstrap-typeahead.js",
+                    "bower_components/bootstrap/js/bootstrap-popover.js",
+                    "bower_components/uri.js/src/URI.js",
+                    "bower_components/uri.js/src/URI.fragmentQuery.js",
+                    "bower_components/moment/min/moment-with-locales.js",
+                    "bower_components/select2/select2.js",
+                    "bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
+                    "bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
+                    "bower_components/DataTables/media/js/jquery.dataTables.js",
+                    "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
+                    "bower_components/modernizr/modernizr.js",
+                    "bower_components/blockui/jquery.blockUI.js",
+                    "bower_components/pnotify/pnotify.core.js",
+                    "bower_components/jquery.uniform/jquery.uniform.js",
+                    "bower_components/jquery.knob/js/jquery.knob.js",
+                    "bower_components/qTip/jquery.qtip.js",
+                    "bower_components/highcharts/highcharts.js",
+                    "bower_components/highcharts/modules/exporting.js",
+                    'bower_components/fullcalendar/dist/fullcalendar.js',
+                    'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
+                    'bower_components/jquery-file-upload/js/jquery.fileupload.js',
+                    'bower_components/webcam/jquery.webcam.js',
+                    'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
+                ],
+                dest: 'web/assets/js/bundled.min.js'
+            },
         },
         copy: {
             "webcam-swf": {
@@ -232,6 +276,48 @@ module.exports = function (grunt) {
                 ],
                 dest: "./web/assets/images"
             },
+            "dev-css-bundled": {
+                src: 'build/assets/css/bundled.css',
+                dest: 'web/assets/css/bundled.min.css'
+            },
+            "dev-css-dashboard": {
+                src: 'build/assets/css/dashboard.css',
+                dest: 'web/assets/css/dashboard.min.css'
+            },
+            "dev-css-main": {
+                src: [
+                    'build/assets/css/main.css',
+                    'build/assets/css/filters.css',
+                    'build/assets/css/lists.css',
+                    'build/assets/css/schedule.css',
+                ],
+                dest: 'web/assets/css/main.min.css'
+            },
+
+            "dev-js-global": {
+                src: [ 'build/assets/js/global_coffee.js' ],
+                dest: 'web/assets/js/global.min.js',
+            },
+            "dev-js-dashboard" : {
+                src: [ 'build/assets/js/dashboard_coffee.js' ],
+                dest: 'web/assets/js/dashboard.min.js',
+            },
+            "dev-js-members" : {
+                src: ['build/assets/js/members_coffee.js'],
+                dest: 'web/assets/js/members.min.js',
+            },
+            "dev-js-lists" : {
+                src: ['build/assets/js/lists_coffee.js'],
+                dest: 'web/assets/js/lists.min.js',
+            },
+            "dev-js-filters" : {
+                src: ['build/assets/js/filters_coffee.js'],
+                dest: 'web/assets/js/filters.min.js',
+            },
+            "dev-js-schedule" : {
+                src: ['build/assets/js/schedule_coffee.js'],
+                dest: 'web/assets/js/schedule.min.js',
+            }
         },
         less: {
             default: {
@@ -247,6 +333,7 @@ module.exports = function (grunt) {
                     "build/assets/css/lists.css": "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
                     "build/assets/css/main.css": "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
                     "build/assets/css/filters.css": "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
+                    "build/assets/css/schedule.css": "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
                 }
             }
         },
@@ -284,6 +371,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-image-embed");
 
     grunt.registerTask('default', ['cssUrlRewrite', 'copy', 'coffee', 'less', 'concat', 'cssmin', 'uglify']);
+
+    grunt.registerTask('development', ['cssUrlRewrite', 'coffee', 'less',
+        'copy:dev-css-bundled', "copy:dev-css-dashboard", "copy:dev-css-main",
+        "concat:dev-js-bundled", "copy:dev-js-global", "copy:dev-js-dashboard", "copy:dev-js-members", "copy:dev-js-lists",
+        "copy:dev-js-filters", "copy:dev-js-schedule"
+    ]);
 
     grunt.registerTask('compile-coffee', ['coffee', 'uglify:coffee']);
     grunt.registerTask('compile-less', ['less', 'cssmin']);

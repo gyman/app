@@ -50,6 +50,16 @@ class Builder
                 )
             )
         )->setExtra('translation_domain', 'DashboardBundle');
+
+        $menu->addChild('dashboard.actions.calendar',
+            array(
+                'route' => '_schedule_calendar',
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => array(
+                    "class" => 'tipB',
+                )
+            )
+        )->setExtra('translation_domain', 'DashboardBundle');
 //
 //        $menu->addChild('dashboard.actions.new_entry',
 //            array(

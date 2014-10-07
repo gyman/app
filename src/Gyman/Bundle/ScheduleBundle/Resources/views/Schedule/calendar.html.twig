@@ -16,32 +16,7 @@
 </div><!-- End .row-fluid -->
 {% endblock body %}
 
-{# javascripts #}
-
 {% block javascripts %}
     {{ parent() }}
-
-    {% javascripts
-        '@ScheduleBundle/Resources/public/js/fullcalendar.js'
-        '@ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee'
-     %}
-
-<script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/assets/js/schedule.min.js"></script>
 {% endblock javascripts %}
-
-{# CSS #}
-
-{% block stylesheets %}
-    {{ parent() }}
-
-    {% stylesheets
-        'bundles/schedule/css/fullcalendar.css'
-        '@ScheduleBundle/Resources/public/less/schedule.less'
-        filter="less,cssrewrite"
-    %}
-
-<link rel="stylesheet" href="{{ asset_url }}" />
-
-    {% endstylesheets %}
-{% endblock stylesheets %}
