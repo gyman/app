@@ -49,9 +49,7 @@ $ ->
     allDaySlot: false
     defaultView: "agendaWeek"
     firstDay: 1
-    events: (start, end, callback) ->
-      console.log 'callback', callback
-
+    events: (start, end, tmz, callback) ->
       week = moment(start).isoWeek()
       year = moment(start).year()
       
@@ -62,9 +60,14 @@ $ ->
           uri.removeFragment("week").addFragment "week", week
           uri.removeFragment("year").addFragment "year", year
           window.location.href = uri
-          
+
           if callback
             callback result
+
+          return
+
+      return
+
     timeFormat: 'H:mm{ - H:mm}'
     minTime: "6:00"
     maxTime: "23:00"
