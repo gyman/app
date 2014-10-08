@@ -2,6 +2,7 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,6 +16,7 @@ use Gyman\Bundle\ScheduleBundle\Form\OccurenceType;
 
 /**
  * @Route("/event")
+ * @todo move as much code as possible to services
  */
 class EventsController extends Controller
 {
@@ -45,6 +47,7 @@ class EventsController extends Controller
 
     /**
      * @Route("/{occurence}/drag",name="_events_drag")
+     * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
      * Template()
      */
@@ -136,6 +139,7 @@ class EventsController extends Controller
     /**
      * @Route("/new",name="_events_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function newAction(Request $request)
@@ -194,7 +198,9 @@ class EventsController extends Controller
     /**
      * @Route("/occurence/{occurence}/edit",name="_events_edit")
      * @ParamConverter("occurence", class="ScheduleBundle:Occurence")
+     * @Security("has_role('ROLE_USER')")
      * @Template()
+     * @todo split to two separated actions
      */
     public function editAction(Event\Occurence $occurence, Request $request)
     {
@@ -204,7 +210,7 @@ class EventsController extends Controller
 
         $event = $occurence->getEvent();
 
-        if ($occurence->isPast()) {
+        if ($occurence->isPast() || !$this->get("security.context")->isGranted("ROLE_ADMIN")) {
             return $this->forward("ScheduleBundle:Events:Show", [
                         "event"     => $event->getId(),
                         "occurence" => $occurence->getId()

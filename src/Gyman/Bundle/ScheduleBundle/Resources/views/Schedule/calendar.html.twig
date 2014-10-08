@@ -3,7 +3,11 @@
 {% block body %}
 <div class="heading">
     <h3>Harmonogram zajęć</h3>
-    <a href="{{path("_events_new")}}" id="newEventHeaderButton" class="btn pull-right createNewEvent openUrlInModal"><span class="icon32 icomoon-icon-new green"></span>Nowe wydarzenie</a>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{path("_events_new")}}" id="newEventHeaderButton" class="btn pull-right createNewEvent openUrlInModal"><span class="icon32 icomoon-icon-new green"></span>Nowe wydarzenie</a>
+    {% endif %}
+
 </div><!-- End .heading-->
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->

@@ -48,7 +48,7 @@ class Builder
                 'linkAttributes' => array(
                     "class" => 'btn btn-block',
                 )
-            ))->setExtra('translation_domain', 'AccountBundle');
+            ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.logout',
             array(
@@ -57,7 +57,7 @@ class Builder
                 'linkAttributes' => array(
                     "class" => 'btn btn-block',
                 )
-            ))->setExtra('translation_domain', 'AccountBundle');
+            ))->setExtra('translation_domain', 'DefaultBundle');
 
         return $menu;
     }
@@ -79,7 +79,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.members', array(
             'route' => '_list_members',
@@ -88,7 +88,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.schedule', array(
             'route' => '_schedule_calendar',
@@ -97,7 +97,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.vouchers', array(
             'route' => '_vouchers_list',
@@ -106,7 +106,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.entries', array(
             'route' => '_list_entries',
@@ -115,7 +115,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
 
         $menu->addChild('navigation.menu.analytics', array(
@@ -125,7 +125,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.employees', array(
             'uri' => '/',
@@ -134,7 +134,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.clubs_and_sections', array(
             'uri' => '/',
@@ -143,7 +143,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.payments', array(
             'uri' => '/',
@@ -152,7 +152,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.dontknow', array(
             'uri' => '/',
@@ -161,7 +161,7 @@ class Builder
                 "class" => 'tipB',
                 'aria-describedby' =>"qtip-21"
             )
-        ))->setExtra('translation_domain', 'AccountBundle');
+        ))->setExtra('translation_domain', 'DefaultBundle');
 
         return $menu;
     }

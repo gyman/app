@@ -68,7 +68,7 @@ $ ->
 
       return
 
-    timeFormat: 'H:mm{ - H:mm}'
+    timeFormat: 'H:mm'
     minTime: "6:00"
     maxTime: "23:00"
     axisFormat: "H:mm"
