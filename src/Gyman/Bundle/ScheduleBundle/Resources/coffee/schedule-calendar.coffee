@@ -17,15 +17,16 @@ $ ->
       center: 'prevYear,prev,today,next,nextYear'
       right: ''
     buttonText:
-      prev: '<span class="icon24 icomoon-icon-arrow-left-2"></span>'
-      next: '<span class="icon24 icomoon-icon-arrow-right-3"></span>'
-      prevYear: '&laquo;'
-      nextYear: '&raquo;'
+      prev: '<'
+      next: '>'
+      prevYear: 'Poprzedni rok'
+      nextYear: 'Następny rok'
       today:    'DZIŚ'
       month:    'miesiąc'
       week:     'tydzień'
       day:      'dzień'
     loading: (isLoading, view) ->
+      return
       if isLoading
         $("#calendar").block
           message:            '<strong style="z-index:11">Ładuję...</strong>'
@@ -49,6 +50,8 @@ $ ->
     defaultView: "agendaWeek"
     firstDay: 1
     events: (start, end, callback) ->
+      console.log 'callback', callback
+
       week = moment(start).isoWeek()
       year = moment(start).year()
       

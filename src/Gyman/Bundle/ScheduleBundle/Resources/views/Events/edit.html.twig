@@ -84,12 +84,6 @@
 {% endblock modal %}
 
 {% block javascript %}
-{% javascripts
-    '@ScheduleBundle/Resources/public/coffee/schedule.newEvent.coffee'
-    '@ScheduleBundle/Resources/public/coffee/schedule.editEvent.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("div#ui-editEventData");
