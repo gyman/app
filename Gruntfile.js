@@ -1,6 +1,122 @@
 module.exports = function (grunt) {
+    var cssVendors = [
+        'build/assets/css/bootstrap.css',
+        'build/assets/css/bootstrap-responsive.css',
+        'build/assets/css/select2.css',
+        'build/assets/css/select2-bootstrap.css',
+        'build/assets/css/bootstrap-datetimepicker.css',
+        'bower_components/font-awesome/css/font-awesome.css',
+        'bower_components/fullcalendar/dist/fullcalendar.css',
+        'bower_components/jquery.uniform/themes/default/css/uniform.default.css',
+
+        'bower_components/DataTables/media/css/jquery.dataTables.css',
+        'bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css',
+
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery-ui-timepicker-addon.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.autocomplete.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.combobox.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.core.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.dialog.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.progressbar.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.resizable.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.slider.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.spinner.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.theme.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.tooltip.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.pnotify.default.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/main.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/custom.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/ie8.css',
+        'src/Gyman/Bundle/LayoutBundle/Resources/css/icons.css',
+//                    'build/assets/css/main.css',
+//                    'build/assets/css/dashboard.css',
+    ];
+
+    var mainLibraries = [
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/jquery-ui/ui/jquery-ui.js',
+        'bower_components/jquery-migrate/jquery-migrate.min.js',
+        "bower_components/bootstrap/js/bootstrap-alert.js",
+        "bower_components/bootstrap/js/bootstrap-button.js",
+        "bower_components/bootstrap/js/bootstrap-carousel.js",
+        "bower_components/bootstrap/js/bootstrap-collapse.js",
+        "bower_components/bootstrap/js/bootstrap-dropdown.js",
+        "bower_components/bootstrap/js/bootstrap-modal.js",
+        "bower_components/bootstrap/js/bootstrap-scrollspy.js",
+        "bower_components/bootstrap/js/bootstrap-tab.js",
+        "bower_components/bootstrap/js/bootstrap-tooltip.js",
+        "bower_components/bootstrap/js/bootstrap-transition.js",
+        "bower_components/bootstrap/js/bootstrap-typeahead.js",
+        "bower_components/bootstrap/js/bootstrap-popover.js",
+        "bower_components/uri.js/src/URI.js",
+        "bower_components/uri.js/src/URI.fragmentQuery.js",
+        "bower_components/moment/min/moment-with-locales.js",
+        "bower_components/select2/select2.js",
+        "bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
+        "bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
+        "bower_components/DataTables/media/js/jquery.dataTables.js",
+        "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
+        "bower_components/modernizr/modernizr.js",
+        "bower_components/blockui/jquery.blockUI.js",
+        "bower_components/pnotify/pnotify.core.js",
+        "bower_components/jquery.uniform/jquery.uniform.js",
+        "bower_components/jquery.knob/js/jquery.knob.js",
+        "bower_components/qTip/jquery.qtip.js",
+        "bower_components/highcharts/highcharts.js",
+        "bower_components/highcharts/modules/exporting.js",
+        'bower_components/fullcalendar/dist/fullcalendar.js',
+        'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
+        'bower_components/jquery-file-upload/js/jquery.fileupload.js',
+        'bower_components/webcam/jquery.webcam.js',
+        'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
+    ];
+
+    var coffeeFiles = [
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/configs.coffee',
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/main.coffee',
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/modal.coffee',
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
+        'web/bundles/lists/coffee/reloadAjax.coffee',
+        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
+        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
+        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.editMember.coffee",
+        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.webcam.coffee",
+        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.filter.coffee",
+        "src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
+        "src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
+        "src/Gyman/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
+        "src/Gyman/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
+        "src/Gyman/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
+        "src/Gyman/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
+        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
+        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
+        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
+        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
+    ];
+
+    var lessFiles = [
+        "bower_components/bootstrap/less/bootstrap.less",
+        "build/assets/css/bootstrap-responsive.css": "bower_components/bootstrap/less/responsive.less",
+        "build/assets/css/bootstrap-datetimepicker.css": "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
+        "build/assets/css/dashboard.css": "src/Gyman/Bundle/DashboardBundle/Resources/less/dashboard.less",
+        "build/assets/css/lists.css": "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
+        "build/assets/css/main.css": "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
+        "build/assets/css/filters.css": "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
+        "build/assets/css/schedule.css": "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
+    ];
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        less: {
+            default: {
+                options: {
+                    paths: ["assets/css"],
+                    relativeUrl: true
+                },
+                files: lessFiles
+            }
+        },
         cssmin: {
             options: {
                 keepSpecialComments: 0,
@@ -36,114 +152,15 @@ module.exports = function (grunt) {
         uglify: {
             js: {
                 files: {
-                    'web/assets/js/bundled.min.js': [
-                        'bower_components/jquery/dist/jquery.js',
-                        'bower_components/jquery-ui/ui/jquery-ui.js',
-                        'bower_components/jquery-migrate/jquery-migrate.min.js',
-                        "bower_components/bootstrap/js/bootstrap-alert.js",
-                        "bower_components/bootstrap/js/bootstrap-button.js",
-                        "bower_components/bootstrap/js/bootstrap-carousel.js",
-                        "bower_components/bootstrap/js/bootstrap-collapse.js",
-                        "bower_components/bootstrap/js/bootstrap-dropdown.js",
-                        "bower_components/bootstrap/js/bootstrap-modal.js",
-                        "bower_components/bootstrap/js/bootstrap-scrollspy.js",
-                        "bower_components/bootstrap/js/bootstrap-tab.js",
-                        "bower_components/bootstrap/js/bootstrap-tooltip.js",
-                        "bower_components/bootstrap/js/bootstrap-transition.js",
-                        "bower_components/bootstrap/js/bootstrap-typeahead.js",
-                        "bower_components/bootstrap/js/bootstrap-popover.js",
-                        "bower_components/uri.js/src/URI.js",
-                        "bower_components/uri.js/src/URI.fragmentQuery.js",
-                        "bower_components/moment/min/moment-with-locales.js",
-                        "bower_components/select2/select2.js",
-                        "bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
-                        "bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
-                        "bower_components/DataTables/media/js/jquery.dataTables.js",
-                        "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
-                        "bower_components/modernizr/modernizr.js",
-                        "bower_components/blockui/jquery.blockUI.js",
-                        "bower_components/pnotify/pnotify.core.js",
-                        "bower_components/jquery.uniform/jquery.uniform.js",
-                        "bower_components/jquery.knob/js/jquery.knob.js",
-                        "bower_components/qTip/jquery.qtip.js",
-                        "bower_components/highcharts/highcharts.js",
-                        "bower_components/highcharts/modules/exporting.js",
-                        'bower_components/fullcalendar/dist/fullcalendar.js',
-                        'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
-                        'bower_components/jquery-file-upload/js/jquery.fileupload.js',
-                        'bower_components/webcam/jquery.webcam.js',
-                        'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
-                    ],
-                },
-            },
-            coffee: {
-                files: {
-                    'web/assets/js/global.min.js': ['build/assets/js/global_coffee.js'],
-                    'web/assets/js/dashboard.min.js': ['build/assets/js/dashboard_coffee.js'],
-                    'web/assets/js/members.min.js': ['build/assets/js/members_coffee.js'],
-                    'web/assets/js/lists.min.js': ['build/assets/js/lists_coffee.js'],
-                    'web/assets/js/filters.min.js': ['build/assets/js/filters_coffee.js'],
-                    'web/assets/js/schedule.min.js': ['build/assets/js/schedule_coffee.js'],
+                    'web/assets/js/bundled.min.js': mainLibraries,
                 },
             },
         },
         coffee: {
             global: {
                 files: {
-                    'build/assets/js/global_coffee.js': [
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/configs.coffee',
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/main.coffee',
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/modal.coffee',
-                        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
-                        'web/bundles/lists/coffee/reloadAjax.coffee',
-                    ]
+                    'build/assets/js/global_coffee.js': coffeeFiles
                 },
-            },
-            dashboard: {
-                files: {
-                    'build/assets/js/dashboard_coffee.js': [
-                        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
-                        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
-                    ],
-                },
-            },
-            members: {
-                files: {
-                    'build/assets/js/members_coffee.js': [
-                        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.editMember.coffee",
-                        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.webcam.coffee",
-                        "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.filter.coffee",
-                    ]
-                }
-            },
-            lists: {
-                files: {
-                    'build/assets/js/lists_coffee.js': [
-                        "src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
-                        "src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
-                        "src/Gyman/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
-                        "src/Gyman/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
-                    ]
-                }
-            },
-            filters: {
-                files: {
-                    'build/assets/js/filters_coffee.js': [
-                        "src/Gyman/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
-                        "src/Gyman/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
-                    ]
-                }
-            },
-            schedule: {
-                files: {
-                    'build/assets/js/schedule_coffee.js': [
-                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
-                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
-                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
-                        "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
-                    ]
-                }
             },
         },
         concat: {
@@ -151,80 +168,12 @@ module.exports = function (grunt) {
                 stripBanners: true,
             },
             "bundled-css": {
-                src: [
-                    'build/assets/css/bootstrap.css',
-                    'build/assets/css/bootstrap-responsive.css',
-                    'build/assets/css/select2.css',
-                    'build/assets/css/select2-bootstrap.css',
-                    'build/assets/css/bootstrap-datetimepicker.css',
-                    'bower_components/font-awesome/css/font-awesome.css',
-                    'bower_components/fullcalendar/dist/fullcalendar.css',
-                    'bower_components/jquery.uniform/themes/default/css/uniform.default.css',
-
-                    'bower_components/DataTables/media/css/jquery.dataTables.css',
-                    'bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css',
-
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery-ui-timepicker-addon.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.autocomplete.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.combobox.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.core.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.dialog.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.progressbar.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.resizable.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.slider.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.spinner.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.theme.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.tooltip.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.pnotify.default.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/main.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/custom.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/ie8.css',
-                    'src/Gyman/Bundle/LayoutBundle/Resources/css/icons.css',
-//                    'build/assets/css/main.css',
-//                    'build/assets/css/dashboard.css',
-                ],
+                src: cssVendors,
                 dest: 'build/assets/css/bundled.css',
                 nonull: true
             },
             "dev-js-bundled": {
-                src: [
-                    'bower_components/jquery/dist/jquery.js',
-                    'bower_components/jquery-ui/ui/jquery-ui.js',
-                    'bower_components/jquery-migrate/jquery-migrate.min.js',
-                    "bower_components/bootstrap/js/bootstrap-alert.js",
-                    "bower_components/bootstrap/js/bootstrap-button.js",
-                    "bower_components/bootstrap/js/bootstrap-carousel.js",
-                    "bower_components/bootstrap/js/bootstrap-collapse.js",
-                    "bower_components/bootstrap/js/bootstrap-dropdown.js",
-                    "bower_components/bootstrap/js/bootstrap-modal.js",
-                    "bower_components/bootstrap/js/bootstrap-scrollspy.js",
-                    "bower_components/bootstrap/js/bootstrap-tab.js",
-                    "bower_components/bootstrap/js/bootstrap-tooltip.js",
-                    "bower_components/bootstrap/js/bootstrap-transition.js",
-                    "bower_components/bootstrap/js/bootstrap-typeahead.js",
-                    "bower_components/bootstrap/js/bootstrap-popover.js",
-                    "bower_components/uri.js/src/URI.js",
-                    "bower_components/uri.js/src/URI.fragmentQuery.js",
-                    "bower_components/moment/min/moment-with-locales.js",
-                    "bower_components/select2/select2.js",
-                    "bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
-                    "bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
-                    "bower_components/DataTables/media/js/jquery.dataTables.js",
-                    "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
-                    "bower_components/modernizr/modernizr.js",
-                    "bower_components/blockui/jquery.blockUI.js",
-                    "bower_components/pnotify/pnotify.core.js",
-                    "bower_components/jquery.uniform/jquery.uniform.js",
-                    "bower_components/jquery.knob/js/jquery.knob.js",
-                    "bower_components/qTip/jquery.qtip.js",
-                    "bower_components/highcharts/highcharts.js",
-                    "bower_components/highcharts/modules/exporting.js",
-                    'bower_components/fullcalendar/dist/fullcalendar.js',
-                    'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
-                    'bower_components/jquery-file-upload/js/jquery.fileupload.js',
-                    'bower_components/webcam/jquery.webcam.js',
-                    'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
-                ],
+                src: mainLibraries,
                 dest: 'web/assets/js/bundled.min.js'
             },
         },
@@ -266,77 +215,13 @@ module.exports = function (grunt) {
                 flatten: true,
                 cwd: '',
                 src: [
-//                    './bower_components/**/images/**',
-//                    './bower_components/**/img/**',
                     './src/**/Resources/**/images/**',
-//                    '**.jpg',
-//                    '**.jpeg',
-//                    '**.gif',
-//                    '**.png',
                 ],
                 dest: "./web/assets/images"
             },
-            "dev-css-bundled": {
-                src: 'build/assets/css/bundled.css',
-                dest: 'web/assets/css/bundled.min.css'
-            },
-            "dev-css-dashboard": {
-                src: 'build/assets/css/dashboard.css',
-                dest: 'web/assets/css/dashboard.min.css'
-            },
-            "dev-css-main": {
-                src: [
-                    'build/assets/css/main.css',
-                    'build/assets/css/filters.css',
-                    'build/assets/css/lists.css',
-                    'build/assets/css/schedule.css',
-                ],
-                dest: 'web/assets/css/main.min.css'
-            },
 
-            "dev-js-global": {
-                src: [ 'build/assets/js/global_coffee.js' ],
-                dest: 'web/assets/js/global.min.js',
-            },
-            "dev-js-dashboard" : {
-                src: [ 'build/assets/js/dashboard_coffee.js' ],
-                dest: 'web/assets/js/dashboard.min.js',
-            },
-            "dev-js-members" : {
-                src: ['build/assets/js/members_coffee.js'],
-                dest: 'web/assets/js/members.min.js',
-            },
-            "dev-js-lists" : {
-                src: ['build/assets/js/lists_coffee.js'],
-                dest: 'web/assets/js/lists.min.js',
-            },
-            "dev-js-filters" : {
-                src: ['build/assets/js/filters_coffee.js'],
-                dest: 'web/assets/js/filters.min.js',
-            },
-            "dev-js-schedule" : {
-                src: ['build/assets/js/schedule_coffee.js'],
-                dest: 'web/assets/js/schedule.min.js',
-            }
         },
-        less: {
-            default: {
-                options: {
-                    paths: ["assets/css"],
-                    relativeUrl: true
-                },
-                files: {
-                    "build/assets/css/bootstrap.css": "bower_components/bootstrap/less/bootstrap.less",
-                    "build/assets/css/bootstrap-responsive.css": "bower_components/bootstrap/less/responsive.less",
-                    "build/assets/css/bootstrap-datetimepicker.css": "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
-                    "build/assets/css/dashboard.css": "src/Gyman/Bundle/DashboardBundle/Resources/less/dashboard.less",
-                    "build/assets/css/lists.css": "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
-                    "build/assets/css/main.css": "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
-                    "build/assets/css/filters.css": "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
-                    "build/assets/css/schedule.css": "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
-                }
-            }
-        },
+
         cssUrlRewrite: {
             select2: {
                 src: './bower_components/select2/select2.css',
@@ -360,7 +245,6 @@ module.exports = function (grunt) {
     grunt.config.set('color', 0);
     grunt.option('no-color');
 
-//    grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -372,11 +256,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['cssUrlRewrite', 'copy', 'coffee', 'less', 'concat', 'cssmin', 'uglify']);
 
-    grunt.registerTask('development', ['cssUrlRewrite', 'coffee', 'less',
-        'copy:dev-css-bundled', "copy:dev-css-dashboard", "copy:dev-css-main",
-        "concat:dev-js-bundled", "copy:dev-js-global", "copy:dev-js-dashboard", "copy:dev-js-members", "copy:dev-js-lists",
-        "copy:dev-js-filters", "copy:dev-js-schedule"
-    ]);
+    grunt.registerTask('development', [ ]);
 
     grunt.registerTask('compile-coffee', ['coffee', 'uglify:coffee']);
     grunt.registerTask('compile-less', ['less', 'cssmin']);
