@@ -30,16 +30,10 @@
 {% endblock %}
 
 {% block javascript %}
-{% javascripts
-    '@VouchersBundle/Resources/public/coffee/vouchers.newVoucher.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("span#ui-sellVoucherData");
         modal.setModalWindowClass("newVoucherModal");
-
         window.newVoucherModal = new NewVoucher();
     });
 </script>

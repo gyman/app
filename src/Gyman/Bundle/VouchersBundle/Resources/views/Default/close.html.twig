@@ -32,20 +32,11 @@
 </span>
 {% endblock %}
 
-{% block javascript %}
-{% javascripts
-    '@VouchersBundle/Resources/public/coffee/vouchers.closeVoucher.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("span#ui-closeVoucherData");
-
         modal.setModalWindowClass("closeVoucherModal");
-
         window.closeVoucherModal = new CloseVoucher();
-
     });
 </script>
 {% endblock javascript %}

@@ -1,10 +1,5 @@
 module.exports = function (grunt) {
     var cssVendors = [
-        'build/assets/css/bootstrap.css',
-        'build/assets/css/bootstrap-responsive.css',
-        'build/assets/css/select2.css',
-        'build/assets/css/select2-bootstrap.css',
-        'build/assets/css/bootstrap-datetimepicker.css',
         'bower_components/font-awesome/css/font-awesome.css',
         'bower_components/fullcalendar/dist/fullcalendar.css',
         'bower_components/jquery.uniform/themes/default/css/uniform.default.css',
@@ -28,8 +23,18 @@ module.exports = function (grunt) {
         'src/Gyman/Bundle/LayoutBundle/Resources/css/custom.css',
         'src/Gyman/Bundle/LayoutBundle/Resources/css/ie8.css',
         'src/Gyman/Bundle/LayoutBundle/Resources/css/icons.css',
-//                    'build/assets/css/main.css',
-//                    'build/assets/css/dashboard.css',
+        "build/assets/css/vendors.css"
+    ];
+
+    var lessFiles = [
+        "bower_components/bootstrap/less/bootstrap.less",
+        "bower_components/bootstrap/less/responsive.less",
+        "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
+        "src/Gyman/Bundle/DashboardBundle/Resources/less/dashboard.less",
+        "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
+        "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
+        "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
+        "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
     ];
 
     var mainLibraries = [
@@ -95,86 +100,81 @@ module.exports = function (grunt) {
         "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
     ];
 
-    var lessFiles = [
-        "bower_components/bootstrap/less/bootstrap.less",
-        "build/assets/css/bootstrap-responsive.css": "bower_components/bootstrap/less/responsive.less",
-        "build/assets/css/bootstrap-datetimepicker.css": "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
-        "build/assets/css/dashboard.css": "src/Gyman/Bundle/DashboardBundle/Resources/less/dashboard.less",
-        "build/assets/css/lists.css": "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
-        "build/assets/css/main.css": "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
-        "build/assets/css/filters.css": "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
-        "build/assets/css/schedule.css": "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
-    ];
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        less: {
-            default: {
-                options: {
-                    paths: ["assets/css"],
-                    relativeUrl: true
-                },
-                files: lessFiles
-            }
-        },
-        cssmin: {
-            options: {
-                keepSpecialComments: 0,
-            },
-            bundled: {
-                options: {
-                    /*                    keepSpecialComments: 0,
-                     target: './web/assets/css',
-                     root: 'web/',
-                     debug: true,
-                     processImport: true,
-                     noRebase: false,
-                     relativeTo: './web/assets', */
-                },
-                src: 'build/assets/css/bundled.css',
-                dest: 'web/assets/css/bundled.min.css'
-            },
-            dashboard: {
-                src: 'build/assets/css/dashboard.css',
-                dest: 'web/assets/css/dashboard.min.css'
-            },
-            main: {
-                src: [
-                    'build/assets/css/main.css',
-                    'build/assets/css/filters.css',
-                    'build/assets/css/lists.css',
-                    'build/assets/css/schedule.css',
 
-                ],
-                dest: 'web/assets/css/main.min.css'
+        clean: {
+            build:            { src: "build/assets" },
+            web:              { src: [ "web/assets", "web/js", "web/css"] },
+            "dev-assets":     { src: ["web/js/*.js", "!web/js/*.min.js", "web/css/*.css", "!web/css/*.min.css"] }
+        },
+
+        less: {
+            "development-vendors": {
+                options: {
+                    paths: [ "bower_components" ],
+                    compress: false,
+                    yuicompress: false,
+                    optimization: 0
+                },
+                files : {
+                    "build/assets/css/vendors.css" : [
+                        "bower_components/bootstrap/less/bootstrap.less",
+                        "bower_components/bootstrap/less/responsive.less",
+                        "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
+                    ]
+                }
+            },
+            "development-project": {
+                options: {
+                    paths: [ "src", 'app/Resources' ],
+                    compress: false,
+                    yuicompress: false,
+                    optimization: 0
+                },
+                files : {
+                    "web/css/project.css" : [
+                        "src/**/*.less",
+                        "app/Resources/**/*.less"
+                    ]
+                }
             },
         },
         uglify: {
-            js: {
+            production: {
                 files: {
-                    'web/assets/js/bundled.min.js': mainLibraries,
+                    'web/js/vendors.min.js': 'web/js/vendors.js',
+                    'web/js/project.min.js': 'web/js/project.js'
                 },
             },
         },
+        cssmin: {
+            "production-vendors": {
+                src: 'web/css/vendors.css',
+                dest: 'web/css/vendors.min.css'
+            },
+            "production-project": {
+                src: 'web/css/project.css',
+                dest: 'web/css/project.min.css'
+            },
+        },
         coffee: {
-            global: {
+            development: {
                 files: {
-                    'build/assets/js/global_coffee.js': coffeeFiles
+                    'web/js/project.js': coffeeFiles
                 },
             },
         },
         concat: {
-            options: {
-                stripBanners: true,
-            },
-            "bundled-css": {
+            "vendors.css": {
                 src: cssVendors,
-                dest: 'build/assets/css/bundled.css',
+                dest: 'web/css/vendors.css',
                 nonull: true
             },
-            "dev-js-bundled": {
+            "vendors.js": {
                 src: mainLibraries,
-                dest: 'web/assets/js/bundled.min.js'
+                dest: 'web/js/vendors.js',
+                nonull: true
             },
         },
         copy: {
@@ -191,56 +191,88 @@ module.exports = function (grunt) {
                 src: '*',
                 dest: 'build/assets/images/'
             },
-            "bootstrap-datetimepicker": {
+            "datetimepicker": {
                 src: "bower_components/bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less",
                 dest: "bower_components/bootstrap/less/bootstrap-datetimepicker.less"
             },
-            fonts: {
-                expand: true,
-                flatten: true,
-                src: [
-                    './src/**/fonts/*',
-                    "./src/**.ttf",
-                    "./src/**.woff",
-                    "./src/**.otf",
-                    './bower_components/**/fonts/*',
-                    "./bower_components/**.ttf",
-                    "./bower_components/**.woff",
-                    "./bower_components/**.otf"
-                ],
-                dest: "./web/assets/fonts/"
-            },
-            "images": {
-                expand: true,
-                flatten: true,
-                cwd: '',
-                src: [
-                    './src/**/Resources/**/images/**',
-                ],
-                dest: "./web/assets/images"
-            },
+            //fonts: {
+            //    expand: true,
+            //    flatten: true,
+            //    src: [
+            //        './src/**/fonts/*',
+            //        "./src/**.ttf",
+            //        "./src/**.woff",
+            //        "./src/**.otf",
+            //        './bower_components/**/fonts/*',
+            //        "./bower_components/**.ttf",
+            //        "./bower_components/**.woff",
+            //        "./bower_components/**.otf"
+            //    ],
+            //    dest: "./web/assets/fonts/"
+            //},
+            //"images": {
+            //    expand: true,
+            //    flatten: true,
+            //    cwd: '',
+            //    src: [
+            //        './src/**/Resources/**/images/**',
+            //    ],
+            //    dest: "./web/assets/images"
+            //},
 
         },
-
-        cssUrlRewrite: {
-            select2: {
-                src: './bower_components/select2/select2.css',
-                dest: "./build/assets/css/select2.css",
-                options: {
-                    skipExternal: true,
-                    cwd: './'
-                }
-            },
-            "select2-bootstrap": {
-                src: './bower_components/select2/select2-bootstrap.css',
-                dest: "./build/assets/css/select2-bootstrap.css",
-                options: {
-                    skipExternal: true,
-                    cwd: './'
-                }
-            }
-        }
+        //
+        //cssUrlRewrite: {
+        //    select2: {
+        //        src: './bower_components/select2/select2.css',
+        //        dest: "./build/assets/css/select2.css",
+        //        options: {
+        //            skipExternal: true,
+        //            cwd: './'
+        //        }
+        //    },
+        //    "select2-bootstrap": {
+        //        src: './bower_components/select2/select2-bootstrap.css',
+        //        dest: "./build/assets/css/select2-bootstrap.css",
+        //        options: {
+        //            skipExternal: true,
+        //            cwd: './'
+        //        }
+        //    }
+        //}
     });
+
+    grunt.registerTask('css:development', [
+        "copy:datetimepicker",                  // datetimepicker to bootstrap dir
+        "less:development-vendors",             // compiles *.less from vendors
+        "concat:vendors.css",                   // concatenates vendors into one web/css/vendors.css file
+        "less:development-project",             // compiles *.less from project into one web/css/project.css file
+    ]);
+
+    grunt.registerTask('js:development', [
+        "coffee:development",                  // compiles *.coffee files into one web/js/project.js
+        "concat:vendors.js",                   // concatenates vendors into one web/js/vendors.js
+    ]);
+
+    grunt.registerTask('development', [
+        "clean:build",
+        "clean:web",
+        "css:development",
+        "js:development",
+        "copy:webcam-swf"
+    ]);
+
+    grunt.registerTask('production', [
+        "development",
+        "cssmin:production-vendors",
+        "cssmin:production-project",
+        "uglify:production",
+        "clean:dev-assets"
+    ]);
+
+    grunt.registerTask('default', [
+        'production'
+    ]);
 
     grunt.config.set('color', 0);
     grunt.option('no-color');
@@ -251,13 +283,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks("grunt-css-url-rewrite");
     grunt.loadNpmTasks("grunt-image-embed");
-
-    grunt.registerTask('default', ['cssUrlRewrite', 'copy', 'coffee', 'less', 'concat', 'cssmin', 'uglify']);
-
-    grunt.registerTask('development', [ ]);
-
-    grunt.registerTask('compile-coffee', ['coffee', 'uglify:coffee']);
-    grunt.registerTask('compile-less', ['less', 'cssmin']);
 };

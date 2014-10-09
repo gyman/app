@@ -28,18 +28,10 @@ tu bedzie formularz zamykania i sprzedazy
 
 
 {% block javascript %}
-{% javascripts
-    '@EntriesBundle/Resources/public/coffee/entries.newEntry.coffee'
-    '@EntriesBundle/Resources/public/coffee/entries.editEntry.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
-
         modal.setupFromNode("div#ui-editEntryData");
         modal.setModalWindowClass("editEntryModal");
-
         window.editEntryModal = new EditEntry();
     });
 </script>
