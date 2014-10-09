@@ -96,14 +96,10 @@
 {% endblock modal %}
 
 {% block javascript %}
-
-<script src="{{ asset('/assets/js/members.min.js') }}"></script>
-
 <script>
     $(function() {
         modal.setupFromNode("div#ui-editMemberData");
         modal.setModalWindowClass("editMemberModal");
-
         window.editMemberModal = new EditMember();
     });
 </script>

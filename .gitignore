@@ -3,6 +3,8 @@
 /web/js/
 /web/css/
 /web/uploads/
+/web/images/
+/web/fonts/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml

@@ -12,8 +12,13 @@
     {% endif %}
 
     {% block stylesheets %}
-        <link rel="stylesheet" href="/assets/css/bundled.min.css"/>
-        <link rel="stylesheet" href="/assets/css/main.min.css"/>
+        {% if app.environment == "prod" %}
+            <link rel="stylesheet" href="/css/vendors.min.css" />
+            <link rel="stylesheet" href="/css/project.min.css" />
+        {% else %}
+            <link rel="stylesheet" href="/css/vendors.css" />
+            <link rel="stylesheet" href="/css/project.css" />
+        {%  endif %}
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
@@ -35,7 +40,7 @@
                 <div class="container-fluid">
 
                     <a href="{{ path("_dashboard_index") }}" class="brand">
-                        <img src="/assets/images/gyman_logo.png" />
+                        <img src="/bundles/default/images/gyman_logo.png" />
                     </a>
 
                     <div class="nav-no-collapse">
@@ -81,8 +86,14 @@
     <!-- end wrapper -->
 
     {% block javascripts %}
-        <script type="text/javascript" src="/assets/js/bundled.min.js"></script>
-        <script type="text/javascript" src="/assets/js/global.min.js"></script>
+        {% if app.environment == "prod" %}
+            <script type="text/javascript" src="/js/vendors.min.js"></script>
+            <script type="text/javascript" src="/js/project.min.js"></script>
+        {% else %}
+            <script type="text/javascript" src="/js/vendors.js"></script>
+            <script type="text/javascript" src="/js/project.js"></script>
+        {% endif %}
+
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
         {% if app.session.flashbag.has('notice') %}

@@ -85,7 +85,7 @@ oneup_uploader:
                 name: MyFancyCustomUploader            
                 
 default:
-    noImage:                /assets/images/no-profile.gif
+    noImage:                /images/no-profile.gif
     galleryDir:             /uploads/gallery/
     
 stof_doctrine_extensions:

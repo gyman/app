@@ -18,14 +18,6 @@
     </div>
 </div>
 {% endblock modal %}
-
-{% block javascript %}
-{% javascripts
-    '@MembersBundle/Resources/public/coffee/members.editMember.coffee'
-    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("div#ui-editOccurenceData");

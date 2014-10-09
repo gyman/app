@@ -89,20 +89,11 @@
 
 
 {% block javascript %}
-{% javascripts
-    '@EntriesBundle/Resources/public/coffee/entries.newEntry.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
-
         modal.setupFromNode("div#ui-newEntryData");
         modal.setModalWindowClass("editEntryModal");
-
         window.newEntryModal = new NewEntry();
-
-        return;
     });
 </script>
 {% endblock javascript %}
