@@ -13,7 +13,6 @@ class @EditMember extends @AbstractModal
       'min':0
     
   initSelects: =>
-    console.log "init select"
     $("#dende_membersbundle_member_belt, #dende_membersbundle_member_gender").select2 @selectSettings
   
   initActivities: =>
