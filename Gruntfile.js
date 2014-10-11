@@ -108,7 +108,22 @@ module.exports = function (grunt) {
             web:              { src: [ "web/assets", "web/js", "web/css", "web/fonts", "web/images"] },
             "dev-assets":     { src: ["web/js/*.js", "!web/js/*.min.js", "web/css/*.css", "!web/css/*.min.css"] }
         },
-
+        watch: {
+            scripts: {
+                files: coffeeFiles,
+                tasks: ['coffee:development'],
+                options: {
+                    spawn: false,
+                },
+            },
+            styles: {
+                files: lessFiles,
+                tasks: ['less:development-project'],
+                options: {
+                    spawn: false,
+                },
+            }
+        },
         less: {
             "development-vendors": {
                 options: {
@@ -274,7 +289,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-exec");
-    //grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     //grunt.loadNpmTasks("grunt-css-url-rewrite");
     //grunt.loadNpmTasks("grunt-image-embed");
 };

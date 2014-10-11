@@ -7,16 +7,16 @@
 <div class="hidden" id="ui-editMemberData">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>{% block modalTitle %}Nowy użytkownik{%endblock modalTitle%}</h3>
+        <h3>{% block modalTitle %}{{ "member.modal.new_user_title"|trans }}{%endblock modalTitle%}</h3>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">{{ "member.modal.save_button_label"|trans }}</a>
     </div>
 </div>
 {% endblock modal %}
 
 {% block birthday %}
-    {{ form_row(form.birthdate,{"label" : "Data urodzin", "attr": { "value" : null }}) }}
+    {{ form_row(form.birthdate,{"label" : "member.modal.birthday_label"|trans, "attr": { "value" : null }}) }}
 {% endblock birthday %}
 
 {% block memberToolbox %}

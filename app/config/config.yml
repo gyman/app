@@ -85,7 +85,7 @@ oneup_uploader:
                 name: MyFancyCustomUploader            
                 
 default:
-    noImage:                /images/no-profile.gif
+    noImage:                /bundles/default/images/no-profile.gif
     galleryDir:             /uploads/gallery/
     
 stof_doctrine_extensions:
@@ -104,18 +104,6 @@ monolog:
             type:  stream  
             path:  %kernel.logs_dir%/%kernel.environment%.log  
             level: error
-
-#sensio_framework_extra:
-#    router: { annotations: true }
-#    view: { annotations: false }
-#    cache: { annotations: true }
-#    request: { converters: true }
-
-#knp_paginator:
-#    template:
-#        pagination: ::pagination.html.twig
-#        sortable: ::sortable_link.html.twig
-#        filtration: ::filtration.html.twig
 
 fos_rest:
     routing_loader:
