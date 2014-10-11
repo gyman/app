@@ -1,13 +1,12 @@
 module.exports = function (grunt) {
     var cssVendors = [
-        'build/assets/css/bootstrap.css',
-        'build/assets/css/bootstrap-responsive.css',
-        'build/assets/css/select2.css',
-        'build/assets/css/select2-bootstrap.css',
-        'build/assets/css/bootstrap-datetimepicker.css',
+        "build/assets/css/bootstrap.css", // bootstrap 2.3.2 files compiled from less
         'bower_components/font-awesome/css/font-awesome.css',
         'bower_components/fullcalendar/dist/fullcalendar.css',
         'bower_components/jquery.uniform/themes/default/css/uniform.default.css',
+
+        'bower_components/select2/select2.css',
+        'bower_components/select2/select2-bootstrap.css',
 
         'bower_components/DataTables/media/css/jquery.dataTables.css',
         'bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css',
@@ -24,11 +23,6 @@ module.exports = function (grunt) {
         'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.theme.css',
         'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.tooltip.css',
         'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.pnotify.default.css',
-        //'src/Gyman/Bundle/LayoutBundle/Resources/css/main.css',
-        //'src/Gyman/Bundle/LayoutBundle/Resources/css/custom.css',
-        //'src/Gyman/Bundle/LayoutBundle/Resources/css/ie8.css',
-        //'src/Gyman/Bundle/LayoutBundle/Resources/css/icons.css',
-        "build/assets/css/bootstrap.css" // bootstrap 2.3.2 files compiled from less
     ];
 
     var lessFiles = [
