@@ -1,5 +1,10 @@
 module.exports = function (grunt) {
     var cssVendors = [
+        'build/assets/css/bootstrap.css',
+        'build/assets/css/bootstrap-responsive.css',
+        'build/assets/css/select2.css',
+        'build/assets/css/select2-bootstrap.css',
+        'build/assets/css/bootstrap-datetimepicker.css',
         'bower_components/font-awesome/css/font-awesome.css',
         'bower_components/fullcalendar/dist/fullcalendar.css',
         'bower_components/jquery.uniform/themes/default/css/uniform.default.css',

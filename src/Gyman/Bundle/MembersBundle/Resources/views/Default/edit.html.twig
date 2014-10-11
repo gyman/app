@@ -13,14 +13,14 @@
             <li class="active">
                 <a data-toggle="tab" href="#detailsPane">
                     <span class="icon16 icomoon-icon-home-6 "></span>
-                    Szczegóły
+                    {{ 'member.modal.tab.details_label'|trans }}
                 </a>
             </li>
             {% if voucher is defined and voucher is not null %}
             <li>
                 <a data-toggle="tab" href="#voucherPane">
                     <span class="icon16 icomoon-icon-equalizer-2"></span>
-                    Karnet
+                    {{ 'member.modal.tab.voucher_label'|trans }}
                 </a>
             </li>
             {% endif %}
@@ -28,20 +28,20 @@
             <li>
                 <a data-toggle="tab" href="#sellPane">
                     <span class="icon16 icomoon-icon-cart"></span>
-                    Sprzedaż
+                    {{ 'member.modal.tab.sales_label'|trans }}
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#entriesPane">
                     <span class="icon16 icomoon-icon-enter"></span>
-                    Wejścia
+                    {{ 'member.modal.tab.entries_label'|trans }}
                 </a>
             </li>
             {% endif %}
             <li>
                 <a data-toggle="tab" href="#additionalsPane">
                     <span class="icon16 icomoon-icon-fire"></span>
-                    Dodatkowe
+                    {{ 'member.modal.tab.extras_label'|trans }}
                 </a>
             </li>
         </ul>
@@ -81,16 +81,18 @@
 <div class="hidden" id="ui-editMemberData">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>{% block modalTitle %}Edycja użytkownika {{member.getName()}}{%endblock modalTitle%}</h3>
+        <h3>{% block modalTitle %}{{ 'member.modal.edit_user_title'|trans(member.getName()) }}{%endblock modalTitle%}</h3>
     </div>
     <div class="modal-footer">
         <form id="deleteForm" class="pull-left">
             <label>
                 <input type="checkbox" id="deleteCheckbox" />
-                Usuń użytkownika
+                {{ 'member.modal.remove_user_checkbox_label'|trans }}
             </label>
         </form>
-        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">
+            {{ 'member.modal.save_button_label'|trans }}
+        </a>
     </div>
 </div>
 {% endblock modal %}

@@ -1,6 +1,13 @@
 members.new.sell_voucher_after_creation: "Sprzedaj karnet po utworzeniu uczestnika"
 
 member.modal.new_user_title: "Nowy uczestnik"
+member.modal.edit_user_title: "Edycja uczestnika '%s'"
 member.modal.birthday_label: "Data urodzin"
 member.modal.save_button_label: "Zapisz"
+member.modal.remove_user_checkbox_label: "Usuń użytkownika"
 
+member.modal.tab.details_label: "Szczegóły"
+member.modal.tab.voucher_label: "Karnet"
+member.modal.tab.sales_label: "Sprzedaż"
+member.modal.tab.entries_label: "Wejścia"
+member.modal.tab.extras_label: "Dodatkowe"
