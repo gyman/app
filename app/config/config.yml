@@ -1,5 +1,6 @@
 parameters:
   session_lifetime: 86400 # 24 hours
+  no_image: /bundles/default/images/no-profile.gif
 
 imports:
     - { resource: parameters.yml }
@@ -85,7 +86,7 @@ oneup_uploader:
                 name: MyFancyCustomUploader            
                 
 default:
-    noImage:                /bundles/default/images/no-profile.gif
+    noImage:                %no_image%
     galleryDir:             /uploads/gallery/
     
 stof_doctrine_extensions:

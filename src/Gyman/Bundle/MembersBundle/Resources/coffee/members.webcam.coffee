@@ -90,8 +90,11 @@ class @WebCamTab
       done: (e, data) =>
         response = data.response().result
         @handleResponse response
-      fail: (e, data) ->
-        alert @FOTO_UPLOAD_ERROR
+      fail: (e, data) =>
+        errors = '';
+        for type, errorMessage of data.messages
+          errors += "\n#{errorMessage}"
+        return alert errors
 
   sendFormData: (formData) =>
     $.ajax

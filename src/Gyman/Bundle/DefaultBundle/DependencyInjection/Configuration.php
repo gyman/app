@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
 
                     ->scalarNode('noImage')
-                    ->defaultValue('/assets/images/no-profile.gif')
+                    ->defaultValue('null')
                     ->end()
                 ->end()
         ;
