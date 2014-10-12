@@ -41,7 +41,8 @@
     "fullcalendar": "~2.1.1",
     "jquery-file-upload": "~9.7.1",
     "webcam": "~1.0.0",
-    "datatables-plugins": "*"
+    "datatables-plugins": "*",
+    "typeahead.js": "*"
   },
   "resolutions": {
      "jquery": "~1.11.0"

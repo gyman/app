@@ -50,8 +50,11 @@ module.exports = function (grunt) {
         "bower_components/bootstrap/js/bootstrap-tab.js",
         "bower_components/bootstrap/js/bootstrap-tooltip.js",
         "bower_components/bootstrap/js/bootstrap-transition.js",
-        "bower_components/bootstrap/js/bootstrap-typeahead.js",
+        //"bower_components/bootstrap/js/bootstrap-typeahead.js",
         "bower_components/bootstrap/js/bootstrap-popover.js",
+
+        "bower_components/typeahead.js/dist/typeahead.bundle.js",
+
         "bower_components/uri.js/src/URI.js",
         "bower_components/uri.js/src/URI.fragmentQuery.js",
         "bower_components/moment/min/moment-with-locales.js",
