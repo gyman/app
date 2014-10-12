@@ -86,7 +86,7 @@ class Globals
     public static function checkIfImageExists($string)
     {
         $file = self::getGalleryDir() . $string;
-        $filepath = __DIR__ . "/../../../../web/" . $file;
+        $filepath = __DIR__ . "/../../../../../web/" . $file;
 
         return is_file($filepath) && file_exists($filepath);
     }
