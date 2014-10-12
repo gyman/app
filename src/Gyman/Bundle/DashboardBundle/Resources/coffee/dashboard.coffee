@@ -1,16 +1,22 @@
 $ ->
   window.ActivityTab = new ActivityTab()
-  
-  $('input.typeahead').typeahead(
-    minLength: 3
-    items: 10
-    source: (typeahead, query) ->
-      $.ajax(
-        url: Routing.generate("_members_dashboard_search", {members: query})
-        success: (data) =>
-          typeahead.process(data)
-      )
-    onselect: (obj) =>
-      window.modal.showFromUrl Routing.generate("_member_edit", {id: obj.id})
-    property: "name"
-  )
+
+  openUserInWindow = (e, user, datasetName) ->
+    window.modal.showFromUrl Routing.generate("_member_edit", {id: user.id})
+
+  $('#membersSearchAutocomplete').typeahead({
+      minLength: 2,
+      highlight: true,
+    },
+    {
+      name: 'members_search',
+      displayKey: 'name'
+      source: (query, cb) ->
+        $.get Routing.generate("_members_dashboard_search", {members: query}), {}, cb
+    }).on("typeahead:selected", openUserInWindow)
+
+#  .on("typeahead:autocompleted",openUserInWindow);
+
+# Routing.generate("_members_dashboard_search", {members: query})
+# window.modal.showFromUrl Routing.generate("_member_edit", {id: obj.id})
+#  $('input.typeahead').typeahead
