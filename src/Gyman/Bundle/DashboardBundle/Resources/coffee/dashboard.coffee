@@ -1,38 +1,22 @@
 $ ->
   window.ActivityTab = new ActivityTab()
-  
-  $('input.typeahead').typeahead
-    minLength: 2
-    items: 10
-    source: (query, process) ->
-      $.ajax(
-        url: Routing.generate("_members_dashboard_search", {members: query})
-        success: (data) =>
-          process data
-      )
 
-    matcher: (item) ->
-      return ~item["name"].toLowerCase().indexOf(this.query.toLowerCase())
+  openUserInWindow = (e, user, datasetName) ->
+    window.modal.showFromUrl Routing.generate("_member_edit", {id: user.id})
 
-    sorter: (items) ->
-      beginswith = []
-      caseSensitive = []
-      caseInsensitive = []
-      item = undefined
-      while item = items.shift()
-        unless item["name"].toLowerCase().indexOf(this.query.toLowerCase())
-          beginswith.push item
-        else if ~item["name"].indexOf(this.query)
-          caseSensitive.push item
-        else
-          caseInsensitive.push item
-      beginswith.concat caseSensitive, caseInsensitive
+  $('#membersSearchAutocomplete').typeahead({
+      minLength: 2,
+      highlight: true,
+    },
+    {
+      name: 'members_search',
+      displayKey: 'name'
+      source: (query, cb) ->
+        $.get Routing.generate("_members_dashboard_search", {members: query}), {}, cb
+    }).on("typeahead:selected", openUserInWindow)
 
-    highlighter: (item) ->
-      query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
-      item["name"].replace new RegExp("(" + query + ")", "ig"), ($1, match) ->
-        "<strong>" + match + "</strong>"
+#  .on("typeahead:autocompleted",openUserInWindow);
 
-    onselect: (obj) =>
-      console.log obj
-      window.modal.showFromUrl Routing.generate("_member_edit", {id: obj.id})
+# Routing.generate("_members_dashboard_search", {members: query})
+# window.modal.showFromUrl Routing.generate("_member_edit", {id: obj.id})
+#  $('input.typeahead').typeahead
