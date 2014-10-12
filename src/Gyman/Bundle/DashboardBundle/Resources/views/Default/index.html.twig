@@ -11,14 +11,14 @@
     </div><!-- End .heading-->
 
     <div class="form-row row-fluid">
-        <div class="span6">
+        <div class="span4">
             {% include "DashboardBundle:Default:activities.html.twig" %}
             {% include "DashboardBundle:Default:hierarchy.html.twig" %}
 
 
         </div>
 
-        <div class="span6">
+        <div class="span4">
             {% include "DashboardBundle:Default:searchUser.html.twig" %}
             {# {% include "DashboardBundle:Default:popularActivities.html.twig" %} #}
 
@@ -31,6 +31,75 @@
                 'depth' : 2,
                 'currentClass' : 'active'
                 }) }}
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="reminder">
+                <h4>Wydarzenia</h4>
+
+                <ul class="messages">
+                    <li class="user clearfix">
+                        <a class="avatar" href="#">
+                            <img alt="" src="/images/avatar.jpg">
+                        </a>
+                        <div class="message">
+                            <div class="head clearfix">
+                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
+                                <span class="time">25 sekund temu</span>
+                            </div>
+                            <p>
+                                Dodany użytkownik "Jan Kowalski".
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="user clearfix">
+                        <a class="avatar" href="#">
+                            <img alt="" src="/images/avatar.jpg">
+                        </a>
+                        <div class="message">
+                            <div class="head clearfix">
+                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
+                                <span class="time">3 minuty temu</span>
+                            </div>
+                            <p>
+                                Sprzedany karnet dla Michał Maj za 500zł.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="user clearfix">
+                        <a class="avatar" href="#">
+                            <img alt="" src="/images/avatar.jpg">
+                        </a>
+                        <div class="message">
+                            <div class="head clearfix">
+                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
+                                <span class="time">25 sekund temu</span>
+                            </div>
+                            <p>
+                                Dodany użytkownik "Jan Kowalski".
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="user clearfix">
+                        <a class="avatar" href="#">
+                            <img alt="" src="/images/avatar.jpg">
+                        </a>
+                        <div class="message">
+                            <div class="head clearfix">
+                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
+                                <span class="time">3 minuty temu</span>
+                            </div>
+                            <p>
+                                Sprzedany karnet dla Michał Maj za 500zł.
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
             </div>
         </div>
     </div>

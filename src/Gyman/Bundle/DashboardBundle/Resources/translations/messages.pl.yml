@@ -1,4 +1,6 @@
 dashboard.your_clubs.caption: 'Kluby, którymi zarządzasz'
 
 dashboard.actions.new_member: "+ Uczestnik"
+dashboard.actions.new_voucher_sale: "+ Karnet"
+dashboard.actions.new_entry: "+ Wejście"
 dashboard.actions.calendar: "Kalendarz"

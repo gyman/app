@@ -51,6 +51,26 @@ class Builder
             )
         )->setExtra('translation_domain', 'DashboardBundle');
 
+        $menu->addChild('dashboard.actions.new_entry',
+            array(
+                'route' => '_member_new', // @todo: przerobić na route '_entrance_add'
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => array(
+                    "class" => 'tipB',
+                )
+            )
+        )->setExtra('translation_domain', 'DashboardBundle');
+
+        $menu->addChild('dashboard.actions.new_voucher_sale',
+            array(
+                'route' => '_member_new', // @todo: przerobić na route '_voucher_new'
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => array(
+                    "class" => 'tipB',
+                )
+            )
+        )->setExtra('translation_domain', 'DashboardBundle');
+
         $menu->addChild('dashboard.actions.calendar',
             array(
                 'route' => '_schedule_calendar',
@@ -60,26 +80,6 @@ class Builder
                 )
             )
         )->setExtra('translation_domain', 'DashboardBundle');
-//
-//        $menu->addChild('dashboard.actions.new_entry',
-//            array(
-//                'route' => '_entrance_add',
-//                "extras" => array("icon" => 'icomoon-icon-users'),
-//                'linkAttributes' => array(
-//                    "class" => 'tipB openUrlInModal',
-//                )
-//            )
-//        )->setExtra('translation_domain', 'DashboardBundle');
-//
-//        $menu->addChild('dashboard.actions.new_voucher_sale',
-//            array(
-//                'route' => '_voucher_new',
-//                "extras" => array("icon" => 'icomoon-icon-users'),
-//                'linkAttributes' => array(
-//                    "class" => 'tipB openUrlInModal',
-//                )
-//            )
-//        )->setExtra('translation_domain', 'DashboardBundle');
 
         return $menu;
     }
