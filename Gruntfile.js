@@ -34,6 +34,7 @@ module.exports = function (grunt) {
         "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
         "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
         "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
+        "src/Gyman/Bundle/EntriesBundle/Resources/public/less/*.less"
     ];
 
     var mainLibraries = [
@@ -84,22 +85,36 @@ module.exports = function (grunt) {
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/modal.coffee',
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
+
         'web/bundles/lists/coffee/reloadAjax.coffee',
+
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
+
         "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.editMember.coffee",
         "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.webcam.coffee",
         "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.filter.coffee",
+
         "src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
         "src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
         "src/Gyman/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
         "src/Gyman/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
+
         "src/Gyman/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
         "src/Gyman/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
+
         "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
         "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
         "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
         "src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
+
+        "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.modal.class.coffee",
+        "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.closeEntry.coffee",
+        "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.newEntry.coffee",
+        "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.editEntry.coffee",
+
+        "src/Gyman/Bundle/VouchersBundle/Resources/coffee/vouchers.closeVoucher.coffee",
+        "src/Gyman/Bundle/VouchersBundle/Resources/coffee/vouchers.newVoucher.coffee"
     ];
 
     grunt.initConfig({
