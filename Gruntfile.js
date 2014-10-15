@@ -123,7 +123,7 @@ module.exports = function (grunt) {
         clean: {
             build:            { src: "build/assets" },
             web:              { src: [ "web/assets", "web/js", "web/css", "web/fonts", "web/images"] },
-            "dev-assets":     { src: ["web/js/*.js", "!web/js/*.min.js", "web/css/*.css", "!web/css/*.min.css"] }
+            "dev-assets":     { src: ["!web/js/*.js", "!web/js/*.min.js", "!web/css/*.css", "!web/css/*.min.css"] }
         },
         watch: {
             scripts: {
