@@ -7,9 +7,8 @@ $ ->
     $memberSearchAutocompleteInput.data "user", user
 
   $("span#clickToOpenFoundUser").on "click", (e) ->
-    console.log "click"
     user = $('#membersSearchAutocomplete').data 'user'
-    return if user is undefined 
+    return if user is undefined
     window.modal.showFromUrl Routing.generate("_member_edit", {id: user.id})
 
   $('#membersSearchAutocomplete').typeahead({

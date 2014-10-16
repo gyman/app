@@ -5,9 +5,14 @@ class @EditMember extends @AbstractModal
     @initSelects()
     @initActivities()
     @initVoucherTab()
-    
+    @initCheckbox()
+
     webcamTab = new WebCamTab()
-    
+
+  $sellVoucherCheckbox: $("input[name='sell_voucher_after_creation']:checkbox")
+  sellVoucher: true,
+  userData: {} # @todo add user and pass it's id to voucher sell route
+
   initVoucherTab: =>
     $(".dial").knob 
       'min':0
@@ -19,7 +24,14 @@ class @EditMember extends @AbstractModal
     activities = []
     $.each $("#dende_membersbundle_member_activities option"), (i,item) ->
       activities.push $(item).val()  
-  
+
+  initCheckbox: =>
+    @$sellVoucherCheckbox.on "click", (e) =>
+      if $(e.target).is(":checked")
+        @sellVoucher = true
+      else
+        @sellVoucher = false
+
   initDatepickers: () =>
     @datetimepickerSettings.endDate = new Date()
     $("#dende_membersbundle_member_birthdate",@$modalWindow).datetimepicker @datetimepickerSettings
@@ -31,7 +43,11 @@ class @EditMember extends @AbstractModal
     
   handleSubmitSuccess: (response) =>
     datatable.fnReloadAjax() if datatable?
-    @modal.hide()
+
+    if @sellVoucher
+      @modal.showFromUrl Routing.generate("_events_delete_singular",{occurence:@occurence.id})
+    else
+      @modal.hide()
     
   handleSubmitError: (responseText) =>
     super(responseText)

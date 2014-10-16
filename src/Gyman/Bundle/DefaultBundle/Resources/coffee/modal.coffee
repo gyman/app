@@ -1,12 +1,10 @@
 class @Modal
   constructor: (@params) ->
-    
     if !@params
       @params = {}
 
     @$modal =  $(@modalSelector)
 
-    
     if @params.node?
       @$modal = $(@params.node)
     
