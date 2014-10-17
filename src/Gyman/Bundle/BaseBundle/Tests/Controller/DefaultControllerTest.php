@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Bundle\DefaultBundle\Tests\Controller;
+namespace Gyman\Bundle\BaseBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -6,7 +6,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: "@MembersBundle/Resources/config/services.yml" }
 
 framework:
     translator:      { fallback: %locale% }
@@ -83,7 +82,7 @@ oneup_uploader:
             frontend: custom
             custom_frontend:
                 class: Gyman\Bundle\MembersBundle\Controller\UploadController
-                name: MyFancyCustomUploader            
+                name:  MyFancyCustomUploader
                 
 default:
     noImage:                %no_image%
@@ -100,16 +99,39 @@ fos_js_routing:
     routes_to_expose: [.*]
     
 monolog:  
-    handlers:  
-        main:
-            type:  stream  
-            path:  %kernel.logs_dir%/%kernel.environment%.log  
-            level: error
+  handlers:
+    main:
+      type:  stream
+      path:  %kernel.logs_dir%/%kernel.environment%.log
+      level: error
+
+jms_serializer:
+  handlers:
+    datetime:
+      default_format: "Y-m-d H:i:s"
+      default_timezone: "UTC"
+  metadata:
+    auto_detection: true
 
 fos_rest:
-    routing_loader:
-        default_format: json
-        include_format: false
+  param_fetcher_listener: true
+  body_listener:
+    decoders:
+      json: fos_rest.decoder.jsontoform
+  format_listener: true
+  view:
+    view_response_listener: force
+    serialize_null: true
+    failed_validation: 422
+  routing_loader:
+      default_format: json
+      include_format: false
+
+sensio_framework_extra:
+  view: { annotations: false }
+  router: { annotations: true }
+  request: { converters: true }
+
 
 doctrine_migrations:
     dir_name: %kernel.root_dir%/Migrations

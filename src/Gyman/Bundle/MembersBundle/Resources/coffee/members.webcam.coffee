@@ -83,9 +83,9 @@ class @WebCamTab
       $("a[href='#filePane']").trigger "click"
           
   initFileUpload: () =>
-    $("#dende_membersbundle_member_fotoUploader").uniform()
-    
-    $("#dende_membersbundle_member_fotoUploader",$(@modalWindow)).fileupload
+    $("#gyman_members_member_form_type_fotoUploader").uniform()
+
+    $("#gyman_members_member_form_type_fotoUploader",$(@modalWindow)).fileupload
       limitMultiFileUploads: 1
       done: (e, data) =>
         response = data.response().result
@@ -111,4 +111,4 @@ class @WebCamTab
     pathname = responseJSON.pathname
     filename = responseJSON.filename
     $("img#memberFoto",$(@modalWindow)).attr "src", pathname
-    $("input#dende_membersbundle_member_foto",$(@modalWindow)).val filename
+    $("input#gyman_members_member_form_typee_member_foto",$(@modalWindow)).val filename

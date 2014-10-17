@@ -1,11 +1,11 @@
 class @EditMember extends @AbstractModal
   constructor: ()->
     super()
-    @initDatepickers()
-    @initSelects()
-    @initActivities()
-    @initVoucherTab()
-    @initCheckbox()
+#    @initDatepickers()
+#    @initSelects()
+#    @initActivities()
+#    @initVoucherTab()
+#    @initCheckbox()
 
     webcamTab = new WebCamTab()
 
@@ -18,11 +18,11 @@ class @EditMember extends @AbstractModal
       'min':0
     
   initSelects: =>
-    $("#dende_membersbundle_member_belt, #dende_membersbundle_member_gender").select2 @selectSettings
+    $("#gyman_members_member_form_type_belt, #gyman_members_member_form_type_gender").select2 @selectSettings
   
   initActivities: =>
     activities = []
-    $.each $("#dende_membersbundle_member_activities option"), (i,item) ->
+    $.each $("#gyman_members_member_form_type_activities option"), (i,item) ->
       activities.push $(item).val()  
 
   initCheckbox: =>
@@ -34,7 +34,7 @@ class @EditMember extends @AbstractModal
 
   initDatepickers: () =>
     @datetimepickerSettings.endDate = new Date()
-    $("#dende_membersbundle_member_birthdate",@$modalWindow).datetimepicker @datetimepickerSettings
+    $("#gyman_members_member_form_type_birthdate",@$modalWindow).datetimepicker @datetimepickerSettings
       
   openTabWithError: () =>
     paneId = "#" + @$modalWindow.find("div.control-group.error").first().parents(".tab-pane").prop("id");

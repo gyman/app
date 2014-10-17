@@ -81,7 +81,7 @@ class MemberType extends AbstractType
      */
     public function getName()
     {
-        return 'dende_membersbundle_member';
+        return 'gyman_members_member_form_type';
     }
 
     private function getActivitiesFromOptions($options)

@@ -4,12 +4,30 @@ parameters:
     member_repository.class: Gyman\Bundle\MembersBundle\Entity\MemberRepository
 
 services:
+
+    gyman_members_manager:
+      parent: gyman_base_entity_manager
+      class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
+      calls:
+        - [setClass, [%member_entity.class%]]
+
+    gyman_members_member_form_type:
+      class: Gyman\Bundle\MembersBundle\Form\MemberType
+      arguments:
+        - @oneup_uploader.templating.uploader_helper
+      tags:
+        - { name: form.type, alias: gyman_members_member_form_type }
+
+#  old
+
+    # @todo: remove
     member_repository:
         class:          "%member_repository.class%"
         factory_service: doctrine
         factory_method:  getRepository
         arguments: [ "%member_entity.class%" ]
 
+    # @todo: remove
     member_manager:
         class:          "%member_manager.class%"
         parent:         base_manager
@@ -17,6 +35,7 @@ services:
              - [ setClass, [%member_entity.class%] ]
              - [ setRepository, ["@member_repository"] ]
 
+    # @todo: rename
     dende.upload_listener:
         class: Gyman\Bundle\MembersBundle\Services\Listener\UploadListener
         arguments: [@doctrine]

@@ -3,8 +3,8 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gyman\Bundle\DefaultBundle\Validator as DefaultBundle;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -28,9 +28,25 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  *     message="Inny użytkownik oznaczony jest tym kodem"
  * )
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ *
  * @codeCoverageIgnore
- * @ExclusionPolicy("none")
+ *
+ * @Serializer\ExclusionPolicy("all")
+ *
+ * @Hateoas\Relation("self", href = @Hateoas\Route(
+ *      "gyman_api_get_member",
+ *      parameters = { "id" = "expr(object.getId())" },
+ *      absolute = true
+ * ))
+ *
+ * @Hateoas\Relation("vouchers", href = @Hateoas\Route(
+ *      "gyman_api_get_member_get_vouchers",
+ *      parameters = { "id" = "expr(object.getId())" },
+ *      absolute = true
+ * ))
+
  */
+
 class Member
 {
     const GENDER_MALE = 'male';
@@ -42,12 +58,12 @@ class Member
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose()
      */
     private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="Gyman\Bundle\SectionBundle\Entity\Section", mappedBy="members")
-     * @Exclude()
      */
     private $sections;
 
@@ -57,6 +73,7 @@ class Member
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Serializer\Expose()
      */
     private $name;
 
@@ -69,12 +86,14 @@ class Member
      *      max="today"
      * )
      * @ORM\Column(name="birthdate", type="string", length=64, nullable=true)
+     * @Serializer\Expose()
      */
     private $birthdate;
 
     /**
      * @var string
      *
+     * @Serializer\Expose()
      * @ORM\Column(name="phone", type="string", length=64, nullable=true)
      */
     private $phone;
@@ -86,6 +105,7 @@ class Member
      *     message = "Adres '{{ value }}' nie jest poprawny.",
      *     checkMX = true
      * )
+     * @Serializer\Expose()
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
@@ -99,14 +119,14 @@ class Member
 
     /**
      * @var string
-     *
+     * @Serializer\Expose()
      * @ORM\Column(name="foto", type="string", length=255, nullable=true)
      */
     private $foto = "no-profile.gif";
 
     /**
      * @var string $zipcode
-     *
+     * @Serializer\Expose()
      * @ORM\Column(name="zipcode", type="string", nullable=true)
      * @Assert\Length(max=6, min=6, minMessage="Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków")
      * @Assert\Regex(
@@ -120,6 +140,7 @@ class Member
     /**
      * @var string $gender
      *
+     * @Serializer\Expose()
      * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'female')", nullable=true)
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      */
@@ -127,13 +148,13 @@ class Member
 
     /**
      * @ORM\OneToMany(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
-     * @Exclude()
      */
     protected $vouchers;
 
     /**
      * @ORM\OneToOne(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher")
      * @ORM\JoinColumn(name="current_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @Serializer\Expose()
      */
     protected $currentVoucher;
 
@@ -141,7 +162,7 @@ class Member
      * @var Entry $lastEntry
      * @ORM\OneToOne(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry")
      * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     * @Exclude()
+     *
      */
     protected $lastEntry;
 
@@ -150,6 +171,7 @@ class Member
      *
      * @ORM\Column(name="belt", type="string", columnDefinition="enum('white','blue','purple','brown','black')", nullable=true)
      * @Assert\NotBlank(message = "Pole nie może być puste!")
+     * @Serializer\Expose()
      */
     private $belt;
 
@@ -162,7 +184,6 @@ class Member
 
     /**
      * @ORM\OneToMany(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
-     * @Exclude()
      */
     private $entries;
 
@@ -189,6 +210,7 @@ class Member
 
     /**
      * @var integer
+     * @Serializer\Expose()e
      * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 64)
      */
     private $barcode;

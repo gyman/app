@@ -1,3 +1,5 @@
+{#@todo translacje#}
+
 <div class="alert alert-error">{{ voucher.getMember().getName() }} aktualnie posiada już karnet. Oto jego szczegóły: </div>
 
 <div class="box">
@@ -32,6 +34,7 @@
 </span>
 {% endblock %}
 
+{% block javascript %}
 <script>
     $(function() {
         modal.setupFromNode("span#ui-closeVoucherData");

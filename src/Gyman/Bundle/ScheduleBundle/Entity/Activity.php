@@ -4,6 +4,8 @@ namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Activity
@@ -12,10 +14,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Gyman\Bundle\ScheduleBundle\Entity\ActivityRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @codeCoverageIgnore
+ * @Serializer\ExclusionPolicy("all")
  */
 class Activity
 {
-
     /**
      * @ORM\ManyToMany(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher" , mappedBy="activities")
      */
@@ -32,12 +34,14 @@ class Activity
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose()
      */
     private $id;
 
     /**
      * @var string
      *
+     * @Serializer\Expose()
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;

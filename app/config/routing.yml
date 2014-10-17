@@ -3,16 +3,6 @@ account:
     type:     annotation
     prefix:   /
 
-section:
-    resource: "@SectionBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-club:
-    resource: "@ClubBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
@@ -20,11 +10,6 @@ user:
 
 chart:
     resource: "@ChartsBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-test:
-    resource: "@TestBundle/Controller/"
     type:     annotation
     prefix:   /
 
@@ -58,41 +43,90 @@ schedule:
     type:     annotation
     prefix:   /schedule
 
-layout:
-    resource: "@LayoutBundle/Controller/"
-    type:     annotation
-    prefix:   /layout
-
 default:
-    resource: "@DefaultBundle/Controller/"
+    resource: "@DefaultBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /default
 
 members:
-    resource: "@MembersBundle/Controller/"
+    resource: "@MembersBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /members
 
 vouchers:
-    resource: "@VouchersBundle/Controller/"
+    resource: "@VouchersBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /vouchers
+
 oneup_uploader:
     resource: .
     type: uploader
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
 
-#api:
-#    resource: "@ApiBundle/Controller/"
-#    type:     annotation
 
-api_members:
-    prefix:   /api
-    type:     rest
-    resource: Gyman\Bundle\ApiBundle\Controller\MemberController
+# api routes
+
+gyman_api:
+    pattern:  /api/
+    defaults: { _controller: DefaultBundle:Api:index, _format: ~ }
+    requirements:
+        _method: GET
+
+gyman_api_get_members:
+    pattern:  /api/members/
+    defaults: { _controller: MembersBundle:Api:getMembers, _format: ~ }
+    requirements:
+        _method: GET
+
+gyman_api_get_member:
+    pattern:  /api/members/{id}
+    defaults: { _controller: MembersBundle:Api:getMember, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+gyman_api_post_member:
+    pattern:  /api/members
+    defaults: { _controller: MembersBundle:Api:postMember, _format: ~ }
+    requirements:
+        _method: POST
+
+gyman_api_put_member:
+    pattern:  /api/members/{id}
+    defaults: { _controller: MembersBundle:Api:putMember, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+gyman_api_get_member_get_vouchers:
+    pattern:  /api/members/{id}/vouchers
+    defaults: { _controller: MembersBundle:Api:getVouchers, _format: ~ }
+    requirements:
+        _method: GET
+
+gyman_api_get_vouchers:
+    pattern:  /api/vouchers/
+    defaults: { _controller: VouchersBundle:Api:getVouchers, _format: ~ }
+    requirements:
+        _method: GET
+
+gyman_api_get_voucher:
+    pattern:  /api/vouchers/{id}
+    defaults: { _controller: VouchersBundle:Api:getVoucher, _format: ~ }
+    requirements:
+        _method: GET
+
+gyman_api_get_voucher_get_activities:
+    pattern:  /api/vouchers/{id}/activities
+    defaults: { _controller: VouchersBundle:Api:getActivities, _format: ~ }
+    requirements:
+        _method: GET

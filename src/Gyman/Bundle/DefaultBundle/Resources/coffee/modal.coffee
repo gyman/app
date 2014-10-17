@@ -94,7 +94,7 @@ class @Modal
     @events.preShowEvent()
     @$modal.modal "show"
     @events.postShowEvent()
-    
+
   hide: =>
     @events.preShowEvent()
     @$modal.modal "hide"
@@ -115,13 +115,13 @@ class @Modal
     $.get url, (response) =>
       @setBody response
   
-  showFromUrl: (url,postData) =>
+  showFromUrl: (url, postData) =>
     if postData?
       method = "post"
     else
       method = "get"
 
-    if @isOpened == true
+    if @isOpened
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
         $.ajax(
           url: url

@@ -3,8 +3,6 @@
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\MembersBundle\Form\MemberType;
-use Gyman\Bundle\MembersBundle\Services\Manager\MemberManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,34 +25,26 @@ class DefaultController extends Controller
             'Content', 200, array('content-type' => 'text/html')
         );
 
-        /** @var MemberManager Description */
-        $memberManager = $this->get("member_manager");
-
-        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
-
-        $form = $this->createForm(new MemberType($uploaderHelper), $member);
+        $manager = $this->get("gyman_members_manager");
+        $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $memberManager->persist($member);
-                $memberManager->flush();
+                $manager->save($member);
             } else {
                 $response->setStatusCode(400);
             }
         }
 
-        $voucher = $memberManager->getCurrentVoucher($member);
-
         return $response->setContent(
             $this->renderView(
                 "MembersBundle:Default:edit.html.twig", array(
-                            'form'     => $form->createView(),
-                            'member'   => $member,
-                            'voucher'  => $voucher,
-                            "uploader" => $uploaderHelper,
-                                )
+                    'form'     => $form->createView(),
+                    'member'   => $member,
+                    "uploader" => $this->get('oneup_uploader.templating.uploader_helper'),
+                )
             )
         );
     }
@@ -69,16 +59,14 @@ class DefaultController extends Controller
             'Content', 200, array('content-type' => 'text/html')
         );
 
-        $member = new Member();
-        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
-        $form = $this->createForm(new MemberType($uploaderHelper), $member);
-        $memberManager = $this->get("member_manager");
+        $manager = $this->get("gyman_members_manager");
+        $member = $manager->create();
+        $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
-
             if ($form->isValid()) {
-                $memberManager->save($member);
+                $manager->save($member);
             } else {
                 $response->setStatusCode(400);
             }
@@ -87,11 +75,11 @@ class DefaultController extends Controller
         return $response->setContent(
             $this->renderView(
                 "MembersBundle:Default:new.html.twig", array(
-                            'form'     => $form->createView(),
-                            'member'   => $member,
-                            'isNew'    => true,
-                            "uploader" => $uploaderHelper
-                                )
+                    'form'     => $form->createView(),
+                    'member'   => $member,
+                    'isNew'    => true,
+                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper')
+                )
             )
         );
     }

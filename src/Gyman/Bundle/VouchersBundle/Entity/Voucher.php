@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gyman\Bundle\VouchersBundle\Validator\VoucherDateConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
-use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Voucher
@@ -17,21 +18,38 @@ use JMS\Serializer\Annotation\Exclude;
  * @VoucherDateConstraint
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- * @codeCoverageIgnore
+ * @Serializer\ExclusionPolicy("all")
+ *
+ * @Hateoas\Relation("member", href = @Hateoas\Route(
+ *      "gyman_api_get_member",
+ *      parameters = { "id" = "expr(object.getMember().getId())" },
+ *      absolute = true
+ * ))
+ *
+ *  @Hateoas\Relation("self", href = @Hateoas\Route(
+ *      "gyman_api_get_voucher",
+ *      parameters = { "id" = "expr(object.getId())" },
+ *      absolute = true
+ * ))
+ *
+ * @Hateoas\Relation("activities", href = @Hateoas\Route(
+ *      "gyman_api_get_voucher_get_activities",
+ *      parameters = { "id" = "expr(object.getId())" },
+ *      absolute = true
+ * ))
  */
+
 class Voucher
 {
     /**
      * @ORM\ManyToMany(targetEntity="Gyman\Bundle\ScheduleBundle\Entity\Activity", inversedBy="vouchers")
      * @ORM\JoinTable(name="vouchers_activities")
-     * @Exclude()
      */
     private $activities;
 
     /**
      * @ORM\OneToMany(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry", mappedBy="voucher")
      * @ORM\JoinTable(name="entries")
-     * @Exclude()
      */
     private $entries;
 
@@ -41,6 +59,7 @@ class Voucher
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -56,19 +75,20 @@ class Voucher
      * @var \DateTime
      * @Assert\NotNull(message = "Należy podać datę początkową")
      * @ORM\Column(name="startDate", type="datetime", nullable = true)
+     * @Serializer\Expose()
      */
     private $startDate;
 
     /**
      * @var \DateTime
-     *
+     * @Serializer\Expose()
      * @ORM\Column(name="endDate", type="datetime", nullable = true)
      */
     private $endDate;
 
     /**
      * @var float
-     *
+     * @Serializer\Expose()
      * @ORM\Column(name="price", type="decimal", scale=2, nullable = true)
      * @Assert\Regex("/^\d+(\.\d\d){0,1}$/")
      */
@@ -76,6 +96,9 @@ class Voucher
 
     /**
      * @var integer
+     *
+     * @Serializer\Expose()
+     *
      * @Assert\Range(
      *      min = 1,
      *      max = 999,
@@ -94,7 +117,7 @@ class Voucher
 
     /**
      * @var integer
-     *
+     * @Serializer\Expose()
      * @ORM\Column(name="amount_left", type="integer", nullable = true)
      */
     private $amountLeft;

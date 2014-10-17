@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\RestBundle\FOSRestBundle(),
@@ -47,6 +48,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\ApiBundle\ApiBundle(),
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
+            new Gyman\Bundle\BaseBundle\BaseBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
