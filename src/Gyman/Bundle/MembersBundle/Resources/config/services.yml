@@ -5,6 +5,7 @@ parameters:
 
 services:
 
+#@todo: rename to commas
     gyman_members_manager:
       parent: gyman_base_entity_manager
       class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
@@ -17,6 +18,18 @@ services:
         - @oneup_uploader.templating.uploader_helper
       tags:
         - { name: form.type, alias: gyman_members_member_form_type }
+
+    gyman.members.menu_builder:
+        class: Gyman\Bundle\MembersdBundle\Menu\Builder
+        arguments: [@knp_menu.factory, @security.context]
+
+    gyman.members.menu.tabs:
+        class:            Knp\Menu\MenuItem
+        factory_service:  gyman.members.menu_builder
+        factory_method:   tabs
+        scope:            request
+        tags:
+            - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
 
 #  old
 
