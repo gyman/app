@@ -3,16 +3,6 @@ account:
     type:     annotation
     prefix:   /
 
-user:
-    resource: "@UserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-chart:
-    resource: "@ChartsBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 reports:
     resource: "@ReportsBundle/Controller/"
     type:     annotation
