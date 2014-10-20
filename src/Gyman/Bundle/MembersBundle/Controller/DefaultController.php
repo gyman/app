@@ -64,9 +64,14 @@ class DefaultController extends Controller
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
+
             $form->handleRequest($request);
+
             if ($form->isValid()) {
                 $manager->save($member);
+                return $this->redirect(
+                    $this->generateUrl("gyman_api_get_member", ["id" => $member->getId()], true)
+                );
             } else {
                 $response->setStatusCode(400);
             }

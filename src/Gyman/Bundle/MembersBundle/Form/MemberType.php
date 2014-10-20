@@ -30,7 +30,6 @@ class MemberType extends AbstractType
                     $builder->create(
                         'birthdate', "date", array(
                             "widget" => "single_text",
-                        //                            "empty_value" => false,
                             "format" => "dd.MM.yyyy"
                             )
                     )
@@ -72,7 +71,8 @@ class MemberType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Gyman\Bundle\MembersBundle\Entity\Member'
+            'data_class' => 'Gyman\Bundle\MembersBundle\Entity\Member',
+            'csrf_protection' => true
         ));
     }
 

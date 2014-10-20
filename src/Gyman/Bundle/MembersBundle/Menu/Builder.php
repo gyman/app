@@ -3,7 +3,10 @@
 namespace Gyman\Bundle\MembersBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 
 class Builder
 {
@@ -18,6 +21,19 @@ class Builder
     private $context;
 
     /**
+     * @var Member
+     */
+    private $member;
+
+    /**
+     * @param Member $member
+     */
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
+    }
+
+    /**
      * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory, SecurityContext $context)
@@ -30,7 +46,101 @@ class Builder
         }
     }
 
-    public function tabs()
+    public function tabs(Request $request)
+    {
+        $menu = $this->factory->createItem('root');
+
+        /**
+         * @var Member $member
+         */
+        $member = $request->get("member");
+
+        if ($member) {
+            /**
+             * @var Voucher $voucher
+             */
+            $voucher = $member->getCurrentVoucher();
+        }
+
+        if(!$this->context->isGranted("ROLE_USER")) {
+            return $menu;
+        }
+
+        $menu->setChildrenAttribute("class", "nav nav-tabs");
+
+        $menu->addChild('member.modal.tab.details_label', [
+                'uri' => '#detailsPane',
+                "extras" => ["icon" => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    'data-toggle' => 'tab'
+                ],
+                "attributes" => [
+                    'class' => 'active'
+                ]
+        ])->setExtra('translation_domain', 'MembersBundle');
+
+        if ($member && $voucher) {
+            $menu->addChild('member.modal.tab.voucher_label',
+                array(
+                    'uri' => '#voucherPane',
+                    "extras" => array("icon" => 'icomoon-icon-users'),
+                    'linkAttributes' => array(
+                        "class" => '',
+                        'data-toggle' => 'tab'
+                    )
+                )
+            )->setExtra('translation_domain', 'MembersBundle');
+        }
+
+        if ($member) {
+            $menu->addChild('member.modal.tab.sales_label', [
+                    'uri' => '#sellPane',
+                    "extras" => array("icon" => 'icomoon-icon-users'),
+                    'linkAttributes' => [
+                        "class" => '',
+                        'data-toggle' => 'tab'
+                    ],
+                    "attributes" => [
+                        'class' => ''
+                    ]
+                ]
+            )->setExtra('translation_domain', 'MembersBundle');
+        }
+
+        if ($member) {
+            $menu->addChild('member.modal.tab.entries_label',
+                array(
+                    'uri' => '#entriesPane',
+                    "extras" => array("icon" => 'icomoon-icon-users'),
+                    'linkAttributes' => [
+                        "class" => '',
+                        'data-toggle' => 'tab'
+                    ],
+                    "attributes" => [
+                        'class' => ''
+                    ]
+                )
+            )->setExtra('translation_domain', 'MembersBundle');
+        }
+
+        $menu->addChild('member.modal.tab.extras_label',
+            array(
+                'uri' => '#additionalsPane',
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => [
+                    "class" => '',
+                    'data-toggle' => 'tab'
+                ],
+                "attributes" => [
+                    'class' => ''
+                ]
+            )
+        )->setExtra('translation_domain', 'MembersBundle');
+
+        return $menu;
+    }
+
+    public function picture()
     {
         $menu = $this->factory->createItem('root');
 
@@ -39,59 +149,33 @@ class Builder
         }
 
         $menu->setChildrenAttribute("class", "nav nav-tabs");
+        $menu->setChildrenAttribute("id", "uploadAvatar");
 
-        $menu->addChild('member.modal.tab.details_label',
+        $menu->addChild('member.modal.tab.picture_label',
             array(
-                'link' => '#detailsPane',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
+                'uri' => '#filePane',
+                "extras" => array("icon" => 'icomoon-icon-database'),
+                'linkAttributes' => [
                     "class" => '',
                     'data-toggle' => 'tab'
-                )
+                ],
+                "attributes" => [
+                    'class' => 'active'
+                ]
             )
         )->setExtra('translation_domain', 'MembersBundle');
 
-        $menu->addChild('member.modal.tab.voucher_label',
+        $menu->addChild('member.modal.tab.camera_label',
             array(
-                'link' => '#voucherPane',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
+                'uri' => '#webcamDiv',
+                "extras" => array("icon" => 'icomoon-icon-camera'),
+                'linkAttributes' => [
                     "class" => '',
                     'data-toggle' => 'tab'
-                )
-            )
-        )->setExtra('translation_domain', 'MembersBundle');
-
-        $menu->addChild('member.modal.tab.sales_label',
-            array(
-                'link' => '#sellPane',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => '',
-                    'data-toggle' => 'tab'
-                )
-            )
-        )->setExtra('translation_domain', 'MembersBundle');
-
-        $menu->addChild('member.modal.tab.entries_label',
-            array(
-                'link' => '#entriesPane',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => '',
-                    'data-toggle' => 'tab'
-                )
-            )
-        )->setExtra('translation_domain', 'MembersBundle');
-
-        $menu->addChild('member.modal.tab.extras_label',
-            array(
-                'link' => '#additionalsPane',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => '',
-                    'data-toggle' => 'tab'
-                )
+                ],
+                "attributes" => [
+                    'class' => ''
+                ]
             )
         )->setExtra('translation_domain', 'MembersBundle');
 

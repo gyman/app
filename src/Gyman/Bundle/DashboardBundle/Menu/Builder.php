@@ -3,7 +3,6 @@
 namespace Gyman\Bundle\DashboardBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class Builder
@@ -20,6 +19,7 @@ class Builder
 
     /**
      * @param FactoryInterface $factory
+     * @param SecurityContext $context
      */
     public function __construct(FactoryInterface $factory, SecurityContext $context)
     {
