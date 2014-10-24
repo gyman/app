@@ -13,7 +13,10 @@ class @WebCamTab
   swffile : "/assets/swf/jscam_canvas_only.swf"
   cameraId : "#camera"
   buttonMakeFotoId : "a#makeFoto"
-   
+
+  hidden_input_foto_selector: "#gyman_members_member_form_type_foto"
+  foto_selector: "img#memberFoto"
+
   pos: 0
   ctx: null
   image: []
@@ -110,5 +113,5 @@ class @WebCamTab
     responseJSON = $.parseJSON(response)
     pathname = responseJSON.pathname
     filename = responseJSON.filename
-    $("img#memberFoto",$(@modalWindow)).attr "src", pathname
-    $("input#gyman_members_member_form_typee_member_foto",$(@modalWindow)).val filename
+    $(@modalWindow).find(@foto_selector).attr "src", pathname
+    $(@modalWindow).find(@hidden_input_foto_selector).val filename

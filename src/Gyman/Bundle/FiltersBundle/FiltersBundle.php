@@ -11,7 +11,6 @@ use Gyman\Bundle\FiltersBundle\DependencyInjection\CompilerPass\AddFiltersToProv
  */
 class FiltersBundle extends Bundle
 {
-
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

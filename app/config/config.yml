@@ -1,6 +1,7 @@
 parameters:
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/default/images/no-profile.gif
+  gallery_dir: /uploads/gallery/
 
 imports:
     - { resource: parameters.yml }
@@ -32,6 +33,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
       sentry_url:     %sentry_url%
+      gallery_dir:    %gallery_dir%
     form:
         resources:
             - ::fields.html.twig
@@ -86,7 +88,7 @@ oneup_uploader:
                 
 default:
     noImage:                %no_image%
-    galleryDir:             /uploads/gallery/
+    galleryDir:             %gallery_dir%
     
 stof_doctrine_extensions:
     default_locale: en_US
