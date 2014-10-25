@@ -15,12 +15,4 @@ class DefaultController extends Controller
     {
         return $this->forward("MembersBundle:Default:index");
     }
-
-    /**
-     * @Template()
-     */
-    public function menuAction()
-    {
-        return array();
-    }
 }

@@ -34,7 +34,8 @@ module.exports = function (grunt) {
         "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
         "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
         "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
-        "src/Gyman/Bundle/EntriesBundle/Resources/public/less/*.less"
+        "src/Gyman/Bundle/EntriesBundle/Resources/public/less/*.less",
+        "src/Gyman/Bundle/TimelineBundle/Resources/less/timeline.less"
     ];
 
     var mainLibraries = [
@@ -51,7 +52,6 @@ module.exports = function (grunt) {
         "bower_components/bootstrap/js/bootstrap-tab.js",
         "bower_components/bootstrap/js/bootstrap-tooltip.js",
         "bower_components/bootstrap/js/bootstrap-transition.js",
-        //"bower_components/bootstrap/js/bootstrap-typeahead.js",
         "bower_components/bootstrap/js/bootstrap-popover.js",
 
         "bower_components/typeahead.js/dist/typeahead.bundle.js",

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "718c40c4e73466d1dfbaff34aa22274b",
+    "hash": "245571dc94e2f7b034f89caa43a6a121",
     "packages": [
         {
             "name": "behat/behat",
@@ -299,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "f7a1d660c521461b835dc31af0f6c9836769e917"
+                "reference": "912e8a11ce3c75a630b225dd82aed83e00943ed5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/f7a1d660c521461b835dc31af0f6c9836769e917",
-                "reference": "f7a1d660c521461b835dc31af0f6c9836769e917",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/912e8a11ce3c75a630b225dd82aed83e00943ed5",
+                "reference": "912e8a11ce3c75a630b225dd82aed83e00943ed5",
                 "shasum": ""
             },
             "require": {
@@ -360,7 +360,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2014-09-29 13:28:56"
+            "time": "2014-10-20 19:28:25"
         },
         {
             "name": "doctrine/collections",
@@ -561,12 +561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "09f1050836a282be5caa2754d38bdb5a946264cf"
+                "reference": "d8a96fcfbe8fcdc3572a6110ddf67151bd7b3001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/09f1050836a282be5caa2754d38bdb5a946264cf",
-                "reference": "09f1050836a282be5caa2754d38bdb5a946264cf",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d8a96fcfbe8fcdc3572a6110ddf67151bd7b3001",
+                "reference": "d8a96fcfbe8fcdc3572a6110ddf67151bd7b3001",
                 "shasum": ""
             },
             "require": {
@@ -624,7 +624,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-10-16 15:33:51"
+            "time": "2014-10-23 22:19:26"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1143,12 +1143,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "35d44057275f010e1a7d5fd400c4dfdd446eb9ab"
+                "reference": "20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/35d44057275f010e1a7d5fd400c4dfdd446eb9ab",
-                "reference": "35d44057275f010e1a7d5fd400c4dfdd446eb9ab",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3",
+                "reference": "20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3",
                 "shasum": ""
             },
             "require": {
@@ -1157,7 +1157,7 @@
                 "doctrine/instantiator": "~1.0.1",
                 "ext-pdo": "*",
                 "php": ">=5.3.2",
-                "symfony/console": "2.*"
+                "symfony/console": "~2.3"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
@@ -1210,7 +1210,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-10-14 11:18:27"
+            "time": "2014-10-23 05:01:59"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1352,12 +1352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "cac56e025c1d2d1fe5acb644e4cafe0830f17150"
+                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/cac56e025c1d2d1fe5acb644e4cafe0830f17150",
-                "reference": "cac56e025c1d2d1fe5acb644e4cafe0830f17150",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9714a92e968f7e12431ccf5fecb1346f0d5adc65",
+                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65",
                 "shasum": ""
             },
             "require": {
@@ -1411,7 +1411,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-10-10 08:00:05"
+            "time": "2014-10-20 09:15:23"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2058,17 +2058,76 @@
             "time": "2014-09-15 15:49:24"
         },
         {
+            "name": "knplabs/knp-time-bundle",
+            "version": "v1.3",
+            "target-dir": "Knp/Bundle/TimeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpTimeBundle.git",
+                "reference": "abf7c17ab817d9b991445f56297c44b2217f6a5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/abf7c17ab817d9b991445f56297c44b2217f6a5d",
+                "reference": "abf7c17ab817d9b991445f56297c44b2217f6a5d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.0"
+            },
+            "suggest": {
+                "symfony/twig-bundle": "to use the Twig time_diff function"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\TimeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/KnpTimeBundle/contributors"
+                }
+            ],
+            "description": "Knplabs time bundle makes your dates look sensible and descriptive",
+            "homepage": "http://github.com/KnpLabs/KnpTimeBundle",
+            "keywords": [
+                "bundle",
+                "date",
+                "descriptive time",
+                "knp",
+                "knplabs",
+                "time"
+            ],
+            "time": "2013-12-12 12:04:14"
+        },
+        {
             "name": "monolog/monolog",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "940cbe15abe36924e5693abb585215bb322686a7"
+                "reference": "d0a9acbad0643726453e901d9d49c14e13de9f86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/940cbe15abe36924e5693abb585215bb322686a7",
-                "reference": "940cbe15abe36924e5693abb585215bb322686a7",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d0a9acbad0643726453e901d9d49c14e13de9f86",
+                "reference": "d0a9acbad0643726453e901d9d49c14e13de9f86",
                 "shasum": ""
             },
             "require": {
@@ -2127,7 +2186,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-10-04 15:43:06"
+            "time": "2014-10-21 20:10:18"
         },
         {
             "name": "ob/highcharts-bundle",
@@ -2135,12 +2194,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marcaube/ObHighchartsBundle.git",
-                "reference": "decb1cc7733b96267a6a3cc65a6b45c83abab1b2"
+                "reference": "32350bc069fa40b22ef1ac86131d0b8760acfb93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marcaube/ObHighchartsBundle/zipball/decb1cc7733b96267a6a3cc65a6b45c83abab1b2",
-                "reference": "decb1cc7733b96267a6a3cc65a6b45c83abab1b2",
+                "url": "https://api.github.com/repos/marcaube/ObHighchartsBundle/zipball/32350bc069fa40b22ef1ac86131d0b8760acfb93",
+                "reference": "32350bc069fa40b22ef1ac86131d0b8760acfb93",
                 "shasum": ""
             },
             "require": {
@@ -2181,7 +2240,7 @@
                 "marcaube",
                 "ob"
             ],
-            "time": "2014-10-08 01:58:46"
+            "time": "2014-10-21 23:14:58"
         },
         {
             "name": "oneup/uploader-bundle",
@@ -2481,6 +2540,344 @@
             "time": "2014-01-18 15:33:09"
         },
         {
+            "name": "ptachoire/cssembed",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/krichprollsch/phpCssEmbed.git",
+                "reference": "406c6d5b846cafa9186f9944a6210d0e6fed154b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/krichprollsch/phpCssEmbed/zipball/406c6d5b846cafa9186f9944a6210d0e6fed154b",
+                "reference": "406c6d5b846cafa9186f9944a6210d0e6fed154b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CssEmbed": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Tachoire",
+                    "email": "pierre.tachoire@gmail.com"
+                }
+            ],
+            "description": "Css url embed library.",
+            "homepage": "https://github.com/krichprollsch/phpCssEmbed",
+            "keywords": [
+                "css",
+                "url"
+            ],
+            "time": "2013-07-22 20:01:48"
+        },
+        {
+            "name": "raulfraile/ladybug",
+            "version": "v1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug.git",
+                "reference": "1fb36821c3e91bd9a030335df452b264811449bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug/zipball/1fb36821c3e91bd9a030335df452b264811449bf",
+                "reference": "1fb36821c3e91bd9a030335df452b264811449bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "ptachoire/cssembed": "v1.0.2",
+                "raulfraile/ladybug-plugin-extra": "~1.0.0",
+                "raulfraile/ladybug-theme-modern": ">=1.0.7,<2.0",
+                "symfony/config": ">=2.0",
+                "symfony/console": ">=2.0",
+                "symfony/dependency-injection": ">=2.0",
+                "symfony/finder": ">=2.0",
+                "twig/twig": ">=1.7.0"
+            },
+            "require-dev": {
+                "jms/serializer": ">=0.11.0",
+                "mockery/mockery": "0.9.1",
+                "phpdocumentor/reflection-docblock": "2.0.0",
+                "phpunit/phpunit": "~4.0",
+                "symfony/dom-crawler": ">=2.0.4"
+            },
+            "suggest": {
+                "jms/serializer": "Required to serialize data to XML and JSON",
+                "phpdocumentor/reflection-docblock": "Required to display object methods description",
+                "symfony/yaml": "Required to serialize data to YAML format"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Theme": [
+                        "../ladybug-themes",
+                        "data/themes"
+                    ],
+                    "Ladybug\\Plugin": [
+                        "../ladybug-plugins",
+                        "data/plugins"
+                    ],
+                    "Ladybug": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Fraile",
+                    "email": "raulfraile@gmail.com",
+                    "homepage": "http://www.raulfb.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple and Extensible PHP Dumper",
+            "homepage": "https://github.com/raulfraile/ladybug",
+            "keywords": [
+                "dump",
+                "dumper",
+                "ladybug",
+                "print_r",
+                "var_dump"
+            ],
+            "time": "2014-08-23 19:43:25"
+        },
+        {
+            "name": "raulfraile/ladybug-bundle",
+            "version": "v1.0.6",
+            "target-dir": "RaulFraile/Bundle/LadybugBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/LadybugBundle.git",
+                "reference": "0a3171f1d15194aadaba12fd9c81c11707c6b1c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/LadybugBundle/zipball/0a3171f1d15194aadaba12fd9c81c11707c6b1c3",
+                "reference": "0a3171f1d15194aadaba12fd9c81c11707c6b1c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "raulfraile/ladybug": "~1.0.0",
+                "raulfraile/ladybug-plugin-symfony2": "~1.0.0",
+                "symfony/framework-bundle": ">=2.0.0"
+            },
+            "replace": {
+                "raulfraile/ladybugbundle": "dev-master"
+            },
+            "require-dev": {
+                "mockery/mockery": "@stable",
+                "phpunit/phpunit": "@stable"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "RaulFraile\\Bundle\\LadybugBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Fraile",
+                    "email": "raulfraile@gmail.com",
+                    "homepage": "http://www.raulfrailebeneyto.com/"
+                }
+            ],
+            "description": "Symfony2 bundle for Ladybug library (Simple and Extensible PHP Dumper)",
+            "homepage": "https://github.com/raulfraile/LadybugBundle",
+            "keywords": [
+                "dump",
+                "ladybug",
+                "tree",
+                "twig"
+            ],
+            "time": "2014-10-10 06:09:15"
+        },
+        {
+            "name": "raulfraile/ladybug-installer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-installer.git",
+                "reference": "04f38f50cac673d3ca93de9c0805889e37804b33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-installer/zipball/04f38f50cac673d3ca93de9c0805889e37804b33",
+                "reference": "04f38f50cac673d3ca93de9c0805889e37804b33",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.*",
+                "mockery/mockery": "0.8.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "\\Ladybug\\LadybugPlugin"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unified installer for ladybug addons",
+            "keywords": [
+                "installer",
+                "ladybug",
+                "plugins",
+                "themes"
+            ],
+            "time": "2013-09-21 23:28:23"
+        },
+        {
+            "name": "raulfraile/ladybug-plugin-extra",
+            "version": "v1.0.1",
+            "target-dir": "Ladybug/Plugin/Extra",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-plugin-extra.git",
+                "reference": "d240770a4c610e26657e5edc0edaace6d07187b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-plugin-extra/zipball/d240770a4c610e26657e5edc0edaace6d07187b2",
+                "reference": "d240770a4c610e26657e5edc0edaace6d07187b2",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "raulfraile/ladybug": "~1.0.0"
+            },
+            "type": "ladybug-plugin",
+            "extra": {
+                "ladybug_name": "Extra"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Plugin\\Extra\\": ""
+                },
+                "files": [
+                    "Resources/php/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Extra plugin for ladybug",
+            "keywords": [
+                "ladybug",
+                "plugin"
+            ],
+            "time": "2013-09-29 10:19:08"
+        },
+        {
+            "name": "raulfraile/ladybug-plugin-symfony2",
+            "version": "v1.0.1",
+            "target-dir": "Ladybug/Plugin/Symfony2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-plugin-symfony2.git",
+                "reference": "81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-plugin-symfony2/zipball/81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84",
+                "reference": "81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "raulfraile/ladybug": "~1.0.0",
+                "symfony/http-foundation": "*"
+            },
+            "type": "ladybug-plugin",
+            "extra": {
+                "ladybug_name": "Symfony2"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Plugin\\Symfony2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony2 plugin for ladybug",
+            "keywords": [
+                "ladybug",
+                "plugin"
+            ],
+            "time": "2013-09-29 09:17:09"
+        },
+        {
+            "name": "raulfraile/ladybug-theme-modern",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-theme-modern.git",
+                "reference": "0271ed62bc45397be9e346c9c19a0ae0d811ef8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-theme-modern/zipball/0271ed62bc45397be9e346c9c19a0ae0d811ef8e",
+                "reference": "0271ed62bc45397be9e346c9c19a0ae0d811ef8e",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0.0"
+            },
+            "type": "ladybug-theme",
+            "extra": {
+                "ladybug_name": "Modern"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Theme 'modern' for ladybug",
+            "keywords": [
+                "dump",
+                "ladybug",
+                "print_r",
+                "theme",
+                "var_dump"
+            ],
+            "time": "2014-08-21 08:27:46"
+        },
+        {
             "name": "raven/raven",
             "version": "dev-master",
             "source": {
@@ -2682,6 +3079,129 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2014-04-28 14:01:06"
+        },
+        {
+            "name": "stephpy/timeline",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stephpy/timeline.git",
+                "reference": "022e8eb3e249202a7f52518c8695f3d51dca0d40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stephpy/timeline/zipball/022e8eb3e249202a7f52518c8695f3d51dca0d40",
+                "reference": "022e8eb3e249202a7f52518c8695f3d51dca0d40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/options-resolver": "*"
+            },
+            "require-dev": {
+                "atoum/atoum": "dev-master",
+                "knplabs/knp-components": "1.*",
+                "pimple/pimple": "*",
+                "symfony/event-dispatcher": "2.*"
+            },
+            "suggest": {
+                "ext-redis": "Redis C extension for PHP",
+                "knplabs/knp-components": "Knp Paginator",
+                "pimple/pimple": "Use ServiceLocator",
+                "predis/predis": "Redis PHP client library"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spy\\Timeline\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/stephpy/timeline/contributors"
+                }
+            ],
+            "description": "Standalone library to create timelines",
+            "homepage": "https://github.com/stephpy/timeline",
+            "keywords": [
+                "standalone",
+                "timeline"
+            ],
+            "time": "2014-10-15 08:33:13"
+        },
+        {
+            "name": "stephpy/timeline-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stephpy/timeline-bundle.git",
+                "reference": "941813e28159b7ab97c048ba4a5b2e1d33e9d002"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stephpy/timeline-bundle/zipball/941813e28159b7ab97c048ba4a5b2e1d33e9d002",
+                "reference": "941813e28159b7ab97c048ba4a5b2e1d33e9d002",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "stephpy/timeline": "*",
+                "symfony/framework-bundle": "2.*",
+                "symfony/options-resolver": "2.*"
+            },
+            "require-dev": {
+                "atoum/atoum": "dev-master",
+                "atoum/atoum-bundle": "dev-master",
+                "doctrine/orm": "2.*",
+                "symfony/console": "2.*",
+                "symfony/twig-bundle": "2.*"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm-bundle": "Use doctrine ODM driver",
+                "doctrine/orm": "Use doctrine ORM driver",
+                "snc/redis-bundle": "Use redis driver",
+                "symfony/console": "List spreads and deploy timelines via a command"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spy\\TimelineBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/stephpy/timeline-bundle/contributors"
+                }
+            ],
+            "description": "Symfony2 bundle to make timeline",
+            "homepage": "https://github.com/stephpy/timeline-bundle",
+            "keywords": [
+                "bundle",
+                "notification",
+                "symfony",
+                "timeline"
+            ],
+            "time": "2014-09-23 08:43:10"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2919,12 +3439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8e42756c375ac73d4fc2a00a24a23281bb3be082"
+                "reference": "23f0411a40e68110f09d5580751959d325da1f38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8e42756c375ac73d4fc2a00a24a23281bb3be082",
-                "reference": "8e42756c375ac73d4fc2a00a24a23281bb3be082",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/23f0411a40e68110f09d5580751959d325da1f38",
+                "reference": "23f0411a40e68110f09d5580751959d325da1f38",
                 "shasum": ""
             },
             "require": {
@@ -3027,7 +3547,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-10 16:59:55"
+            "time": "2014-10-24 09:00:07"
         },
         {
             "name": "twig/extensions",
@@ -3083,13 +3603,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
-                "reference": "9c162c5c5aafecb8b421baac073b33385d3902ac"
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "f8b6e918a7d8e073efe14cbed7ae02df40ef19ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/9c162c5c5aafecb8b421baac073b33385d3902ac",
-                "reference": "9c162c5c5aafecb8b421baac073b33385d3902ac",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f8b6e918a7d8e073efe14cbed7ae02df40ef19ed",
+                "reference": "f8b6e918a7d8e073efe14cbed7ae02df40ef19ed",
                 "shasum": ""
             },
             "require": {
@@ -3124,7 +3644,7 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
                     "role": "Contributors"
                 }
             ],
@@ -3133,7 +3653,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-10-16 18:28:42"
+            "time": "2014-10-23 15:29:03"
         },
         {
             "name": "vipsoft/doctrine-data-fixtures-extension",
@@ -3202,12 +3722,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "614a63d14742e293744b41f908a210ec42ac911b"
+                "reference": "3bbdb2b460c01abdda85be595653019e3f69f19c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/614a63d14742e293744b41f908a210ec42ac911b",
-                "reference": "614a63d14742e293744b41f908a210ec42ac911b",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/3bbdb2b460c01abdda85be595653019e3f69f19c",
+                "reference": "3bbdb2b460c01abdda85be595653019e3f69f19c",
                 "shasum": ""
             },
             "require": {
@@ -3258,7 +3778,7 @@
                 }
             ],
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
-            "time": "2014-08-17 10:08:45"
+            "time": "2014-10-18 12:34:08"
         },
         {
             "name": "willdurand/hateoas-bundle",
@@ -4340,12 +4860,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "e54a01c0da1b87db3c5a3c4c5277ddf331da4aef"
+                "reference": "6f67d2ae044ba17ba30573941f4ac96c4777be97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/e54a01c0da1b87db3c5a3c4c5277ddf331da4aef",
-                "reference": "e54a01c0da1b87db3c5a3c4c5277ddf331da4aef",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/6f67d2ae044ba17ba30573941f4ac96c4777be97",
+                "reference": "6f67d2ae044ba17ba30573941f4ac96c4777be97",
                 "shasum": ""
             },
             "require": {
@@ -4359,7 +4879,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -4373,11 +4893,6 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                },
-                {
                     "name": "Jeff Welch",
                     "email": "whatthejeff@gmail.com"
                 },
@@ -4388,6 +4903,10 @@
                 {
                     "name": "Bernhard Schussek",
                     "email": "bschussek@2bepublished.at"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Provides the functionality to compare PHP values for equality",
@@ -4397,7 +4916,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2014-05-11 23:00:21"
+            "time": "2014-10-21 10:04:18"
         },
         {
             "name": "sebastian/diff",
@@ -4455,12 +4974,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "205fcef5998953ec69cb79bc1ea9fee1277c8714"
+                "reference": "07a5d03892f4e31bc16f97c58de100c04f95b731"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/205fcef5998953ec69cb79bc1ea9fee1277c8714",
-                "reference": "205fcef5998953ec69cb79bc1ea9fee1277c8714",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/07a5d03892f4e31bc16f97c58de100c04f95b731",
+                "reference": "07a5d03892f4e31bc16f97c58de100c04f95b731",
                 "shasum": ""
             },
             "require": {
@@ -4472,7 +4991,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -4497,7 +5016,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2014-10-08 05:30:43"
+            "time": "2014-10-24 08:51:36"
         },
         {
             "name": "sebastian/exporter",
@@ -4609,19 +5128,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpcpd.git",
-                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39"
+                "reference": "0874c9455e73af847ef91adbaeee0f61a700ba3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
-                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/0874c9455e73af847ef91adbaeee0f61a700ba3d",
+                "reference": "0874c9455e73af847ef91adbaeee0f61a700ba3d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-timer": "~1.0.4",
+                "phpunit/php-timer": "~1.0",
                 "sebastian/finder-facade": "~1.1",
-                "sebastian/version": "~1.0.3",
+                "sebastian/version": "~1.0",
                 "symfony/console": "~2.2",
                 "theseer/fdomdocument": "~1.4"
             },
@@ -4652,7 +5171,7 @@
             ],
             "description": "Copy/Paste Detector (CPD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpcpd",
-            "time": "2014-05-04 17:53:54"
+            "time": "2014-10-19 17:48:47"
         },
         {
             "name": "sebastian/version",
@@ -4695,12 +5214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "995d6e97f79b5f15631e2082ee6eb80279d114f2"
+                "reference": "1ba2e9c219f961102c73b102535ce389797ca1bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/995d6e97f79b5f15631e2082ee6eb80279d114f2",
-                "reference": "995d6e97f79b5f15631e2082ee6eb80279d114f2",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1ba2e9c219f961102c73b102535ce389797ca1bd",
+                "reference": "1ba2e9c219f961102c73b102535ce389797ca1bd",
                 "shasum": ""
             },
             "require": {
@@ -4760,7 +5279,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-10-15 23:54:48"
+            "time": "2014-10-24 04:23:06"
         },
         {
             "name": "theseer/fdomdocument",
@@ -4803,23 +5322,30 @@
             "time": "2014-09-13 10:57:19"
         }
     ],
-    "aliases": [],
+    "aliases": [
+
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
+        "stephpy/timeline": 20,
+        "stephpy/timeline-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
         "willdurand/hateoas-bundle": 0,
         "knplabs/knp-paginator-bundle": 20,
         "oneup/uploader-bundle": 20,
         "jms/serializer-bundle": 20,
-        "raven/raven": 20
+        "raven/raven": 20,
+        "knplabs/knp-time-bundle": 20
     },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4.0"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }

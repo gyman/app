@@ -1,10 +1,15 @@
 parameters:
-    base_manager.class: Gyman\Bundle\EntriesBundle\Services\Manager\BaseManager
     entry_entity.class: Gyman\Bundle\EntriesBundle\Entity\Entry
-    entry_manager.class: Gyman\Bundle\EntriesBundle\Services\Manager\EntryManager
     entry_repository.class: Gyman\Bundle\EntriesBundle\Entity\EntryRepository
 
 services:
+    gyman.twig.entry_extension:
+        class: Gyman\Bundle\EntriesBundle\Twig\EntryExtension
+        calls:
+          - [setTranslator, [@translator]]
+        tags:
+            - { name: twig.extension }
+
     entry_repository:
         class:          "%entry_repository.class%"
         factory_service: doctrine
@@ -12,7 +17,8 @@ services:
         arguments: [ "%entry_entity.class%" ]
 
     entry_manager:
-        class:          "%entry_manager.class%"
+        class:          Gyman\Bundle\EntriesBundle\Services\Manager\EntryManager
+        parent:         gyman_base_entity_manager
 
     dende.update_left_amount_listener:
         class: Gyman\Bundle\EntriesBundle\Services\Listener\UpdateLeftAmountListener

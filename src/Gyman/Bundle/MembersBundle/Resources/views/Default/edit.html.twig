@@ -23,7 +23,6 @@
             'currentAsLink' : true,
             'depth' : 1,
             'currentClass' : 'active',
-
         }) }}
 
         <div class="tab-content">
@@ -36,11 +35,12 @@
             </div>
             {% endif %}
             <div class="tab-pane fade in" id="sellPane">
-                {% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}
+                {#{% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}#}
+                <div id="timeline">{% render controller('TimelineBundle:Default:timeline', {subject: member }) %}</div>
             </div>
-            <div class="tab-pane fade in" id="entriesPane">
-                {% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}
-            </div>
+            {#<div class="tab-pane fade in" id="entriesPane">#}
+                {#{% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}#}
+            {#</div>#}
             <div class="tab-pane fade in" id="additionalsPane">
                 {% include 'MembersBundle:Default:Modal/_additional.html.twig' with {'form' : form} %}
             </div>

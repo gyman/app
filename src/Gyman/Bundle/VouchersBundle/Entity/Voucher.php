@@ -298,4 +298,5 @@ class Voucher
 
         return $this;
     }
+
 }

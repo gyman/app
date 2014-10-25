@@ -66,23 +66,21 @@ class DefaultController extends Controller
                     $entry->setEntryPrice(null);
                 }
 
-                $this->getDoctrine()->getManager()->persist($entry);
-                $this->getDoctrine()->getManager()->flush();
+                $this->get('entry_manager')->save($entry);
             } else {
                 $response->setStatusCode(400);
             }
         }
 
-        return $response->setContent(
-            $this->renderView(
-                "EntriesBundle:Default:new.html.twig", array(
+        return $response->setContent($this->renderView(
+                "EntriesBundle:Default:new.html.twig",
+                [
                     "form"          => $form->createView(),
                     "member"        => $member,
                     "voucher"       => $currentVoucher,
                     "currentEvents" => [] // $this->getDoctrine()->getRepository("ScheduleBundle:Occurence")->getCurrentEvents()
-                    )
-            )
-        );
+                ]
+        ));
     }
 
     /**

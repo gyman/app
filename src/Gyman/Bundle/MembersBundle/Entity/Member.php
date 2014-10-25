@@ -46,7 +46,6 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  * ))
 
  */
-
 class Member
 {
     const GENDER_MALE = 'male';

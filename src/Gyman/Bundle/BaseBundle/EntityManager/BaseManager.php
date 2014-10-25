@@ -32,9 +32,10 @@ abstract class BaseManager
      */
     protected $dispatcher;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, EventDispatcherInterface $dispatcher)
     {
         $this->em = $em;
+        $this->dispatcher = $dispatcher;
     }
 
     /**

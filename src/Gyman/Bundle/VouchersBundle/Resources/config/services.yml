@@ -1,9 +1,15 @@
 parameters:
     voucher_entity.class: Gyman\Bundle\VouchersBundle\Entity\Voucher
     voucher_repository.class: Gyman\Bundle\VouchersBundle\Entity\VoucherRepository
-    voucher_manager.class: Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager
     date_validator.class: Gyman\Bundle\VouchersBundle\Validator\VoucherDateValidator
 services:
+    gyman.twig.voucher_extension:
+        class: Gyman\Bundle\VouchersBundle\Twig\VoucherExtension
+        calls:
+          - [setTranslator, [@translator]]
+        tags:
+            - { name: twig.extension }
+
     voucher_repository:
         class:          "%voucher_repository.class%"
         factory_service: doctrine
@@ -11,11 +17,10 @@ services:
         arguments: [ "%voucher_entity.class%" ]
 
     voucher_manager:
-        class:          "%voucher_manager.class%"
-        parent:         base_manager
+        class:          Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager
+        parent:         gyman_base_entity_manager
         calls:
              - [ setClass, [%voucher_entity.class%] ]
-             - [ setRepository, ["@voucher_repository"] ]
 
     validator.voucher_date:
         class:          "%date_validator.class%"
