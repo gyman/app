@@ -4,7 +4,6 @@ namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Gyman\Bundle\BaseBundle\Controller\BaseApiController;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,20 +17,23 @@ class ApiController extends BaseApiController
     /**
      * @Rest\View()
      */
-    public function getMembersAction() {
+    public function getMembersAction()
+    {
         return $this->createView($this->get('doctrine.orm.entity_manager')->getRepository("MembersBundle:Member")->findAll(), 200);
     }
     /**
      * @Rest\View()
      */
-    public function getMemberAction(Member $member) {
+    public function getMemberAction(Member $member)
+    {
         return $this->createView($member, 200);
     }
 
     /**
      * @Rest\View()
      */
-    public function getVouchersAction(Member $member) {
+    public function getVouchersAction(Member $member)
+    {
         return $this->createView(["vouchers" => $member->getVouchers()], 200);
     }
 
@@ -64,6 +66,7 @@ class ApiController extends BaseApiController
 
             return $view;
         }
+
         return $this->createView($form, 422);
     }
 
@@ -98,6 +101,7 @@ class ApiController extends BaseApiController
                     true
                 )
             );
+
             return $view;
         }
 

@@ -127,7 +127,7 @@ class FilterProvider
      * and gets and them to Filter
      *
      * @param Gyman\Bundle\FiltersBundle\Entity\Filter $filter
-     * @param array $subfiltersNames
+     * @param array                                    $subfiltersNames
      */
     public function attachFilters(Filter $filter, $subfiltersNames)
     {

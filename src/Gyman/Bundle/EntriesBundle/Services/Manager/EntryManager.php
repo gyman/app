@@ -24,7 +24,7 @@ class EntryManager extends BaseManager
 
     /**
      * @param Entry $object
-     * @param bool $withFlush
+     * @param bool  $withFlush
      */
     public function save($object, $withFlush = true)
     {
@@ -37,7 +37,6 @@ class EntryManager extends BaseManager
         } else {
 //            $this->dispatcher->dispatch(EntriesEvents::EDITED, new EntryCreatedEvent($object));
         }
-
 
     }
 }

@@ -3,9 +3,9 @@
 {% block fos_user_content %}
 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="form-content login-form fos_user_resetting_request">
     <h3 class="title">{{ "account.reset.header"|trans }}</h3>
-    
+
     <p>{{ "account.reset.caption"|trans }}</p>
-    
+
     {% if invalid_username is defined %}
     <div class="alert alert-danger fade in ">
         <i class="fa fa-envelope alert-icon"></i>
@@ -16,7 +16,7 @@
         </ul>
     </div>
     {% endif %}
-        
+
     <label>{{ 'resetting.request.username'|trans }} <span class="required">*</span></label>
     <input type="text" id="username" name="username" required="required" class="form-control"/>
 

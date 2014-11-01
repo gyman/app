@@ -7,4 +7,4 @@ final class VouchersEvents
      * @var string
      */
     const CREATED = 'vouchers.CREATED';
-} 
+}

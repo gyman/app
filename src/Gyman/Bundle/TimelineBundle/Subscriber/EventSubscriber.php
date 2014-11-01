@@ -11,14 +11,15 @@ use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Gyman\Bundle\TimelineBundle\Timeline\EventsHandler;
 
-class EventSubscriber implements EventSubscriberInterface {
+class EventSubscriber implements EventSubscriberInterface
+{
 
     /**
      * @var EventsHandler $eventsHandler
      */
     private $eventsHandler;
 
-    function __construct(EventsHandler $eventsHandler)
+    public function __construct(EventsHandler $eventsHandler)
     {
         $this->eventsHandler = $eventsHandler;
     }
@@ -32,15 +33,18 @@ class EventSubscriber implements EventSubscriberInterface {
         );
     }
 
-    public function onMemberCreated(MemberCreatedEvent $event) {
+    public function onMemberCreated(MemberCreatedEvent $event)
+    {
         $this->eventsHandler->onMemberCreated($event);
     }
 
-    public function onVoucherCreated(VoucherCreatedEvent $event) {
+    public function onVoucherCreated(VoucherCreatedEvent $event)
+    {
         $this->eventsHandler->onVoucherCreated($event);
     }
 
-    public function onEntryCreated(EntryCreatedEvent $event) {
+    public function onEntryCreated(EntryCreatedEvent $event)
+    {
         $this->eventsHandler->onEntryCreated($event);
     }
 }

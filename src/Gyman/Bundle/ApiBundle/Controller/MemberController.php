@@ -2,11 +2,8 @@
 
 namespace Gyman\Bundle\ApiBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\RouteResource;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 
 class MemberController extends FOSRestController

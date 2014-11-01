@@ -2,7 +2,7 @@
 
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
-use Dende\TestBundle\Tests\BaseTest;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class ProfileControllerTest extends BaseTest
 {

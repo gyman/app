@@ -50,10 +50,13 @@ class ActivitiesType extends AbstractSubfilterType
 //                if (count($collection) == 0)
 //                {
                     $context->addViolationAt(
-                        'activity', 'Musisz podać jakieś aktywności!', array(), null
+                        'activity',
+                        'Musisz podać jakieś aktywności!',
+                        [],
+                        null
                     );
 //                }
             }),
-        ];
+            ];
     }
 }

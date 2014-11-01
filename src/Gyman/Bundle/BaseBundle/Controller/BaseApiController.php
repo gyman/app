@@ -10,18 +10,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class BaseApiController extends FOSRestController
 {
     /**
-     * @param string $route
+     * @param  string $route
      * @param  array  $parameters
      * @return string
      */
-    protected function generateAbsoluteUrl($route, $parameters = array())
+    protected function generateAbsoluteUrl($route, $parameters = [])
     {
         return $this->generateUrl($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     /**
-     * @param mixed $data
-     * @param int $statusCode
+     * @param  mixed $data
+     * @param  int   $statusCode
      * @return View
      */
     protected function createView($data, $statusCode)
@@ -31,6 +31,7 @@ class BaseApiController extends FOSRestController
         $view->setStatusCode($statusCode);
         $view->setFormat('json');
         $view->setSerializationContext(SerializationContext::create()->setSerializeNull(true));
+
         return $view;
     }
 
@@ -48,6 +49,6 @@ class BaseApiController extends FOSRestController
      */
     public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
     {
-        return $this->createView(array(), 404);
+        return $this->createView([], 404);
     }
 }

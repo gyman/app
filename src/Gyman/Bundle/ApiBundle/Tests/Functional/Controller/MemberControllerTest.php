@@ -19,8 +19,6 @@ class MemberControllerTest extends WebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-
-        var_dump( $this->client->getResponse()->getContent());
+        var_dump($this->client->getResponse()->getContent());
     }
-
 }

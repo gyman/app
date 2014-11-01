@@ -44,13 +44,13 @@ class InvoiceDataType extends BaseType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
-        
+
         $resolver->setDefaults(array(
             'error_bubbling' => true,
             'data_class' => 'Gyman\Bundle\AccountBundle\Model\InvoiceData',
         ));
     }
-    
+
     public function getName()
     {
         return 'dende_user_invoicedata';

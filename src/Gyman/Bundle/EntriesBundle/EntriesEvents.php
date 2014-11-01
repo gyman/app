@@ -7,4 +7,4 @@ final class EntriesEvents
      * @var string
      */
     const CREATED = 'entries.CREATED';
-} 
+}

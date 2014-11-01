@@ -34,12 +34,12 @@ class RegisterType extends BaseType
     public function setDefaultOptions(\Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
-        
+
         $resolver->setDefaults(array(
             'error_bubbling' => true
         ));
     }
-    
+
     public function getName()
     {
         return 'dende_user_registration';

@@ -17,10 +17,10 @@ class Spread implements SpreadInterface
      */
     protected $entityManager;
 
-    CONST USER_CLASS = 'Gyman\Bundle\UserBundle\Entity\User';
-    CONST MEMBER_CLASS = 'Gyman\Bundle\MembersBundle\Entity\Member';
-    CONST VOUCHER_CLASS = 'Gyman\Bundle\VouchersBundle\Entity\Voucher';
-    CONST ENTRY_CLASS = 'Gyman\Bundle\EntriesBundle\Entity\Entry';
+    const USER_CLASS = 'Gyman\Bundle\UserBundle\Entity\User';
+    const MEMBER_CLASS = 'Gyman\Bundle\MembersBundle\Entity\Member';
+    const VOUCHER_CLASS = 'Gyman\Bundle\VouchersBundle\Entity\Voucher';
+    const ENTRY_CLASS = 'Gyman\Bundle\EntriesBundle\Entity\Entry';
 
     /**
      * @param EntityManager $entityManager

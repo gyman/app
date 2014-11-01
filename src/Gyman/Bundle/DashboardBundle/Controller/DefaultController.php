@@ -43,11 +43,10 @@ class DefaultController extends Controller
 
         return new Response(
             $this->renderView(
-                "DashboardBundle:Default:activities.html.twig", array(
-                "date"       => $date,
-                "occurences" => $occurences
-                )
-            ), 200
+                "DashboardBundle:Default:activities.html.twig",
+                ["date"       => $date, "occurences" => $occurences]
+            ),
+            200
         );
     }
 }

@@ -4,7 +4,6 @@ namespace Gyman\Bundle\TimelineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Spy\TimelineBundle\Entity\Timeline as BaseTimeline;
-use Spy\Timeline\Model\ComponentInterface;
 
 /**
  * @ORM\Table("timelines")
@@ -12,7 +11,8 @@ use Spy\Timeline\Model\ComponentInterface;
  * @codeCoverageIgnore
  */
 
-class Timeline extends BaseTimeline {
+class Timeline extends BaseTimeline
+{
 
     /**
      * @var integer

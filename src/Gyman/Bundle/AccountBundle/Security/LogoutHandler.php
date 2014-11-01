@@ -6,7 +6,8 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class LogoutHandler {
+class LogoutHandler
+{
 
     private $sessionLifetime;
 
@@ -30,4 +31,3 @@ class LogoutHandler {
         }
     }
 }
-

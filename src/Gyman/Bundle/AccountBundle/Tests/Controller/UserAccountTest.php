@@ -2,7 +2,7 @@
 
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
-use Dende\TestBundle\Tests\BaseTest;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class UserAccountTest extends BaseTest
 {
@@ -35,7 +35,7 @@ class UserAccountTest extends BaseTest
         $this->assertPageResponseCode(200);
         $this->assertPageContainsText('account.title.caption');
     }
-    
+
     /**
      * @dataProvider testRegisterDataProvider
      */
@@ -62,28 +62,28 @@ class UserAccountTest extends BaseTest
         $this->resettingFormWasSubmitted('uirapuru');
         $this->assertPageResponseCode(200);
         $this->assertPageContainsText('resetting.check_email');
-        
+
         $entityManager = $this->getContainer()->get("doctrine.orm.entity_manager");
         $query = "SELECT u FROM Gyman\Bundle\AccountBundle\Entity\User u WHERE u.username = 'uirapuru'";
         $user = $entityManager->createQuery($query)->getSingleResult();
-        
+
         $confirmationToken = $user->getConfirmationToken();
-        
+
         $this->getPage("/resetting/reset/".md5(time()));
         $this->assertPageResponseCode(404);
-        
+
         $this->getPage("/resetting/reset/".$confirmationToken);
         $this->assertPageResponseCode(200);
-        
+
         $this->newPasswordFormWasSubmitted('123', 'abc');
         $this->assertPageResponseCode(200);
         $this->assertPageContainsText('fos_user.password.mismatch');
-        
+
         $this->newPasswordFormWasSubmitted('123', '123');
         $this->assertPageResponseCode(200);
         $this->assertPageContainsText('user.notice.password_resetted_succesfuly');
     }
-    
+
     public function testRegisterDataProvider()
     {
         return array(
@@ -110,7 +110,7 @@ class UserAccountTest extends BaseTest
             ),
         );
     }
-    
+
     private function registerFormWasSubmitted($username, $password1, $password2, $email)
     {
         $form = $this->crawler->filter('button:contains("account.register.label.submit")')->form();
@@ -122,7 +122,7 @@ class UserAccountTest extends BaseTest
 
         $this->crawler = $this->client->submit($form);
     }
-    
+
     private function resettingFormWasSubmitted($username)
     {
         $form = $this->crawler->filter('button:contains("resetting.request.submit")')->form();
@@ -131,7 +131,7 @@ class UserAccountTest extends BaseTest
 
         $this->crawler = $this->client->submit($form);
     }
-    
+
     private function newPasswordFormWasSubmitted($first, $second)
     {
         $form = $this->crawler->filter('button:contains("resetting.reset.submit")')->form();

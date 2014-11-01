@@ -5,7 +5,6 @@ namespace Gyman\Bundle\AccountBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Gyman\Bundle\AccountBundle\Form\UserType;
 
 /**
  * @Route("/profile")

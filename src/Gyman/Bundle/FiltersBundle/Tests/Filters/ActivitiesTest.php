@@ -42,8 +42,8 @@ class ActivitiesTest extends BaseTest
                     return [$activity];
                 })),
                 "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10)"
-            ],
-            [
+                ],
+                [
                 "activity"    => new ArrayCollection(call_user_func(function () {
                     $activity = new Activity();
                     $activity->setId(10);
@@ -56,11 +56,11 @@ class ActivitiesTest extends BaseTest
                     return [$activity, $activity2];
                 })),
                 "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10, 20)"
-            ],
-            [
+                ],
+                [
                 "activity"    => new ArrayCollection([]),
                 "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a"
-            ],
-        ];
+                ],
+                ];
     }
 }

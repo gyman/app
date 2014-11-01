@@ -2,15 +2,16 @@
 
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
-use Dende\TestBundle\Tests\BaseTest;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class UserControllerTest extends BaseTest
 {
     public function testCompleteScenario()
     {
         $this->markTestIncomplete();
+
         return;
-        
+
         // Create a new client to browse the application
         $client = static::createClient();
 

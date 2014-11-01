@@ -32,12 +32,13 @@ class UpdatedProfileSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param \Symfony\Component\Routing\Router $router
+     * @param  \Symfony\Component\Routing\Router                                       $router
      * @return \Gyman\Bundle\AccountBundle\Service\Subscriber\RegisteredUserSubscriber
      */
     public function setRouter(Router $router)
     {
         $this->router = $router;
+
         return $this;
     }
 
@@ -49,6 +50,7 @@ class UpdatedProfileSubscriber implements EventSubscriberInterface
     public function setSession(Session $session)
     {
         $this->session = $session;
+
         return $this;
     }
 

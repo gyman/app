@@ -19,7 +19,8 @@ class AddFiltersToProviderPerListTest extends BaseTest
         $containerBuilder->setParameter("filter_provider.lists", $list);
         $containerBuilder->addDefinitions([
             "filter_provider" => new Definition(
-                "Gyman\Bundle\FiltersBundle\Services\FilterProvider", [$this->container]
+                "Gyman\Bundle\FiltersBundle\Services\FilterProvider",
+                [$this->container]
             )
         ]);
 

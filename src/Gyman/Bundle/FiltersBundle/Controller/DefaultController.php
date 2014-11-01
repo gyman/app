@@ -98,7 +98,9 @@ class DefaultController extends Controller
         $statusCode = 200;
 
         $response = new Response(
-            'Content', $statusCode, array('content-type' => 'text/html')
+            'Content',
+            $statusCode,
+            ['content-type' => 'text/html']
         );
 
         $filter = $this->get("filter_provider")->createFilterFromRequest($request);

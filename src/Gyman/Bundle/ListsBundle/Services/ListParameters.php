@@ -8,41 +8,30 @@ use Symfony\Component\DependencyInjection\Container;
 
 class ListParameters
 {
-// <editor-fold defaultstate="collapsed" desc="fields">
-
     /**
-     *
      * @var \Closure
      */
     private $sortingFunction;
 
     /**
-     *
      * @var Request
      */
     private $request;
 
     /**
-     *
      * @var array
      */
     private $columns = array();
 
-// </editor-fold>
     public function get($param)
-{
+    {
         return $this->getRequest()->get($param);
     }
 
-//    public function __construct(Request $request) {
-//        $this->setRequest($request);
-//    }
     public function __construct(Container $container)
-{
+    {
         $this->setRequest($container->get("request"));
     }
-
-// <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     public function getSortingFunction()
     {
@@ -68,8 +57,6 @@ class ListParameters
     {
         $this->request = $request;
     }
-
-// </editor-fold>
 
     public function applyRequest(QueryBuilder $query)
     {
@@ -110,8 +97,11 @@ class ListParameters
         }
 
         $qb->andWhere($qb->expr()->orX(
-            $qb->expr()->like("m.name", ":string"), $qb->expr()->like("m.barcode", ":string"), $qb->expr()->like("m.notes", ":string")
+            $qb->expr()->like("m.name", ":string"),
+            $qb->expr()->like("m.barcode", ":string"),
+            $qb->expr()->like("m.notes", ":string")
         ));
+
         $qb->setParameter("string", "%" . $search . "%");
     }
 
@@ -119,8 +109,6 @@ class ListParameters
     {
         $closure = $this->getSortingFunction();
         $closure($query);
-
-        return;
     }
 
     public function getSortingColumnsCount()

@@ -54,12 +54,13 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param User $user
+     * @param  QueryBuilder $queryBuilder
+     * @param  User         $user
      * @return QueryBuilder
      */
-    public function getMembersForUser(QueryBuilder $queryBuilder, User $user) {
-        $queryBuilder->innerJoin("m.sections","s");
+    public function getMembersForUser(QueryBuilder $queryBuilder, User $user)
+    {
+        $queryBuilder->innerJoin("m.sections", "s");
         $queryBuilder->innerJoin("s.club", "c");
         $queryBuilder->andWhere(":user MEMBER OF c.owners");
         $queryBuilder->setParameter("user", $user);

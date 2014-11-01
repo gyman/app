@@ -12,6 +12,7 @@ class UserRepository extends EntityRepository
     public function getAdministrators()
     {
         $query = $this->getByRolesQueryBuilder(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"]);
+
         return $query->getResult();
     }
 

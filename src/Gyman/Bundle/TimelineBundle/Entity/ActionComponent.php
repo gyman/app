@@ -4,7 +4,6 @@ namespace Gyman\Bundle\TimelineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Spy\TimelineBundle\Entity\ActionComponent as BaseActionComponent;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="timeline_action_component")
