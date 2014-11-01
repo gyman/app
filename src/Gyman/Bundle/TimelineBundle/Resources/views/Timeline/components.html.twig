@@ -1,0 +1,38 @@
+{% block _gyman_bundle_membersbundle_entity_member_subject_component %}
+    {% spaceless %}
+        <div {{ block('component_attributes') }}>
+            <img src="{{ value.getFoto() }}" class="thumbnail timelineAvatar"/>
+            <a href="{{ path("_member_edit", {id: value.getId()}) }}" class="openUrlInModal">
+                {{ value.getName() }}
+            </a>
+        </div>
+    {% endspaceless %}
+{% endblock _gyman_bundle_membersbundle_entity_member_subject_component %}
+
+{% block _gyman_bundle_vouchersbundle_entity_voucher_default_component %}
+    {% spaceless %}
+        <span {{ block('component_attributes') }}>
+            <a href="{{ path("_voucher_edit", {id: value.getId()}) }}" class="openUrlInModal">
+                {{ "timeline.product.voucher"|trans }}
+            </a>
+
+            <span class="badge badge-important">{{ value|entries_label }}</span>
+        </span>
+    {% endspaceless %}
+{% endblock _gyman_bundle_vouchersbundle_entity_voucher_default_component %}
+
+{% block _gyman_bundle_entriesbundle_entity_entry_default_component %}
+    {% spaceless %}
+        <span {{ block('component_attributes') }}>
+            <a href="{{ path("_events_show", {occurence: value.getId()}) }}" class="openUrlInModal">
+                {{ value|activity_label }}
+            </a>
+        </span>
+    {% endspaceless %}
+{% endblock _gyman_bundle_entriesbundle_entity_entry_default_component %}
+
+{% block _gyman_bundle_userbundle_entity_user_default_component %}
+    <a class="user-avatar span1" href="#">
+        <img alt="{{ value.getFullname() }}" src="{{ value.getFoto() }}">
+    </a>
+{% endblock _gyman_bundle_userbundle_entity_user_default_component %}

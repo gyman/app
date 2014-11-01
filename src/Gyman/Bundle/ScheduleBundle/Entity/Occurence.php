@@ -4,6 +4,7 @@ namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gyman\Bundle\EntriesBundle\Entity\Entry;
 use JMS\Serializer\Annotation as JMS;
 use DateTime;
 
@@ -41,12 +42,14 @@ class Occurence
      * @JMS\Exclude
      * @ORM\ManyToOne(targetEntity="Gyman\Bundle\ScheduleBundle\Entity\Event", inversedBy="occurences",cascade={"persist"})
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var Event
      */
     protected $event;
 
     /**
      * @JMS\Exclude
      * @ORM\OneToMany(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry", mappedBy="occurence")
+     * @var Entry[]
      */
     protected $entries;
 

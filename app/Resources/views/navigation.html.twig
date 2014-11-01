@@ -8,9 +8,9 @@
         <div id="loggedAs" class="container-fluid">
             <div class="row-fluid">
                 <div class="span6">
-                    <img src="/bundles/default/images/no-profile.gif" class="img-circle">
+                    <img src="{{ app.user.getFoto() }}" class="img-circle">
                     <h3>
-                        {{ app.user.firstname ~ " " ~ app.user.lastname }}
+                        {{ app.user.getFullname() }}
                         <small>({{ ('roles.' ~ app.user.roles[0])|trans }})</small>
                     </h3>
                 </div>

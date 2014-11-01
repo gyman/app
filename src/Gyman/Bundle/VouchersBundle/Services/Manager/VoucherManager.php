@@ -3,17 +3,28 @@
 namespace Gyman\Bundle\VouchersBundle\Services\Manager;
 
 use Doctrine\ORM\QueryBuilder;
+use Gyman\Bundle\VouchersBundle\VouchersEvents;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
-use Gyman\Bundle\DefaultBundle\Services\Manager\BaseManager;
+use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Exception;
+use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 
 /**
+ * @todo: refactor class and move to entitymanagers
  * Manages Vouchers
  * @method VouchersRepository getRepository() getRepo() Returns entity repository
  */
 class VoucherManager extends BaseManager
 {
+    public function save($object, $withFlush = true)
+    {
+//        @todo: change methods to "create" and "update"
+        parent::save($object, $withFlush);
+
+        $this->dispatcher->dispatch(VouchersEvents::CREATED, new VoucherCreatedEvent($object));
+    }
+
     /**
      * Returns array of all members
      * @return array

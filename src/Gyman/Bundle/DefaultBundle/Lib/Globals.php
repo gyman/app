@@ -5,7 +5,7 @@ namespace Gyman\Bundle\DefaultBundle\Lib;
 class Globals
 {
 
-    protected static $galleryDir;
+    protected static $galleryDir = "/uploads/gallery/";
     protected static $noImage;
     protected static $compareChoices = array(
         "eq"         => "równy",

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gyman\Bundle\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="users")
  */
 class User extends BaseUser
@@ -115,5 +115,15 @@ class User extends BaseUser
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+    }
+
+    public function getFullname()
+    {
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function getFoto()
+    {
+        return "/bundles/default/images/no-profile.gif";
     }
 }

@@ -5,11 +5,10 @@ class @EditMember extends @AbstractModal
 #    @initSelects()
 #    @initActivities()
 #    @initVoucherTab()
-#    @initCheckbox()
+    @initCheckbox()
 
     webcamTab = new WebCamTab()
 
-  $sellVoucherCheckbox: $("input[name='sell_voucher_after_creation']:checkbox")
   sellVoucher: true,
   userData: {} # @todo add user and pass it's id to voucher sell route
 
@@ -26,11 +25,8 @@ class @EditMember extends @AbstractModal
       activities.push $(item).val()  
 
   initCheckbox: =>
-    @$sellVoucherCheckbox.on "click", (e) =>
-      if $(e.target).is(":checked")
-        @sellVoucher = true
-      else
-        @sellVoucher = false
+    $("input[name='sell_voucher_after_creation']:checkbox").on "change.sellVoucher", (e) =>
+      @sellVoucher = $(e.target).is ":checked"
 
   initDatepickers: () =>
     @datetimepickerSettings.endDate = new Date()
@@ -40,15 +36,31 @@ class @EditMember extends @AbstractModal
     paneId = "#" + @$modalWindow.find("div.control-group.error").first().parents(".tab-pane").prop("id");
     $tab = @$modalWindow.find("ul.nav-tabs a").filter("[href="+paneId+"]");
     $tab.trigger "click"
-    
-  handleSubmitSuccess: (response) =>
+
+  handleSaveButton: (e) =>
+    if @deleteCheckbox? and @deleteCheckbox.is ":checked"
+      if confirm @CONFIRM_DELETE_TEXT
+        $.get @$form.data(@deleteActionAttributeName), @handleDeleteAction
+    else
+      container = $(".modal-body",@$modalWindow)
+      action = @$form.attr "action" # Routing.generate "gyman_api_post_member"
+      data = @$form.serialize()
+      modal.block()
+      @handleSubmitForm action, data, container
+
+  handleDeleteAction: (e) =>
+    @modal.hide()
     datatable.fnReloadAjax() if datatable?
 
+  handleSubmitSuccess: (response) =>
+#   @todo: enable only for lists, omit datatables in modal
+#    datatable.fnReloadAjax() if datatable? and $("table.dataTable").length > 0
+
     if @sellVoucher
-      @modal.showFromUrl Routing.generate("_events_delete_singular",{occurence:@occurence.id})
+      @modal.showFromUrl Routing.generate("_voucher_new", {"id" : response.id})
     else
       @modal.hide()
-    
+
   handleSubmitError: (responseText) =>
     super(responseText)
     @openTabWithError()

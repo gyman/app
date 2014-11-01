@@ -1,4 +1,10 @@
 {#@todo: translacje#}
+{% if not form.vars.valid %}
+    <div class="alert alert-error">
+        <strong>{{ 'members.modal.form_has_errors'|trans }}</strong>
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
 
 <form id="memberForm"
       class="form-horizontal row-fluid"
@@ -6,47 +12,18 @@
       method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }}
     {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
 
+
     <div class="span4">
         {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
 
     <div class="span8">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#detailsPane">
-                    <span class="icon16 icomoon-icon-home-6 "></span>
-                    {{ 'member.modal.tab.details_label'|trans }}
-                </a>
-            </li>
-            {% if member.getCurrentVoucher() is not null %}
-            <li>
-                <a data-toggle="tab" href="#voucherPane">
-                    <span class="icon16 icomoon-icon-equalizer-2"></span>
-                    {{ 'member.modal.tab.voucher_label'|trans }}
-                </a>
-            </li>
-            {% endif %}
-            {% if isNew is not defined %}
-            <li>
-                <a data-toggle="tab" href="#sellPane">
-                    <span class="icon16 icomoon-icon-cart"></span>
-                    {{ 'member.modal.tab.sales_label'|trans }}
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#entriesPane">
-                    <span class="icon16 icomoon-icon-enter"></span>
-                    {{ 'member.modal.tab.entries_label'|trans }}
-                </a>
-            </li>
-            {% endif %}
-            <li>
-                <a data-toggle="tab" href="#additionalsPane">
-                    <span class="icon16 icomoon-icon-fire"></span>
-                    {{ 'member.modal.tab.extras_label'|trans }}
-                </a>
-            </li>
-        </ul>
+        {{ knp_menu_render('gyman.members.menu.tabs', {
+            'template': 'MembersBundle:Default:Menu/tabs.html.twig',
+            'currentAsLink' : true,
+            'depth' : 1,
+            'currentClass' : 'active',
+        }) }}
 
         <div class="tab-content">
             <div id="detailsPane" class="tab-pane fade in active">
@@ -58,15 +35,17 @@
             </div>
             {% endif %}
             <div class="tab-pane fade in" id="sellPane">
-                {% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}
+                {#{% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}#}
+                <div id="timeline">{% render controller('TimelineBundle:Default:timeline', {subject: member }) %}</div>
             </div>
-            <div class="tab-pane fade in" id="entriesPane">
-                {% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}
-            </div>
+            {#<div class="tab-pane fade in" id="entriesPane">#}
+                {#{% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}#}
+            {#</div>#}
             <div class="tab-pane fade in" id="additionalsPane">
                 {% include 'MembersBundle:Default:Modal/_additional.html.twig' with {'form' : form} %}
             </div>
         </div>
+
         {% block memberToolbox %}
         <div class="pull-right hideForNewMember" id="memberModalToolbox">
             <a href="{{ path("_voucher_new",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-signup"></i> Karnet</a>
@@ -74,10 +53,13 @@
         </div>
         {% endblock memberToolbox %}
     </div>
+
     <div class="hidden">
     {{ form_rest(form) }}
     </div>
+
 </form>
+
 
 {% block modal %}
 <div class="hidden" id="ui-editMemberData">

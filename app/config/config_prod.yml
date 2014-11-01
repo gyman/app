@@ -11,23 +11,23 @@ imports:
 #        result_cache_driver: apc
 #        query_cache_driver: apc
 
-monolog:
-  handlers:
-    main:
-        type:         fingers_crossed
-        action_level: notice
-        handler:      grouped_main
+#monolog:
+#  handlers:
+#    main:
+#        type:         fingers_crossed
+#        action_level: notice
+#        handler:      grouped_main
     # Groups
-    grouped_main:
-        type:    group
-        members: [sentry, streamed_main]
+#    grouped_main:
+#        type:    group
+#        members: [sentry, streamed_main]
 
     # Streams
-    streamed_main:
-        type:  stream
-        path:  %kernel.logs_dir%/%kernel.environment%.log
-        level: error
-    sentry:
-        type:  raven
-        dsn:   'http://309f2c3e1634407c8f00ff278f087cd6:36101a1428b5484fac797c6e5cac3bcf@sentry.uirapu.ru/2'
-        level: notice
+#    streamed_main:
+#        type:  stream
+#        path:  %kernel.logs_dir%/%kernel.environment%.log
+#        level: error
+#    sentry:
+#        type:  raven
+#        dsn:   'http://309f2c3e1634407c8f00ff278f087cd6:36101a1428b5484fac797c6e5cac3bcf@sentry.uirapu.ru/2'
+#        level: notice

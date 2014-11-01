@@ -1,5 +1,7 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
+{#@todo: tłumaczenia!#}
+
 {% block body_class %}dashboard{% endblock %}
 
 {% block body %}
@@ -35,71 +37,9 @@
         </div>
 
         <div class="span4">
-            <div class="reminder">
+            <div class="reminder" id="timeline">
                 <h4>Wydarzenia</h4>
-
-                <ul class="messages">
-                    <li class="user clearfix">
-                        <a class="avatar" href="#">
-                            <img alt="" src="/images/avatar.jpg">
-                        </a>
-                        <div class="message">
-                            <div class="head clearfix">
-                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
-                                <span class="time">25 sekund temu</span>
-                            </div>
-                            <p>
-                                Dodany użytkownik "Jan Kowalski".
-                            </p>
-                        </div>
-                    </li>
-
-                    <li class="user clearfix">
-                        <a class="avatar" href="#">
-                            <img alt="" src="/images/avatar.jpg">
-                        </a>
-                        <div class="message">
-                            <div class="head clearfix">
-                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
-                                <span class="time">3 minuty temu</span>
-                            </div>
-                            <p>
-                                Sprzedany karnet dla Michał Maj za 500zł.
-                            </p>
-                        </div>
-                    </li>
-
-                    <li class="user clearfix">
-                        <a class="avatar" href="#">
-                            <img alt="" src="/images/avatar.jpg">
-                        </a>
-                        <div class="message">
-                            <div class="head clearfix">
-                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
-                                <span class="time">25 sekund temu</span>
-                            </div>
-                            <p>
-                                Dodany użytkownik "Jan Kowalski".
-                            </p>
-                        </div>
-                    </li>
-
-                    <li class="user clearfix">
-                        <a class="avatar" href="#">
-                            <img alt="" src="/images/avatar.jpg">
-                        </a>
-                        <div class="message">
-                            <div class="head clearfix">
-                                <span class="name"><strong>Grzegorz Kaszuba</strong> zrobił:</span>
-                                <span class="time">3 minuty temu</span>
-                            </div>
-                            <p>
-                                Sprzedany karnet dla Michał Maj za 500zł.
-                            </p>
-                        </div>
-                    </li>
-
-                </ul>
+                {% render controller('TimelineBundle:Default:timeline', {subject: app.user }) %}
             </div>
         </div>
     </div>

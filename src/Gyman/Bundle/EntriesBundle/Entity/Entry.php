@@ -34,23 +34,23 @@ class Entry
     private $id;
 
     /**
-     * @var integer
-     *
      * @ORM\ManyToOne(targetEntity="Gyman\Bundle\MembersBundle\Entity\Member", inversedBy="entries")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var Member
      */
     private $member;
 
     /**
-     * @var Voucher
      * @ORM\ManyToOne(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher", inversedBy="entries")
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var Voucher
      */
     private $voucher;
 
     /**
      * @ORM\ManyToOne(targetEntity="Gyman\Bundle\ScheduleBundle\Entity\Occurence", inversedBy="entries")
      * @ORM\JoinColumn(name="occurence_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var Occurence
      */
     private $occurence;
 
@@ -108,16 +108,14 @@ class Entry
         return $this->id;
     }
 
-    public function getActivity()
-    {
-        return $this->activity;
-    }
-
     public function getVoucher()
     {
         return $this->voucher;
     }
 
+    /**
+     * @return Occurence
+     */
     public function getOccurence()
     {
         return $this->occurence;
@@ -161,13 +159,6 @@ class Entry
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function setActivity($activity)
-    {
-        $this->activity = $activity;
 
         return $this;
     }

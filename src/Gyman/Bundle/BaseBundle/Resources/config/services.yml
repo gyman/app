@@ -5,3 +5,4 @@ services:
     abstract: true
     arguments:
       - @doctrine.orm.entity_manager
+      - @event_dispatcher

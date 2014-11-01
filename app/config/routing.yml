@@ -1,3 +1,8 @@
+timeline:
+    resource: "@TimelineBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 account:
     resource: "@AccountBundle/Controller/"
     type:     annotation

@@ -4,6 +4,10 @@ namespace Gyman\Bundle\DefaultBundle\Services\Manager;
 use Symfony\Component\DependencyInjection\Container;
 use Doctrine\ORM\EntityManager as DocumentManager;
 
+/**
+ * @todo: do usunięcia!!!
+ */
+
 class BaseManager
 {
     /**

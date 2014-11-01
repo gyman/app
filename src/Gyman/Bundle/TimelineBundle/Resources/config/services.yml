@@ -1,0 +1,20 @@
+services:
+  gyman.timeline.spread:
+    class: Gyman\Bundle\TimelineBundle\Timeline\Spread
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - { name: spy_timeline.spread }
+
+  gyman.timeline.events_handler:
+    class: Gyman\Bundle\TimelineBundle\Timeline\EventsHandler
+    arguments:
+      - @security.context
+      - @spy_timeline.action_manager.orm
+
+  gyman.timeline.events_subscriber:
+    class: Gyman\Bundle\TimelineBundle\Subscriber\EventSubscriber
+    arguments:
+      - @gyman.timeline.events_handler
+    tags:
+      - { name: kernel.event_subscriber }

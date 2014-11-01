@@ -1,0 +1,22 @@
+<li class="timeline-item row-fluid">
+
+    {{ timeline_component_render(timeline, 'indirectComplement') }}
+
+    <div class="timeline-box span11">
+        <div class="head">
+            {% if timeline.getComponent("indirectComplement") is not null %}
+            <span class="name">
+                <strong>{{ timeline.getComponent("indirectComplement").getData().getFullname() }}:</strong>
+            </span>
+            {%  endif %}
+            <span class="time" title="{{ timeline.createdAt()|date("Y-m-d H:i:s") }}">
+                {{ time_diff(timeline.createdAt()) }}
+            </span>
+        </div>
+        <div class="body">
+            {{ timeline_component_render(timeline, 'subject') }}
+            {{ timeline.getVerb()|trans }}
+            {{ timeline_component_render(timeline, 'directComplement') }}
+        </div>
+    </div>
+</li>
