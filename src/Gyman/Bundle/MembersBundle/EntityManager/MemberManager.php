@@ -6,7 +6,6 @@ use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
 use Gyman\Bundle\MembersBundle\MembersEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class MemberManager extends BaseManager
 {

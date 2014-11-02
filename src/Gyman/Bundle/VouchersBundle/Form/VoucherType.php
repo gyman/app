@@ -22,36 +22,28 @@ class VoucherType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-                ->add(
-                    $builder->create(
-                        'startDate', "date", array(
-                            "widget" => "single_text",
-                            "format" => "dd.MM.yyyy",
-                            )
-                    )
-                        ->addModelTransformer(new VoucherDateTransformer("start"))
-                )
-                ->add(
-                    $builder->create(
-                        'endDate', "date", array(
-                            "widget" => "single_text",
-                            "format" => "dd.MM.yyyy"
-                            )
-                    )
-                        ->addModelTransformer(new VoucherDateTransformer("end"))
-                )
-                ->add('price')
-                ->add('amount')
-                ->add('activities', "entity", array(
-                    'class'         => 'ScheduleBundle:Activity',
-                    'property'      => 'name',
-                    'multiple'      => true,
-                    'query_builder' => function ($er) {
-                return $er->createQueryBuilder('a');
-                    },
-                ))
-        ;
+        $builder->add(
+            $builder
+                ->create('startDate', "date", ["widget" => "single_text","format" => "dd.MM.yyyy"])
+                ->addModelTransformer(new VoucherDateTransformer("start"))
+        )
+        ->add(
+            $builder
+                ->create('endDate', "date", ["widget" => "single_text", "format" => "dd.MM.yyyy"])
+                ->addModelTransformer(new VoucherDateTransformer("end"))
+        )
+        ->add('price')
+        ->add('amount')
+        ->add(
+            'activities',
+            "entity",
+            [
+                'class'         => 'ScheduleBundle:Activity',
+                'property'      => 'name',
+                'multiple'      => true,
+                'query_builder' => $this->getQueryBuilderClosure()
+            ]
+        );
     }
 
     /**
@@ -59,9 +51,9 @@ class VoucherType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Gyman\Bundle\VouchersBundle\Entity\Voucher'
-        ));
+        ]);
     }
 
     /**
@@ -70,5 +62,17 @@ class VoucherType extends AbstractType
     public function getName()
     {
         return 'dende_vouchersbundle_voucher';
+    }
+
+    /**
+     * @return callable
+     */
+    private function getQueryBuilderClosure()
+    {
+        $closure = function ($er) {
+            return $er->createQueryBuilder('a');
+        };
+
+        return $closure;
     }
 }

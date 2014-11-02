@@ -1,7 +1,6 @@
 <?php
 namespace Gyman\MembersBundle\Tests\Functional\Controller;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Component\Test\WebTestCase;
 use Gyman\Component\Test\RestTestCase;

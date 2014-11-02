@@ -70,14 +70,18 @@ class EventRepository extends EntityRepository
         $qb->select("e", "a HIDDEN", "o HIDDEN")
             ->leftJoin("e.activity", "a")
             ->leftJoin("e.occurences", "o", Join::WITH, $exp->andX(
-                $exp->eq("e.id", "o.event"), $exp->between("o.startDate", ":weekStart", ":weekEnd")
+                $exp->eq("e.id", "o.event"),
+                $exp->between("o.startDate", ":weekStart", ":weekEnd")
             ))
             ->where(
                 $exp->orX(
                     $exp->andX(
-                        $exp->lte("e.startDate", ":weekEnd"), $exp->isNull("e.endDate")
-                    ), $exp->andX(
-                        $exp->lte("e.startDate", ":weekEnd"), $exp->gte("e.endDate", ":weekStart")
+                        $exp->lte("e.startDate", ":weekEnd"),
+                        $exp->isNull("e.endDate")
+                    ),
+                    $exp->andX(
+                        $exp->lte("e.startDate", ":weekEnd"),
+                        $exp->gte("e.endDate", ":weekStart")
                     )
                 )
             )

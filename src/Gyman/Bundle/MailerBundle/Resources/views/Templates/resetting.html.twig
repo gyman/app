@@ -3,7 +3,7 @@
     {{ 'resetting.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
     {% endautoescape %}
 {% endblock %}
-    
+
 {% block body_html %}
     {% embed "MailerBundle::layout.html.twig" %}
         {% block content %}

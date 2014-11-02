@@ -26,7 +26,7 @@ class Builder
         $this->factory = $factory;
         $this->context = $context;
 
-        if($context->getToken()) {
+        if ($context->getToken()) {
             $this->user = $context->getToken()->getUser();
         }
     }
@@ -35,29 +35,33 @@ class Builder
     {
         $menu = $this->factory->createItem('root');
 
-        if(!$this->context->isGranted("ROLE_USER")) {
+        if (!$this->context->isGranted("ROLE_USER")) {
             return $menu;
         }
 
         $menu->setChildrenAttribute("class", "span6");
 
-        $menu->addChild('navigation.edit_profile',
+        $menu->addChild(
+            'navigation.edit_profile',
             array(
                 'route' => 'profile_edit',
                 "extras" => array("icon" => 'fa-user'),
                 'linkAttributes' => array(
                     "class" => 'btn btn-block',
                 )
-            ))->setExtra('translation_domain', 'DefaultBundle');
+            )
+        )->setExtra('translation_domain', 'DefaultBundle');
 
-        $menu->addChild('navigation.logout',
+        $menu->addChild(
+            'navigation.logout',
             array(
                 'route' => 'fos_user_security_logout',
                 "extras" => array("icon" => 'fa-plus'),
                 'linkAttributes' => array(
                     "class" => 'btn btn-block',
                 )
-            ))->setExtra('translation_domain', 'DefaultBundle');
+            )
+        )->setExtra('translation_domain', 'DefaultBundle');
 
         return $menu;
     }
@@ -66,7 +70,7 @@ class Builder
     {
         $menu = $this->factory->createItem('root');
 
-        if(!$this->context->isGranted("ROLE_ADMIN")) {
+        if (!$this->context->isGranted("ROLE_ADMIN")) {
             return $menu;
         }
 
@@ -116,7 +120,6 @@ class Builder
                 'aria-describedby' =>"qtip-21"
             )
         ))->setExtra('translation_domain', 'DefaultBundle');
-
 
         $menu->addChild('navigation.menu.analytics', array(
             'uri' => '/',

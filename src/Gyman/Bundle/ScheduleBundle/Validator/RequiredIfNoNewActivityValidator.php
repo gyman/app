@@ -22,7 +22,8 @@ class RequiredIfNoNewActivityValidator extends ConstraintValidator
 
         if (is_null($value)) {
             $this->context->addViolation(
-                $constraint->message, array('%string%' => $value)
+                $constraint->message,
+                array('%string%' => $value)
             );
         }
     }

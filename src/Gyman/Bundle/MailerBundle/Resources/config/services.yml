@@ -15,7 +15,7 @@ services:
             - [ setSubject,['%contact.subject%']]
             - [ setTemplate,['%contact.template%']]
             - [ setTo,['some@email.com']]
-            
+
     mailer.registration_successful:
         class:  Gyman\Bundle\MailerBundle\Service\Mailer
         arguments: [@mailer]
@@ -24,4 +24,3 @@ services:
             - [ setTemplating, ["@templating"]]
             - [ setSubject,['%registration_successful.subject%']]
             - [ setTemplate,['%registration_successful.template%']]
-            

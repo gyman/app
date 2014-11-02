@@ -27,41 +27,43 @@ class MemberType extends AbstractType
         $builder
                 ->add('name')
                 ->add(
-                    $builder->create(
-                        'birthdate', "date", array(
+                    $builder->create('birthdate', "date", [
                             "widget" => "single_text",
                             "format" => "dd.MM.yyyy"
-                            )
-                    )
-                        ->addModelTransformer(new DateToStringTransformer())
+                        ])
+                    ->addModelTransformer(new DateToStringTransformer())
                 )
-                ->add('gender', "choice", array(
-                    "choices" => array(
-                        "male"   => "Mężczyzna",
-                        "female" => "Kobieta"
-                    )
-                ))
-                ->add('belt', "choice", array(
-                    "choices" => array(
+                 /*
+                 * @todo: translations!
+                 */
+                ->add('gender', "choice", [
+                        "choices" => [
+                            "male"   => "Mężczyzna",
+                            "female" => "Kobieta"
+                        ]
+                ])
+            /**
+             * @todo: translations!
+             */
+                ->add('belt', "choice", [
+                    "choices" => [
                         "white"  => "biały",
                         "blue"   => "niebieski",
                         "purple" => "purpurowy",
                         "brown"  => "brązowy",
                         "black"  => "czarny"
-                    )
-                ))
+                    ]
+                ])
                 ->add('phone')
                 ->add('email')
                 ->add('notes')
                 ->add('zipcode')
                 ->add('barcode')
                 ->add('foto', 'hidden')
-                ->add('fotoUploader', "file", array(
+                ->add('fotoUploader', "file", [
                     "mapped" => false,
-                    "attr"   => array(
-                        "data-url" => $this->uploaderHelper->endpoint('gallery')
-                    )
-                ))
+                    "attr"   => ["data-url" => $this->uploaderHelper->endpoint('gallery')]
+                ])
         ;
     }
 

@@ -29,10 +29,11 @@ class SectionsData extends BaseFixture
     }
 
     /**
-     * @param array $members
+     * @param  array           $members
      * @return ArrayCollection
      */
-    function prepareMembers($members) {
+    public function prepareMembers($members)
+    {
         $result = array();
 
         foreach ($members as $member) {
@@ -41,5 +42,4 @@ class SectionsData extends BaseFixture
 
         return new ArrayCollection($result);
     }
-
 }

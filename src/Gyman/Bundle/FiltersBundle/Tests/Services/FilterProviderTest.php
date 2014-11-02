@@ -57,23 +57,29 @@ class FilterProviderTest extends BaseTest
     public function testCreateFilterFromRequest()
     {
         $request = new Request(
-            [], ["add" => [
-                "Activities",
-                "Age",
-                "Belt",
-                "CheckedIn",
-                "CurrentVoucher",
-                "EntryDate",
-                "EntryType",
-                "Gender",
-                "Member",
-                "Price",
-                "RegistrationDate",
-                "SearchName",
-                "Starred",
-                "VoucherEnd",
-                "VoucherStart"
-            ]], ["listname" => "testListName"]
+            [],
+            [
+                "add" => [
+                    "Activities",
+                    "Age",
+                    "Belt",
+                    "CheckedIn",
+                    "CurrentVoucher",
+                    "EntryDate",
+                    "EntryType",
+                    "Gender",
+                    "Member",
+                    "Price",
+                    "RegistrationDate",
+                    "SearchName",
+                    "Starred",
+                    "VoucherEnd",
+                    "VoucherStart"
+                ]
+            ],
+            [
+                "listname" => "testListName"
+            ]
         );
 
         $filterProvider = new FilterProvider($this->container);

@@ -27,7 +27,7 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
      * @var Mailer $mailer
      */
     private $mailer;
-    
+
     /**
      *
      * @return type
@@ -39,12 +39,13 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
 
     /**
      *
-     * @param \Symfony\Component\Routing\Router $router
+     * @param  \Symfony\Component\Routing\Router                                       $router
      * @return \Gyman\Bundle\AccountBundle\Service\Subscriber\RegisteredUserSubscriber
      */
     public function setRouter(Router $router)
     {
         $this->router = $router;
+
         return $this;
     }
 
@@ -56,6 +57,7 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
     public function setSession(Session $session)
     {
         $this->session = $session;
+
         return $this;
     }
 
@@ -67,11 +69,10 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
     public function setMailer(Mailer $mailer)
     {
         $this->mailer = $mailer;
+
         return $this;
     }
 
-
-    
     /**
      * {@inheritDoc}
      */
@@ -92,9 +93,9 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
     private function sendEmail(FormEvent $event)
     {
         $form = $event->getForm();
-        
+
         $mailer = $this->getMailer();
-        
+
         $mailer->setParameters(array(
             "password"   => $form->get("plainPassword")->getData(),
             "username"   => $form->get("username")->getData()

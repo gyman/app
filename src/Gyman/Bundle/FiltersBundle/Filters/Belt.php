@@ -4,9 +4,13 @@ namespace Gyman\Bundle\FiltersBundle\Filters;
 
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * Class Belt
+ * @package Gyman\Bundle\FiltersBundle\Filters
+ * @todo move queries to repository
+ */
 class Belt extends AbstractSubfilter
 {
-
     private $belts = array(
         "white",
         "blue",
@@ -27,7 +31,8 @@ class Belt extends AbstractSubfilter
         $lowerThanBelts = array_slice($this->belts, $this->beltIndex);
         $queryBuilder->andWhere(
             $queryBuilder->expr()->orX(
-                $queryBuilder->expr()->notIn("m.belt", $lowerThanBelts), $queryBuilder->expr()->isNull("m.belt")
+                $queryBuilder->expr()->notIn("m.belt", $lowerThanBelts),
+                $queryBuilder->expr()->isNull("m.belt")
             )
         );
     }
@@ -46,7 +51,8 @@ class Belt extends AbstractSubfilter
         if ($this["belt"] == "white") {
             $queryBuilder->andWhere(
                 $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq("m.belt", ":belt"), $queryBuilder->expr()->isNull("m.belt")
+                    $queryBuilder->expr()->eq("m.belt", ":belt"),
+                    $queryBuilder->expr()->isNull("m.belt")
                 )
             );
         } else {

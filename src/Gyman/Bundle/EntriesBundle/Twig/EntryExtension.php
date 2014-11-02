@@ -29,8 +29,7 @@ class EntryExtension extends \Twig_Extension
          */
         $occurence = $entry->getOccurence();
 
-        if(!$occurence)
-        {
+        if (!$occurence) {
             return;
         }
 

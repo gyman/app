@@ -21,7 +21,7 @@ class MemberType extends AbstractSubfilterType
                 'property'      => 'name',
                 'multiple'      => false,
                 'query_builder' => function ($repository) {
-                return $repository->createQueryBuilder('m')
+                    return $repository->createQueryBuilder('m')
                     ->orderBy("m.name", "ASC");
                 },
                 "property_path" => "[member]"

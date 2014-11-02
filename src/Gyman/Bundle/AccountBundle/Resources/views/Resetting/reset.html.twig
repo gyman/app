@@ -9,13 +9,13 @@
 
 {% block fos_user_content %}
 <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="form-content login-form fos_user_resetting_reset">
-    
+
     <h3 class="title">{{ "account.reset.header"|trans }}</h3>
-    
+
     <p>{{ "account.reset.enter_new"|trans }}</p>
-    
+
     {# todo: please override resetting form and add error bubbling #}
-    
+
     {% if form.plainPassword.first.vars.errors|length %}
         <div class="row">
             <div class="col-sm-12 col-md-12">
@@ -32,11 +32,11 @@
             </div>
         </div>
     {% endif %}
-    
+
     {% for input in [form.plainPassword.first, form.plainPassword.second] %}
         {{ _self.inputWidget(input) }}
     {% endfor %}
-    
+
     {{ form_rest(form) }}
 
     <div class="buttons-box clearfix">

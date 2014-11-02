@@ -21,7 +21,8 @@ class Activities extends AbstractSubfilter
 
         $queryBuilder->andWhere(
             $queryBuilder->expr()->in(
-                'a.id', array_map(function (Activity $item) {
+                'a.id',
+                array_map(function (Activity $item) {
                     return $item->getId();
                 }, $activities)
             )

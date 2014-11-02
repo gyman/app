@@ -16,7 +16,6 @@ class MemberCreatedEvent extends Event
      */
     protected $member;
 
-
     /**
      * @param Member $member
      */

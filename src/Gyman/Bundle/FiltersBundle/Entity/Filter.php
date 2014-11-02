@@ -137,7 +137,10 @@ class Filter
     {
         if (count($this->filters) == 0) {
             $context->addViolationAt(
-                'filters', 'Musisz dodać jakieś opcje!', array(), null
+                'filters',
+                'Musisz dodać jakieś opcje!',
+                [],
+                null
             );
         }
     }

@@ -9,4 +9,4 @@ final class MembersEvents
      * @var string
      */
     const CREATED = 'member.CREATED';
-} 
+}

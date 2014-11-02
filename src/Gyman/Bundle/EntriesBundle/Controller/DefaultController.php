@@ -38,9 +38,7 @@ class DefaultController extends Controller
             return $this->forward("EntriesBundle:Default:close", array("id" => $lastEntry->getId()));
         }
 
-        $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
-        );
+        $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $entry = $this->get('entry_manager')->createNewEntry();
         $entry->setMember($member);
@@ -73,8 +71,8 @@ class DefaultController extends Controller
         }
 
         return $response->setContent($this->renderView(
-                "EntriesBundle:Default:new.html.twig",
-                [
+            "EntriesBundle:Default:new.html.twig",
+            [
                     "form"          => $form->createView(),
                     "member"        => $member,
                     "voucher"       => $currentVoucher,

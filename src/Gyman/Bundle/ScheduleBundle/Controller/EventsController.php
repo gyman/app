@@ -71,10 +71,11 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:drag.html.twig", array(
-                            "form"      => $form->createView(),
-                            "occurence" => $occurence
-                                )
+                "ScheduleBundle:Events:drag.html.twig",
+                [
+                    "form"      => $form->createView(),
+                    "occurence" => $occurence
+                ]
             )
         );
     }
@@ -145,7 +146,9 @@ class EventsController extends Controller
     public function newAction(Request $request)
     {
         $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
+            'Content',
+            200,
+            ['content-type' => 'text/html']
         );
 
         $event = new Event\Event();
@@ -169,10 +172,11 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:new.html.twig", array(
-                            'form'  => $form->createView(),
-                            'event' => $event,
-                                )
+                "ScheduleBundle:Events:new.html.twig",
+                [
+                    'form'  => $form->createView(),
+                    'event' => $event,
+                ]
             )
         );
     }
@@ -188,9 +192,10 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:show.html.twig", array(
-                            'occurence' => $occurence,
-                                )
+                "ScheduleBundle:Events:show.html.twig",
+                [
+                    'occurence' => $occurence,
+                ]
             )
         );
     }
@@ -205,16 +210,21 @@ class EventsController extends Controller
     public function editAction(Event\Occurence $occurence, Request $request)
     {
         $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
+            'Content',
+            200,
+            ['content-type' => 'text/html']
         );
 
         $event = $occurence->getEvent();
 
         if ($occurence->isPast() || !$this->get("security.context")->isGranted("ROLE_ADMIN")) {
-            return $this->forward("ScheduleBundle:Events:Show", [
-                        "event"     => $event->getId(),
-                        "occurence" => $occurence->getId()
-            ]);
+            return $this->forward(
+                "ScheduleBundle:Events:Show",
+                [
+                    "event"     => $event->getId(),
+                    "occurence" => $occurence->getId()
+                ]
+            );
         }
 
         $eventType = new EventType();
@@ -254,15 +264,16 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:edit.html.twig", array(
-                            'form'                => $form->createView(),
-                            'event'               => $event,
-                            'occurence'           => $occurence,
-                            'eventType'           => get_class($event),
-                            'occurenceType'       => get_class($occurence),
-                            "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
-                            "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
-                )
+                "ScheduleBundle:Events:edit.html.twig",
+                [
+                    'form'                => $form->createView(),
+                    'event'               => $event,
+                    'occurence'           => $occurence,
+                    'eventType'           => get_class($event),
+                    'occurenceType'       => get_class($occurence),
+                    "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
+                    "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
+                ]
             )
         );
     }

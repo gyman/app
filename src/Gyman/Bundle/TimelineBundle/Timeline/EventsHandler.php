@@ -7,7 +7,8 @@ use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 use Spy\TimelineBundle\Driver\ORM\ActionManager;
 use Symfony\Component\Security\Core\SecurityContext;
 
-class EventsHandler {
+class EventsHandler
+{
 
     const VERB_BOUGHT = 'bought';
     const VERB_PAID = 'paid';
@@ -66,14 +67,15 @@ class EventsHandler {
         $this->insertData($subject, self::$translationKeys[self::VERB_ENTERED], $complement);
     }
 
-    private function insertData($subject, $verb, $complement = null) {
+    private function insertData($subject, $verb, $complement = null)
+    {
         $components = ["indirectComplement" => $this->user];
 
         if ($complement !== null) {
-           $components["directComplement"] = $complement;
+            $components["directComplement"] = $complement;
         }
 
         $action = $this->actionManager->create($subject, $verb, $components);
         $this->actionManager->updateAction($action);
     }
-} 
+}

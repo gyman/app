@@ -20,7 +20,7 @@
     </target>
 
     <target name="phpcs" description="php code sniffer">
-        <exec command="bin/phpcs --standard=app/phpcs.xml --extensions=php src/" checkreturn="true" passthru="true" />
+        <exec command="bin/phpcs --standard=app/phpcs.xml --extensions=php src/Gyman/Bundle" checkreturn="true" passthru="true" />
     </target>
 
     <target name="phpcsfixer" description="php code fixer">
@@ -28,7 +28,7 @@
     </target>
 
     <target name="phpcbf" description="php code beautifier and fixer">
-        <exec command="bin/phpcbf -p --encoding=utf8 --standard=app/phpcs.xml src/" checkreturn="true" passthru="true" />
+        <exec command="bin/phpcbf -p --encoding=utf8 --standard=app/phpcs.xml --extensions=php src/Gyman/Bundle" checkreturn="true" passthru="true" />
     </target>
 
     <target name="find-translations-unused" description="looks for translations and adds them to translation files">
@@ -97,7 +97,7 @@
                     <isset property="env" />
                 </not>
                 <then>
-                    <echo>Setting to default environment (dev)</echo>
+                    <echo>Setting to default environment (dev) because you didn't use -Denv parameter</echo>
                     <property name="env" value="dev" />
                 </then>
             </elseif>
@@ -105,25 +105,27 @@
         <echo>Dropping database - ${env} environment</echo>
         <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --env=${env} --force --no-interaction" checkreturn="true" passthru="true" />
         <echo>Creating new schema - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --env=${env} --no-interaction" checkreturn="true" passthru="true"  />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --env=${env} --no-interaction" checkreturn="true" passthru="true" />
         <echo>Loading fixtures - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --env=${env} --no-interaction" checkreturn="true" passthru="true"  />
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --env=${env} --no-interaction" checkreturn="true" passthru="true" />
     </target>
    
     <target name="test-phpunit">
-        <phingcall target="reset-db">
-            <property name="env" value="test" />
-        </phingcall>
-      
+        <!--<phingcall target="reset-db">-->
+            <!--<property name="env" value="test" />-->
+        <!--</phingcall>-->
         <echo>Running phpunit tests</echo>
-        <exec command="bin/phpunit -c app" checkreturn="true" passthru="true" />
+        <exec command="bin/phpunit -c app --testsuite=all" checkreturn="true" passthru="true" />
     </target>
-    
+    <target name="test-security">
+        <exec command="bin/security-checker security:check --quiet" checkreturn="true" passthru="true" />
+    </target>
     <target name="test">
         <phingcall target="test-phplint" />
         <phingcall target="test-twiglint" />
+        <phingcall target="test-security" />
         <phingcall target="phpcs" />
-        <!-- phingcall target="phpmd" / -->
+        <phingcall target="phpmd" />
         <phingcall target="test-phpunit" />
     </target>
 
@@ -137,16 +139,15 @@
     </target>
 
     <target name="clear-cache">
-            <if><not><isset property="env" /></not>
-                <then>
-                    <echo>Setting to default environment (dev)</echo>
-                    <property name="env" value="dev" />
-                </then>
-            </if>
+        <if><not><isset property="env" /></not>
+            <then>
+                <echo>Setting to default environment (dev)</echo>
+                <property name="env" value="dev" />
+            </then>
+        </if>
         <echo>Clearing cache - ${env} environment</echo>
         <exec command="${php_bin} ${symfony_console} cache:clear --env=${env}" checkreturn="true" passthru="true" />
-    </target>    
-
+    </target>
     <target name="cc">
         <phingcall target="clear-cache" />
     </target>
@@ -163,6 +164,33 @@
         <exec command="grunt --verbose" checkreturn="true" passthru="true" />
         <!--<exec command="${php_bin} ${symfony_console} assetic:dump" checkreturn="true" passthru="true" />-->
     </target>
-    
-    
+
+
+    <target name="drop-schema">
+        <exec executable="app/console" passthru="true" checkreturn="true">
+            <arg value="doctrine:schema:drop" />
+            <arg value="--force" />
+        </exec>
+    </target>
+
+    <target name="create-schema">
+        <exec executable="app/console" passthru="true" checkreturn="true">
+            <arg value="doctrine:schema:create" />
+        </exec>
+    </target>
+
+    <target name="clear-cache-test">
+        <exec executable="app/console" passthru="true" checkreturn="true">
+            <arg value="cache:clear" />
+            <arg value="--env=test" />
+        </exec>
+    </target>
+    <target name="load-fixtures" depends="drop-schema, create-schema">
+        <exec executable="app/console" passthru="true" checkreturn="true">
+            <arg value="doctrine:fixtures:load" />
+            <arg value="--append" />
+        </exec>
+    </target>
+
+
 </project>

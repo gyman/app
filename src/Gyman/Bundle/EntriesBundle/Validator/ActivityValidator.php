@@ -18,7 +18,6 @@ class ActivityValidator extends ConstraintValidator
 
             if (count($activities) === 0) {
 // karnet nie jest typu open
-
                 return true;
             }
 

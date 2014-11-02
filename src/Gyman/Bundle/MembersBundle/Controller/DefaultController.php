@@ -21,9 +21,7 @@ class DefaultController extends Controller
      */
     public function editAction(Member $member, Request $request)
     {
-        $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
-        );
+        $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $manager = $this->get("gyman_members_manager");
         $form = $this->createForm('gyman_members_member_form_type', $member);
@@ -39,13 +37,11 @@ class DefaultController extends Controller
         }
 
         return $response->setContent(
-            $this->renderView(
-                "MembersBundle:Default:edit.html.twig", array(
+            $this->renderView("MembersBundle:Default:edit.html.twig", [
                     'form'     => $form->createView(),
                     'member'   => $member,
                     "uploader" => $this->get('oneup_uploader.templating.uploader_helper'),
-                )
-            )
+            ])
         );
     }
 
@@ -55,20 +51,18 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
-        );
+        $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $manager = $this->get("gyman_members_manager");
         $member = $manager->create();
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
-
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $manager->save($member);
+
                 return $this->redirect(
                     $this->generateUrl("gyman_api_get_member", ["id" => $member->getId()], true)
                 );
@@ -78,14 +72,12 @@ class DefaultController extends Controller
         }
 
         return $response->setContent(
-            $this->renderView(
-                "MembersBundle:Default:new.html.twig", array(
+            $this->renderView("MembersBundle:Default:new.html.twig", [
                     'form'     => $form->createView(),
                     'member'   => $member,
                     'isNew'    => true,
                     'uploader' => $this->get('oneup_uploader.templating.uploader_helper')
-                )
-            )
+            ])
         );
     }
 
@@ -136,9 +128,7 @@ class DefaultController extends Controller
     public function searchForDashboardAction(ArrayCollection $members = null)
     {
         $serializer = $this->get("jms_serializer");
-
-        return new Response(
-            $serializer->serialize(count($members) > 0 ? $members : [], "json"), 200, ["content-type" => "application/json"]
-        );
+        $data = $serializer->serialize(count($members) > 0 ? $members : [], "json");
+        return new Response($data, 200, ["content-type" => "application/json"]);
     }
 }

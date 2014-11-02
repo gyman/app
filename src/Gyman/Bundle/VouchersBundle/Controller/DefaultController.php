@@ -25,9 +25,7 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request, Member $member, $decision)
     {
-        $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
-        );
+        $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $voucherManager = $this->get("voucher_manager");
         $currentVoucher = $member->getCurrentVoucher();
@@ -51,6 +49,9 @@ class DefaultController extends Controller
             $voucher = $voucherManager->createNewVoucherAtEndDate($member);
         }
 
+        /**
+         * @todo move types to services
+         */
         $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
 
         if ($request->getMethod() == 'POST') {
@@ -66,12 +67,13 @@ class DefaultController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "VouchersBundle:Default:new.html.twig", array(
-                            'form'     => $form->createView(),
-                            'voucher'  => $voucher,
-                            "member"   => $member,
-                            "decision" => $decision
-                                )
+                "VouchersBundle:Default:new.html.twig",
+                [
+                    'form'     => $form->createView(),
+                    'voucher'  => $voucher,
+                    "member"   => $member,
+                    "decision" => $decision
+                ]
             )
         );
     }
@@ -83,9 +85,7 @@ class DefaultController extends Controller
      */
     public function editAction(Voucher $voucher, Request $request)
     {
-        $response = new Response(
-            'Content', 200, array('content-type' => 'text/html')
-        );
+        $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $voucherManager = $this->get("voucher_manager");
 
@@ -104,11 +104,12 @@ class DefaultController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "VouchersBundle:Default:edit.html.twig", array(
-                            'form'    => $form->createView(),
-                            'voucher' => $voucher,
-                            "member"  => $voucher->getMember(),
-                                )
+                "VouchersBundle:Default:edit.html.twig",
+                [
+                    'form'    => $form->createView(),
+                    'voucher' => $voucher,
+                    "member"  => $voucher->getMember()
+                ]
             )
         );
     }
@@ -121,11 +122,7 @@ class DefaultController extends Controller
     public function closeAction(Request $request, Voucher $voucher)
     {
         $diff = $voucher->getEndDate()->diff(new \DateTime());
-
-        return array(
-            "voucher"  => $voucher,
-            "leftDays" => $diff->days
-        );
+        return ["voucher"  => $voucher, "leftDays" => $diff->days];
     }
 
     /**
@@ -139,7 +136,7 @@ class DefaultController extends Controller
         $leftEntries = $voucher->getAmountLeft();
         $usedEntries = $voucher->getAmount() - $voucher->getAmountLeft();
 
-        return array(
+        return [
             "voucher"     => $voucher,
             "member"      => $voucher->getMember(),
             "leftDays"    => $leftDays,
@@ -147,7 +144,7 @@ class DefaultController extends Controller
             "pastDays"    => $pastDays,
             "leftEntries" => $leftEntries,
             "usedEntries" => $usedEntries
-        );
+        ];
     }
 
     /**

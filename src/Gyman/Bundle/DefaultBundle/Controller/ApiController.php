@@ -31,4 +31,3 @@ class ApiController extends BaseApiController
         return $view;
     }
 }
-

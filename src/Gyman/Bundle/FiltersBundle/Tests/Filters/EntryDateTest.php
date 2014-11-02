@@ -231,18 +231,18 @@ class EntryDateTest extends BaseTest
 
                         return $lastDayOfWeek->format("Y-m-d 23:59:59");
                     }),
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-            [
-                "options"       => [
+                    ]
+                    ],
+                    [
+                    "options"       => [
                     "type" => "lastWeek",
-                ],
-                "expectedDql"   => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
-                "expectedDates" => [
+                    ],
+                    "expectedDql"   => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
+                    "expectedDates" => [
                     "date1" => call_user_func(function () {
                         $Y = date("Y");
                         $W = (int) date("W") - 1;
@@ -262,68 +262,68 @@ class EntryDateTest extends BaseTest
 
                         return $lastDayOfWeek->format("Y-m-d 23:59:59");
                     }),
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-            [
-                "options"            => [
+                    ]
+                    ],
+                    [
+                    "options"            => [
                     "type" => "thisMonth",
-                ],
-                "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
-                "expectedDates"      => [
+                    ],
+                    "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
+                    "expectedDates"      => [
                     "date1" => (new DateTime("first day of this month"))->format("Y-m-d 00:00:00"),
                     "date2" => (new DateTime("last day of this month"))->format("Y-m-d 23:59:59")
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-            [
-                "options"            => [
+                    ]
+                    ],
+                    [
+                    "options"            => [
                     "type" => "lastMonth",
-                ],
-                "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
-                "expectedDates"      => [
+                    ],
+                    "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
+                    "expectedDates"      => [
                     "date1" => (new DateTime("first day of previous month"))->format("Y-m-d 00:00:00"),
                     "date2" => (new DateTime("last day of previous month"))->format("Y-m-d 23:59:59")
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-            [
-                "options"            => [
+                    ]
+                    ],
+                    [
+                    "options"            => [
                     "type" => "thisYear",
-                ],
-                "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
-                "expectedDates"      => [
+                    ],
+                    "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
+                    "expectedDates"      => [
                     "date1" => (new DateTime(date("Y-01-01")))->format("Y-m-d 00:00:00"),
                     "date2" => (new DateTime(date("Y-12-31")))->format("Y-m-d 23:59:59")
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-            [
-                "options"            => [
+                    ]
+                    ],
+                    [
+                    "options"            => [
                     "type" => "lastYear",
-                ],
-                "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
-                "expectedDates"      => [
+                    ],
+                    "expectedDql"        => "SELECT e FROM Gyman\Bundle\EntriesBundle\Entity\Entry e WHERE e.created >= :dateFrom AND e.created <= :dateTo",
+                    "expectedDates"      => [
                     "date1" => (new DateTime(date("Y-01-01", strtotime("-1 year"))))->format("Y-m-d 00:00:00"),
                     "date2" => (new DateTime(date("Y-12-31", strtotime("-1 year"))))->format("Y-m-d 23:59:59")
-                ],
-                "expectedParameters" => [
+                    ],
+                    "expectedParameters" => [
                     "dateFrom",
                     "dateTo",
-                ]
-            ],
-        ];
+                    ]
+                    ],
+                    ];
     }
 }

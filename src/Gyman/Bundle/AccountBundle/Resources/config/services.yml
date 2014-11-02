@@ -21,7 +21,7 @@ services:
             - [setSession,["@session"]]
         tags:
             - { name: kernel.event_subscriber }
-            
+
     account_bundle.profile.edit_type:
         class: Gyman\Bundle\AccountBundle\Form\Type\UserType
         arguments: [%fos_user.model.user.class%]

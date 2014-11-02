@@ -86,12 +86,13 @@ class ArrayCollectionConverter implements ParamConverterInterface
     protected function getOptions(ConfigurationInterface $configuration)
     {
         return array_replace(
-            array(
-            'entity'    => null,
-            'finder'    => null,
-            'field'     => 'id',
-            'delimiter' => ','
-                ), $configuration->getOptions()
+            [
+                'entity'    => null,
+                'finder'    => null,
+                'field'     => 'id',
+                'delimiter' => ','
+            ],
+            $configuration->getOptions()
         );
     }
 

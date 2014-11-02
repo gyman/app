@@ -2,7 +2,6 @@
 
 namespace Gyman\Component\Test;
 
-
 use Symfony\Component\BrowserKit\Client;
 
 class WebTestCase extends ContainerAwareTestCase
@@ -25,7 +24,8 @@ class WebTestCase extends ContainerAwareTestCase
         ));
     }
 
-    public function doLogin($username, $password) {
+    public function doLogin($username, $password)
+    {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->selectButton('_submit')->form(array(
             '_username'  => $username,
@@ -35,7 +35,7 @@ class WebTestCase extends ContainerAwareTestCase
     }
 
     /**
-     * @param array $server
+     * @param  array  $server
      * @return Client
      */
     protected function prepareClient(array $server = array())
@@ -44,6 +44,7 @@ class WebTestCase extends ContainerAwareTestCase
         $client->setServerParameters($server);
         $client->followRedirects(true);
         $this->client = $client;
+
         return $client;
     }
     protected function assertText(array $expectedMessage, $actualMessage)
@@ -60,6 +61,7 @@ class WebTestCase extends ContainerAwareTestCase
     protected function translate($textToTranslation, $translationParams = array())
     {
         $translator = $this->container->get('translator');
+
         return $translator->trans($textToTranslation, $translationParams);
     }
     protected function thenResponseStatusEquals($statusCode)
@@ -105,8 +107,8 @@ class WebTestCase extends ContainerAwareTestCase
     /**
      * Get an URI from route & parameters.
      *
-     * @param string $route route name
-     * @param array $params route parameters
+     * @param string  $route    route name
+     * @param array   $params   route parameters
      * @param boolean $absolute
      *
      * @return string
