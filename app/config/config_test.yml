@@ -14,9 +14,3 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
-    
-doctrine:
-    dbal:
-        dbname:   timesheet_test
-        user:     %database_user%
-        password: %database_password%
