@@ -24,7 +24,9 @@ class MembersListTest extends BaseTest
             $this->list = new \Gyman\Bundle\ListsBundle\Services\MembersList();
             $this->list->setListParameters($this->getListParametersMock());
             $this->list->setFilterProvider($this->getFilterProviderMock());
-            $this->list->setRepository($this->getContainer()->get("member_repository"));
+            $this->list->setRepository(
+                $this->getContainer()->get("entity_manager")->getRepository("MembersBundle:Member")
+            );
             $this->list->setTemplating($this->getTemplatingMock());
         }
 

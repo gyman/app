@@ -2,6 +2,7 @@
 
 namespace Gyman\Bundle\MembersBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman_members_manager");
+        $manager = $this->get("gyman.members.members_manager");
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
@@ -53,7 +54,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman_members_manager");
+        $manager = $this->get("gyman.members.members_manager");
         $member = $manager->create();
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
@@ -88,7 +89,12 @@ class DefaultController extends Controller
      */
     public function deleteAction(Member $member)
     {
-        $this->get("member_manager")->delete($member);
+        /**
+         * @var EntityManager $entityManager
+         */
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $entityManager->remove($member);
+        $entityManager->flush();
 
         return array();
     }
@@ -118,7 +124,7 @@ class DefaultController extends Controller
      *     class="Doctrine\Common\Collections\ArrayCollection", options={
      *         "finder"    = "getDashboardSearchQueryBuilder",
      *         "entity"    = "Gyman\Bundle\MembersBundle\Entity\Member",
-     *         "field"     = "name",
+     *         "field"     = {"name", "barcode"},
      *         "limit"     = 10,
      *         "delimiter" = ",",
      *     }

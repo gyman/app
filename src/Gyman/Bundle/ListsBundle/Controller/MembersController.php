@@ -57,8 +57,9 @@ class MembersController extends Controller implements ListControllerInterface
      */
     public function galleryAction(Request $request)
     {
-        $memberManager = $this->get("member_manager");
-        $members = $memberManager->getMembers();
+        $members = $this->getDoctrine()
+            ->getRepository("MembersBundle:Member")
+            ->findAll();
 
         return array("members" => $members);
     }

@@ -149,7 +149,7 @@ class @Modal
         @logError xhr, status, message    
 
   logError: (xhr, status, message) =>
-    alert "#{message} (#{xhr.status})"
+    console.log "#{message} (#{xhr.status})"
 
   setupFromNode: (node) =>
     $dataDiv = $(node)

@@ -2,6 +2,7 @@
 
 namespace Gyman\Bundle\DefaultBundle\Request;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
@@ -15,9 +16,25 @@ class ArrayCollectionConverter implements ParamConverterInterface
      */
     protected $container;
 
-    public function __construct($container)
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
     {
-        $this->container = $container;
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->entityManager;
     }
 
     public function apply(Request $request, ParamConverter $configuration)
@@ -37,7 +54,6 @@ class ArrayCollectionConverter implements ParamConverterInterface
         }
 
         $repo = $this->getEntityManager()->getRepository($options['entity']);
-//        $user = $this->getSecurityContext()->getToken()->getUser();
 
         if (!$finder = $options['finder']) {
             // Create a new default query builder with WHERE user_id clause
@@ -50,13 +66,27 @@ class ArrayCollectionConverter implements ParamConverterInterface
         $limit = isset($options['limit']) ? $options['limit'] : 10;
 
         // Edit the builder and add WHERE IN $items clause
-        $alias = $builder->getRootAlias() . "." . $options['field'];
+        $fields = $options['field'];
 
-        $wherein = $builder->expr()->like($alias, "'%{$queredText}%'");
+        if (is_array($fields)) {
+            $fieldsAreLike = $builder->expr()->orX();
+
+            foreach ($fields as $field) {
+                $alias = $builder->getRootAlias() . "." . $field;
+
+                $fieldsAreLike->add(
+                    $builder->expr()->like($alias, "'%{$queredText}%'")
+                );
+
+            }
+        } else {
+            $alias = $builder->getRootAlias() . "." . $fields;
+            $fieldsAreLike = $builder->expr()->like($alias, "'%{$queredText}%'");
+        }
 
         $builder->setMaxResults($limit);
 
-        $result = $builder->andwhere($wherein)->getQuery()->getResult();
+        $result = $builder->andwhere($fieldsAreLike)->getQuery()->getResult();
 
         // Set request attribute and we're done
         $request->attributes->set($name, new ArrayCollection($result));
@@ -94,21 +124,5 @@ class ArrayCollectionConverter implements ParamConverterInterface
             ],
             $configuration->getOptions()
         );
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->container->get('doctrine.orm.default_entity_manager');
-    }
-
-    /**
-     * @return \Symfony\Component\Security\Core\SecurityContext
-     */
-    protected function getSecurityContext()
-    {
-        return $this->container->get('security.context');
     }
 }

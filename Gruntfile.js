@@ -42,6 +42,9 @@ module.exports = function (grunt) {
         'bower_components/jquery/dist/jquery.js',
         'bower_components/jquery-ui/ui/jquery-ui.js',
         'bower_components/jquery-migrate/jquery-migrate.min.js',
+
+        'bower_components/underscore/underscore.js',
+
         "bower_components/bootstrap/js/bootstrap-alert.js",
         "bower_components/bootstrap/js/bootstrap-button.js",
         "bower_components/bootstrap/js/bootstrap-carousel.js",
@@ -54,7 +57,7 @@ module.exports = function (grunt) {
         "bower_components/bootstrap/js/bootstrap-transition.js",
         "bower_components/bootstrap/js/bootstrap-popover.js",
 
-        "bower_components/typeahead.js/dist/typeahead.bundle.js",
+        "bower_components/typeahead.js/dist/typeahead.jquery.js",
 
         "bower_components/uri.js/src/URI.js",
         "bower_components/uri.js/src/URI.fragmentQuery.js",
@@ -89,6 +92,9 @@ module.exports = function (grunt) {
         'web/bundles/lists/coffee/reloadAjax.coffee',
 
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
+        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
+        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
+        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee",
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
 
         "src/Gyman/Bundle/MembersBundle/Resources/coffee/members.editMember.coffee",
@@ -238,7 +244,7 @@ module.exports = function (grunt) {
                 flatten: true,
                 filter: 'isFile',
                 src: [
-                    './src/Gyman/Component/supr/css/fonts/*',
+                    './vendor/gyman/supr/css/fonts/*',
                 ],
                 dest: "./web/fonts/"
             },
@@ -248,7 +254,7 @@ module.exports = function (grunt) {
                 cwd: '',
                 filter: 'isFile',
                 src: [
-                    './src/Gyman/Component/supr/images/**/*.{png,jpg,svg,gif}',
+                    './vendor/gyman/supr/images/**/*.{png,jpg,svg,gif}',
                     './bower_components/bootstrap/images/*.{png,jpg,svg,gif}',
                     './bower_components/DataTables/media/images/*.{png,jpg,svg,gif}',
                     './bower_components/jquery-file-upload/img/*.{png,jpg,svg,gif}',

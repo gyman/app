@@ -11,11 +11,11 @@ parameters:
 services:
     activity_manager:
         class:          Gyman\Bundle\ScheduleBundle\Services\Manager\ActivityManager
-        parent:         gyman_base_entity_manager
+        parent:         gyman.base.entity_manager
 
     event_manager:
         class:          Gyman\Bundle\ScheduleBundle\Services\Manager\EventManager
-        parent:         gyman_base_entity_manager
+        parent:         gyman.base.entity_manager
 
     event_repository:
         class:              %event_repository.class%
@@ -37,7 +37,7 @@ services:
 
     occurences_manager:
         class: Gyman\Bundle\ScheduleBundle\Services\Manager\OccurencesManager
-        parent: gyman_base_entity_manager
+        parent: gyman.base.entity_manager
         calls:
              - [ setRouter, ["@router"] ]
 

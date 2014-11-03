@@ -48,7 +48,9 @@
         "vipsoft/doctrine-data-fixtures-extension": "~2",
         "phing/phing": "*",
         "willdurand/hateoas-bundle": "@stable",
-        "raulfraile/ladybug-bundle": "~1.0"
+        "raulfraile/ladybug-bundle": "~1.0",
+
+        "gyman/supr": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
@@ -67,9 +69,6 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "npm install",
-            "node_modules/.bin/bower install --allow-root",
-            "node_modules/.bin/grunt --no-color",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
@@ -77,9 +76,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
-            "npm install",
-            "node_modules/.bin/bower install --allow-root",
-            "node_modules/.bin/grunt --no-color",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
