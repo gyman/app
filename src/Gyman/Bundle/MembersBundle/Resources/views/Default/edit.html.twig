@@ -52,7 +52,12 @@
         {% block memberToolbox %}
         <div class="pull-right hideForNewMember" id="memberModalToolbox">
             <a href="{{ path("_voucher_new",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-signup"></i> Karnet</a>
+
+            {% if member.hasOpenedEntry() %}
+            <a href="{{ path("_entry_close",{id: member.getLastEntry().getId()}) }}" class="btn btn-warning openUrlInModal"><i class="icomoon-icon-enter"></i> Wyjście</a>
+            {% else %}
             <a href="{{ path("_entrance_add",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-enter"></i> Wejście</a>
+            {% endif %}
         </div>
         {% endblock memberToolbox %}
     </div>

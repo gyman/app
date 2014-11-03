@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use DateTime;
@@ -70,7 +71,9 @@ class DefaultController extends Controller
      */
     public function quickSearchAction(Member $member)
     {
-        return $this->forward("EntriesBundle:Default:new", array("id" => $member->getId()));
+        return new RedirectResponse(
+            $this->generateUrl("_entrance_add", ["id" => $member->getId()])
+        );
     }
 
 }
