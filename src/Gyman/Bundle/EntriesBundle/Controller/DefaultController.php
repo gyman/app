@@ -15,15 +15,6 @@ use DateTime;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/quick/member/{barcode}", name="_entry_quickadd")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     */
-    public function quickSearchAction(Member $member)
-    {
-        return $this->forward("EntriesBundle:Default:new", array("id" => $member->getId()));
-    }
-
-    /**
      * @Route("/new/member/{id}", name="_entrance_add")
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
@@ -31,9 +22,7 @@ class DefaultController extends Controller
     public function openAction(Member $member)
     {
         $entryHandler = $this->get("gyman.entries.entry_handler");
-
         $response = $entryHandler->handleOpen($member);
-
         return $response;
     }
 
@@ -45,9 +34,7 @@ class DefaultController extends Controller
     public function closeAction(Entry $entry)
     {
         $entryHandler = $this->get("gyman.entries.entry_handler");
-
         $response = $entryHandler->handleClose($entry);
-
         return $response;
     }
 
@@ -78,22 +65,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * Route("/{id}/close", name="_entry_close")
-     * ParamConverter("entry", class="EntriesBundle:Entry")
-     * Template()
+     * @Route("/quick/member/{barcode}", name="_entry_quickadd")
+     * @ParamConverter("member", class="MembersBundle:Member")
      */
-    public function close_oldAction(Entry $entry, Request $request)
+    public function quickSearchAction(Member $member)
     {
-        if ($request->getMethod() == 'POST') {
-            $em = $this->getDoctrine()->getManager();
-            $entry->setEndDate(new \DateTime());
-            $em->persist($entry);
-            $em->flush();
-        }
-
-        return array(
-            "entry"      => $entry,
-            "minutesAgo" => $entry->getStartDate()->diff(new DateTime())
-        );
+        return $this->forward("EntriesBundle:Default:new", array("id" => $member->getId()));
     }
+
 }
