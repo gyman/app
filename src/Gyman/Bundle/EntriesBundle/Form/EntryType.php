@@ -15,8 +15,6 @@ use DateTime;
 
 class EntryType extends AbstractType
 {
-// <editor-fold defaultstate="collapsed" desc="fields">
-
     /**
      *
      * @var OccurenceRepository
@@ -29,8 +27,6 @@ class EntryType extends AbstractType
      */
     private $entry;
 
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="setters and getters">
     /**
      *
      * @return Entry
@@ -51,8 +47,6 @@ class EntryType extends AbstractType
 
         return $this;
     }
-
-// </editor-fold>
 
     public function __construct(OccurenceRepository $occurenceRepository)
     {
@@ -137,7 +131,7 @@ class EntryType extends AbstractType
      */
     public function getName()
     {
-        return 'dende_entriesbundle_entry';
+        return 'gyman_entries_entry';
     }
 
     protected function getChoices()

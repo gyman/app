@@ -1,14 +1,8 @@
 parameters:
-    base_manager.class: Gyman\Bundle\MembersBundle\Services\Manager\BaseManager
     memcached.servers:
       - { host: 127.0.0.1, port: 11211 }
 
 services:
-    base_manager:
-        class:     "%base_manager.class%"
-        calls:
-             - [ setContainer, ["@service_container"] ]
-
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Bundle\EntriesBundle\Services\Manager;
+namespace Gyman\Bundle\EntriesBundle\EntityManager;
 
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;

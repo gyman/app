@@ -2,27 +2,27 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Services\Manager;
 
+use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\ScheduleBundle\Entity as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\Form;
 
-class OccurencesManager
+
+/**
+ * Class OccurencesManager
+ * @package Gyman\Bundle\ScheduleBundle\Services\Manager
+ *
+ * @todo: refactor and move form stuff to FormHandler
+ */
+class OccurencesManager extends BaseManager
 {
-// <editor-fold defaultstate="collapsed" desc="members">
 
     /**
      *
      * @var Form
      */
     private $form;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    private $entityManager;
 
     /**
      *
@@ -52,10 +52,7 @@ class OccurencesManager
      */
     private $occurence;
 
-// <editor-fold defaultstate="collapsed" desc="setters and getters">
-
     /**
-     *
      * @return Entity\Occurence
      */
     public function getOccurence()
@@ -92,23 +89,6 @@ class OccurencesManager
         return $this;
     }
 
-    public function getEntityManager()
-    {
-        return $this->entityManager;
-    }
-
-    /**
-     *
-     * @param  EntityManager     $entityManager
-     * @return OccurencesManager
-     */
-    public function setEntityManager(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-
-        return $this;
-    }
-
     /**
      *
      * @return Router
@@ -124,8 +104,6 @@ class OccurencesManager
 
         return $this;
     }
-
-// </editor-fold>
 
     public function addOccurencesForEvent(Entity\Event $event)
     {

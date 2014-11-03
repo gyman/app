@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Bundle\EntriesBundle\Tests\Form;
+namespace Gyman\Bundle\EntriesBundle\Tests\Unit\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
 use Gyman\Bundle\EntriesBundle\Form\EntryType;

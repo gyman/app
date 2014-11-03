@@ -8,7 +8,24 @@ use Gyman\Bundle\TestBundle\Traits\SetupTrait;
 class BaseTest extends WebTestCase
 {
 
-    use SetupTrait;
+    protected $container;
+
+    public function setUp()
+    {
+        if (null !== static::$kernel) {
+            static::$kernel->shutdown();
+        }
+
+        static::$kernel = static::createKernel(['environment' => 'test']);
+        static::$kernel->boot();
+
+        $this->container = static::$kernel->getContainer();
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
+    }
 
     /**
      * @param mixed $expectedName
