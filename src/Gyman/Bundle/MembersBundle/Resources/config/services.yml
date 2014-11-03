@@ -1,6 +1,5 @@
 parameters:
     member_entity.class: Gyman\Bundle\MembersBundle\Entity\Member
-    member_manager.class: Gyman\Bundle\MembersBundle\Services\Manager\MemberManager
     member_repository.class: Gyman\Bundle\MembersBundle\Entity\MemberRepository
 
 services:
@@ -40,22 +39,12 @@ services:
         tags:
             - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
 
-#  old
-
     # @todo: remove
     member_repository:
         class:          "%member_repository.class%"
         factory_service: doctrine
         factory_method:  getRepository
         arguments: [ "%member_entity.class%" ]
-
-    # @todo: remove
-    member_manager:
-        class:          "%member_manager.class%"
-        parent:         base_manager
-        calls:
-             - [ setClass, [%member_entity.class%] ]
-             - [ setRepository, ["@member_repository"] ]
 
     # @todo: rename
     dende.upload_listener:
