@@ -93,7 +93,7 @@ class @NewEntry extends @AbstractModal
       e.stopPropagation()
       
       if e.which == 13
-        @saveButton.trigger "click"
+        @$saveButton.trigger "click"
       
   handleSubmitSuccess: (response) =>
     super()

@@ -1,6 +1,6 @@
 services:
 
-  gyman_base_entity_manager:
+  gyman.base.entity_manager:
     class: Gyman\Bundle\BaseBundle\EntityManager\BaseManager
     abstract: true
     arguments:

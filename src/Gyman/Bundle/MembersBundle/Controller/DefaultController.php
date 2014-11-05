@@ -23,7 +23,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman_members_manager");
+        $manager = $this->get("gyman.members.members_manager");
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
@@ -53,7 +53,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman_members_manager");
+        $manager = $this->get("gyman.members.members_manager");
         $member = $manager->create();
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
@@ -118,7 +118,7 @@ class DefaultController extends Controller
      *     class="Doctrine\Common\Collections\ArrayCollection", options={
      *         "finder"    = "getDashboardSearchQueryBuilder",
      *         "entity"    = "Gyman\Bundle\MembersBundle\Entity\Member",
-     *         "field"     = "name",
+     *         "field"     = {"name", "barcode"},
      *         "limit"     = 10,
      *         "delimiter" = ",",
      *     }

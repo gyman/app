@@ -1,15 +1,11 @@
-parameters:
-    member_entity.class: Gyman\Bundle\MembersBundle\Entity\Member
-    member_repository.class: Gyman\Bundle\MembersBundle\Entity\MemberRepository
-
 services:
 
 #@todo: rename to commas
-    gyman_members_manager:
-      parent: gyman_base_entity_manager
+    gyman.members.members_manager:
+      parent: gyman.base.entity_manager
       class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
       calls:
-        - [setClass, [%member_entity.class%]]
+        - [setClass, [Gyman\Bundle\MembersBundle\Entity\Member]]
 
     gyman_members_member_form_type:
       class: Gyman\Bundle\MembersBundle\Form\MemberType
@@ -38,13 +34,6 @@ services:
         scope:            request
         tags:
             - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
-
-    # @todo: remove
-    member_repository:
-        class:          "%member_repository.class%"
-        factory_service: doctrine
-        factory_method:  getRepository
-        arguments: [ "%member_entity.class%" ]
 
     # @todo: rename
     dende.upload_listener:

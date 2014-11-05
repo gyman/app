@@ -51,7 +51,7 @@ class ApiController extends BaseApiController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $this->get('gyman_members_manager')->save($member);
+            $this->get('gyman.members.members_manager')->save($member);
 
             $view = $this->createView($member, 200);
 
@@ -77,7 +77,7 @@ class ApiController extends BaseApiController
      */
     public function postMemberAction(Request $request)
     {
-        $manager = $this->get("gyman_members_manager");
+        $manager = $this->get("gyman.members.members_manager");
 
         $member = $manager->create();
 

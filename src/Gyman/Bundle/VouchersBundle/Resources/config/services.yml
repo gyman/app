@@ -18,7 +18,7 @@ services:
 
     voucher_manager:
         class:          Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager
-        parent:         gyman_base_entity_manager
+        parent:         gyman.base.entity_manager
         calls:
              - [ setClass, [%voucher_entity.class%] ]
 

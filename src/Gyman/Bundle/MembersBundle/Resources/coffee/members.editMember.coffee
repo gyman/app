@@ -1,9 +1,9 @@
 class @EditMember extends @AbstractModal
   constructor: ()->
     super()
-#    @initDatepickers()
-#    @initSelects()
-#    @initActivities()
+    @initDatepickers()
+    @initSelects()
+    @initActivities()
 #    @initVoucherTab()
     @initCheckbox()
 
@@ -56,7 +56,7 @@ class @EditMember extends @AbstractModal
 #   @todo: enable only for lists, omit datatables in modal
 #    datatable.fnReloadAjax() if datatable? and $("table.dataTable").length > 0
 
-    if @sellVoucher
+    if @sellVoucher?
       @modal.showFromUrl Routing.generate("_voucher_new", {"id" : response.id})
     else
       @modal.hide()

@@ -95,26 +95,9 @@ class Builder
 
         if ($member) {
             $menu->addChild(
-                'member.modal.tab.sales_label',
+                'member.modal.tab.history_label',
                 [
-                    'uri' => '#sellPane',
-                    "extras" => ["icon" => 'icomoon-icon-users'],
-                    'linkAttributes' => [
-                        "class" => '',
-                        'data-toggle' => 'tab'
-                    ],
-                    "attributes" => [
-                        'class' => ''
-                    ]
-                ]
-            )->setExtra('translation_domain', 'MembersBundle');
-        }
-
-        if ($member) {
-            $menu->addChild(
-                'member.modal.tab.entries_label',
-                [
-                    'uri' => '#entriesPane',
+                    'uri' => '#historyPane',
                     "extras" => ["icon" => 'icomoon-icon-users'],
                     'linkAttributes' => [
                         "class" => '',
