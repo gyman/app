@@ -146,11 +146,6 @@
         <phingcall target="assets" />
         <echo>Resetting database</echo>
         <phingcall target="reset-db" />
-
-        <!--"npm install",-->
-        <!--"node_modules/.bin/bower install --allow-root",-->
-        <!--"node_modules/.bin/grunt --no-color",-->
-
     </target>
 
     <target name="clear-cache">
