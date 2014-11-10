@@ -32,6 +32,7 @@ class @SearchInput
       handler(user)
 
   setupInputButton: () =>
+#    @todo: clicking does not work
     @$searchButton.on "click", @inputButtonHandler
 
   inputButtonHandler: (e) =>
