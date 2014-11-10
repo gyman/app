@@ -22,7 +22,7 @@ class UpdateEntriesCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get("doctrine")->getManager();
 
         $now = new \DateTime();
-        $memberRepository = $this->getContainer()->get("member_repository");
+        $memberRepository = $this->getContainer()->get("entity_manager")->getRepository("MembersBundle:Member");
 
         /** @var QueryBuilder $query * */
         $query = $memberRepository->getQuery("m");

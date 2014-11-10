@@ -9,6 +9,7 @@ use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Exception;
 use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
+use Gyman\Bundle\VouchersBundle\Event\VoucherEditedEvent;
 
 /**
  * @todo: refactor class and move to entitymanagers
@@ -19,10 +20,16 @@ class VoucherManager extends BaseManager
 {
     public function save($object, $withFlush = true)
     {
-//        @todo: change methods to "create" and "update"
+        $isNew = !$object->getId() ? true : false;
+
         parent::save($object, $withFlush);
 
-        $this->dispatcher->dispatch(VouchersEvents::CREATED, new VoucherCreatedEvent($object));
+        if ($isNew) {
+            $this->dispatcher->dispatch(VouchersEvents::CREATED, new VoucherCreatedEvent($object));
+        } else {
+            $this->dispatcher->dispatch(VouchersEvents::EDITED, new VoucherEditedEvent($object));
+        }
+
     }
 
     /**

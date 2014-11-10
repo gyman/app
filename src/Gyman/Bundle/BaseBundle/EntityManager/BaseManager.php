@@ -12,7 +12,7 @@ abstract class BaseManager
      * Holds the Doctrine entity manager for database interaction
      * @var EntityManager
      */
-    protected $em;
+    protected $entityManager;
 
     /**
      * The Fully-Qualified Class Name for our entity
@@ -34,7 +34,7 @@ abstract class BaseManager
 
     public function __construct(EntityManager $em, EventDispatcherInterface $dispatcher)
     {
-        $this->em = $em;
+        $this->entityManager = $em;
         $this->dispatcher = $dispatcher;
     }
 
@@ -48,7 +48,7 @@ abstract class BaseManager
 
     public function getEntityManager()
     {
-        return $this->em;
+        return $this->entityManager;
     }
 
     /**
@@ -56,22 +56,22 @@ abstract class BaseManager
      */
     public function getRepository()
     {
-        return $this->em->getRepository($this->class);
+        return $this->entityManager->getRepository($this->class);
     }
 
     public function flush()
     {
-        $this->em->flush();
+        $this->entityManager->flush();
     }
 
     public function persist($object)
     {
-        $this->em->persist($object);
+        $this->entityManager->persist($object);
     }
 
     public function remove($object)
     {
-        $this->em->remove($object);
+        $this->entityManager->remove($object);
     }
 
     public function create()

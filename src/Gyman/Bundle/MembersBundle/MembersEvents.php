@@ -9,4 +9,11 @@ final class MembersEvents
      * @var string
      */
     const CREATED = 'member.CREATED';
+
+    /**
+     * Registered event is thrown each time a new member is edited
+     *
+     * @var string
+     */
+    const EDITED = 'member.EDITED';
 }

@@ -1,7 +1,7 @@
 timeline:
     resource: "@TimelineBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /timeline
 
 account:
     resource: "@AccountBundle/Controller/"

@@ -48,7 +48,9 @@
         "vipsoft/doctrine-data-fixtures-extension": "~2",
         "phing/phing": "*",
         "willdurand/hateoas-bundle": "@stable",
-        "raulfraile/ladybug-bundle": "~1.0"
+        "raulfraile/ladybug-bundle": "~1.0",
+
+        "gyman/supr": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",

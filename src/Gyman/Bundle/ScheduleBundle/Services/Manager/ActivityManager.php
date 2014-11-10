@@ -2,7 +2,7 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Services\Manager;
 
-use Gyman\Bundle\DefaultBundle\Services\Manager\BaseManager;
+use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 
 class ActivityManager extends BaseManager
 {

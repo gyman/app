@@ -3,53 +3,55 @@ parameters:
     entry_repository.class: Gyman\Bundle\EntriesBundle\Entity\EntryRepository
 
 services:
-    gyman.entries.twig.entry_extension:
-        class: Gyman\Bundle\EntriesBundle\Twig\EntryExtension
-        calls:
-          - [setTranslator, [@translator]]
-        tags:
-          - { name: twig.extension }
 
-    gyman.entries.form.entry:
-        class: Gyman\Bundle\EntriesBundle\Form\EntryType
-        arguments:
-          - @occurence_repository
-        tags:
-          - { name: form.type, alias: gyman_entries_entry }
+  gyman.entries.events_handler:
+    class: Gyman\Bundle\EntriesBundle\Event\EventsHandler
+    calls:
+      - [setEntityManager, [@doctrine.orm.default_entity_manager]]
 
-    entry_repository:
-        class:          "%entry_repository.class%"
-        factory_service: doctrine
-        factory_method:  getRepository
-        arguments: [ "%entry_entity.class%" ]
+  gyman.entries.events_subscriber:
+    class: Gyman\Bundle\EntriesBundle\Subscriber\EventSubscriber
+    arguments:
+      - @gyman.entries.events_handler
+      - @gyman.members.members_manager
+    tags:
+      - { name: kernel.event_subscriber }
 
-    gyman.entries.entry_manager:
-        class:          Gyman\Bundle\EntriesBundle\EntityManager\EntryManager
-        parent:         gyman_base_entity_manager
+  gyman.entries.twig.entry_extension:
+      class: Gyman\Bundle\EntriesBundle\Twig\EntryExtension
+      calls:
+        - [setTranslator, [@translator]]
+      tags:
+        - { name: twig.extension }
 
-    gyman.entries.entry_handler:
-        class:          Gyman\Bundle\EntriesBundle\Services\EntryHandler
-        scope:          request
-        calls:
-          - [setTemplating, [@templating]]
-          - [setFormFactory, [@form.factory]]
-          - [setEntryManager, [@gyman.entries.entry_manager]]
-          - [setRequestStack, [@request_stack]]
-          - [setRouter, [@router]]
-          - [setEntryType, [@gyman.entries.form.entry]]
+  gyman.entries.form.entry:
+      class: Gyman\Bundle\EntriesBundle\Form\EntryType
+      arguments:
+        - @occurence_repository
+      tags:
+        - { name: form.type, alias: gyman_entries_entry }
 
-    dende.update_left_amount_listener:
-        class: Gyman\Bundle\EntriesBundle\Services\Listener\UpdateLeftAmountListener
-        # TODO: very bad, temporarily workaround of circular
-        arguments: ["@service_container"]
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
-    dende.update_last_entry_listener:
-        class: Gyman\Bundle\EntriesBundle\Services\Listener\UpdateLastEntryListener
-        # TODO: very bad, temporarily workaround of circular
-        arguments: ["@service_container"]
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
+  entry_repository:
+      class:          "%entry_repository.class%"
+      factory_service: doctrine
+      factory_method:  getRepository
+      arguments: [ "%entry_entity.class%" ]
+
+  gyman.entries.entry_manager:
+      class:          Gyman\Bundle\EntriesBundle\EntityManager\EntryManager
+      parent:         gyman.base.entity_manager
+
+  gyman.entries.entry_handler:
+      class:          Gyman\Bundle\EntriesBundle\Services\EntryHandler
+      scope:          request
+      calls:
+        - [setTemplating, [@templating]]
+        - [setFormFactory, [@form.factory]]
+        - [setEntryManager, [@gyman.entries.entry_manager]]
+        - [setRequestStack, [@request_stack]]
+        - [setRouter, [@router]]
+        - [setEntryType, [@gyman.entries.form.entry]]
+
 
 #    validator.left_amount_validator:
 #        class: Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator

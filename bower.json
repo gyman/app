@@ -1,7 +1,7 @@
 {
   "name": "app.gyman.pl",
   "version": "0.2",
-  "homepage": "https://github.com/uirapuru/bjjTimesheet",
+  "homepage": "https://github.com/gyman/app",
   "authors": [
     "Grzegorz Kaszuba <uirapuru@tlen.pl>"
   ],
@@ -42,7 +42,8 @@
     "jquery-file-upload": "~9.7.1",
     "webcam": "~1.0.0",
     "datatables-plugins": "*",
-    "typeahead.js": "*"
+    "typeahead.js": "*",
+    "underscore": "*"
   },
   "resolutions": {
      "jquery": "~1.11.0"
