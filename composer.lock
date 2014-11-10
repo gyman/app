@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "023f024608021eef1ed75fa39e6f6873",
+    "hash": "78cdad8b3ac213888b194e9e9011c654",
     "packages": [
         {
             "name": "behat/behat",
@@ -231,12 +231,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633"
+                "reference": "3b6668f54ad3f95d68b64a742f6b0de55d6caeb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/6a6bec0670bb6e71a263b08bc1b98ea242928633",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/3b6668f54ad3f95d68b64a742f6b0de55d6caeb1",
+                "reference": "3b6668f54ad3f95d68b64a742f6b0de55d6caeb1",
                 "shasum": ""
             },
             "require": {
@@ -291,7 +291,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-09-25 16:45:30"
+            "time": "2014-11-04 15:34:10"
         },
         {
             "name": "doctrine/cache",
@@ -368,12 +368,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "8c5148e0ef8cee4afe86d45ba98f7b6d96e780d0"
+                "reference": "38ed66e6606309bec203a9df506ffa26d956d21d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/8c5148e0ef8cee4afe86d45ba98f7b6d96e780d0",
-                "reference": "8c5148e0ef8cee4afe86d45ba98f7b6d96e780d0",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/38ed66e6606309bec203a9df506ffa26d956d21d",
+                "reference": "38ed66e6606309bec203a9df506ffa26d956d21d",
                 "shasum": ""
             },
             "require": {
@@ -426,7 +426,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2014-09-24 12:11:27"
+            "time": "2014-11-05 15:56:21"
         },
         {
             "name": "doctrine/common",
@@ -561,12 +561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d12672808124e711c2cb78a82d4461ba2e89c7ef"
+                "reference": "a2e87c57a9843f07e8e6d6e57fe0fff965c0f4ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d12672808124e711c2cb78a82d4461ba2e89c7ef",
-                "reference": "d12672808124e711c2cb78a82d4461ba2e89c7ef",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/a2e87c57a9843f07e8e6d6e57fe0fff965c0f4ac",
+                "reference": "a2e87c57a9843f07e8e6d6e57fe0fff965c0f4ac",
                 "shasum": ""
             },
             "require": {
@@ -624,7 +624,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-10-29 16:12:22"
+            "time": "2014-11-08 06:30:07"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1143,12 +1143,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3"
+                "reference": "76e1a469ef3c4af4ef9d60c769822d4283809217"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3",
-                "reference": "20c6bfd360b3db9e9bc53e5ae37afe1a22dccca3",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/76e1a469ef3c4af4ef9d60c769822d4283809217",
+                "reference": "76e1a469ef3c4af4ef9d60c769822d4283809217",
                 "shasum": ""
             },
             "require": {
@@ -1210,7 +1210,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-10-23 05:01:59"
+            "time": "2014-11-05 12:19:29"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1488,6 +1488,29 @@
                 "uploadable"
             ],
             "time": "2014-10-05 20:50:56"
+        },
+        {
+            "name": "gyman/supr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gyman/supr.git",
+                "reference": "fb8b884a2d06662aafb1f52eb8e85268d69ad113"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gyman/supr/zipball/fb8b884a2d06662aafb1f52eb8e85268d69ad113",
+                "reference": "fb8b884a2d06662aafb1f52eb8e85268d69ad113",
+                "shasum": ""
+            },
+            "type": "template",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "commercial"
+            ],
+            "description": "supr.admin template for gyman app",
+            "homepage": "http://github.com/gyman/supr",
+            "time": "2014-11-09 15:54:31"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2314,12 +2337,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "10ad2d1c96a119d5001bd11ee8477c0857cb325a"
+                "reference": "393c4a4a80f0ed8fc259722364e55b631e1c3036"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/10ad2d1c96a119d5001bd11ee8477c0857cb325a",
-                "reference": "10ad2d1c96a119d5001bd11ee8477c0857cb325a",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/393c4a4a80f0ed8fc259722364e55b631e1c3036",
+                "reference": "393c4a4a80f0ed8fc259722364e55b631e1c3036",
                 "shasum": ""
             },
             "require": {
@@ -2395,7 +2418,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2014-10-30 14:51:09"
+            "time": "2014-11-07 11:01:02"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3484,12 +3507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b2ddfa8c3b14d6902a98f48f5b82362b4eeff593"
+                "reference": "85b016f37b16c60f54eab26786e264ae78d614e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b2ddfa8c3b14d6902a98f48f5b82362b4eeff593",
-                "reference": "b2ddfa8c3b14d6902a98f48f5b82362b4eeff593",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/85b016f37b16c60f54eab26786e264ae78d614e3",
+                "reference": "85b016f37b16c60f54eab26786e264ae78d614e3",
                 "shasum": ""
             },
             "require": {
@@ -3589,7 +3612,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-31 01:05:12"
+            "time": "2014-11-09 07:53:45"
         },
         {
             "name": "twig/extensions",
@@ -3764,12 +3787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "c06036b3e2687699a2e57f8b0694e33d0cfe09df"
+                "reference": "b09e66900e0098fb1d3c40951e3649eb50519830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/c06036b3e2687699a2e57f8b0694e33d0cfe09df",
-                "reference": "c06036b3e2687699a2e57f8b0694e33d0cfe09df",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/b09e66900e0098fb1d3c40951e3649eb50519830",
+                "reference": "b09e66900e0098fb1d3c40951e3649eb50519830",
                 "shasum": ""
             },
             "require": {
@@ -3820,7 +3843,7 @@
                 }
             ],
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
-            "time": "2014-10-26 23:45:55"
+            "time": "2014-11-07 08:43:51"
         },
         {
             "name": "willdurand/hateoas-bundle",
@@ -5250,13 +5273,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sensiolabs/security-advisories.git",
-                "reference": "ffeaf5ae0e7f3af94f5ef0743b48f59e544e6bc8"
+                "url": "git@github.com:sensiolabs/security-advisories.git",
+                "reference": "6ff08467663408549bdcf5df63b791d925c5b5fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-advisories/zipball/ffeaf5ae0e7f3af94f5ef0743b48f59e544e6bc8",
-                "reference": "ffeaf5ae0e7f3af94f5ef0743b48f59e544e6bc8",
+                "url": "https://api.github.com/repos/sensiolabs/security-advisories/zipball/6ff08467663408549bdcf5df63b791d925c5b5fc",
+                "reference": "6ff08467663408549bdcf5df63b791d925c5b5fc",
                 "shasum": ""
             },
             "require": {
@@ -5273,7 +5296,7 @@
                     "email": "fabien.potencier@gmail.com"
                 }
             ],
-            "time": "2014-10-26 06:35:04"
+            "time": "2014-10-28 10:42:17"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -5281,12 +5304,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "ff485307d2cd41cc36767c986a182ace6e22aafd"
+                "reference": "bf803199c1a0973dee174f06cf0366ed2c9710b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ff485307d2cd41cc36767c986a182ace6e22aafd",
-                "reference": "ff485307d2cd41cc36767c986a182ace6e22aafd",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/bf803199c1a0973dee174f06cf0366ed2c9710b0",
+                "reference": "bf803199c1a0973dee174f06cf0366ed2c9710b0",
                 "shasum": ""
             },
             "require": {
@@ -5346,7 +5369,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-10-31 07:02:44"
+            "time": "2014-11-06 21:18:20"
         },
         {
             "name": "theseer/fdomdocument",
@@ -5406,6 +5429,7 @@
         "jms/serializer-bundle": 20,
         "raven/raven": 20,
         "willdurand/hateoas-bundle": 0,
+        "gyman/supr": 20,
         "sensiolabs/security-advisories": 20
     },
     "prefer-stable": false,

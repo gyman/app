@@ -7,4 +7,5 @@ final class VouchersEvents
      * @var string
      */
     const CREATED = 'vouchers.CREATED';
+    const EDITED = 'vouchers.EDITED';
 }

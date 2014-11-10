@@ -28,11 +28,20 @@ class @EditMember extends @AbstractModal
     $("input[name='sell_voucher_after_creation']:checkbox").on "change.sellVoucher", (e) =>
       @sellVoucher = $(e.target).is ":checked"
 
-  initDatepickers: () =>
+  initDatepickers: =>
+    @datetimepickerSettings.startView =       "month"
+    @datetimepickerSettings.minView =         'hour'
+    @datetimepickerSettings.format =          'dd.MM.yyyy'
+    @datetimepickerSettings.todayBtn =        true
+    @datetimepickerSettings.todayHighlight =  true
     @datetimepickerSettings.endDate = new Date()
-    $("#gyman_members_member_form_type_birthdate",@$modalWindow).datetimepicker @datetimepickerSettings
-      
-  openTabWithError: () =>
+
+    @$datePicker = $("#memberBirthdate").datetimepicker @datetimepickerSettings
+
+    @$datePicker.on "changeDate", (ev) =>
+      @$datePicker.datetimepicker 'hide'
+
+  openTabWithError: =>
     paneId = "#" + @$modalWindow.find("div.control-group.error").first().parents(".tab-pane").prop("id");
     $tab = @$modalWindow.find("ul.nav-tabs a").filter("[href="+paneId+"]");
     $tab.trigger "click"

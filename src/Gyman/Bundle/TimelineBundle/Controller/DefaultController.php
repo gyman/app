@@ -10,14 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DefaultController extends Controller
 {
     /**
+     * @Route("/", name="gyman_timeline_index")
      * @Template()
      */
-    public function timelineAction(Request $request, $subject)
+    public function timelineAction(Request $request, $subject = null)
     {
+        if (!$subject) {
+            $subject = $this->getUser();
+        }
+
         if (false === $subject instanceof Member && false === $subject instanceof User) {
             throw new Exception("Unsupported subject class");
         }
