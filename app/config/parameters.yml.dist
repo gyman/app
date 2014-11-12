@@ -1,3 +1,4 @@
+
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
@@ -5,20 +6,16 @@ parameters:
     database_name:     ~
     database_user:     ~
     database_password: ~
-
     mailer_transport:  smtp
     mailer_host:       smtp.gmail.com
     mailer_user:       ~
     mailer_password:   ~
-
     locale:            pl
     secret:           "nuɐǝɔo ɹóʍʇsǝzɹd oƃǝɥɔns ɐu ɯǝłąuʎłdʍ"
-
-    locale: pl
-    secret: ThisTokenIsNotSoSecretChangeIt
     use_assetic_controller: false
     debug_toolbar:          true
     debug_redirects:        false
     sentry_url:             http://0@sentry
-
     base_url:               localhost
+    blank_club_database_name: %database_name%_default
+    club_database_name_template: '%database_name%_{{club_name}}'

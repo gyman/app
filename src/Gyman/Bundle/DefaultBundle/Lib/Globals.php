@@ -5,6 +5,8 @@ namespace Gyman\Bundle\DefaultBundle\Lib;
 class Globals
 {
 
+    const CURRENT_CLUB_SESSION_KEY = 'current_club';
+
     protected static $galleryDir = "/uploads/gallery/";
     protected static $noImage;
     protected static $compareChoices = array(

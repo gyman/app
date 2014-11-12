@@ -10,4 +10,5 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Serial extends Occurence
 {
+
 }

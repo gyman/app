@@ -1,0 +1,71 @@
+doctrine:
+    dbal:
+      default_connection: default
+      connections:
+        default:
+          driver:   %database_driver%
+          host:     %database_host%
+          port:     %database_port%
+          dbname:   %database_name%
+          user:     %database_user%
+          password: %database_password%
+          charset:  UTF8
+          mapping_types:
+              enum: string
+        club:
+          driver:   %database_driver%
+          host:     %database_host%
+          port:     %database_port%
+          platform_service: ~
+          dbname:   ~
+          user:     ~
+          password: ~
+          charset:  UTF8
+          wrapper_class: Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper
+          mapping_types:
+              enum: string
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        default_entity_manager:   default
+
+        entity_managers:
+          default:
+            auto_mapping: false # disabled so we can assign entities to our own connections
+            connection:       default
+            dql:
+                string_functions:
+                    multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
+                datetime_functions:
+                    dayname: Gyman\Bundle\MembersBundle\DQL\Dayname
+            filters:
+                softdeleteable:
+                    class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                    enabled: true
+            mappings:
+                StofDoctrineExtensionsBundle: ~
+                UserBundle: ~
+                ClubBundle: ~
+
+          club:
+            auto_mapping:     false # disabled so we can assign entities to our own connections
+            connection:       club
+            mappings:
+              StofDoctrineExtensionsBundle: ~
+              MembersBundle: ~
+              FiltersBundle: ~
+              EntriesBundle: ~
+              MembersBundle: ~
+              ScheduleBundle: ~
+              SectionBundle: ~
+              TimelineBundle: ~
+              VouchersBundle: ~
+              SpyTimelineBundle: ~
+            dql:
+                string_functions:
+                    multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
+                datetime_functions:
+                    dayname: Gyman\Bundle\MembersBundle\DQL\Dayname
+            filters:
+                softdeleteable:
+                    class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                    enabled: true

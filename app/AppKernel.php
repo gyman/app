@@ -8,6 +8,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -35,9 +36,9 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
 
+            new Gyman\Bundle\DefaultBundle\DefaultBundle(),
             new Gyman\Bundle\MembersBundle\MembersBundle(),
             new Gyman\Bundle\VouchersBundle\VouchersBundle(),
-            new Gyman\Bundle\DefaultBundle\DefaultBundle(),
             new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
             new Gyman\Bundle\EntriesBundle\EntriesBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),

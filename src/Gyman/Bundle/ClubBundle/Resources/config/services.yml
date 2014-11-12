@@ -1,0 +1,3 @@
+services:
+  gyman.club.club_manager:
+    class: Gyman\Bundle\ClubBundle\EntityManager\ClubManager

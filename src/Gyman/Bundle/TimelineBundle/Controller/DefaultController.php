@@ -2,6 +2,8 @@
 
 namespace Gyman\Bundle\TimelineBundle\Controller;
 
+use Gyman\Bundle\ClubBundle\Entity\Club;
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Spy\TimelineBundle\Driver\ORM\ActionManager;
@@ -21,10 +23,16 @@ class DefaultController extends Controller
     public function timelineAction(Request $request, $subject = null)
     {
         if (!$subject) {
-            $subject = $this->getUser();
+            $subject = $this->get("session")->get(
+                Globals::CURRENT_CLUB_SESSION_KEY
+            );
         }
 
-        if (false === $subject instanceof Member && false === $subject instanceof User) {
+        if (
+            false === $subject instanceof Member &&
+            false === $subject instanceof User &&
+            false === $subject instanceof Club
+        ) {
             throw new Exception("Unsupported subject class");
         }
 
@@ -38,7 +46,7 @@ class DefaultController extends Controller
          */
         $timelineManager = $this->get('spy_timeline.timeline_manager');
 
-        $subject = $actionManager->findOrCreateComponent($subject);
+        $subject = $actionManager->findOrCreateComponent($this->getUser());
         $timeline = $timelineManager->getTimeline($subject);
 
         return array(

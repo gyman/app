@@ -11,7 +11,7 @@ services:
 
   filter_repository:
     class: Gyman\Bundle\FiltersBundle\Entity\FilterRepository
-    factory_service: doctrine.orm.entity_manager
+    factory_service: doctrine.orm.club_entity_manager
     factory_method:  getRepository
     arguments:
         - Gyman\Bundle\FiltersBundle\Entity\Filter

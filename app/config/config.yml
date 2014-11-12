@@ -7,7 +7,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: spy_timeline.yml }
+    - { resource: timeline.yml }
+    - { resource: doctrine.yml }
 
 framework:
     translator:      { fallback: %locale% }
@@ -39,37 +40,6 @@ twig:
         resources:
             - ::fields.html.twig
 
-doctrine:
-    dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
-        charset:  UTF8
-        mapping_types:
-            enum: string
-    orm:
-        auto_generate_proxy_classes: %kernel.debug%
-#        auto_mapping: true
-#        mappings:
-#            StofDoctrineExtensionsBundle: ~
-        entity_managers:
-            default:
-                dql:
-                    string_functions:
-                        multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
-                    datetime_functions:
-                        dayname: Gyman\Bundle\MembersBundle\DQL\Dayname
-                auto_mapping: true
-                filters:
-                    softdeleteable:
-                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                        enabled: true
-                mappings:
-                    StofDoctrineExtensionsBundle: ~
-
 swiftmailer:
     transport: smtp
     host:      smtp.gmail.com
@@ -94,12 +64,15 @@ default:
     galleryDir:             %gallery_dir%
     
 stof_doctrine_extensions:
-    default_locale: en_US
+    default_locale: pl_PL
     orm:
         default:
             timestampable: true
             sluggable: true
-            
+        club:
+            timestampable: true
+            sluggable: true
+
 fos_js_routing:
     routes_to_expose: [.*]
     

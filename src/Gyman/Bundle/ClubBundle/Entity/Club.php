@@ -36,10 +36,20 @@ class Club
     protected $owners;
 
     /**
-     * @var Section[]
-     * @ORM\OneToMany(targetEntity="Gyman\Bundle\SectionBundle\Entity\Section", mappedBy="club", cascade={"remove"}, orphanRemoval=true)
+     * @var string
+     *
+     * @ORM\Column(name="subdomain", type="string", length=255)
      */
-    protected $sections;
+    protected $subdomain;
+
+    /**
+     * @var array
+     *
+     * array with database configuration
+     *
+     * @ORM\Column(name="database_config", type="json_array")
+     */
+    protected $database;
 
     /**
      * Get id
@@ -124,5 +134,38 @@ class Club
     {
         $this->owners = new ArrayCollection();
         $this->sections = new ArrayCollection();
+        $this->database = array();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    /**
+     * @param array $database
+     */
+    public function setDatabase($database)
+    {
+        $this->database = $database;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubdomain()
+    {
+        return $this->subdomain;
+    }
+
+    /**
+     * @param mixed $subdomain
+     */
+    public function setSubdomain($subdomain)
+    {
+        $this->subdomain = $subdomain;
     }
 }

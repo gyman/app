@@ -25,7 +25,7 @@ class MembersListTest extends BaseTest
             $this->list->setListParameters($this->getListParametersMock());
             $this->list->setFilterProvider($this->getFilterProviderMock());
             $this->list->setRepository(
-                $this->getContainer()->get("entity_manager")->getRepository("MembersBundle:Member")
+                $this->getContainer()->get("doctrine.orm.club_entity_manager")->getRepository("MembersBundle:Member")
             );
             $this->list->setTemplating($this->getTemplatingMock());
         }

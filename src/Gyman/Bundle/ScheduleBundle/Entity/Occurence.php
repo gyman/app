@@ -12,10 +12,15 @@ use DateTime;
  * OccurenceMeta
  *
  * @ORM\Table("events_occurences")
+ *
  * @ORM\Entity(repositoryClass="Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository")
+ *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="occurence_type", type="string")
+ *
  * @ORM\DiscriminatorMap({
  *      "serial" = "Gyman\Bundle\ScheduleBundle\Entity\Serial",
  *      "singular" = "Gyman\Bundle\ScheduleBundle\Entity\Singular",
@@ -26,8 +31,6 @@ class Occurence
 {
     const SERIAL = "serial";
     const SINGULAR = "singular";
-
-    // <editor-fold defaultstate="collapsed" desc="members">
 
     /**
      * @var integer
@@ -90,9 +93,7 @@ class Occurence
      *
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
-    protected $deletedAt; // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    protected $deletedAt;
 
     public function getId()
     {
@@ -209,8 +210,6 @@ class Occurence
 
         return $this;
     }
-
-    // </editor-fold>
 
     public function isPast($endDatePassed = false)
     {

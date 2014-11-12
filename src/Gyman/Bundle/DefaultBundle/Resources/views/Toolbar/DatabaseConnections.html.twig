@@ -1,0 +1,8 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <ul style="list-style: none" class="inline">
+        <li><strong>default:</strong> {{ collector.getDefault() }}</li>
+        <li><strong>club:</strong> {{ collector.getClub() }}</li>
+    </ul>
+{% endblock %}

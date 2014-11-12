@@ -6,6 +6,14 @@ services:
       class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
       calls:
         - [setClass, [Gyman\Bundle\MembersBundle\Entity\Member]]
+        - [setEntityManager, [@doctrine.orm.club_entity_manager]]
+
+    gyman.members.repository:
+      class:  "Gyman\Bundle\MembersBundle\Entity\MemberRepository"
+      factory_method: getRepository
+      factory_service: doctrine.orm.club_entity_manager
+      arguments: ["Gyman\Bundle\MembersBundle\Entity\Member"]
+
 
     gyman_members_member_form_type:
       class: Gyman\Bundle\MembersBundle\Form\MemberType

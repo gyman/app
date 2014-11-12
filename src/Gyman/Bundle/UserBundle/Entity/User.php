@@ -5,6 +5,7 @@ namespace Gyman\Bundle\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\ClubBundle\Entity\Club;
 
 /**
  * @ORM\Entity(repositoryClass="Gyman\Bundle\UserBundle\Entity\UserRepository")
@@ -37,11 +38,19 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @var Club[]
      * @ORM\ManyToMany(targetEntity="Gyman\Bundle\ClubBundle\Entity\Club", inversedBy="owners")
      * @ORM\JoinTable(name="users_has_clubs")
      * )
      */
     protected $clubs;
+
+    /**
+     * @var Club
+     * @ORM\OneToOne(targetEntity="Gyman\Bundle\ClubBundle\Entity\Club")
+     * @ORM\JoinColumn(name="current_club_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $currentClub;
 
     /**
      * @ORM\Column(type="string")
@@ -125,5 +134,21 @@ class User extends BaseUser
     public function getFoto()
     {
         return "/bundles/default/images/no-profile.gif";
+    }
+
+    /**
+     * @return Club|null
+     */
+    public function getCurrentClub()
+    {
+        return $this->currentClub;
+    }
+
+    /**
+     * @param Club|null $currentClub
+     */
+    public function setCurrentClub($currentClub)
+    {
+        $this->currentClub = $currentClub;
     }
 }

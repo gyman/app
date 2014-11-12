@@ -113,13 +113,20 @@
             </elseif>
         </if>
         <echo>Dropping database - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --env=${env} --force --no-interaction" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=club --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
         <echo>Creating new schema - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --env=${env} --no-interaction" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=default --env=${env} --no-interaction" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=club --env=${env} --no-interaction" checkreturn="true" passthru="true" />
         <echo>Loading fixtures - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --env=${env} --no-interaction" checkreturn="true" passthru="true" />
+        <phingcall target="load-fixtures"/>
     </target>
-   
+
+    <target name="load-fixtures">
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=club --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/Club" checkreturn="true" passthru="true" />
+    </target>
+
     <target name="test-phpunit">
         <!--<phingcall target="reset-db">-->
             <!--<property name="env" value="test" />-->

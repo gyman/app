@@ -17,6 +17,11 @@ class Spread implements SpreadInterface
      */
     protected $entityManager;
 
+    /**
+     * @var EntityManager $entityManager
+     */
+    protected $defaultManager;
+
     const USER_CLASS = 'Gyman\Bundle\UserBundle\Entity\User';
     const MEMBER_CLASS = 'Gyman\Bundle\MembersBundle\Entity\Member';
     const VOUCHER_CLASS = 'Gyman\Bundle\VouchersBundle\Entity\Voucher';
@@ -31,6 +36,15 @@ class Spread implements SpreadInterface
     }
 
     /**
+     * @param EntityManager $defaultManager
+     */
+    public function setDefaultManager($defaultManager)
+    {
+        $this->defaultManager = $defaultManager;
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function supports(ActionInterface $action)
@@ -43,23 +57,7 @@ class Spread implements SpreadInterface
      */
     public function process(ActionInterface $action, EntryCollection $coll)
     {
-        $this->insertAdministrators($coll);
         $this->insertMember($action, $coll);
-    }
-
-    private function insertAdministrators(EntryCollection $coll)
-    {
-        $administrators = $this->entityManager
-            ->getRepository("UserBundle:User")
-            ->getAdministrators();
-
-        /**
-         * @var $administrator User
-         */
-        foreach ($administrators as $administrator) {
-            $entry = new EntryUnaware(self::USER_CLASS, $administrator->getId());
-            $coll->add($entry);
-        }
     }
 
     private function insertMember(ActionInterface $action, EntryCollection $coll)

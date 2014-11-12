@@ -21,6 +21,7 @@ services:
         parent:         gyman.base.entity_manager
         calls:
              - [ setClass, [%voucher_entity.class%] ]
+             - [ setEntityManager, [@doctrine.orm.club_entity_manager]]
 
     validator.voucher_date:
         class:          "%date_validator.class%"

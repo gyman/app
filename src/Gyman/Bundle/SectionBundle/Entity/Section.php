@@ -31,8 +31,7 @@ class Section
 
     /**
      * @var Club
-     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\ClubBundle\Entity\Club", inversedBy="sections")
-     * @ORM\JoinColumn(name="club_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\Column(name="club_id", type="integer", nullable=true)
      */
     private $club;
 

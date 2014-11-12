@@ -3,7 +3,7 @@
         <div class="head">
             {% if timeline.getComponent("indirectComplement") is not null %}
             <span class="name">
-                <strong>{{ timeline.getComponent("indirectComplement").getData().getFullname() }}:</strong>
+                <strong>{{ timeline.getComponent("indirectComplement") }}:</strong>
             </span>
             {%  endif %}
             <span class="time" title="{{ timeline.createdAt()|date("Y-m-d H:i:s") }}">

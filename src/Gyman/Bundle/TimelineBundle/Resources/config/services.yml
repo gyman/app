@@ -2,7 +2,8 @@ services:
   gyman.timeline.spread:
     class: Gyman\Bundle\TimelineBundle\Timeline\Spread
     calls:
-      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setEntityManager, [@doctrine.orm.club_entity_manager]]
+      - [setDefaultManager, [@doctrine.orm.default_entity_manager]]
     tags:
       - { name: spy_timeline.spread }
 

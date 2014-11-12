@@ -1,13 +1,13 @@
 class @SearchInput
   constructor: (selector) ->
     @$searchAutocompleteInput = $(selector)
-    @$searchButton = $("span#clickToOpenFoundUser", selector)
+    @$searchButton = @$searchAutocompleteInput.siblings("#clickToOpenFoundUser")
 
     @setupInput()
     @setupInputButton()
 
   $searchAutocompleteInput: null
-  $searchButton: $("span#clickToOpenFoundUser")
+  $searchButton: null
   user: null
   handlers: []
 
@@ -32,7 +32,6 @@ class @SearchInput
       handler(user)
 
   setupInputButton: () =>
-#    @todo: clicking does not work
     @$searchButton.on "click", @inputButtonHandler
 
   inputButtonHandler: (e) =>

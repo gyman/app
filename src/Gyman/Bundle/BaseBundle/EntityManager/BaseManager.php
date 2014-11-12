@@ -39,6 +39,14 @@ abstract class BaseManager
     }
 
     /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
      * @param string $class
      */
     public function setClass($class)

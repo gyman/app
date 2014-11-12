@@ -15,7 +15,7 @@ services:
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
-#            - [setRepository,[@member_repository]]
+            - [setRepository,[@gyman.members.repository]]
             - [setTemplating, [@templating]]
 
     vouchers_list:

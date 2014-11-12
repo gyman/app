@@ -26,7 +26,6 @@ class Chart
     }
 
     /**
-     *
      * @var Doctrine\ORM\EntityManager
      */
     private $entityManager;

@@ -10,7 +10,7 @@ class MemberController extends FOSRestController
 {
     public function getMembersAction()
     {
-        $repository  = $this->getDoctrine()->getManager()->getRepository("MembersBundle:Member");
+        $repository  = $this->getDoctrine()->getRepository("MembersBundle:Member", 'club');
         $queryBuilder = $repository->getQuery();
         $user = $this->get("security.context")->getToken()->getUser();
 

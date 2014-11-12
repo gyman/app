@@ -18,7 +18,9 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  * Member
  *
  * @ORM\Table("members")
+ *
  * @ORM\Entity(repositoryClass="Gyman\Bundle\MembersBundle\Entity\MemberRepository")
+ *
  * @UniqueEntity(
  *     fields={"email"},
  *     message="Ten email jest już zarejestrowany"
@@ -44,8 +46,9 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  *      parameters = { "id" = "expr(object.getId())" },
  *      absolute = true
  * ))
-
+ *
  */
+
 class Member
 {
     const GENDER_MALE = 'male';

@@ -48,14 +48,14 @@ class Activity
     /**
      * @var DateTime $created
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime", nullable=false)
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     private $created;
 
     /**
      * @var DateTime $modified
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     * @ORM\Column(name="modified", type="datetime", nullable=true)
      */
     private $modified;
 

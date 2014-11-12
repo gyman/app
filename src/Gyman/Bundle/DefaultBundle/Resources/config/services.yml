@@ -3,10 +3,87 @@ parameters:
       - { host: 127.0.0.1, port: 11211 }
 
 services:
+    gyman.default.credentials_storage:
+      class: Gyman\Bundle\DefaultBundle\Services\CredentialsStorage
+      calls:
+        - [setSession, [@session]]
+
+#    gyman.default.club_connection:
+#        class: Gyman\Bundle\DefaultBundle\Connection\ClubConnection
+#        scope: request
+#        calls:
+#            - [setDoctrineConnection, [@doctrine.dbal.club_connection]]
+#            - [setSecurityContext, [@security.context]]
+#            - [setSession, [@session]]
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    gyman.default.collector.db_connections:
+      class: Gyman\Bundle\DefaultBundle\DataCollector\DatabaseConnectionsDataCollector
+      arguments: [@doctrine.dbal.default_connection, @doctrine.dbal.club_connection]
+      tags:
+        - { name: data_collector, template: "DefaultBundle:Toolbar:DatabaseConnections.html.twig", id: "database_connections" }
+
+    gyman.default.slugify:
+      class: Gyman\Bundle\DefaultBundle\Services\Slugify
+
+    gyman.default.command:
+      abstract: true
+      class: Gyman\Bundle\DefaultBundle\Command\AbstractCommand
+
+    gyman.default.command.create_database:
+      class: Gyman\Bundle\DefaultBundle\Command\CreateClubDatabaseCommand
+      parent: gyman.default.command
+      calls:
+        - [setDatabaseWorker, [@gyman.default.database_worker]]
+      tags:
+        - { name: console.command }
+
+    gyman.default.command.load_fixtures:
+      class: Gyman\Bundle\DefaultBundle\Command\LoadClubFixturesCommand
+      calls:
+        - [setDatabaseWorker, [@gyman.default.database_worker]]
+      tags:
+        - { name: console.command }
+
+    gyman.default.database_worker:
+      class: Gyman\Bundle\DefaultBundle\Services\DatabaseWorker
+      arguments:
+        - "%club_database_name_template%"
+        - "%database_user%"
+        - "%database_password%"
+      calls:
+        - [setSlugifier, [@gyman.default.slugify]]
+        - [setDefaultConnection, [@doctrine.dbal.default_connection]]
+        - [setClubConnection, [@doctrine.dbal.club_connection]]
+        - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
+        - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
+
+#    gyman.default.current_club_wrapper:
+#        class: Gyman\Bundle\DefaultBundle\Services\CurrentClubWrapper
+#        arguments:
+#          - @security.context
+#          - @doctrine.orm.default_entity_manager
+
+#    gyman.default.form.club_switch:
+#        class: Gyman\Bundle\DefaultBundle\Form\ClubSwitchType
+#        arguments: [@security.context]
+#        tags:
+#          - { name: form.type, alias: gyman_default_clubswitch }
+
+    gyman.default.subscriber.login:
+        class: Gyman\Bundle\DefaultBundle\Services\LoginSubscriber
+        calls:
+          - [setClubConnection, [@doctrine.dbal.club_connection]]
+          - [setSession, [@session]]
+        tags:
+            - { name: kernel.event_subscriber }
+
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+            - { name: doctrine.event_subscriber, connection: club }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
 
@@ -18,7 +95,7 @@ services:
     gyman.default.request.arraycollection_converter:
       class: Gyman\Bundle\DefaultBundle\Request\ArrayCollectionConverter
       calls:
-        - [setEntityManager, [@doctrine.orm.default_entity_manager]]
+        - [setEntityManager, [@doctrine.orm.club_entity_manager]]
       tags:
         - { name: request.param_converter}
 

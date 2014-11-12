@@ -18,19 +18,19 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
+//        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
 
         $occurences = $this->get("schedule")->getOccurencesForDashboard(new DateTime());
 
-        $popularChart = $this->get("chart")->getMostPopularChart(new Highchart());
-        $frequencyChart = $this->get("chart")->getFrequencyChart(new Highchart(), new DateTime());
+//        $popularChart = $this->get("chart")->getMostPopularChart(new Highchart());
+//        $frequencyChart = $this->get("chart")->getFrequencyChart(new Highchart(), new DateTime());
 
         return array(
             "date"            => new DateTime(),
-            "filters"         => $pinnedFilters,
+//            "filters"         => $pinnedFilters,
             "occurences"      => $occurences,
-            "popularityChart" => $popularChart,
-            "frequencyChart"  => $frequencyChart
+//            "popularityChart" => $popularChart,
+//            "frequencyChart"  => $frequencyChart
         );
     }
 
