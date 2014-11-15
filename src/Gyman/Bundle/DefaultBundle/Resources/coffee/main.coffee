@@ -312,55 +312,7 @@ $(document).ready ->
 #      false
   
   #------------- Tooltips -------------//
-  
-  #top tooltip
-  $(".tip").qtip
-    content: false
-    position:
-      my: "bottom center"
-      at: "top center"
-      viewport: $(window)
 
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in right
-  $(".tipR").qtip
-    content: false
-    position:
-      my: "left center"
-      at: "right center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in bottom
-  $(".tipB").qtip
-    content: false
-    position:
-      my: "top center"
-      at: "bottom center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in left
-  $(".tipL").qtip
-    content: false
-    position:
-      my: "right center"
-      at: "left center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
   #------------- Jrespond -------------//
 #  jRes = jRespond([
 #    label: "small"
@@ -393,7 +345,11 @@ $(document).ready ->
   window.modal = new Modal
             
   $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) ->
-    # e.stopPropagation()
+    e.stopPropagation()
     e.preventDefault()
+
+    if $(e.target).hasClass 'disabled'
+      return false
+
     href = $(this).attr "href"
     modal.showFromUrl(href)

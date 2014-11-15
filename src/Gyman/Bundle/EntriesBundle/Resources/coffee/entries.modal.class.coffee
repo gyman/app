@@ -20,7 +20,7 @@ window.setupEntriesModal = ->
     setupClickEvent(e,href)
     
   # $entranceModal.on "shown", () ->
-  #  $("input#dende_entriesbundle_entry_entryDate",@$modalWindow).datepicker
+  #  $("input#gyman_entries_entry_entryDate",@$modalWindow).datepicker
   #    dateFormat: "dd.mm.yyyy"
   
   # event w modalu

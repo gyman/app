@@ -42,6 +42,6 @@ class @NewVoucher  extends @AbstractModal
         
     @$modalWindow.trigger eventName
     
-  handleSubmitSuccess: (response) =>
-    super()
-    datatable.fnReloadAjax() if datatable?
+#  handleSubmitSuccess: (response) =>
+#    super()
+#    datatable.fnReloadAjax() if datatable?

@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="gyman" default="prepare">
+    <if>
+        <not><isset property="env" /></not>
+        <then>
+            <echo>Setting to default environment (dev)</echo>
+            <property name="env" value="dev" />
+        </then>
+    </if>
+
     <property name="php_bin" value="php" />
     <property name="capifony_bin" value="cap" />
+    <property name="composer" value="#{php_bin} composer.phar" />
     <property name="symfony_console" value="app/console" />
     <property name="grunt" value="node_modules/grunt-cli/bin/grunt" />
+    <property name="bower" value="node_modules/.bin/bower" />
     <property name="default_language" value="pl" />
     
     <target name="phpmd" description="php mess detector">
@@ -131,27 +141,16 @@
 
     <target name="prepare">
         <echo>Clearing cache - ${env} environment</echo>
-        <phingcall target="clear-cache" />
+        <phingcall target="composer:install" />
         <echo>Building assets</echo>
         <phingcall target="assets" />
         <echo>Resetting database</echo>
         <phingcall target="reset-db" />
-
-        <!--"npm install",-->
-        <!--"node_modules/.bin/bower install --allow-root",-->
-        <!--"node_modules/.bin/grunt --no-color",-->
-
     </target>
 
     <target name="clear-cache">
-        <if><not><isset property="env" /></not>
-            <then>
-                <echo>Setting to default environment (dev)</echo>
-                <property name="env" value="dev" />
-            </then>
-        </if>
         <echo>Clearing cache - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} cache:clear --env=${env}" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} cache:clear --env=#{env}" checkreturn="true" passthru="true" />
     </target>
     <target name="cc">
         <phingcall target="clear-cache" />
@@ -160,14 +159,10 @@
     <target name="assets">
         <delete dir="build/assets" />
         <delete dir="web/assets" />
-<!--        <delete dir="web/bundles" />
-        <delete dir="web/js" />
-        <delete dir="web/css" />-->
-        
-        <exec command="bower install" checkreturn="true" passthru="true" />
-        <!--<exec command="${php_bin} ${symfony_console} assets:install web/ -symlink" checkreturn="true" passthru="true" />-->
-        <exec command="grunt --verbose" checkreturn="true" passthru="true" />
-        <!--<exec command="${php_bin} ${symfony_console} assetic:dump" checkreturn="true" passthru="true" />-->
+
+        <exec command="${bower} install" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} assets:install web/ --symlink" checkreturn="true" passthru="true" />
+        <exec command="${grunt}" checkreturn="true" passthru="true" />
     </target>
 
 
@@ -197,5 +192,16 @@
         </exec>
     </target>
 
+    <target name="composer:download">
+        <exec executable="sh" passthru="true" checkreturn="true">
+            <arg value="-c 'curl -sS https://getcomposer.org/installer | php'" />
+        </exec>
+    </target>
 
+    <target name="composer:install" depends="composer:download">
+        <exec executable="#{composer}" passthru="true" checkreturn="true">
+            <arg value="install" />
+            <arg value="--env=#{env}" />
+        </exec>
+    </target>
 </project>

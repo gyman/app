@@ -28,12 +28,3 @@ services:
             - "@voucher_manager"
         tags:
             - { name: validator.constraint_validator, alias: validator.voucher_date_constraint}
-
-    dende.update_current_voucher_listener:
-        class: Gyman\Bundle\VouchersBundle\Services\Listener\UpdateCurrentVoucherListener
-        # TODO: very bad, temporarily workaround of circular
-        arguments: ["@service_container"]
-#         calls:
-#             - [ setMemberManager, ["@member_manager"] ]
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }

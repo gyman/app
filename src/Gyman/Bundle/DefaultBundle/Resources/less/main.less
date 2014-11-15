@@ -10938,7 +10938,31 @@ div.editMemberModal.modal {
 .select2-search input.select2-active,
 .select2-more-results.select2-active,
 .select2-container-multi .select2-choices .select2-search-field input.select2-active,
-
 {
   background-image: url('/images/select2-spinner.gif') !important;
+}
+
+#spinner {
+  @border: 1px solid black;
+  @radius: 5px;
+  @width: 120px;
+
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: @width;
+  line-height: 30px;
+  height: 30px;
+  font-size: 25px;
+  font-weight: bold;
+  right: 50%;
+  margin-left: -0.5 * @width;
+  border-bottom: @border;
+  border-left: @border;
+  border-right: @border;
+  border-bottom-left-radius: @radius;
+  border-bottom-right-radius: @radius;
+  padding: 3px 10px;
+  background-color: #ffffdd;
+  z-index: 99999
 }

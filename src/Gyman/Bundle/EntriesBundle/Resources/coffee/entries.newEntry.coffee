@@ -10,10 +10,10 @@ class @NewEntry extends @AbstractModal
     @setupEnterSend()
     @updateSelectEvent() # initial load of data
     
-  entryTypeInputSelector: "input[name='dende_entriesbundle_entry\\\[entryType\\\]']"
-  priceInputSelector: "input#dende_entriesbundle_entry_entryPrice"
-  startDateInputSelector: "#dende_entriesbundle_entry_startDate"
-  eventSelector: "#dende_entriesbundle_entry_occurence"
+  entryTypeInputSelector: "input[name='gyman_entries_entry\\\[entryType\\\]']"
+  priceInputSelector: "input#dgyman_entries_entry_entryPrice"
+  startDateInputSelector: "#gyman_entries_entry_startDate"
+  eventSelector: "#gyman_entries_entry_occurence"
   $datePicker : null
   
   setupSelect: =>
@@ -29,7 +29,8 @@ class @NewEntry extends @AbstractModal
       
   updateSelectEvent: () =>
     val = $(@startDateInputSelector).val()
-    url = Routing.generate '_events_getForDate', {date: moment(val,"DD.MM.YYYY HH:mm").format("YYYY-MM-DD")}
+    date = moment(val, "DD.MM.YYYY HH:mm").format("YYYY-MM-DD")
+    url = Routing.generate '_events_getForDate', {date: date}
 
     $eventSelect = $(@eventSelector)
     $eventSelect.select2 "destroy"
@@ -58,7 +59,7 @@ class @NewEntry extends @AbstractModal
   setupDatepicker: =>
     @datetimepickerSettings.startView =       "month"
     @datetimepickerSettings.minView =         'hour'
-    @datetimepickerSettings.format =          'dd.mm.yyyy hh:ii'
+    @datetimepickerSettings.format =          'dd.MM.yyyy hh:mm'
     @datetimepickerSettings.todayBtn =        true
     @datetimepickerSettings.todayHighlight =  true
     @$datePicker = $("#entryStartDate").datetimepicker @datetimepickerSettings

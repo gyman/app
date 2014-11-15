@@ -55,11 +55,13 @@ class @AbstractModal
       @$saveButton.addClass @BUTTON_SAVE_CLASS
          
   handleSaveButton: (e) =>
+    e.preventDefault()
+
     if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
       if confirm @CONFIRM_DELETE_TEXT
         $.get @$form.data(@deleteActionAttributeName), @handleDeleteAction
     else
-      container = $(".modal-body",@$modalWindow)
+      container = @$modalWindow.find(".modal-body")
       action = @$form.attr "action"
       data = @$form.serialize()
       modal.block()

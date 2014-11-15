@@ -19,8 +19,12 @@ class ApiController extends BaseApiController
      */
     public function getMembersAction()
     {
-        return $this->createView($this->get('doctrine.orm.entity_manager')->getRepository("MembersBundle:Member")->findAll(), 200);
+        return $this->createView(
+            $this->getDoctrine()->getRepository("MembersBundle:Member")->findAll(),
+            200
+        );
     }
+
     /**
      * @Rest\View()
      */

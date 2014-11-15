@@ -39,39 +39,55 @@ class Builder
             return $menu;
         }
 
-        $menu->setChildrenAttribute("class", "bigBtnIcon");
+        $menu->setChildrenAttributes(["id" => "dashboardActionMenu"]);
+
 
         $menu->addChild(
-            'dashboard.actions.new_member',
-            array(
+            'dashboard.actions.sell',
+            [
                 'route' => '_member_new',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => 'tipB createNewMember openUrlInModal',
-                )
-            )
+                "extras" => ["icon" => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    "id" => "actionSell"
+                ]
+            ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_entry',
-            array(
-                'route' => '_member_new', // @todo: przerobić na route '_entrance_add'
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => 'tipB',
-                )
-            )
+            [
+                'route' => '_member_new',
+                "extras" => ["icon" => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    "id" => "actionEntry"
+                ]
+            ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_voucher_sale',
-            array(
-                'route' => '_member_new', // @todo: przerobić na route '_voucher_new'
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => 'tipB',
-                )
-            )
+            [
+                'route' => '_member_new',
+                "extras" => ["icon" => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    "id" => "actionVoucher"
+                ]
+            ]
+        )->setExtra('translation_domain', 'DashboardBundle');
+
+        $menu->addChild(
+            'dashboard.actions.new_member',
+            [
+                'route' => '_member_new',
+                "extras" => ["icon" => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    "class" => 'btn btn-block btn-large btn-primary createNewMember openUrlInModal',
+                    "id" => "actionMember"
+                ]
+            ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
@@ -80,7 +96,8 @@ class Builder
                 'route' => '_schedule_calendar',
                 "extras" => array("icon" => 'icomoon-icon-users'),
                 'linkAttributes' => array(
-                    "class" => 'tipB',
+                    "class" => 'btn btn-block btn-large btn-primary',
+                    "id" => "actionCalendar"
                 )
             )
         )->setExtra('translation_domain', 'DashboardBundle');

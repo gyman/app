@@ -46,7 +46,9 @@
         "vipsoft/doctrine-data-fixtures-extension": "~2",
         "phing/phing": "*",
         "willdurand/hateoas-bundle": "@stable",
-        "twig/extensions": "~1.2@dev"
+        "twig/extensions": "~1.2@dev",
+        
+        "gyman/supr": "dev-master"
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",

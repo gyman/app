@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a7f7f9ee9ebb6a405433f96724e0a4b",
+    "hash": "ed79b3253c5c0fe1af31fa67df229fbe",
     "packages": [
         {
             "name": "behat/behat",
@@ -1490,6 +1490,29 @@
                 "uploadable"
             ],
             "time": "2014-10-05 20:50:56"
+        },
+        {
+            "name": "gyman/supr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gyman/supr.git",
+                "reference": "fb8b884a2d06662aafb1f52eb8e85268d69ad113"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gyman/supr/zipball/fb8b884a2d06662aafb1f52eb8e85268d69ad113",
+                "reference": "fb8b884a2d06662aafb1f52eb8e85268d69ad113",
+                "shasum": ""
+            },
+            "type": "template",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "commercial"
+            ],
+            "description": "supr.admin template for gyman app",
+            "homepage": "http://github.com/gyman/supr",
+            "time": "2014-11-09 15:54:31"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -5414,6 +5437,7 @@
         "raven/raven": 20,
         "willdurand/hateoas-bundle": 0,
         "twig/extensions": 20,
+        "gyman/supr": 20,
         "sensiolabs/security-checker": 20,
         "sensiolabs/security-advisories": 20
     },

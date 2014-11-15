@@ -2,6 +2,7 @@
 
 namespace Gyman\Bundle\MembersBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,7 +89,12 @@ class DefaultController extends Controller
      */
     public function deleteAction(Member $member)
     {
-        $this->get("member_manager")->delete($member);
+        /**
+         * @var EntityManager $entityManager
+         */
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $entityManager->remove($member);
+        $entityManager->flush();
 
         return array();
     }
