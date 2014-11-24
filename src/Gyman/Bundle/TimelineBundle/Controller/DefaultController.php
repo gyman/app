@@ -46,7 +46,10 @@ class DefaultController extends Controller
          */
         $timelineManager = $this->get('spy_timeline.timeline_manager');
 
-        $subject = $actionManager->findOrCreateComponent($this->getUser());
+        $subject = $actionManager->findOrCreateComponent(
+            $this->getUser()->getCurrentClub()
+        );
+        
         $timeline = $timelineManager->getTimeline($subject);
 
         return array(
