@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 
             new Gyman\Bundle\DefaultBundle\DefaultBundle(),
             new Gyman\Bundle\MembersBundle\MembersBundle(),
@@ -50,11 +51,11 @@ class AppKernel extends Kernel
             new Gyman\Bundle\UserBundle\UserBundle(),
             new Gyman\Bundle\ClubBundle\ClubBundle(),
             new Gyman\Bundle\SectionBundle\SectionBundle(),
-            new Gyman\Bundle\ApiBundle\ApiBundle(),
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
             new Gyman\Bundle\TimelineBundle\TimelineBundle(),
+            new Gyman\Bundle\ApiBundle\ApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

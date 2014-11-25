@@ -16,13 +16,17 @@ class UsersData extends BaseFixture
 
     public function insert($params)
     {
+        $club = $this->getClubs($params['clubs']);
+        $currentClub = $this->getReference($params['clubs'][0]);
+
         $user = new User();
         $user->setUsername($params["username"]);
         $user->setFirstname($params["firstname"]);
         $user->setLastname($params["lastname"]);
         $user->setEmail($params["email"]);
         $user->setRoles($params["roles"]);
-        $user->setClubs($this->getClubs($params['clubs']));
+        $user->setClubs($club);
+//        $user->setCurrentClub($currentClub);
         $user->setPlainPassword($params["plainPassword"]);
         $user->setEnabled($params["enabled"]);
 

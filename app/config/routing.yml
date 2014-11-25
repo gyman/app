@@ -48,10 +48,17 @@ members:
     type:     annotation
     prefix:   /members
 
+#clubs:
+#    resource: "@ClubBundle/Controller/"
+#    type:     annotation
+#    prefix:   /clubs
+
 vouchers:
     resource: "@VouchersBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /vouchers
+
+# bundles
 
 oneup_uploader:
     resource: .
@@ -67,61 +74,68 @@ fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
 
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
 
 # api routes
 
 gyman_api:
-    pattern:  /api/
-    defaults: { _controller: DefaultBundle:Api:index, _format: ~ }
-    requirements:
-        _method: GET
+  type: rest
+  resource: @ApiBundle/Controller/DefaultController.php
 
-gyman_api_get_members:
-    pattern:  /api/members/
-    defaults: { _controller: MembersBundle:Api:getMembers, _format: ~ }
-    requirements:
-        _method: GET
-
-gyman_api_get_member:
-    pattern:  /api/members/{id}
-    defaults: { _controller: MembersBundle:Api:getMember, _format: ~ }
-    requirements:
-        _method: GET
-        id: "\d+"
-
-gyman_api_post_member:
-    pattern:  /api/members
-    defaults: { _controller: MembersBundle:Api:postMember, _format: ~ }
-    requirements:
-        _method: POST
-
-gyman_api_put_member:
-    pattern:  /api/members/{id}
-    defaults: { _controller: MembersBundle:Api:putMember, _format: ~ }
-    requirements:
-        _method: PUT
-        id: "\d+"
-
-gyman_api_get_member_get_vouchers:
-    pattern:  /api/members/{id}/vouchers
-    defaults: { _controller: MembersBundle:Api:getVouchers, _format: ~ }
-    requirements:
-        _method: GET
-
-gyman_api_get_vouchers:
-    pattern:  /api/vouchers/
-    defaults: { _controller: VouchersBundle:Api:getVouchers, _format: ~ }
-    requirements:
-        _method: GET
-
-gyman_api_get_voucher:
-    pattern:  /api/vouchers/{id}
-    defaults: { _controller: VouchersBundle:Api:getVoucher, _format: ~ }
-    requirements:
-        _method: GET
-
-gyman_api_get_voucher_get_activities:
-    pattern:  /api/vouchers/{id}/activities
-    defaults: { _controller: VouchersBundle:Api:getActivities, _format: ~ }
-    requirements:
-        _method: GET
+#gyman_api:
+#    pattern:  /api/
+#    defaults: { _controller: DefaultBundle:Api:index, _format: ~ }
+#    requirements:
+#        _method: GET
+#
+#gyman_api_get_members:
+#    pattern:  /api/members/
+#    defaults: { _controller: MembersBundle:Api:getMembers, _format: ~ }
+#    requirements:
+#        _method: GET
+#
+#gyman_api_get_member:
+#    pattern:  /api/members/{id}
+#    defaults: { _controller: MembersBundle:Api:getMember, _format: ~ }
+#    requirements:
+#        _method: GET
+#        id: "\d+"
+#
+#gyman_api_post_member:
+#    pattern:  /api/members
+#    defaults: { _controller: MembersBundle:Api:postMember, _format: ~ }
+#    requirements:
+#        _method: POST
+#
+#gyman_api_put_member:
+#    pattern:  /api/members/{id}
+#    defaults: { _controller: MembersBundle:Api:putMember, _format: ~ }
+#    requirements:
+#        _method: PUT
+#        id: "\d+"
+#
+#gyman_api_get_member_get_vouchers:
+#    pattern:  /api/members/{id}/vouchers
+#    defaults: { _controller: MembersBundle:Api:getVouchers, _format: ~ }
+#    requirements:
+#        _method: GET
+#
+#gyman_api_get_vouchers:
+#    pattern:  /api/vouchers/
+#    defaults: { _controller: VouchersBundle:Api:getVouchers, _format: ~ }
+#    requirements:
+#        _method: GET
+#
+#gyman_api_get_voucher:
+#    pattern:  /api/vouchers/{id}
+#    defaults: { _controller: VouchersBundle:Api:getVoucher, _format: ~ }
+#    requirements:
+#        _method: GET
+#
+#gyman_api_get_voucher_get_activities:
+#    pattern:  /api/vouchers/{id}/activities
+#    defaults: { _controller: VouchersBundle:Api:getActivities, _format: ~ }
+#    requirements:
+#        _method: GET

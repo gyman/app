@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Bundle\VouchersBundle\Controller;
+namespace Gyman\Bundle\ApiBundle\Controller;
 
 use Gyman\Bundle\BaseBundle\Controller\BaseApiController;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
@@ -12,7 +12,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  * @Rest\RouteResource("Voucher")
  */
 
-class ApiController extends BaseApiController
+class VoucherController extends BaseApiController
 {
     /**
      * @Rest\View()

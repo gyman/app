@@ -1,45 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="gyman" default="prepare">
-    <if>
-        <not><isset property="env" /></not>
-        <then>
-            <echo>Setting to default environment (dev)</echo>
-            <property name="env" value="dev" />
-        </then>
-    </if>
-
-    <property name="php_bin" value="php" />
-    <property name="capifony_bin" value="cap" />
-    <property name="composer" value="#{php_bin} composer.phar" />
-    <property name="symfony_console" value="app/console" />
-    <property name="grunt" value="node_modules/grunt-cli/bin/grunt" />
-    <property name="bower" value="node_modules/.bin/bower" />
-    <property name="default_language" value="pl" />
-    
-    <target name="phpmd" description="php mess detector">
-        <exec command="bin/phpmd src/ text app/phpmd.xml" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="compile:less" description="grunt less task">
-        <exec command="${grunt} compile-less" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="watch:compile:less" description="grunt less task">
-        <exec command="watch -c ${grunt} compile-less" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="phpcs" description="php code sniffer">
-        <exec command="bin/phpcs --standard=app/phpcs.xml --extensions=php src/Gyman/Bundle" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="phpcsfixer" description="php code fixer">
-        <exec command="bin/php-cs-fixer fix ./ --config=sf23" checkreturn="false" passthru="true" />
-    </target>
-
-    <target name="phpcbf" description="php code beautifier and fixer">
-        <exec command="bin/phpcbf -p --encoding=utf8 --standard=app/phpcs.xml --extensions=php src/Gyman/Bundle" checkreturn="true" passthru="true" />
-    </target>
+    <import file="${project.basedir}/app/Resources/phing/properties.xml"/>
+    <import file="${project.basedir}/app/Resources/phing/database.xml"/>
+    <import file="${project.basedir}/app/Resources/phing/tests.xml"/>
 
     <target name="find-translations-unused" description="looks for translations and adds them to translation files">
         <if>
@@ -63,26 +27,6 @@
         <exec command="${php_bin} ${symfony_console} translation:update --force --no-interaction ${lang} ${bundle}" checkreturn="true" passthru="true" />
     </target>
 
-    <target name="test-phplint" description="linting phpfiles">
-        <foreach param="fname" absparam="php-file" target="phplint">
-            <fileset dir="${project.basedir}">
-                <include name="app/**/*.php" />
-                <include name="src/**/*.php" />
-                <exclude name="app/cache/**/*.php" />
-            </fileset>
-        </foreach>
-    </target>
-    
-    <target name="phplint">
-        <exec command="${php_bin} -l ${php-file}" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="test-twiglint">
-        <exec command="${php_bin} ${symfony_console} twig:lint app/Resources" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} twig:lint src" checkreturn="true" passthru="true" />
-    </target>
-
-
     <target name="test-translations">
         <foreach list="AccountBundle,AdminBundle,FrontBundle,MailerBundle,SubscriptionBundle,TestBundle" param="bundle" target="find-translations" delimiter="," /> 
     </target>
@@ -90,113 +34,14 @@
      <target name="find-translations">
         <exec command="${php_bin} ${symfony_console} translation:debug --only-missing pl ${bundle}" checkreturn="true" passthru="true" />
     </target>
-        
-    <target name="deploy-prod">
-        <exec command="${capifony_bin} deploy" checkreturn="true" passthru="true" />
-        <exec command="${capifony_bin} deploy:cleanup" checkreturn="true" passthru="true" />
-    </target>
-      
-    <target name="reset-db">
-        <if>
-            <equals arg1="${env}" arg2="prod" />
-            <then>
-                <fail message="Cannot reset-db on prod environment!!!" />
-            </then>
-            <elseif>
-                <not>
-                    <isset property="env" />
-                </not>
-                <then>
-                    <echo>Setting to default environment (dev) because you didn't use -Denv parameter</echo>
-                    <property name="env" value="dev" />
-                </then>
-            </elseif>
-        </if>
-        <echo>Dropping database - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=club --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
-        <echo>Creating new schema - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=default --env=${env} --no-interaction" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=club --env=${env} --no-interaction" checkreturn="true" passthru="true" />
-        <echo>Loading fixtures - ${env} environment</echo>
-        <phingcall target="load-fixtures"/>
-    </target>
-
-    <target name="load-fixtures">
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=club --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/Club" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="test-phpunit">
-        <!--<phingcall target="reset-db">-->
-            <!--<property name="env" value="test" />-->
-        <!--</phingcall>-->
-        <echo>Running phpunit tests</echo>
-        <exec command="bin/phpunit -c app --testsuite=all" checkreturn="true" passthru="true" />
-    </target>
-    <target name="test-security">
-        <exec command="bin/security-checker security:check --quiet" checkreturn="true" passthru="true" />
-    </target>
-    <target name="test">
-        <phingcall target="test-phplint" />
-        <phingcall target="test-twiglint" />
-        <phingcall target="test-security" />
-        <phingcall target="phpcs" />
-        <phingcall target="phpmd" />
-        <phingcall target="test-phpunit" />
-    </target>
-
-    <target name="prepare">
-        <echo>Clearing cache - ${env} environment</echo>
-        <phingcall target="composer:install" />
-        <echo>Building assets</echo>
-        <phingcall target="assets" />
-        <echo>Resetting database</echo>
-        <phingcall target="reset-db" />
-    </target>
 
     <target name="clear-cache">
         <echo>Clearing cache - ${env} environment</echo>
         <exec command="${php_bin} ${symfony_console} cache:clear --env=#{env}" checkreturn="true" passthru="true" />
     </target>
+
     <target name="cc">
         <phingcall target="clear-cache" />
-    </target>
-    
-    <target name="assets">
-        <delete dir="build/assets" />
-        <delete dir="web/assets" />
-
-        <exec command="${bower} install" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} assets:install web/ --symlink" checkreturn="true" passthru="true" />
-        <exec command="${grunt}" checkreturn="true" passthru="true" />
-    </target>
-
-
-    <target name="drop-schema">
-        <exec executable="app/console" passthru="true" checkreturn="true">
-            <arg value="doctrine:schema:drop" />
-            <arg value="--force" />
-        </exec>
-    </target>
-
-    <target name="create-schema">
-        <exec executable="app/console" passthru="true" checkreturn="true">
-            <arg value="doctrine:schema:create" />
-        </exec>
-    </target>
-
-    <target name="clear-cache-test">
-        <exec executable="app/console" passthru="true" checkreturn="true">
-            <arg value="cache:clear" />
-            <arg value="--env=test" />
-        </exec>
-    </target>
-    <target name="load-fixtures" depends="drop-schema, create-schema">
-        <exec executable="app/console" passthru="true" checkreturn="true">
-            <arg value="doctrine:fixtures:load" />
-            <arg value="--append" />
-        </exec>
     </target>
 
     <target name="composer:download">
@@ -211,4 +56,5 @@
             <arg value="--env=#{env}" />
         </exec>
     </target>
+
 </project>

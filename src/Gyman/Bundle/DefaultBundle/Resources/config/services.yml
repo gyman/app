@@ -2,6 +2,9 @@ parameters:
     memcached.servers:
       - { host: 127.0.0.1, port: 11211 }
 
+imports:
+  - { resource: commands.yml }
+
 services:
     gyman.default.credentials_storage:
       class: Gyman\Bundle\DefaultBundle\Services\CredentialsStorage
@@ -26,25 +29,6 @@ services:
 
     gyman.default.slugify:
       class: Gyman\Bundle\DefaultBundle\Services\Slugify
-
-    gyman.default.command:
-      abstract: true
-      class: Gyman\Bundle\DefaultBundle\Command\AbstractCommand
-
-    gyman.default.command.create_database:
-      class: Gyman\Bundle\DefaultBundle\Command\CreateClubDatabaseCommand
-      parent: gyman.default.command
-      calls:
-        - [setDatabaseWorker, [@gyman.default.database_worker]]
-      tags:
-        - { name: console.command }
-
-    gyman.default.command.load_fixtures:
-      class: Gyman\Bundle\DefaultBundle\Command\LoadClubFixturesCommand
-      calls:
-        - [setDatabaseWorker, [@gyman.default.database_worker]]
-      tags:
-        - { name: console.command }
 
     gyman.default.database_worker:
       class: Gyman\Bundle\DefaultBundle\Services\DatabaseWorker

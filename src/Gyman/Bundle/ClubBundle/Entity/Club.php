@@ -4,6 +4,7 @@ namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;
 
 /**
@@ -49,7 +50,11 @@ class Club
      *
      * @ORM\Column(name="database_config", type="json_array")
      */
-    protected $database;
+    protected $database = [
+        CredentialsStorage::PARAM_BASE => null,
+        CredentialsStorage::PARAM_USER => null,
+        CredentialsStorage::PARAM_PASS => null,
+    ];
 
     /**
      * Get id
@@ -134,7 +139,6 @@ class Club
     {
         $this->owners = new ArrayCollection();
         $this->sections = new ArrayCollection();
-        $this->database = array();
     }
 
     /**

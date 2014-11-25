@@ -118,3 +118,5 @@ doctrine_migrations:
     name: Application Migrations
 
 knp_time: ~
+
+nelmio_api_doc: ~

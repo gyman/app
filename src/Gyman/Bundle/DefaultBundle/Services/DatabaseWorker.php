@@ -1,7 +1,6 @@
 <?php
 namespace Gyman\Bundle\DefaultBundle\Services;
 
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper;
@@ -13,6 +12,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class DatabaseWorker {
 
     const QUERY_CREATE_DB = 'CREATE DATABASE IF NOT EXISTS `{{name}}`;';
+    const QUERY_DROP_DB = 'DROP DATABASE IF EXISTS `{{name}}`;';
 
     /**
      * @var string $dbName
@@ -76,6 +76,8 @@ class DatabaseWorker {
         $this->createDatabase();
         $this->updateClubConnection();
         $this->createSchema();
+
+        return [$this->dbName, $this->username, $this->password];
     }
 
     public function loadFixtures($clubName, Command $command, ConsoleOutput $output, $env = 'dev')
@@ -84,11 +86,13 @@ class DatabaseWorker {
         $this->updateClubConnection();
 
         $input = new ArrayInput([
-            "--fixtures" => 'src/Gyman/Bundle/TestBundle/DataFixtures/Club',
-            "--em" => 'club',
             "--no-interaction",
+            "--em" => 'club',
             "--env" => $env,
+            "--fixtures" => 'src/Gyman/Bundle/TestBundle/DataFixtures/Club',
         ]);
+
+        $input->setInteractive(false);
 
         $output->writeln((string) $input);
 
@@ -101,6 +105,18 @@ class DatabaseWorker {
     public function createDatabase() {
         $this->defaultConnection->exec(
             $this->getCreateDatabaseQuery($this->dbName)
+        );
+    }
+
+    /**
+     * @param $clubName
+     */
+    public function dropDatabase($clubName)
+    {
+        $dbname = $this->createDatabaseName($clubName);
+
+        $this->defaultConnection->exec(
+            $this->getDropDatabaseQuery($dbname)
         );
     }
 
@@ -188,4 +204,9 @@ class DatabaseWorker {
         );
     }
 
-} 
+    private function getDropDatabaseQuery($dbname)
+    {
+        $query = str_replace("{{name}}", $dbname, self::QUERY_DROP_DB);
+        return $query;
+    }
+}

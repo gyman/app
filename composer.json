@@ -48,7 +48,8 @@
         "willdurand/hateoas-bundle": "@stable",
         "twig/extensions": "~1.2@dev",
         
-        "gyman/supr": "dev-master"
+        "gyman/supr": "dev-master",
+        "nelmio/api-doc-bundle": "~2.7@dev"
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",

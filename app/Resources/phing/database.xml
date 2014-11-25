@@ -1,0 +1,65 @@
+<project name="gyman.database" default="reset-db">
+    <target name="reset-db">
+
+        <!--Prevents accidental resetting of prod db-->
+
+        <if>
+            <equals arg1="${env}" arg2="prod" />
+            <then>
+                <fail message="Cannot reset-db on prod environment!!!" />
+            </then>
+        </if>
+
+        <!--User have to always set club property unless it's test environment-->
+
+        <if>
+            <and>
+                <not>
+                    <equals arg1="${env}" arg2="test" />
+                </not>
+                <not>
+                    <isset property="club" />
+                </not>
+            </and>
+            <then>
+                <fail message="No club (-Dclub) property set" />
+            </then>
+        </if>
+
+        <!--If we're performing testing - it is done on test club db-->
+
+        <if>
+            <and>
+                <equals arg1="${env}" arg2="test" />
+            </and>
+            <then>
+                <property name="club" value="test" />
+            </then>
+        </if>
+
+        <!--If no env is provided, we assume it's dev-->
+
+        <if>
+            <not>
+                <isset property="env" />
+            </not>
+            <then>
+                <echo>Setting to default environment (dev) because you didn't use -Denv parameter</echo>
+                <property name="env" value="dev" />
+            </then>
+        </if>
+
+        <echo>Dropping database - ${env} environment</echo>
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} gyman:database:drop '${club}'" checkreturn="true" passthru="true" />
+
+        <echo>Creating new schema - ${env} environment</echo>
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=default --env=${env} --no-interaction" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} gyman:database:create '${club}'" checkreturn="true" passthru="true" />
+
+        <echo>Loading fixtures - ${env} environment, default database</echo>
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection" checkreturn="true" passthru="true" />
+        <echo>Loading fixtures - ${env} environment, club "${club}" database</echo>
+        <exec command="${php_bin} ${symfony_console} gyman:database:load_fixtures '${club}'" checkreturn="true" passthru="true" />
+    </target>
+</project>

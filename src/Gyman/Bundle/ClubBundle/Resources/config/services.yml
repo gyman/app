@@ -1,3 +1,12 @@
 services:
   gyman.club.club_manager:
     class: Gyman\Bundle\ClubBundle\EntityManager\ClubManager
+    parent: gyman.base.entity_manager
+
+  gyman.club.subscriber:
+      class: Gyman\Bundle\ClubBundle\Services\ClubSubscriber
+      calls:
+        - [setDatabaseWorker, [@gyman.default.database_worker]]
+        - [setClubEntityManager, [@gyman.club.club_manager] ]
+      tags:
+          - { name: kernel.event_subscriber }

@@ -1,0 +1,17 @@
+<project name="gyman.properties">
+    <if>
+        <not><isset property="env" /></not>
+        <then>
+            <echo>Setting to default environment (dev)</echo>
+            <property name="env" value="dev" />
+        </then>
+    </if>
+
+    <property name="php_bin" value="php" />
+    <property name="capifony_bin" value="cap" />
+    <property name="composer" value="#{php_bin} composer.phar" />
+    <property name="symfony_console" value="app/console" />
+    <property name="grunt" value="node_modules/grunt-cli/bin/grunt" />
+    <property name="bower" value="node_modules/.bin/bower" />
+    <property name="default_language" value="pl" />
+</project>
