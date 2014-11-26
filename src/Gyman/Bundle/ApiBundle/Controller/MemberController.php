@@ -20,7 +20,7 @@ class MemberController extends BaseApiController
     public function getMembersAction()
     {
         return $this->createView(
-            $this->getDoctrine()->getRepository("MembersBundle:Member")->findAll(),
+            $this->getDoctrine()->getRepository("MembersBundle:Member", "club")->findAll(),
             200
         );
     }

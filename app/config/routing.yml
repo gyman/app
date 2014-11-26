@@ -48,10 +48,10 @@ members:
     type:     annotation
     prefix:   /members
 
-#clubs:
-#    resource: "@ClubBundle/Controller/"
-#    type:     annotation
-#    prefix:   /clubs
+clubs:
+    resource: "@ClubBundle/Controller/"
+    type:     annotation
+    prefix:   /clubs
 
 vouchers:
     resource: "@VouchersBundle/Controller/DefaultController.php"

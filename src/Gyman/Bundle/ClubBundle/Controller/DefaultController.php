@@ -1,140 +1,32 @@
 <?php
 
-namespace Gyman\Bundle\MembersBundle\Controller;
+namespace Gyman\Bundle\ClubBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
-use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\ClubBundle\ClubsEvents;
+use Gyman\Bundle\ClubBundle\Entity\Club;
+use Gyman\Bundle\ClubBundle\Event\ClubCreatedEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{id}/edit", name="_member_edit")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
-     */
-    public function editAction(Member $member, Request $request)
-    {
-        $response = new Response('Content', 200, ['content-type' => 'text/html']);
-
-        $manager = $this->get("gyman.members.members_manager");
-        $form = $this->createForm('gyman_members_member_form_type', $member);
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $manager->save($member);
-            } else {
-                $response->setStatusCode(400);
-            }
-        }
-
-        return $response->setContent(
-            $this->renderView("MembersBundle:Default:edit.html.twig", [
-                    'form'     => $form->createView(),
-                    'member'   => $member,
-                    "uploader" => $this->get('oneup_uploader.templating.uploader_helper'),
-            ])
-        );
-    }
-
-    /**
-     * @Route("/new", name="_member_new")
+     * @Route("/new", name="_club_new")
      * @Template()
      */
     public function newAction(Request $request)
     {
-        $response = new Response('Content', 200, ['content-type' => 'text/html']);
+        $club = new Club();
+        $club->setName("Jakiś klub na próbę");
+        $club->setOwners(new ArrayCollection([$this->getUser()]));
 
-        $manager = $this->get("gyman.members.members_manager");
-        $member = $manager->create();
-        $form = $this->createForm('gyman_members_member_form_type', $member);
+        $em = $this->getDoctrine()->getEntityManagerForClass("ClubBundle:Club");
+        $em->persist($club);
+        $em->flush();
 
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $manager->save($member);
-
-                return $this->redirect(
-                    $this->generateUrl("gyman_api_get_member", ["id" => $member->getId()], true)
-                );
-            } else {
-                $response->setStatusCode(400);
-            }
-        }
-
-        return $response->setContent(
-            $this->renderView("MembersBundle:Default:new.html.twig", [
-                    'form'     => $form->createView(),
-                    'member'   => $member,
-                    'isNew'    => true,
-                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper')
-            ])
-        );
-    }
-
-    /**
-     * @Route("/{id}/delete", name="_member_delete")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
-     */
-    public function deleteAction(Member $member)
-    {
-        /**
-         * @var EntityManager $entityManager
-         */
-        $entityManager = $this->getDoctrine()->getEntityManager();
-        $entityManager->remove($member);
-        $entityManager->flush();
-
-        return array();
-    }
-
-    /**
-     * @Route("/{id}/starred", name="_member_starred")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
-     */
-    public function starredAction(Member $member)
-    {
-        if ($member->getStarred()) {
-            $member->setStarred(false);
-        } else {
-            $member->setStarred(true);
-        }
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($member);
-        $manager->flush();
-
-        return new JsonResponse(array("status" => "ok", "starred" => $member->getStarred()));
-    }
-
-    /**
-     * @Route("/search/{members}", name="_members_dashboard_search")
-     * @ParamConverter("members",
-     *     class="Doctrine\Common\Collections\ArrayCollection", options={
-     *         "finder"    = "getDashboardSearchQueryBuilder",
-     *         "entity"    = "Gyman\Bundle\MembersBundle\Entity\Member",
-     *         "field"     = {"name", "barcode"},
-     *         "limit"     = 10,
-     *         "delimiter" = ",",
-     *     }
-     * )
-     * @Template()
-     */
-    public function searchForDashboardAction(ArrayCollection $members = null)
-    {
-        $serializer = $this->get("jms_serializer");
-        $data = $serializer->serialize(count($members) > 0 ? $members : [], "json");
-        return new Response($data, 200, ["content-type" => "application/json"]);
+        $this->get("event_dispatcher")->dispatch(ClubsEvents::CREATED, new ClubCreatedEvent($club));
     }
 }

@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\ClubBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Gyman\Bundle\MembersBundle\Event\ClubCreatedEvent;
+use Gyman\Bundle\ClubBundle\Event\ClubCreatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
@@ -24,7 +24,7 @@ class ClubSubscriber implements EventSubscriberInterface
     /**
      * @param ObjectManager $clubEntityManager
      */
-    public function setClubEntityManager(ObjectManager $clubEntityManager)
+    public function setClubEntityManager($clubEntityManager)
     {
         $this->clubEntityManager = $clubEntityManager;
     }
@@ -63,8 +63,8 @@ class ClubSubscriber implements EventSubscriberInterface
             CredentialsStorage::PARAM_PASS => $pass,
         ]);
 
-//        $this->clubEntityManager->persist($club);
-//        $this->clubEntityManager->flush();
+        $this->clubEntityManager->persist($club);
+        $this->clubEntityManager->flush();
 
     }
 }

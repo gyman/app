@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Bundle\MembersBundle\Event;
+namespace Gyman\Bundle\ClubBundle\Event;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Symfony\Component\EventDispatcher\Event;
