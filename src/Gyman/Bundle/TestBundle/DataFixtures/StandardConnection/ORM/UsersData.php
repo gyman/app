@@ -16,7 +16,7 @@ class UsersData extends BaseFixture
 
     public function insert($params)
     {
-        $club = $this->getClubs($params['clubs']);
+        $clubsCollection = $this->getClubs($params['clubs']);
         $currentClub = $this->getReference($params['clubs'][0]);
 
         $user = new User();
@@ -25,8 +25,8 @@ class UsersData extends BaseFixture
         $user->setLastname($params["lastname"]);
         $user->setEmail($params["email"]);
         $user->setRoles($params["roles"]);
-        $user->setClubs($club);
-//        $user->setCurrentClub($currentClub);
+        $user->setClubs($clubsCollection);
+        $user->setCurrentClub($currentClub);
         $user->setPlainPassword($params["plainPassword"]);
         $user->setEnabled($params["enabled"]);
 

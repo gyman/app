@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class ApiController
  * @package Gyman\Bundle\MembersBundle\Controller
- * @Rest\RouteResource("Member")
+ * @Rest\NamePrefix("gyman_api_")
  */
 class MemberController extends BaseApiController
 {

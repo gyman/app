@@ -81,8 +81,14 @@ NelmioApiDocBundle:
 # api routes
 
 gyman_api:
+  resource: @ApiBundle/Controller/
+  type: annotation
+  prefix: /api/
+
+gyman_api_members:
+  resource: @ApiBundle/Controller/MemberController.php
   type: rest
-  resource: @ApiBundle/Controller/DefaultController.php
+  prefix: /api/
 
 #gyman_api:
 #    pattern:  /api/

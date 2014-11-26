@@ -47,7 +47,7 @@ class User extends BaseUser
 
     /**
      * @var Club
-     * @ORM\OneToOne(targetEntity="Gyman\Bundle\ClubBundle\Entity\Club")
+     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\ClubBundle\Entity\Club")
      * @ORM\JoinColumn(name="current_club_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $currentClub;

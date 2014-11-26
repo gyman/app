@@ -145,6 +145,12 @@ class DatabaseWorker {
         return $query;
     }
 
+    private function getDropDatabaseQuery($dbname)
+    {
+        $query = str_replace("{{name}}", $dbname, self::QUERY_DROP_DB);
+        return $query;
+    }
+
     /**
      * @param Connection $defaultConnection
      */
@@ -204,9 +210,5 @@ class DatabaseWorker {
         );
     }
 
-    private function getDropDatabaseQuery($dbname)
-    {
-        $query = str_replace("{{name}}", $dbname, self::QUERY_DROP_DB);
-        return $query;
-    }
+
 }
