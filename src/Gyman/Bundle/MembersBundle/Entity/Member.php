@@ -37,13 +37,13 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  *
  * @Hateoas\Relation("self", href = @Hateoas\Route(
  *      "gyman_api_get_member",
- *      parameters = { "id" = "expr(object.getId())" },
+ *      parameters = { "member" = "expr(object.getId())" },
  *      absolute = true
  * ))
  *
  * @Hateoas\Relation("vouchers", href = @Hateoas\Route(
  *      "gyman_api_get_member_get_vouchers",
- *      parameters = { "id" = "expr(object.getId())" },
+ *      parameters = { "member" = "expr(object.getId())" },
  *      absolute = true
  * ))
  *

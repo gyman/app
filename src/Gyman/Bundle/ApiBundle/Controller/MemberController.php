@@ -5,6 +5,7 @@ namespace Gyman\Bundle\ApiBundle\Controller;
 use Gyman\Bundle\BaseBundle\Controller\BaseApiController;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -35,6 +36,7 @@ class MemberController extends BaseApiController
 
     /**
      * @Rest\View()
+     * @Route("/get_vouchers", name="gyman_api_get_member_get_vouchers")
      */
     public function getVouchersAction(Member $member)
     {

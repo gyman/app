@@ -65,7 +65,7 @@ class DefaultController extends Controller
                 $manager->save($member);
 
                 return $this->redirect(
-                    $this->generateUrl("gyman_api_get_member", ["id" => $member->getId()], true)
+                    $this->generateUrl("gyman_api_get_member", ["member" => $member->getId()], true)
                 );
             } else {
                 $response->setStatusCode(400);
