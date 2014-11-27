@@ -4,6 +4,7 @@ namespace Gyman\Bundle\DefaultBundle\Controller;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper;
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -54,6 +55,11 @@ class DefaultController extends Controller
         $em->flush();
 
         $db = $club->getDatabase();
+
+        $this->get("session")->set(
+            Globals::CURRENT_CLUB_SESSION_KEY,
+            $club
+        );
 
         /* @var ConnectionWrapper $connection */
         $connection = $this->get("doctrine.dbal.club_connection");
