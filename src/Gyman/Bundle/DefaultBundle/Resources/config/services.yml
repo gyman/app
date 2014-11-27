@@ -4,22 +4,14 @@ parameters:
 
 imports:
   - { resource: commands.yml }
+  - { resource: forms.yml }
+  - { resource: menu.yml }
 
 services:
     gyman.default.credentials_storage:
       class: Gyman\Bundle\DefaultBundle\Services\CredentialsStorage
       calls:
         - [setSession, [@session]]
-
-#    gyman.default.club_connection:
-#        class: Gyman\Bundle\DefaultBundle\Connection\ClubConnection
-#        scope: request
-#        calls:
-#            - [setDoctrineConnection, [@doctrine.dbal.club_connection]]
-#            - [setSecurityContext, [@security.context]]
-#            - [setSession, [@session]]
-#        tags:
-#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     gyman.default.collector.db_connections:
       class: Gyman\Bundle\DefaultBundle\DataCollector\DatabaseConnectionsDataCollector
@@ -42,18 +34,6 @@ services:
         - [setClubConnection, [@doctrine.dbal.club_connection]]
         - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
         - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
-
-#    gyman.default.current_club_wrapper:
-#        class: Gyman\Bundle\DefaultBundle\Services\CurrentClubWrapper
-#        arguments:
-#          - @security.context
-#          - @doctrine.orm.default_entity_manager
-
-#    gyman.default.form.club_switch:
-#        class: Gyman\Bundle\DefaultBundle\Form\ClubSwitchType
-#        arguments: [@security.context]
-#        tags:
-#          - { name: form.type, alias: gyman_default_clubswitch }
 
     gyman.default.subscriber.login:
         class: Gyman\Bundle\DefaultBundle\Services\LoginSubscriber
@@ -82,28 +62,6 @@ services:
         - [setEntityManager, [@doctrine.orm.club_entity_manager]]
       tags:
         - { name: request.param_converter}
-
-    gyman.default.menu_builder:
-        class: Gyman\Bundle\DefaultBundle\Menu\Builder
-        arguments: [@knp_menu.factory, @security.context]
-
-    gyman.default.menu.main:
-        class:            Knp\Menu\MenuItem
-        factory_service:  gyman.default.menu_builder
-        factory_method:   main
-        arguments:        ["@request"]
-        scope:            request
-        tags:
-            - { name: knp_menu.menu, alias: main }
-
-    gyman.default.menu.profile:
-        class: Knp\Menu\MenuItem
-        factory_service: gyman.default.menu_builder
-        factory_method: profile
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: profile }
 
 #    gyman.default.menu_abstract:
 #        abstract: true

@@ -340,6 +340,10 @@ $(document).ready ->
   $("#qLoverlay").fadeOut 250
   $("#qLbar").fadeOut 250
 
+  # setup switchClub
+
+  window.switchClub = new SwitchClub("form[name=\"gyman_default_clubswitch\"]")
+
   # modal setup
 
   window.modal = new Modal

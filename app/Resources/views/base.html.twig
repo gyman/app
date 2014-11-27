@@ -46,6 +46,9 @@
 
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
+                            <li>
+                                {{ render(controller("DefaultBundle:Default:switchClub")) }}
+                            </li>
                             {% if is_granted("ROLE_ADMIN") %}
                             <li>
                                 <a href="{{ path("_dashboard_index") }}">

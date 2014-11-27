@@ -88,6 +88,7 @@ module.exports = function (grunt) {
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/modal.coffee',
         'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
+        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/SwitchClub.coffee',
 
         'web/bundles/lists/coffee/reloadAjax.coffee',
 

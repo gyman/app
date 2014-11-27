@@ -6,15 +6,18 @@ use Gyman\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\MembersBundle\Form\DataTransformer\DateToStringTransformer;
-use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ClubSwitchType extends AbstractType
 {
-    public function __construct(User $user)
+    /**
+     * @var User
+     */
+    private $user;
+
+    public function __construct(SecurityContext $context)
     {
-        $this->user = $user;
+        $this->user = $context->getToken()->getUser();
     }
 
     /**
@@ -23,18 +26,12 @@ class ClubSwitchType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-                ->add(
-                    $builder->create('club', "choice", [
-                        "choices" => [
-                            "aaa1",
-                            "aaa2",
-                            "aaa3",
-                            "aaa4",
-                        ]
-                    ])
-                )
-        ;
+        $builder->add('club', "entity", [
+            "class" => "ClubBundle:Club",
+            "choices" => $this->user->getClubs(),
+            "property" => "name",
+            "data" => $this->user->getCurrentClub()->getId()
+        ]);
     }
 
     /**
@@ -43,7 +40,7 @@ class ClubSwitchType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => '',
+            'data_class' => null,
             'csrf_protection' => false
         ));
     }

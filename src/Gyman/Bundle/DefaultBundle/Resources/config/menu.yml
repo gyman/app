@@ -1,0 +1,22 @@
+services:
+    gyman.default.menu_builder:
+        class: Gyman\Bundle\DefaultBundle\Menu\Builder
+        arguments: [@knp_menu.factory, @security.context]
+
+    gyman.default.menu.main:
+        class:            Knp\Menu\MenuItem
+        factory_service:  gyman.default.menu_builder
+        factory_method:   main
+        arguments:        ["@request"]
+        scope:            request
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
+    gyman.default.menu.profile:
+        class: Knp\Menu\MenuItem
+        factory_service: gyman.default.menu_builder
+        factory_method: profile
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: profile }

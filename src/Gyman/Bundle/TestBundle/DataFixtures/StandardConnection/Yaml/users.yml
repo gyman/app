@@ -32,7 +32,9 @@ user-admin:
   roles: [ROLE_ADMIN]
   enabled: true
   clubs:
+    - club-dende
     - club-rio
+    - club-extreme
 
 user-user:
   firstname: Grzegorz
