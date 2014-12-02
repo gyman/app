@@ -22,3 +22,15 @@ services:
       parent: gyman.default.command
       tags:
         - { name: console.command }
+
+    gyman.default.command.migrations.migrate:
+      class: Gyman\Bundle\DefaultBundle\Command\MigrationsMigrateCommand
+      parent: gyman.default.command
+      tags:
+        - { name: console.command }
+
+    gyman.default.command.migrations.generate:
+      class: Gyman\Bundle\DefaultBundle\Command\MigrationsGenerateCommand
+      parent: gyman.default.command
+      tags:
+        - { name: console.command }
