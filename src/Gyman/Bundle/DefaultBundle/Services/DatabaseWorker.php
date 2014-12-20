@@ -6,8 +6,10 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper;
 use SebastianBergmann\Exporter\Exception;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\Output;
 
 class DatabaseWorker {
 
@@ -201,8 +203,15 @@ class DatabaseWorker {
         return $dbname;
     }
 
-    private function updateClubConnection()
+    private function updateClubConnection($club = null)
     {
+        if ($club !== null) {
+            $db = $club->getDatabase();
+            $this->dbName = $db[CredentialsStorage::PARAM_BASE];
+            $this->username = $db[CredentialsStorage::PARAM_USER];
+            $this->password = $db[CredentialsStorage::PARAM_PASS];
+        }
+
         $this->clubConnection->forceSwitch(
             $this->dbName,
             $this->username,
@@ -210,5 +219,44 @@ class DatabaseWorker {
         );
     }
 
+    public function migrate(Command $command, Output $output, ArgvInput $input)
+    {
+        $clubs = $this->defaultEntityManager->getRepository("ClubBundle:Club")->findAll();
+        $count = count($clubs);
 
+        $input->setOption("em", "club");
+        $input->setInteractive(false);
+
+        foreach ($clubs as $i => $club) {
+            $this->updateClubConnection($club);
+
+            $output->writeln(sprintf(
+                "Migrating database %s (%d/%d)",
+                $club->getDatabase()[CredentialsStorage::PARAM_BASE],
+                $i + 1,
+                $count
+            ));
+
+            $clonedCommand = clone($command);
+            $clonedCommand->run($input, $output);
+        }
+    }
+
+    public function generateMigrations(Command $command, Output $output, ArgvInput $input)
+    {
+        $clubs = $this->defaultEntityManager->getRepository("ClubBundle:Club")->findAll();
+        $singleClub = array_pop($clubs);
+
+        $this->updateClubConnection($singleClub);
+
+        $input->setOption("em", "club");
+        $input->setInteractive(false);
+
+        $output->writeln(sprintf(
+            "Generating migration with %s as reference",
+            $singleClub->getDatabase()[CredentialsStorage::PARAM_BASE]
+        ));
+
+        $command->run($input, $output);
+    }
 }
