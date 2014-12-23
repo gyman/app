@@ -1,4 +1,4 @@
-class @SwitchClub
+class window.SwitchClub
   constructor: (selector)->
     @$form = $(selector)
     @$select = @$form.find("#gyman_default_clubswitch_club")

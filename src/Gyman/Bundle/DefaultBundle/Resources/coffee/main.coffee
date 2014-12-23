@@ -342,13 +342,15 @@ $(document).ready ->
 
   # setup switchClub
 
-  window.switchClub = new SwitchClub("form[name=\"gyman_default_clubswitch\"]")
+#  todo: re-add
+#  window.switchClub = new SwitchClub("form[name=\"gyman_default_clubswitch\"]")
 
   # modal setup
 
-  window.modal = new Modal
+  gyman = gyman || {}
+  gyman.modal = new ModalContainer({}, "div#modalWindow")
             
-  $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) ->
+  $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) =>
     e.stopPropagation()
     e.preventDefault()
 
@@ -356,4 +358,4 @@ $(document).ready ->
       return false
 
     href = $(this).attr "href"
-    modal.showFromUrl(href)
+    gyman.modal.showFromUrl(href)

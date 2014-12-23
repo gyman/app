@@ -89,9 +89,15 @@
 {% block javascript %}
 <script>
     $(function() {
-        modal.setupFromNode("div#ui-editMemberData");
-        modal.setModalWindowClass("editMemberModal");
-        window.editMemberModal = new EditMember();
+        console.log("start");
+        gyman.modal.setupFromNode("div#ui-editMemberData");
+        console.log("1");
+        gyman.modal.setModalWindowClass("editMemberModal");
+        console.log("2");
+        var gyman.editMemberModal = new EditMember();
+        console.log("3");
+        console.log(modal, window.editMemberModal);
+        console.log("4");
     });
 </script>
 {% endblock javascript %}

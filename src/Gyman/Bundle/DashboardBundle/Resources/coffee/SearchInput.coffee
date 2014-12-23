@@ -1,4 +1,5 @@
-class @SearchInput
+class window.SearchInput
+  
   constructor: (selector) ->
     @$searchAutocompleteInput = $(selector)
     @$searchButton = @$searchAutocompleteInput.siblings("#clickToOpenFoundUser")

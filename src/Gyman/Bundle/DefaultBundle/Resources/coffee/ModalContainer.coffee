@@ -1,5 +1,5 @@
-class @Modal
-  constructor: (@params) ->
+class @ModalContainer
+  constructor: (@params, @modalSelector) ->
     if !@params
       @params = {}
 
@@ -116,37 +116,28 @@ class @Modal
       @setBody response
   
   showFromUrl: (url, postData) =>
+    console.log url
+    return
+
     if postData?
       method = "post"
     else
       method = "get"
 
-    if @isOpened
-      @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
-        $.ajax(
-          url: url
-          data: postData
-          dataType: "html"
-          type: method
-        ).success((response) =>
-          @setBody response
-          @show()
-          window.modal.getModal().off("hidden.imidiateShow")
-        ).error (xhr, status, message) =>
-          @logError xhr, status, message
-          
-      @hide()
-    else
-      $.ajax(
-        url: url
-        data: postData
-        type: method
-        dataType: "html"
-      ).success((response) =>
-        @setBody response
-        @show()
-      ).error (xhr, status, message) =>
-        @logError xhr, status, message    
+    callback = (response) =>
+      @setBody response
+      @show()
+      if @isOpened
+        @getModal().off("hidden.imidiateShow")
+
+    $.ajax(
+      url: url
+      data: postData
+      type: method
+      dataType: "html"
+    ).success(callback)
+    .error (xhr, status, message) =>
+      @logError xhr, status, message
 
   logError: (xhr, status, message) =>
     console.log "#{message} (#{xhr.status})"

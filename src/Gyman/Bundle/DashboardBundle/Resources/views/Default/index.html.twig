@@ -36,10 +36,10 @@
         </div>
 
         <div class="span4">
-            <div class="reminder" id="timeline">
-                <h4>Wydarzenia</h4>
-                <div id="dashboardTimeline"></div>
-            </div>
+            {#<div class="reminder" id="timeline">#}
+                {#<h4>Wydarzenia</h4>#}
+                {#<div id="dashboardTimeline"></div>#}
+            {#</div>#}
         </div>
     </div>
 
@@ -50,10 +50,10 @@
     {#</div>#}
 {% endblock body %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        {# { chart(frequencyChart) } #}
-        {# { chart(popularityChart) } #}
-    </script>
-{% endblock %}
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    {#<script>#}
+        {#&#123;&#35; { chart(frequencyChart) } &#35;&#125;#}
+        {#&#123;&#35; { chart(popularityChart) } &#35;&#125;#}
+    {#</script>#}
+{#{% endblock %}#}
