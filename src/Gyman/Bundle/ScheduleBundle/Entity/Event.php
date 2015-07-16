@@ -25,7 +25,7 @@ use JMS\Serializer\Annotation as JMS;
  * })
  * @codeCoverageIgnore
  */
-class Event
+abstract class Event
 {
     const SUPER = "event";
     const WEEKLY = "weekly";

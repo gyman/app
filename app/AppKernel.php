@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
             new Gyman\Bundle\DefaultBundle\DefaultBundle(),
             new Gyman\Bundle\MembersBundle\MembersBundle(),
@@ -56,6 +57,8 @@ class AppKernel extends Kernel
             new Gyman\Bundle\BaseBundle\BaseBundle(),
             new Gyman\Bundle\TimelineBundle\TimelineBundle(),
             new Gyman\Bundle\ApiBundle\ApiBundle(),
+
+            new Dende\CommonBundle\DendeCommonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -71,5 +74,12 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function boot()
+    {
+        parent::boot();
+        $logger = $this->container->get('logger');
+        \Monolog\ErrorHandler::register($logger);
     }
 }

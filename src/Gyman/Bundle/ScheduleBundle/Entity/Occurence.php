@@ -27,7 +27,7 @@ use DateTime;
  * })
  * @codeCoverageIgnore
  */
-class Occurence
+abstract class Occurence
 {
     const SERIAL = "serial";
     const SINGULAR = "singular";

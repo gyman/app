@@ -2,6 +2,7 @@ parameters:
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/default/images/no-profile.gif
   gallery_dir: /uploads/gallery/
+  revision_file: "%kernel.root_dir%/../REVISION"
 
 imports:
     - { resource: parameters.yml }
@@ -18,14 +19,17 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled: true, enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
+    trusted_hosts:   ~
     trusted_proxies: ~
     session:
         cookie_lifetime:  %session_lifetime%
         gc_maxlifetime: 1800
+        handler_id:  ~
+
     fragments:       ~
     http_method_override: true
 
@@ -110,13 +114,16 @@ sensio_framework_extra:
   router: { annotations: true }
   request: { converters: true }
 
-
-doctrine_migrations:
-    dir_name: %kernel.root_dir%/Migrations
-    namespace: Application\Migrations
-    table_name: migration_versions
-    name: Application Migrations
-
 knp_time: ~
 
 nelmio_api_doc: ~
+
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/../src/Gyman/MainBundle/DoctrineMigrations
+    namespace: Gyman\MainBundle\DoctrineMigrations
+    table_name: doctrine_migrations
+    name: Gyman DB Migrations
+
+accelerator_cache:
+    host: %base_url%
+    web_dir: %kernel.root_dir%/../web

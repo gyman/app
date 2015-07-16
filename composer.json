@@ -4,52 +4,52 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": {
-            "": "src/"
-        }
+      "psr-4": { "": "src/", "SymfonyStandard\\": "app/" }
     },
     "require": {
         "php": ">=5.4.0",
 
-        "doctrine/orm": "2.5.x-dev",
-        "doctrine/doctrine-bundle": "1.3.x-dev",
+        "symfony/symfony": "2.7.*",
+        "symfony/swiftmailer-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.7.*",
+
+        "doctrine/orm": "2.5.*",
+        "doctrine/doctrine-bundle": "1.5.*",
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
 
-        "symfony/symfony": "2.5.*",
-        "symfony/swiftmailer-bundle": "2.3.*",
-        "symfony/monolog-bundle": "2.3.*",
-
-        "sensio/distribution-bundle": "2.3.*",
+        "sensio/distribution-bundle": "3.0.*",
         "sensio/framework-extra-bundle": "~3.0",
-        "sensio/generator-bundle": "2.3.*",
+        "sensio/generator-bundle": "2.5.*",
 
         "stephpy/timeline": "1.1.*@dev",
         "stephpy/timeline-bundle": "2.1.*@dev",
 
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "friendsofsymfony/jsrouting-bundle": "*",
-        "friendsofsymfony/rest-bundle": "1.3.*",
+        "friendsofsymfony/jsrouting-bundle": "1.5.*",
+        "friendsofsymfony/rest-bundle": "1.6.*",
 
         "knplabs/knp-menu-bundle": "~1",
         "knplabs/knp-menu": "~1",
         "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-time-bundle": "~1.1@dev",
+        "knplabs/knp-time-bundle": "1.3",
 
-        "incenteev/composer-parameter-handler": "~2.0",
-        "oneup/uploader-bundle": "1.0.*@dev",
+        "incenteev/composer-parameter-handler": "2.1.*",
+        "oneup/uploader-bundle": "1.3.*",
         "jms/serializer-bundle": "dev-master",
-        "raven/raven": "dev-master",
         "ob/highcharts-bundle": "1.*",
         "vipsoft/doctrine-data-fixtures-extension": "~2",
         "phing/phing": "*",
         "willdurand/hateoas-bundle": "@stable",
-        "twig/extensions": "~1.2@dev",
+        "twig/extensions": "1.2.*@dev",
         
         "gyman/supr": "dev-master",
-        "nelmio/api-doc-bundle": "~2.7@dev"
+        "nelmio/api-doc-bundle": "~2.7@dev",
+
+        "imagine/imagine": "0.6.*",
+        "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a"
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",
@@ -61,34 +61,40 @@
         "behat/mink-extension": "~1",
         "behat/mink-browserkit-driver": "~1",
         "behat/mink-selenium2-driver": "~1",
-        "phpunit/phpunit": "4.2.*",
-        "fabpot/php-cs-fixer": "~0.5",
+        "phpunit/phpunit": "4.7.*",
+        "fabpot/php-cs-fixer": "2.0.*@dev",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "~2",
         "mayflower/php-codebrowser": "~1",
-        "sensiolabs/security-advisories": "dev-master"
+        "sensiolabs/security-advisories": "dev-master",
+        "mockery/mockery" : "*",
+        "dende/common-bundle" : "*"
     },
     "scripts": {
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
     "config": {
         "bin-dir": "bin",
         "preferred-install": "dist",
         "github-oauth": {
-            "github.com": "87bdf0c483226aca6a2636896939d9b61cdc1116"
+            "github.com": "66b302af2c7a920b1673df3549d83c90338e4076"
         }
     },
     "minimum-stability": "dev",
@@ -100,7 +106,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "2.3-dev"
+            "dev-master": "2.7-dev"
         }
     }
 }

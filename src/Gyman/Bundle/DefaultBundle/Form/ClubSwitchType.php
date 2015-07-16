@@ -26,24 +26,26 @@ class ClubSwitchType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $clubs = $this->user->getClubs();
+
         $builder->add('club', "entity", [
             "class" => "ClubBundle:Club",
-            "choices" => $this->user->getClubs(),
+            "choices" => $clubs,
             "property" => "name",
-            "data" => $this->user->getCurrentClub()->getId()
+            "data" => $this->user->getCurrentClub()
         ]);
     }
 
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => null,
-            'csrf_protection' => false
-        ));
-    }
+//    public function setDefaultOptions(OptionsResolverInterface $resolver)
+//    {
+//        $resolver->setDefaults(array(
+//            'data_class' => null,
+//            'csrf_protection' => false
+//        ));
+//    }
 
     /**
      * @return string
