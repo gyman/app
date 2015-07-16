@@ -1,4 +1,4 @@
-class @ActivityTab
+class window.ActivityTab
   constructor: () ->
     @setupTab()
     @setupNavigation()

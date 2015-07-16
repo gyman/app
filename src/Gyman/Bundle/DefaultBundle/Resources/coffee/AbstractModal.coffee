@@ -1,32 +1,32 @@
 class @AbstractModal
-  constructor: ()->
-    @modal = window.modal
-    @$modalWindow = @modal.getModal()
+  constructor: (@modal)->
+    console.log @modal
+#    @$modalWindow = @modal.getModal()
+#
+#    @$form = $(".modal-body form",@$modalWindow)
+#
+#    @datetimepickerSettings =
+#      minuteStep:     15
+#      format:         'dd.mm.yyyy'
+#      weekStart:      1
+#      autoclose:      true
+#      pickerPosition: "bottom-left"
+#      startView:      'decade'
+#      minView:        'month'
+#      maxView:        'decade'
+#      todayHighlight: true
+#      language:       "pl"
+#
+#    @selectSettings =
+#      dropdownAutoWidth: true
+#      containerCss:
+#        width: "220px"
+#
+#    @deleteCheckbox = $("input#deleteCheckbox",@$modalWindow)
+#    @$saveButton = $("#saveFormInModal",@$modalWindow)
     
-    @$form = $(".modal-body form",@$modalWindow)
-    
-    @datetimepickerSettings =
-      minuteStep:     15
-      format:         'dd.mm.yyyy'
-      weekStart:      1
-      autoclose:      true
-      pickerPosition: "bottom-left"
-      startView:      'decade'
-      minView:        'month'
-      maxView:        'decade'
-      todayHighlight: true
-      language:       "pl"
-      
-    @selectSettings =
-      dropdownAutoWidth: true
-      containerCss: 
-        width: "220px"
-        
-    @deleteCheckbox = $("input#deleteCheckbox",@$modalWindow)
-    @$saveButton = $("#saveFormInModal",@$modalWindow)
-    
-    @initDeleteCheckbox()
-    @initSaveButton()
+#    @initDeleteCheckbox()
+#    @initSaveButton()
     
   BUTTON_SAVE_STATE: "Zapisz"
   BUTTON_SAVE_CLASS: "btn-primary"

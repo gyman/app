@@ -1,4 +1,5 @@
-class @ActionMenu
+class window.ActionMenu
+
   constructor: (selector, searchInput) ->
     @$actionMenu = $(selector)
     @searchInput = searchInput

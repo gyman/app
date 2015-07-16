@@ -1,13 +1,14 @@
 class @EditMember extends @AbstractModal
-  constructor: ()->
-    super()
-    @initDatepickers()
-    @initSelects()
-    @initActivities()
-#    @initVoucherTab()
-    @initCheckbox()
 
-    webcamTab = new WebCamTab()
+  constructor: (@modal)->
+#    super(@modal)
+#    @initDatepickers()
+#    @initSelects()
+#    @initActivities()
+#    @initVoucherTab()
+#    @initCheckbox()
+
+#    webcamTab = new WebCamTab()
 
   sellVoucher: true,
   userData: {} # @todo add user and pass it's id to voucher sell route
@@ -59,7 +60,7 @@ class @EditMember extends @AbstractModal
 
   handleDeleteAction: (e) =>
     @modal.hide()
-    datatable.fnReloadAjax() if datatable?
+#    datatable.fnReloadAjax() if datatable?
 
   handleSubmitSuccess: (response) =>
 #   @todo: enable only for lists, omit datatables in modal
