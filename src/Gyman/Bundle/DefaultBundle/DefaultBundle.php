@@ -17,11 +17,4 @@ class DefaultBundle extends Bundle
         Globals::setNoImage($this->container->getParameter('default.noImage'));
         Globals::setGalleryDir($this->container->getParameter('default.galleryDir'));
     }
-
-    public function build(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new ConnectionCompilerPass());
-
-        parent::build($container);
-    }
 }

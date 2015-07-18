@@ -6,7 +6,7 @@ services:
   gyman.club.subscriber:
       class: Gyman\Bundle\ClubBundle\Services\ClubSubscriber
       calls:
-        - [setDatabaseWorker, [@gyman.default.database_worker]]
+        - [setDatabaseWorker, [@gyman.multidatabase.database_worker]]
         - [setClubEntityManager, [@gyman.club.club_manager] ]
       tags:
           - { name: kernel.event_subscriber }

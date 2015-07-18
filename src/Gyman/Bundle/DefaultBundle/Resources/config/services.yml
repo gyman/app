@@ -3,46 +3,9 @@ parameters:
       - { host: 127.0.0.1, port: 11211 }
 
 imports:
-  - { resource: commands.yml }
-  - { resource: forms.yml }
   - { resource: menu.yml }
 
 services:
-    gyman.default.credentials_storage:
-      class: Gyman\Bundle\DefaultBundle\Services\CredentialsStorage
-      calls:
-        - [setSession, [@session]]
-
-    gyman.default.collector.db_connections:
-      class: Gyman\Bundle\DefaultBundle\DataCollector\DatabaseConnectionsDataCollector
-      arguments: [@doctrine.dbal.default_connection, @doctrine.dbal.club_connection]
-      tags:
-        - { name: data_collector, template: "DefaultBundle:Toolbar:DatabaseConnections.html.twig", id: "database_connections" }
-
-    gyman.default.slugify:
-      class: Gyman\Bundle\DefaultBundle\Services\Slugify
-
-    gyman.default.database_worker:
-      class: Gyman\Bundle\DefaultBundle\Services\DatabaseWorker
-      arguments:
-        - "%club_database_name_template%"
-        - "%database_user%"
-        - "%database_password%"
-      calls:
-        - [setSlugifier, [@gyman.default.slugify]]
-        - [setDefaultConnection, [@doctrine.dbal.default_connection]]
-        - [setClubConnection, [@doctrine.dbal.club_connection]]
-        - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
-        - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
-
-    gyman.default.subscriber.login:
-        class: Gyman\Bundle\DefaultBundle\Services\LoginSubscriber
-        calls:
-          - [setClubConnection, [@doctrine.dbal.club_connection]]
-          - [setSession, [@session]]
-        tags:
-            - { name: kernel.event_subscriber }
-
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:

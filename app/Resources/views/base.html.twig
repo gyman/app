@@ -5,10 +5,10 @@
     <title>{% block title %}Gyman.pl{% endblock %}</title>
 
     {% if app.environment != "dev" %}
-        <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
-        <script>
-            Raven.config('{{ sentry_url }}');
-        </script>
+        {#<script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>#}
+        {#<script>#}
+            {#Raven.config('{{ sentry_url }}');#}
+        {#</script>#}
     {% endif %}
 
     {% block stylesheets %}
@@ -28,8 +28,8 @@
     <body class="{% block body_class %}{% endblock %}">
     <div id="spinner">Ładuję...</div>
 
-    <div id="qLoverlay"></div>
-    <div id="qLbar"></div>
+    {#<div id="qLoverlay"></div>#}
+    {#<div id="qLbar"></div>#}
 
     {% if app.user is not null %}
         {{ include("navigation.html.twig") }}
@@ -46,6 +46,7 @@
 
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
+                            {# todo: przywrócić!!!
                             <li>
                                 {{ render(controller("DefaultBundle:Default:switchClub")) }}
                             </li>
@@ -63,6 +64,7 @@
                                     <span class="txt"> {{ 'open_navigation'|trans }}</span>
                                 </a>
                             </li>
+                            #}
                         </ul>
                     </div>
 

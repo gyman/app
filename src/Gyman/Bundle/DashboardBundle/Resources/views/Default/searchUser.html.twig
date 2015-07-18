@@ -1,13 +1,15 @@
 <div class="reminder" id="searchTab">
     <h4>Szukaj uczestnika
-    {% if is_granted("ROLE_ADMIN") %}
-        <a class="icon tip" href="{{ path("_list_members") }}"><span class="icon16 icomoon-icon-users"></span></a>
-    {% endif %}
+    {#{% if is_granted("ROLE_ADMIN") %}#}
+        {#<a class="icon tip" href="{{ path("_list_members") }}"><span class="icon16 icomoon-icon-users"></span></a>#}
+    {#{% endif %}#}
     </h4>
 
     <form id="membersSearchAutocompleteForm" class="input-append">
         <input id="membersSearchAutocomplete" placeholder="imię/nazwisko uczestnika lub kod" autocomplete="off">
-        <div id="clickToOpenFoundUser" class="add-on btn-warning"><i class="icon16 icomoon-icon-search-2"></i>Pokaż</div>
+        <div id="clickToOpenFoundUser" class="add-on btn-warning">
+            <i class="icon16 icomoon-icon-search-2"></i>Pokaż
+        </div>
     </form>
 </div>
 

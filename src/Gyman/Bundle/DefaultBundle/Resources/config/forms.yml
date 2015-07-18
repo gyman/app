@@ -1,6 +1,0 @@
-services:
-    gyman.default.form.club_switch:
-        class: Gyman\Bundle\DefaultBundle\Form\ClubSwitchType
-        arguments: [@security.context]
-        tags:
-          - { name: form.type, alias: gyman_default_clubswitch }

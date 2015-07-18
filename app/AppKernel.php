@@ -59,6 +59,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\ApiBundle\ApiBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
+            new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

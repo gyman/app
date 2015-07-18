@@ -1,0 +1,86 @@
+services:
+  gyman.multidatabase.credentials_storage:
+    class: Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage
+    calls:
+      - [setSession, [@session]]
+
+  gyman.multidatabase.collector.db_connections:
+    class: Gyman\Bundle\MultiDatabaseBundle\DataCollector\DatabaseConnectionsDataCollector
+    arguments: [@doctrine.dbal.default_connection, @doctrine.dbal.club_connection]
+    tags:
+      - { name: data_collector, template: "DefaultBundle:Toolbar:DatabaseConnections.html.twig", id: "database_connections" }
+
+  gyman.multidatabase.slugify:
+    class: Gyman\Bundle\MultiDatabaseBundle\Services\Slugify
+
+  gyman.multidatabase.database_worker:
+    class: Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker
+    arguments:
+      - "%club_database_name_template%"
+      - "%database_user%"
+      - "%database_password%"
+    calls:
+      - [setSlugifier, [@gyman.multidatabase.slugify]]
+      - [setDefaultConnection, [@doctrine.dbal.default_connection]]
+      - [setClubConnection, [@doctrine.dbal.club_connection]]
+      - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
+      - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
+
+  gyman.multidatabase.subscriber.login:
+      class: Gyman\Bundle\MultiDatabaseBundle\Services\LoginSubscriber
+      calls:
+        - [setClubConnection, [@doctrine.dbal.club_connection]]
+        - [setSession, [@session]]
+      tags:
+          - { name: kernel.event_subscriber }
+
+  gyman.multidatabase.club_connection_command_listener:
+      class: Gyman\Bundle\MultiDatabaseBundle\Listener\ClubConnectionCommandListener
+      arguments:
+          - %kernel.root_dir%/../src/TPN/MainBundle/DataFixtures/ORM
+          - %kernel.environment%
+      tags:
+          - { name: kernel.event_listener, event: console.command }
+
+  gyman.multidatabase.command:
+    abstract: true
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\AbstractCommand
+    calls:
+      - [setDatabaseWorker, [@gyman.multidatabase.database_worker]]
+
+  gyman.multidatabase.command.create_database:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\CreateClubDatabaseCommand
+    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.command.drop_database:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\DropClubDatabaseCommand
+    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.command.load_fixtures:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\LoadClubFixturesCommand
+    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.command.migrations.migrate:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\MigrationsMigrateCommand
+    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.command.migrations.generate:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\MigrationsGenerateCommand
+    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.form.club_switch:
+    class: Gyman\Bundle\MultiDatabaseBundle\Form\ClubSwitchType
+    arguments: [@security.context]
+    tags:
+      - { name: form.type, alias: gyman_default_clubswitch }
+

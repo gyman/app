@@ -1,3 +1,8 @@
+gyman_multi_database:
+    resource: "@GymanMultiDatabaseBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 timeline:
     resource: "@TimelineBundle/Controller/"
     type:     annotation

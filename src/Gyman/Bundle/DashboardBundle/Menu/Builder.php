@@ -42,17 +42,17 @@ class Builder
         $menu->setChildrenAttributes(["id" => "dashboardActionMenu"]);
 
 
-        $menu->addChild(
-            'dashboard.actions.sell',
-            [
-                'route' => '_member_new',
-                "extras" => ["icon" => 'icomoon-icon-users'],
-                'linkAttributes' => [
-                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
-                    "id" => "actionSell"
-                ]
-            ]
-        )->setExtra('translation_domain', 'DashboardBundle');
+//        $menu->addChild(
+//            'dashboard.actions.sell',
+//            [
+//                'route' => '_member_new',
+//                "extras" => ["icon" => 'icomoon-icon-users'],
+//                'linkAttributes' => [
+//                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+//                    "id" => "actionSell"
+//                ]
+//            ]
+//        )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_entry',
@@ -84,23 +84,23 @@ class Builder
                 'route' => '_member_new',
                 "extras" => ["icon" => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    "class" => 'btn btn-block btn-large btn-primary createNewMember openUrlInModal',
+                    "class" => 'btn btn-block btn-large btn-primary createNewMember',
                     "id" => "actionMember"
                 ]
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
-        $menu->addChild(
-            'dashboard.actions.calendar',
-            array(
-                'route' => '_schedule_calendar',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => 'btn btn-block btn-large btn-primary',
-                    "id" => "actionCalendar"
-                )
-            )
-        )->setExtra('translation_domain', 'DashboardBundle');
+//        $menu->addChild(
+//            'dashboard.actions.calendar',
+//            array(
+//                'route' => '_schedule_calendar',
+//                "extras" => array("icon" => 'icomoon-icon-users'),
+//                'linkAttributes' => array(
+//                    "class" => 'btn btn-block btn-large btn-primary',
+//                    "id" => "actionCalendar"
+//                )
+//            )
+//        )->setExtra('translation_domain', 'DashboardBundle');
 
         return $menu;
     }

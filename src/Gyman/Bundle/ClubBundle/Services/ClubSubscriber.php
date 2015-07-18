@@ -3,10 +3,10 @@ namespace Gyman\Bundle\ClubBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Gyman\Bundle\ClubBundle\Event\ClubCreatedEvent;
+use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
+use Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
-use Gyman\Bundle\DefaultBundle\Services\DatabaseWorker;
 use Gyman\Bundle\ClubBundle\ClubsEvents;
 
 class ClubSubscriber implements EventSubscriberInterface

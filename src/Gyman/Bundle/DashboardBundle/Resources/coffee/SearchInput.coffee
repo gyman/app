@@ -1,4 +1,5 @@
-class @SearchInput
+class window.SearchInput
+  
   constructor: (selector) ->
     @$searchAutocompleteInput = $(selector)
     @$searchButton = @$searchAutocompleteInput.siblings("#clickToOpenFoundUser")
@@ -39,7 +40,9 @@ class @SearchInput
     @editUser()
 
   editUser: () =>
-    window.modal.showFromUrl Routing.generate("_member_edit", {id: @user.id})
+#    window.modal.showFromUrl Routing.generate("_member_edit", {id: @user.id})
+    window.location = Routing.generate("_member_edit", {id: @user.id})
+
 
   subscribe: (handler) =>
     @handlers.push handler
