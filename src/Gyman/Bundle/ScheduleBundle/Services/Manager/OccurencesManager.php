@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\Form;
 
-
 /**
  * Class OccurencesManager
  * @package Gyman\Bundle\ScheduleBundle\Services\Manager
@@ -17,7 +16,6 @@ use Symfony\Component\Form\Form;
  */
 class OccurencesManager extends BaseManager
 {
-
     /**
      *
      * @var Form

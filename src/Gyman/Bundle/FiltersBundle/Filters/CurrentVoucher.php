@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class CurrentVoucher extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $hasVoucher = (bool) $this["currentVoucher"];

@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
-class EntryHandler {
-
+class EntryHandler
+{
     /**
      * @var EntryManager
      */
@@ -130,7 +130,7 @@ class EntryHandler {
             if ($this->request->getMethod() == 'POST') {
                 $this->handlePostedOpenEntryForm($form);
             }
-        } catch(EntryFormInvalidException $e) {
+        } catch (EntryFormInvalidException $e) {
             return $this->renderOpenEntryFormError($form);
         }
 
@@ -151,13 +151,15 @@ class EntryHandler {
         return $this->renderCloseEntryTemplate($entry);
     }
 
-    public function redirectToCloseEntry(Entry $entry) {
+    public function redirectToCloseEntry(Entry $entry)
+    {
         return new RedirectResponse(
             $this->router->generate("_entry_close", ["id" => $entry->getId()])
         );
     }
 
-    public function createEntry(Member $member) {
+    public function createEntry(Member $member)
+    {
         $entry = $this->entryManager->createNewEntry();
         $entry->setMember($member);
 
@@ -253,5 +255,4 @@ class EntryHandler {
 
         return $response;
     }
-
 }

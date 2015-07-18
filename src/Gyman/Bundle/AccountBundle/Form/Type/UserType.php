@@ -8,7 +8,6 @@ use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 class UserType extends BaseType
 {
-
     private $class = 'Gyman\Bundle\AccountBundle\Entity\User';
 
     public function buildForm(FormBuilderInterface $builder, array $options)

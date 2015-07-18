@@ -9,7 +9,6 @@ use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 //@todo: use base fixture class
 
 class VouchersData extends AbstractFixture implements OrderedFixtureInterface

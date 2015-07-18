@@ -16,7 +16,7 @@ class ClubCreatedEvent extends Event
      */
     protected $club;
 
-    function __construct($club)
+    public function __construct($club)
     {
         $this->club = $club;
     }
@@ -29,4 +29,3 @@ class ClubCreatedEvent extends Event
         return $this->club;
     }
 }
-

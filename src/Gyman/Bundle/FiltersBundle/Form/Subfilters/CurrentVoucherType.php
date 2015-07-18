@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CurrentVoucherType extends AbstractSubfilterType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

@@ -6,7 +6,6 @@ use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class FilterRepositoryTest extends BaseTest
 {
-
     public function testGetPinnedFiltersQueryBuilder()
     {
         $query = $this->container->get('filter_repository')->getPinnedFiltersQueryBuilder();

@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Age;
 
 class AgeTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

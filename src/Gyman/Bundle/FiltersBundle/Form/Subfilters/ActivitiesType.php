@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Context\LegacyExecutionContext as ExecutionConte
 
 class ActivitiesType extends AbstractSubfilterType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

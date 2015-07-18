@@ -39,8 +39,5 @@ class EventsHandler
 
         $this->entityManager->persist($member);
         $this->entityManager->flush();
-
-
-
     }
 }

@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
 
 class GetFormTypeTraitStub
 {
-
     use ParseClassname, GetFormType;
 
     public function testGetFormType($object)

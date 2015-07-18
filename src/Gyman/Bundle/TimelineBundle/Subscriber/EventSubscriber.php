@@ -13,7 +13,6 @@ use Gyman\Bundle\TimelineBundle\Timeline\EventsHandler;
 
 class EventSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var EventsHandler $eventsHandler
      */

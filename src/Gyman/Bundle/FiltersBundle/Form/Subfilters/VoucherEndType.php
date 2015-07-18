@@ -9,7 +9,6 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
 
 class VoucherEndType extends AbstractSubfilterType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

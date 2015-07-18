@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class Gender extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $queryBuilder->andWhere("m.gender = :gender");

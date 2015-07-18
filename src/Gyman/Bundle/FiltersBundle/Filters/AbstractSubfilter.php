@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractSubfilter implements FilterInterface, \ArrayAccess, \Iterator
 {
-
     /**
      * subfilter options
      * @var array

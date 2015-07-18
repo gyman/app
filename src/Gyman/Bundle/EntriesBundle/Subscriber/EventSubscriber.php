@@ -10,7 +10,6 @@ use Gyman\Bundle\EntriesBundle\Event\EventsHandler;
 
 class EventSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var EventsHandler $eventsHandler
      */

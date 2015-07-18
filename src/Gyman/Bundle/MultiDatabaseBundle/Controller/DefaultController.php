@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-
     /**
      * @Route("/switch-club-form", name="gyman_default_clubswitch")
      * @Method("GET")

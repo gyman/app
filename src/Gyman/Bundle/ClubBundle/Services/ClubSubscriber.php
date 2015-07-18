@@ -11,7 +11,6 @@ use Gyman\Bundle\ClubBundle\ClubsEvents;
 
 class ClubSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var DatabaseWorker
      */
@@ -65,6 +64,5 @@ class ClubSubscriber implements EventSubscriberInterface
 
         $this->clubEntityManager->persist($club);
         $this->clubEntityManager->flush();
-
     }
 }

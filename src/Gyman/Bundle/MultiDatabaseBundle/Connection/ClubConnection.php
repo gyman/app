@@ -33,11 +33,13 @@ class ClubConnection
      */
     private $securityContext;
 
-    function getSecurityContext() {
+    public function getSecurityContext()
+    {
         return $this->securityContext;
     }
 
-    function setSecurityContext(\Symfony\Component\Security\Core\SecurityContext $securityContext) {
+    public function setSecurityContext(\Symfony\Component\Security\Core\SecurityContext $securityContext)
+    {
         $this->securityContext = $securityContext;
     }
     
@@ -56,21 +58,19 @@ class ClubConnection
 
     public function onKernelRequest()
     {
-        if(!$this->securityContext->getToken()) {
+        if (!$this->securityContext->getToken()) {
             return;
         }
         
         $user = $this->securityContext->getToken()->getUser();
         $club = $user->getCurrentClub();
 
-        if(!$club)
-        {
+        if (!$club) {
             $club = $user->getClubs()->first();
         }
 
-        if(!$club)
-        {
-         throw new \Exception("no clubs");
+        if (!$club) {
+            throw new \Exception("no clubs");
         }
 
         $db = $club->getDatabase();
@@ -81,9 +81,9 @@ class ClubConnection
 //        if ($this->connection->isConnected()) {
 //            return true;
 //        }
-//        
+//
 //        $this->connection->setSession($this->session);
-//        
+//
 //        $params = $this->connection->getParams();
 //        $driverOptions = isset($params['driverOptions']) ? $params['driverOptions'] : array();
 //

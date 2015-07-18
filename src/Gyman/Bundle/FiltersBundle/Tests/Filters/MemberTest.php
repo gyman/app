@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Member;
 
 class MemberTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

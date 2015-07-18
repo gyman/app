@@ -8,8 +8,7 @@ use Swift_Mailer;
 
 class Mailer
 {
-
-// <editor-fold defaultstate="collapsed" desc="fields">
+    // <editor-fold defaultstate="collapsed" desc="fields">
     /**
      * @var SwiftMailer
      */

@@ -6,5 +6,4 @@ use Symfony\Component\DependencyInjection\Container;
 
 class ContainerStub extends Container
 {
-
 }

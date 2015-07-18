@@ -8,7 +8,6 @@ use DateTime;
 
 class EntryDateTest extends BaseTest
 {
-
     /**
      * @dataProvider applyOneDateDataProvider
      */

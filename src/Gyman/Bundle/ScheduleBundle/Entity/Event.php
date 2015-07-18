@@ -250,7 +250,7 @@ abstract class Event
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-//        $metadata->addPropertyConstraint('startDate', new Assert\GreaterThan(array(
+        //        $metadata->addPropertyConstraint('startDate', new Assert\GreaterThan(array(
 //            'value' => date("Y-m-d H:i:s"),
 //        )));
 //        $metadata->addPropertyConstraint('endDate', new Assert\LessThan(array(

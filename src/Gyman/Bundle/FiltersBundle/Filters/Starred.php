@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class Starred extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $starred = $this["starred"] == 1 ? true : false;

@@ -7,7 +7,6 @@ use Gyman\Bundle\ScheduleBundle\Entity\Activity;
 
 class Activities extends AbstractSubfilter
 {
-
     /**
      * Filters parameter
      */

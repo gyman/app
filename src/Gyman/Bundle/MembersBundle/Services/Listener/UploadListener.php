@@ -13,9 +13,9 @@ class UploadListener
 
     public function onUpload(PostPersistEvent $event)
     {
-            $filename = $event->getFile()->getFilename();
-            $response = $event->getResponse();
-            $response["pathname"] = Globals::applyGalleryDir($filename);
-            $response["filename"] = $filename;
+        $filename = $event->getFile()->getFilename();
+        $response = $event->getResponse();
+        $response["pathname"] = Globals::applyGalleryDir($filename);
+        $response["filename"] = $filename;
     }
 }

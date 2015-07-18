@@ -29,7 +29,6 @@ class VoucherManager extends BaseManager
         } else {
             $this->dispatcher->dispatch(VouchersEvents::EDITED, new VoucherEditedEvent($object));
         }
-
     }
 
     /**

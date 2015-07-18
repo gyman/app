@@ -12,7 +12,6 @@ use Gyman\Bundle\MailerBundle\Service\Mailer;
 
 class RegisteredUserSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var Router $router
      */

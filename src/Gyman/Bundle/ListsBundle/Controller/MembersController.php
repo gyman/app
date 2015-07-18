@@ -16,7 +16,6 @@ use Gyman\Bundle\MembersBundle\Entity\Member;
  */
 class MembersController extends Controller implements ListControllerInterface
 {
-
     private $listname = "members";
 
     /**

@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class Price extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $method = $this["type"];

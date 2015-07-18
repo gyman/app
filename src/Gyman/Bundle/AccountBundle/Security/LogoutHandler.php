@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class LogoutHandler
 {
-
     private $sessionLifetime;
 
     /**

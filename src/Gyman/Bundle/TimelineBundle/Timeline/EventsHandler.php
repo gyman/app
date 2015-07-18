@@ -10,7 +10,6 @@ use Gyman\Bundle\UserBundle\Entity\User;
 
 class EventsHandler
 {
-
     const VERB_BOUGHT = 'bought';
     const VERB_PAID = 'paid';
     const VERB_ENTERED = 'entered';

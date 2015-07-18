@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
 
 class ParseClassnameTraitTest extends BaseTest
 {
-
     public function testParseClassname()
     {
         $traitStub = new ParseClassnameTraitStub();

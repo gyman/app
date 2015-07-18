@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Price;
 
 class PriceTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

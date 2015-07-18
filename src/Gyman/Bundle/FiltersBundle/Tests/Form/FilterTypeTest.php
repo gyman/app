@@ -9,7 +9,6 @@ use Gyman\Bundle\FiltersBundle\Filters as Subfilter;
 
 class FilterTypeTest extends TypeTestCase
 {
-
     /**
      * @dataProvider submitValidDataProvider
      */

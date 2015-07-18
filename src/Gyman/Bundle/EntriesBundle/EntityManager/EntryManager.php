@@ -35,8 +35,7 @@ class EntryManager extends BaseManager
         if ($isNew) {
             $this->dispatcher->dispatch(EntriesEvents::CREATED, new EntryCreatedEvent($object));
         } else {
-//            $this->dispatcher->dispatch(EntriesEvents::EDITED, new EntryCreatedEvent($object));
+            //            $this->dispatcher->dispatch(EntriesEvents::EDITED, new EntryCreatedEvent($object));
         }
-
     }
 }

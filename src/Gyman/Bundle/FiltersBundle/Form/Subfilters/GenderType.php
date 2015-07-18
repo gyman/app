@@ -8,7 +8,6 @@ use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 
 class GenderType extends AbstractSubfilterType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

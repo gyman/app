@@ -7,8 +7,8 @@ use Gyman\Bundle\MultiDatabaseBundle\Exception\NoClubsException;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\SecurityContext;
 
-class CurrentClubWrapper {
-
+class CurrentClubWrapper
+{
     /**
      * @var Club
      */
@@ -24,7 +24,7 @@ class CurrentClubWrapper {
      */
     private $defaultEntityManager;
 
-    function __construct(SecurityContext $context, EntityManager $manager)
+    public function __construct(SecurityContext $context, EntityManager $manager)
     {
         $this->defaultEntityManager = $manager;
         $this->user = $context->getToken()->getUser();
@@ -52,11 +52,10 @@ class CurrentClubWrapper {
 
     public function updateCurrentClub(Club $club)
     {
-        if ($club === null)
-        {
+        if ($club === null) {
             $club = $this->user->getClubs()->first();
 
-            if($club === null) {
+            if ($club === null) {
                 throw new NoClubsException("This user has no clubs");
             }
         }
@@ -65,4 +64,4 @@ class CurrentClubWrapper {
 
         return $club;
     }
-} 
+}

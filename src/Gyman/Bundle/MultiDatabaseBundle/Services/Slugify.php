@@ -1,10 +1,12 @@
 <?php
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
-class Slugify {
+class Slugify
+{
     private $separator = "_";
 
-    public function convert($string) {
+    public function convert($string)
+    {
         return strtolower(
             trim(
                 preg_replace(
@@ -28,4 +30,4 @@ class Slugify {
             )
         );
     }
-} 
+}

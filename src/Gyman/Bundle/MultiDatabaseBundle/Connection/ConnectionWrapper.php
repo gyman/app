@@ -12,7 +12,7 @@ use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Doctrine\DBAL\Events;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 
-class ConnectionWrapper extends Connection 
+class ConnectionWrapper extends Connection
 {
     private $platform;
 
@@ -36,8 +36,7 @@ class ConnectionWrapper extends Connection
 
     public function __construct(
         array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null
-    )
-    {
+    ) {
         $this->platform = $params["platform"] = new MySQL57Platform();
         parent::__construct($params, $driver, $config, $eventManager);
     }
@@ -46,7 +45,7 @@ class ConnectionWrapper extends Connection
     {
         try {
             $this->credentialsStorage->updateCredentials($dbName, $dbUser, $dbPassword);
-        } catch(CredentialsUnchangedException $e) {
+        } catch (CredentialsUnchangedException $e) {
             return;
         }
 

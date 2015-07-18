@@ -20,7 +20,6 @@ use Gyman\Bundle\AccountBundle\Form\UserType;
  */
 class UserController extends Controller
 {
-
     /**
      * Lists all User entities.
      *

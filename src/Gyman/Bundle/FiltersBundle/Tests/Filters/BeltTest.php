@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Belt;
 
 class BeltTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

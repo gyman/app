@@ -77,7 +77,6 @@ class ArrayCollectionConverter implements ParamConverterInterface
                 $fieldsAreLike->add(
                     $builder->expr()->like($alias, "'%{$queredText}%'")
                 );
-
             }
         } else {
             $alias = $builder->getRootAlias() . "." . $fields;

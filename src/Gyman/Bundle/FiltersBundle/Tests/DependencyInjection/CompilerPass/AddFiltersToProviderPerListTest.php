@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class AddFiltersToProviderPerListTest extends BaseTest
 {
-
     public function testProcess()
     {
         $this->markTestIncomplete();

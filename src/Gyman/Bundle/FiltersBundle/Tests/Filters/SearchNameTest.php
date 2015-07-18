@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\SearchName;
 
 class SearchNameTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\CurrentVoucher;
 
 class CurrentVoucherTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

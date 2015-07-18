@@ -26,7 +26,6 @@ final class ClubConnectionCommandListener
 //        $t = $command->getDefinition()->getOption('club')->;
 
         die(var_dump($t));
-
     }
 
     private function isProperCommand(Command $command)

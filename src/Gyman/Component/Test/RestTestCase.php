@@ -1,5 +1,7 @@
 <?php
-namespace Gyman\Component\Test;;
+namespace Gyman\Component\Test;
+
+;
 
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -69,5 +71,4 @@ class RestTestCase extends \PHPUnit_Framework_TestCase
         }
         $this->fail("Path '$path' shouldn't be accessible in this json");
     }
-
 }

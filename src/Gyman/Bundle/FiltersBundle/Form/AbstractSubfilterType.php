@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 
 abstract class AbstractSubfilterType extends AbstractType implements SubfilterTypeInterface
 {
-
     /**
      * types - defines also a methods called in each filter
      */

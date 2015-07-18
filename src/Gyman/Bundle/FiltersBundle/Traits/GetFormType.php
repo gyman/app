@@ -6,7 +6,6 @@ use Gyman\Bundle\FiltersBundle\Filters\FilterInterface;
 
 trait GetFormType
 {
-
     /**
      *
      * @param  \Gyman\Bundle\FiltersBundle\Filters\FilterInterface $filter

@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class MembersList extends AbstractList
 {
-
     protected $listname = "members";
     protected $listTrPartial = "ListsBundle:Members:_list_tr.html.twig";
     protected $columnsCount = 4;

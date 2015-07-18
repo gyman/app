@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class UpdatedProfileSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var Router $router
      */

@@ -7,7 +7,6 @@ use \DateTime;
 
 class Age extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $this->call($this["type"], $queryBuilder);

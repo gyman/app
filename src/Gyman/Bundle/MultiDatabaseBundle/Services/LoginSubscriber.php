@@ -72,7 +72,8 @@ class LoginSubscriber implements EventSubscriberInterface
         $this->updateConnection($db);
     }
 
-    private function updateConnection(array $db) {
+    private function updateConnection(array $db)
+    {
         $this->clubConnection->forceSwitch(
             $db[CredentialsStorage::PARAM_BASE],
             $db[CredentialsStorage::PARAM_USER],

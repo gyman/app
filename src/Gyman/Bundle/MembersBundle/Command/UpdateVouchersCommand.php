@@ -50,10 +50,10 @@ class UpdateVouchersCommand extends ContainerAwareCommand
 
         if (count($vouchers) > 0) {
             foreach ($vouchers as $voucher) {
-                    $member = $voucher->getMember();
-                    $member->setCurrentVoucher($voucher);
-                    $em->persist($member);
-                    $ids[] = $voucher->getId();
+                $member = $voucher->getMember();
+                $member->setCurrentVoucher($voucher);
+                $em->persist($member);
+                $ids[] = $voucher->getId();
             }
         }
 

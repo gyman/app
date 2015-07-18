@@ -7,7 +7,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class FilterRepository extends EntityRepository
 {
-
     /**
      * @codeCoverageIgnore
      * @return type

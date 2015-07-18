@@ -17,7 +17,7 @@ class ActivityValidator extends ConstraintValidator
             $activities = $entry->getVoucher()->getActivities();
 
             if (count($activities) === 0) {
-// karnet nie jest typu open
+                // karnet nie jest typu open
                 return true;
             }
 

@@ -7,7 +7,6 @@ use DateTime;
 
 class CheckedIn extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $checkedIn = (bool) $this["checkedIn"];

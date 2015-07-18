@@ -7,7 +7,6 @@ use DateTime;
 
 abstract class DateFilter extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $this["date1"] = $this->fixDate($this["date1"]);

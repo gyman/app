@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\EntryType;
 
 class EntryTypeTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

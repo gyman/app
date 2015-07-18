@@ -9,7 +9,6 @@ use Gyman\Bundle\ScheduleBundle\Entity\Activity;
 
 class ActivitiesTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

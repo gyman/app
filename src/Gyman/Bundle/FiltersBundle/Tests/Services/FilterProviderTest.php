@@ -10,7 +10,6 @@ use Gyman\Bundle\FiltersBundle\Entity\Filter;
 
 class FilterProviderTest extends BaseTest
 {
-
     public function testAddFilterForList()
     {
         $filterProvider = new FilterProvider($this->container);

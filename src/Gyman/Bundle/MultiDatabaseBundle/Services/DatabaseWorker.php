@@ -11,8 +11,8 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\Output;
 
-final class DatabaseWorker {
-
+final class DatabaseWorker
+{
     const QUERY_CREATE_DB = 'CREATE DATABASE IF NOT EXISTS `{{name}}`;';
     const QUERY_DROP_DB = 'DROP DATABASE IF EXISTS `{{name}}`;';
 
@@ -61,7 +61,7 @@ final class DatabaseWorker {
      */
     private $defaultConnection;
 
-    function __construct($clubDatabaseNameTemplate, $username, $password)
+    public function __construct($clubDatabaseNameTemplate, $username, $password)
     {
         $this->clubDatabaseNameTemplate = $clubDatabaseNameTemplate;
         $this->username = $username;
@@ -72,7 +72,8 @@ final class DatabaseWorker {
      * Setup database for given club name
      * @param $clubName
      */
-    public function setupDatabase($clubName) {
+    public function setupDatabase($clubName)
+    {
         $this->dbName = $this->createDatabaseName($clubName);
 
         $this->createDatabase();
@@ -104,7 +105,8 @@ final class DatabaseWorker {
     /**
      * Creates database
      */
-    public function createDatabase() {
+    public function createDatabase()
+    {
         $this->defaultConnection->exec(
             $this->getCreateDatabaseQuery($this->dbName)
         );
@@ -126,10 +128,11 @@ final class DatabaseWorker {
      * Creates schema in existing database
      * @throws \Doctrine\ORM\Tools\ToolsException
      */
-    public function createSchema() {
+    public function createSchema()
+    {
         $metadatas = $this->clubEntityManager->getMetadataFactory()->getAllMetadata();
 
-        if ( ! empty($metadatas)) {
+        if (! empty($metadatas)) {
             $tool = new SchemaTool($this->clubEntityManager);
             $tool->createSchema($metadatas);
         } else {
@@ -197,7 +200,8 @@ final class DatabaseWorker {
      * @param string $clubName
      * @return string mixed
      */
-    protected function createDatabaseName($clubName) {
+    protected function createDatabaseName($clubName)
+    {
         $clubSlug = $this->slugifier->convert($clubName);
         $dbname = str_replace('{{club_name}}', $clubSlug, $this->clubDatabaseNameTemplate);
         return $dbname;

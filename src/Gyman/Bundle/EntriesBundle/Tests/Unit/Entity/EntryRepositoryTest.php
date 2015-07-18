@@ -6,7 +6,6 @@ use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class EntryRepositoryTest extends BaseTest
 {
-
     public function testGetCountByActivitiesQueryBuilder()
     {
         $startDate = new \DateTime();

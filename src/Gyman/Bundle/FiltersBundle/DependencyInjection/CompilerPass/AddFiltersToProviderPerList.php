@@ -11,7 +11,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class AddFiltersToProviderPerList implements CompilerPassInterface
 {
-
     public function process(ContainerBuilder $container)
     {
         $lists = $container->getParameter("filter_provider.lists");

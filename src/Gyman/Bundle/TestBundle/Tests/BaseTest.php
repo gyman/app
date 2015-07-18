@@ -7,7 +7,6 @@ use Gyman\Bundle\TestBundle\Traits\SetupTrait;
 
 class BaseTest extends WebTestCase
 {
-
     protected $container;
 
     public function setUp()

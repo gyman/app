@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\CheckedIn;
 
 class CheckedInTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

@@ -17,7 +17,6 @@ use Symfony\Component\Form\FormInterface;
 
 class FilterType extends AbstractType
 {
-
     use ParseClassname,
         GetFormType;
 

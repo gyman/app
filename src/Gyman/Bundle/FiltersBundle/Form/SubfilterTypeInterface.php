@@ -7,7 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 interface SubfilterTypeInterface
 {
-
     public function getName();
 
     public function buildForm(FormBuilderInterface $builder, array $options);

@@ -8,7 +8,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Age;
 
 class GetFormTypeTraitTest extends BaseTest
 {
-
     public function testGetFormType()
     {
         $stub = new GetFormTypeTraitStub();

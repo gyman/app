@@ -6,7 +6,8 @@ use Gyman\Bundle\EntriesBundle\Services\EntryHandler;
 use Gyman\Component\Test\UnitTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class EntryHandlerTest extends UnitTestCase {
+class EntryHandlerTest extends UnitTestCase
+{
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
@@ -73,7 +74,8 @@ class EntryHandlerTest extends UnitTestCase {
     /**
      * @test
      */
-    public function member_has_opened_entry_is_redirected() {
+    public function member_has_opened_entry_is_redirected()
+    {
         $this->routerMock->expects($this->once())
             ->method("generate")
             ->will($this->returnValue("/entry/close/999"));
@@ -103,7 +105,8 @@ class EntryHandlerTest extends UnitTestCase {
     /**
      * @test
      */
-    public function renders_opening_form() {
+    public function renders_opening_form()
+    {
         $memberMock = $this->getMemberMock();
 
         $memberMock->expects($this->once())
@@ -293,7 +296,8 @@ class EntryHandlerTest extends UnitTestCase {
     /**
      * @test
      */
-    public function entry_closing_form_is_rendered() {
+    public function entry_closing_form_is_rendered()
+    {
         $this->templatingMock->expects($this->once())
             ->method("render")
             ->will($this->returnValue("renderedTemplate"));
@@ -314,7 +318,8 @@ class EntryHandlerTest extends UnitTestCase {
     /**
      * @test
      */
-    public function entry_closing_is_posted_and_performed() {
+    public function entry_closing_is_posted_and_performed()
+    {
         $this->requestMock->expects($this->once())
             ->method("getMethod")
             ->will($this->returnValue("POST"));

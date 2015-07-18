@@ -11,7 +11,6 @@ use Doctrine\ORM\QueryBuilder;
  */
 class SearchName extends AbstractSubfilter
 {
-
     public function apply(QueryBuilder $queryBuilder)
     {
         $string = $this["search"];

@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Starred;
 
 class StarredTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

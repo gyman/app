@@ -15,7 +15,6 @@ use Symfony\Component\Form\Form;
 
 class FiltersCollectionType extends AbstractType
 {
-
     use ParseClassname,
         GetFormType;
 

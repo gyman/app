@@ -11,7 +11,6 @@ use Gyman\Component\Test\RestTestCase;
  */
 class ApiControllerTest extends WebTestCase
 {
-
     protected function setUp()
     {
         parent::setUp();

@@ -7,7 +7,6 @@ namespace Gyman\Bundle\MailerBundle\Service;
  */
 class MailerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Mailer
      */
@@ -30,7 +29,6 @@ class MailerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
@@ -116,6 +114,5 @@ class MailerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('translated_text'));
 
         return $mock;
-
     }// </editor-fold>
 }

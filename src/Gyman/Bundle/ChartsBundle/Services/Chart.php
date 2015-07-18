@@ -80,7 +80,7 @@ class Chart
                 if (isset($preparedResult[$name][$date])) {
                     $value = $preparedResult[$name][$date];
                 } else {
-                        $value = 0;
+                    $value = 0;
                 }
 
                 $serie[] = $value;

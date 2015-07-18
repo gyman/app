@@ -6,7 +6,6 @@ use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
 
 class ParseClassnameTraitStub
 {
-
     use ParseClassname;
 
     public function testParseClassname($object)

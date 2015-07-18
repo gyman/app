@@ -215,7 +215,6 @@ abstract class Occurence
     {
         if ($endDatePassed) {
             return $this->getStartDate()->getTimestamp() + $this->getDuration() * 60 < time();
-
         }
 
         return $this->getStartDate()->getTimestamp() < time();

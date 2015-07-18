@@ -5,8 +5,8 @@ use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class CredentialsStorage {
-
+class CredentialsStorage
+{
     const SESSION_ACTIVE_DYNAMIC_CONN = 'active_dynamic_conn';
 
     const PARAM_BASE = "dbname";
@@ -47,7 +47,7 @@ class CredentialsStorage {
      */
     public function updateCredentials($dbName, $dbUser, $dbPassword)
     {
-        if($this->getDatabaseName() === $dbName) {
+        if ($this->getDatabaseName() === $dbName) {
             throw new CredentialsUnchangedException();
         }
 
@@ -111,7 +111,7 @@ class CredentialsStorage {
 
     private function loadStorage()
     {
-        if($this->session !== null) {
+        if ($this->session !== null) {
             if (!$this->session->has(self::SESSION_ACTIVE_DYNAMIC_CONN)) {
                 throw new SessionCredentialsNotInitializedException;
             }

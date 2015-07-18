@@ -2,7 +2,6 @@
 
 namespace Gyman\Bundle\EntriesBundle\Exception;
 
-
-class EntryFormInvalidException extends \Exception {
-
-} 
+class EntryFormInvalidException extends \Exception
+{
+}

@@ -7,7 +7,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Gender;
 
 class GenderTest extends BaseTest
 {
-
     /**
      * @dataProvider applyToQueryDataProvider
      */

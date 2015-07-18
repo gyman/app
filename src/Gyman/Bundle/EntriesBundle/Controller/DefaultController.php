@@ -75,5 +75,4 @@ class DefaultController extends Controller
             $this->generateUrl("_entrance_add", ["id" => $member->getId()])
         );
     }
-
 }

@@ -9,7 +9,6 @@ use Gyman\Bundle\FiltersBundle\Filters\Belt;
 
 class BeltType extends AbstractSubfilterType
 {
-
     private $choices = array(
         parent::TYPE_EQ  => parent::LABEL_EQ,
         parent::TYPE_LT  => parent::LABEL_LT,

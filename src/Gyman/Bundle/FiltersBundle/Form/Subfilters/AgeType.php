@@ -8,7 +8,6 @@ use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 
 class AgeType extends AbstractSubfilterType
 {
-
     private $choices = array(
         parent::TYPE_LT      => parent::LABEL_LT,
         parent::TYPE_GT      => parent::LABEL_GT,
