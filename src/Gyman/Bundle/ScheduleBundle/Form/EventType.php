@@ -2,15 +2,15 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Form;
 
+use Gyman\Bundle\ScheduleBundle\Entity as Events;
+use Gyman\Bundle\ScheduleBundle\Validator\AtLeastOneDaySelectedIfNotSingle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
-use Gyman\Bundle\ScheduleBundle\Entity as Events;
-use Gyman\Bundle\ScheduleBundle\Validator\AtLeastOneDaySelectedIfNotSingle;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventType extends AbstractType
@@ -39,13 +39,12 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "setupConditionalFields"));
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'setupConditionalFields']);
 
         $builder
-            ->add('duration', "number", [
-                "label" => "Czas trwania (w minutach)",
-            ])
-        ;
+            ->add('duration', 'number', [
+                'label' => 'Czas trwania (w minutach)',
+            ]);
     }
 
     /**
@@ -54,22 +53,22 @@ class EventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'validation_groups' => $this->getValidationGroupsCallback()
+            'validation_groups' => $this->getValidationGroupsCallback(),
         ]);
     }
 
     private function setupStartDateFromEvent($form)
     {
-        $form->add('startDate', "datetime", [
-            "widget"       => "single_text",
-            "format"       => "dd.MM.yyyy HH:mm",
-            "with_minutes" => true,
-            "with_seconds" => false,
-            "label"        => "Data i godzina rozpoczęcia",
-            "attr"         => [
-                "placeholder" => "dd.mm.yyyy hh:mm",
-                "readonly"    => "READONLY"
-            ]
+        $form->add('startDate', 'datetime', [
+            'widget'       => 'single_text',
+            'format'       => 'dd.MM.yyyy HH:mm',
+            'with_minutes' => true,
+            'with_seconds' => false,
+            'label'        => 'Data i godzina rozpoczęcia',
+            'attr'         => [
+                'placeholder' => 'dd.mm.yyyy hh:mm',
+                'readonly'    => 'READONLY',
+            ],
         ]);
     }
 
@@ -79,40 +78,40 @@ class EventType extends AbstractType
     private function getValidationGroupsCallback()
     {
         return function (FormInterface $form) {
-            $validationGroups = array();
+            $validationGroups = [];
 
             /** @var Gyman\Bundle\ScheduleBundle\Entity\Event $entity */
             $event = $form->getData();
 
             if ($event->isNew()) {
-                if ($form->getRoot()->has("eventType")) {
-                    $eventType = $form->getRoot()->get("eventType")->getData();
+                if ($form->getRoot()->has('eventType')) {
+                    $eventType = $form->getRoot()->get('eventType')->getData();
                 } else {
                     $eventType = Events\Event::SINGLE;
                 }
 
-                $validationGroups[] = "new";
+                $validationGroups[] = 'new';
 
                 if ($eventType == Events\Event::WEEKLY) {
-                    $validationGroups[] = "weekly";
-                    $validationGroups[] = "notSingle";
+                    $validationGroups[] = 'weekly';
+                    $validationGroups[] = 'notSingle';
                 } elseif ($eventType == Events\Event::SINGLE) {
-                    $validationGroups[] = "single";
+                    $validationGroups[] = 'single';
                 }
             } else {
-                if ($form->getRoot()->has("editType")) {
-                    $editType = $form->getRoot()->get("editType")->getData();
+                if ($form->getRoot()->has('editType')) {
+                    $editType = $form->getRoot()->get('editType')->getData();
                 } else {
                     $editType = Events\Occurence::SINGULAR;
                 }
 
-                $validationGroups[] = "edit";
+                $validationGroups[] = 'edit';
 
                 if ($editType == Events\Occurence::SERIAL) {
-                    $validationGroups[] = "serial";
-                    $validationGroups[] = "notSingle";
+                    $validationGroups[] = 'serial';
+                    $validationGroups[] = 'notSingle';
                 } elseif ($editType == Events\Occurence::SINGULAR) {
-                    $validationGroups[] = "singular";
+                    $validationGroups[] = 'singular';
                 }
             }
 
@@ -124,11 +123,11 @@ class EventType extends AbstractType
 
     private function validationGroupActivity(Form $form, array &$validationGroups)
     {
-        if ($form->getRoot()->has("activity") && $form->getRoot()->has("newActivity")) {
-            if ($form->getRoot()->get("newActivity")->getData() !== null) {
-                $validationGroups[] = "newActivity";
+        if ($form->getRoot()->has('activity') && $form->getRoot()->has('newActivity')) {
+            if ($form->getRoot()->get('newActivity')->getData() !== null) {
+                $validationGroups[] = 'newActivity';
             } else {
-                $validationGroups[] = "dbActivity";
+                $validationGroups[] = 'dbActivity';
             }
         }
     }
@@ -179,13 +178,13 @@ class EventType extends AbstractType
      */
     private function setupDescription(Form $form)
     {
-        $form->add('description', "textarea", [
-            "label"  => "Opis",
-            "data"   => $this->getOccurence()->getDescription(),
-            "mapped" => false,
-            "attr"   => [
-                "placeholder" => "opis zajęć"
-            ]
+        $form->add('description', 'textarea', [
+            'label'  => 'Opis',
+            'data'   => $this->getOccurence()->getDescription(),
+            'mapped' => false,
+            'attr'   => [
+                'placeholder' => 'opis zajęć',
+            ],
         ]);
     }
 
@@ -194,19 +193,19 @@ class EventType extends AbstractType
      */
     private function setupEditType(Form $form)
     {
-        $form->add('editType', "choice", [
-            "choices"     => [
-                Events\Occurence::SERIAL   => "to wystąpienie i wszystkie następne",
-                Events\Occurence::SINGULAR => "tylko to wystąpienie",
+        $form->add('editType', 'choice', [
+            'choices'     => [
+                Events\Occurence::SERIAL   => 'to wystąpienie i wszystkie następne',
+                Events\Occurence::SINGULAR => 'tylko to wystąpienie',
             ],
-            "empty_data"  => Events\Occurence::SINGULAR,
-            "mapped"      => false,
-            "label"       => "Edytuj",
-            "expanded"    => true,
-            "multiple"    => false,
-            "constraints" => [
-                new NotBlank(["groups" => ["edit"]])
-            ]
+            'empty_data'  => Events\Occurence::SINGULAR,
+            'mapped'      => false,
+            'label'       => 'Edytuj',
+            'expanded'    => true,
+            'multiple'    => false,
+            'constraints' => [
+                new NotBlank(['groups' => ['edit']]),
+            ],
         ]);
     }
 
@@ -215,19 +214,19 @@ class EventType extends AbstractType
      */
     private function setupEventType(Form $form)
     {
-        $form->add('eventType', "choice", [
-            "choices"     => [
-                Events\Event::WEEKLY => "co tydzień",
-                Events\Event::SINGLE => "nie",
+        $form->add('eventType', 'choice', [
+            'choices'     => [
+                Events\Event::WEEKLY => 'co tydzień',
+                Events\Event::SINGLE => 'nie',
             ],
-            "mapped"      => false,
-            "label"       => "Powtarza się",
-            "expanded"    => true,
-            "multiple"    => false,
-            "empty_data"  => Events\Event::WEEKLY,
-            "constraints" => [
-                new NotBlank(["groups" => ["new"]])
-            ]
+            'mapped'      => false,
+            'label'       => 'Powtarza się',
+            'expanded'    => true,
+            'multiple'    => false,
+            'empty_data'  => Events\Event::WEEKLY,
+            'constraints' => [
+                new NotBlank(['groups' => ['new']]),
+            ],
         ]);
     }
 
@@ -237,19 +236,19 @@ class EventType extends AbstractType
      */
     private function setupActivity(Form $form)
     {
-        $form->add('activity', "entity", [
-                "label"       => "Zajęcia",
+        $form->add('activity', 'entity', [
+                'label'       => 'Zajęcia',
                 'class'       => 'ScheduleBundle:Activity',
                 'property'    => 'name',
-                "empty_value" => "wybierz...",
-                "empty_data"  => null,
+                'empty_value' => 'wybierz...',
+                'empty_data'  => null,
             ])
-            ->add('newActivity', "text", [
-                "label"  => "Nazwa zajęć",
-                "mapped" => false,
-                "attr"   => [
-                    "placeholder" => "wpisz nazwę nowych zajęć"
-                ]
+            ->add('newActivity', 'text', [
+                'label'  => 'Nazwa zajęć',
+                'mapped' => false,
+                'attr'   => [
+                    'placeholder' => 'wpisz nazwę nowych zajęć',
+                ],
         ]);
     }
 
@@ -258,14 +257,14 @@ class EventType extends AbstractType
      */
     private function setupEndDate(Form $form)
     {
-        $form->add('endDate', "date", [
-            "widget" => "single_text",
-            "format" => "dd.MM.yyyy",
-            "label"  => "Data zakończenia",
-            "attr"   => [
-                "placeholder" => "dd.mm.yyyy",
-                "readonly"    => "READONLY"
-            ]
+        $form->add('endDate', 'date', [
+            'widget' => 'single_text',
+            'format' => 'dd.MM.yyyy',
+            'label'  => 'Data zakończenia',
+            'attr'   => [
+                'placeholder' => 'dd.mm.yyyy',
+                'readonly'    => 'READONLY',
+            ],
         ]);
     }
 
@@ -274,26 +273,26 @@ class EventType extends AbstractType
      */
     private function setupDays(Form $form)
     {
-        $form->add('days', "choice", [
-            "choices"     => [
-                "monday"    => "poniedziałek",
-                "tuesday"   => "wtorek",
-                "wednesday" => "środa",
-                "thursday"  => "czwartek",
-                "friday"    => "piątek",
-                "saturday"  => "sobota",
-                "sunday"    => "niedziela",
+        $form->add('days', 'choice', [
+            'choices'     => [
+                'monday'    => 'poniedziałek',
+                'tuesday'   => 'wtorek',
+                'wednesday' => 'środa',
+                'thursday'  => 'czwartek',
+                'friday'    => 'piątek',
+                'saturday'  => 'sobota',
+                'sunday'    => 'niedziela',
             ],
-            "data"        => ["monday", "tuesday", "wednesday", "thursday", "friday"],
-            "multiple"    => true,
-            "expanded"    => true,
-            "mapped"      => false,
-            "label"       => "Dni",
-            "constraints" => [
+            'data'        => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
+            'multiple'    => true,
+            'expanded'    => true,
+            'mapped'      => false,
+            'label'       => 'Dni',
+            'constraints' => [
                 new AtLeastOneDaySelectedIfNotSingle([
-                    'groups' => ['notSingle']
-                    ])
-            ]
+                    'groups' => ['notSingle'],
+                    ]),
+            ],
         ]);
     }
 }

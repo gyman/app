@@ -13,7 +13,7 @@ class ActivityValidator extends ConstraintValidator
 
         $entry = $form->getData();
 
-        if ($entry->getEntryType() == "voucher") {
+        if ($entry->getEntryType() == 'voucher') {
             $activities = $entry->getVoucher()->getActivities();
 
             if (count($activities) === 0) {

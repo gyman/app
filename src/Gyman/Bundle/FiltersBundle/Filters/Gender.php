@@ -8,7 +8,7 @@ class Gender extends AbstractSubfilter
 {
     public function apply(QueryBuilder $queryBuilder)
     {
-        $queryBuilder->andWhere("m.gender = :gender");
-        $queryBuilder->setParameter("gender", $this["gender"]);
+        $queryBuilder->andWhere('m.gender = :gender');
+        $queryBuilder->setParameter('gender', $this['gender']);
     }
 }

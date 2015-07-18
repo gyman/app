@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\MembersBundle\Form;
 
+use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\MembersBundle\Form\DataTransformer\DateToStringTransformer;
+use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\MembersBundle\Form\DataTransformer\DateToStringTransformer;
-use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 
 class MemberType extends AbstractType
 {
@@ -27,32 +27,32 @@ class MemberType extends AbstractType
         $builder
                 ->add('name')
                 ->add(
-                    $builder->create('birthdate', "date", [
-                            "widget" => "single_text",
-                            "format" => "dd.MM.yyyy"
+                    $builder->create('birthdate', 'date', [
+                            'widget' => 'single_text',
+                            'format' => 'dd.MM.yyyy',
                         ])
                     ->addModelTransformer(new DateToStringTransformer())
                 )
                  /*
                  * @todo: translations!
                  */
-                ->add('gender', "choice", [
-                        "choices" => [
-                            "male"   => "Mężczyzna",
-                            "female" => "Kobieta"
-                        ]
+                ->add('gender', 'choice', [
+                        'choices' => [
+                            'male'   => 'Mężczyzna',
+                            'female' => 'Kobieta',
+                        ],
                 ])
             /**
              * @todo: translations!
              */
-                ->add('belt', "choice", [
-                    "choices" => [
-                        "white"  => "biały",
-                        "blue"   => "niebieski",
-                        "purple" => "purpurowy",
-                        "brown"  => "brązowy",
-                        "black"  => "czarny"
-                    ]
+                ->add('belt', 'choice', [
+                    'choices' => [
+                        'white'  => 'biały',
+                        'blue'   => 'niebieski',
+                        'purple' => 'purpurowy',
+                        'brown'  => 'brązowy',
+                        'black'  => 'czarny',
+                    ],
                 ])
                 ->add('phone')
                 ->add('email')
@@ -60,11 +60,10 @@ class MemberType extends AbstractType
                 ->add('zipcode')
                 ->add('barcode')
                 ->add('foto', 'hidden')
-                ->add('fotoUploader', "file", [
-                    "mapped" => false,
-                    "attr"   => ["data-url" => $this->uploaderHelper->endpoint('gallery')]
-                ])
-        ;
+                ->add('fotoUploader', 'file', [
+                    'mapped' => false,
+                    'attr'   => ['data-url' => $this->uploaderHelper->endpoint('gallery')],
+                ]);
     }
 
     /**
@@ -72,10 +71,10 @@ class MemberType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Gyman\Bundle\MembersBundle\Entity\Member',
-            'csrf_protection' => true
-        ));
+        $resolver->setDefaults([
+            'data_class'      => 'Gyman\Bundle\MembersBundle\Entity\Member',
+            'csrf_protection' => true,
+        ]);
     }
 
     /**
@@ -88,11 +87,11 @@ class MemberType extends AbstractType
 
     private function getActivitiesFromOptions($options)
     {
-        $activities = array();
+        $activities = [];
 
-        if ($options["data"] instanceof Member) {
+        if ($options['data'] instanceof Member) {
             /** @var Member */
-            $member = $options["data"];
+            $member = $options['data'];
 
             /** @var Doctrine\ORM\PersistentCollection $vouchers */
             $vouchersCollection = $member->getVouchers();

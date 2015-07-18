@@ -2,11 +2,11 @@
 
 namespace Gyman\Bundle\FiltersBundle\Form\Subfilters;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 use Symfony\Component\Validator\Constraints\Callback;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Context\LegacyExecutionContext as ExecutionContext;
 
 class ActivitiesType extends AbstractSubfilterType
@@ -18,28 +18,28 @@ class ActivitiesType extends AbstractSubfilterType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('activity', "entity", [
+            ->add('activity', 'entity', [
                 'class'         => 'ScheduleBundle:Activity',
                 'property'      => 'name',
                 'multiple'      => true,
-                "property_path" => "[activities]",
+                'property_path' => '[activities]',
 //                'query_builder' => function ($er) {
 //                return $er->createQueryBuilder('a');
 //            },
-                "constraints" => $this->getActivityFieldConstraints(),
+                'constraints' => $this->getActivityFieldConstraints(),
         ]);
     }
 
     public function getName()
     {
-        return "activities";
+        return 'activities';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => "Gyman\Bundle\FiltersBundle\Filters\Activities",
-        ));
+        ]);
     }
 
     private function getActivityFieldConstraints()

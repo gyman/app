@@ -12,11 +12,11 @@ class Activities extends AbstractSubfilter
      */
     public function apply(QueryBuilder $queryBuilder)
     {
-        if (count($this["activities"]) == 0) {
+        if (count($this['activities']) == 0) {
             return;
         }
 
-        $activities = $this["activities"]->toArray();
+        $activities = $this['activities']->toArray();
 
         $queryBuilder->andWhere(
             $queryBuilder->expr()->in(

@@ -6,7 +6,7 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 class ActivitiesChoiceList extends SimpleChoiceList
 {
-    private $disabledItems = array();
+    private $disabledItems = [];
 
 //    function getDisabledItems()
 //    {

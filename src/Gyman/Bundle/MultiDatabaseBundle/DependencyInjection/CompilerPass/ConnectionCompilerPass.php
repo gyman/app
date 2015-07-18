@@ -15,7 +15,6 @@ class ConnectionCompilerPass implements CompilerPassInterface
     {
         $connection = $container
             ->getDefinition('doctrine.dbal.club_connection')
-            ->addMethodCall('setCredentialsStorage', [new Reference('gyman.multidatabase.credentials_storage')])
-        ;
+            ->addMethodCall('setCredentialsStorage', [new Reference('gyman.multidatabase.credentials_storage')]);
     }
 }

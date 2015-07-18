@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -35,7 +36,7 @@ class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, Co
     {
         $this->manager = $manager;
         $file = $this->translateClassToFilename($this);
-        $value = Yaml::parse(file_get_contents($this->dir."/../Yaml/".$file));
+        $value = Yaml::parse(file_get_contents($this->dir . '/../Yaml/' . $file));
 
         foreach ($value as $key => $params) {
             $object = $this->insert($params);
@@ -57,7 +58,7 @@ class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function insert($params)
     {
-        throw new \Exception("Must implement this method!");
+        throw new \Exception('Must implement this method!');
     }
 
     /**
@@ -66,9 +67,9 @@ class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function translateClassToFilename($object)
     {
-        $classnameArray = explode("\\", get_class($object));
+        $classnameArray = explode('\\', get_class($object));
         $class = array_pop($classnameArray);
-        $filename = strtolower(substr($class, 0, strpos($class, "Data"))) . ".yml";
+        $filename = strtolower(substr($class, 0, strpos($class, 'Data'))) . '.yml';
 
         return $filename;
     }

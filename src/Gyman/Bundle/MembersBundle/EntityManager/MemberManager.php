@@ -4,9 +4,8 @@ namespace Gyman\Bundle\MembersBundle\EntityManager;
 
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
-use Gyman\Bundle\MembersBundle\MembersEvents;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Gyman\Bundle\MembersBundle\Event\MemberEditedEvent;
+use Gyman\Bundle\MembersBundle\MembersEvents;
 
 class MemberManager extends BaseManager
 {

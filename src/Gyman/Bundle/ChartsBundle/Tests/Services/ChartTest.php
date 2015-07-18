@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\ChartsBundle\Tests\Services;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
-use Gyman\Bundle\ChartsBundle\Services\Chart;
-use Doctrine\ORM\EntityRepository;
 use DateTime;
+use Doctrine\ORM\EntityRepository;
+use Gyman\Bundle\ChartsBundle\Services\Chart;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class ChartTest extends BaseTest
 {
@@ -15,7 +15,7 @@ class ChartTest extends BaseTest
     public function testPrepareResults($dataset, $expected)
     {
         $chart = new Chart();
-        $chart->dateFormat = "Y-m-d";
+        $chart->dateFormat = 'Y-m-d';
 
         $result = $chart->prepareResults($dataset);
 
@@ -30,7 +30,7 @@ class ChartTest extends BaseTest
         $this->dataset = $dataset;
 
         $chart = new Chart();
-        $chart->dateFormat = "Y-m-d";
+        $chart->dateFormat = 'Y-m-d';
 
         $chart->setEntityManager(
             $this->getEntityManagerMock(
@@ -67,36 +67,36 @@ class ChartTest extends BaseTest
     public function getActivityByFrequencyDataProvider()
     {
         return [
-            ["dataset"  => [], "expected" => new Chart([[
+            ['dataset'     => [], 'expected' => new Chart([[
                     'type' => 'pie',
                     'name' => 'abc',
-                    "data" => []
+                    'data' => [],
                     ]], [])],
             [
-                "dataset"  => [
+                'dataset'  => [
                     [
-                        "name" => "name1",
-                        "cnt"  => 33
+                        'name' => 'name1',
+                        'cnt'  => 33,
                     ],
                     [
-                        "name" => "name2",
-                        "cnt"  => 55
+                        'name' => 'name2',
+                        'cnt'  => 55,
                     ],
                     [
-                        "name" => "name3",
-                        "cnt"  => 24
+                        'name' => 'name3',
+                        'cnt'  => 24,
                     ],
                 ],
-                "expected" => new Chart([[
+                'expected' => new Chart([[
                     'type' => 'pie',
                     'name' => 'abc',
-                    "data" => [
-                        ["name1", 33],
-                        ["name2", 55],
-                        ["name3", 24],
-                    ]
-                    ]], [])
-            ]
+                    'data' => [
+                        ['name1', 33],
+                        ['name2', 55],
+                        ['name3', 24],
+                    ],
+                    ]], []),
+            ],
         ];
     }
 
@@ -104,49 +104,49 @@ class ChartTest extends BaseTest
     {
         return [
             [
-                "dataset"  => [],
-                "expected" => new Chart(
+                'dataset'  => [],
+                'expected' => new Chart(
                     [],
                     [
-                        "2014-05-01",
-                        "2014-05-02",
-                        "2014-05-03",
-                        "2014-05-04",
-                        "2014-05-05",
-                        "2014-05-06",
-                        "2014-05-07",
-                        "2014-05-08",
-                        "2014-05-09",
-                        "2014-05-10",
-                        "2014-05-11",
-                        "2014-05-12",
-                        "2014-05-13",
-                        "2014-05-14",
-                        "2014-05-15",
-                        "2014-05-16",
-                        "2014-05-17",
-                        "2014-05-18",
-                        "2014-05-19",
-                        "2014-05-20",
-                        "2014-05-21",
-                        "2014-05-22",
-                        "2014-05-23",
-                        "2014-05-24",
-                        "2014-05-25",
-                        "2014-05-26",
-                        "2014-05-27",
-                        "2014-05-28",
-                        "2014-05-29",
-                        "2014-05-30",
-                        "2014-05-31",
+                        '2014-05-01',
+                        '2014-05-02',
+                        '2014-05-03',
+                        '2014-05-04',
+                        '2014-05-05',
+                        '2014-05-06',
+                        '2014-05-07',
+                        '2014-05-08',
+                        '2014-05-09',
+                        '2014-05-10',
+                        '2014-05-11',
+                        '2014-05-12',
+                        '2014-05-13',
+                        '2014-05-14',
+                        '2014-05-15',
+                        '2014-05-16',
+                        '2014-05-17',
+                        '2014-05-18',
+                        '2014-05-19',
+                        '2014-05-20',
+                        '2014-05-21',
+                        '2014-05-22',
+                        '2014-05-23',
+                        '2014-05-24',
+                        '2014-05-25',
+                        '2014-05-26',
+                        '2014-05-27',
+                        '2014-05-28',
+                        '2014-05-29',
+                        '2014-05-30',
+                        '2014-05-31',
                     ],
-                    "Y-m-d"
+                    'Y-m-d'
                 ),
-                "days"     => 30,
-                "endDate"  => new DateTime("2014-05-31")
+                'days'     => 30,
+                'endDate'  => new DateTime('2014-05-31'),
             ],
             [
-                "dataset"  => [
+                'dataset'  => [
                     [
                         'name' => 'name1',
                         'cnt'  => '33',
@@ -165,7 +165,7 @@ class ChartTest extends BaseTest
                     [
                         'name' => 'name1',
                         'cnt'  => '30',
-                        'date' => '2014-05-02'
+                        'date' => '2014-05-02',
                     ],
                     [
                         'name' => 'name2',
@@ -198,54 +198,54 @@ class ChartTest extends BaseTest
                         'date' => '2014-05-31',
                     ],
                 ],
-                "expected" => new Chart([
-                    ["name" => "name1", "data" => [
+                'expected' => new Chart([
+                    ['name' => 'name1', 'data' => [
                             33, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 15
+                            0, 0, 0, 0, 0, 0, 15,
                         ]],
-                    ["name" => "name2", "data" => [
+                    ['name' => 'name2', 'data' => [
                             33, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 15
+                            0, 0, 0, 0, 0, 0, 15,
                         ]],
-                    ["name" => "name3", "data" => [
+                    ['name' => 'name3', 'data' => [
                             33, 0, 0, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 15
+                            0, 0, 0, 0, 0, 0, 15,
                         ]],
                     ], [
-                    "2014-05-01",
-                    "2014-05-02",
-                    "2014-05-03",
-                    "2014-05-04",
-                    "2014-05-05",
-                    "2014-05-06",
-                    "2014-05-07",
-                    "2014-05-08",
-                    "2014-05-09",
-                    "2014-05-10",
-                    "2014-05-11",
-                    "2014-05-12",
-                    "2014-05-13",
-                    "2014-05-14",
-                    "2014-05-15",
-                    "2014-05-16",
-                    "2014-05-17",
-                    "2014-05-18",
-                    "2014-05-19",
-                    "2014-05-20",
-                    "2014-05-21",
-                    "2014-05-22",
-                    "2014-05-23",
-                    "2014-05-24",
-                    "2014-05-25",
-                    "2014-05-26",
-                    "2014-05-27",
-                    "2014-05-28",
-                    "2014-05-29",
-                    "2014-05-30",
-                    "2014-05-31",
-                    ], "Y-m-d"),
-                "days"     => 30,
-                "endDate"  => new DateTime("2014-05-31")
+                    '2014-05-01',
+                    '2014-05-02',
+                    '2014-05-03',
+                    '2014-05-04',
+                    '2014-05-05',
+                    '2014-05-06',
+                    '2014-05-07',
+                    '2014-05-08',
+                    '2014-05-09',
+                    '2014-05-10',
+                    '2014-05-11',
+                    '2014-05-12',
+                    '2014-05-13',
+                    '2014-05-14',
+                    '2014-05-15',
+                    '2014-05-16',
+                    '2014-05-17',
+                    '2014-05-18',
+                    '2014-05-19',
+                    '2014-05-20',
+                    '2014-05-21',
+                    '2014-05-22',
+                    '2014-05-23',
+                    '2014-05-24',
+                    '2014-05-25',
+                    '2014-05-26',
+                    '2014-05-27',
+                    '2014-05-28',
+                    '2014-05-29',
+                    '2014-05-30',
+                    '2014-05-31',
+                    ], 'Y-m-d'),
+                'days'     => 30,
+                'endDate'  => new DateTime('2014-05-31'),
             ],
         ];
     }
@@ -257,7 +257,7 @@ class ChartTest extends BaseTest
             ->getMock();
 
         $mock->expects($this->once())
-            ->method("getRepository")
+            ->method('getRepository')
             ->will($this->returnValue($repositoryMock));
 
         return $mock;
@@ -270,7 +270,7 @@ class ChartTest extends BaseTest
             ->getMock();
 
         $mock->expects($this->once())
-            ->method("getCountByActivities")
+            ->method('getCountByActivities')
             ->will($this->returnValue($this->dataset));
 
         return $mock;
@@ -283,7 +283,7 @@ class ChartTest extends BaseTest
             ->getMock();
 
         $mock->expects($this->once())
-            ->method("getCountByActivities")
+            ->method('getCountByActivities')
             ->will($this->returnValue($this->dataset));
 
         return $mock;
@@ -293,43 +293,43 @@ class ChartTest extends BaseTest
     {
         return [
             [
-                "dataset"  => [],
-                "expected" => []
+                'dataset'  => [],
+                'expected' => [],
             ],
             [
-                "dataset"  => [
+                'dataset'  => [
                     [
-                        "date" => "2014-01-01",
-                        "name" => "name1",
-                        "cnt"  => "33"
+                        'date' => '2014-01-01',
+                        'name' => 'name1',
+                        'cnt'  => '33',
                     ],
                     [
-                        "date" => "2014-01-02",
-                        "name" => "name2",
-                        "cnt"  => "33"
+                        'date' => '2014-01-02',
+                        'name' => 'name2',
+                        'cnt'  => '33',
                     ],
                     [
-                        "date" => "2014-01-03",
-                        "name" => "name1",
-                        "cnt"  => "33"
+                        'date' => '2014-01-03',
+                        'name' => 'name1',
+                        'cnt'  => '33',
                     ],
                     [
-                        "date" => "2014-01-03",
-                        "name" => "name3",
-                        "cnt"  => "33"
+                        'date' => '2014-01-03',
+                        'name' => 'name3',
+                        'cnt'  => '33',
                     ],
                 ],
-                "expected" => [
-                    "name1" => [
-                        "2014-01-01" => "33",
-                        "2014-01-03" => "33"
+                'expected' => [
+                    'name1' => [
+                        '2014-01-01' => '33',
+                        '2014-01-03' => '33',
                     ],
-                    "name2" => [
-                        "2014-01-02" => "33"
+                    'name2' => [
+                        '2014-01-02' => '33',
                     ],
-                    "name3" => [
-                        "2014-01-03" => "33"
-                    ]
+                    'name3' => [
+                        '2014-01-03' => '33',
+                    ],
                 ],
             ],
         ];

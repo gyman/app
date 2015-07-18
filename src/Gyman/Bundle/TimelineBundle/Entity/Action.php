@@ -10,7 +10,6 @@ use Spy\TimelineBundle\Entity\Action as BaseAction;
  * @ORM\Entity()
  * @codeCoverageIgnore
  */
-
 class Action extends BaseAction
 {
     /**

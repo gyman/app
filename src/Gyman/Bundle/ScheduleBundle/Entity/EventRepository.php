@@ -3,7 +3,6 @@
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Gyman\Bundle\ScheduleBundle\Entity as Schedule;
 use Symfony\Component\Form\Form;
@@ -26,19 +25,19 @@ class EventRepository extends EntityRepository
         $dayOfWeek = strtolower(date('l'));
 
         if ($timeOffsetInMinutes) {
-            $hour = date('H:i', strtotime(sprintf("+%d minutes", $timeOffsetInMinutes)));
+            $hour = date('H:i', strtotime(sprintf('+%d minutes', $timeOffsetInMinutes)));
         } else {
             $hour = date('H:i');
         }
 
-        $queryBuilder = $this->createQueryBuilder("e")
-            ->where("e.dayOfWeek = :day")
-            ->andWhere("e.startHour <= :hour")
-            ->andWhere("e.endHour >= :hour")
-            ->setParameters(array(
-            "day"  => $dayOfWeek,
-            "hour" => $hour
-        ));
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->where('e.dayOfWeek = :day')
+            ->andWhere('e.startHour <= :hour')
+            ->andWhere('e.endHour >= :hour')
+            ->setParameters([
+            'day'  => $dayOfWeek,
+            'hour' => $hour,
+        ]);
 
         $query = $queryBuilder->getQuery();
 
@@ -47,7 +46,7 @@ class EventRepository extends EntityRepository
 
     public function getAllEvents()
     {
-        $queryBuilder = $this->createQueryBuilder("e");
+        $queryBuilder = $this->createQueryBuilder('e');
 
         $query = $queryBuilder->getQuery();
 
@@ -61,35 +60,34 @@ class EventRepository extends EntityRepository
      */
     public function getAllEventsForWeek($year, $weekNumber)
     {
-        $weekStart = new \DateTime(sprintf("%d-W%02d-1", $year, $weekNumber));
-        $weekEnd = new \DateTime(sprintf("%d-W%02d-0 23:59:59", $year, $weekNumber + 1));
+        $weekStart = new \DateTime(sprintf('%d-W%02d-1', $year, $weekNumber));
+        $weekEnd = new \DateTime(sprintf('%d-W%02d-0 23:59:59', $year, $weekNumber + 1));
 
-        $qb = $this->createQueryBuilder("e");
+        $qb = $this->createQueryBuilder('e');
         $exp = $qb->expr();
 
-        $qb->select("e", "a HIDDEN", "o HIDDEN")
-            ->leftJoin("e.activity", "a")
-            ->leftJoin("e.occurences", "o", Join::WITH, $exp->andX(
-                $exp->eq("e.id", "o.event"),
-                $exp->between("o.startDate", ":weekStart", ":weekEnd")
+        $qb->select('e', 'a HIDDEN', 'o HIDDEN')
+            ->leftJoin('e.activity', 'a')
+            ->leftJoin('e.occurences', 'o', Join::WITH, $exp->andX(
+                $exp->eq('e.id', 'o.event'),
+                $exp->between('o.startDate', ':weekStart', ':weekEnd')
             ))
             ->where(
                 $exp->orX(
                     $exp->andX(
-                        $exp->lte("e.startDate", ":weekEnd"),
-                        $exp->isNull("e.endDate")
+                        $exp->lte('e.startDate', ':weekEnd'),
+                        $exp->isNull('e.endDate')
                     ),
                     $exp->andX(
-                        $exp->lte("e.startDate", ":weekEnd"),
-                        $exp->gte("e.endDate", ":weekStart")
+                        $exp->lte('e.startDate', ':weekEnd'),
+                        $exp->gte('e.endDate', ':weekStart')
                     )
                 )
             )
             ->setParameters([
-                "weekStart" => $weekStart,
-                "weekEnd"   => $weekEnd
-            ])
-        ;
+                'weekStart' => $weekStart,
+                'weekEnd'   => $weekEnd,
+            ]);
         $query = $qb->getQuery();
 
         return $query->execute();
@@ -112,12 +110,12 @@ class EventRepository extends EntityRepository
 
     public function getEventsForDate(\DateTime $date)
     {
-        throw new \Exception("deprecated");
-        $queryBuilder = $this->createQueryBuilder("e");
+        throw new \Exception('deprecated');
+        $queryBuilder = $this->createQueryBuilder('e');
         $queryBuilder
-            ->join("e.activity", "a")
-            ->where("e.dayOfWeek = :day")
-            ->setParameter("day", strtolower($date->format("l")));
+            ->join('e.activity', 'a')
+            ->where('e.dayOfWeek = :day')
+            ->setParameter('day', strtolower($date->format('l')));
         $query = $queryBuilder->getQuery();
 
         return $query->execute();
@@ -125,13 +123,13 @@ class EventRepository extends EntityRepository
 
     public function getEventsForPeriod(\DateTime $startDate, \DateTime $endDate)
     {
-        $queryBuilder = $this->createQueryBuilder("e");
+        $queryBuilder = $this->createQueryBuilder('e');
         $queryBuilder
-            ->select("e")
-            ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
+            ->select('e')
+            ->join('e.occurences', 'o', Join::WITH, 'o.startDate BETWEEN :start AND :end')
             ->setParameters([
-                "start" => $startDate->modify("00:00:00"),
-                "end"   => $endDate->modify("23:59:59"),
+                'start' => $startDate->modify('00:00:00'),
+                'end'   => $endDate->modify('23:59:59'),
         ]);
 
         $query = $queryBuilder->getQuery();
@@ -148,13 +146,13 @@ class EventRepository extends EntityRepository
     {
         $start = clone($date);
         $end = clone($date);
-        $queryBuilder = $this->createQueryBuilder("e");
+        $queryBuilder = $this->createQueryBuilder('e');
         $queryBuilder
-            ->join("e.activity", "a")
-            ->join("e.occurences", "o", Join::WITH, "o.startDate BETWEEN :start AND :end")
+            ->join('e.activity', 'a')
+            ->join('e.occurences', 'o', Join::WITH, 'o.startDate BETWEEN :start AND :end')
             ->setParameters([
-                "start" => $start->modify("00:00:00"),
-                "end"   => $end->modify("23:59:59"),
+                'start' => $start->modify('00:00:00'),
+                'end'   => $end->modify('23:59:59'),
         ]);
 
         $query = $queryBuilder->getQuery();
@@ -164,9 +162,9 @@ class EventRepository extends EntityRepository
 
     public function createEntity($form)
     {
-        $type = ucfirst($form["eventType"]->getData());
-        $class = "\\Dende\\ScheduleBundle\\Entity\\" . $type;
-        $method = "create" . $type;
+        $type = ucfirst($form['eventType']->getData());
+        $class = '\\Dende\\ScheduleBundle\\Entity\\' . $type;
+        $method = 'create' . $type;
         $object = new $class();
 
         return $this->$method($form, $object);
@@ -174,8 +172,8 @@ class EventRepository extends EntityRepository
 
     private function createSingle(Form $form, Schedule\Single $event)
     {
-        $event->setStartDate($form["startDate"]->getData());
-        $event->setDuration($form["duration"]->getData());
+        $event->setStartDate($form['startDate']->getData());
+        $event->setDuration($form['duration']->getData());
         $event->setActivity($form->getData()->getActivity());
 
         return $event;
@@ -183,18 +181,18 @@ class EventRepository extends EntityRepository
 
     private function createWeekly(Form $form, Schedule\Weekly $event)
     {
-        $event->setStartDate($form["startDate"]->getData());
-        $event->setEndDate($form["endDate"]->getData());
-        $event->setDuration($form["duration"]->getData());
+        $event->setStartDate($form['startDate']->getData());
+        $event->setEndDate($form['endDate']->getData());
+        $event->setDuration($form['duration']->getData());
         $event->setActivity($form->getData()->getActivity());
 
-        $event->setMonday($form["days"][0]->getData());
-        $event->setTuesday($form["days"][1]->getData());
-        $event->setWednesday($form["days"][2]->getData());
-        $event->setThursday($form["days"][3]->getData());
-        $event->setFriday($form["days"][4]->getData());
-        $event->setSaturday($form["days"][5]->getData());
-        $event->setSunday($form["days"][6]->getData());
+        $event->setMonday($form['days'][0]->getData());
+        $event->setTuesday($form['days'][1]->getData());
+        $event->setWednesday($form['days'][2]->getData());
+        $event->setThursday($form['days'][3]->getData());
+        $event->setFriday($form['days'][4]->getData());
+        $event->setSaturday($form['days'][5]->getData());
+        $event->setSunday($form['days'][6]->getData());
 
         return $event;
     }

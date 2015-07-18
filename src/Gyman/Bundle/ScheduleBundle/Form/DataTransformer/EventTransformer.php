@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
-use Gyman\Bundle\ScheduleBundle\Entity\Event;
 use Doctrine\Common\Persistence\ObjectManager;
+use Gyman\Bundle\ScheduleBundle\Entity\Event;
 use Gyman\Bundle\ScheduleBundle\Entity\EventRepository;
+use Symfony\Component\Form\DataTransformerInterface;
 
 class EventTransformer implements DataTransformerInterface
 {

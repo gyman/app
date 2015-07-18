@@ -22,9 +22,9 @@ class Owner extends AbstractSubfilter
 
     public function apply(QueryBuilder $queryBuilder)
     {
-        $queryBuilder->andWhere("c.owner = :owner");
-        $queryBuilder->setParameters(array(
-            "owner", $this->securityContext->getToken()->getUser()
-        ));
+        $queryBuilder->andWhere('c.owner = :owner');
+        $queryBuilder->setParameters([
+            'owner', $this->securityContext->getToken()->getUser(),
+        ]);
     }
 }

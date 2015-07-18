@@ -1,7 +1,6 @@
 <?php
-namespace Gyman\Component\Test;
 
-;
+namespace Gyman\Component\Test;
 
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;

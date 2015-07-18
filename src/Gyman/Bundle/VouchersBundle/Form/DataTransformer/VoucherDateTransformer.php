@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\VouchersBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use DateTime;
+use Symfony\Component\Form\DataTransformerInterface;
 
 class VoucherDateTransformer implements DataTransformerInterface
 {
@@ -23,7 +23,7 @@ class VoucherDateTransformer implements DataTransformerInterface
     {
         if (!$datetime instanceof DateTime) {
             //            return new DateTime();
-            return null;
+            return;
         }
 
         return $this->fixHour($datetime);
@@ -38,7 +38,7 @@ class VoucherDateTransformer implements DataTransformerInterface
     {
         if (!$datetime instanceof DateTime) {
             //            return new DateTime();
-            return null;
+            return;
         }
 
         return $this->fixHour($datetime);
@@ -51,12 +51,12 @@ class VoucherDateTransformer implements DataTransformerInterface
      */
     private function fixHour($dateTime)
     {
-        $string = $dateTime->format("Y-m-d");
+        $string = $dateTime->format('Y-m-d');
 
-        if ($this->mode == "start") {
-            return new DateTime($string . " 00:00:00");
-        } elseif ($this->mode == "end") {
-            return new DateTime($string . " 23:59:59");
+        if ($this->mode == 'start') {
+            return new DateTime($string . ' 00:00:00');
+        } elseif ($this->mode == 'end') {
+            return new DateTime($string . ' 23:59:59');
         }
     }
 }

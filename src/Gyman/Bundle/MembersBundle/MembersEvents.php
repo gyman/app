@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MembersBundle;
 
 final class MembersEvents

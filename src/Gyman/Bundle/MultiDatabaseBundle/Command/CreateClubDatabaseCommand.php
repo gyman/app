@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,13 +13,12 @@ class CreateClubDatabaseCommand extends AbstractCommand
         $this
             ->setName('gyman:database:create')
             ->setDescription('Creates database schema for club connection on selected name')
-            ->addArgument('name', InputArgument::REQUIRED, 'Club name (will be converted to slug)')
-        ;
+            ->addArgument('name', InputArgument::REQUIRED, 'Club name (will be converted to slug)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $clubName = $input->getArgument("name");
+        $clubName = $input->getArgument('name');
         $this->dataBaseWorker->setupDatabase($clubName);
     }
 }

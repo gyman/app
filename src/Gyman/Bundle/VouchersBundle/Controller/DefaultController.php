@@ -7,12 +7,12 @@ namespace Gyman\Bundle\VouchersBundle\Controller;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Gyman\Bundle\VouchersBundle\Form\VoucherType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 // </editor-fold>
 
@@ -27,32 +27,32 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $voucherManager = $this->get("voucher_manager");
+        $voucherManager = $this->get('voucher_manager');
         $currentVoucher = $member->getCurrentVoucher();
 
-        $decision = $request->get("decision");
+        $decision = $request->get('decision');
 
-        if ($decision == "confirm" && $currentVoucher) {
+        if ($decision == 'confirm' && $currentVoucher) {
             $voucherManager->closeVoucher($currentVoucher);
             $currentVoucher = null;
         }
 
-        if ($currentVoucher && $decision != "deny") {
-            return $this->forward("VouchersBundle:Default:close", array(
-                        "id" => $currentVoucher->getId(),
-            ));
+        if ($currentVoucher && $decision != 'deny') {
+            return $this->forward('VouchersBundle:Default:close', [
+                        'id' => $currentVoucher->getId(),
+            ]);
         }
 
-        if ($decision == "confirm" || $decision == null) {
+        if ($decision == 'confirm' || $decision == null) {
             $voucher = $voucherManager->createNewVoucherNow($member);
-        } elseif ($decision == "deny") {
+        } elseif ($decision == 'deny') {
             $voucher = $voucherManager->createNewVoucherAtEndDate($member);
         }
 
         /**
          * @todo move types to services
          */
-        $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
+        $form = $this->createForm(new VoucherType($this->get('activity_manager')), $voucher);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -67,12 +67,12 @@ class DefaultController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "VouchersBundle:Default:new.html.twig",
+                'VouchersBundle:Default:new.html.twig',
                 [
                     'form'     => $form->createView(),
                     'voucher'  => $voucher,
-                    "member"   => $member,
-                    "decision" => $decision
+                    'member'   => $member,
+                    'decision' => $decision,
                 ]
             )
         );
@@ -87,9 +87,9 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $voucherManager = $this->get("voucher_manager");
+        $voucherManager = $this->get('voucher_manager');
 
-        $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
+        $form = $this->createForm(new VoucherType($this->get('activity_manager')), $voucher);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -104,11 +104,11 @@ class DefaultController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "VouchersBundle:Default:edit.html.twig",
+                'VouchersBundle:Default:edit.html.twig',
                 [
                     'form'    => $form->createView(),
                     'voucher' => $voucher,
-                    "member"  => $voucher->getMember()
+                    'member'  => $voucher->getMember(),
                 ]
             )
         );
@@ -122,7 +122,8 @@ class DefaultController extends Controller
     public function closeAction(Request $request, Voucher $voucher)
     {
         $diff = $voucher->getEndDate()->diff(new \DateTime());
-        return ["voucher"  => $voucher, "leftDays" => $diff->days];
+
+        return ['voucher'  => $voucher, 'leftDays' => $diff->days];
     }
 
     /**
@@ -137,13 +138,13 @@ class DefaultController extends Controller
         $usedEntries = $voucher->getAmount() - $voucher->getAmountLeft();
 
         return [
-            "voucher"     => $voucher,
-            "member"      => $voucher->getMember(),
-            "leftDays"    => $leftDays,
-            "totalDays"   => $totalDays,
-            "pastDays"    => $pastDays,
-            "leftEntries" => $leftEntries,
-            "usedEntries" => $usedEntries
+            'voucher'     => $voucher,
+            'member'      => $voucher->getMember(),
+            'leftDays'    => $leftDays,
+            'totalDays'   => $totalDays,
+            'pastDays'    => $pastDays,
+            'leftEntries' => $leftEntries,
+            'usedEntries' => $usedEntries,
         ];
     }
 
@@ -168,9 +169,9 @@ class DefaultController extends Controller
         $em->flush();
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array("status" => "ok"));
+            return new JsonResponse(['status' => 'ok']);
         }
 
-        return $this->redirect($this->generateUrl("_vouchers_list"));
+        return $this->redirect($this->generateUrl('_vouchers_list'));
     }
 }

@@ -6,10 +6,10 @@ use Gyman\Bundle\EntriesBundle\EntriesEvents;
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
 use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
 use Gyman\Bundle\MembersBundle\MembersEvents;
-use Gyman\Bundle\VouchersBundle\VouchersEvents;
-use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Gyman\Bundle\TimelineBundle\Timeline\EventsHandler;
+use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
+use Gyman\Bundle\VouchersBundle\VouchersEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSubscriber implements EventSubscriberInterface
 {
@@ -25,11 +25,11 @@ class EventSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            MembersEvents::CREATED => [['onMemberCreated', 0]],
+        return [
+            MembersEvents::CREATED  => [['onMemberCreated', 0]],
             VouchersEvents::CREATED => [['onVoucherCreated', 0]],
-            EntriesEvents::CREATED => [['onEntryCreated', 0]]
-        );
+            EntriesEvents::CREATED  => [['onEntryCreated', 0]],
+        ];
     }
 
     public function onMemberCreated(MemberCreatedEvent $event)

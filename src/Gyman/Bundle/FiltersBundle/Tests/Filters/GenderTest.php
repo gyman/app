@@ -2,8 +2,8 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Filters\Gender;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class GenderTest extends BaseTest
 {
@@ -13,9 +13,9 @@ class GenderTest extends BaseTest
     public function testApplyToQuery($options, $expectedDql, $parameterCount)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
-            ->createQueryBuilder("m");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
+            ->createQueryBuilder('m');
 
         $genderFilter = new Gender();
         $genderFilter->setOptions($options);
@@ -31,11 +31,11 @@ class GenderTest extends BaseTest
     {
         return [
             [
-                "options"        => [
-                    "gender" => "male",
+                'options'        => [
+                    'gender' => 'male',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.gender = :gender",
-                "parameterCount" => 1
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.gender = :gender",
+                'parameterCount' => 1,
             ],
         ];
     }

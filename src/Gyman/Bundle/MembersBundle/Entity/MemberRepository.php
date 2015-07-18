@@ -22,20 +22,20 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      */
     public function getQuery()
     {
-        $query = $this->createQueryBuilder("m");
+        $query = $this->createQueryBuilder('m');
 
         return $query;
     }
 
     public function getDashboardSearchQueryBuilder()
     {
-        return $this->createQueryBuilder("m");
+        return $this->createQueryBuilder('m');
     }
 
     public function getTotalCount()
     {
         $query = $this->getQuery();
-        $query->select("count(m.id)");
+        $query->select('count(m.id)');
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -50,7 +50,7 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      */
     public function setActiveCriteria(QueryBuilder $query)
     {
-        $query->andWhere("m.deletedAt is null");
+        $query->andWhere('m.deletedAt is null');
     }
 
     /**
@@ -60,10 +60,10 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      */
     public function getMembersForUser(QueryBuilder $queryBuilder, User $user)
     {
-        $queryBuilder->innerJoin("m.sections", "s");
-        $queryBuilder->innerJoin("s.club", "c");
-        $queryBuilder->andWhere(":user MEMBER OF c.owners");
-        $queryBuilder->setParameter("user", $user);
+        $queryBuilder->innerJoin('m.sections', 's');
+        $queryBuilder->innerJoin('s.club', 'c');
+        $queryBuilder->andWhere(':user MEMBER OF c.owners');
+        $queryBuilder->setParameter('user', $user);
 
         return $queryBuilder;
     }

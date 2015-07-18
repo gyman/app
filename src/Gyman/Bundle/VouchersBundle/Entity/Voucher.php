@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\VouchersBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gyman\Bundle\VouchersBundle\Validator\VoucherDateConstraint;
-use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
-use JMS\Serializer\Annotation as Serializer;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gyman\Bundle\VouchersBundle\Validator\VoucherDateConstraint;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Voucher
@@ -38,7 +38,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      absolute = true
  * ))
  */
-
 class Voucher
 {
     /**

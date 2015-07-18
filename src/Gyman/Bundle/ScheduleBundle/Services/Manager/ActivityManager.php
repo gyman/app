@@ -18,7 +18,7 @@ class ActivityManager extends BaseManager
 
         $data =  $query->getQuery()->execute();
 
-        $result = array();
+        $result = [];
 
         foreach ($data as $item) {
             $result[$item->getId()] = $item->getName();

@@ -2,11 +2,11 @@
 
 namespace Gyman\Bundle\MembersBundle\Menu;
 
+use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
-use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 
 class Builder
 {
@@ -53,7 +53,7 @@ class Builder
         /**
          * @var Member $member
          */
-        $member = $request->get("member");
+        $member = $request->get('member');
 
         if ($member) {
             /**
@@ -62,33 +62,33 @@ class Builder
             $voucher = $member->getCurrentVoucher();
         }
 
-        if (!$this->context->isGranted("ROLE_USER")) {
+        if (!$this->context->isGranted('ROLE_USER')) {
             return $menu;
         }
 
-        $menu->setChildrenAttribute("class", "nav nav-tabs");
+        $menu->setChildrenAttribute('class', 'nav nav-tabs');
 
         $menu->addChild('member.modal.tab.details_label', [
-                'uri' => '#detailsPane',
-                "extras" => ["icon" => 'icomoon-icon-users'],
+                'uri'            => '#detailsPane',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    'data-toggle' => 'tab'
+                    'data-toggle' => 'tab',
                 ],
-                "attributes" => [
-                    'class' => 'active'
-                ]
+                'attributes' => [
+                    'class' => 'active',
+                ],
         ])->setExtra('translation_domain', 'MembersBundle');
 
         if ($member && $voucher) {
             $menu->addChild(
                 'member.modal.tab.voucher_label',
                 [
-                    'uri' => '#voucherPane',
-                    "extras" => ["icon" => 'icomoon-icon-users'],
+                    'uri'            => '#voucherPane',
+                    'extras'         => ['icon' => 'icomoon-icon-users'],
                     'linkAttributes' => [
-                        "class" => '',
-                        'data-toggle' => 'tab'
-                    ]
+                        'class'       => '',
+                        'data-toggle' => 'tab',
+                    ],
                 ]
             )->setExtra('translation_domain', 'MembersBundle');
         }
@@ -97,15 +97,15 @@ class Builder
             $menu->addChild(
                 'member.modal.tab.history_label',
                 [
-                    'uri' => '#historyPane',
-                    "extras" => ["icon" => 'icomoon-icon-users'],
+                    'uri'            => '#historyPane',
+                    'extras'         => ['icon' => 'icomoon-icon-users'],
                     'linkAttributes' => [
-                        "class" => '',
-                        'data-toggle' => 'tab'
+                        'class'       => '',
+                        'data-toggle' => 'tab',
                     ],
-                    "attributes" => [
-                        'class' => ''
-                    ]
+                    'attributes' => [
+                        'class' => '',
+                    ],
                 ]
             )->setExtra('translation_domain', 'MembersBundle');
         }
@@ -113,15 +113,15 @@ class Builder
         $menu->addChild(
             'member.modal.tab.extras_label',
             [
-                'uri' => '#additionalsPane',
-                "extras" => ["icon" => 'icomoon-icon-users'],
+                'uri'            => '#additionalsPane',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    "class" => '',
-                    'data-toggle' => 'tab'
+                    'class'       => '',
+                    'data-toggle' => 'tab',
                 ],
-                "attributes" => [
-                    'class' => ''
-                ]
+                'attributes' => [
+                    'class' => '',
+                ],
             ]
         )->setExtra('translation_domain', 'MembersBundle');
 
@@ -132,40 +132,40 @@ class Builder
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted("ROLE_USER")) {
+        if (!$this->context->isGranted('ROLE_USER')) {
             return $menu;
         }
 
-        $menu->setChildrenAttribute("class", "nav nav-tabs");
-        $menu->setChildrenAttribute("id", "uploadAvatar");
+        $menu->setChildrenAttribute('class', 'nav nav-tabs');
+        $menu->setChildrenAttribute('id', 'uploadAvatar');
 
         $menu->addChild(
             'member.modal.tab.picture_label',
             [
-                'uri' => '#filePane',
-                "extras" => ["icon" => 'icomoon-icon-database'],
+                'uri'            => '#filePane',
+                'extras'         => ['icon' => 'icomoon-icon-database'],
                 'linkAttributes' => [
-                    "class" => '',
-                    'data-toggle' => 'tab'
+                    'class'       => '',
+                    'data-toggle' => 'tab',
                 ],
-                "attributes" => [
-                    'class' => 'active'
-                ]
+                'attributes' => [
+                    'class' => 'active',
+                ],
             ]
         )->setExtra('translation_domain', 'MembersBundle');
 
         $menu->addChild(
             'member.modal.tab.camera_label',
             [
-                'uri' => '#webcamDiv',
-                "extras" => ["icon" => 'icomoon-icon-camera'],
+                'uri'            => '#webcamDiv',
+                'extras'         => ['icon' => 'icomoon-icon-camera'],
                 'linkAttributes' => [
-                    "class" => '',
-                    'data-toggle' => 'tab'
+                    'class'       => '',
+                    'data-toggle' => 'tab',
                 ],
-                "attributes" => [
-                    'class' => ''
-                ]
+                'attributes' => [
+                    'class' => '',
+                ],
             ]
         )->setExtra('translation_domain', 'MembersBundle');
 

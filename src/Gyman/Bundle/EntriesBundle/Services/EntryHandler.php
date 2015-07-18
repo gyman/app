@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\EntriesBundle\Services;
 
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
@@ -6,15 +7,14 @@ use Gyman\Bundle\EntriesBundle\EntityManager\EntryManager;
 use Gyman\Bundle\EntriesBundle\Exception\EntryFormInvalidException;
 use Gyman\Bundle\EntriesBundle\Form\EntryType;
 use Gyman\Bundle\MembersBundle\Entity\Member;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\TwigBundle\TwigEngine;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class EntryHandler
 {
@@ -119,6 +119,7 @@ class EntryHandler
     {
         if ($member->hasOpenedEntry()) {
             $lastEntry = $member->getLastEntry();
+
             return $this->redirectToCloseEntry($lastEntry);
         }
 
@@ -143,8 +144,9 @@ class EntryHandler
     public function handleClose(Entry $entry)
     {
         if ($this->request->getMethod() === 'POST') {
-            $entry->setEndDate(new \DateTime("now"));
+            $entry->setEndDate(new \DateTime('now'));
             $this->entryManager->save($entry);
+
             return new Response();
         }
 
@@ -154,7 +156,7 @@ class EntryHandler
     public function redirectToCloseEntry(Entry $entry)
     {
         return new RedirectResponse(
-            $this->router->generate("_entry_close", ["id" => $entry->getId()])
+            $this->router->generate('_entry_close', ['id' => $entry->getId()])
         );
     }
 
@@ -177,7 +179,7 @@ class EntryHandler
         $form->handleRequest($this->request);
 
         if (!$form->isValid()) {
-            throw new EntryFormInvalidException("Invalid form");
+            throw new EntryFormInvalidException('Invalid form');
         }
 
         /**
@@ -185,11 +187,11 @@ class EntryHandler
          */
         $entry = $form->getData();
 
-        if ($entry->getEntryType() != "voucher") {
+        if ($entry->getEntryType() != 'voucher') {
             $entry->setVoucher(null);
         }
 
-        if ($entry->getEntryType() != "paid") {
+        if ($entry->getEntryType() != 'paid') {
             $entry->setEntryPrice(null);
         }
 
@@ -227,12 +229,12 @@ class EntryHandler
         $currentVoucher = $member->getCurrentVoucher();
 
         $template = $this->templating->render(
-            "EntriesBundle:Default:new.html.twig",
+            'EntriesBundle:Default:new.html.twig',
             [
-                "form"          => $form->createView(),
-                "member"        => $member,
-                "voucher"       => $currentVoucher,
-                "currentEvents" => [] // $this->getDoctrine()->getRepository("ScheduleBundle:Occurence")->getCurrentEvents()
+                'form'          => $form->createView(),
+                'member'        => $member,
+                'voucher'       => $currentVoucher,
+                'currentEvents' => [], // $this->getDoctrine()->getRepository("ScheduleBundle:Occurence")->getCurrentEvents()
             ]
         );
 
@@ -244,10 +246,10 @@ class EntryHandler
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $template = $this->templating->render(
-            "EntriesBundle:Default:close.html.twig",
+            'EntriesBundle:Default:close.html.twig',
             [
-                "entry" => $entry,
-                "minutesAgo" => $entry->getStartDate()->diff(new \DateTime('now'))
+                'entry'      => $entry,
+                'minutesAgo' => $entry->getStartDate()->diff(new \DateTime('now')),
             ]
         );
 

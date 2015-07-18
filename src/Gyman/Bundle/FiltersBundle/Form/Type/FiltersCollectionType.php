@@ -2,16 +2,15 @@
 
 namespace Gyman\Bundle\FiltersBundle\Form\Type;
 
+use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
+use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
-use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class FiltersCollectionType extends AbstractType
 {
@@ -32,8 +31,8 @@ class FiltersCollectionType extends AbstractType
                 $filterName = $this->parseClassname($filter);
 
                 $event->getForm()->add($filterName, $formType, [
-                    "validation_groups" => ["setFilter","saveFilter"],
-                    "property_path" => "[$filterName]",
+                    'validation_groups' => ['setFilter','saveFilter'],
+                    'property_path'     => "[$filterName]",
                 ]);
 
                 $event->getForm()->get($filterName)->setData($filter);
@@ -43,16 +42,16 @@ class FiltersCollectionType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        return "buildView - please implement when necessary";
+        return 'buildView - please implement when necessary';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => "Doctrine\Common\Collections\ArrayCollection",
             'cascade_validation' => true,
-            "error_bubbling"     => true
-        ));
+            'error_bubbling'     => true,
+        ]);
     }
 
     public function getParent()

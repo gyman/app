@@ -12,24 +12,23 @@ class UpdateVouchersCommand extends ContainerAwareCommand
     {
         $this
                 ->setName('vouchers:update')
-                ->setDescription('Removes old vouchers and sets actual')
-        ;
+                ->setDescription('Removes old vouchers and sets actual');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get("doctrine")->getManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
         $now = new \DateTime();
-        $memberRepository = $this->getContainer()->get("entity_manager")->getRepository("MembersBundle:Member");
+        $memberRepository = $this->getContainer()->get('entity_manager')->getRepository('MembersBundle:Member');
         $members = $memberRepository->getQuery()
-                        ->leftJoin("m.currentVoucher", "v")
-                        ->where("v.endDate < :now")
-                        ->setParameters(array(
-                            "now" => $now,
-                        ))
+                        ->leftJoin('m.currentVoucher', 'v')
+                        ->where('v.endDate < :now')
+                        ->setParameters([
+                            'now' => $now,
+                        ])
                         ->getQuery()->execute();
 
-        $ids = array();
+        $ids = [];
 
         if (count($members) > 0) {
             foreach ($members as $member) {
@@ -38,14 +37,13 @@ class UpdateVouchersCommand extends ContainerAwareCommand
             }
         }
         /** vouchers that were sold with date in future */
-
-        $voucherRepository = $this->getContainer()->get("voucher_repository");
-        $vouchers = $voucherRepository->getQuery("v")
-                        ->where("v.startDate <= :now")
-                        ->andWhere("v.endDate >= :now or v.endDate is null")
-                        ->setParameters(array(
-                            "now" => $now,
-                        ))
+        $voucherRepository = $this->getContainer()->get('voucher_repository');
+        $vouchers = $voucherRepository->getQuery('v')
+                        ->where('v.startDate <= :now')
+                        ->andWhere('v.endDate >= :now or v.endDate is null')
+                        ->setParameters([
+                            'now' => $now,
+                        ])
                         ->getQuery()->execute();
 
         if (count($vouchers) > 0) {
@@ -59,9 +57,9 @@ class UpdateVouchersCommand extends ContainerAwareCommand
 
         $em->flush();
 
-        $message = sprintf("Found and updated %d members", count($ids));
+        $message = sprintf('Found and updated %d members', count($ids));
 
         $output->writeln($message);
-        $this->getContainer()->get("logger")->info($message, $ids);
+        $this->getContainer()->get('logger')->info($message, $ids);
     }
 }

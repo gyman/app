@@ -23,6 +23,7 @@ class ActivitiesData extends BaseFixture
         extract($params);
         $activity = new Activity();
         $activity->setName($name);
+
         return $activity;
     }
 }

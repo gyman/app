@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use FOS\UserBundle\Event\UserEvent;
@@ -44,10 +45,10 @@ class LoginSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onSecurityImplicitLogin',
-            SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
-        );
+            SecurityEvents::INTERACTIVE_LOGIN      => 'onSecurityInteractiveLogin',
+        ];
     }
 
     public function onSecurityImplicitLogin(UserEvent $event)
@@ -84,6 +85,7 @@ class LoginSubscriber implements EventSubscriberInterface
     private function getDatabaseParameters(Club $club)
     {
         $db = $club->getDatabase();
+
         return $db;
     }
 }

@@ -11,7 +11,7 @@ abstract class ContainerAwareTestCase extends BaseWebTestCase
     protected function setUp()
     {
         $this->resetKernel();
-        exec("bin/phing -Denv=test reset-db");
+        exec('bin/phing -Denv=test reset-db');
     }
 
     protected function resetKernel()

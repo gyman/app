@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\TestBundle\Services;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManager;
 
 class FixtureLoader
 {
@@ -21,9 +21,9 @@ class FixtureLoader
     public function load($dirOrFile, $append = false, $purgeMode = ORMPurger::PURGE_MODE_DELETE)
     {
         if ($dirOrFile) {
-            $paths = is_array($dirOrFile) ? $dirOrFile : array($dirOrFile);
+            $paths = is_array($dirOrFile) ? $dirOrFile : [$dirOrFile];
         } else {
-            $paths = array();
+            $paths = [];
         }
 
         foreach ($paths as $path) {

@@ -13,7 +13,7 @@ trait GetFormType
      */
     private function getFormType(FilterInterface $filter)
     {
-        $classname = "\\Dende\\FiltersBundle\\Form\\Subfilters\\" . $this->parseClassname($filter) . "Type";
+        $classname = '\\Dende\\FiltersBundle\\Form\\Subfilters\\' . $this->parseClassname($filter) . 'Type';
 
         return new $classname();
     }

@@ -11,44 +11,43 @@ class InvoiceDataType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('companyName', 'text', array(
-                'label' => 'user.form.invoice.companyName',
-                'error_bubbling' => true
-            ))
-            ->add('nip', 'text', array(
-                'label' => 'user.form.invoice.nip',
-                'error_bubbling' => true
-            ))
-            ->add('street', 'text', array(
-                'label' => 'user.form.invoice.street',
-                'error_bubbling' => true
-            ))
-            ->add('zipcode', 'text', array(
-                'label' => 'user.form.invoice.zipcode',
+            ->add('companyName', 'text', [
+                'label'          => 'user.form.invoice.companyName',
                 'error_bubbling' => true,
-            ))
-            ->add('city', 'text', array(
-                'label' => 'user.form.invoice.city',
-                'error_bubbling' => true
-            ))
-            ->add('country', 'choice', array(
-                'label' => 'user.form.invoice.country',
+            ])
+            ->add('nip', 'text', [
+                'label'          => 'user.form.invoice.nip',
                 'error_bubbling' => true,
-                'choices' => array(
-                    "poland" => "countries.label.poland"
-                )
-            ))
-        ;
+            ])
+            ->add('street', 'text', [
+                'label'          => 'user.form.invoice.street',
+                'error_bubbling' => true,
+            ])
+            ->add('zipcode', 'text', [
+                'label'          => 'user.form.invoice.zipcode',
+                'error_bubbling' => true,
+            ])
+            ->add('city', 'text', [
+                'label'          => 'user.form.invoice.city',
+                'error_bubbling' => true,
+            ])
+            ->add('country', 'choice', [
+                'label'          => 'user.form.invoice.country',
+                'error_bubbling' => true,
+                'choices'        => [
+                    'poland' => 'countries.label.poland',
+                ],
+            ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'error_bubbling' => true,
-            'data_class' => 'Gyman\Bundle\AccountBundle\Model\InvoiceData',
-        ));
+            'data_class'     => 'Gyman\Bundle\AccountBundle\Model\InvoiceData',
+        ]);
     }
 
     public function getName()

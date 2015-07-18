@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\FiltersBundle\Tests\Services;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Tests\Traits\ParseClassnameTraitStub;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
 
 class ParseClassnameTraitTest extends BaseTest
@@ -14,7 +14,7 @@ class ParseClassnameTraitTest extends BaseTest
         $object = new WebTestCase();
 
         $classname = $traitStub->testParseClassname($object);
-        $this->assertEquals("WebTestCase", $classname);
-        $this->assertNotEquals("", $classname);
+        $this->assertEquals('WebTestCase', $classname);
+        $this->assertNotEquals('', $classname);
     }
 }

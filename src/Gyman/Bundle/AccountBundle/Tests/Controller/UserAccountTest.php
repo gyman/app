@@ -11,14 +11,14 @@ class UserAccountTest extends BaseTest
         $this->clientIsSettedUp();
         $this->fixturesAreLoaded();
 
-        $this->getPage("/login");
+        $this->getPage('/login');
         $this->assertPageResponseCode(200);
 
         $this->loginFormWasSubmitted('uirapuru', '1234');
-        $this->assertPageContainsText("Bad credentials");
+        $this->assertPageContainsText('Bad credentials');
 
         $this->loginFormWasSubmitted('uirapuru123', '1234');
-        $this->assertPageContainsText("Bad credentials");
+        $this->assertPageContainsText('Bad credentials');
 
         $this->loginFormWasSubmitted('uirapuru', '123');
         $this->assertPageResponseCode(200);
@@ -28,7 +28,7 @@ class UserAccountTest extends BaseTest
         $this->clientIsSettedUp();
         $this->fixturesAreLoaded();
 
-        $this->getPage("/register/monthly");
+        $this->getPage('/register/monthly');
         $this->assertPageResponseCode(200);
 
         $this->registerFormWasSubmitted('uirapuru345', '123', '123', 'uirapuru345@tlen.pl');
@@ -44,7 +44,7 @@ class UserAccountTest extends BaseTest
         $this->clientIsSettedUp();
         $this->fixturesAreLoaded();
 
-        $this->getPage("/register/monthly");
+        $this->getPage('/register/monthly');
         $this->assertPageResponseCode(200);
 
         $this->registerFormWasSubmitted($username, $password1, $password2, $email);
@@ -56,23 +56,23 @@ class UserAccountTest extends BaseTest
         $this->clientIsSettedUp();
         $this->fixturesAreLoaded();
 
-        $this->getPage("/resetting/request");
+        $this->getPage('/resetting/request');
         $this->assertPageResponseCode(200);
 
         $this->resettingFormWasSubmitted('uirapuru');
         $this->assertPageResponseCode(200);
         $this->assertPageContainsText('resetting.check_email');
 
-        $entityManager = $this->getContainer()->get("doctrine.orm.entity_manager");
+        $entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $query = "SELECT u FROM Gyman\Bundle\AccountBundle\Entity\User u WHERE u.username = 'uirapuru'";
         $user = $entityManager->createQuery($query)->getSingleResult();
 
         $confirmationToken = $user->getConfirmationToken();
 
-        $this->getPage("/resetting/reset/".md5(time()));
+        $this->getPage('/resetting/reset/' . md5(time()));
         $this->assertPageResponseCode(404);
 
-        $this->getPage("/resetting/reset/".$confirmationToken);
+        $this->getPage('/resetting/reset/' . $confirmationToken);
         $this->assertPageResponseCode(200);
 
         $this->newPasswordFormWasSubmitted('123', 'abc');
@@ -86,29 +86,29 @@ class UserAccountTest extends BaseTest
 
     public function testRegisterDataProvider()
     {
-        return array(
-            array(
-                "username"  => 'uirapuru',
+        return [
+            [
+                'username'  => 'uirapuru',
                 'password1' => '123',
                 'password2' => '123',
                 'email'     => 'uirapuru123@tlen.pl',
-                'notice'    => 'user.username_exists'
-            ),
-            array(
-                "username"  => 'uirapuru123',
+                'notice'    => 'user.username_exists',
+            ],
+            [
+                'username'  => 'uirapuru123',
                 'password1' => '123',
                 'password2' => '123',
                 'email'     => 'uirapuruadg+gymanUirapuru@gmail.com',
-                'notice'    => 'user.email_exists'
-            ),
-            array(
-                "username"  => 'uirapuru123',
+                'notice'    => 'user.email_exists',
+            ],
+            [
+                'username'  => 'uirapuru123',
                 'password1' => '123',
                 'password2' => '1234',
                 'email'     => 'uirapuru123@tlen.pl',
-                'notice'    => 'fos_user.password.mismatch'
-            ),
-        );
+                'notice'    => 'fos_user.password.mismatch',
+            ],
+        ];
     }
 
     private function registerFormWasSubmitted($username, $password1, $password2, $email)

@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
-use Gyman\Bundle\ScheduleBundle\Entity\Activity;
 use Doctrine\Common\Persistence\ObjectManager;
+use Gyman\Bundle\ScheduleBundle\Entity\Activity;
 use Gyman\Bundle\ScheduleBundle\Entity\ActivityRepository;
+use Symfony\Component\Form\DataTransformerInterface;
 
 class ActivityTransformer implements DataTransformerInterface
 {

@@ -10,5 +10,5 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Single extends Event
 {
-    protected $type = "single";
+    protected $type = 'single';
 }

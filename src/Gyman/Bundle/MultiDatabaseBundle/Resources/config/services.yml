@@ -36,11 +36,11 @@ services:
 
   gyman.multidatabase.club_connection_command_listener:
       class: Gyman\Bundle\MultiDatabaseBundle\Listener\ClubConnectionCommandListener
-      arguments:
-          - %kernel.root_dir%/../src/TPN/MainBundle/DataFixtures/ORM
-          - %kernel.environment%
+      calls:
+        - [setClubRepository, [@gyman.club.repository]]
+        - [setConnectionWrapper, [@doctrine.dbal.club_connection]]
       tags:
-          - { name: kernel.event_listener, event: console.command }
+          - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
 
   gyman.multidatabase.command:
     abstract: true

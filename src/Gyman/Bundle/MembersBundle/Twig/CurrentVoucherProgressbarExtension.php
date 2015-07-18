@@ -43,12 +43,12 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('progressbar', array($this, 'getProgressBar',
-                array(
-                    "is_safe" => array('html')
-                ))),
-        );
+        return [
+            new \Twig_SimpleFilter('progressbar', [$this, 'getProgressBar',
+                [
+                    'is_safe' => ['html'],
+                ], ]),
+        ];
     }
 
     public function getProgressBar(Member $member)
@@ -56,13 +56,13 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
         $voucher = $this->memberManager->getCurrentVoucher($member);
 
         if (!$voucher) {
-            return null;
+            return;
         }
 
         $params = func_get_args();
         $daysWord = $params[2];
 
-        $result = "Kod karnetu: <strong>".$voucher->getBarcode()."</strong>";
+        $result = 'Kod karnetu: <strong>' . $voucher->getBarcode() . '</strong>';
 
         $startDate = $voucher->getStartDate();
         $endDate = $voucher->getEndDate();
@@ -77,24 +77,24 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
                 $daysWord = $params[1];
             }
 
-            $result.=str_replace(array(
-                "%%percentage%%",
-                "%%days_left%%",
-                "%%days_word%%",
-                "%%start%%",
-                "%%end%%",
-                    ), array(
+            $result .= str_replace([
+                '%%percentage%%',
+                '%%days_left%%',
+                '%%days_word%%',
+                '%%start%%',
+                '%%end%%',
+                    ], [
                 $percentage,
                 $leftDays,
                 $daysWord,
-                $startDate->format("d.m"),
-                $endDate->format("d.m"),
-                    ), $this->markup_date);
+                $startDate->format('d.m'),
+                $endDate->format('d.m'),
+                    ], $this->markup_date);
         }
         $amountTotal = $voucher->getAmount();
 
         if ($amountTotal !== null) {
-            $amountWord = "wejść";
+            $amountWord = 'wejść';
             $amountLeft = $voucher->getAmountLeft();
 
             if ($amountLeft == null) {
@@ -105,19 +105,19 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
 
             $percentageAmount = intval(100 - ($amountLeft / $amountTotal * 100));
 
-            $result.=str_replace(array(
-                "%%amount_left%%",
-                "%%amount_total%%",
-                "%%amount_used%%",
-                "%%amount_word%%",
-                "%%percentage%%"
-                    ), array(
+            $result .= str_replace([
+                '%%amount_left%%',
+                '%%amount_total%%',
+                '%%amount_used%%',
+                '%%amount_word%%',
+                '%%percentage%%',
+                    ], [
                 $amountLeft,
                 $amountTotal,
                 $amountUsed,
                 $amountWord,
-                $percentageAmount
-                    ), $this->markup_entries);
+                $percentageAmount,
+                    ], $this->markup_entries);
         }
 
         return $result;

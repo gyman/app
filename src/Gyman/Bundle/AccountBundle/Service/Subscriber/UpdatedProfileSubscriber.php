@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\AccountBundle\Service\Subscriber;
 
-use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use FOS\UserBundle\Event\FormEvent;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Router;
 
 class UpdatedProfileSubscriber implements EventSubscriberInterface
 {
@@ -58,13 +58,13 @@ class UpdatedProfileSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FOSUserEvents::PROFILE_EDIT_COMPLETED  => 'onProfileEditCompleted',
             FOSUserEvents::PROFILE_EDIT_SUCCESS    => 'onProfileEditSuccess',
 //            FOSUserEvents::CHANGE_PASSWORD_COMPLETED => 'onResettingCompleted',
 //            FOSUserEvents::CHANGE_PASSWORD_SUCCESS => 'onRessetingSuccess',
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onRessetingSuccess',
-        );
+        ];
     }
 
     public function onProfileEditSuccess(FormEvent $event)

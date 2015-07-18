@@ -1,10 +1,11 @@
 <?php
+
 namespace Gyman\Bundle\AccountBundle\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class LogoutHandler
 {
@@ -25,7 +26,7 @@ class LogoutHandler
 
         if ($exception instanceof AuthenticationException || $exception instanceof AccessDeniedException) {
             if ($request->isXmlHttpRequest()) {
-                $event->setResponse(new JsonResponse(array("action" => "logout"), 401, array("Content-Type" => "application/json")));
+                $event->setResponse(new JsonResponse(['action' => 'logout'], 401, ['Content-Type' => 'application/json']));
             }
         }
     }

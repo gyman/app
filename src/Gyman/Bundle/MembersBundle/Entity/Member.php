@@ -2,17 +2,17 @@
 
 namespace Gyman\Bundle\MembersBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
-use Hateoas\Configuration\Annotation as Hateoas;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gyman\Bundle\DefaultBundle\Validator as DefaultBundle;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\DefaultBundle\Validator as DefaultBundle;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Member
@@ -48,7 +48,6 @@ use Gyman\Bundle\EntriesBundle\Entity\Entry;
  * ))
  *
  */
-
 class Member
 {
     const GENDER_MALE = 'male';
@@ -124,7 +123,7 @@ class Member
      * @Serializer\Expose()
      * @ORM\Column(name="foto", type="string", length=255, nullable=true)
      */
-    private $foto = "no-profile.gif";
+    private $foto = 'no-profile.gif';
 
     /**
      * @var string $zipcode

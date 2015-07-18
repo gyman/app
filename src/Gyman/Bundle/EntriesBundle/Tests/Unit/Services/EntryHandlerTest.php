@@ -77,21 +77,21 @@ class EntryHandlerTest extends UnitTestCase
     public function member_has_opened_entry_is_redirected()
     {
         $this->routerMock->expects($this->once())
-            ->method("generate")
-            ->will($this->returnValue("/entry/close/999"));
+            ->method('generate')
+            ->will($this->returnValue('/entry/close/999'));
 
         $this->entryMock->expects($this->once())
-            ->method("getId")
+            ->method('getId')
             ->will($this->returnValue(999));
 
         $memberMock = $this->getMemberMock();
 
         $memberMock->expects($this->once())
-            ->method("hasOpenedEntry")
+            ->method('hasOpenedEntry')
             ->will($this->returnValue(true));
 
         $memberMock->expects($this->once())
-            ->method("getLastEntry")
+            ->method('getLastEntry')
             ->will($this->returnValue($this->entryMock));
 
         $response = $this->entryHandler->handleOpen($memberMock);
@@ -110,37 +110,35 @@ class EntryHandlerTest extends UnitTestCase
         $memberMock = $this->getMemberMock();
 
         $memberMock->expects($this->once())
-            ->method("hasOpenedEntry")
+            ->method('hasOpenedEntry')
             ->will($this->returnValue(false));
 
         $memberMock->expects($this->exactly(2))
-            ->method("getCurrentVoucher")
+            ->method('getCurrentVoucher')
             ->will($this->returnValue(null));
 
-
         $this->templatingMock->expects($this->once())
-            ->method("render")
-            ->will($this->returnValue("renderedTemplate"));
+            ->method('render')
+            ->will($this->returnValue('renderedTemplate'));
 
         $this->entryMock->expects($this->once())
-            ->method("getMember")
+            ->method('getMember')
             ->will($this->returnValue($memberMock));
 
         $this->formMock->expects($this->once())
-            ->method("getData")
+            ->method('getData')
             ->will($this->returnValue($this->entryMock));
 
-
         $this->formMock->expects($this->once())
-            ->method("createView")
+            ->method('createView')
             ->will($this->returnValue(null));
 
         $this->entryManagerMock->expects($this->once())
-            ->method("createNewEntry")
+            ->method('createNewEntry')
             ->will($this->returnValue($this->entryMock));
 
         $this->formFactoryMock->expects($this->once())
-            ->method("create")
+            ->method('create')
             ->will($this->returnValue($this->formMock));
 
         $response = $this->entryHandler->handleOpen($memberMock);
@@ -159,61 +157,61 @@ class EntryHandlerTest extends UnitTestCase
         $memberMock = $this->getMemberMock();
 
         $memberMock->expects($this->once())
-            ->method("hasOpenedEntry")
+            ->method('hasOpenedEntry')
             ->will($this->returnValue(false));
 
         $memberMock->expects($this->exactly(2))
-            ->method("getCurrentVoucher")
+            ->method('getCurrentVoucher')
             ->will($this->returnValue(null));
 
         $this->requestMock->expects($this->once())
-            ->method("getMethod")
-            ->will($this->returnValue("POST"));
+            ->method('getMethod')
+            ->will($this->returnValue('POST'));
 
 //         mocking a factored form
 
         $this->formMock->expects($this->once())
-            ->method("handleRequest")
+            ->method('handleRequest')
             ->will($this->returnValue(null));
 
         $this->formMock->expects($this->once())
-            ->method("isValid")
+            ->method('isValid')
             ->will($this->returnValue(true));
 
         $this->formMock->expects($this->exactly(2))
-            ->method("getData")
+            ->method('getData')
             ->will($this->returnValue($this->entryMock));
 
         $this->formMock->expects($this->once())
-            ->method("createView")
+            ->method('createView')
             ->will($this->returnValue(null));
 
 //         mocking a template
 
         $this->templatingMock->expects($this->once())
-            ->method("render")
-            ->will($this->returnValue("renderedTemplate"));
+            ->method('render')
+            ->will($this->returnValue('renderedTemplate'));
 
 //        mocking entry
 
         $this->entryMock->expects($this->once())
-            ->method("getMember")
+            ->method('getMember')
             ->will($this->returnValue($memberMock));
 
 //        mocking entry manager
 
         $this->entryManagerMock->expects($this->once())
-            ->method("createNewEntry")
+            ->method('createNewEntry')
             ->will($this->returnValue($this->entryMock));
 
         $this->entryManagerMock->expects($this->once())
-            ->method("save")
+            ->method('save')
             ->will($this->returnValue(null));
 
 //        mocking form factory
 
         $this->formFactoryMock->expects($this->once())
-            ->method("create")
+            ->method('create')
             ->will($this->returnValue($this->formMock));
 
         $response = $this->entryHandler->handleOpen($memberMock);
@@ -232,57 +230,57 @@ class EntryHandlerTest extends UnitTestCase
         $memberMock = $this->getMemberMock();
 
         $memberMock->expects($this->once())
-            ->method("hasOpenedEntry")
+            ->method('hasOpenedEntry')
             ->will($this->returnValue(false));
 
         $memberMock->expects($this->exactly(2))
-            ->method("getCurrentVoucher")
+            ->method('getCurrentVoucher')
             ->will($this->returnValue(null));
 
         $this->requestMock->expects($this->once())
-            ->method("getMethod")
-            ->will($this->returnValue("POST"));
+            ->method('getMethod')
+            ->will($this->returnValue('POST'));
 
 //         mocking a factored form
 
         $this->formMock->expects($this->once())
-            ->method("handleRequest")
+            ->method('handleRequest')
             ->will($this->returnValue(null));
 
         $this->formMock->expects($this->once())
-            ->method("isValid")
+            ->method('isValid')
             ->will($this->returnValue(false));
 
         $this->formMock->expects($this->once())
-            ->method("getData")
+            ->method('getData')
             ->will($this->returnValue($this->entryMock));
 
         $this->formMock->expects($this->once())
-            ->method("createView")
+            ->method('createView')
             ->will($this->returnValue(null));
 
 //         mocking a template
 
         $this->templatingMock->expects($this->once())
-            ->method("render")
-            ->will($this->returnValue("renderedTemplate"));
+            ->method('render')
+            ->will($this->returnValue('renderedTemplate'));
 
 //        mocking entry
 
         $this->entryMock->expects($this->once())
-            ->method("getMember")
+            ->method('getMember')
             ->will($this->returnValue($memberMock));
 
 //        mocking entry manager
 
         $this->entryManagerMock->expects($this->once())
-            ->method("createNewEntry")
+            ->method('createNewEntry')
             ->will($this->returnValue($this->entryMock));
 
 //        mocking form factory
 
         $this->formFactoryMock->expects($this->once())
-            ->method("create")
+            ->method('create')
             ->will($this->returnValue($this->formMock));
 
         $response = $this->entryHandler->handleOpen($memberMock);
@@ -299,12 +297,12 @@ class EntryHandlerTest extends UnitTestCase
     public function entry_closing_form_is_rendered()
     {
         $this->templatingMock->expects($this->once())
-            ->method("render")
-            ->will($this->returnValue("renderedTemplate"));
+            ->method('render')
+            ->will($this->returnValue('renderedTemplate'));
 
         $entryMock = $this->getEntryMock();
         $entryMock->expects($this->once())
-            ->method("getStartDate")
+            ->method('getStartDate')
             ->will($this->returnValue(new \DateTime()));
 
         $response = $this->entryHandler->handleClose($entryMock);
@@ -321,17 +319,17 @@ class EntryHandlerTest extends UnitTestCase
     public function entry_closing_is_posted_and_performed()
     {
         $this->requestMock->expects($this->once())
-            ->method("getMethod")
-            ->will($this->returnValue("POST"));
+            ->method('getMethod')
+            ->will($this->returnValue('POST'));
 
         $entryMock = $this->getEntryMock();
 
         $entryMock->expects($this->once())
-            ->method("setEndDate")
+            ->method('setEndDate')
             ->will($this->returnValue(null));
 
         $this->entryManagerMock->expects($this->once())
-            ->method("save")
+            ->method('save')
             ->will($this->returnValue(null));
 
         $response = $this->entryHandler->handleClose($entryMock);
@@ -386,6 +384,7 @@ class EntryHandlerTest extends UnitTestCase
         $entryMock = $this->getMockBuilder("Gyman\Bundle\EntriesBundle\Entity\Entry")
             ->disableOriginalConstructor()
             ->getMock();
+
         return $entryMock;
     }
 
@@ -397,6 +396,7 @@ class EntryHandlerTest extends UnitTestCase
         $memberMock = $this->getMockBuilder("Gyman\Bundle\MembersBundle\Entity\Member")
             ->disableOriginalConstructor()
             ->getMock();
+
         return $memberMock;
     }
 
@@ -407,7 +407,7 @@ class EntryHandlerTest extends UnitTestCase
     {
         $entryTypeMock = $this->getMockBuilder("Gyman\Bundle\EntriesBundle\Form\EntryType")
             ->disableOriginalConstructor()
-            ->setMethods(["getData", "createView", "isValid", "handleRequest"])
+            ->setMethods(['getData', 'createView', 'isValid', 'handleRequest'])
             ->getMock();
 
         return $entryTypeMock;
@@ -421,6 +421,7 @@ class EntryHandlerTest extends UnitTestCase
         $entryTypeMock = $this->getMockBuilder("Symfony\Component\Form\FormFactory")
             ->disableOriginalConstructor()
             ->getMock();
+
         return $entryTypeMock;
     }
 

@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\FiltersBundle\Tests\Traits;
 
-use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
 use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
+use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
 
 class GetFormTypeTraitStub
 {

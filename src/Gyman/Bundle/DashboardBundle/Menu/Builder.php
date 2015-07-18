@@ -35,12 +35,11 @@ class Builder
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted("ROLE_USER")) {
+        if (!$this->context->isGranted('ROLE_USER')) {
             return $menu;
         }
 
-        $menu->setChildrenAttributes(["id" => "dashboardActionMenu"]);
-
+        $menu->setChildrenAttributes(['id' => 'dashboardActionMenu']);
 
 //        $menu->addChild(
 //            'dashboard.actions.sell',
@@ -57,36 +56,36 @@ class Builder
         $menu->addChild(
             'dashboard.actions.new_entry',
             [
-                'route' => '_member_new',
-                "extras" => ["icon" => 'icomoon-icon-users'],
+                'route'          => '_member_new',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
-                    "id" => "actionEntry"
-                ]
+                    'class' => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    'id'    => 'actionEntry',
+                ],
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_voucher_sale',
             [
-                'route' => '_member_new',
-                "extras" => ["icon" => 'icomoon-icon-users'],
+                'route'          => '_member_new',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
-                    "id" => "actionVoucher"
-                ]
+                    'class' => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    'id'    => 'actionVoucher',
+                ],
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_member',
             [
-                'route' => '_member_new',
-                "extras" => ["icon" => 'icomoon-icon-users'],
+                'route'          => '_member_new',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    "class" => 'btn btn-block btn-large btn-primary createNewMember',
-                    "id" => "actionMember"
-                ]
+                    'class' => 'btn btn-block btn-large btn-primary createNewMember',
+                    'id'    => 'actionMember',
+                ],
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 

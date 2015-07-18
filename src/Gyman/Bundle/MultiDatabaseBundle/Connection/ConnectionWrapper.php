@@ -1,16 +1,17 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Connection;
 
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
+use Doctrine\DBAL\Event\ConnectionEventArgs;
+use Doctrine\DBAL\Events;
 use Doctrine\DBAL\Platforms\MySQL57Platform;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
-use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Event\ConnectionEventArgs;
 
 class ConnectionWrapper extends Connection
 {
@@ -31,14 +32,19 @@ class ConnectionWrapper extends Connection
      */
     public function setCredentialsStorage(CredentialsStorage$credentialsStorage)
     {
-        ConnectionWrapper::close();
         $this->credentialsStorage = $credentialsStorage;
     }
 
+    /**
+     * @param array $params
+     * @param Driver $driver
+     * @param Configuration|null $config
+     * @param EventManager|null $eventManager
+     */
     public function __construct(
         array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null
     ) {
-        $this->platform = $params["platform"] = new MySQL57Platform();
+        $this->platform = $params['platform'] = new MySQL57Platform();
         parent::__construct($params, $driver, $config, $eventManager);
     }
 

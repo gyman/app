@@ -23,8 +23,8 @@ class FilterRepository extends EntityRepository
      */
     public function getPinnedFiltersQueryBuilder()
     {
-        return $this->createQueryBuilder("f")
-                ->where("f.pinned = true");
+        return $this->createQueryBuilder('f')
+                ->where('f.pinned = true');
     }
 
     /**
@@ -42,7 +42,7 @@ class FilterRepository extends EntityRepository
      */
     public function getFiltersQueryBuilder()
     {
-        return $this->createQueryBuilder("f");
+        return $this->createQueryBuilder('f');
     }
 
     /**
@@ -62,8 +62,8 @@ class FilterRepository extends EntityRepository
      */
     public function getFiltersByListnameQueryBuilder($listname)
     {
-        return $this->createQueryBuilder("f")
-                ->andWhere("f.listname = :listname")
-                ->setParameter("listname", $listname);
+        return $this->createQueryBuilder('f')
+                ->andWhere('f.listname = :listname')
+                ->setParameter('listname', $listname);
     }
 }

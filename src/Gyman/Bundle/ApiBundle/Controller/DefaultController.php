@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Gyman\Bundle\BaseBundle\Controller\BaseApiController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DefaultController extends BaseApiController
@@ -16,22 +16,22 @@ class DefaultController extends BaseApiController
      */
     public function indexAction()
     {
-        $view = $this->createView(array(
-            "_links" => array(
-                "self" => array(
-                    "href" => $this->generateAbsoluteUrl("gyman_api")
-                ),
-                "members" => array(
-                    "href" => $this->generateAbsoluteUrl("gyman_api_get_members")
-                ),
+        $view = $this->createView([
+            '_links' => [
+                'self' => [
+                    'href' => $this->generateAbsoluteUrl('gyman_api'),
+                ],
+                'members' => [
+                    'href' => $this->generateAbsoluteUrl('gyman_api_get_members'),
+                ],
 //                "vouchers" => array(
 //                    "href" => $this->generateAbsoluteUrl("gyman_api_get_vouchers")
 //                ),
 //                "clubs" => array(
 //                    "href" => $this->generateAbsoluteUrl("gyman_api_get_clubs")
 //                ),
-            )
-        ), 200);
+            ],
+        ], 200);
 
         return $view;
     }

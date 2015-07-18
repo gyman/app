@@ -1,12 +1,13 @@
 <?php
+
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
 use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
+use Gyman\Bundle\UserBundle\Entity\User;
 use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 use Spy\TimelineBundle\Driver\ORM\ActionManager;
 use Symfony\Component\Security\Core\SecurityContext;
-use Gyman\Bundle\UserBundle\Entity\User;
 
 class EventsHandler
 {
@@ -17,11 +18,11 @@ class EventsHandler
     const VERB_CREATED = 'created';
 
     public static $translationKeys = [
-        self::VERB_BOUGHT => "timeline.verb.bought",
-        self::VERB_PAID => "timeline.verb.paid",
-        self::VERB_ENTERED => "timeline.verb.entered",
-        self::VERB_LEFT => "timeline.verb.left",
-        self::VERB_CREATED => "timeline.verb.created",
+        self::VERB_BOUGHT  => 'timeline.verb.bought',
+        self::VERB_PAID    => 'timeline.verb.paid',
+        self::VERB_ENTERED => 'timeline.verb.entered',
+        self::VERB_LEFT    => 'timeline.verb.left',
+        self::VERB_CREATED => 'timeline.verb.created',
     ];
 
     /**
@@ -69,10 +70,10 @@ class EventsHandler
 
     private function insertData($subject, $verb, $complement = null)
     {
-        $components = ["indirectComplement" => $this->user->getFullname()];
+        $components = ['indirectComplement' => $this->user->getFullname()];
 
         if ($complement !== null) {
-            $components["directComplement"] = $complement;
+            $components['directComplement'] = $complement;
         }
 
         $action = $this->actionManager->create($subject, $verb, $components);

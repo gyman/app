@@ -1,8 +1,9 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {

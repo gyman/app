@@ -2,11 +2,11 @@
 
 namespace Gyman\Bundle\EntriesBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
-use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DateTime;
+use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 
 /**
  * EntryRepository
@@ -18,7 +18,7 @@ class EntryRepository extends EntityRepository implements RepositoryListCompatib
 {
     public function getAllEntries()
     {
-        return $this->createQueryBuilder("e")
+        return $this->createQueryBuilder('e')
                         ->getQuery()->execute();
     }
 
@@ -28,13 +28,13 @@ class EntryRepository extends EntityRepository implements RepositoryListCompatib
      */
     public function getQuery()
     {
-        return $this->createQueryBuilder("e");
+        return $this->createQueryBuilder('e');
     }
 
     public function getTotalCount()
     {
         $query = $this->getQuery();
-        $query->select("count(e.id)");
+        $query->select('count(e.id)');
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -50,21 +50,21 @@ class EntryRepository extends EntityRepository implements RepositoryListCompatib
      */
     public function getCountByActivitiesQueryBuilder(DateTime $startDate, DateTime $endDate)
     {
-        return $this->createQueryBuilder("e")
+        return $this->createQueryBuilder('e')
                         ->select([
-                            "a.name",
-                            "SUBSTRING(o.startDate,1,10) as date",
-                            "count(e) as cnt"
+                            'a.name',
+                            'SUBSTRING(o.startDate,1,10) as date',
+                            'count(e) as cnt',
                         ])
-                        ->join("e.occurence", "o")
-                        ->join("o.event", "ev")
-                        ->join("ev.activity", "a")
-                        ->groupBy("date, a.name")
-                        ->where("e.startDate > :start")
-                        ->andWhere("e.endDate < :end or e.endDate is null")
+                        ->join('e.occurence', 'o')
+                        ->join('o.event', 'ev')
+                        ->join('ev.activity', 'a')
+                        ->groupBy('date, a.name')
+                        ->where('e.startDate > :start')
+                        ->andWhere('e.endDate < :end or e.endDate is null')
                         ->setParameters([
-                            "start" => $startDate,
-                            "end"   => $endDate,
+                            'start' => $startDate,
+                            'end'   => $endDate,
         ]);
     }
 

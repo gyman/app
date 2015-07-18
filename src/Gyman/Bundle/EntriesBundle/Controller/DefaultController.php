@@ -2,16 +2,15 @@
 
 namespace Gyman\Bundle\EntriesBundle\Controller;
 
-use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Gyman\Bundle\MembersBundle\Entity\Member;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use DateTime;
 
 class DefaultController extends Controller
 {
@@ -22,8 +21,9 @@ class DefaultController extends Controller
      */
     public function openAction(Member $member)
     {
-        $entryHandler = $this->get("gyman.entries.entry_handler");
+        $entryHandler = $this->get('gyman.entries.entry_handler');
         $response = $entryHandler->handleOpen($member);
+
         return $response;
     }
 
@@ -34,8 +34,9 @@ class DefaultController extends Controller
      */
     public function closeAction(Entry $entry)
     {
-        $entryHandler = $this->get("gyman.entries.entry_handler");
+        $entryHandler = $this->get('gyman.entries.entry_handler');
         $response = $entryHandler->handleClose($entry);
+
         return $response;
     }
 
@@ -50,7 +51,7 @@ class DefaultController extends Controller
         $entityManager->remove($entry);
         $entityManager->flush();
 
-        return new JsonResponse(array("status" => "ok"));
+        return new JsonResponse(['status' => 'ok']);
     }
 
     /**
@@ -60,9 +61,9 @@ class DefaultController extends Controller
      */
     public function editAction(Entry $entry, Request $request)
     {
-        return array(
-            "entry" => $entry
-        );
+        return [
+            'entry' => $entry,
+        ];
     }
 
     /**
@@ -72,7 +73,7 @@ class DefaultController extends Controller
     public function quickSearchAction(Member $member)
     {
         return new RedirectResponse(
-            $this->generateUrl("_entrance_add", ["id" => $member->getId()])
+            $this->generateUrl('_entrance_add', ['id' => $member->getId()])
         );
     }
 }

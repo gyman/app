@@ -2,11 +2,8 @@
 
 namespace Gyman\Bundle\DefaultBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Gyman\Bundle\DefaultBundle\DependencyInjection\CompilerPass\ConnectionCompilerPass;
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DefaultBundle extends Bundle
 {

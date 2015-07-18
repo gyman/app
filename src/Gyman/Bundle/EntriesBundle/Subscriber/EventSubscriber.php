@@ -4,9 +4,9 @@ namespace Gyman\Bundle\EntriesBundle\Subscriber;
 
 use Gyman\Bundle\EntriesBundle\EntriesEvents;
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
+use Gyman\Bundle\EntriesBundle\Event\EventsHandler;
 use Gyman\Bundle\MembersBundle\EntityManager\MemberManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Gyman\Bundle\EntriesBundle\Event\EventsHandler;
 
 class EventSubscriber implements EventSubscriberInterface
 {
@@ -35,9 +35,9 @@ class EventSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            EntriesEvents::CREATED => [['onEntryCreated', 0]]
-        );
+        return [
+            EntriesEvents::CREATED => [['onEntryCreated', 0]],
+        ];
     }
 
     /**

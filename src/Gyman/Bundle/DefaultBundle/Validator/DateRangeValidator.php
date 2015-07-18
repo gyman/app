@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\DefaultBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
@@ -20,17 +21,17 @@ class DateRangeValidator extends ConstraintValidator
         }
 
         if (null !== $constraint->max && $value > $constraint->max) {
-            $this->context->addViolation($constraint->maxMessage, array(
-                '{{ value }}' => $value->format("d.m.y"),
+            $this->context->addViolation($constraint->maxMessage, [
+                '{{ value }}' => $value->format('d.m.y'),
                 '{{ limit }}' => $this->formatDate($constraint->max),
-            ));
+            ]);
         }
 
         if (null !== $constraint->min && $value < $constraint->min) {
-            $this->context->addViolation($constraint->minMessage, array(
-                '{{ value }}' => $value->format("d.m.y"),
+            $this->context->addViolation($constraint->minMessage, [
+                '{{ value }}' => $value->format('d.m.y'),
                 '{{ limit }}' => $this->formatDate($constraint->min),
-            ));
+            ]);
         }
     }
 

@@ -3,13 +3,13 @@
 namespace Gyman\Bundle\VouchersBundle\Services\Manager;
 
 use Doctrine\ORM\QueryBuilder;
-use Gyman\Bundle\VouchersBundle\VouchersEvents;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Exception;
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Exception;
+use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 use Gyman\Bundle\VouchersBundle\Event\VoucherEditedEvent;
+use Gyman\Bundle\VouchersBundle\VouchersEvents;
 
 /**
  * @todo: refactor class and move to entitymanagers
@@ -58,7 +58,7 @@ class VoucherManager extends BaseManager
         $member = $this->getById($id);
 
         if (!$member) {
-            throw new Exception("Voucher not found");
+            throw new Exception('Voucher not found');
         }
 
         $member->setDeletedAt(new \DateTime());
@@ -71,12 +71,12 @@ class VoucherManager extends BaseManager
      */
     public function setActiveCriteria(QueryBuilder $query)
     {
-        $query->andWhere("v.deletedAt is null");
+        $query->andWhere('v.deletedAt is null');
     }
 
     public function closeVoucher(Voucher $voucher)
     {
-        $yesterday = date("Y-m-d 23:59:59", strtotime("yesterday"));
+        $yesterday = date('Y-m-d 23:59:59', strtotime('yesterday'));
         $voucher->setEndDate(new \DateTime($yesterday));
         $this->save($voucher);
     }
@@ -115,11 +115,11 @@ class VoucherManager extends BaseManager
         $startDate = new \DateTime();
         if ($currentVoucher) {
             $startDate = clone($currentVoucher->getEndDate());
-            $startDate->add(new \DateInterval("PT1S"));
+            $startDate->add(new \DateInterval('PT1S'));
         }
 
         $endDate = clone($startDate);
-        $endDate->add(new \DateInterval("P1M"));
+        $endDate->add(new \DateInterval('P1M'));
 
         $voucher->setMember($member);
         $voucher->setStartDate($startDate);

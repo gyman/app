@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\ReportsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,22 +18,22 @@ class DefaultController extends Controller
      */
     public function indexAction($listname, Request $request)
     {
-        $vouchersList = $this->get("vouchers_list");
+        $vouchersList = $this->get('vouchers_list');
         $data = $vouchersList->getFullDataView();
         $format = $request->getRequestFormat();
 
         $priceSum = $this->getPriceSum($data);
 
-        $filename = sprintf("report_%s_%s.%s", $listname, date("Y-m-d_H:i:s"), $format);
+        $filename = sprintf('report_%s_%s.%s', $listname, date('Y-m-d_H:i:s'), $format);
 
-        $response = $this->render('ReportsBundle:Default:' . ucfirst($listname) . '/index.' . $format . '.twig', array('data'     => $data,
-            "priceSum" => $priceSum));
+        $response = $this->render('ReportsBundle:Default:' . ucfirst($listname) . '/index.' . $format . '.twig', ['data'     => $data,
+            'priceSum' => $priceSum, ]);
 
         switch ($format) {
-            case "csv":
+            case 'csv':
                 $response->headers->set('Content-Type', 'text/csv');
                 break;
-            case "html":
+            case 'html':
                 $response->headers->set('Content-Type', 'text/html');
                 break;
         }
@@ -47,7 +47,7 @@ class DefaultController extends Controller
     {
         $sum = 0;
         foreach ($data as $item) {
-            $sum +=$item->getPrice();
+            $sum += $item->getPrice();
         }
 
         return $sum;

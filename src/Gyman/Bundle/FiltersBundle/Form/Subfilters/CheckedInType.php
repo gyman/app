@@ -14,24 +14,24 @@ class CheckedInType extends AbstractSubfilterType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("checkedIn", "choice", array(
-            "choices" => [
-                true  => "tak",
-                false => "nie"
+        $builder->add('checkedIn', 'choice', [
+            'choices' => [
+                true  => 'tak',
+                false => 'nie',
             ],
-            "property_path" => "[checkedIn]"
-        ));
+            'property_path' => '[checkedIn]',
+        ]);
     }
 
     public function getName()
     {
-        return "checked_in";
+        return 'checked_in';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => "Gyman\Bundle\FiltersBundle\Filters\CheckedIn",
-        ));
+        ]);
     }
 }

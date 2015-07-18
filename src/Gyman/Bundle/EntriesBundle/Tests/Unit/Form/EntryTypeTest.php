@@ -2,15 +2,15 @@
 
 namespace Gyman\Bundle\EntriesBundle\Tests\Unit\Form;
 
-use Symfony\Component\Form\Test\TypeTestCase;
-use Gyman\Bundle\EntriesBundle\Form\EntryType;
-use Gyman\Bundle\ScheduleBundle\Entity\Serial;
-use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Symfony\Component\Form\PreloadedExtension;
-use Symfony\Component\Form\Forms;
-use Gyman\Bundle\ScheduleBundle\Entity\Event;
 use DateTime;
+use Gyman\Bundle\EntriesBundle\Entity\Entry;
+use Gyman\Bundle\EntriesBundle\Form\EntryType;
+use Gyman\Bundle\ScheduleBundle\Entity\Event;
+use Gyman\Bundle\ScheduleBundle\Entity\Serial;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
 
 class EntryTypeTest extends TypeTestCase
 {
@@ -23,7 +23,7 @@ class EntryTypeTest extends TypeTestCase
 
         $entry = new Entry();
         $entry->setVoucher(new Voucher());
-        $entry->setStartDate(new DateTime($formData["startDate"]));
+        $entry->setStartDate(new DateTime($formData['startDate']));
 
         $type = new EntryType($occurenceRepositoryMock);
         $form = $this->factory->create($type, $entry);
@@ -47,55 +47,55 @@ class EntryTypeTest extends TypeTestCase
     {
         $voucher = new Voucher();
 
-        $dataSet1 = array(
-            "entryType"  => "paid",
-            "entryPrice" => "15",
-            "startDate"  => '11.05.2014 06:24',
-            "occurence"  => 123,
-        );
+        $dataSet1 = [
+            'entryType'  => 'paid',
+            'entryPrice' => '15',
+            'startDate'  => '11.05.2014 06:24',
+            'occurence'  => 123,
+        ];
 
         $preparedEntry1 = new Entry();
         $preparedEntry1->setVoucher($voucher);
-        $preparedEntry1->setEntryPrice($dataSet1["entryPrice"]);
-        $preparedEntry1->setStartDate(new DateTime($dataSet1["startDate"]));
-        $preparedEntry1->setEntryType("paid");
+        $preparedEntry1->setEntryPrice($dataSet1['entryPrice']);
+        $preparedEntry1->setStartDate(new DateTime($dataSet1['startDate']));
+        $preparedEntry1->setEntryType('paid');
 
-        $dataSet2 = array(
-            "entryType" => "free",
-            "startDate" => '11.05.2014 06:24',
-            "occurence" => 123,
-        );
+        $dataSet2 = [
+            'entryType' => 'free',
+            'startDate' => '11.05.2014 06:24',
+            'occurence' => 123,
+        ];
 
         $preparedEntry2 = new Entry();
         $preparedEntry2->setVoucher($voucher);
-        $preparedEntry2->setStartDate(new DateTime($dataSet2["startDate"]));
-        $preparedEntry2->setEntryType("free");
+        $preparedEntry2->setStartDate(new DateTime($dataSet2['startDate']));
+        $preparedEntry2->setEntryType('free');
 
-        $dataSet3 = array(
-            "entryType" => "voucher",
-            "startDate" => '11.05.2014 06:24',
-            "occurence" => 123,
-        );
+        $dataSet3 = [
+            'entryType' => 'voucher',
+            'startDate' => '11.05.2014 06:24',
+            'occurence' => 123,
+        ];
 
         $preparedEntry3 = new Entry();
         $preparedEntry3->setVoucher($voucher);
-        $preparedEntry3->setEntryType("voucher");
-        $preparedEntry3->setStartDate(new DateTime($dataSet3["startDate"]));
+        $preparedEntry3->setEntryType('voucher');
+        $preparedEntry3->setStartDate(new DateTime($dataSet3['startDate']));
 
-        return array(
-            array(
-                "formData" => $dataSet1,
-                "entry"    => $preparedEntry1
-            ),
-            array(
-                "formData" => $dataSet2,
-                "entry"    => $preparedEntry2
-            ),
-            array(
-                "formData"      => $dataSet3,
-                "preparedEntry" => $preparedEntry3,
-            ),
-        );
+        return [
+            [
+                'formData' => $dataSet1,
+                'entry'    => $preparedEntry1,
+            ],
+            [
+                'formData' => $dataSet2,
+                'entry'    => $preparedEntry2,
+            ],
+            [
+                'formData'      => $dataSet3,
+                'preparedEntry' => $preparedEntry3,
+            ],
+        ];
     }
 
     private function getOccurence($id, Event $event, DateTime $startDate)
@@ -111,13 +111,13 @@ class EntryTypeTest extends TypeTestCase
     private function getOccurenceRepositoryMock()
     {
         $activity = new \Gyman\Bundle\ScheduleBundle\Entity\Activity();
-        $activity->setName("someName");
+        $activity->setName('someName');
 
         $event = new \Gyman\Bundle\ScheduleBundle\Entity\Weekly();
         $event->setActivity($activity);
 
         $startDate = new \DateTime();
-        $startDate->modify("22:11:00");
+        $startDate->modify('22:11:00');
 
         $occurence = $this->getOccurence(123, $event, $startDate);
 
@@ -141,16 +141,16 @@ class EntryTypeTest extends TypeTestCase
         $mockRegistry = $this->getRegistryMock($entityManagerMock);
 
         $entityTypeMock = $this->getMockBuilder('Symfony\Bridge\Doctrine\Form\Type\EntityType')
-                ->setMethods(array('getName'))
-                ->setConstructorArgs(array($mockRegistry))
+                ->setMethods(['getName'])
+                ->setConstructorArgs([$mockRegistry])
                 ->getMock();
 
         $entityTypeMock->expects($this->any())->method('getName')
                 ->will($this->returnValue('entity'));
 
-        return array(new PreloadedExtension(array(
+        return [new PreloadedExtension([
                 $entityTypeMock->getName() => $entityTypeMock,
-                    ), array()));
+                    ], [])];
     }
 
     private function getMetadataClassMock()
@@ -169,7 +169,7 @@ class EntryTypeTest extends TypeTestCase
     {
         $mockEntityManager = $this->getMockBuilder('\Doctrine\ORM\EntityManager')
                 ->disableOriginalConstructor()
-                ->setMethods(array("getClassMetadata"))
+                ->setMethods(['getClassMetadata'])
                 ->getMock();
 
         $mockEntityManager->expects($this->any())
@@ -183,7 +183,7 @@ class EntryTypeTest extends TypeTestCase
     {
         $mockRegistry = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
                 ->disableOriginalConstructor()
-                ->setMethods(array('getManagerForClass'))
+                ->setMethods(['getManagerForClass'])
                 ->getMock();
 
         $mockRegistry->expects($this->any())->method('getManagerForClass')

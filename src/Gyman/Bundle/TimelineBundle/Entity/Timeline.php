@@ -10,7 +10,6 @@ use Spy\TimelineBundle\Entity\Timeline as BaseTimeline;
  * @ORM\Entity()
  * @codeCoverageIgnore
  */
-
 class Timeline extends BaseTimeline
 {
     /**

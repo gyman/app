@@ -6,23 +6,23 @@ use Doctrine\ORM\QueryBuilder;
 
 class EntriesList extends AbstractList
 {
-    protected $listname = "entries";
-    protected $listTrPartial = "ListsBundle:Entries:_list_tr.html.twig";
+    protected $listname = 'entries';
+    protected $listTrPartial = 'ListsBundle:Entries:_list_tr.html.twig';
     protected $columnsCount = 5;
-    protected $sortingColumns = array(
-        "m.name",
-        "e.created",
-        "a.name",
-        "e.entryType"
-    );
+    protected $sortingColumns = [
+        'm.name',
+        'e.created',
+        'a.name',
+        'e.entryType',
+    ];
 
     protected function addJoins(QueryBuilder $query)
     {
-        $query->join("e.member", "m");
-        $query->leftJoin("e.voucher", "v");
-        $query->join("e.occurence", "o");
-        $query->join("o.event", "ev");
-        $query->join("ev.activity", "a");
+        $query->join('e.member', 'm');
+        $query->leftJoin('e.voucher', 'v');
+        $query->join('e.occurence', 'o');
+        $query->join('o.event', 'ev');
+        $query->join('ev.activity', 'a');
     }
 
     public function getSortingFunction($sortingColumnsCount, $sortingColumnArray, $sortingOrderArray)
@@ -40,7 +40,7 @@ class EntriesList extends AbstractList
                 $column = (int) $sortingColumnArray[$a];
                 $order = strtoupper($sortingOrderArray[$a]);
 
-                if (!key_exists($column, $this->sortingColumns)) {
+                if (!array_key_exists($column, $this->sortingColumns)) {
                     continue;
                 }
 

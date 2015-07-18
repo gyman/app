@@ -2,7 +2,7 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
-use \DateTime;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,7 +59,7 @@ class Weekly extends Event
      * @ORM\Column(name="saturday", type="boolean", nullable = true)
      */
     private $saturday;
-    protected $type = "weekly";
+    protected $type = 'weekly';
 
 // <editor-fold defaultstate="collapsed" desc="setters getters">
 
@@ -168,9 +168,9 @@ class Weekly extends Event
      */
     public function getOccurenceForWeekNumber($year, $weekNumber)
     {
-        $weekStart = new \DateTime(sprintf("%d-W%d-1", $year, $weekNumber));
+        $weekStart = new \DateTime(sprintf('%d-W%d-1', $year, $weekNumber));
         $eventDate = $this->getStartDate();
-        $interval = new \DateInterval(sprintf("PT%dS", $this->getInterval()));
+        $interval = new \DateInterval(sprintf('PT%dS', $this->getInterval()));
 
         while ($eventDate->getTimestamp() < $weekStart->getTimestamp()) {
             $eventDate->add($interval);
@@ -186,7 +186,7 @@ class Weekly extends Event
         }
 
         $result = array_filter($this->meta->toArray(), function (EventMeta $meta) use ($date) {
-            $isDeleted = $meta->getKey() == "deleted";
+            $isDeleted = $meta->getKey() == 'deleted';
             $isDateSame = $meta->getStartDate()->getTimestamp() == $date->getTimestamp();
             if (!$isDeleted || !$isDateSame) {
                 return false;

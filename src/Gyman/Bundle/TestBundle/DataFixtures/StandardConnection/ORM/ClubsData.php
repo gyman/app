@@ -1,9 +1,10 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM;
 
+use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\TestBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\ClubBundle\Entity\Club;
 
 class ClubsData extends BaseFixture
 {
@@ -17,9 +18,9 @@ class ClubsData extends BaseFixture
     public function insert($params)
     {
         $club = new Club();
-        $club->setName($params["name"]);
-        $club->setSubdomain($params["subdomain"]);
-        $club->setDatabase($this->getDb($params["database"]));
+        $club->setName($params['name']);
+        $club->setSubdomain($params['subdomain']);
+        $club->setDatabase($this->getDb($params['database']));
 
         $this->manager->persist($club);
         $this->manager->flush();
@@ -30,9 +31,9 @@ class ClubsData extends BaseFixture
     private function getDb($database)
     {
         return [
-            CredentialsStorage::PARAM_BASE => $database["name"],
-            CredentialsStorage::PARAM_USER => $database["user"],
-            CredentialsStorage::PARAM_PASS => $database["password"],
+            CredentialsStorage::PARAM_BASE => $database['name'],
+            CredentialsStorage::PARAM_USER => $database['user'],
+            CredentialsStorage::PARAM_PASS => $database['password'],
         ];
     }
 }

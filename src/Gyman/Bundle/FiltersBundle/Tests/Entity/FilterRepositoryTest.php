@@ -28,13 +28,13 @@ class FilterRepositoryTest extends BaseTest
 
     public function testGetFiltersByListnameQueryBuilder()
     {
-        $query = $this->container->get('filter_repository')->getFiltersByListnameQueryBuilder("testListname");
+        $query = $this->container->get('filter_repository')->getFiltersByListnameQueryBuilder('testListname');
 
         $testDql = "SELECT f FROM Gyman\Bundle\FiltersBundle\Entity\Filter f WHERE f.listname = :listname";
 
         $this->assertEquals($testDql, $query->getDQL());
         $this->assertEquals(1, $query->getParameters()->count());
-        $this->assertEquals("listname", $query->getParameters()->get(0)->getName());
-        $this->assertEquals("testListname", $query->getParameters()->get(0)->getValue());
+        $this->assertEquals('listname', $query->getParameters()->get(0)->getName());
+        $this->assertEquals('testListname', $query->getParameters()->get(0)->getValue());
     }
 }

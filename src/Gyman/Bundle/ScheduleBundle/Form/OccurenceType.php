@@ -15,18 +15,16 @@ class OccurenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('editType', "choice", array(
-                    "choices"  => [
-                        "single" => "tylko ten element",
-                        "rest"   => "wszystkie następne",
+                ->add('editType', 'choice', [
+                    'choices'  => [
+                        'single' => 'tylko ten element',
+                        'rest'   => 'wszystkie następne',
                     ],
-                    "mapped"   => false,
-                    "data"     => "single",
-                    "label"    => "Edytuj",
-                    "expanded" => true
-                ))
-
-        ;
+                    'mapped'   => false,
+                    'data'     => 'single',
+                    'label'    => 'Edytuj',
+                    'expanded' => true,
+                ]);
     }
 
     /**
@@ -34,9 +32,9 @@ class OccurenceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Gyman\Bundle\ScheduleBundle\Entity\Occurence'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Gyman\Bundle\ScheduleBundle\Entity\Occurence',
+        ]);
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use Doctrine\ORM\EntityManager;
@@ -56,7 +57,7 @@ class CurrentClubWrapper
             $club = $this->user->getClubs()->first();
 
             if ($club === null) {
-                throw new NoClubsException("This user has no clubs");
+                throw new NoClubsException('This user has no clubs');
             }
         }
 

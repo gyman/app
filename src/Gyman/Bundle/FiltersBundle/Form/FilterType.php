@@ -2,18 +2,18 @@
 
 namespace Gyman\Bundle\FiltersBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Form;
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
-use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Gyman\Bundle\FiltersBundle\Form\Extension\ActivitiesChoiceList;
-use Symfony\Component\Form\FormView;
+use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
+use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class FilterType extends AbstractType
 {
@@ -36,30 +36,30 @@ class FilterType extends AbstractType
         $filtersList = $this->getFiltersChoiceList();
 
         $builder
-            ->add('save', "checkbox", [
-                "label"  => "Zapisz filtr",
-                "mapped" => false,
-                "data"   => false
+            ->add('save', 'checkbox', [
+                'label'  => 'Zapisz filtr',
+                'mapped' => false,
+                'data'   => false,
             ])
-            ->add('name', "text", [
-                "label" => "Nazwa filtra",
-                "attr"  => [
-                    "placeholder" => "wpisz nazwę..."
+            ->add('name', 'text', [
+                'label' => 'Nazwa filtra',
+                'attr'  => [
+                    'placeholder' => 'wpisz nazwę...',
                 ],
-                "validation_groups" => ["saveFilter"]
+                'validation_groups' => ['saveFilter'],
             ])
-            ->add('pinned', "checkbox", [
-                "label" => "Pokaż na dashboardzie",
+            ->add('pinned', 'checkbox', [
+                'label' => 'Pokaż na dashboardzie',
             ])
-            ->add('listname', "hidden")
-            ->add('addFilter', "choice", [
-                "choice_list"     => $filtersList,
-                "label"       => "Dodaj opcję",
-                "empty_value" => "wybierz",
-                "mapped"      => false,
+            ->add('listname', 'hidden')
+            ->add('addFilter', 'choice', [
+                'choice_list'     => $filtersList,
+                'label'           => 'Dodaj opcję',
+                'empty_value'     => 'wybierz',
+                'mapped'          => false,
             ]);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, "buildFormCallback"));
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'buildFormCallback']);
     }
 
     public function buildFormCallback(FormEvent $event)
@@ -71,14 +71,14 @@ class FilterType extends AbstractType
                 $formType = $this->getFormType($filter);
 //                    $filterName = $this->parseClassname($filter);
 
-                $event->getForm()->add("sub_".$filterName, $formType, [
-                    "validation_groups" => ["setFilter","saveFilter"],
-                    "property_path" => "filters[$filterName]",
+                $event->getForm()->add('sub_' . $filterName, $formType, [
+                    'validation_groups'  => ['setFilter','saveFilter'],
+                    'property_path'      => "filters[$filterName]",
                     'cascade_validation' => true,
-                    'error_bubbling' => true
+                    'error_bubbling'     => true,
                 ]);
 
-                $event->getForm()->get("sub_".$filterName)->setData($filter);
+                $event->getForm()->get('sub_' . $filterName)->setData($filter);
             }
         }
     }
@@ -93,28 +93,28 @@ class FilterType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(["mode"]);
+        $resolver->setRequired(['mode']);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => 'Gyman\Bundle\FiltersBundle\Entity\Filter',
-            'validation_groups'  => [$this, "getValidationGroups"],
+            'validation_groups'  => [$this, 'getValidationGroups'],
             'cascade_validation' => true,
-            'error_bubbling' => true
-        ));
+            'error_bubbling'     => true,
+        ]);
     }
 
     public function getValidationGroups(Form $form)
     {
-        $mode = $form->getConfig()->getOption("mode");
+        $mode = $form->getConfig()->getOption('mode');
 
         $groups = [];
 
-        if ($mode == "update") {
-            $groups[] = "updateFilter";
-        } elseif ($mode == "save") {
-            $groups[] = "saveFilter";
-        } elseif ($mode == "set") {
-            $groups[] = "setFilter";
+        if ($mode == 'update') {
+            $groups[] = 'updateFilter';
+        } elseif ($mode == 'save') {
+            $groups[] = 'saveFilter';
+        } elseif ($mode == 'set') {
+            $groups[] = 'setFilter';
         }
 
         return $groups;
@@ -122,7 +122,7 @@ class FilterType extends AbstractType
 
     private function getFiltersArrayForChoiceList()
     {
-        $array = array();
+        $array = [];
 
         if (count($this->filtersList) > 0) {
             foreach ($this->filtersList as $filter) {

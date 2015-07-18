@@ -15,8 +15,7 @@ class DescriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('value', "textarea", [])
-        ;
+                ->add('value', 'textarea', []);
     }
 
     /**
@@ -24,9 +23,9 @@ class DescriptionType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Gyman\Bundle\ScheduleBundle\Entity\Description'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Gyman\Bundle\ScheduleBundle\Entity\Description',
+        ]);
     }
 
     /**

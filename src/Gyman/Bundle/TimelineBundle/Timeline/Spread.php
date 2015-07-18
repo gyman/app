@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Spy\Timeline\Spread\SpreadInterface;
-use Spy\Timeline\Model\ActionInterface;
-use Spy\Timeline\Spread\Entry\EntryCollection;
-use Spy\Timeline\Spread\Entry\Entry;
-use Spy\Timeline\Spread\Entry\EntryUnaware;
 use Doctrine\ORM\EntityManager;
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Spy\Timeline\Model\ActionInterface;
+use Spy\Timeline\Spread\Entry\Entry;
+use Spy\Timeline\Spread\Entry\EntryCollection;
+use Spy\Timeline\Spread\Entry\EntryUnaware;
+use Spy\Timeline\Spread\SpreadInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class Spread implements SpreadInterface

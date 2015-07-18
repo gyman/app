@@ -2,14 +2,14 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gyman\Bundle\DefaultBundle\Validator as DefaultBundle;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * Event
@@ -27,9 +27,9 @@ use JMS\Serializer\Annotation as JMS;
  */
 abstract class Event
 {
-    const SUPER = "event";
-    const WEEKLY = "weekly";
-    const SINGLE = "single";
+    const SUPER = 'event';
+    const WEEKLY = 'weekly';
+    const SINGLE = 'single';
 
     // <editor-fold defaultstate="collapsed" desc="members">
 
@@ -115,7 +115,7 @@ abstract class Event
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt; // </editor-fold>
-    protected $type = "event";
+    protected $type = 'event';
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
@@ -245,7 +245,7 @@ abstract class Event
     {
         $this->entries = new ArrayCollection();
         $this->startDate = new DateTime();
-        $this->endDate = new DateTime("+1 year");
+        $this->endDate = new DateTime('+1 year');
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)

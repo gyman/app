@@ -3,7 +3,6 @@
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * EventMetaRepository
@@ -29,22 +28,22 @@ class OccurenceRepository extends EntityRepository
 
     public function getDeleteFollowingQueryBuilder(Serial $occurence)
     {
-        return $this->createQueryBuilder("o")
+        return $this->createQueryBuilder('o')
                         ->delete()
-                        ->where("o.startDate >= :date")
-                        ->andWhere("o.event = :event")
-                        ->setParameter("date", $occurence->getStartDate())
-                        ->setParameter("event", $occurence->getEvent());
+                        ->where('o.startDate >= :date')
+                        ->andWhere('o.event = :event')
+                        ->setParameter('date', $occurence->getStartDate())
+                        ->setParameter('event', $occurence->getEvent());
     }
 
     public function getOccurencesForPeriodQueryBuilder(\DateTime $startDate, \DateTime $endDate)
     {
-        return $queryBuilder = $this->createQueryBuilder("o")
-                ->where("o.startDate BETWEEN :start AND :end")
-                ->orderBy("o.startDate", "ASC")
+        return $queryBuilder = $this->createQueryBuilder('o')
+                ->where('o.startDate BETWEEN :start AND :end')
+                ->orderBy('o.startDate', 'ASC')
                 ->setParameters([
-            "start" => $startDate,
-            "end"   => $endDate,
+            'start' => $startDate,
+            'end'   => $endDate,
         ]);
     }
 }

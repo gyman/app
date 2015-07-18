@@ -3,8 +3,8 @@
 namespace Gyman\Bundle\ListsBundle\Services;
 
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Request;
 
 class ListParameters
 {
@@ -21,7 +21,7 @@ class ListParameters
     /**
      * @var array
      */
-    private $columns = array();
+    private $columns = [];
 
     public function get($param)
     {
@@ -30,7 +30,7 @@ class ListParameters
 
     public function __construct(Container $container)
     {
-        $this->setRequest($container->get("request"));
+        $this->setRequest($container->get('request'));
     }
 
     public function getSortingFunction()
@@ -68,7 +68,7 @@ class ListParameters
 
     public function applyLimit(QueryBuilder $query)
     {
-        $limit = $this->getRequest()->get("iDisplayLength", 10);
+        $limit = $this->getRequest()->get('iDisplayLength', 10);
 
         if (!$limit) {
             return;
@@ -79,7 +79,7 @@ class ListParameters
 
     public function applyOffset(QueryBuilder $query)
     {
-        $offset = $this->getRequest()->get("iDisplayStart", 0);
+        $offset = $this->getRequest()->get('iDisplayStart', 0);
 
         if (!$offset) {
             return;
@@ -90,19 +90,19 @@ class ListParameters
 
     public function applySearch(QueryBuilder $qb)
     {
-        $search = $this->getRequest()->get("sSearch", null);
+        $search = $this->getRequest()->get('sSearch', null);
 
         if (!$search) {
             return;
         }
 
         $qb->andWhere($qb->expr()->orX(
-            $qb->expr()->like("m.name", ":string"),
-            $qb->expr()->like("m.barcode", ":string"),
-            $qb->expr()->like("m.notes", ":string")
+            $qb->expr()->like('m.name', ':string'),
+            $qb->expr()->like('m.barcode', ':string'),
+            $qb->expr()->like('m.notes', ':string')
         ));
 
-        $qb->setParameter("string", "%" . $search . "%");
+        $qb->setParameter('string', '%' . $search . '%');
     }
 
     public function applySort(QueryBuilder $query)
@@ -113,15 +113,15 @@ class ListParameters
 
     public function getSortingColumnsCount()
     {
-        return (int) $this->getRequest()->get("iSortingCols");
+        return (int) $this->getRequest()->get('iSortingCols');
     }
 
     public function getSortingColumns()
     {
-        $array = array();
+        $array = [];
         $count = $this->getSortingColumnsCount();
         for ($a = 0; $a < $count; $a++) {
-            $array[] = $this->getRequest()->get("iSortCol_" . $a);
+            $array[] = $this->getRequest()->get('iSortCol_' . $a);
         }
 
         return $array;
@@ -129,10 +129,10 @@ class ListParameters
 
     public function getSortingOrders()
     {
-        $array = array();
+        $array = [];
         $count = $this->getSortingColumnsCount();
         for ($a = 0; $a < $count; $a++) {
-            $array[] = $this->getRequest()->get("sSortDir_" . $a);
+            $array[] = $this->getRequest()->get('sSortDir_' . $a);
         }
 
         return $array;

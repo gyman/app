@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\AccountBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("/profile")
@@ -17,6 +17,6 @@ class ProfileController extends Controller
      */
     public function indexAction()
     {
-        return $this->forward("FOSUserBundle:Profile:edit");
+        return $this->forward('FOSUserBundle:Profile:edit');
     }
 }

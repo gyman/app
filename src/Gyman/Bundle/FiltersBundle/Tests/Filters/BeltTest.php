@@ -2,8 +2,8 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Filters\Belt;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class BeltTest extends BaseTest
 {
@@ -13,9 +13,9 @@ class BeltTest extends BaseTest
     public function testApplyToQuery($options, $expectedDql, $parameterCount)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
-            ->createQueryBuilder("m");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
+            ->createQueryBuilder('m');
 
         $beltFilter = new Belt();
         $beltFilter->setOptions($options);
@@ -31,52 +31,52 @@ class BeltTest extends BaseTest
     {
         return [
             [
-                "options"        => [
-                    "type" => "not",
-                    "belt" => "blue",
+                'options'        => [
+                    'type' => 'not',
+                    'belt' => 'blue',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt != :belt",
-                "parameterCount" => 1
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt != :belt",
+                'parameterCount' => 1,
             ],
             [
-                "options"        => [
-                    "type" => "gt",
-                    "belt" => "blue",
+                'options'        => [
+                    'type' => 'gt',
+                    'belt' => 'blue',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt NOT IN('white', 'blue') AND m.belt is not null",
-                "parameterCount" => 0
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt NOT IN('white', 'blue') AND m.belt is not null",
+                'parameterCount' => 0,
             ],
             [
-                "options"        => [
-                    "type" => "lt",
-                    "belt" => "blue",
+                'options'        => [
+                    'type' => 'lt',
+                    'belt' => 'blue',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt NOT IN('blue', 'purple', 'brown', 'black') OR m.belt IS NULL",
-                "parameterCount" => 0
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt NOT IN('blue', 'purple', 'brown', 'black') OR m.belt IS NULL",
+                'parameterCount' => 0,
             ],
             [
-                "options"        => [
-                    "type" => "eq",
-                    "belt" => "blue",
+                'options'        => [
+                    'type' => 'eq',
+                    'belt' => 'blue',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt = :belt",
-                "parameterCount" => 1
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt = :belt",
+                'parameterCount' => 1,
             ],
             [
-                "options"        => [
-                    "type" => "eq",
-                    "belt" => "white",
+                'options'        => [
+                    'type' => 'eq',
+                    'belt' => 'white',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt = :belt OR m.belt IS NULL",
-                "parameterCount" => 1
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.belt = :belt OR m.belt IS NULL",
+                'parameterCount' => 1,
             ],
             [
-                "options"        => [
-                    "type" => "not",
-                    "belt" => "white",
+                'options'        => [
+                    'type' => 'not',
+                    'belt' => 'white',
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE NOT(m.belt = :belt) AND m.belt IS NOT NULL",
-                "parameterCount" => 1
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE NOT(m.belt = :belt) AND m.belt IS NOT NULL",
+                'parameterCount' => 1,
             ],
         ];
     }

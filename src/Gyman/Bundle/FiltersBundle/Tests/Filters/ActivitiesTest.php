@@ -2,10 +2,10 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
-use Gyman\Bundle\FiltersBundle\Filters\Activities;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\FiltersBundle\Filters\Activities;
 use Gyman\Bundle\ScheduleBundle\Entity\Activity;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class ActivitiesTest extends BaseTest
 {
@@ -15,12 +15,12 @@ class ActivitiesTest extends BaseTest
     public function testApplyToQuery($activity, $expectedDql)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("ScheduleBundle:Activity")
-            ->createQueryBuilder("a");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('ScheduleBundle:Activity')
+            ->createQueryBuilder('a');
 
         $activityFilter = new Activities();
-        $activityFilter["activities"] = $activity;
+        $activityFilter['activities'] = $activity;
         $activityFilter->apply($queryBuilder);
 
         $dql = $queryBuilder->getQuery()->getDQL();
@@ -33,32 +33,32 @@ class ActivitiesTest extends BaseTest
     {
         return [
             [
-                "activity"    => new ArrayCollection(call_user_func(function () {
+                'activity'    => new ArrayCollection(call_user_func(function () {
                     $activity = new Activity();
                     $activity->setId(10);
-                    $activity->setName("testActivity");
+                    $activity->setName('testActivity');
 
                     return [$activity];
                 })),
-                "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10)"
+                'expectedDql' => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10)",
                 ],
                 [
-                "activity"    => new ArrayCollection(call_user_func(function () {
+                'activity'    => new ArrayCollection(call_user_func(function () {
                     $activity = new Activity();
                     $activity->setId(10);
-                    $activity->setName("testActivity");
+                    $activity->setName('testActivity');
 
                     $activity2 = new Activity();
                     $activity2->setId(20);
-                    $activity2->setName("testActivity2");
+                    $activity2->setName('testActivity2');
 
                     return [$activity, $activity2];
                 })),
-                "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10, 20)"
+                'expectedDql' => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a WHERE a.id IN(10, 20)",
                 ],
                 [
-                "activity"    => new ArrayCollection([]),
-                "expectedDql" => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a"
+                'activity'    => new ArrayCollection([]),
+                'expectedDql' => "SELECT a FROM Gyman\Bundle\ScheduleBundle\Entity\Activity a",
                 ],
                 ];
     }

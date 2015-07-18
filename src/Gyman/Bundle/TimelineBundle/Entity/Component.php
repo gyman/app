@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\TimelineBundle\Entity;
 
-use Spy\TimelineBundle\Entity\Component as BaseComponent;
 use Doctrine\ORM\Mapping as ORM;
+use Spy\TimelineBundle\Entity\Component as BaseComponent;
 
 /**
  * @ORM\Entity

@@ -5,7 +5,6 @@ namespace Gyman\Bundle\MultiDatabaseBundle\Form;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class ClubSwitchType extends AbstractType
@@ -28,24 +27,13 @@ class ClubSwitchType extends AbstractType
     {
         $clubs = $this->user->getClubs();
 
-        $builder->add('club', "entity", [
-            "class" => "ClubBundle:Club",
-            "choices" => $clubs,
-            "property" => "name",
-            "data" => $this->user->getCurrentClub()
+        $builder->add('club', 'entity', [
+            'class'    => 'ClubBundle:Club',
+            'choices'  => $clubs,
+            'property' => 'name',
+            'data'     => $this->user->getCurrentClub(),
         ]);
     }
-
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-//    public function setDefaultOptions(OptionsResolverInterface $resolver)
-//    {
-//        $resolver->setDefaults(array(
-//            'data_class' => null,
-//            'csrf_protection' => false
-//        ));
-//    }
 
     /**
      * @return string

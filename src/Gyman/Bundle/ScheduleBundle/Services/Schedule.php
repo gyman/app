@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Services;
 
-use Symfony\Component\DependencyInjection\Container;
+use DateTime;
 use Gyman\Bundle\ScheduleBundle\Entity\Occurence;
-use \DateTime;
+use Symfony\Component\DependencyInjection\Container;
 
 class Schedule
 {
@@ -28,12 +28,12 @@ class Schedule
      */
     public function getOccurencesForDashboard(DateTime $date)
     {
-        $occurenceRepository = $this->container->get("occurence_repository");
+        $occurenceRepository = $this->container->get('occurence_repository');
 
         $start = clone($date);
-        $start->modify("00:00:00");
+        $start->modify('00:00:00');
         $end = clone($date);
-        $end->modify("23:59:59");
+        $end->modify('23:59:59');
 
         $occurences = $occurenceRepository->getOccurencesForPeriod($start, $end);
 
@@ -52,13 +52,13 @@ class Schedule
      */
     public function getEventsForEntryEventSelector(\DateTime $date)
     {
-        $occurenceRepository = $this->container->get("occurence_repository");
+        $occurenceRepository = $this->container->get('occurence_repository');
 
         $start = clone($date);
         $end = clone($date);
 
-        $start->modify("00:00:00");
-        $end->modify("23:59:59");
+        $start->modify('00:00:00');
+        $end->modify('23:59:59');
 
         $occurences = $occurenceRepository->getOccurencesForPeriod($start, $end);
 
@@ -73,10 +73,10 @@ class Schedule
              * @var $occurence Occurence
              */
             $result[] = [
-                "id"           => $occurence->getId(),
-                "activityName" => $occurence->getEvent()->getActivity()->getName(),
-                "startDate"    => $occurence->getStartDate(),
-                "endDate"      => $occurence->getEndDate()
+                'id'           => $occurence->getId(),
+                'activityName' => $occurence->getEvent()->getActivity()->getName(),
+                'startDate'    => $occurence->getStartDate(),
+                'endDate'      => $occurence->getEndDate(),
             ];
         }
 

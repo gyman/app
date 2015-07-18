@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Features\Context;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Behat\MinkExtension\Context\MinkContext;
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\When;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ResponseTextException;
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class FeatureContext extends MinkContext implements KernelAwareInterface
 {
@@ -43,7 +43,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $element = $this->getSession()
             ->getPage()
-            ->find("css", "div#modalWindow");
+            ->find('css', 'div#modalWindow');
 
         $tick = 250000;
         $timeout = time() + 10;
@@ -75,7 +75,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $element = $this->getSession()
             ->getPage()
-            ->find("css", $locator);
+            ->find('css', $locator);
 
         if ($element == null) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $locator);
@@ -91,7 +91,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $page = $this->getSession()->getScreenshot();
 
-        file_put_contents("/tmp/screen.png", $page);
+        file_put_contents('/tmp/screen.png', $page);
     }
 
     /**
@@ -102,13 +102,13 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         /** @var Behat\Mink\Element\NodeElement $drop */
         $drop = $this->getSession()
             ->getPage()
-            ->find("css", "div#select2-drop");
+            ->find('css', 'div#select2-drop');
 
         if (!is_object($drop)) {
             throw new ElementNotFoundException($this->getSession(), 'element');
         }
 
-        $options = $drop->findAll("css", "div.select2-result-label");
+        $options = $drop->findAll('css', 'div.select2-result-label');
 
         /** @var Behat\Mink\Element\NodeElement $element */
         $element = null;
@@ -133,11 +133,11 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $element = $this->getSession()
             ->getPage()
-            ->find("css", $selector);
+            ->find('css', $selector);
 
         $newDate = new \DateTime($date);
 
-        $element->setValue($newDate->format("d.m.Y H:i"));
+        $element->setValue($newDate->format('d.m.Y H:i'));
     }
 
     /**
@@ -147,7 +147,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $element = $this->getSession()
             ->getPage()
-            ->find("css", $selector);
+            ->find('css', $selector);
 
         $element->setValue($value);
     }
@@ -188,7 +188,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         /** @var Behat\Mink\Element\NodeElement $element */
         $element = $this->getSession()
             ->getPage()
-            ->find("css", $selector);
+            ->find('css', $selector);
 
         if ($element) {
             $tick = 250000;
@@ -226,6 +226,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     private function getScreen()
     {
         $page = $this->getSession()->getScreenshot();
-        file_put_contents("/tmp/screen".time().".png", $page);
+        file_put_contents('/tmp/screen' . time() . '.png', $page);
     }
 }

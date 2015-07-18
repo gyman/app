@@ -10,3 +10,9 @@ services:
         - [setClubEntityManager, [@gyman.club.club_manager] ]
       tags:
           - { name: kernel.event_subscriber }
+
+  gyman.club.repository:
+      class:  "Gyman\Bundle\ClubBundle\Entity\ClubRepository"
+      factory_method: getRepository
+      factory_service: doctrine.orm.default_entity_manager
+      arguments: ["Gyman\Bundle\ClubBundle\Entity\Club"]

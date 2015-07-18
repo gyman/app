@@ -1,7 +1,7 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Exception;
 
-use Exception;
 use Gyman\Bundle\UserBundle\Entity\User;
 
 /**

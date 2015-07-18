@@ -1,9 +1,10 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\TestBundle\DataFixtures\BaseFixture;
 use Gyman\Bundle\SectionBundle\Entity\Section;
+use Gyman\Bundle\TestBundle\DataFixtures\BaseFixture;
 
 class SectionsData extends BaseFixture
 {
@@ -16,9 +17,9 @@ class SectionsData extends BaseFixture
     public function insert($params)
     {
         $section = new Section();
-        $section->setName($params["name"]);
+        $section->setName($params['name']);
 //        $section->setClub($this->getReference($params["club"]));
-        $section->setMembers($this->prepareMembers($params["members"]));
+        $section->setMembers($this->prepareMembers($params['members']));
 
         return $section;
     }
@@ -29,7 +30,7 @@ class SectionsData extends BaseFixture
      */
     public function prepareMembers($members)
     {
-        $result = array();
+        $result = [];
 
         foreach ($members as $member) {
             $result[] = $this->getReference($member);

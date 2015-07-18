@@ -1,9 +1,10 @@
 <?php
+
 namespace Gyman\MembersBundle\Tests\Functional\Controller;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Test\WebTestCase;
 use Gyman\Component\Test\RestTestCase;
+use Gyman\Component\Test\WebTestCase;
 
 /**
  * Class MemberControllerTest
@@ -16,13 +17,13 @@ class ApiControllerTest extends WebTestCase
         parent::setUp();
 
         $this->client = $this->prepareClient([
-            'HTTP_HOST' => $this->container->getParameter("base_url"),
-            'SERVER_NAME' => $this->container->getParameter("base_url")
+            'HTTP_HOST'   => $this->container->getParameter('base_url'),
+            'SERVER_NAME' => $this->container->getParameter('base_url'),
         ]);
 
         $this->client->followRedirects();
 
-        $this->doLogin("user", "user");
+        $this->doLogin('user', 'user');
     }
 
     public function testGetMembersApi()
@@ -37,7 +38,7 @@ class ApiControllerTest extends WebTestCase
 
     public function testGetMemberApi()
     {
-        $this->jsonRequest('GET', $this->getUrl('gyman_api_get_member', ["id" => 1]));
+        $this->jsonRequest('GET', $this->getUrl('gyman_api_get_member', ['id' => 1]));
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertJsonResponse();
 
@@ -55,14 +56,14 @@ class ApiControllerTest extends WebTestCase
         $jsonTestCase->assertPathExists('_links.self.href');
         $jsonTestCase->assertPathEquals(
             '_links.self.href',
-            $this->getUrl("gyman_api_get_member", ["id" => 1], true)
+            $this->getUrl('gyman_api_get_member', ['id' => 1], true)
         );
 
         $jsonTestCase->assertPathExists('_links.vouchers');
         $jsonTestCase->assertPathExists('_links.vouchers.href');
         $jsonTestCase->assertPathEquals(
             '_links.vouchers.href',
-            $this->getUrl("gyman_api_get_member_get_vouchers", ["id" => 1], true)
+            $this->getUrl('gyman_api_get_member_get_vouchers', ['id' => 1], true)
         );
     }
 
@@ -72,9 +73,9 @@ class ApiControllerTest extends WebTestCase
             'POST',
             $this->getUrl('gyman_api_post_member'),
             json_encode([
-                "name" => "new name",
-                "gender" => Member::GENDER_MALE,
-                "belt" => 'white'
+                'name'   => 'new name',
+                'gender' => Member::GENDER_MALE,
+                'belt'   => 'white',
             ])
         );
 
@@ -87,33 +88,33 @@ class ApiControllerTest extends WebTestCase
         $jsonTestCase->assertPathEquals('id', 12);
 
         $jsonTestCase->assertPathExists('name');
-        $jsonTestCase->assertPathEquals('name', "new name");
+        $jsonTestCase->assertPathEquals('name', 'new name');
 
         $jsonTestCase->assertPathExists('_links');
         $jsonTestCase->assertPathExists('_links.self');
         $jsonTestCase->assertPathExists('_links.self.href');
         $jsonTestCase->assertPathEquals(
             '_links.self.href',
-            $this->getUrl("gyman_api_get_member", ["id" => 12], true)
+            $this->getUrl('gyman_api_get_member', ['id' => 12], true)
         );
 
-        $member = $this->container->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
+        $member = $this->container->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
             ->find(12);
 
         $this->assertEquals($member->getId(), 12);
-        $this->assertEquals($member->getName(), "new name");
+        $this->assertEquals($member->getName(), 'new name');
     }
 
     public function testPutMemberApi()
     {
         $this->jsonRequest(
             'PUT',
-            $this->getUrl('gyman_api_put_member', ["id" => 1]),
+            $this->getUrl('gyman_api_put_member', ['id' => 1]),
             json_encode([
-                "name" => "changed-name",
-                "gender" => Member::GENDER_MALE,
-                "belt" => 'white'
+                'name'   => 'changed-name',
+                'gender' => Member::GENDER_MALE,
+                'belt'   => 'white',
             ])
         );
 
@@ -126,21 +127,21 @@ class ApiControllerTest extends WebTestCase
         $jsonTestCase->assertPathEquals('id', 1);
 
         $jsonTestCase->assertPathExists('name');
-        $jsonTestCase->assertPathEquals('name', "changed-name");
+        $jsonTestCase->assertPathEquals('name', 'changed-name');
 
         $jsonTestCase->assertPathExists('_links');
         $jsonTestCase->assertPathExists('_links.self');
         $jsonTestCase->assertPathExists('_links.self.href');
         $jsonTestCase->assertPathEquals(
             '_links.self.href',
-            $this->getUrl("gyman_api_get_member", ["id" => 1], true)
+            $this->getUrl('gyman_api_get_member', ['id' => 1], true)
         );
 
-        $member = $this->container->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
+        $member = $this->container->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
             ->find(1);
 
         $this->assertEquals($member->getId(), 1);
-        $this->assertEquals($member->getName(), "changed-name");
+        $this->assertEquals($member->getName(), 'changed-name');
     }
 }

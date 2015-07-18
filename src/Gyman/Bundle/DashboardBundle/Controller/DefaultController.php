@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use DateTime;
+use Ob\HighchartsBundle\Highcharts\Highchart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use \DateTime;
-use Ob\HighchartsBundle\Highcharts\Highchart;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -20,18 +20,18 @@ class DefaultController extends Controller
     {
         //        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
 
-        $occurences = $this->get("schedule")->getOccurencesForDashboard(new DateTime());
+        $occurences = $this->get('schedule')->getOccurencesForDashboard(new DateTime());
 
 //        $popularChart = $this->get("chart")->getMostPopularChart(new Highchart());
 //        $frequencyChart = $this->get("chart")->getFrequencyChart(new Highchart(), new DateTime());
 
-        return array(
-            "date"            => new DateTime(),
+        return [
+            'date'            => new DateTime(),
 //            "filters"         => $pinnedFilters,
-            "occurences"      => $occurences,
+            'occurences'      => $occurences,
 //            "popularityChart" => $popularChart,
 //            "frequencyChart"  => $frequencyChart
-        );
+        ];
     }
 
     /**
@@ -39,12 +39,12 @@ class DefaultController extends Controller
      */
     public function getActivitiesAction(DateTime $date)
     {
-        $occurences = $this->get("schedule")->getOccurencesForDashboard($date);
+        $occurences = $this->get('schedule')->getOccurencesForDashboard($date);
 
         return new Response(
             $this->renderView(
-                "DashboardBundle:Default:activities.html.twig",
-                ["date"       => $date, "occurences" => $occurences]
+                'DashboardBundle:Default:activities.html.twig',
+                ['date'       => $date, 'occurences' => $occurences]
             ),
             200
         );

@@ -2,11 +2,11 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
 use JMS\Serializer\Annotation as JMS;
-use DateTime;
 
 /**
  * OccurenceMeta
@@ -29,8 +29,8 @@ use DateTime;
  */
 abstract class Occurence
 {
-    const SERIAL = "serial";
-    const SINGULAR = "singular";
+    const SERIAL = 'serial';
+    const SINGULAR = 'singular';
 
     /**
      * @var integer
@@ -235,7 +235,7 @@ abstract class Occurence
          * @var \DateTime $endDate
          */
         $endDate = clone($this->getStartDate());
-        $diff = new \DateInterval(sprintf("PT%dM", abs($this->duration)));
+        $diff = new \DateInterval(sprintf('PT%dM', abs($this->duration)));
         $endDate->add($diff);
 
         return $endDate;

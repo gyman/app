@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\ListsBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/entries")
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class EntriesController extends Controller implements ListControllerInterface
 {
-    private $listname = "entries";
+    private $listname = 'entries';
 
     public function getListname()
     {
@@ -29,14 +29,14 @@ class EntriesController extends Controller implements ListControllerInterface
      */
     public function indexAction(Request $request)
     {
-        $filter = $this->get("filter_provider")->getListFilter($this->getListname());
-        $filters = $this->get("filter_repository")->getFiltersByListname($this->getListname());
+        $filter = $this->get('filter_provider')->getListFilter($this->getListname());
+        $filters = $this->get('filter_repository')->getFiltersByListname($this->getListname());
 
-        return array(
-            "filter"   => $filter,
-            "filters"  => $filters,
-            "listname" => $this->getListname()
-        );
+        return [
+            'filter'   => $filter,
+            'filters'  => $filters,
+            'listname' => $this->getListname(),
+        ];
     }
 
     /**
@@ -46,7 +46,7 @@ class EntriesController extends Controller implements ListControllerInterface
      */
     public function datasourceAction(Request $request)
     {
-        $membersList = $this->get("entries_list");
+        $membersList = $this->get('entries_list');
         $data = $membersList->getResults();
 
         return new JsonResponse($data);

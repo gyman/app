@@ -6,26 +6,26 @@ use Doctrine\ORM\QueryBuilder;
 
 class MembersList extends AbstractList
 {
-    protected $listname = "members";
-    protected $listTrPartial = "ListsBundle:Members:_list_tr.html.twig";
+    protected $listname = 'members';
+    protected $listTrPartial = 'ListsBundle:Members:_list_tr.html.twig';
     protected $columnsCount = 4;
-    protected $sortingColumns = array(
-        0 => "beltN",
-        1 => "m.name",
-        2 => "cv.endDate"
-    );
+    protected $sortingColumns = [
+        0 => 'beltN',
+        1 => 'm.name',
+        2 => 'cv.endDate',
+    ];
 
     protected function addJoins(QueryBuilder $query)
     {
-        $query->leftJoin("m.vouchers", "v");
-        $query->leftJoin("m.currentVoucher", "cv");
-        $query->leftJoin("m.entries", "e");
-        $query->leftJoin("e.occurence", "o");
-        $query->leftJoin("o.event", "ev");
-        $query->leftJoin("ev.activity", "a");
+        $query->leftJoin('m.vouchers', 'v');
+        $query->leftJoin('m.currentVoucher', 'cv');
+        $query->leftJoin('m.entries', 'e');
+        $query->leftJoin('e.occurence', 'o');
+        $query->leftJoin('o.event', 'ev');
+        $query->leftJoin('ev.activity', 'a');
 
-        $query->leftJoin('m.sections', "s");
-        $query->leftJoin('s.club', "c");
+        $query->leftJoin('m.sections', 's');
+        $query->leftJoin('s.club', 'c');
     }
 
     /**
@@ -50,12 +50,12 @@ class MembersList extends AbstractList
                 $columnName = $this->sortingColumns[$column];
 
                 if ($column === 0) {
-                    $select = "(case "
+                    $select = '(case '
                         . "when m.belt = 'blue' then 1 "
                         . "when m.belt = 'purple' then 2 "
                         . "when m.belt = 'brown' then 3 "
                         . "when m.belt = 'black' then 4 "
-                        . "else 0 end) as HIDDEN beltN";
+                        . 'else 0 end) as HIDDEN beltN';
 
                     $query->addSelect($select);
                 }

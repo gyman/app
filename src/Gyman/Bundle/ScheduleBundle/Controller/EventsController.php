@@ -2,17 +2,17 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Gyman\Bundle\ScheduleBundle\Entity as Event;
 use Gyman\Bundle\ScheduleBundle\Form\EventType;
 use Gyman\Bundle\ScheduleBundle\Form\OccurenceType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/event")
@@ -26,11 +26,11 @@ class EventsController extends Controller
      */
     public function getEventsForWeekAction($year, $week)
     {
-        $serializer = $this->get("jms_serializer");
-        $events = $this->get("event_repository")->getAllEventsForWeek($year, $week);
+        $serializer = $this->get('jms_serializer');
+        $events = $this->get('event_repository')->getAllEventsForWeek($year, $week);
         $eventsArray = $this->get('occurences_manager')->prepareOccurences($events);
 
-        return new Response($serializer->serialize($eventsArray, "json"), 200, ["Content-Type" => "application/json"]);
+        return new Response($serializer->serialize($eventsArray, 'json'), 200, ['Content-Type' => 'application/json']);
     }
 
     /**
@@ -39,10 +39,10 @@ class EventsController extends Controller
      */
     public function getEventsForDateAction(\DateTime $date)
     {
-        $serializer = $this->get("jms_serializer");
+        $serializer = $this->get('jms_serializer');
         $eventsArray = $this->get('schedule')->getEventsForEntryEventSelector($date);
 
-        return new Response($serializer->serialize($eventsArray, "json"), 200, ["Content-Type" => "application/json"]);
+        return new Response($serializer->serialize($eventsArray, 'json'), 200, ['Content-Type' => 'application/json']);
     }
 
     /**
@@ -53,16 +53,16 @@ class EventsController extends Controller
      */
     public function dragEventAction(Event\Occurence $occurence, Request $request)
     {
-        throw new \Exception("not working now");
-        $delta = $request->get("delta");
-        $days = intval($delta["days"]);
-        $minutes = intval($delta["minutes"]) + $days * 24 * 60;
+        throw new \Exception('not working now');
+        $delta = $request->get('delta');
+        $days = intval($delta['days']);
+        $minutes = intval($delta['minutes']) + $days * 24 * 60;
 
         $response = new Response('', 200);
 
         if ($minutes == 0) {
             $response->setStatusCode(500);
-            $response->setContent($this->get("jms_serializer")->serialize(["status" => "error", "message" => "time is 0"], "json"));
+            $response->setContent($this->get('jms_serializer')->serialize(['status' => 'error', 'message' => 'time is 0'], 'json'));
 
             return $response;
         }
@@ -71,10 +71,10 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:drag.html.twig",
+                'ScheduleBundle:Events:drag.html.twig',
                 [
-                    "form"      => $form->createView(),
-                    "occurence" => $occurence
+                    'form'      => $form->createView(),
+                    'occurence' => $occurence,
                 ]
             )
         );
@@ -87,8 +87,8 @@ class EventsController extends Controller
      */
     public function resizeEventAction(Event\Occurence $occurence, Request $request)
     {
-        throw new \Exception("not working now");
-        $duration = (int) $request->get("duration");
+        throw new \Exception('not working now');
+        $duration = (int) $request->get('duration');
 
         if ($duration == 0) {
             return new Response();
@@ -112,7 +112,7 @@ class EventsController extends Controller
     public function deleteEventsAction(Event\Occurence $occurence)
     {
         $em = $this->getDoctrine()->getManager();
-        $this->get("occurence_repository")->deleteFollowing($occurence);
+        $this->get('occurence_repository')->deleteFollowing($occurence);
 
         return new Response();
     }
@@ -159,7 +159,7 @@ class EventsController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $event = $this->get("event_repository")->createEntity($form);
+                $event = $this->get('event_repository')->createEntity($form);
                 $this->setNewActivityToEvent($event, $form);
                 $this->container->get('occurences_manager')->addOccurencesForEvent($event);
                 $this->getDoctrine()->getManager()->persist($event);
@@ -172,7 +172,7 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:new.html.twig",
+                'ScheduleBundle:Events:new.html.twig',
                 [
                     'form'  => $form->createView(),
                     'event' => $event,
@@ -192,7 +192,7 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:show.html.twig",
+                'ScheduleBundle:Events:show.html.twig',
                 [
                     'occurence' => $occurence,
                 ]
@@ -217,12 +217,12 @@ class EventsController extends Controller
 
         $event = $occurence->getEvent();
 
-        if ($occurence->isPast() || !$this->get("security.context")->isGranted("ROLE_ADMIN")) {
+        if ($occurence->isPast() || !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
             return $this->forward(
-                "ScheduleBundle:Events:Show",
+                'ScheduleBundle:Events:Show',
                 [
-                    "event"     => $event->getId(),
-                    "occurence" => $occurence->getId()
+                    'event'     => $event->getId(),
+                    'occurence' => $occurence->getId(),
                 ]
             );
         }
@@ -238,22 +238,22 @@ class EventsController extends Controller
             if ($form->isValid()) {
                 $this->setNewActivityToEvent($event, $form);
 
-                if ($form->has("editType") && $form->get("editType")->getData() == Event\Occurence::SERIAL) {
+                if ($form->has('editType') && $form->get('editType')->getData() == Event\Occurence::SERIAL) {
                     $this->container->get('occurences_manager')->updateOccurencesForEvent($event, $occurence, $form);
                     $this->getDoctrine()->getManager()->persist($event);
-                } elseif ($form->has("editType") && $form->get("editType")->getData() == Event\Occurence::SINGULAR) {
+                } elseif ($form->has('editType') && $form->get('editType')->getData() == Event\Occurence::SINGULAR) {
                     $singularOccurence = new Event\Singular();
-                    $singularOccurence->setStartDate($form->get("startDate")->getData());
-                    $singularOccurence->setDuration($form->get("duration")->getData());
-                    $singularOccurence->setDescription($form->get("description")->getData());
+                    $singularOccurence->setStartDate($form->get('startDate')->getData());
+                    $singularOccurence->setDuration($form->get('duration')->getData());
+                    $singularOccurence->setDescription($form->get('description')->getData());
                     $singularOccurence->setEvent($occurence->getEvent());
 
                     $this->getDoctrine()->getManager()->remove($occurence);
                     $this->getDoctrine()->getManager()->persist($singularOccurence);
-                } elseif (!$form->has("editType") && $occurence instanceof Event\Singular) {
-                    $occurence->setStartDate($form->get("startDate")->getData());
-                    $occurence->setDuration($form->get("duration")->getData());
-                    $occurence->setDescription($form->get("description")->getData());
+                } elseif (!$form->has('editType') && $occurence instanceof Event\Singular) {
+                    $occurence->setStartDate($form->get('startDate')->getData());
+                    $occurence->setDuration($form->get('duration')->getData());
+                    $occurence->setDescription($form->get('description')->getData());
                     $this->getDoctrine()->getManager()->persist($occurence);
                 }
             } else {
@@ -264,15 +264,15 @@ class EventsController extends Controller
 
         return $response->setContent(
             $this->renderView(
-                "ScheduleBundle:Events:edit.html.twig",
+                'ScheduleBundle:Events:edit.html.twig',
                 [
                     'form'                => $form->createView(),
                     'event'               => $event,
                     'occurence'           => $occurence,
                     'eventType'           => get_class($event),
                     'occurenceType'       => get_class($occurence),
-                    "occurenceSerialized" => $this->get("jms_serializer")->serialize($occurence, "json"),
-                    "eventSerialized"     => $this->get("jms_serializer")->serialize($event, "json")
+                    'occurenceSerialized' => $this->get('jms_serializer')->serialize($occurence, 'json'),
+                    'eventSerialized'     => $this->get('jms_serializer')->serialize($event, 'json'),
                 ]
             )
         );
@@ -280,10 +280,9 @@ class EventsController extends Controller
 
     private function setNewActivityToEvent(Event\Event $event, $form)
     {
-        if ($form->has("newActivity") && $newActivityName = $form->get("newActivity")->getData()) {
+        if ($form->has('newActivity') && $newActivityName = $form->get('newActivity')->getData()) {
             /** @var $activity Event\Activity */
-            if ($activity = $this->get("activity_repository")->findOneByName($newActivityName)) {
-                ;
+            if ($activity = $this->get('activity_repository')->findOneByName($newActivityName)) {;
             } else {
                 $activity = new Event\Activity();
                 $activity->setName($newActivityName);

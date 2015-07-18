@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\EntriesBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\ScheduleBundle\Entity\Occurence;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Entry

@@ -2,16 +2,16 @@
 
 namespace Gyman\Bundle\EntriesBundle\Form;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\EntriesBundle\Entity\Entry;
+use Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use DateTime;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EntryType extends AbstractType
 {
@@ -59,25 +59,24 @@ class EntryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options["data"] instanceof Entry) {
-            $this->setEntry($options["data"]);
+        if ($options['data'] instanceof Entry) {
+            $this->setEntry($options['data']);
         }
 
         $builder
-                ->add('startDate', "datetime", array(
-                    "widget" => "single_text",
-                    "format" => "dd.MM.yyyy HH:mm",
-                    "attr"   => array(
-                        "readonly" => "READONLY",
-                    )
-                ))
-                ->add('entryType', 'choice', array(
+                ->add('startDate', 'datetime', [
+                    'widget' => 'single_text',
+                    'format' => 'dd.MM.yyyy HH:mm',
+                    'attr'   => [
+                        'readonly' => 'READONLY',
+                    ],
+                ])
+                ->add('entryType', 'choice', [
                     'choices'  => $this->getChoices()->toArray(),
                     'data'     => $this->getDefaultChoice(),
-                    "expanded" => true,
-                ))
-                ->add('entryPrice', 'text')
-        ;
+                    'expanded' => true,
+                ])
+                ->add('entryPrice', 'text');
 
         $setupActivity = $this->getSetupActivityCallback();
 
@@ -96,20 +95,20 @@ class EntryType extends AbstractType
     {
         $callback = function (FormInterface $form, DateTime $date) {
             $startDate = clone($date);
-            $startDate->modify("00:00:00");
+            $startDate->modify('00:00:00');
 
             $endDate = clone($date);
-            $endDate->modify("23:59:59");
+            $endDate->modify('23:59:59');
 
             $occurences = $this->occurenceRepository->getOccurencesForPeriod($startDate, $endDate);
 
-            $form->add('occurence', "entity", [
-                'class'       => "ScheduleBundle:Occurence",
-                'empty_value' => "brak wydarzeń tego dnia",
+            $form->add('occurence', 'entity', [
+                'class'       => 'ScheduleBundle:Occurence',
+                'empty_value' => 'brak wydarzeń tego dnia',
                 'empty_data'  => null,
                 'multiple'    => false,
                 'choices'     => $occurences,
-                'property'    => 'event.activity.name'
+                'property'    => 'event.activity.name',
             ]);
         };
 
@@ -121,9 +120,9 @@ class EntryType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Gyman\Bundle\EntriesBundle\Entity\Entry'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Gyman\Bundle\EntriesBundle\Entity\Entry',
+        ]);
     }
 
     /**
@@ -136,16 +135,16 @@ class EntryType extends AbstractType
 
     protected function getChoices()
     {
-        $choices = new ArrayCollection(array(
+        $choices = new ArrayCollection([
             'free' => 'darmowe',
-            'paid' => "płatne",
+            'paid' => 'płatne',
 //            'multisport' => 'multisport',
-        ));
+        ]);
 
         $voucher = $this->getEntry()->getVoucher();
 
         if ($voucher && ($voucher->getAmountLeft() > 0 or $voucher->getAmount() == null)) {
-            $choices->offsetSet("voucher", "na karnet");
+            $choices->offsetSet('voucher', 'na karnet');
         }
 
         return $choices;
@@ -154,18 +153,18 @@ class EntryType extends AbstractType
     protected function getDefaultChoice()
     {
         if ($this->getEntry()->getVoucher()) {
-            return "voucher";
+            return 'voucher';
         } else {
-            return "paid";
+            return 'paid';
         }
     }
 
     protected function getLabel($event)
     {
-        $name = $event["name"];
-        $start = $event["startHour"];
-        $end = $event["endHour"];
+        $name = $event['name'];
+        $start = $event['startHour'];
+        $end = $event['endHour'];
 
-        return sprintf("(%s-%s) %s", $start, $end, $name);
+        return sprintf('(%s-%s) %s', $start, $end, $name);
     }
 }

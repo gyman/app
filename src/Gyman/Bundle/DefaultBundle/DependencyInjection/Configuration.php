@@ -29,8 +29,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('noImage')
                     ->defaultValue('null')
                     ->end()
-                ->end()
-        ;
+                ->end();
 
         return $treeBuilder;
     }

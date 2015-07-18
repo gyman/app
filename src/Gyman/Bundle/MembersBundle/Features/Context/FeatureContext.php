@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\MembersBundle\Features\Context;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Behat\MinkExtension\Context\MinkContext;
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\When;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ResponseTextException;
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class FeatureContext extends MinkContext implements KernelAwareInterface
 {
@@ -43,7 +43,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $element = $this->getSession()
                 ->getPage()
-                ->find("css", $locator);
+                ->find('css', $locator);
 
         if ($element == null) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $locator);
@@ -88,7 +88,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         /** @var Behat\Mink\Element\NodeElement $element */
         $element = $this->getSession()
                 ->getPage()
-                ->find("css", $selector);
+                ->find('css', $selector);
 
         if ($element) {
             $tick = 250000;

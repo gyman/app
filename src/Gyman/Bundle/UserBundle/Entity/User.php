@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 
 /**
@@ -128,12 +128,12 @@ class User extends BaseUser
 
     public function getFullname()
     {
-        return $this->firstname . " " . $this->lastname;
+        return $this->firstname . ' ' . $this->lastname;
     }
 
     public function getFoto()
     {
-        return "/bundles/default/images/no-profile.gif";
+        return '/bundles/default/images/no-profile.gif';
     }
 
     /**

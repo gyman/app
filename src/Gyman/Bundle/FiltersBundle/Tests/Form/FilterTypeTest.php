@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\EntriesBundle\Tests\Form;
 
-use Symfony\Component\Form\Test\TypeTestCase;
 use Gyman\Bundle\FiltersBundle\Entity\Filter;
-use Gyman\Bundle\FiltersBundle\Form\FilterType;
 use Gyman\Bundle\FiltersBundle\Filters as Subfilter;
+use Gyman\Bundle\FiltersBundle\Form\FilterType;
+use Symfony\Component\Form\Test\TypeTestCase;
 
 class FilterTypeTest extends TypeTestCase
 {
@@ -15,7 +15,7 @@ class FilterTypeTest extends TypeTestCase
     public function testSubmitValidData($params, $submitData, $expected)
     {
         $filterEntity = new Filter();
-        $filterEntity->setListname("testList");
+        $filterEntity->setListname('testList');
         $filterEntity->addFilter(new Subfilter\Age());
         $filterEntity->addFilter(new Subfilter\EntryDate());
 
@@ -39,7 +39,7 @@ class FilterTypeTest extends TypeTestCase
 
         $filterType = new FilterType($availableSubfiltersArray);
 
-        $form = $this->factory->create($filterType, $filterEntity, ["update" => $params["update"]]);
+        $form = $this->factory->create($filterType, $filterEntity, ['update' => $params['update']]);
         $form->submit($submitData);
 
         $this->assertTrue($form->isSynchronized());
@@ -53,56 +53,56 @@ class FilterTypeTest extends TypeTestCase
         }
 
         $groups = $filterType->getValidationGroups($form);
-        $this->assertEquals($expected["groups"], $groups);
+        $this->assertEquals($expected['groups'], $groups);
     }
 
     public function submitValidDataProvider()
     {
         return [
             [
-                "params"     => [
-                    "update" => true
+                'params'     => [
+                    'update' => true,
                 ],
-                "submitData" => [
-                    "addFilter" => ["Age", "EntryDate"],
-                    "save"      => true,
-                    "name"      => "filterName",
-                    "pinned"    => true,
-                    "listname"  => "listname",
+                'submitData' => [
+                    'addFilter' => ['Age', 'EntryDate'],
+                    'save'      => true,
+                    'name'      => 'filterName',
+                    'pinned'    => true,
+                    'listname'  => 'listname',
                 ],
-                "expected"   => [
-                    "groups" => "updateFilter"
-                ]
+                'expected'   => [
+                    'groups' => 'updateFilter',
+                ],
             ],
             [
-                "params"     => [
-                    "update" => false
+                'params'     => [
+                    'update' => false,
                 ],
-                "submitData" => [
-                    "addFilter" => ["Age", "EntryDate"],
-                    "save"      => true,
-                    "name"      => "filterName",
-                    "pinned"    => true,
-                    "listname"  => "listname",
+                'submitData' => [
+                    'addFilter' => ['Age', 'EntryDate'],
+                    'save'      => true,
+                    'name'      => 'filterName',
+                    'pinned'    => true,
+                    'listname'  => 'listname',
                 ],
-                "expected"   => [
-                    "groups" => "saveFilter"
-                ]
+                'expected'   => [
+                    'groups' => 'saveFilter',
+                ],
             ],
             [
-                "params"     => [
-                    "update" => false
+                'params'     => [
+                    'update' => false,
                 ],
-                "submitData" => [
-                    "addFilter" => ["Age", "EntryDate"],
-                    "save"      => false,
-                    "name"      => "filterName",
-                    "pinned"    => false,
-                    "listname"  => "listname",
+                'submitData' => [
+                    'addFilter' => ['Age', 'EntryDate'],
+                    'save'      => false,
+                    'name'      => 'filterName',
+                    'pinned'    => false,
+                    'listname'  => 'listname',
                 ],
-                "expected"   => [
-                    "groups" => "setFilter"
-                ]
+                'expected'   => [
+                    'groups' => 'setFilter',
+                ],
             ],
         ];
     }
@@ -114,11 +114,11 @@ class FilterTypeTest extends TypeTestCase
             ->getMock();
 
         $mock->expects($this->any())
-            ->method("getLabel")
+            ->method('getLabel')
             ->will($this->returnValue($label));
 
         $mock->expects($this->any())
-            ->method("getName")
+            ->method('getName')
             ->will($this->returnValue($name));
 
         return $mock;

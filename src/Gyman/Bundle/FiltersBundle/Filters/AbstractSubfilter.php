@@ -10,17 +10,17 @@ abstract class AbstractSubfilter implements FilterInterface, \ArrayAccess, \Iter
      * subfilter options
      * @var array
      */
-    public $options = array();
+    public $options = [];
 
     /**
      * date format
      * @var string
      */
-    protected $format = "Y-m-d H:i:s";
+    protected $format = 'Y-m-d H:i:s';
 
     public function __construct()
     {
-        $this->typeClass = "Gyman\Bundle\FiltersBundle\Form\Subfilters\\" . get_class($this) . "Type";
+        $this->typeClass = "Gyman\Bundle\FiltersBundle\Form\Subfilters\\" . get_class($this) . 'Type';
     }
 
     public function call($method, $queryBuilder)
@@ -30,7 +30,7 @@ abstract class AbstractSubfilter implements FilterInterface, \ArrayAccess, \Iter
 
     public function apply(QueryBuilder $query)
     {
-        throw new \Exception("You should implement this method in filter class!");
+        throw new \Exception('You should implement this method in filter class!');
     }
 
     public function offsetExists($offset)

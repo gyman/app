@@ -3,12 +3,12 @@
 namespace Gyman\Bundle\FiltersBundle\Services;
 
 use Gyman\Bundle\FiltersBundle\Entity\Filter;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\DependencyInjection\Container;
 use Gyman\Bundle\FiltersBundle\Filters\FilterInterface;
-use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
 use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
+use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class FilterProvider
 {
@@ -27,7 +27,7 @@ class FilterProvider
     public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->setSession($container->get("session"));
+        $this->setSession($container->get('session'));
     }
 
     /**
@@ -70,8 +70,8 @@ class FilterProvider
      */
     public function getFilter($filterName)
     {
-        $string = preg_replace('/(?<=\\w)(?=[A-Z])/', "_$1", $filterName);
-        $serviceName = sprintf("filters.%s", strtolower($string));
+        $string = preg_replace('/(?<=\\w)(?=[A-Z])/', '_$1', $filterName);
+        $serviceName = sprintf('filters.%s', strtolower($string));
         $subfilter = $this->container->get($serviceName);
 
         return $subfilter;
@@ -144,9 +144,9 @@ class FilterProvider
     public function createFilterFromRequest(Request $request)
     {
         $filter = new Filter();
-        $filter->setListname($request->get("listname"));
+        $filter->setListname($request->get('listname'));
 
-        if ($addedFiltersNames = $request->get("add", [])) {
+        if ($addedFiltersNames = $request->get('add', [])) {
             $this->attachFilters($filter, $addedFiltersNames);
         }
 

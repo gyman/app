@@ -2,10 +2,10 @@
 
 namespace Gyman\Bundle\VouchersBundle\Form;
 
+use Gyman\Bundle\VouchersBundle\Form\DataTransformer\VoucherDateTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\VouchersBundle\Form\DataTransformer\VoucherDateTransformer;
 
 class VoucherType extends AbstractType
 {
@@ -24,24 +24,24 @@ class VoucherType extends AbstractType
     {
         $builder->add(
             $builder
-                ->create('startDate', "date", ["widget" => "single_text","format" => "dd.MM.yyyy"])
-                ->addModelTransformer(new VoucherDateTransformer("start"))
+                ->create('startDate', 'date', ['widget' => 'single_text','format' => 'dd.MM.yyyy'])
+                ->addModelTransformer(new VoucherDateTransformer('start'))
         )
         ->add(
             $builder
-                ->create('endDate', "date", ["widget" => "single_text", "format" => "dd.MM.yyyy"])
-                ->addModelTransformer(new VoucherDateTransformer("end"))
+                ->create('endDate', 'date', ['widget' => 'single_text', 'format' => 'dd.MM.yyyy'])
+                ->addModelTransformer(new VoucherDateTransformer('end'))
         )
         ->add('price')
         ->add('amount')
         ->add(
             'activities',
-            "entity",
+            'entity',
             [
                 'class'         => 'ScheduleBundle:Activity',
                 'property'      => 'name',
                 'multiple'      => true,
-                'query_builder' => $this->getQueryBuilderClosure()
+                'query_builder' => $this->getQueryBuilderClosure(),
             ]
         );
     }
@@ -52,7 +52,7 @@ class VoucherType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Gyman\Bundle\VouchersBundle\Entity\Voucher'
+            'data_class' => 'Gyman\Bundle\VouchersBundle\Entity\Voucher',
         ]);
     }
 

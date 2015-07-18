@@ -2,21 +2,21 @@
 
 namespace Gyman\Bundle\ListsBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use Gyman\Bundle\MembersBundle\Entity\Member;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Gyman\Bundle\MembersBundle\Entity\Member;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/members")
  */
 class MembersController extends Controller implements ListControllerInterface
 {
-    private $listname = "members";
+    private $listname = 'members';
 
     /**
      * @Route("/", name="_list_members")
@@ -25,14 +25,14 @@ class MembersController extends Controller implements ListControllerInterface
      */
     public function indexAction(Request $request)
     {
-        $filter = $this->get("filter_provider")->getListFilter($this->listname);
-        $filters = $this->get("filter_repository")->getFiltersByListname($this->listname);
+        $filter = $this->get('filter_provider')->getListFilter($this->listname);
+        $filters = $this->get('filter_repository')->getFiltersByListname($this->listname);
 
-        return array(
-            "filter"   => $filter,
-            "filters"  => $filters,
-            "listname" => $this->listname
-        );
+        return [
+            'filter'   => $filter,
+            'filters'  => $filters,
+            'listname' => $this->listname,
+        ];
     }
 
     /**
@@ -43,7 +43,7 @@ class MembersController extends Controller implements ListControllerInterface
      */
     public function datasourceAction(Request $request)
     {
-        $membersList = $this->get("members_list");
+        $membersList = $this->get('members_list');
         $data = $membersList->getResults();
 
         return new JsonResponse($data);
@@ -57,10 +57,10 @@ class MembersController extends Controller implements ListControllerInterface
     public function galleryAction(Request $request)
     {
         $members = $this->getDoctrine()
-            ->getRepository("MembersBundle:Member", 'club')
+            ->getRepository('MembersBundle:Member', 'club')
             ->findAll();
 
-        return array("members" => $members);
+        return ['members' => $members];
     }
 
     /**
@@ -78,11 +78,11 @@ class MembersController extends Controller implements ListControllerInterface
             $diff = $lastEntry->getStartDate()->diff(new \DateTime());
         }
 
-        return new JsonResponse(array(
-            "data" => $this->renderView("ListsBundle:Members:_list_tr_details.html.twig", array(
-                "member"     => $member,
-                "minutesAgo" => $diff
-            ))
-        ));
+        return new JsonResponse([
+            'data'           => $this->renderView('ListsBundle:Members:_list_tr_details.html.twig', [
+                'member'     => $member,
+                'minutesAgo' => $diff,
+            ]),
+        ]);
     }
 }

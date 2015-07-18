@@ -2,10 +2,9 @@
 
 namespace Gyman\Bundle\ClubBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
-use Gyman\Bundle\UserBundle\Entity\User;
 
 /**
  * Club

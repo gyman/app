@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\VouchersBundle;
 
 final class VouchersEvents

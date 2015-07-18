@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Connection;
 
 use Doctrine\DBAL\Connection;
@@ -11,8 +12,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 final class ClubConnection implements ConnectionInterface
 {
     const SESSION_ACTIVE_DYNAMIC_CONN = 'active_dynamic_conn';
-        
-    /**
+
+/**
      * @var Session
      */
     private $session;
@@ -24,13 +25,13 @@ final class ClubConnection implements ConnectionInterface
     {
         $this->session = $sess;
     }
-    
-    /**
+
+/**
      * @var ConnectionWrapper
      */
     private $connection;
-    
-    /**
+
+/**
      *
      * @var \Symfony\Component\Security\Core\SecurityContext
      */
@@ -45,8 +46,8 @@ final class ClubConnection implements ConnectionInterface
     {
         $this->securityContext = $securityContext;
     }
-    
-    /**
+
+/**
      * Sets the DB Name prefix to use when selecting the database to connect to
      *
      * @param  Connection       $connection
@@ -81,7 +82,7 @@ final class ClubConnection implements ConnectionInterface
         }
 
         $db = $club->getDatabase();
-        
-        $this->connection->forceSwitch($db["name"], $db["user"], $db["password"]);
+
+$this->connection->forceSwitch($db['name'], $db['user'], $db['password']);
     }
 }

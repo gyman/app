@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Gyman\Bundle\BaseBundle\Controller\BaseApiController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ClubController extends BaseApiController
 {
@@ -15,7 +15,7 @@ class ClubController extends BaseApiController
      */
     public function postClubAction(Request $request)
     {
-        $manager = $this->get("gyman.club.club_manager");
+        $manager = $this->get('gyman.club.club_manager');
 
         $club = $manager->create();
 

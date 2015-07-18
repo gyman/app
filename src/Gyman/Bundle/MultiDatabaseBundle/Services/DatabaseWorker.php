@@ -1,10 +1,11 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
+use Exception;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
-use \Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -89,10 +90,10 @@ final class DatabaseWorker
         $this->updateClubConnection();
 
         $input = new ArrayInput([
-            "--no-interaction",
-            "--em" => 'club',
-            "--env" => $env,
-            "--fixtures" => 'src/Gyman/Bundle/TestBundle/DataFixtures/Club',
+            '--no-interaction',
+            '--em'       => 'club',
+            '--env'      => $env,
+            '--fixtures' => 'src/Gyman/Bundle/TestBundle/DataFixtures/Club',
         ]);
 
         $input->setInteractive(false);
@@ -132,7 +133,7 @@ final class DatabaseWorker
     {
         $metadatas = $this->clubEntityManager->getMetadataFactory()->getAllMetadata();
 
-        if (! empty($metadatas)) {
+        if (!empty($metadatas)) {
             $tool = new SchemaTool($this->clubEntityManager);
             $tool->createSchema($metadatas);
         } else {
@@ -146,13 +147,15 @@ final class DatabaseWorker
      */
     private function getCreateDatabaseQuery($dbName)
     {
-        $query = str_replace("{{name}}", $dbName, self::QUERY_CREATE_DB);
+        $query = str_replace('{{name}}', $dbName, self::QUERY_CREATE_DB);
+
         return $query;
     }
 
     private function getDropDatabaseQuery($dbname)
     {
-        $query = str_replace("{{name}}", $dbname, self::QUERY_DROP_DB);
+        $query = str_replace('{{name}}', $dbname, self::QUERY_DROP_DB);
+
         return $query;
     }
 
@@ -204,6 +207,7 @@ final class DatabaseWorker
     {
         $clubSlug = $this->slugifier->convert($clubName);
         $dbname = str_replace('{{club_name}}', $clubSlug, $this->clubDatabaseNameTemplate);
+
         return $dbname;
     }
 
@@ -225,17 +229,17 @@ final class DatabaseWorker
 
     public function migrate(Command $command, Output $output, ArgvInput $input)
     {
-        $clubs = $this->defaultEntityManager->getRepository("ClubBundle:Club")->findAll();
+        $clubs = $this->defaultEntityManager->getRepository('ClubBundle:Club')->findAll();
         $count = count($clubs);
 
-        $input->setOption("em", "club");
+        $input->setOption('em', 'club');
         $input->setInteractive(false);
 
         foreach ($clubs as $i => $club) {
             $this->updateClubConnection($club);
 
             $output->writeln(sprintf(
-                "Migrating database %s (%d/%d)",
+                'Migrating database %s (%d/%d)',
                 $club->getDatabase()[CredentialsStorage::PARAM_BASE],
                 $i + 1,
                 $count
@@ -248,16 +252,16 @@ final class DatabaseWorker
 
     public function generateMigrations(Command $command, Output $output, ArgvInput $input)
     {
-        $clubs = $this->defaultEntityManager->getRepository("ClubBundle:Club")->findAll();
+        $clubs = $this->defaultEntityManager->getRepository('ClubBundle:Club')->findAll();
         $singleClub = array_pop($clubs);
 
         $this->updateClubConnection($singleClub);
 
-        $input->setOption("em", "club");
+        $input->setOption('em', 'club');
         $input->setInteractive(false);
 
         $output->writeln(sprintf(
-            "Generating migration with %s as reference",
+            'Generating migration with %s as reference',
             $singleClub->getDatabase()[CredentialsStorage::PARAM_BASE]
         ));
 

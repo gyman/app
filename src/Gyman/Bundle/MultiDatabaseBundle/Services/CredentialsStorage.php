@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
@@ -9,14 +10,14 @@ class CredentialsStorage
 {
     const SESSION_ACTIVE_DYNAMIC_CONN = 'active_dynamic_conn';
 
-    const PARAM_BASE = "dbname";
-    const PARAM_USER = "user";
-    const PARAM_PASS = "password";
+    const PARAM_BASE = 'dbname';
+    const PARAM_USER = 'user';
+    const PARAM_PASS = 'password';
 
     private $credentials = [
         self::PARAM_BASE => null,
         self::PARAM_USER => null,
-        self::PARAM_PASS => null
+        self::PARAM_PASS => null,
     ];
 
     /**
@@ -113,7 +114,7 @@ class CredentialsStorage
     {
         if ($this->session !== null) {
             if (!$this->session->has(self::SESSION_ACTIVE_DYNAMIC_CONN)) {
-                throw new SessionCredentialsNotInitializedException;
+                throw new SessionCredentialsNotInitializedException();
             }
         }
 

@@ -17,9 +17,9 @@ class EntryExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('activity_label', array($this, 'activityLabelFilter')),
-        );
+        return [
+            new \Twig_SimpleFilter('activity_label', [$this, 'activityLabelFilter']),
+        ];
     }
 
     public function activityLabelFilter(Entry $entry)

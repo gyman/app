@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\DefaultBundle\Request;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class ArrayCollectionConverter implements ParamConverterInterface
 {
@@ -72,14 +72,14 @@ class ArrayCollectionConverter implements ParamConverterInterface
             $fieldsAreLike = $builder->expr()->orX();
 
             foreach ($fields as $field) {
-                $alias = $builder->getRootAlias() . "." . $field;
+                $alias = $builder->getRootAlias() . '.' . $field;
 
                 $fieldsAreLike->add(
                     $builder->expr()->like($alias, "'%{$queredText}%'")
                 );
             }
         } else {
-            $alias = $builder->getRootAlias() . "." . $fields;
+            $alias = $builder->getRootAlias() . '.' . $fields;
             $fieldsAreLike = $builder->expr()->like($alias, "'%{$queredText}%'");
         }
 
@@ -119,7 +119,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
                 'entity'    => null,
                 'finder'    => null,
                 'field'     => 'id',
-                'delimiter' => ','
+                'delimiter' => ',',
             ],
             $configuration->getOptions()
         );

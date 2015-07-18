@@ -2,13 +2,13 @@
 
 namespace Gyman\Bundle\AccountBundle\Service\Subscriber;
 
+use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
+use Gyman\Bundle\MailerBundle\Service\Mailer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use FOS\UserBundle\Event\FormEvent;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Gyman\Bundle\MailerBundle\Service\Mailer;
+use Symfony\Component\Routing\Router;
 
 class RegisteredUserSubscriber implements EventSubscriberInterface
 {
@@ -77,9 +77,9 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationCompleted',
-        );
+        ];
     }
 
     public function onRegistrationCompleted(FormEvent $event)
@@ -95,14 +95,14 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
 
         $mailer = $this->getMailer();
 
-        $mailer->setParameters(array(
-            "password"   => $form->get("plainPassword")->getData(),
-            "username"   => $form->get("username")->getData()
-        ));
+        $mailer->setParameters([
+            'password'   => $form->get('plainPassword')->getData(),
+            'username'   => $form->get('username')->getData(),
+        ]);
         $mailer->setTo(
-            $form->get("email")->getData()
+            $form->get('email')->getData()
         );
-        $mailer->setFrom("uirapuruadg@gmail.com");
+        $mailer->setFrom('uirapuruadg@gmail.com');
         $mailer->sendMail();
     }
 

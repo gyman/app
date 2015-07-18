@@ -2,10 +2,9 @@
 
 namespace Gyman\Bundle\VouchersBundle\Validator;
 
-use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Constraint;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class VoucherDateValidator extends ConstraintValidator
 {
@@ -32,7 +31,7 @@ class VoucherDateValidator extends ConstraintValidator
             $currentEndDate = $currentVoucher->getEndDate();
 
             if ($currentEndDate) {
-                $properDate = $currentEndDate->format("d.m.Y");
+                $properDate = $currentEndDate->format('d.m.Y');
                 $this->context->addViolationAt('startDate', 'Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na ' . $properDate);
             }
         }

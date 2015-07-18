@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\FiltersBundle\Tests\Services;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
-use Gyman\Bundle\FiltersBundle\Tests\Traits\GetFormTypeTraitStub;
 use Gyman\Bundle\FiltersBundle\Filters\Age;
+use Gyman\Bundle\FiltersBundle\Tests\Traits\GetFormTypeTraitStub;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class GetFormTypeTraitTest extends BaseTest
 {

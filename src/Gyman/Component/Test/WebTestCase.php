@@ -17,20 +17,20 @@ class WebTestCase extends ContainerAwareTestCase
     protected $parsedResponse;
     protected function loginAs($username)
     {
-        $this->prepareClient(array(
+        $this->prepareClient([
             'PHP_AUTH_USER' => $username,
-            'PHP_AUTH_PW' => $username,
-            'HTTP_HOST' => $this->container->getParameter('base_url')
-        ));
+            'PHP_AUTH_PW'   => $username,
+            'HTTP_HOST'     => $this->container->getParameter('base_url'),
+        ]);
     }
 
     public function doLogin($username, $password)
     {
         $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('_submit')->form(array(
+        $form = $crawler->selectButton('_submit')->form([
             '_username'  => $username,
             '_password'  => $password,
-        ));
+        ]);
         $this->client->submit($form);
     }
 
@@ -38,7 +38,7 @@ class WebTestCase extends ContainerAwareTestCase
      * @param  array  $server
      * @return Client
      */
-    protected function prepareClient(array $server = array())
+    protected function prepareClient(array $server = [])
     {
         $client = $this->container->get('test.client');
         $client->setServerParameters($server);
@@ -58,7 +58,7 @@ class WebTestCase extends ContainerAwareTestCase
             }
         }
     }
-    protected function translate($textToTranslation, $translationParams = array())
+    protected function translate($textToTranslation, $translationParams = [])
     {
         $translator = $this->container->get('translator');
 
@@ -113,7 +113,7 @@ class WebTestCase extends ContainerAwareTestCase
      *
      * @return string
      */
-    protected function getUrl($route, $params = array(), $absolute = false)
+    protected function getUrl($route, $params = [], $absolute = false)
     {
         return $this->container->get('router')->generate($route, $params, $absolute);
     }
@@ -124,11 +124,11 @@ class WebTestCase extends ContainerAwareTestCase
     {
         $this->assertTrue(
             $this->client->getResponse()->headers->contains('Content-Type', 'application/json'),
-            "No content-type: application/json in response header"
+            'No content-type: application/json in response header'
         );
         $this->assertJson(
             $this->getContent(),
-            "Returned content is not a valid JSON"
+            'Returned content is not a valid JSON'
         );
     }
     /**
@@ -165,9 +165,9 @@ class WebTestCase extends ContainerAwareTestCase
         $this->crawler = $this->client->request(
             $method,
             $path,
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             $content
         );
     }

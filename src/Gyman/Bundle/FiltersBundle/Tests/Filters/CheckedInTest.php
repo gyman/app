@@ -2,8 +2,8 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Filters\CheckedIn;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class CheckedInTest extends BaseTest
 {
@@ -13,12 +13,12 @@ class CheckedInTest extends BaseTest
     public function testApplyToQuery($checkedIn, $expectedDql, $expectedCount)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
-            ->createQueryBuilder("m");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
+            ->createQueryBuilder('m');
 
         $checkedInFilter = new CheckedIn();
-        $checkedInFilter->setOptions(["checkedIn" => $checkedIn]);
+        $checkedInFilter->setOptions(['checkedIn' => $checkedIn]);
         $checkedInFilter->apply($queryBuilder);
 
         $dql = $queryBuilder->getQuery()->getDQL();
@@ -30,14 +30,14 @@ class CheckedInTest extends BaseTest
     {
         return [
             [
-                "checkedIn"     => true,
-                "expectedDql"   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is not null and (m.lastEntry.endDate is null or m.lastEntry.endDate < :now)",
-                "expectedCount" => 1
+                'checkedIn'     => true,
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is not null and (m.lastEntry.endDate is null or m.lastEntry.endDate < :now)",
+                'expectedCount' => 1,
             ],
             [
-                "checkedIn"     => false,
-                "expectedDql"   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is null",
-                "expectedCount" => 0
+                'checkedIn'     => false,
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is null",
+                'expectedCount' => 0,
             ],
         ];
     }

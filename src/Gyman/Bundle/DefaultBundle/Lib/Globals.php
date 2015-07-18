@@ -6,39 +6,39 @@ class Globals
 {
     const CURRENT_CLUB_SESSION_KEY = 'current_club';
 
-    protected static $galleryDir = "/uploads/gallery/";
+    protected static $galleryDir = '/uploads/gallery/';
     protected static $noImage;
-    protected static $compareChoices = array(
-        "eq"         => "równy",
-        "lt"         => "wcześniej niż",
-        "gt"         => "później niż",
-        "between"    => "pomiędzy",
-        "notBetween" => "poza",
-        "today"      => "dzisiaj",
-        "yesterday"  => "wczoraj",
-        "thisWeek"   => "ten tydzień",
-        "lastWeek"   => "poprzedni tydzień",
-        "thisMonth"  => "ten miesiąc",
-        "lastMonth"  => "poprzedni miesiąc",
-        "thisYear"   => "ten rok",
-        "lastYear"   => "poprzedni rok",
-    );
+    protected static $compareChoices = [
+        'eq'         => 'równy',
+        'lt'         => 'wcześniej niż',
+        'gt'         => 'później niż',
+        'between'    => 'pomiędzy',
+        'notBetween' => 'poza',
+        'today'      => 'dzisiaj',
+        'yesterday'  => 'wczoraj',
+        'thisWeek'   => 'ten tydzień',
+        'lastWeek'   => 'poprzedni tydzień',
+        'thisMonth'  => 'ten miesiąc',
+        'lastMonth'  => 'poprzedni miesiąc',
+        'thisYear'   => 'ten rok',
+        'lastYear'   => 'poprzedni rok',
+    ];
     protected static $filtersLabels = [
-        "Activities"       => "Zajęcia",
-        "Age"              => "Wiek",
-        "Belt"             => "Kolor pasa",
-        "CheckedIn"        => "Obecny w klubie",
-        "CurrentVoucher"   => "Aktualny karnet",
-        "EntryDate"        => "Data wejścia",
-        "EntryType"        => "Płatność za wejście",
-        "Gender"           => "Płeć",
-        "Member"           => "Uczestnik",
-        "Price"            => "Płatność",
-        "RegistrationDate" => "Data rejestracji",
-        "SearchName"       => "Imię/nazwisko",
-        "Starred"          => "Ulubiony",
-        "VoucherStart"     => "Data rozpoczęcia karnetu",
-        "VoucherEnd"       => "Data zakończenia karnetu",
+        'Activities'       => 'Zajęcia',
+        'Age'              => 'Wiek',
+        'Belt'             => 'Kolor pasa',
+        'CheckedIn'        => 'Obecny w klubie',
+        'CurrentVoucher'   => 'Aktualny karnet',
+        'EntryDate'        => 'Data wejścia',
+        'EntryType'        => 'Płatność za wejście',
+        'Gender'           => 'Płeć',
+        'Member'           => 'Uczestnik',
+        'Price'            => 'Płatność',
+        'RegistrationDate' => 'Data rejestracji',
+        'SearchName'       => 'Imię/nazwisko',
+        'Starred'          => 'Ulubiony',
+        'VoucherStart'     => 'Data rozpoczęcia karnetu',
+        'VoucherEnd'       => 'Data zakończenia karnetu',
     ];
 
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
@@ -87,7 +87,7 @@ class Globals
     public static function checkIfImageExists($string)
     {
         $file = self::getGalleryDir() . $string;
-        $filepath = __DIR__ . "/../../../../../web/" . $file;
+        $filepath = __DIR__ . '/../../../../../web/' . $file;
 
         return is_file($filepath) && file_exists($filepath);
     }
@@ -99,6 +99,6 @@ class Globals
 
     public static function parseClassname($object)
     {
-        return join('', array_slice(explode('\\', get_class($object)), -1));
+        return implode('', array_slice(explode('\\', get_class($object)), -1));
     }
 }

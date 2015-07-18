@@ -2,19 +2,19 @@
 
 namespace Gyman\Bundle\VouchersBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
-use Gyman\Bundle\MembersBundle\Entity\Member;
-use Doctrine\ORM\QueryBuilder;
 use DateTime;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
+use Gyman\Bundle\MembersBundle\Entity\Member;
 
 class VoucherRepository extends EntityRepository implements RepositoryListCompatible
 {
     public function getAllVouchers()
     {
         return $this->getQuery()
-                        ->orderBy("v.created", "DESC")
+                        ->orderBy('v.created', 'DESC')
                         ->getQuery()->execute();
     }
 
@@ -24,7 +24,7 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
      */
     public function getQuery()
     {
-        $query = $this->createQueryBuilder("v");
+        $query = $this->createQueryBuilder('v');
 
         return $query;
     }
@@ -32,7 +32,7 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
     public function getTotalCount()
     {
         $query = $this->getQuery();
-        $query->select("count(v.id)");
+        $query->select('count(v.id)');
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -51,13 +51,13 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
     public function getVoucherActiveForDate(\DateTime $date, Member $member)
     {
         $query = $this->getQuery();
-        $query->where("v.member = :member");
-        $query->andWhere("v.startDate <= :moment");
-        $query->andWhere("v.endDate >= :moment");
-        $query->setParameters(array(
-            "moment" => $date,
-            "member" => $member
-        ));
+        $query->where('v.member = :member');
+        $query->andWhere('v.startDate <= :moment');
+        $query->andWhere('v.endDate >= :moment');
+        $query->setParameters([
+            'moment' => $date,
+            'member' => $member,
+        ]);
 
         return $query->getQuery()->getOneOrNullResult();
     }
@@ -65,14 +65,14 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
     public function getCurrentVouchers(Member $member)
     {
         $query = $this->getQuery();
-        $query->where("v.member = :member");
-        $query->andWhere("v.startDate is null OR v.startDate < :moment");
-        $query->andWhere("v.endDate is null OR v.endDate > :moment");
-        $query->andWhere("v.amountLeft > 0 OR v.amountLeft is null");
-        $query->setParameters(array(
-            "moment" => new DateTime(),
-            "member" => $member
-        ));
+        $query->where('v.member = :member');
+        $query->andWhere('v.startDate is null OR v.startDate < :moment');
+        $query->andWhere('v.endDate is null OR v.endDate > :moment');
+        $query->andWhere('v.amountLeft > 0 OR v.amountLeft is null');
+        $query->setParameters([
+            'moment' => new DateTime(),
+            'member' => $member,
+        ]);
 
         return $query->getQuery()->getOneOrNullResult();
     }

@@ -9,11 +9,11 @@ class ScheduleEventSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'prePersist',
 //            'postUpdate',
 //            'postDelete',
-        );
+        ];
     }
 
     /**
@@ -21,7 +21,7 @@ class ScheduleEventSubscriber implements EventSubscriber
      * @var EntityManager
      */
     private $entityManager;
-    private $weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    private $weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
     public function prePersist(LifecycleEventArgs $args)
     {
@@ -50,7 +50,7 @@ class ScheduleEventSubscriber implements EventSubscriber
         while ($startDate->getTimestamp() <= $event->getEndDate()->getTimestamp()) {
             $day = current($days) == false ? reset($days) : current($days);
             $occurence = new Entity\Serial();
-            $occurence->setStartDate(clone($startDate->modify("next " . $day)));
+            $occurence->setStartDate(clone($startDate->modify('next ' . $day)));
             $occurence->setDuration($event->getDuration());
 
             $this->entityManager->persist($occurence);
@@ -67,7 +67,7 @@ class ScheduleEventSubscriber implements EventSubscriber
         $days = [];
 
         foreach ($this->weekdays as $day) {
-            $method = "get" . ucfirst($day);
+            $method = 'get' . ucfirst($day);
 
             if (!method_exists($event, $method)) {
                 throw new Exception("Event has no $method() method!");

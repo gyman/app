@@ -2,8 +2,8 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Filters\Member;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class MemberTest extends BaseTest
 {
@@ -13,9 +13,9 @@ class MemberTest extends BaseTest
     public function testApplyToQuery($options, $expectedDql, $parameterCount)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
-            ->createQueryBuilder("m");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
+            ->createQueryBuilder('m');
 
         $memberFilter = new Member();
         $memberFilter->setOptions($options);
@@ -31,11 +31,11 @@ class MemberTest extends BaseTest
     {
         return [
             [
-                "options"        => [
-                    "member" => 15,
+                'options'        => [
+                    'member' => 15,
                 ],
-                "expectedDql"    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.id = 15",
-                "parameterCount" => 0
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.id = 15",
+                'parameterCount' => 0,
             ],
         ];
     }

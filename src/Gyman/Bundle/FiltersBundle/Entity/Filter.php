@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\FiltersBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\FiltersBundle\Filters\FilterInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\QueryBuilder;
+use Gyman\Bundle\FiltersBundle\Filters\FilterInterface;
 use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**

@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
+use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 class UserType extends BaseType
 {
@@ -14,27 +14,27 @@ class UserType extends BaseType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('firstname', null, array(
-            'label' => 'form.label.firstname',
-            'error_bubbling' => true
-        ));
-        $builder->add('lastname', null, array(
-            'label' => 'form.label.lastname',
-            'error_bubbling' => true
-        ));
-        $builder->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-                'error_bubbling' => true,
-                'required' => false,
-                'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'form.password'),
-                'second_options' => array('label' => 'form.password_confirmation'),
+        $builder->add('firstname', null, [
+            'label'          => 'form.label.firstname',
+            'error_bubbling' => true,
+        ]);
+        $builder->add('lastname', null, [
+            'label'          => 'form.label.lastname',
+            'error_bubbling' => true,
+        ]);
+        $builder->add('plainPassword', 'repeated', [
+                'type'            => 'password',
+                'error_bubbling'  => true,
+                'required'        => false,
+                'options'         => ['translation_domain' => 'FOSUserBundle'],
+                'first_options'   => ['label'              => 'form.password'],
+                'second_options'  => ['label'              => 'form.password_confirmation'],
                 'invalid_message' => 'fos_user.password.mismatch',
-            ));
+            ]);
 
         $builder->remove('current_password');
-        $builder->get("username")->setDisabled(true);
-        $builder->get("email")->setDisabled(true);
+        $builder->get('username')->setDisabled(true);
+        $builder->get('email')->setDisabled(true);
 
 //        $builder->add('invoiceData', new InvoiceDataType());
     }
@@ -51,11 +51,11 @@ class UserType extends BaseType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'cascade_validation'=> true,
-            'data_class' => $this->class,
-            'error_bubbling' => true
-        ));
+        $resolver->setDefaults([
+            'cascade_validation' => true,
+            'data_class'        => $this->class,
+            'error_bubbling'    => true,
+        ]);
     }
 
     /**

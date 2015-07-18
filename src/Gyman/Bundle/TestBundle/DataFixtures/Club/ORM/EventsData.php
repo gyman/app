@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
-use Gyman\Bundle\ScheduleBundle\Entity as Schedule;
 use DateTime;
+use Gyman\Bundle\ScheduleBundle\Entity as Schedule;
 use Gyman\Bundle\TestBundle\DataFixtures\BaseFixture;
 
 class EventsData extends BaseFixture
@@ -20,17 +20,17 @@ class EventsData extends BaseFixture
         extract($params);
 
         switch ($type) {
-            case "single":
+            case 'single':
                 $event = new Schedule\Single();
                 break;
-            case "weekly":
+            case 'weekly':
                 $event = new Schedule\Weekly();
                 break;
         }
 
         $event->setActivity($this->getReference($activity));
         $event->setStartDate(new DateTime($startDate));
-        $event->setEndDate(isset($endDate) ? new DateTime($endDate) : new DateTime("2015-12-31 23:59:59"));
+        $event->setEndDate(isset($endDate) ? new DateTime($endDate) : new DateTime('2015-12-31 23:59:59'));
 
         $event->setDuration($duration);
 

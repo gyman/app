@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\MembersBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use DateTime;
+use Symfony\Component\Form\DataTransformerInterface;
 
 class DateToStringTransformer implements DataTransformerInterface
 {
@@ -27,7 +27,7 @@ class DateToStringTransformer implements DataTransformerInterface
     public function reverseTransform($date)
     {
         if ($date) {
-            return $date->format("Y-m-d");
+            return $date->format('Y-m-d');
         }
     }
 }

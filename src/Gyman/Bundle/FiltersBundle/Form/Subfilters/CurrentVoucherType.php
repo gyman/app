@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\FiltersBundle\Form\Subfilters;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CurrentVoucherType extends AbstractSubfilterType
@@ -14,24 +14,24 @@ class CurrentVoucherType extends AbstractSubfilterType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("currentVoucher", "choice", array(
-            "choices"       => array(
-                true  => "posiada",
-                false => "nie posiada"
-            ),
-            "property_path" => "[currentVoucher]"
-        ));
+        $builder->add('currentVoucher', 'choice', [
+            'choices'       => [
+                true  => 'posiada',
+                false => 'nie posiada',
+            ],
+            'property_path' => '[currentVoucher]',
+        ]);
     }
 
     public function getName()
     {
-        return "current_voucher";
+        return 'current_voucher';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => "Gyman\Bundle\FiltersBundle\Filters\CurrentVoucher",
-        ));
+        ]);
     }
 }

@@ -6,21 +6,21 @@ use Doctrine\ORM\QueryBuilder;
 
 class VouchersList extends AbstractList
 {
-    protected $listname = "vouchers";
-    protected $listTrPartial = "ListsBundle:Vouchers:_list_tr.html.twig";
+    protected $listname = 'vouchers';
+    protected $listTrPartial = 'ListsBundle:Vouchers:_list_tr.html.twig';
     protected $columnsCount = 6;
-    protected $sortingColumns = array(
-        0 => "m.name",
-        1 => "v.startDate",
-        2 => "v.amount",
-        3 => "v.created",
-        4 => "priceL",
-    );
+    protected $sortingColumns = [
+        0 => 'm.name',
+        1 => 'v.startDate',
+        2 => 'v.amount',
+        3 => 'v.created',
+        4 => 'priceL',
+    ];
 
     protected function addJoins(QueryBuilder $query)
     {
-        $query->innerJoin("v.member", "m");
-        $query->leftJoin("v.entries", "e");
+        $query->innerJoin('v.member', 'm');
+        $query->leftJoin('v.entries', 'e');
     }
 
     public function getSortingFunction($sortingColumnsCount, $sortingColumnArray, $sortingOrderArray)
@@ -38,17 +38,17 @@ class VouchersList extends AbstractList
                 $column = (int) $sortingColumnArray[$a];
                 $order = strtoupper($sortingOrderArray[$a]);
 
-                if (!key_exists($column, $this->sortingColumns)) {
+                if (!array_key_exists($column, $this->sortingColumns)) {
                     continue;
                 }
 
                 $columnName = $this->sortingColumns[$column];
 
                 if ($column == 4) {
-                    $select = "LENGTH(v.price) as HIDDEN priceL";
+                    $select = 'LENGTH(v.price) as HIDDEN priceL';
                     $query->addSelect($select);
-                    $query->addOrderBy("priceL", $order);
-                    $query->addOrderBy("v.price", $order);
+                    $query->addOrderBy('priceL', $order);
+                    $query->addOrderBy('v.price', $order);
                     continue;
                 }
 

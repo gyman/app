@@ -1,13 +1,14 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Gyman\Bundle\ClubBundle\ClubsEvents;
+use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Event\ClubCreatedEvent;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Bundle\ClubBundle\ClubsEvents;
 
 class ClubSubscriber implements EventSubscriberInterface
 {
@@ -38,15 +39,14 @@ class ClubSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             ClubsEvents::CREATED => [['onClubCreated', 0]],
-        );
+        ];
     }
 
     /**
      * creates database field from club name
      */
-
     public function onClubCreated(ClubCreatedEvent $event)
     {
         /**

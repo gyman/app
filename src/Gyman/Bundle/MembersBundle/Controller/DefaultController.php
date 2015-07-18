@@ -2,16 +2,16 @@
 
 namespace Gyman\Bundle\MembersBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -24,7 +24,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman.members.members_manager");
+        $manager = $this->get('gyman.members.members_manager');
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
@@ -38,10 +38,10 @@ class DefaultController extends Controller
         }
 
         return $response->setContent(
-            $this->renderView("MembersBundle:Default:edit.html.twig", [
+            $this->renderView('MembersBundle:Default:edit.html.twig', [
                     'form'     => $form->createView(),
                     'member'   => $member,
-                    "uploader" => $this->get('oneup_uploader.templating.uploader_helper'),
+                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper'),
             ])
         );
     }
@@ -54,7 +54,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get("gyman.members.members_manager");
+        $manager = $this->get('gyman.members.members_manager');
         $member = $manager->create();
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
@@ -65,7 +65,7 @@ class DefaultController extends Controller
                 $manager->save($member);
 
                 return $this->redirect(
-                    $this->generateUrl("gyman_api_get_member", ["member" => $member->getId()], true)
+                    $this->generateUrl('gyman_api_get_member', ['member' => $member->getId()], true)
                 );
             } else {
                 $response->setStatusCode(400);
@@ -73,11 +73,11 @@ class DefaultController extends Controller
         }
 
         return $response->setContent(
-            $this->renderView("MembersBundle:Default:new.html.twig", [
+            $this->renderView('MembersBundle:Default:new.html.twig', [
                     'form'     => $form->createView(),
                     'member'   => $member,
                     'isNew'    => true,
-                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper')
+                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper'),
             ])
         );
     }
@@ -96,7 +96,7 @@ class DefaultController extends Controller
         $entityManager->remove($member);
         $entityManager->flush();
 
-        return array();
+        return [];
     }
 
     /**
@@ -115,7 +115,7 @@ class DefaultController extends Controller
         $manager->persist($member);
         $manager->flush();
 
-        return new JsonResponse(array("status" => "ok", "starred" => $member->getStarred()));
+        return new JsonResponse(['status' => 'ok', 'starred' => $member->getStarred()]);
     }
 
     /**
@@ -133,8 +133,9 @@ class DefaultController extends Controller
      */
     public function searchForDashboardAction(ArrayCollection $members = null)
     {
-        $serializer = $this->get("jms_serializer");
-        $data = $serializer->serialize(count($members) > 0 ? $members : [], "json");
-        return new Response($data, 200, ["content-type" => "application/json"]);
+        $serializer = $this->get('jms_serializer');
+        $data = $serializer->serialize(count($members) > 0 ? $members : [], 'json');
+
+        return new Response($data, 200, ['content-type' => 'application/json']);
     }
 }

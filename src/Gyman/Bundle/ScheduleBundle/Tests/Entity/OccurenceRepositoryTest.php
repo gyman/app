@@ -11,10 +11,10 @@ class OccurenceRepositoryTest extends BaseTest
     public function testGetOccurencesForPeriodQueryBuilder()
     {
         $startDate = new \DateTime();
-        $startDate->modify("00:11:22");
+        $startDate->modify('00:11:22');
 
         $endDate = clone($startDate);
-        $endDate->modify("23:24:25");
+        $endDate->modify('23:24:25');
 
         $query = $this->container->get('occurence_repository')->getOccurencesForPeriodQueryBuilder($startDate, $endDate);
 

@@ -4,17 +4,17 @@ namespace Gyman\Bundle\FiltersBundle\Controller;
 
 use Gyman\Bundle\FiltersBundle\Entity\Filter;
 use Gyman\Bundle\FiltersBundle\Form\FilterType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public static $filter_session_key = "members_list_filter";
+    public static $filter_session_key = 'members_list_filter';
 
     /**
      * @Route("/{id}/delete/{listname}", name="_filter_delete", requirements={"listname" = "(members|vouchers|entries)"})
@@ -30,7 +30,7 @@ class DefaultController extends Controller
         $this->resetFilterAction($request, $listname);
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array("status" => "ok"));
+            return new JsonResponse(['status' => 'ok']);
         }
 
         return $this->redirect($this->generateUrl("_{$listname}_list"));
@@ -41,10 +41,10 @@ class DefaultController extends Controller
      */
     public function resetFilterAction(Request $request, $listname)
     {
-        $this->get("filter_provider")->resetListFilter($listname);
+        $this->get('filter_provider')->resetListFilter($listname);
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array("status" => "ok"));
+            return new JsonResponse(['status' => 'ok']);
         }
 
         return $this->redirect($this->generateUrl("_{$listname}_list"));
@@ -56,15 +56,15 @@ class DefaultController extends Controller
      */
     public function setFilterAction(Filter $filter, Request $request, $listname)
     {
-        $filterProvider = $this->get("filter_provider");
+        $filterProvider = $this->get('filter_provider');
 
         $filterProvider->setListFilter($filter, $listname);
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array("status" => "ok"));
+            return new JsonResponse(['status' => 'ok']);
         }
 
-        return $this->redirect($this->generateUrl("_list_members"));
+        return $this->redirect($this->generateUrl('_list_members'));
     }
 
     /**
@@ -76,16 +76,16 @@ class DefaultController extends Controller
         $starredSubfilter = new \Gyman\Bundle\FiltersBundle\Filters\Starred();
 
         $filter = new Filter();
-        $filter->setFilter(json_encode(array($starredSubfilter->getName() => array("starred" => true))));
+        $filter->setFilter(json_encode([$starredSubfilter->getName() => ['starred' => true]]));
 
-        $filterProvider = $this->get("filter_provider");
+        $filterProvider = $this->get('filter_provider');
         $filterProvider->setListFilter($filter, $listname);
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array("status" => "ok"));
+            return new JsonResponse(['status' => 'ok']);
         }
 
-        return $this->redirect($this->generateUrl("_list_members"));
+        return $this->redirect($this->generateUrl('_list_members'));
     }
 
     /**
@@ -102,37 +102,37 @@ class DefaultController extends Controller
             ['content-type' => 'text/html']
         );
 
-        $filter = $this->get("filter_provider")->createFilterFromRequest($request);
+        $filter = $this->get('filter_provider')->createFilterFromRequest($request);
 
         $formType = new FilterType(
-            $this->get("filter_provider")->getFiltersForList($listname)
+            $this->get('filter_provider')->getFiltersForList($listname)
         );
 
-        $mode = $request->get("mode", "init");
+        $mode = $request->get('mode', 'init');
 
-        $form = $this->createForm($formType, $filter, ["mode" => $mode]);
+        $form = $this->createForm($formType, $filter, ['mode' => $mode]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
-            if ($form->isValid() && $mode === "save") {
+            if ($form->isValid() && $mode === 'save') {
                 $manager = $this->getDoctrine()->getManager();
                 $manager->persist($filter);
                 $manager->flush();
 
-                $data = array(
-                    "name" => $filter->getName(),
-                    "id"   => $filter->getId()
-                );
+                $data = [
+                    'name' => $filter->getName(),
+                    'id'   => $filter->getId(),
+                ];
 
-                $this->get("filter_provider")->setListFilter($filter);
+                $this->get('filter_provider')->setListFilter($filter);
 
-                return new JsonResponse(array(
-                    "status" => "ok",
-                    "data"   => $data
-                ));
-            } elseif ($form->isValid() && $mode == "set") {
-                $this->get("filter_provider")->setListFilter($filter);
+                return new JsonResponse([
+                    'status' => 'ok',
+                    'data'   => $data,
+                ]);
+            } elseif ($form->isValid() && $mode == 'set') {
+                $this->get('filter_provider')->setListFilter($filter);
             } elseif (!$form->isValid()) {
                 $statusCode = 400;
             }
@@ -141,11 +141,11 @@ class DefaultController extends Controller
         return $response
                 ->setStatusCode($statusCode)
                 ->setContent(
-                    $this->renderView("FiltersBundle:Default:newFilter.html.twig", array(
-                        'form'     => $form->createView(),
-                        'listname' => $listname,
-                        "runSetupJavascript" => $mode == "init"
-                    ))
+                    $this->renderView('FiltersBundle:Default:newFilter.html.twig', [
+                        'form'               => $form->createView(),
+                        'listname'           => $listname,
+                        'runSetupJavascript' => $mode == 'init',
+                    ])
                 );
     }
 }

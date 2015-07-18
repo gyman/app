@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\ScheduleBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ScheduleController extends Controller
 {
@@ -14,6 +14,6 @@ class ScheduleController extends Controller
      */
     public function calendarAction()
     {
-        return array();
+        return [];
     }
 }

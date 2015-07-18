@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\FiltersBundle\Form\Subfilters;
 
+use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 
 class EntryTypeType extends AbstractSubfilterType
 {
@@ -15,32 +15,32 @@ class EntryTypeType extends AbstractSubfilterType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("type", "choice", array(
-                "choices"       => array(
-                    "eq"  => "jest",
-                    "not" => "nie jest"
-                ),
-                "property_path" => "[type]"
-            ))
-            ->add('entryType', "choice", array(
-                "choices"       => array(
-                    "free"    => "darmowa",
-                    "paid"    => "płatna",
-                    "voucher" => "na karnet",
-                ),
-                "property_path" => "[entryType]"
-        ));
+            ->add('type', 'choice', [
+                'choices'       => [
+                    'eq'  => 'jest',
+                    'not' => 'nie jest',
+                ],
+                'property_path' => '[type]',
+            ])
+            ->add('entryType', 'choice', [
+                'choices'       => [
+                    'free'    => 'darmowa',
+                    'paid'    => 'płatna',
+                    'voucher' => 'na karnet',
+                ],
+                'property_path' => '[entryType]',
+        ]);
     }
 
     public function getName()
     {
-        return "entry_type";
+        return 'entry_type';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => "Gyman\Bundle\FiltersBundle\Filters\EntryType",
-        ));
+        ]);
     }
 }

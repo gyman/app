@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Yaml\Yaml;
-use Doctrine\Common\Collections\ArrayCollection;
 
 //@todo: use base fixture class
 
@@ -48,7 +48,7 @@ class VouchersData extends AbstractFixture implements OrderedFixtureInterface
         $voucher->setPrice($price);
 
         if ($activities) {
-            $activities = explode(",", $activities);
+            $activities = explode(',', $activities);
             $collection = new ArrayCollection();
             foreach ($activities as $activity) {
                 $collection->add($this->getReference($activity));

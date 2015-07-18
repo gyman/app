@@ -15,17 +15,17 @@ class VoucherExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('entries_label', array($this, 'entriesLabelFilter')),
-        );
+        return [
+            new \Twig_SimpleFilter('entries_label', [$this, 'entriesLabelFilter']),
+        ];
     }
 
     public function entriesLabelFilter(Voucher $voucher)
     {
         if ($voucher->getAmount() == 0) {
-            return $this->translator->trans("voucher.entries.open");
+            return $this->translator->trans('voucher.entries.open');
         } else {
-            return sprintf("%d/%d", $voucher->getAmountLeft(), $voucher->getAmount());
+            return sprintf('%d/%d', $voucher->getAmountLeft(), $voucher->getAmount());
         }
     }
 

@@ -15,20 +15,20 @@ class ActivityRepository extends EntityRepository
 {
     public function getActivitiesQuery()
     {
-        return $this->createQueryBuilder("a")
+        return $this->createQueryBuilder('a')
                 ->select();
     }
 
     public function getPopularityQueryBuilder()
     {
-        return $this->createQueryBuilder("a")
-                ->select("a.name", "count(en.id) as cnt")
-                ->join("a.events", "e")
-                ->join("e.occurences", "o")
-                ->join("o.entries", "en")
+        return $this->createQueryBuilder('a')
+                ->select('a.name', 'count(en.id) as cnt')
+                ->join('a.events', 'e')
+                ->join('e.occurences', 'o')
+                ->join('o.entries', 'en')
                 ->setMaxResults(6)
-                ->groupBy("a.name")
-                ->orderBy("cnt", "DESC");
+                ->groupBy('a.name')
+                ->orderBy('cnt', 'DESC');
     }
 
     public function getCountByActivities()

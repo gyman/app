@@ -2,16 +2,16 @@
 
 namespace Gyman\Bundle\ListsBundle\Services;
 
-use Gyman\Bundle\FiltersBundle\Services\FilterProvider;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Gyman\Bundle\FiltersBundle\Services\FilterProvider;
 
 abstract class AbstractList
 {
     protected $listname;
     protected $templating;
     protected $listTrPartial;
-    protected $sortingColumns = array();
+    protected $sortingColumns = [];
 
     /**
      *
@@ -136,20 +136,20 @@ abstract class AbstractList
 
         $displayedCount = count($paginator);
 
-        $datatable = array(
-            "sEcho"                => $this->getListParameters()->get("sEcho"),
-            "iTotalRecords"        => $totalCount,
-            "iTotalDisplayRecords" => $displayedCount,
-            "aaData"               => array()
-        );
+        $datatable = [
+            'sEcho'                => $this->getListParameters()->get('sEcho'),
+            'iTotalRecords'        => $totalCount,
+            'iTotalDisplayRecords' => $displayedCount,
+            'aaData'               => [],
+        ];
 
         if ($displayedCount > 0) {
             $template = array_fill(0, $this->columnsCount, null);
 
             foreach ($paginator as $entity) {
-                $datatable["aaData"][] = array_replace($template, array(
-                    $this->getTemplating()->render($this->getListTrPartial(), array("entity" => $entity))
-                ));
+                $datatable['aaData'][] = array_replace($template, [
+                    $this->getTemplating()->render($this->getListTrPartial(), ['entity' => $entity]),
+                ]);
             }
         }
 

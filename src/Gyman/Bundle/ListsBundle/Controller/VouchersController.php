@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\ListsBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/vouchers")
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class VouchersController extends Controller implements ListControllerInterface
 {
-    private $listname = "vouchers";
+    private $listname = 'vouchers';
 
     public function getListname()
     {
@@ -29,14 +29,14 @@ class VouchersController extends Controller implements ListControllerInterface
      */
     public function indexAction(Request $request)
     {
-        $filter = $this->get("filter_provider")->getListFilter($this->getListname());
-        $filters = $this->get("filter_repository")->getFiltersByListname($this->getListname());
+        $filter = $this->get('filter_provider')->getListFilter($this->getListname());
+        $filters = $this->get('filter_repository')->getFiltersByListname($this->getListname());
 
-        return array(
-            "filter"   => $filter,
-            "filters"  => $filters,
-            "listname" => $this->getListname()
-        );
+        return [
+            'filter'   => $filter,
+            'filters'  => $filters,
+            'listname' => $this->getListname(),
+        ];
     }
 
     /**
@@ -46,7 +46,7 @@ class VouchersController extends Controller implements ListControllerInterface
      */
     public function datasourceAction(Request $request)
     {
-        $vouchersList = $this->get("vouchers_list");
+        $vouchersList = $this->get('vouchers_list');
         $data = $vouchersList->getResults();
 
         return new JsonResponse($data);

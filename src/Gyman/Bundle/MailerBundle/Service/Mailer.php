@@ -2,9 +2,9 @@
 
 namespace Gyman\Bundle\MailerBundle\Service;
 
+use Swift_Mailer;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Swift_Mailer;
 
 class Mailer
 {
@@ -32,7 +32,7 @@ class Mailer
     /**
      * @var array
      */
-    private $parameters = array();
+    private $parameters = [];
 
     /**
      * @return Swift_Message
@@ -148,14 +148,14 @@ class Mailer
         $this->setMessage(
             $mailer->createMessage()
         );
-        $this->getMessage()->setContentType("text/html");
+        $this->getMessage()->setContentType('text/html');
     }
 
     public function __call($method, $arguments)
     {
-        if (strstr($method, "set") && method_exists($this->getMessage(), $method)) {
+        if (strstr($method, 'set') && method_exists($this->getMessage(), $method)) {
             return call_user_func_array(
-                array($this->getMessage(),$method),
+                [$this->getMessage(),$method],
                 $arguments
             );
         }

@@ -2,8 +2,8 @@
 
 namespace Dende\Filters\Tests\Filters;
 
-use Gyman\Bundle\TestBundle\Tests\BaseTest;
 use Gyman\Bundle\FiltersBundle\Filters\SearchName;
+use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
 class SearchNameTest extends BaseTest
 {
@@ -13,9 +13,9 @@ class SearchNameTest extends BaseTest
     public function testApply($options, $expectedDql, $parameterCount, $expectedParameters, $expectedString)
     {
         $queryBuilder = $this->container
-            ->get("doctrine.orm.entity_manager")
-            ->getRepository("MembersBundle:Member")
-            ->createQueryBuilder("m");
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('MembersBundle:Member')
+            ->createQueryBuilder('m');
 
         $searchNameFilter = new SearchName();
         $searchNameFilter->setOptions($options);
@@ -28,25 +28,24 @@ class SearchNameTest extends BaseTest
         $parameters = $queryBuilder->getParameters();
 
         $this->assertEquals($parameters->count(), $parameterCount);
-        $this->assertParameterEqual($expectedParameters[0], $expectedString["string"], $parameters->get(0));
+        $this->assertParameterEqual($expectedParameters[0], $expectedString['string'], $parameters->get(0));
     }
 
     public function applyToQueryDataProvider()
     {
         return [
             [
-                "options"            => [
-                    "search" => "abc",
+                'options'            => [
+                    'search' => 'abc',
                 ],
-                "expectedDql"        => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.name LIKE :string OR m.notes LIKE :string",
-                "parameterCount"     => 1,
-                "expectedParameters" => [
-                    "string",
+                'expectedDql'        => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.name LIKE :string OR m.notes LIKE :string",
+                'parameterCount'     => 1,
+                'expectedParameters' => [
+                    'string',
                 ],
-                "expectedString"     =>
-                [
-                    "string" => "%abc%",
-                ]
+                'expectedString'     => [
+                    'string' => '%abc%',
+                ],
             ],
         ];
     }

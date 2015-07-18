@@ -14,7 +14,7 @@ class RequiredIfNoNewActivityValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $newActivity = $this->context->getRoot()->get("newActivity")->getData();
+        $newActivity = $this->context->getRoot()->get('newActivity')->getData();
 
         if (!is_null($newActivity)) {
             return;
@@ -23,7 +23,7 @@ class RequiredIfNoNewActivityValidator extends ConstraintValidator
         if (is_null($value)) {
             $this->context->addViolation(
                 $constraint->message,
-                array('%string%' => $value)
+                ['%string%' => $value]
             );
         }
     }
