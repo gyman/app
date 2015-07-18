@@ -8,7 +8,7 @@ services:
     class: Gyman\Bundle\MultiDatabaseBundle\DataCollector\DatabaseConnectionsDataCollector
     arguments: [@doctrine.dbal.default_connection, @doctrine.dbal.club_connection]
     tags:
-      - { name: data_collector, template: "DefaultBundle:Toolbar:DatabaseConnections.html.twig", id: "database_connections" }
+      - { name: data_collector, template: "GymanMultiDatabaseBundle:Toolbar:DatabaseConnections.html.twig", id: "database_connections" }
 
   gyman.multidatabase.slugify:
     class: Gyman\Bundle\MultiDatabaseBundle\Services\Slugify

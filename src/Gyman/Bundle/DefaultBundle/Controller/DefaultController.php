@@ -5,7 +5,7 @@ namespace Gyman\Bundle\DefaultBundle\Controller;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
+use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

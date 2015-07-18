@@ -21,7 +21,7 @@ doctrine:
           user:     ~
           password: ~
           charset:  UTF8
-          wrapper_class: Gyman\Bundle\DefaultBundle\Connection\ConnectionWrapper
+          wrapper_class: Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper
           mapping_types:
               enum: string
     orm:

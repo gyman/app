@@ -36,6 +36,7 @@
         <phingcall target="test-twiglint" />
         <phingcall target="test-security" />
         <phingcall target="phpcs" />
+        <phingcall target="phpcsfixer-dry" />
         <phingcall target="phpmd" />
         <phingcall target="test-phpunit" />
     </target>
@@ -44,8 +45,12 @@
         <exec command="bin/phpcs --standard=app/phpcs.xml --extensions=php src/Gyman/Bundle" checkreturn="true" passthru="true" />
     </target>
 
+    <target name="phpcsfixer-dry" description="php code fixer">
+        <exec command="bin/php-cs-fixer fix --dry-run --config-file=.php_cs" checkreturn="true" passthru="true" />
+    </target>
+
     <target name="phpcsfixer" description="php code fixer">
-        <exec command="bin/php-cs-fixer fix ./ --config=sf23" checkreturn="false" passthru="true" />
+        <exec command="bin/php-cs-fixer fix --config-file=.php_cs" checkreturn="true" passthru="true" />
     </target>
 
     <target name="phpcbf" description="php code beautifier and fixer">

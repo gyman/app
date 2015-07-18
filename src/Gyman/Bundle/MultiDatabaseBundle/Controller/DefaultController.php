@@ -7,6 +7,7 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

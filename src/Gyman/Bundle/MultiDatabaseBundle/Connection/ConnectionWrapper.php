@@ -24,13 +24,14 @@ class ConnectionWrapper extends Connection
     /**
      * @var bool
      */
-    private $_isConnected = false;
+    private $isConnected = false;
 
     /**
      * @param CredentialsStorage $credentialsStorage
      */
     public function setCredentialsStorage(CredentialsStorage$credentialsStorage)
     {
+        ConnectionWrapper::close();
         $this->credentialsStorage = $credentialsStorage;
     }
 
@@ -83,7 +84,7 @@ class ConnectionWrapper extends Connection
             $this->_eventManager->dispatchEvent(Events::postConnect, $eventArgs);
         }
 
-        $this->_isConnected = true;
+        $this->isConnected = true;
 
         return true;
     }
@@ -93,7 +94,7 @@ class ConnectionWrapper extends Connection
      */
     public function isConnected()
     {
-        return $this->_isConnected;
+        return $this->isConnected;
     }
 
     /**
@@ -103,7 +104,7 @@ class ConnectionWrapper extends Connection
     {
         if ($this->isConnected()) {
             parent::close();
-            $this->_isConnected = false;
+            $this->isConnected = false;
         }
     }
 }

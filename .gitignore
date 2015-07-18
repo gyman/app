@@ -27,3 +27,4 @@ node_modules/
 .idea/
 phantomjsdriver.log
 auth.json
+.php_cs.cache

@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM;
 
-use Gyman\Bundle\DefaultBundle\Services\CredentialsStorage;
+use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\TestBundle\DataFixtures\BaseFixture;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 
