@@ -4,7 +4,6 @@ namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\ORM\EntityRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Bundle\MultiDatabaseBundle\Connection\ClubConnection;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\ClubNotFoundException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
@@ -43,11 +42,15 @@ final class ClubConnectionCommandListener
         $clubName = $input->getOption('club');
 
         if ($clubName === null) {
+            $event->getOutput()->writeln(
+                sprintf('Performing operation on standard database <info>"gyman"</info>')
+            );
+
             return;
         }
 
         $input->setOption('em', 'club');
-//        $input->setInteractive(false);
+        $command->getDefinition()->getOption('em')->setDefault('club');
 
         /** @var Club $club */
         $club = $this->clubRepository->findOneBySubdomain($clubName);
@@ -63,6 +66,10 @@ final class ClubConnectionCommandListener
             $db[CredentialsStorage::PARAM_USER],
             $db[CredentialsStorage::PARAM_PASS]
         );
+
+        $event->getOutput()->writeln(
+            sprintf("Switching to <info>'%s'</info> database as user <info>'%s'</info>", $db[CredentialsStorage::PARAM_BASE], $db[CredentialsStorage::PARAM_USER])
+        );
     }
 
     /**
@@ -71,7 +78,12 @@ final class ClubConnectionCommandListener
      */
     private function isProperCommand(Command $command)
     {
-        return ($command->getName() === 'doctrine:schema:update');
+        return in_array($command->getName(), [
+            'doctrine:schema:update',
+            'doctrine:schema:create',
+            'doctrine:schema:drop',
+            'doctrine:fixtures:load',
+        ]);
     }
 
     /**

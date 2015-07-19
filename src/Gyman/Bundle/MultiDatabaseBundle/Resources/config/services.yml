@@ -40,7 +40,14 @@ services:
         - [setClubRepository, [@gyman.club.repository]]
         - [setConnectionWrapper, [@doctrine.dbal.club_connection]]
       tags:
-          - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
+        - { name: kernel.event_listener, event: console.command, method: onConsoleCommand, priority: 255 }
+
+  gyman.multidatabase.doctrine_fixtures_load_listener:
+      class: Gyman\Bundle\MultiDatabaseBundle\Listener\DoctrineFixturesLoadListener
+      calls:
+        - [setOptions, [{default: src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection, club: src/Gyman/Bundle/TestBundle/DataFixtures/Club}]]
+      tags:
+        - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
 
   gyman.multidatabase.command:
     abstract: true
