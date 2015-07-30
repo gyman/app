@@ -1,5 +1,7 @@
-{{ form_start(form, {action: "dupa-dupa"}) }}
-{{ form_widget(form["club"]) }}
-<a href="/"><i class="icon icon-plus-sign"></i></a>
+{{ form_start(form, {action: path("gyman_multidatabase_set_current_club")}) }}
+    {{ form_widget(form.club) }}
 
+    <button type="submit">switch</button>
+
+    {{ form_rest(form) }}
 {{ form_end(form) }}

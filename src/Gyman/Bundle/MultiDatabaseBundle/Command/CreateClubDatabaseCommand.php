@@ -11,8 +11,8 @@ class CreateClubDatabaseCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName('gyman:database:create')
-            ->setDescription('Creates database schema for club connection on selected name')
+            ->setName('gyman:club:create')
+            ->setDescription('Creates database with empty schema for club on selected name')
             ->addArgument('name', InputArgument::REQUIRED, 'Club name (will be converted to slug)');
     }
 

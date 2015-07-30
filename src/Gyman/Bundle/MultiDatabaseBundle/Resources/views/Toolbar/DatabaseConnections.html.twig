@@ -1,8 +1,23 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
-    <ul style="list-style: none" class="inline">
-        <li><strong>default:</strong> {{ collector.getDefault() }}</li>
-        <li><strong>club:</strong> {{ collector.getClub() }}</li>
-    </ul>
+<style>
+    #databases-indicator {
+        text-indent: 0;
+        margin: 0;
+        padding: 0;
+        display: block;
+        position: relative;
+        left: 20px;
+    }
+    #databases-indicator li {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+    <ol id="databases-indicator">
+        <li>{{ collector.getDefault() }}</li>
+        <li>{{ collector.getClub() }}</li>
+    </ol>
 {% endblock %}

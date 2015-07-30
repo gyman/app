@@ -1,22 +1,42 @@
 {% extends "MembersBundle:Default:edit.html.twig" %}
 
+{% block title %}
+    {{ parent() }} - Dodaj użytkownika
+{% endblock title %}
+
 {% block content %}
-    {% if not form.vars.valid %}
-        <div class="alert alert-error">
-            <strong>{{ 'members.modal.form_has_errors'|trans }}</strong>
-            {{ form_errors(form) }}
+    <div class="contentwrapper">
+
+        <div class="heading">
+
+            <h3>Dodaj użytkownika</h3>
+
         </div>
-    {% endif %}
 
-    {{ form_start(form, {
-        attr : {
-            'id' : "memberForm",
-            'class' : "form-horizontal row-fluid"
-        },
-        action : path('_member_new')
-    }) }}
+        <div class="span12">
 
-    {%  include "@Members/Default/member_form_inner.html.twig" %}
+        {% if not form.vars.valid %}
+            <div class="alert alert-error">
+                <strong>{{ 'members.modal.form_has_errors'|trans }}</strong>
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        {{ form_start(form, {
+            attr : {
+                'id' : "memberForm",
+                'class' : "form-horizontal row-fluid"
+            },
+            action : path('_member_new'),
+            method : 'POST'
+        }) }}
+
+        {%  include "@Members/Default/member_form_inner.html.twig" %}
+
+        </div>
+
+    </div>
+
 {% endblock %}
 
 {% block birthday %}

@@ -67,12 +67,6 @@ services:
     tags:
       - { name: console.command }
 
-  gyman.multidatabase.command.load_fixtures:
-    class: Gyman\Bundle\MultiDatabaseBundle\Command\LoadClubFixturesCommand
-    parent: gyman.multidatabase.command
-    tags:
-      - { name: console.command }
-
   gyman.multidatabase.command.migrations.migrate:
     class: Gyman\Bundle\MultiDatabaseBundle\Command\MigrationsMigrateCommand
     parent: gyman.multidatabase.command

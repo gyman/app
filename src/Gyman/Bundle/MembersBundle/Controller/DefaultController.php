@@ -54,19 +54,15 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get('gyman.members.members_manager');
-        $member = $manager->create();
+        $memberManager = $this->get('gyman.members.members_manager');
+        $member = $memberManager->create();
         $form = $this->createForm('gyman_members_member_form_type', $member);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $manager->save($member);
-
-                return $this->redirect(
-                    $this->generateUrl('gyman_api_get_member', ['member' => $member->getId()], true)
-                );
+                $memberManager->save($member);
             } else {
                 $response->setStatusCode(400);
             }

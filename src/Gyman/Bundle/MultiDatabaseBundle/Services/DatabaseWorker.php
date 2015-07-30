@@ -84,25 +84,6 @@ final class DatabaseWorker
         return [$this->dbName, $this->username, $this->password];
     }
 
-    public function loadFixtures($clubName, Command $command, ConsoleOutput $output, $env = 'dev')
-    {
-        $this->dbName = $this->createDatabaseName($clubName);
-        $this->updateClubConnection();
-
-        $input = new ArrayInput([
-            '--no-interaction',
-            '--em'       => 'club',
-            '--env'      => $env,
-            '--fixtures' => 'src/Gyman/Bundle/TestBundle/DataFixtures/Club',
-        ]);
-
-        $input->setInteractive(false);
-
-        $output->writeln((string) $input);
-
-        $command->run($input, $output);
-    }
-
     /**
      * Creates database
      */

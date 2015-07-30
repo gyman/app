@@ -46,10 +46,11 @@
 
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
-                            {# todo: przywrócić!!!
                             <li>
-                                {{ render(controller("DefaultBundle:Default:switchClub")) }}
+                                {{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}
                             </li>
+
+                            {# todo: przywrócić!!!
                             {% if is_granted("ROLE_ADMIN") %}
                             <li>
                                 <a href="{{ path("_dashboard_index") }}">

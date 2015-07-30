@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -24,7 +26,7 @@ class DefaultController extends Controller
      */
     public function switchClubAction()
     {
-        $formType = $this->get('gyman.default.form.club_switch');
+        $formType = $this->get('gyman.multidatabase.form.club_switch');
 
         return [
             'form' => $this->createForm($formType)->createView(),
@@ -32,35 +34,44 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/set-current-club/{club}", name="gyman_default_set_current_club")
-     * @ParamConverter("club", class="ClubBundle:Club")
+     * @Route("/set-current-club", name="gyman_multidatabase_set_current_club")
+     * @Method("POST")
      */
-    public function setCurrentClubAction(Club $club)
+    public function setCurrentClubAction(Request $request)
     {
-        /* @var User $user */
-        $user = $this->getUser();
+        $form = $this->createForm($this->get('gyman.multidatabase.form.club_switch'));
 
-        $user->setCurrentClub($club);
+        $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager('default');
-        $em->persist($user);
-        $em->flush();
+        if ($form->isValid()) {
 
-        $db = $club->getDatabase();
+            /** @var Club $club */
+            $club = $form->getData()["club"];
 
-        $this->get('session')->set(
-            Globals::CURRENT_CLUB_SESSION_KEY,
-            $club
-        );
+            /* @var User $user */
+            $user = $this->getUser();
+            $user->setCurrentClub($club);
 
-        /* @var ConnectionWrapper $connection */
-        $connection = $this->get('doctrine.dbal.club_connection');
-        $connection->forceSwitch(
-            $db[CredentialsStorage::PARAM_BASE],
-            $db[CredentialsStorage::PARAM_USER],
-            $db[CredentialsStorage::PARAM_PASS]
-        );
+            $em = $this->getDoctrine()->getManager('default');
+            $em->persist($user);
+            $em->flush();
 
-        return new JsonResponse(['status' => 'ok']);
+            $db = $club->getDatabase();
+
+            $this->get('session')->set(
+                Globals::CURRENT_CLUB_SESSION_KEY,
+                $club
+            );
+
+            /* @var ConnectionWrapper $connection */
+            $connection = $this->get('doctrine.dbal.club_connection');
+            $connection->forceSwitch(
+                $db[CredentialsStorage::PARAM_BASE],
+                $db[CredentialsStorage::PARAM_USER],
+                $db[CredentialsStorage::PARAM_PASS]
+            );
+        }
+
+        return new RedirectResponse($this->generateUrl('_dashboard_index'));
     }
 }

@@ -24,7 +24,7 @@
         {% if member.getId() is not null %}
             <div class="tab-pane fade in" id="historyPane">
                 {#{% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}#}
-                <div id="timeline">{% render controller('TimelineBundle:Default:timeline', {subject: member }) %}</div>
+                {#<div id="timeline">{% render controller('TimelineBundle:Default:timeline', {subject: member }) %}</div>#}
             </div>
         {% endif %}
         <div class="tab-pane fade in" id="additionalsPane">
@@ -48,5 +48,14 @@
 </div>
 
 {{ form_rest(form) }}
+
+<div class="row-fluid">
+
+<div class="span12">
+    <button class="btn btn-primary pull-right" id="saveFormInModal" type="submit">
+        Dodaj nowego użytkownika
+    </button>
+</div>
+</div>
 
 {{ form_end(form) }}
