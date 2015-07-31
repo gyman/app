@@ -1,0 +1,99 @@
+Gyman\Bundle\MembersBundle\Entity\Member:
+  type:   entity
+  table:  members
+  repositoryClass:  Gyman\Bundle\MembersBundle\Entity\MemberRepository
+  embedded:
+    details:
+      class: Gyman\Bundle\MembersBundle\Entity\Details
+      columnPrefix: details_
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
+  manyToMany:
+    sections:
+      targetEntity: Gyman\Bundle\SectionBundle\Entity\Section
+      mappedBy: members
+
+  oneToMany:
+
+    vouchers:
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
+      mappedBy: member
+      cascade: [remove]
+      orphanRemoval:  true
+
+    entries:
+      targetEntity: Gyman\Bundle\EntriesBundle\Entity\Entry
+      mappedBy: member
+      cascade: [remove]
+      orphanRemoval: true
+
+  oneToOne:
+
+    currentVoucher:
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
+      inversedBy: member
+      joinColumn:
+        name: current_voucher_id
+        referencedColumnName: id
+        onDelete: SET NULL
+        nullable: true #false
+
+    lastEntry:
+      targetEntity: Gyman\Bundle\EntriesBundle\Entity\Entry
+      joinColumn:
+        name: last_entry_id
+        referencedColumnName: id
+        onDelete: SET NULL
+        nullable: true #false
+
+  fields:
+
+    email:
+      type: string
+      length: 255
+      nullable: true
+
+    password:
+      type: string
+      length: 255
+      nullable: true
+
+    nameSlug:
+      name: name_slug
+      type: string
+      nullable: true
+      gedmo:
+        slug:
+          fields: [ details.firstname, details.lastname]
+          updatable: true
+          separator: -
+          unique: true
+
+    deletedAt:
+      name: deleted_at
+      type: datetime
+      nullable: true #false
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update

@@ -4,224 +4,40 @@ namespace Gyman\Bundle\MembersBundle\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\DefaultBundle\Validator as DefaultBundle;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation as Serializer;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
+use Gyman\Component\Members\Model\Member as BaseMember;
 
 /**
  * Member
- *
- * @ORM\Table("members")
- *
- * @ORM\Entity(repositoryClass="Gyman\Bundle\MembersBundle\Entity\MemberRepository")
- *
- * @UniqueEntity(
- *     fields={"email"},
- *     message="Ten email jest już zarejestrowany"
- * )
- * @UniqueEntity(
- *     fields={"barcode"},
- *     message="Inny użytkownik oznaczony jest tym kodem"
- * )
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- *
  * @codeCoverageIgnore
- *
- * @Serializer\ExclusionPolicy("all")
- *
- * @Hateoas\Relation("self", href = @Hateoas\Route(
- *      "gyman_api_get_member",
- *      parameters = { "member" = "expr(object.getId())" },
- *      absolute = true
- * ))
- *
- * @Hateoas\Relation("vouchers", href = @Hateoas\Route(
- *      "gyman_api_get_member_get_vouchers",
- *      parameters = { "member" = "expr(object.getId())" },
- *      absolute = true
- * ))
- *
  */
-class Member
+final class Member extends BaseMember
 {
-    const GENDER_MALE = 'male';
-    const GENDER_FEMALE = 'female';
-
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @Serializer\Expose()
      */
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\SectionBundle\Entity\Section", mappedBy="members")
-     */
-    private $sections;
-
-    /**
      * @var string
-     *
-     * @Assert\NotBlank(message = "Pole nie może być puste!")
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     * @Serializer\Expose()
-     */
-    private $name;
-
-    /**
-     * @var \DateTime
-     *
-     * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
-     * @DefaultBundle\DateRangeConstraint(
-     *      min="100 years ago",
-     *      max="today"
-     * )
-     * @ORM\Column(name="birthdate", type="string", length=64, nullable=true)
-     * @Serializer\Expose()
-     */
-    private $birthdate;
-
-    /**
-     * @var string
-     *
-     * @Serializer\Expose()
-     * @ORM\Column(name="phone", type="string", length=64, nullable=true)
-     */
-    private $phone;
-
-    /**
-     * @var string
-     *
-     * @Assert\Email(
-     *     message = "Adres '{{ value }}' nie jest poprawny.",
-     *     checkMX = true
-     * )
-     * @Serializer\Expose()
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="notes", type="text", nullable=true)
-     */
-    private $notes;
-
-    /**
-     * @var string
-     * @Serializer\Expose()
-     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
-     */
-    private $foto = 'no-profile.gif';
-
-    /**
-     * @var string $zipcode
-     * @Serializer\Expose()
-     * @ORM\Column(name="zipcode", type="string", nullable=true)
-     * @Assert\Length(max=6, min=6, minMessage="Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków")
-     * @Assert\Regex(
-     *           pattern= "/\d{2}\-\d{3}/",
-     *           match=   true,
-     *           message= "Kod pocztowy musi być w formacie XX-XXX"
-     * )
-     */
-    private $zipcode;
-
-    /**
-     * @var string $gender
-     *
-     * @Serializer\Expose()
-     * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'female')", nullable=true)
-     * @Assert\NotBlank(message = "Pole nie może być puste!")
-     */
-    private $gender;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
-     */
-    protected $vouchers;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="current_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     * @Serializer\Expose()
-     */
-    protected $currentVoucher;
-
-    /**
-     * @var Entry $lastEntry
-     * @ORM\OneToOne(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     *
-     */
-    protected $lastEntry;
-
-    /**
-     * @var string $gender
-     *
-     * @ORM\Column(name="belt", type="string", columnDefinition="enum('white','blue','purple','brown','black')", nullable=true)
-     * @Assert\NotBlank(message = "Pole nie może być puste!")
-     * @Serializer\Expose()
-     */
-    private $belt;
-
-    /**
-     * @var string
-     * @Gedmo\Slug(fields={"name"}, updatable=true, separator="-", unique=true)
-     * @ORM\Column(name="name_slug", type="string", nullable=false)
      */
     private $nameSlug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
+     * @var DateTime
      */
-    private $entries;
+    private $createdAt;
 
     /**
-     * @var DateTime $created
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime", nullable=false)
+     * @var DateTime
      */
-    private $created;
-
-    /**
-     * @var DateTime $modified
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="modified", type="datetime", nullable=false)
-     */
-    private $modified;
+    private $updatedAt;
 
     /**
      * @var Datetime $deletedAt
-     *
-     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     private $deletedAt;
-
-    /**
-     * @var integer
-     * @Serializer\Expose()e
-     * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 64)
-     */
-    private $barcode;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="is_starred", type="boolean", nullable = true)
-     */
-    private $starred;
-    private $beltN;
 
     public function getStarred()
     {

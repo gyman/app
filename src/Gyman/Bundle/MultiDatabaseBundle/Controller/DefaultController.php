@@ -8,11 +8,9 @@ use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,7 +44,7 @@ class DefaultController extends Controller
         if ($form->isValid()) {
 
             /** @var Club $club */
-            $club = $form->getData()["club"];
+            $club = $form->getData()['club'];
 
             /* @var User $user */
             $user = $this->getUser();

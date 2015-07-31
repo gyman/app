@@ -1,0 +1,5 @@
+Gyman\Bundle\MembersBundle\Entity\Member:
+  relations:
+    -
+        rel: self
+        href: http://acme.com/foo/1

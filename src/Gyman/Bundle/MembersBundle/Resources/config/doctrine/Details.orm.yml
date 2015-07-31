@@ -1,0 +1,55 @@
+Gyman\Bundle\MembersBundle\Entity\Details:
+  type:   embeddable
+  fields:
+    firstname:
+      type: string
+      length: 255
+      nullable: false
+
+    lastname:
+      type: string
+      length: 255
+      nullable: false
+
+    birthdate:
+      type: date
+      nullable: true
+
+    phone:
+      type: string
+      length: 64
+      nullable: true
+
+    notes:
+      type: text
+      nullable: true
+
+    foto:
+      type: string
+      length: 255
+      nullable: true
+
+    zipcode:
+      type: string
+      nullable: true
+
+    gender:
+      type: string
+      columnDefinition: enum('male', 'female')
+      nullable: true
+
+    belt:
+      type: string
+      nullable: true
+      columnDefinition: enum('white','blue','purple','brown','black')
+
+    barcode:
+      type: string
+      nullable: true
+      unique: true
+      length: 64
+
+    starred:
+      name: is_starred
+      type: boolean
+      nullable: true

@@ -2,14 +2,12 @@
 
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
-use Exception;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Exception;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\Output;
 
 final class DatabaseWorker
