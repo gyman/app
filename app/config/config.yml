@@ -118,12 +118,6 @@ knp_time: ~
 
 nelmio_api_doc: ~
 
-doctrine_migrations:
-    dir_name: %kernel.root_dir%/../src/Gyman/MainBundle/DoctrineMigrations
-    namespace: Gyman\MainBundle\DoctrineMigrations
-    table_name: doctrine_migrations
-    name: Gyman DB Migrations
-
 accelerator_cache:
     host: %base_url%
     web_dir: %kernel.root_dir%/../web
