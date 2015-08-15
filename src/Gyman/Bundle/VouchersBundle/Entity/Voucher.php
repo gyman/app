@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      absolute = true
  * ))
  *
- *  @Hateoas\Relation("self", href = @Hateoas\Route(
+ * @Hateoas\Relation("self", href = @Hateoas\Route(
  *      "gyman_api_get_voucher",
  *      parameters = { "id" = "expr(object.getId())" },
  *      absolute = true

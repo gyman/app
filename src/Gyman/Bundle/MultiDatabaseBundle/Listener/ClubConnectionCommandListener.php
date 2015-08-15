@@ -4,6 +4,7 @@ namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\ORM\EntityRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\ClubNotFoundException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
@@ -53,7 +54,7 @@ final class ClubConnectionCommandListener
         $command->getDefinition()->getOption('em')->setDefault('club');
 
         /** @var Club $club */
-        $club = $this->clubRepository->findOneBySubdomain($clubName);
+        $club = $this->clubRepository->findOneBySubdomain(new Subdomain($clubName));
 
         if (!$club) {
             throw new ClubNotFoundException($clubName);
@@ -62,13 +63,13 @@ final class ClubConnectionCommandListener
         $db = $club->getDatabase();
 
         $this->connectionWrapper->forceSwitch(
-            $db[CredentialsStorage::PARAM_BASE],
-            $db[CredentialsStorage::PARAM_USER],
-            $db[CredentialsStorage::PARAM_PASS]
+            $db->getName(),
+            $db->getUsername(),
+            $db->getPassword()
         );
 
         $event->getOutput()->writeln(
-            sprintf("Switching to <info>'%s'</info> database as user <info>'%s'</info>", $db[CredentialsStorage::PARAM_BASE], $db[CredentialsStorage::PARAM_USER])
+            sprintf("Switching to <info>'%s'</info> database as user <info>'%s'</info>", $db->getName(), $db->getUsername())
         );
     }
 

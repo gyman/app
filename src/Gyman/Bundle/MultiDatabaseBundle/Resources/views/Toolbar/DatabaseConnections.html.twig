@@ -2,17 +2,22 @@
 
 {% block toolbar %}
 <style>
-    #databases-indicator {
+    ol#databases-indicator {
         text-indent: 0;
         margin: 0;
         padding: 0;
-        display: block;
+        display: inline-block !important;
         position: relative;
-        left: 20px;
+        left: 5px;
+        list-style-position: inside;
+        font-size: 11px;
+        line-height: 11px;
     }
-    #databases-indicator li {
-        padding: 0;
-        margin: 0;
+    ol#databases-indicator li {
+        line-height: inherit;
+        text-indent: inherit;
+        margin: inherit;
+        padding: inherit;
     }
 </style>
 
