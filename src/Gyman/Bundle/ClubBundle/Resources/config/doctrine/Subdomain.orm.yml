@@ -1,0 +1,9 @@
+Gyman\Bundle\ClubBundle\Entity\Subdomain:
+  type:   embeddable
+  fields:
+    name:
+      name: subdomain
+      type: string
+      nullable: false
+      unique: true
+      length: 255

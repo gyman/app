@@ -1,0 +1,29 @@
+Gyman\Bundle\ClubBundle\Entity\Club:
+  type:   entity
+  table:  clubs
+  repositoryClass:  Gyman\Bundle\ClubBundle\Entity\ClubRepository
+  embedded:
+    database:
+      class: Gyman\Bundle\ClubBundle\Entity\Database
+      columnPrefix: false
+    subdomain:
+      class: Gyman\Bundle\ClubBundle\Entity\Subdomain
+      columnPrefix: subdomain_
+
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  manyToMany:
+#    sections:
+#      targetEntity: Gyman\Bundle\SectionBundle\Entity\Section
+#      mappedBy: members
+    owners:
+      targetEntity: Gyman\Bundle\UserBundle\Entity\User
+      mappedBy: clubs
+
+  fields:
+    name:
+      type: string
+      length: 255

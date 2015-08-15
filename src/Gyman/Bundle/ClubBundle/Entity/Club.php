@@ -3,62 +3,65 @@
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
+use Gyman\Bundle\SectionBundle\Entity\Section;
+use Gyman\Bundle\UserBundle\Entity\User;
 
 /**
  * Club
- *
- * @ORM\Table(name="clubs")
- * @ORM\Entity
  */
 class Club
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\UserBundle\Entity\User", mappedBy="clubs")
+     * @var ArrayCollection|User[]
      */
     protected $owners;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="subdomain", type="string", length=255, nullable=true)
+     * @var ArrayCollection|Section[]
+     */
+    protected $sections;
+
+    /**
+     * @var Subdomain
      */
     protected $subdomain;
 
     /**
-     * @var array
-     *
-     * array with database configuration
-     *
-     * @ORM\Column(name="database_config", type="json_array")
+     * @var Database
      */
-    protected $database = [
-        CredentialsStorage::PARAM_BASE => null,
-        CredentialsStorage::PARAM_USER => null,
-        CredentialsStorage::PARAM_PASS => null,
-    ];
+    protected $database;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * Club constructor.
+     * @param int $id
+     * @param string $name
+     * @param ArrayCollection|\Gyman\Bundle\UserBundle\Entity\User[] $owners
+     * @param ArrayCollection|\Gyman\Bundle\SectionBundle\Entity\Section[] $sections
+     * @param Subdomain $subdomain
+     * @param Database $database
+     */
+    public function __construct($id, $name, $owners, $sections, Subdomain $subdomain, Database $database)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->owners = $owners;
+        $this->sections = $sections;
+        $this->subdomain = $subdomain;
+        $this->database = $database;
+    }
+
+    /**
+     * @return int
      */
     public function getId()
     {
@@ -66,21 +69,6 @@ class Club
     }
 
     /**
-     * Set name
-     *
-     * @param  string $name
-     * @return Club
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -89,22 +77,7 @@ class Club
     }
 
     /**
-     * Set owner
-     *
-     * @param  \stdClass $owner
-     * @return Club
-     */
-    public function setOwners(ArrayCollection $owner)
-    {
-        $this->owners = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return \stdClass
+     * @return ArrayCollection|\Gyman\Bundle\UserBundle\Entity\User[]
      */
     public function getOwners()
     {
@@ -112,52 +85,15 @@ class Club
     }
 
     /**
-     * Set sections
-     *
-     * @param  \stdClass $sections
-     * @return Club
-     */
-    public function setSections(ArrayCollection $sections)
-    {
-        $this->sections = $sections;
-
-        return $this;
-    }
-
-    /**
-     * Get sections
-     *
-     * @return Section[]
+     * @return ArrayCollection|\Gyman\Bundle\SectionBundle\Entity\Section[]
      */
     public function getSections()
     {
         return $this->sections;
     }
 
-    public function __construct()
-    {
-        $this->owners = new ArrayCollection();
-        $this->sections = new ArrayCollection();
-    }
-
     /**
-     * @return array
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    /**
-     * @param array $database
-     */
-    public function setDatabase($database)
-    {
-        $this->database = $database;
-    }
-
-    /**
-     * @return mixed
+     * @return Subdomain
      */
     public function getSubdomain()
     {
@@ -165,10 +101,10 @@ class Club
     }
 
     /**
-     * @param mixed $subdomain
+     * @return Database
      */
-    public function setSubdomain($subdomain)
+    public function getDatabase()
     {
-        $this->subdomain = $subdomain;
+        return $this->database;
     }
 }

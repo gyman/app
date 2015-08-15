@@ -1,0 +1,16 @@
+Gyman\Bundle\ClubBundle\Entity\Database:
+  type:   embeddable
+  fields:
+    dbname:
+      type: string
+      nullable: false
+      unique: true
+      length: 64
+    username:
+      type: string
+      nullable: false
+      length: 256
+    password:
+      type: string
+      nullable: false
+      length: 256

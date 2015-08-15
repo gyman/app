@@ -4,6 +4,15 @@ parameters:
     - src/Gyman/Bundle/TestBundle/DataFixtures/Club
 
 services:
+  gyman.multidatabase.database_switcher:
+    class: Gyman\Bundle\MultiDatabaseBundle\Listener\DatabaseSwitcher
+    arguments:
+      - %base_url%
+      - @doctrine.orm.entity_manager
+      - @doctrine.dbal.club_connection
+    tags:
+        - { name: kernel.event_listener, method: onKernelRequest, event: kernel.request }
+
   gyman.multidatabase.credentials_storage:
     class: Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage
     calls:
@@ -31,13 +40,13 @@ services:
       - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
       - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
 
-  gyman.multidatabase.subscriber.login:
-      class: Gyman\Bundle\MultiDatabaseBundle\Services\LoginSubscriber
-      calls:
-        - [setClubConnection, [@doctrine.dbal.club_connection]]
-        - [setSession, [@session]]
-      tags:
-          - { name: kernel.event_subscriber }
+#  gyman.multidatabase.subscriber.login:
+#      class: Gyman\Bundle\MultiDatabaseBundle\Services\LoginSubscriber
+#      calls:
+#        - [setClubConnection, [@doctrine.dbal.club_connection]]
+#        - [setSession, [@session]]
+#      tags:
+#          - { name: kernel.event_subscriber }
 
   gyman.multidatabase.club_connection_command_listener:
       class: Gyman\Bundle\MultiDatabaseBundle\Listener\ClubConnectionCommandListener
