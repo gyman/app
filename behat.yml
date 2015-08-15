@@ -1,30 +1,4 @@
-#imports:
-#  - app/config/behat_local.yml
-
-#default:
-#    paths:
-#        features: src/Dende
-#        bootstrap: src/Dende
-#    extensions:
-#        Behat\Symfony2Extension\Extension:
-#            kernel:
-#                env: test
-#                debug: true
-#            mink_driver: true
-#        Behat\MinkExtension\Extension:
-#            default_session: selenium2
-#            javascript_session: selenium2
-#        VIPSoft\DoctrineDataFixturesExtension\Extension:
-#          lifetime:    scenario
-#          autoload:    true
-#          directories: ~
-#          fixtures: ~
-
 default:
-#    autoload:
-#        '' : %paths.base%/features
-#    extensions:
-#        Behat\Symfony2Extension: ~
     suites:
         members:
             paths:    [%paths.base%/src/Gyman/Component/Members/features]

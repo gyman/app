@@ -3,9 +3,13 @@ Gyman\Bundle\MembersBundle\Entity\Member:
   table:  members
   repositoryClass:  Gyman\Bundle\MembersBundle\Entity\MemberRepository
   embedded:
+    email:
+      class: Gyman\Bundle\MembersBundle\Entity\EmailAddress
+      columnPrefix: false
     details:
       class: Gyman\Bundle\MembersBundle\Entity\Details
-      columnPrefix: details_
+      columnPrefix: false
+
   id:
     id:
       type: integer
@@ -55,17 +59,6 @@ Gyman\Bundle\MembersBundle\Entity\Member:
         nullable: true #false
 
   fields:
-
-    email:
-      type: string
-      length: 255
-      nullable: true
-
-    password:
-      type: string
-      length: 255
-      nullable: true
-
     nameSlug:
       name: name_slug
       type: string

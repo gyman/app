@@ -1,5 +1,16 @@
 Gyman\Bundle\MembersBundle\Entity\Details:
   type:   embeddable
+  embedded:
+    belt:
+      class: Gyman\Bundle\MembersBundle\Entity\Belt
+      columnPrefix: false
+    foto:
+      class: Gyman\Bundle\MembersBundle\Entity\Foto
+      columnPrefix: false
+    barcode:
+      class: Gyman\Bundle\MembersBundle\Entity\Barcode
+      columnPrefix: false
+
   fields:
     firstname:
       type: string
@@ -24,11 +35,6 @@ Gyman\Bundle\MembersBundle\Entity\Details:
       type: text
       nullable: true
 
-    foto:
-      type: string
-      length: 255
-      nullable: true
-
     zipcode:
       type: string
       nullable: true
@@ -37,17 +43,6 @@ Gyman\Bundle\MembersBundle\Entity\Details:
       type: string
       columnDefinition: enum('male', 'female')
       nullable: true
-
-    belt:
-      type: string
-      nullable: true
-      columnDefinition: enum('white','blue','purple','brown','black')
-
-    barcode:
-      type: string
-      nullable: true
-      unique: true
-      length: 64
 
     starred:
       name: is_starred

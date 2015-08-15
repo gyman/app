@@ -1,0 +1,8 @@
+Gyman\Bundle\MembersBundle\Entity\Foto:
+  type:   embeddable
+  fields:
+    foto:
+      name: foto
+      type: string
+      length: 255
+      nullable: true

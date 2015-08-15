@@ -4,7 +4,8 @@ Member01:
     email:              test01@test.pl
     foto:               null
     gender:             male
-    name:               "Jan Kowalski"
+    firstname:          Jan
+    lastname:           Kowalski
     notes:              notes
     phone:              604411089
     zipcode:            88-888
@@ -16,7 +17,8 @@ Member02:
     email:              test02@test2.pl
     foto:               null
     gender:             male
-    name:               "Marcin Nowak"
+    firstname:          Marcin
+    lastname:           Nowak
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -28,7 +30,8 @@ Member03:
     email:              test03@test2.pl
     foto:               null
     gender:             female
-    name:               "Beata Kamińska"
+    firstname:          Beata
+    lastname:           Kamińska
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -40,7 +43,8 @@ Member04:
     email:              test04@test2.pl
     foto:               null
     gender:             female
-    name:               "Joanna Grabiec"
+    firstname:          Joanna
+    lastname:           Grabiec
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -52,7 +56,8 @@ Member05:
     email:              test05@test2.pl
     foto:               null
     gender:             female
-    name:               "Sylwia Grzeszczak"
+    firstname:          Sylwia
+    lastname:           Grzeszczak
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -64,7 +69,8 @@ Member06:
     email:              test06@test2.pl
     foto:               null
     gender:             male
-    name:               "Marcin Molenda"
+    firstname:          Marcin
+    lastname:           Molenda
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -76,7 +82,8 @@ Member07:
     email:              test07@test2.pl
     foto:               null
     gender:             male
-    name:               "Kryspin Kryszak"
+    firstname:          Kryspin
+    lastname:           Kryszak
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -88,7 +95,8 @@ Member08:
     email:              test08@test2.pl
     foto:               null
     gender:             female
-    name:               "Agata Nowak"
+    firstname:          Agata
+    lastname:           Nowak
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -100,7 +108,8 @@ Member09:
     email:              test09@test2.pl
     foto:               null
     gender:             female
-    name:               "Sylwia Majer"
+    firstname:          Sylwia
+    lastname:           Majer
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -112,7 +121,8 @@ Member10:
     email:              test10@test2.pl
     foto:               null
     gender:             male
-    name:               "Tomasz Marek"
+    firstname:          Tomasz
+    lastname:           Marek
     notes:              notes
     phone:              500666666
     zipcode:            88-888
@@ -124,7 +134,8 @@ Member11:
     email:              test11@test2.pl
     foto:               null
     gender:             male
-    name:               "Majk Wazalsky"
+    firstname:          Majk
+    lastname:           Wazalsky
     notes:              testing old voucher removal
     phone:              500666666
     zipcode:            88-888

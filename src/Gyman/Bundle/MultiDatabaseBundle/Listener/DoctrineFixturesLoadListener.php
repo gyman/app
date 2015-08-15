@@ -2,7 +2,6 @@
 
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
-use Gyman\Bundle\ClubBundle\Entity\Club;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -38,8 +37,8 @@ final class DoctrineFixturesLoadListener
             $event->getOutput()->writeln(sprintf('Using <info>standard</info> fixtures: <info>%s</info>', $this->options['default']));
             $command->getDefinition()->getOption('fixtures')->setDefault([$this->options['default']]);
         } else {
-            $event->getOutput()->writeln(sprintf('Using <info>custom</info> fixtures: <info>%s</info>', $this->options['club']));
-            $command->getDefinition()->getOption('fixtures')->setDefault([$this->options['club']]);
+            $event->getOutput()->writeln(sprintf('Using <info>custom</info> fixtures: <info>%s</info>', implode(',', $this->options['club'])));
+            $command->getDefinition()->getOption('fixtures')->setDefault($this->options['club']);
             $command->getDefinition()->getOption('em')->setDefault('club');
         }
     }

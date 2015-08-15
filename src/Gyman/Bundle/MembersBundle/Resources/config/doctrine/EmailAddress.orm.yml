@@ -1,0 +1,7 @@
+Gyman\Bundle\MembersBundle\Entity\EmailAddress:
+  type:   embeddable
+  fields:
+    email:
+      type: string
+      length: 255
+      nullable: false

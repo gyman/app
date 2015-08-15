@@ -14,19 +14,14 @@ use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 class Member
 {
     /**
-     * @var Details
-     */
-    protected $details;
-
-    /**
-     * @var string
+     * @var EmailAddress
      */
     protected $email;
 
     /**
-     * @var string
+     * @var Details
      */
-    protected $password;
+    protected $details;
 
     /**
      * @var ArrayCollection|Section[]
@@ -54,33 +49,43 @@ class Member
     protected $entries;
 
     /**
-     * Member constructor.
-     * @param $email
+     * @param EmailAddress $email
      * @param Details $details
-     * @param string $password
-     * @param ArrayCollection|\Gyman\Bundle\SectionBundle\Entity\Section[] $sections
-     * @param ArrayCollection|\Gyman\Bundle\VouchersBundle\Entity\Voucher[] $vouchers
+     * @param $sections
+     * @param $vouchers
+     * @param $entries
      * @param Voucher $currentVoucher
      * @param Entry $lastEntry
-     * @param $entries
      */
-    public function __construct($email, Details $details, $password, $sections, $vouchers, Voucher $currentVoucher, Entry $lastEntry, $entries)
+    public function __construct(EmailAddress $email, Details $details, $sections = [], $vouchers = [], $entries = [], $currentVoucher, $lastEntry)
     {
         $this->email = $email;
         $this->details = $details;
-        $this->password = $password;
         $this->sections = $sections;
         $this->vouchers = $vouchers;
+        $this->entries = $entries;
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;
-        $this->entries = $entries;
     }
 
-    public function toEntity()
+    public function email()
     {
+        return $this->email;
     }
 
-    public function fromEntity(){
-        
+    public function details(){
+        return $this->details;
+    }
+
+    public function sections(){
+        return $this->sections;
+    }
+
+    public function vouchers(){
+        return $this->vouchers;
+    }
+
+    public function entries() {
+        return $this->entries;
     }
 }
