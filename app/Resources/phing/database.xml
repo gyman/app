@@ -49,17 +49,21 @@
             </then>
         </if>
 
-        <echo>Dropping database - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force --no-interaction" checkreturn="false" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} gyman:database:drop '${club}'" checkreturn="true" passthru="true" />
-
-        <echo>Creating new schema - ${env} environment</echo>
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:database:drop &#45;&#45;connection=default &#45;&#45;env=${env} &#45;&#45;force &#45;&#45;no-interaction &#45;&#45;if-exists" checkreturn="false" passthru="true" />-->
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:database:create &#45;&#45;connection=default &#45;&#45;env=${env} &#45;&#45;no-interaction" checkreturn="false" passthru="true" />-->
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force" checkreturn="true" passthru="true" />
         <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=default --env=${env} --no-interaction" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} gyman:database:create '${club}'" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default" checkreturn="true" passthru="true" />
 
-        <echo>Loading fixtures - ${env} environment, default database</echo>
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default --fixtures=src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection" checkreturn="true" passthru="true" />
-        <echo>Loading fixtures - ${env} environment, club "${club}" database</echo>
-        <exec command="${php_bin} ${symfony_console} gyman:database:load_fixtures '${club}'" checkreturn="true" passthru="true" />
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:database:drop -vvv &#45;&#45;club=${club} &#45;&#45;env=${env} &#45;&#45;force &#45;&#45;if-exists &#45;&#45;no-interaction" checkreturn="false" passthru="true" />-->
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:database:create &#45;&#45;connection=club &#45;&#45;club=${club} &#45;&#45;env=${env} &#45;&#45;force &#45;&#45;no-interaction" checkreturn="false" passthru="true" />-->
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=club --club=${club} --env=${env} --force" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=club --club=${club} --env=${env} --no-interaction" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=club --club=${club}" checkreturn="true" passthru="true" />
+
+
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:schema:drop &#45;&#45;club=${club} &#45;&#45;env=${env} &#45;&#45;force &#45;&#45;no-interaction" checkreturn="true" passthru="true" />-->
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:schema:create &#45;&#45;club=${club} &#45;&#45;env=${env} &#45;&#45;no-interaction" checkreturn="true" passthru="true" />-->
+        <!--<exec command="${php_bin} ${symfony_console} doctrine:fixtures:load &#45;&#45;no-interaction &#45;&#45;club=${club}" checkreturn="true" passthru="true" />-->
     </target>
 </project>

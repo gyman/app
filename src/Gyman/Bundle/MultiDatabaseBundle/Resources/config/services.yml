@@ -1,4 +1,7 @@
 parameters:
+  standardFixtures:
+    - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection
+    - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
   clubFixtures:
     - src/Gyman/Bundle/MembersBundle/DataFixtures/Club
     - src/Gyman/Bundle/TestBundle/DataFixtures/Club
@@ -11,7 +14,7 @@ services:
       - @doctrine.orm.entity_manager
       - @doctrine.dbal.club_connection
     tags:
-        - { name: kernel.event_listener, method: onKernelRequest, event: kernel.request }
+        - { name: kernel.event_listener, method: onKernelRequest, event: kernel.request, priority: 255 }
 
   gyman.multidatabase.credentials_storage:
     class: Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage
@@ -40,26 +43,19 @@ services:
       - [setDefaultEntityManager, [@doctrine.orm.default_entity_manager]]
       - [setClubEntityManager, [@doctrine.orm.club_entity_manager]]
 
-#  gyman.multidatabase.subscriber.login:
-#      class: Gyman\Bundle\MultiDatabaseBundle\Services\LoginSubscriber
-#      calls:
-#        - [setClubConnection, [@doctrine.dbal.club_connection]]
-#        - [setSession, [@session]]
-#      tags:
-#          - { name: kernel.event_subscriber }
-
   gyman.multidatabase.club_connection_command_listener:
       class: Gyman\Bundle\MultiDatabaseBundle\Listener\ClubConnectionCommandListener
       calls:
         - [setClubRepository, [@gyman.club.repository]]
         - [setConnectionWrapper, [@doctrine.dbal.club_connection]]
+        - [setSchemaManager, ["@=service('doctrine.dbal.default_connection').getSchemaManager()"]]
       tags:
         - { name: kernel.event_listener, event: console.command, method: onConsoleCommand, priority: 255 }
 
   gyman.multidatabase.doctrine_fixtures_load_listener:
       class: Gyman\Bundle\MultiDatabaseBundle\Listener\DoctrineFixturesLoadListener
       calls:
-        - [setOptions, [{default: src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection, club: %clubFixtures% }]]
+        - [setOptions, [{default: %standardFixtures%, club: %clubFixtures% }]]
       tags:
         - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
 

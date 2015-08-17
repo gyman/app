@@ -2,12 +2,12 @@
 
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\ClubNotFoundException;
-use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -25,8 +25,18 @@ final class ClubConnectionCommandListener
      */
     private $connectionWrapper;
 
+    /**
+     * @var AbstractSchemaManager
+     */
+    private $schemaManager;
+
+    /**
+     * @param ConsoleCommandEvent $event
+     * @throws ClubNotFoundException
+     */
     public function onConsoleCommand(ConsoleCommandEvent $event)
     {
+
         $command = $event->getCommand();
 
         if (!$this->isProperCommand($command)) {
@@ -53,6 +63,10 @@ final class ClubConnectionCommandListener
         $input->setOption('em', 'club');
         $command->getDefinition()->getOption('em')->setDefault('club');
 
+        if (!$this->schemaManager->tablesExist(['clubs'])) {
+            return;
+        }
+
         /** @var Club $club */
         $club = $this->clubRepository->findOneBySubdomain(new Subdomain($clubName));
 
@@ -61,6 +75,10 @@ final class ClubConnectionCommandListener
         }
 
         $db = $club->getDatabase();
+
+//        if (!in_array($db->getName(), $this->schemaManager->listDatabases())) {
+//            return;
+//        }
 
         $this->connectionWrapper->forceSwitch(
             $db->getName(),
@@ -101,5 +119,13 @@ final class ClubConnectionCommandListener
     public function setConnectionWrapper(ConnectionWrapper $clubConnection)
     {
         $this->connectionWrapper = $clubConnection;
+    }
+
+    /**
+     * @param AbstractSchemaManager $schemaManager
+     */
+    public function setSchemaManager($schemaManager)
+    {
+        $this->schemaManager = $schemaManager;
     }
 }

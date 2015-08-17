@@ -34,8 +34,8 @@ final class DoctrineFixturesLoadListener
         $clubName = $input->getOption('club');
 
         if ($clubName === null) {
-            $event->getOutput()->writeln(sprintf('Using <info>standard</info> fixtures: <info>%s</info>', $this->options['default']));
-            $command->getDefinition()->getOption('fixtures')->setDefault([$this->options['default']]);
+            $event->getOutput()->writeln(sprintf('Using <info>standard</info> fixtures: <info>%s</info>', implode(',', $this->options['default'])));
+            $command->getDefinition()->getOption('fixtures')->setDefault($this->options['default']);
         } else {
             $event->getOutput()->writeln(sprintf('Using <info>custom</info> fixtures: <info>%s</info>', implode(',', $this->options['club'])));
             $command->getDefinition()->getOption('fixtures')->setDefault($this->options['club']);

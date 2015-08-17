@@ -9,6 +9,6 @@ class ClubNotFoundException extends \Exception
      */
     public function __construct($clubName)
     {
-        $this->message = sprintf("Club '%s' not found", $clubName);
+        $this->message = sprintf("Club '%s' not found.", $clubName);
     }
 }

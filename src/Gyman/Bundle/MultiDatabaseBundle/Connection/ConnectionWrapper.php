@@ -9,6 +9,7 @@ use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Doctrine\DBAL\Events;
 use Doctrine\DBAL\Platforms\MySQL57Platform;
+use Gyman\Bundle\ClubBundle\Entity\Database;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
@@ -30,7 +31,7 @@ class ConnectionWrapper extends Connection
     /**
      * @param CredentialsStorage $credentialsStorage
      */
-    public function setCredentialsStorage(CredentialsStorage$credentialsStorage)
+    public function setCredentialsStorage(CredentialsStorage $credentialsStorage)
     {
         $this->credentialsStorage = $credentialsStorage;
     }
@@ -44,7 +45,9 @@ class ConnectionWrapper extends Connection
     public function __construct(
         array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null
     ) {
+        $this->setCredentialsStorage(new CredentialsStorage());
         $this->platform = $params['platform'] = new MySQL57Platform();
+        $params['server_version'] = '5.6';
         parent::__construct($params, $driver, $config, $eventManager);
     }
 
@@ -78,11 +81,13 @@ class ConnectionWrapper extends Connection
             return false;
         }
 
+        $params["server_version"] = "5.6";
+
         $this->_conn = $this->_driver->connect(
             $params,
             $params[CredentialsStorage::PARAM_USER],
             $params[CredentialsStorage::PARAM_PASS],
-            [] // driver options (empty)
+            $params["driverOptions"]
         );
 
         if ($this->_eventManager->hasListeners(Events::postConnect)) {
