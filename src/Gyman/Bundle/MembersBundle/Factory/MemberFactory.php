@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MembersBundle\Factory;
 
 use DateTime;
@@ -16,7 +17,7 @@ final class MemberFactory implements MemberFactoryInterface
      * @param $params
      * @return Member
      */
-    static public function createFromArray($array)
+    public static function createFromArray($array)
     {
         return new Member(
             new EmailAddress($array['email']),

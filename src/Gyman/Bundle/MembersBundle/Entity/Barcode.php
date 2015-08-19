@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Component\Members\Model\Barcode as BaseBarcode;
@@ -9,5 +10,4 @@ use Gyman\Component\Members\Model\Barcode as BaseBarcode;
  */
 class Barcode extends BaseBarcode
 {
-
 }

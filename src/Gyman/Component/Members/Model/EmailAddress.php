@@ -26,7 +26,8 @@ class EmailAddress
      * @param EmailAddress $email
      * @return bool
      */
-    public function equals(EmailAddress $email){
+    public function equals(EmailAddress $email)
+    {
         return $this->email === $email->email();
     }
 

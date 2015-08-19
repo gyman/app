@@ -196,4 +196,10 @@ class Details
     {
         return $this->firstname;
     }
+
+    public function hasValidData()
+    {
+        return !empty($this->firstname) || !empty($this->lastname);
+
+    }
 }

@@ -66,8 +66,8 @@ class CredentialsStorage
         $parameters['dbname'] = $this->credentials[self::PARAM_BASE];
         $parameters['user'] = $this->credentials[self::PARAM_USER];
         $parameters['password'] = $this->credentials[self::PARAM_PASS];
-        $parameters['server_version'] = "5.6";
-        $parameters['serverVersion'] = "5.6";
+        $parameters['server_version'] = '5.6';
+        $parameters['serverVersion'] = '5.6';
 
         return $parameters;
     }

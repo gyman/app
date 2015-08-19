@@ -10,12 +10,12 @@ class Belt
     const BELT_BROWN = 'brown';
     const BELT_BLACK = 'black';
 
-    static public $colors = [
+    public static $colors = [
         self::BELT_WHITE,
         self::BELT_BLUE,
         self::BELT_PURPLE,
         self::BELT_BROWN,
-        self::BELT_BLACK
+        self::BELT_BLACK,
     ];
 
     /**

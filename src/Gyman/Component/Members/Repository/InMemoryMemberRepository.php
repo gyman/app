@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Component\Members\Repository;
 
 use Gyman\Component\Members\Model\EmailAddress;
@@ -25,11 +26,9 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      */
     public function findOneByEmailAddress(EmailAddress $email)
     {
-        foreach($this->members as $member) {
-            if($member->email()->equals($email)) {
-                return $email;
-            }
-        }
+        $address = $email->email();
+
+        return array_key_exists($address, $this->members) ? $this->members[$address] : null;
     }
 
     /**

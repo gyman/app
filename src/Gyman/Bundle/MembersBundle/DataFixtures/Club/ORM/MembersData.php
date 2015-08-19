@@ -16,11 +16,11 @@ class MembersData extends BaseFixture
 
     public function insert($params)
     {
-        $params["sections"] = [];
-        $params["vouchers"] = [];
-        $params["entries"] = [];
-        $params["current_voucher"] = null;
-        $params["last_entry"] = null;
+        $params['sections'] = [];
+        $params['vouchers'] = [];
+        $params['entries'] = [];
+        $params['current_voucher'] = null;
+        $params['last_entry'] = null;
 
         $member = MemberFactory::createFromArray($params);
 

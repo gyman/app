@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\ORM\EntityManager;
@@ -6,6 +7,7 @@ use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class DatabaseSwitcher
@@ -47,10 +49,14 @@ class DatabaseSwitcher
     public function onKernelRequest(GetResponseEvent $event)
     {
         $currentHost = $event->getRequest()->getHttpHost();
-        $subdomain = str_replace('.'.$this->baseUrl, '', $currentHost);
+        $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
         /** @var Club $club */
-        $club = $this->entityManager->getRepository("ClubBundle:Club")->findOneBySubdomain(new Subdomain($subdomain));
+        $club = $this->entityManager->getRepository('ClubBundle:Club')->findOneBySubdomain(new Subdomain($subdomain));
+
+        if (!$club) {
+            throw new NotFoundHttpException(sprintf('Subdomain "%s" not found or club not registered.', $subdomain));
+        }
 
         $this->clubConnection->forceSwitch(
             $club->getDatabase()->getName(),

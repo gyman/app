@@ -11,3 +11,8 @@ Feature: Creating user
     Then I have 1 user in repository
     And I should be notified about the member project creation success
 
+  Scenario: Creating a new Member without data
+    Given there is no members
+    When I add new member without any data
+    Then I have 0 user in repository
+    And I should be notified about the member project creation failure

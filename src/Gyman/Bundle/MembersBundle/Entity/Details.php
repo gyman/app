@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Component\Members\Model\Details as BaseDetails;
@@ -9,5 +10,4 @@ use Gyman\Component\Members\Model\Details as BaseDetails;
  */
 class Details extends BaseDetails
 {
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Component\Members\Factory;
 
 use DateTime;
@@ -15,12 +16,34 @@ use Gyman\Component\Members\Model\Member;
  */
 final class MemberFactory implements MemberFactoryInterface
 {
+    private static $template = [
+        'email'           => null,
+        'firstname'       => null,
+        'lastname'        => null,
+        'birthdate'       => null,
+        'phone'           => null,
+        'notes'           => null,
+        'foto'            => null,
+        'zipcode'         => null,
+        'gender'          => null,
+        'belt'            => null,
+        'barcode'         => null,
+        'starred'         => null,
+        'sections'        => [],
+        'vouchers'        => [],
+        'entries'         => [],
+        'current_voucher' => null,
+        'last_entry'      => null,
+    ];
+
     /**
      * @param $params
      * @return Member
      */
-    static public function createFromArray($array)
+    public static function createFromArray($array)
     {
+        $array = array_merge(self::$template, $array);
+
         return new Member(
             new EmailAddress($array['email']),
             new Details(
@@ -34,7 +57,7 @@ final class MemberFactory implements MemberFactoryInterface
                 $array['gender'],
                 new Belt($array['belt']),
                 new Barcode($array['barcode']),
-                false
+                $array['starred']
             ),
             $array['sections'],
             $array['vouchers'],

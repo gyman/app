@@ -9,7 +9,6 @@ use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Doctrine\DBAL\Events;
 use Doctrine\DBAL\Platforms\MySQL57Platform;
-use Gyman\Bundle\ClubBundle\Entity\Database;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
@@ -81,13 +80,13 @@ class ConnectionWrapper extends Connection
             return false;
         }
 
-        $params["server_version"] = "5.6";
+        $params['server_version'] = '5.6';
 
         $this->_conn = $this->_driver->connect(
             $params,
             $params[CredentialsStorage::PARAM_USER],
             $params[CredentialsStorage::PARAM_PASS],
-            $params["driverOptions"]
+            $params['driverOptions']
         );
 
         if ($this->_eventManager->hasListeners(Events::postConnect)) {

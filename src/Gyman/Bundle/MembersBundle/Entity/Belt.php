@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Component\Members\Model\Belt as BaseBelt;
@@ -9,5 +10,4 @@ use Gyman\Component\Members\Model\Belt as BaseBelt;
  */
 class Belt extends BaseBelt
 {
-
 }

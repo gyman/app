@@ -53,8 +53,8 @@ class UserType extends BaseType
     {
         $resolver->setDefaults([
             'cascade_validation' => true,
-            'data_class'        => $this->class,
-            'error_bubbling'    => true,
+            'data_class'         => $this->class,
+            'error_bubbling'     => true,
         ]);
     }
 

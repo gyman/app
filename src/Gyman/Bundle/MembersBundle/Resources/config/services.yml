@@ -1,57 +1,62 @@
 services:
+  gyman.members.create_member:
+  class: Gyman\Component\Members\Service\CreateMember
+  arguments:
+    - @gyman.members.repository
+    - @event_dispatcher
 
-#@todo: rename to commas
-    gyman.members.members_manager:
-      parent: gyman.base.entity_manager
-      class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
-      calls:
-        - [setClass, [Gyman\Bundle\MembersBundle\Entity\Member]]
-        - [setEntityManager, [@doctrine.orm.club_entity_manager]]
+  #@todo: rename to commas
+  gyman.members.members_manager:
+    parent: gyman.base.entity_manager
+    class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
+    calls:
+      - [setClass, [Gyman\Bundle\MembersBundle\Entity\Member]]
+      - [setEntityManager, [@doctrine.orm.club_entity_manager]]
 
-    gyman.members.repository:
-      class:  "Gyman\Bundle\MembersBundle\Entity\MemberRepository"
-      factory_method: getRepository
-      factory_service: doctrine.orm.club_entity_manager
-      arguments: ["Gyman\Bundle\MembersBundle\Entity\Member"]
+  gyman.members.repository:
+    class:  "Gyman\Bundle\MembersBundle\Entity\MemberRepository"
+    factory_method: getRepository
+    factory_service: doctrine.orm.club_entity_manager
+    arguments: ["Gyman\Bundle\MembersBundle\Entity\Member"]
 
 
-    gyman_members_member_form_type:
-      class: Gyman\Bundle\MembersBundle\Form\MemberType
-      arguments:
-        - @oneup_uploader.templating.uploader_helper
+  gyman_members_member_form_type:
+    class: Gyman\Bundle\MembersBundle\Form\MemberType
+    arguments:
+      - @oneup_uploader.templating.uploader_helper
+    tags:
+      - { name: form.type, alias: gyman_members_member_form_type }
+
+  gyman.members.menu_builder:
+      class: Gyman\Bundle\MembersBundle\Menu\Builder
+      arguments: [@knp_menu.factory, @security.context]
+
+  gyman.members.menu.tabs:
+      class:            Knp\Menu\MenuItem
+      factory_service:  gyman.members.menu_builder
+      factory_method:   tabs
+      scope:            request
+      arguments:        [@request]
       tags:
-        - { name: form.type, alias: gyman_members_member_form_type }
+          - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
 
-    gyman.members.menu_builder:
-        class: Gyman\Bundle\MembersBundle\Menu\Builder
-        arguments: [@knp_menu.factory, @security.context]
+  gyman.members.menu.tabs_picture:
+      class:            Knp\Menu\MenuItem
+      factory_service:  gyman.members.menu_builder
+      factory_method:   picture
+      scope:            request
+      tags:
+          - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
 
-    gyman.members.menu.tabs:
-        class:            Knp\Menu\MenuItem
-        factory_service:  gyman.members.menu_builder
-        factory_method:   tabs
-        scope:            request
-        arguments:        [@request]
-        tags:
-            - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
+  # @todo: rename
+  dende.upload_listener:
+      class: Gyman\Bundle\MembersBundle\Services\Listener\UploadListener
+      arguments: [@doctrine]
+      tags:
+          - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
 
-    gyman.members.menu.tabs_picture:
-        class:            Knp\Menu\MenuItem
-        factory_service:  gyman.members.menu_builder
-        factory_method:   picture
-        scope:            request
-        tags:
-            - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
-
-    # @todo: rename
-    dende.upload_listener:
-        class: Gyman\Bundle\MembersBundle\Services\Listener\UploadListener
-        arguments: [@doctrine]
-        tags:
-            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
-
-    dende.image_rescale_listener:
-        class: Gyman\Bundle\MembersBundle\Services\Listener\ImageRescaleListener
-        arguments: [@doctrine]
-        tags:
-            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
+  dende.image_rescale_listener:
+      class: Gyman\Bundle\MembersBundle\Services\Listener\ImageRescaleListener
+      arguments: [@doctrine]
+      tags:
+          - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}

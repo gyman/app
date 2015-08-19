@@ -36,7 +36,6 @@ final class ClubConnectionCommandListener
      */
     public function onConsoleCommand(ConsoleCommandEvent $event)
     {
-
         $command = $event->getCommand();
 
         if (!$this->isProperCommand($command)) {

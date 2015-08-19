@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle\Factory;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
@@ -15,7 +16,8 @@ class ClubFactory
      * @param $params
      * @return Club
      */
-    static public function createFromArray($params) {
+    public static function createFromArray($params)
+    {
         return new Club(
             null,
             $params['name'],

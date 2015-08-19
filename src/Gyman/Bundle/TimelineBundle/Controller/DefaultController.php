@@ -48,7 +48,7 @@ class DefaultController extends Controller
 
         $subject = $actionManager->findOrCreateComponent($subject);
 
-$timeline = $timelineManager->getTimeline($subject);
+        $timeline = $timelineManager->getTimeline($subject);
 
         return [
             'timeline' => $timeline,

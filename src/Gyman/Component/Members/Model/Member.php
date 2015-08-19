@@ -68,24 +68,43 @@ class Member
         $this->lastEntry = $lastEntry;
     }
 
+    /**
+     * @return EmailAddress
+     */
     public function email()
     {
         return $this->email;
     }
 
-    public function details(){
+    /**
+     * @return Details
+     */
+    public function details()
+    {
         return $this->details;
     }
 
-    public function sections(){
+    /**
+     * @return array|ArrayCollection|Section[]
+     */
+    public function sections()
+    {
         return $this->sections;
     }
 
-    public function vouchers(){
+    /**
+     * @return array|ArrayCollection|Voucher[]
+     */
+    public function vouchers()
+    {
         return $this->vouchers;
     }
 
-    public function entries() {
+    /**
+     * @return array|ArrayCollection|Entry[]
+     */
+    public function entries()
+    {
         return $this->entries;
     }
 }

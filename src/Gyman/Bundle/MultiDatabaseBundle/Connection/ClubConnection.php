@@ -83,6 +83,6 @@ final class ClubConnection implements ConnectionInterface
 
         $db = $club->getDatabase();
 
-$this->connection->forceSwitch($db['name'], $db['user'], $db['password']);
+        $this->connection->forceSwitch($db['name'], $db['user'], $db['password']);
     }
 }

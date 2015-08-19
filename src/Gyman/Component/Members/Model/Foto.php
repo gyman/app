@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Component\Members\Model;
 
 class Foto

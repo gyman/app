@@ -2,8 +2,8 @@
 
 namespace Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM;
 
-use Gyman\Bundle\ClubBundle\Factory\ClubFactory;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\ClubBundle\Factory\ClubFactory;
 
 class ClubsData extends BaseFixture
 {
