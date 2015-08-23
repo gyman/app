@@ -2,10 +2,11 @@
 
 namespace Gyman\Component\Members\Repository;
 
+use Gyman\Component\CoreDomain\Repository\RepositoryInterface;
 use Gyman\Component\Members\Model\EmailAddress;
 use Gyman\Component\Members\Model\Member;
 
-interface MemberRepositoryInterface
+interface MemberRepositoryInterface extends RepositoryInterface
 {
     /**
      * @return Member[]

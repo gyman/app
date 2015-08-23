@@ -3,9 +3,11 @@
 namespace Gyman\Component\Members\Tests\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Exception;
+use Gyman\Component\CoreDomain\Repository\InMemoryDomainEventRepository;
+use Gyman\Component\CoreDomain\Tests\LoggedAsAdministratorTrait;
+use Gyman\Component\Members\Event\MemberEvent;
 use Gyman\Component\Members\Factory\MemberFactory;
 use Gyman\Component\Members\Repository\InMemoryMemberRepository;
 use Gyman\Component\Members\Service\CreateMember;
@@ -14,6 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class MembersContext implements Context
 {
+    use LoggedAsAdministratorTrait;
+
     /**
      * @var InMemoryMemberRepository
      */
@@ -30,6 +34,11 @@ class MembersContext implements Context
     private $createMember;
 
     /**
+     * @var InMemoryDomainEventRepository
+     */
+    private $domainEventRepository;
+
+    /**
      * @BeforeScenario
      */
     public function prepareUseCases()
@@ -37,6 +46,8 @@ class MembersContext implements Context
         $dispatcher = new EventDispatcher();
 
         $this->memberRepository = new InMemoryMemberRepository();
+        $this->domainEventRepository = new InMemoryDomainEventRepository();
+
         $this->createMember = new CreateMember($this->memberRepository, $dispatcher);
 
         $dispatcher->addListener(CreateMember::SUCCESS, [$this, 'recordNotification']);
@@ -70,7 +81,7 @@ class MembersContext implements Context
             'email'     => $table->getColumn(2)[1],
         ]);
 
-        $this->createMember->createMember($member);
+        $this->createMember->createMember($member, $this->user);
     }
 
     /**
@@ -89,6 +100,10 @@ class MembersContext implements Context
     public function recordNotification(Event $event)
     {
         $this->lastNotification = $event->getName();
+
+        if ($event->getName() === CreateMember::SUCCESS) {
+            $this->domainEventRepository->insert($event);
+        }
     }
 
     /**
@@ -98,7 +113,7 @@ class MembersContext implements Context
     {
         $member = MemberFactory::createFromArray([]);
 
-        $this->createMember->createMember($member);
+        $this->createMember->createMember($member, $this->user);
     }
 
     /**
@@ -108,6 +123,32 @@ class MembersContext implements Context
     {
         if ($this->lastNotification !== CreateMember::FAILURE) {
             throw new Exception('No success event thrown');
+        }
+    }
+
+    /**
+     * @Given /^domain event on success is stored in repository$/
+     */
+    public function domainEventOnSuccessIsStoredInRepository()
+    {
+        $events = $this->domainEventRepository->findAll();
+        $event = array_pop($events);
+
+        if (is_null($event) || !$event instanceof MemberEvent || $event->getName() !== CreateMember::SUCCESS) {
+            throw new Exception('Last stored event is incorrect');
+        }
+    }
+
+    /**
+     * @Given /^domain event on failure is not stored in repository$/
+     */
+    public function domainEventOnFailureIsNotStoredInRepository()
+    {
+        $events = $this->domainEventRepository->findAll();
+        $event = array_pop($events);
+
+        if (!is_null($event) && $event instanceof MemberEvent && $event->getName() === CreateMember::FAILURE) {
+            throw new Exception('Last stored event is incorrect');
         }
     }
 }

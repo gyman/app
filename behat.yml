@@ -3,3 +3,6 @@ default:
         members:
             paths:    [%paths.base%/src/Gyman/Component/Members/features]
             contexts: [Gyman\Component\Members\Tests\Context\MembersContext]
+        vouchers:
+            paths:    [%paths.base%/src/Gyman/Component/Vouchers/features]
+            contexts: [Gyman\Component\Vouchers\Tests\Context\VouchersContext]
