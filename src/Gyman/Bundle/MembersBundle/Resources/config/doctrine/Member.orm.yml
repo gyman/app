@@ -34,7 +34,7 @@ Gyman\Bundle\MembersBundle\Entity\Member:
       orphanRemoval:  true
 
     entries:
-      targetEntity: Gyman\Bundle\EntriesBundle\Entity\Entry
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
       mappedBy: member
       cascade: [remove]
       orphanRemoval: true
@@ -50,13 +50,13 @@ Gyman\Bundle\MembersBundle\Entity\Member:
         onDelete: SET NULL
         nullable: true #false
 
-    lastEntry:
-      targetEntity: Gyman\Bundle\EntriesBundle\Entity\Entry
-      joinColumn:
-        name: last_entry_id
-        referencedColumnName: id
-        onDelete: SET NULL
-        nullable: true #false
+#    lastEntry:
+#      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
+#      joinColumn:
+#        name: last_entry_id
+#        referencedColumnName: id
+#        onDelete: SET NULL
+#        nullable: true #false
 
   fields:
     nameSlug:

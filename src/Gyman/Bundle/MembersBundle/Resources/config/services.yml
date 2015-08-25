@@ -1,9 +1,9 @@
 services:
   gyman.members.create_member:
-  class: Gyman\Component\Members\Service\CreateMember
-  arguments:
-    - @gyman.members.repository
-    - @event_dispatcher
+    class: Gyman\Component\Members\Service\CreateMember
+    arguments:
+      - @gyman.members.repository
+      - @event_dispatcher
 
   #@todo: rename to commas
   gyman.members.members_manager:

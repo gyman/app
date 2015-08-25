@@ -1,24 +1,7 @@
-parameters:
-    memcached.servers:
-      - { host: 127.0.0.1, port: 11211 }
-
 imports:
   - { resource: menu.yml }
 
 services:
-    gedmo.listener.softdeleteable:
-        class: Gedmo\SoftDeleteable\SoftDeleteableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-            - { name: doctrine.event_subscriber, connection: club }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-
-    memcached:
-        class: Memcached
-        calls:
-            - [ addServers, [ %memcached.servers% ]]
-
     gyman.default.request.arraycollection_converter:
       class: Gyman\Bundle\DefaultBundle\Request\ArrayCollectionConverter
       calls:

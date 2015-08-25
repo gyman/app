@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Vouchers\Model;
 
 /**
@@ -11,12 +10,12 @@ class Price
     /**
      * @var integer
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @var string
      */
-    private $currency;
+    protected $currency;
 
     /**
      * Price constructor.

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use DateTime;
@@ -47,11 +46,17 @@ class Member extends BaseMember
         return Globals::applyGalleryDir($this->foto);
     }
 
+    /**
+     * @return bool
+     */
     public function hasOpenedEntry()
     {
-        return !is_null($this->getLastEntry()) && $this->getLastEntry()->isOpened();
+        return !is_null($this->lastEntry()) && $this->lastEntry()->isOpened();
     }
 
+    /**
+     * @return bool
+     */
     public function isMale()
     {
         return $this->details()->gender() == Details::GENDER_MALE;

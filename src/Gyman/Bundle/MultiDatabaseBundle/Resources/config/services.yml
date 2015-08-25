@@ -1,11 +1,3 @@
-parameters:
-  standardFixtures:
-    - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection
-    - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
-  clubFixtures:
-    - src/Gyman/Bundle/MembersBundle/DataFixtures/Club
-    - src/Gyman/Bundle/TestBundle/DataFixtures/Club
-
 services:
   gyman.multidatabase.database_switcher:
     class: Gyman\Bundle\MultiDatabaseBundle\Listener\DatabaseSwitcher

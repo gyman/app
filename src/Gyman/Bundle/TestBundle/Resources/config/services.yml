@@ -1,12 +1,1 @@
-services:
-    data_fixture_loader:
-        class: Gyman\Bundle\TestBundle\Services\FixtureLoader
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - '@symfony.data_fixtures.loader'
-
-    symfony.data_fixtures.loader:
-        public: false
-        class: Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader
-        arguments:
-            - '@service_container'
+services: ~

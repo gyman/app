@@ -10,6 +10,13 @@ services:
         tags:
             - { name: twig.extension }
 
+    gyman.vouchers.repository.entry:
+      class:          Gyman\Bundle\VouchersBundle\Repository\EntryRepository
+      factory_service: doctrine.orm.club_entity_manager
+      factory_method:  getRepository
+      arguments:
+        - Gyman\Bundle\VouchersBundle\Entity\Entry
+
     voucher_repository:
         class:          "%voucher_repository.class%"
         factory_service: doctrine

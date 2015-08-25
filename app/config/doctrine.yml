@@ -54,13 +54,12 @@ doctrine:
             mappings:
               StofDoctrineExtensionsBundle: ~
               MembersBundle: ~
+              VouchersBundle: ~
               FiltersBundle: ~
-              EntriesBundle: ~
-              MembersBundle: ~
+#              EntriesBundle: ~
               ScheduleBundle: ~
               SectionBundle: ~
               TimelineBundle: ~
-              VouchersBundle: ~
               SpyTimelineBundle: ~
             dql:
                 string_functions:

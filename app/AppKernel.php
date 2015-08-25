@@ -42,7 +42,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\MembersBundle\MembersBundle(),
             new Gyman\Bundle\VouchersBundle\VouchersBundle(),
             new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
-            new Gyman\Bundle\EntriesBundle\EntriesBundle(),
+//            new Gyman\Bundle\EntriesBundle\EntriesBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
             new Gyman\Bundle\FiltersBundle\FiltersBundle(),
             new Gyman\Bundle\ListsBundle\ListsBundle(),

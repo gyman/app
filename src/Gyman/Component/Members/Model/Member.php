@@ -1,11 +1,13 @@
 <?php
-
 namespace Gyman\Component\Members\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Gyman\Bundle\SectionBundle\Entity\Section;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Gyman\Component\Members\Exception\MemberHasNoLastEntryException;
+use Gyman\Component\Vouchers\Exception\LastEntryIsStillOpenedException;
+use Gyman\Component\Vouchers\Exception\NoCurrentVoucherForVoucherEntryException;
+use Gyman\Component\Vouchers\Model\Entry;
+use Gyman\Component\Vouchers\Model\Section;
+use Gyman\Component\Vouchers\Model\Voucher;
 
 /**
  * Class Member
@@ -57,13 +59,15 @@ class Member
      * @param Voucher $currentVoucher
      * @param Entry $lastEntry
      */
-    public function __construct(EmailAddress $email, Details $details, $sections = [], $vouchers = [], $entries = [], $currentVoucher, $lastEntry)
+    public function __construct(EmailAddress $email, Details $details, ArrayCollection $sections, ArrayCollection $vouchers, $entries = [], $currentVoucher = null, $lastEntry = null)
     {
         $this->email = $email;
         $this->details = $details;
-        $this->sections = $sections;
-        $this->vouchers = $vouchers;
-        $this->entries = $entries;
+
+        $this->sections = empty($sections) ? new ArrayCollection() : $sections;
+        $this->vouchers = empty($vouchers) ? new ArrayCollection() : $vouchers;
+        $this->entries = empty($entries) ? new ArrayCollection() : $entries;
+
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;
     }
@@ -85,7 +89,7 @@ class Member
     }
 
     /**
-     * @return array|ArrayCollection|Section[]
+     * @return ArrayCollection|Section[]
      */
     public function sections()
     {
@@ -93,7 +97,7 @@ class Member
     }
 
     /**
-     * @return array|ArrayCollection|Voucher[]
+     * @return ArrayCollection|Voucher[]
      */
     public function vouchers()
     {
@@ -101,10 +105,99 @@ class Member
     }
 
     /**
-     * @return array|ArrayCollection|Entry[]
+     * @return ArrayCollection|Entry[]
      */
     public function entries()
     {
         return $this->entries;
+    }
+
+    /**
+     * @return Entry|null
+     */
+    public function lastEntry()
+    {
+        return $this->lastEntry;
+    }
+
+    /**
+     * @param $voucher
+     */
+    public function addVoucher(Voucher $voucher)
+    {
+        /** @var Voucher $lastVoucher */
+        $lastVoucher = $this->vouchers->last();
+
+        if (
+            $lastVoucher instanceof Voucher
+            && (
+                $lastVoucher->endDate() === null
+                || $lastVoucher->endDate()->getTimestamp() >= $voucher->startDate()->getTimestamp()
+            )
+        ) {
+            $lastVoucher->close($voucher->startDate());
+        }
+
+        $now = time();
+
+        if ($voucher->startDate()->getTimestamp() <= $now && $voucher->endDate()->getTimestamp() >= $now) {
+            $this->currentVoucher = $voucher;
+        }
+
+        $this->vouchers->add($voucher);
+    }
+
+    /**
+     * @return Voucher
+     */
+    public function currentVoucher()
+    {
+        return $this->currentVoucher;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCurrentVoucher()
+    {
+        return !is_null($this->currentVoucher());
+    }
+
+    /**
+     * @param Entry $entry
+     */
+    public function enter(Entry $entry)
+    {
+        if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
+            throw new LastEntryIsStillOpenedException();
+        }
+
+        if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
+            throw new NoCurrentVoucherForVoucherEntryException();
+        }
+
+        $this->lastEntry = $entry;
+        $this->entries->add($entry);
+
+        if ($this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
+            $this->currentVoucher->addEntry($entry);
+        }
+    }
+
+    public function exitLastEntry()
+    {
+        if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
+            $this->lastEntry()->closeEntry(new \DateTime());
+        }
+
+        throw new MemberHasNoLastEntryException();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLastEntry()
+    {
+        return $this->lastEntry !== null;
     }
 }
