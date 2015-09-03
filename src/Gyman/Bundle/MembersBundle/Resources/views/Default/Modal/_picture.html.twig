@@ -8,15 +8,15 @@
 <div class="tab-content">
     <div id="filePane" class="tab-pane fade in active">
 
-        {% if member.getId() == null and form.vars.submitted and not form.vars.valid %}
+        {% if member.id() == null and form.vars.submitted and not form.vars.valid %}
             {% set foto = form.foto.vars.value %}
         {% else %}
-            {% set foto = "dsfsdfsdfsdfdsf/" ~ member.getFoto() %}
+            {% set foto = member.details.foto.foto %}
         {% endif %}
 
-        <img src="{{ member.getFoto() }}" class="thumbnail" id="memberFoto"/>
+        <img src="{{ foto }}" class="thumbnail" id="memberFoto"/>
 
-        {{ form_widget(form.fotoUploader) }}
+        {#{{ form_widget(form.fotoUploader) }}#}
     </div>
 
     <div class="tab-pane fade in" id="webcamDiv">

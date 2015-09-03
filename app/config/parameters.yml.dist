@@ -19,3 +19,6 @@ parameters:
     base_url:               localhost
     blank_club_database_name: %database_name%_default
     club_database_name_template: '%database_name%_{{club_name}}'
+
+    sqlite_database_user:     admin
+    sqlite_database_password: admin

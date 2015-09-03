@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Form\Type;
 
 use Gyman\Bundle\FiltersBundle\Traits\GetFormType;

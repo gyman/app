@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Factory;
 
 interface MemberFactoryInterface

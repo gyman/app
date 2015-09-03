@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Twig;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ScheduleBundle\Services\Manager;
 
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;

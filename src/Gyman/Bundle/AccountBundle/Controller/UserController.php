@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AccountBundle\Controller;
 
 use Gyman\Bundle\AccountBundle\Entity\User;

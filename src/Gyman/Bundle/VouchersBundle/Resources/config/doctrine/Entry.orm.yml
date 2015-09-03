@@ -35,7 +35,7 @@ Gyman\Bundle\VouchersBundle\Entity\Entry:
 
     type:
       type: string
-      columnDefinition: enum('free', 'voucher', 'paid', 'multisport')
+#      columnDefinition: enum('free', 'voucher', 'paid', 'multisport')
       nullable: false
 
     deletedAt:

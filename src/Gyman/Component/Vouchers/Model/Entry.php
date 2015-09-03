@@ -146,11 +146,18 @@ class Entry
      */
     public function assignToVoucher(Voucher $voucher)
     {
-        if(!$this->isType(Entry::TYPE_VOUCHER))
-        {
+        if (!$this->isType(self::TYPE_VOUCHER)) {
             throw new EntryMustBeVoucherTypeException();
         }
 
         $this->voucher = $voucher;
+    }
+
+    /**
+     * @return Voucher
+     */
+    public function voucher()
+    {
+        return $this->voucher;
     }
 }

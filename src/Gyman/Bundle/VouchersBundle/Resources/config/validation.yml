@@ -20,7 +20,7 @@ Gyman\Component\VouchersBundle\Entity\Price:
 
 Gyman\Component\VouchersBundle\Entity\Entry:
   constraints:
-    - Symfony\Component\Validator\Constraints\Callback:
-      methods:
-        - { "Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"}
-        - { "Gyman\Bundle\EntriesBundle\Validator\PriceNotBlankIfPaidEntryTypeValidator", "isPaidAndPriceSet"}
+    - Callback:
+        methods: ~
+#          - { "Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"}
+#          - { "Gyman\Bundle\EntriesBundle\Validator\PriceNotBlankIfPaidEntryTypeValidator", "isPaidAndPriceSet"}

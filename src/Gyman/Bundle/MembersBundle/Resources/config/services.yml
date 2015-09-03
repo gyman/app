@@ -25,7 +25,7 @@ services:
     arguments:
       - @oneup_uploader.templating.uploader_helper
     tags:
-      - { name: form.type, alias: gyman_members_member_form_type }
+      - { name: form.type, alias: member }
 
   gyman.members.menu_builder:
       class: Gyman\Bundle\MembersBundle\Menu\Builder

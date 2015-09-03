@@ -10,8 +10,6 @@ services:
 
   gyman.multidatabase.credentials_storage:
     class: Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage
-    calls:
-      - [setSession, [@session]]
 
   gyman.multidatabase.collector.db_connections:
     class: Gyman\Bundle\MultiDatabaseBundle\DataCollector\DatabaseConnectionsDataCollector

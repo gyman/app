@@ -60,4 +60,8 @@
     <target name="phpmd" description="php mess detector">
         <exec command="bin/phpmd src/ text app/phpmd.xml" checkreturn="true" passthru="true" />
     </target>
+
+    <target name="behat-ddd" description="behat ddd tests">
+        <exec command="./bin/behat -c src/Gyman/Component/CoreDomain/behat.yml" checkreturn="true" passthru="true" />
+    </target>
 </project>

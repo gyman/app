@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AccountBundle\Service\Subscriber;
 
 use FOS\UserBundle\Event\FormEvent;

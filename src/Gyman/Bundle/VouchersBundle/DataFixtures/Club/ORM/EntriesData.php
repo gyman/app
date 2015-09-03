@@ -21,7 +21,7 @@ class EntriesData extends BaseFixture
         $price = null;
 
         if ($params['price']) {
-            list($amount, $currency) = sscanf($params['price'], "%d %s");
+            list($amount, $currency) = sscanf($params['price'], '%d %s');
             $price = new Price($amount, $currency);
         }
 

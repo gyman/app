@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ClubBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;

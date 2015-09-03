@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\DefaultBundle\Lib;
 
 class Globals

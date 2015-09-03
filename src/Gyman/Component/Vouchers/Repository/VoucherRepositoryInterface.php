@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Vouchers\Repository;
 
 use Gyman\Component\CoreDomain\Repository\RepositoryInterface;

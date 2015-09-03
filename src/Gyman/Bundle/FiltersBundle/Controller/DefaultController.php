@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Controller;
 
 use Gyman\Bundle\FiltersBundle\Entity\Filter;

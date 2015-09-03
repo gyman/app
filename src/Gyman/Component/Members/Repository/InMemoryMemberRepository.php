@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Repository;
 
 use Gyman\Component\Members\Model\EmailAddress;

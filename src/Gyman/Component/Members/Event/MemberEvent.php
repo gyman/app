@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Event;
 
 use Gyman\Component\CoreDomain\Event\DomainEventInterface;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Connection;
 
 use Doctrine\Common\EventManager;
@@ -45,8 +44,7 @@ class ConnectionWrapper extends Connection
         array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null
     ) {
         $this->setCredentialsStorage(new CredentialsStorage());
-        $this->platform = $params['platform'] = new MySQL57Platform();
-        $params['server_version'] = '5.6';
+
         parent::__construct($params, $driver, $config, $eventManager);
     }
 
@@ -79,8 +77,6 @@ class ConnectionWrapper extends Connection
         } catch (SessionCredentialsNotInitializedException $e) {
             return false;
         }
-
-        $params['server_version'] = '5.6';
 
         $this->_conn = $this->_driver->connect(
             $params,

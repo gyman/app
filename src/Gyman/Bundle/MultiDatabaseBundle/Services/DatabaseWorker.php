@@ -1,7 +1,7 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Exception;
@@ -149,7 +149,7 @@ final class DatabaseWorker
     /**
      * @param ConnectionWrapper $connection
      */
-    public function setClubConnection(ConnectionWrapper $connection)
+    public function setClubConnection(Connection $connection)
     {
         $this->clubConnection = $connection;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;

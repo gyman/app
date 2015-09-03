@@ -25,7 +25,8 @@
         {{ form_start(form, {
             attr : {
                 'id' : "memberForm",
-                'class' : "form-horizontal row-fluid"
+                'class' : "form-horizontal row-fluid",
+                'novalidate' : 'NOVALIDATE'
             },
             action : path('_member_new'),
             method : 'POST'

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\VouchersBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

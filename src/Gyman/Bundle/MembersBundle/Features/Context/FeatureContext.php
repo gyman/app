@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Features\Context;
 
 use Behat\Behat\Context\Step\Then;

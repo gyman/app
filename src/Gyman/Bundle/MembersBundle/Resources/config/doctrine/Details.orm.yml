@@ -41,7 +41,7 @@ Gyman\Bundle\MembersBundle\Entity\Details:
 
     gender:
       type: string
-      columnDefinition: enum('male', 'female')
+#      columnDefinition: enum('male', 'female')
       nullable: true
 
     starred:

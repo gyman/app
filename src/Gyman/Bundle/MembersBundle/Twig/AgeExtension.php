@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Twig;
 
 class AgeExtension extends \Twig_Extension

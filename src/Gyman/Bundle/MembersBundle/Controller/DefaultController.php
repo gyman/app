@@ -1,10 +1,10 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -25,7 +25,7 @@ class DefaultController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $manager = $this->get('gyman.members.members_manager');
-        $form = $this->createForm('gyman_members_member_form_type', $member);
+        $form = $this->createForm('member', $member);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -55,11 +55,13 @@ class DefaultController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $memberManager = $this->get('gyman.members.members_manager');
-        $member = $memberManager->create();
-        $form = $this->createForm('gyman_members_member_form_type', $member);
+        $member = MemberFactory::createFromArray([]);
+        $form = $this->createForm('member', $member);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
+
+            die(var_dump($form->isValid(), $form->getData()));
 
             if ($form->isValid()) {
                 $memberManager->save($member);

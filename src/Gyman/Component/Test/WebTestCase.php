@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Test;
 
 use Symfony\Component\BrowserKit\Client;

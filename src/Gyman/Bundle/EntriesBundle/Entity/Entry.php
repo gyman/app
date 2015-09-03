@@ -104,6 +104,9 @@ class Entry
         return $this->id;
     }
 
+    /**
+     * @return Voucher
+     */
     public function getVoucher()
     {
         return $this->voucher;

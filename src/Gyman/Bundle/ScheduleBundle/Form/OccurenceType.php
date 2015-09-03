@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ScheduleBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
