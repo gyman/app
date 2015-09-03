@@ -83,7 +83,7 @@ final class ClubConnectionCommandListener
         );
 
         $event->getOutput()->writeln(
-            sprintf("<error>%s@%s:</error> ", $db->getUsername(), $db->getName())
+            sprintf('<error>%s@%s:</error> ', $db->getUsername(), $db->getName())
         );
     }
 

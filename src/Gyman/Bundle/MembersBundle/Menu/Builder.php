@@ -58,7 +58,7 @@ class Builder
             /**
              * @var Voucher $voucher
              */
-            $voucher = $member->getCurrentVoucher();
+            $voucher = $member->currentVoucher();
         }
 
         if (!$this->context->isGranted('ROLE_USER')) {

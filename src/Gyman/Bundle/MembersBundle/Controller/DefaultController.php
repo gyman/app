@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class DefaultController
+ * @package Gyman\Bundle\MembersBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -24,14 +28,18 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get('gyman.members.members_manager');
-        $form = $this->createForm('member', $member);
+        $memberManager = $this->get('gyman.members.members_manager');
+        $form = $this->createForm('gyman_member_form', $member);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $manager->save($member);
+                /** @var Member $member */
+                $member = $form->getData();
+                $memberManager->save($member);
+
+                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $response->setStatusCode(400);
             }
@@ -56,15 +64,17 @@ class DefaultController extends Controller
 
         $memberManager = $this->get('gyman.members.members_manager');
         $member = MemberFactory::createFromArray([]);
-        $form = $this->createForm('member', $member);
+        $form = $this->createForm('gyman_member_form', $member);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            die(var_dump($form->isValid(), $form->getData()));
-
             if ($form->isValid()) {
+                /** @var Member $member */
+                $member = $form->getData();
                 $memberManager->save($member);
+
+                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $response->setStatusCode(400);
             }

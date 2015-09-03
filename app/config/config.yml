@@ -36,7 +36,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: timeline.yml }
+#    - { resource: timeline.yml }
     - { resource: doctrine.yml }
 
 framework:

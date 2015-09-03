@@ -7,7 +7,6 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Platforms\MySQL57Platform;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
 use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;

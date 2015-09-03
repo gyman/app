@@ -57,4 +57,13 @@
         </exec>
     </target>
 
+    <target name="test-dende">
+        <property name="env" value="test" />
+        <property name="club" value="dende" />
+
+        <phingcall target="reset-db" />
+        <phingcall target="behat-ddd" />
+        <exec command="./bin/phpunit -c app/phpunit.xml ./src/Gyman/Bundle/MembersBundle/Tests/Functional/Controller/DefaultControllerTest.php" passthru="true" checkreturn="true" />
+    </target>
+
 </project>

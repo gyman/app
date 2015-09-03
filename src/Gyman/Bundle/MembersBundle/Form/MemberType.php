@@ -18,8 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class MemberType extends AbstractType
 {
+    /**
+     * @var
+     */
     protected $uploaderHelper;
 
+    /**
+     * @param $uploaderHelper
+     */
     public function __construct($uploaderHelper)
     {
         $this->uploaderHelper = $uploaderHelper;
@@ -78,6 +84,6 @@ class MemberType extends AbstractType
      */
     public function getName()
     {
-        return 'member';
+        return 'gyman_member_form';
     }
 }

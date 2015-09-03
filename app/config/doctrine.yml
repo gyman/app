@@ -68,8 +68,8 @@ doctrine:
 #              EntriesBundle: ~
               ScheduleBundle: ~
               SectionBundle: ~
-              TimelineBundle: ~
-              SpyTimelineBundle: ~
+#              TimelineBundle: ~
+#              SpyTimelineBundle: ~
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

@@ -3,10 +3,10 @@ gyman_multi_database:
     type:     annotation
     prefix:   /
 
-timeline:
-    resource: "@TimelineBundle/Controller/"
-    type:     annotation
-    prefix:   /timeline
+#timeline:
+#    resource: "@TimelineBundle/Controller/"
+#    type:     annotation
+#    prefix:   /timeline
 
 account:
     resource: "@AccountBundle/Controller/"
@@ -79,21 +79,21 @@ fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
 
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
+#NelmioApiDocBundle:
+#    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+#    prefix:   /api/doc
 
 # api routes
 
-gyman_api:
-  resource: @ApiBundle/Controller/
-  type: annotation
-  prefix: /api/
+#gyman_api:
+#  resource: @ApiBundle/Controller/
+#  type: annotation
+#  prefix: /api/
 
-gyman_api_members:
-  resource: @ApiBundle/Controller/MemberController.php
-  type: rest
-  prefix: /api/
+#gyman_api_members:
+#  resource: @ApiBundle/Controller/MemberController.php
+#  type: rest
+#  prefix: /api/
 
 #gyman_api:
 #    pattern:  /api/

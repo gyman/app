@@ -34,7 +34,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Spy\TimelineBundle\SpyTimelineBundle(),
+//            new Spy\TimelineBundle\SpyTimelineBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
@@ -55,8 +55,8 @@ class AppKernel extends Kernel
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
-            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
-            new Gyman\Bundle\ApiBundle\ApiBundle(),
+//            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
+//            new Gyman\Bundle\ApiBundle\ApiBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),

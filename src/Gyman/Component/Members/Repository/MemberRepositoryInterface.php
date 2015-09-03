@@ -16,17 +16,17 @@ interface MemberRepositoryInterface extends RepositoryInterface
      * @param EmailAddress $email
      * @return Member
      */
-    public function findOneByEmailAddress(EmailAddress $email);
+    public function findOneByEmailAddress($email);
 
     /**
      * @param Member $member
      * @return mixed
      */
-    public function remove(Member $member);
+    public function remove($member);
 
     /**
      * @param Member $member
      * @return null
      */
-    public function insert(Member $member);
+    public function insert($member);
 }

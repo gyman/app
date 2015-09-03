@@ -2,8 +2,6 @@
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;
-use Gyman\Bundle\MultiDatabaseBundle\Exception\SessionCredentialsNotInitializedException;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class CredentialsStorage
 {
@@ -73,5 +71,4 @@ class CredentialsStorage
     {
         return $this->credentials[self::PARAM_BASE];
     }
-
 }
