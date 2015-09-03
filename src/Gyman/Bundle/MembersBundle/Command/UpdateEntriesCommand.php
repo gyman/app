@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Command;
 
 use Doctrine\ORM\QueryBuilder;

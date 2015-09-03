@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\CoreDomain\Repository;
 
 /**

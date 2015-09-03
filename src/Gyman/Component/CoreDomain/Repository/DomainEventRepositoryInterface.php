@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\CoreDomain\Repository;
 
 use Gyman\Component\CoreDomain\Event\DomainEventInterface;

@@ -1,9 +1,9 @@
 services:
   gyman.members.create_member:
-  class: Gyman\Component\Members\Service\CreateMember
-  arguments:
-    - @gyman.members.repository
-    - @event_dispatcher
+    class: Gyman\Component\Members\Service\CreateMember
+    arguments:
+      - @gyman.members.repository
+      - @event_dispatcher
 
   #@todo: rename to commas
   gyman.members.members_manager:
@@ -25,7 +25,7 @@ services:
     arguments:
       - @oneup_uploader.templating.uploader_helper
     tags:
-      - { name: form.type, alias: gyman_members_member_form_type }
+      - { name: form.type, alias: gyman_member_form }
 
   gyman.members.menu_builder:
       class: Gyman\Bundle\MembersBundle\Menu\Builder

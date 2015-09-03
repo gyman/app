@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ScheduleBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectManager;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\EntriesBundle\Entity;
 
 use DateTime;
@@ -12,10 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Entry
- * @Assert\Callback(methods={
- *     { "Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"},
- *     { "Gyman\Bundle\EntriesBundle\Validator\PriceNotBlankIfPaidEntryTypeValidator", "isPaidAndPriceSet"},
- * })
+
  * @ORM\Table("entries")
  * @ORM\Entity(repositoryClass="Gyman\Bundle\EntriesBundle\Entity\EntryRepository")
  *
@@ -108,6 +104,9 @@ class Entry
         return $this->id;
     }
 
+    /**
+     * @return Voucher
+     */
     public function getVoucher()
     {
         return $this->voucher;

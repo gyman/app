@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -57,8 +56,8 @@ class Filter
 
     /**
      * @var string $listname
-     *
-     * @ORM\Column(name="listname", type="string", columnDefinition="enum('members', 'vouchers', 'entries')", nullable=false)
+     * columnDefinition="enum('members', 'vouchers', 'entries')",
+     * @ORM\Column(name="listname", type="string", nullable=false)
      * @Assert\NotBlank(message = "Pole nie może być puste!", groups={"saveFilter","setFilter"})
      */
     private $listname;

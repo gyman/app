@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Event;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;

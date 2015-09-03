@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Menu;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;
@@ -59,7 +58,7 @@ class Builder
             /**
              * @var Voucher $voucher
              */
-            $voucher = $member->getCurrentVoucher();
+            $voucher = $member->currentVoucher();
         }
 
         if (!$this->context->isGranted('ROLE_USER')) {

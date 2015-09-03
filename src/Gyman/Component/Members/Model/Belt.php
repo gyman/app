@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Model;
 
 class Belt
@@ -30,5 +29,13 @@ class Belt
     public function __construct($color)
     {
         $this->color = $color;
+    }
+
+    /**
+     * @return string
+     */
+    public function color()
+    {
+        return $this->color;
     }
 }

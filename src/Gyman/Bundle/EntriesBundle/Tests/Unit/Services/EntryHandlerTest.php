@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\EntriesBundle\Tests\Unit\Services;
 
 use Gyman\Bundle\EntriesBundle\Services\EntryHandler;

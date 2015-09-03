@@ -1,7 +1,6 @@
 <?php
 
 // <editor-fold defaultstate="collapsed" desc="namespace related">
-
 namespace Gyman\Bundle\VouchersBundle\Controller;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;

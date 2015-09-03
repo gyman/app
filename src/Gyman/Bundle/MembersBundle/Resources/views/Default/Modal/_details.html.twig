@@ -1,4 +1,5 @@
-{{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
+{{ form_row(form.firstname,{"label" : "Imię"}) }}
+{{ form_row(form.lastname,{"label" : "Nazwisko"}) }}
 {% block birthday %}{{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}{% endblock birthday %}
 {{ form_row(form.gender,{"label" : "Płeć"}) }}
 {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}

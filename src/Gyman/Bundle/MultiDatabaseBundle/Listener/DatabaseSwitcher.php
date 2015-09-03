@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\ORM\EntityManager;
@@ -49,6 +48,11 @@ class DatabaseSwitcher
     public function onKernelRequest(GetResponseEvent $event)
     {
         $currentHost = $event->getRequest()->getHttpHost();
+
+        if ($currentHost === 'localhost') {
+            return;
+        }
+
         $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
         /** @var Club $club */

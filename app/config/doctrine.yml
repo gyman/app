@@ -27,11 +27,16 @@ doctrine:
           mapping_types:
               enum: string
     orm:
+
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
 
         entity_managers:
           default:
+            metadata_cache_driver: apc
+            result_cache_driver: apc
+            query_cache_driver: apc
+
             auto_mapping: false # disabled so we can assign entities to our own connections
             connection:       default
             dql:
@@ -49,19 +54,22 @@ doctrine:
                 ClubBundle: ~
 
           club:
+            metadata_cache_driver: apc
+            result_cache_driver: apc
+            query_cache_driver: apc
+
             auto_mapping:     false # disabled so we can assign entities to our own connections
             connection:       club
             mappings:
               StofDoctrineExtensionsBundle: ~
               MembersBundle: ~
+              VouchersBundle: ~
               FiltersBundle: ~
-              EntriesBundle: ~
-              MembersBundle: ~
+#              EntriesBundle: ~
               ScheduleBundle: ~
               SectionBundle: ~
-              TimelineBundle: ~
-              VouchersBundle: ~
-              SpyTimelineBundle: ~
+#              TimelineBundle: ~
+#              SpyTimelineBundle: ~
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

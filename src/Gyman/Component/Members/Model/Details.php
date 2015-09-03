@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Model;
 
 /**
@@ -10,6 +9,14 @@ class Details
 {
     const GENDER_MALE = 'male';
     const GENDER_FEMALE = 'female';
+
+    /**
+     * @var array
+     */
+    public static $genders = [
+        self::GENDER_MALE,
+        self::GENDER_FEMALE,
+    ];
 
     /**
      * @var string
@@ -67,24 +74,18 @@ class Details
     protected $starred;
 
     /**
-     * @var integer
-     */
-    protected $beltN;
-
-    /**
      * Details constructor.
      * @param string $firstname
      * @param string $lastname
      * @param \DateTime $birthdate
      * @param string $phone
      * @param string $notes
-     * @param string $foto
+     * @param Foto $foto
      * @param string $zipcode
      * @param string $gender
-     * @param string $belt
-     * @param int $barcode
+     * @param Belt $belt
+     * @param Barcode $barcode
      * @param bool $starred
-     * @param int $beltN
      */
     public function __construct($firstname, $lastname, \DateTime $birthdate, $phone, $notes, Foto $foto, $zipcode, $gender, Belt $belt, Barcode $barcode, $starred)
     {
@@ -102,14 +103,6 @@ class Details
     }
 
     /**
-     * @return int
-     */
-    public function getBeltN()
-    {
-        return $this->beltN;
-    }
-
-    /**
      * @return boolean
      */
     public function isStarred()
@@ -118,17 +111,17 @@ class Details
     }
 
     /**
-     * @return int
+     * @return Barcode
      */
-    public function getBarcode()
+    public function barcode()
     {
         return $this->barcode;
     }
 
     /**
-     * @return string
+     * @return Belt
      */
-    public function getBelt()
+    public function belt()
     {
         return $this->belt;
     }
@@ -136,7 +129,7 @@ class Details
     /**
      * @return string
      */
-    public function getGender()
+    public function gender()
     {
         return $this->gender;
     }
@@ -144,15 +137,15 @@ class Details
     /**
      * @return string
      */
-    public function getZipcode()
+    public function zipcode()
     {
         return $this->zipcode;
     }
 
     /**
-     * @return string
+     * @return Foto
      */
-    public function getFoto()
+    public function foto()
     {
         return $this->foto;
     }
@@ -160,7 +153,7 @@ class Details
     /**
      * @return string
      */
-    public function getNotes()
+    public function notes()
     {
         return $this->notes;
     }
@@ -168,7 +161,7 @@ class Details
     /**
      * @return string
      */
-    public function getPhone()
+    public function phone()
     {
         return $this->phone;
     }
@@ -176,7 +169,7 @@ class Details
     /**
      * @return \DateTime
      */
-    public function getBirthdate()
+    public function birthdate()
     {
         return $this->birthdate;
     }
@@ -184,7 +177,7 @@ class Details
     /**
      * @return string
      */
-    public function getLastname()
+    public function lastname()
     {
         return $this->lastname;
     }
@@ -192,7 +185,7 @@ class Details
     /**
      * @return string
      */
-    public function getFirstname()
+    public function firstname()
     {
         return $this->firstname;
     }

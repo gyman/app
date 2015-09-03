@@ -1,11 +1,10 @@
 <?php
-
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gyman\Bundle\EntriesBundle\Entity\Entry;
+use Gyman\Bundle\VouchersBundle\Entity\Entry;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -51,7 +50,7 @@ abstract class Occurence
 
     /**
      * @JMS\Exclude
-     * @ORM\OneToMany(targetEntity="Gyman\Bundle\EntriesBundle\Entity\Entry", mappedBy="occurence")
+     * ORM\OneToMany(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Entry", mappedBy="occurence")
      * @var Entry[]
      */
     protected $entries;

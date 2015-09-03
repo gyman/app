@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;

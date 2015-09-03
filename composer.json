@@ -52,7 +52,8 @@
         "nelmio/api-doc-bundle": "~2.7@dev",
 
         "imagine/imagine": "0.6.*",
-        "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a"
+        "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a",
+        "dende/common-bundle": "dev-master"
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",
@@ -65,8 +66,8 @@
         "mayflower/php-codebrowser": "~1",
         "sensiolabs/security-advisories": "dev-master",
         "mockery/mockery" : "*",
-        "dende/common-bundle" : "*",
-        "behat/symfony2-extension": "^2.0@dev"
+        "behat/symfony2-extension": "^2.0@dev",
+        "liip/functional-test-bundle": "^1.3@dev"
     },
     "scripts": {
         "post-install-cmd": [

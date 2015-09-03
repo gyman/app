@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
@@ -7,8 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Bundle\UserBundle\Entity\User;
-use Gyman\Component\Members\Model\EmailAddress;
-use Gyman\Component\Members\Model\Member;
 use Gyman\Component\Members\Repository\MemberRepositoryInterface;
 
 /**
@@ -23,16 +20,22 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      * @param EmailAddress $email
      * @return Member
      */
-    public function findOneByEmailAddress(EmailAddress $email)
+    public function findOneByEmailAddress($emailAddress)
     {
-        // TODO: Implement findOneByEmailAddress() method.
+        $qb = $this->createQueryBuilder('m');
+
+        $query = $qb->where('m.email.email = :emailAddress')
+            ->setParameter('emailAddress', $emailAddress->email())
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
     }
 
     /**
      * @param Member $member
      * @return mixed
      */
-    public function remove(Member $member)
+    public function remove($member)
     {
         // TODO: Implement remove() method.
     }
@@ -41,7 +44,7 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      * @param Member $member
      * @return null
      */
-    public function insert(Member $member)
+    public function insert($member)
     {
         // TODO: Implement insert() method.
     }

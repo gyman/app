@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\SectionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

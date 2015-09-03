@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\EntriesBundle\Event;
 
 use Doctrine\ORM\EntityManager;

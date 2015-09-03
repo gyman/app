@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AccountBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

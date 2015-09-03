@@ -31,5 +31,5 @@ services:
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
-            - [setRepository,[@entry_repository]]
+            - [setRepository,[@gyman.vouchers.repository.entry]]
             - [setTemplating, [@templating]]

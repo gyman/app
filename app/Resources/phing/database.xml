@@ -49,12 +49,46 @@
             </then>
         </if>
 
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=default --env=${env} --force" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=default --env=${env} --no-interaction" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=default" checkreturn="true" passthru="true" />
-
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:drop --em=club --club=${club} --env=${env} --force" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:schema:create --em=club --club=${club} --env=${env} --no-interaction" checkreturn="true" passthru="true" />
-        <exec command="${php_bin} ${symfony_console} doctrine:fixtures:load --no-interaction --em=club --club=${club}" checkreturn="true" passthru="true" />
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:drop" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--force" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:create" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:fixtures:load" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:drop" />
+            <arg value="--em=club" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="--force" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:create" />
+            <arg value="--em=club" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:fixtures:load" />
+            <arg value="--append" />
+            <arg value="--em=club" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+        </exec>
     </target>
 </project>
+

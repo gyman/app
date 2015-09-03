@@ -1,10 +1,9 @@
 <?php
-
 namespace Gyman\Component\Members\Model;
 
 /**
  * Class Barcode
- * @package Gyman\Component\Members\Model
+ * @package Gyman\Component\Members
  */
 class Barcode
 {
@@ -15,7 +14,7 @@ class Barcode
 
     /**
      * Barcode constructor.
-     * @param int $barcode
+     * @param string $barcode
      */
     public function __construct($barcode)
     {
@@ -25,7 +24,7 @@ class Barcode
     /**
      * @return string
      */
-    public function getBarcode()
+    public function barcode()
     {
         return $this->barcode;
     }

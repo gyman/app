@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

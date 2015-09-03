@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
@@ -52,9 +51,7 @@ final class ClubConnectionCommandListener
         $clubName = $input->getOption('club');
 
         if ($clubName === null) {
-            $event->getOutput()->writeln(
-                sprintf('Performing operation on standard database <info>"gyman"</info>')
-            );
+            $event->getOutput()->write('<error>gyman:</error> ');
 
             return;
         }
@@ -86,7 +83,7 @@ final class ClubConnectionCommandListener
         );
 
         $event->getOutput()->writeln(
-            sprintf("Switching to <info>'%s'</info> database as user <info>'%s'</info>", $db->getName(), $db->getUsername())
+            sprintf('<error>%s@%s:</error> ', $db->getUsername(), $db->getName())
         );
     }
 

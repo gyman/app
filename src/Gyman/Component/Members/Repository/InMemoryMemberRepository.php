@@ -1,8 +1,6 @@
 <?php
-
 namespace Gyman\Component\Members\Repository;
 
-use Gyman\Component\Members\Model\EmailAddress;
 use Gyman\Component\Members\Model\Member;
 
 class InMemoryMemberRepository implements MemberRepositoryInterface
@@ -24,7 +22,7 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      * @param $email
      * @return Member
      */
-    public function findOneByEmailAddress(EmailAddress $email)
+    public function findOneByEmailAddress($email)
     {
         $address = $email->email();
 
@@ -35,7 +33,7 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      * @param Member $member
      * @return mixed
      */
-    public function remove(Member $member)
+    public function remove($member)
     {
         unset($this->members[$member->email()->email()]);
     }
@@ -44,7 +42,7 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      * @param Member $member
      * @return null
      */
-    public function insert(Member $member)
+    public function insert($member)
     {
         $this->members[$member->email()->email()] = $member;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Model;
 
 class Foto
@@ -21,7 +20,7 @@ class Foto
     /**
      * @return string
      */
-    public function getFoto()
+    public function foto()
     {
         return $this->foto;
     }

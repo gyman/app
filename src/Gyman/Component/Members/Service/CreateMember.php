@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Component\Members\Service;
 
 use Gyman\Component\CoreDomain\Model\UserInterface;

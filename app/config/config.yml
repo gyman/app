@@ -3,12 +3,40 @@ parameters:
   no_image: /bundles/default/images/no-profile.gif
   gallery_dir: /uploads/gallery/
   revision_file: "%kernel.root_dir%/../REVISION"
+  memcached.servers:
+    - { host: 127.0.0.1, port: 11211 }
+
+services:
+    memcached:
+        class: Memcached
+        calls:
+            - [ addServers, [ %memcached.servers% ]]
+
+    gedmo.listener.softdeleteable:
+        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+            - { name: doctrine.event_subscriber, connection: club }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    data_fixture_loader:
+        class: Gyman\Bundle\TestBundle\Services\FixtureLoader
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@symfony.data_fixtures.loader'
+
+    symfony.data_fixtures.loader:
+        public: false
+        class: Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader
+        arguments:
+            - '@service_container'
 
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: timeline.yml }
+#    - { resource: timeline.yml }
     - { resource: doctrine.yml }
 
 framework:

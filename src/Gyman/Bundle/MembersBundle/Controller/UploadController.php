@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Oneup\UploaderBundle\Controller\AbstractController;

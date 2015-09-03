@@ -1,12 +1,16 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    translator.class: Gyman\Bundle\DefaultBundle\Translator\NoTranslator
+
 framework:
     test: ~
     session:
-        storage_id: session.storage.mock_file
+        storage_id: session.storage.filesystem
     profiler:
-        collect: false
+        collect: true
+        only_exceptions: false
 
 web_profiler:
     toolbar: false
@@ -14,3 +18,29 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+        default:
+          driver:   pdo_sqlite
+          dbname:   %database_name%
+          path:     %kernel.cache_dir%/default.db
+
+        club:
+          driver:   pdo_sqlite
+          dbname:   %database_name%_dende
+          path:     %kernel.cache_dir%/club.db
+          memory: false
+
+liip_functional_test:
+  cache_sqlite_db: true
+  authentication:
+    username: %sqlite_database_user%
+    password: %sqlite_database_password%
+
+security:
+    firewalls:
+        main:
+            http_basic: ~

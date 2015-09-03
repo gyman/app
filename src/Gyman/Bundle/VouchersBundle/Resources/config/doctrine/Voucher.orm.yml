@@ -1,0 +1,57 @@
+Gyman\Bundle\VouchersBundle\Entity\Voucher:
+  type:   entity
+  table:  vouchers
+  repositoryClass:  Gyman\Bundle\VouchersBundle\Entity\VoucherRepository
+  embedded:
+    price:
+      class: Gyman\Bundle\VouchersBundle\Entity\Price
+      columnPrefix: false
+
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
+  oneToMany:
+
+    entries:
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
+      cascade: [remove]
+      orphanRemoval:  true
+      mappedBy: voucher
+
+  fields:
+
+    startDate:
+      type: datetime
+      nullable: true #false
+
+    endDate:
+      type: datetime
+      nullable: true #false
+
+    deletedAt:
+      name: deleted_at
+      type: datetime
+      nullable: true #false
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update

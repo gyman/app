@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ScheduleBundle\Services\Manager;
 
 use Doctrine\Common\Collections\ArrayCollection;

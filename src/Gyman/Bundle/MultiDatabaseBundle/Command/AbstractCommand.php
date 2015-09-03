@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Command;
 
 use Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker;

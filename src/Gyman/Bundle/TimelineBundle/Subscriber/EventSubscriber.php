@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\TimelineBundle\Subscriber;
 
 use Gyman\Bundle\EntriesBundle\EntriesEvents;

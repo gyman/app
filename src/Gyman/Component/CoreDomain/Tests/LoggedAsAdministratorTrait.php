@@ -1,6 +1,6 @@
 <?php
-
 namespace Gyman\Component\CoreDomain\Tests;
+
 use Gyman\Component\CoreDomain\Model\User;
 use Gyman\Component\CoreDomain\Model\UserInterface;
 

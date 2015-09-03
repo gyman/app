@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\VouchersBundle\Form\DataTransformer;
 
 use DateTime;

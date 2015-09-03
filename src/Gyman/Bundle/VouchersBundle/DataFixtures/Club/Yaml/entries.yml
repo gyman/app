@@ -1,0 +1,18 @@
+Entry001:
+  type:       free
+  startDate:  now
+  endDate:    +1 hour 30 minutes
+  price:      ~
+
+Entry002:
+  voucher:    Voucher00
+  type:       voucher
+  startDate:  now
+  endDate:    +1 hour 30 minutes
+  price:      ~
+
+Entry003:
+  type:       paid
+  startDate:  now
+  endDate:    ~
+  price:      15 PLN

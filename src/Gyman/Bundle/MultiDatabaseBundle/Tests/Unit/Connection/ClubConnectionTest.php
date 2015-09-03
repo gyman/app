@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Tests\Unit\Connection;
 
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ClubConnection;

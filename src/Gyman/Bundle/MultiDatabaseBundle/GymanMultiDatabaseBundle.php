@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle;
 
 use Gyman\Bundle\MultiDatabaseBundle\DependencyInjection\CompilerPass\ConnectionCompilerPass;

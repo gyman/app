@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;

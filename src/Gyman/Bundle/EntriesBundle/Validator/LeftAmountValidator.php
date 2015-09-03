@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\EntriesBundle\Validator;
 
 //use Symfony\Component\Validator\ConstraintValidator;
@@ -7,7 +6,8 @@ namespace Gyman\Bundle\EntriesBundle\Validator;
 //use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 //use Gyman\Bundle\MembersBundle\Entity\Member;
 //use Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager;
-use Gyman\Bundle\EntriesBundle\Entity\Entry;
+//use Gyman\Bundle\EntriesBundle\Entity\Entry;
+use Gyman\Bundle\VouchersBundle\Entity\Entry;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 // extends ConstraintValidator
@@ -16,10 +16,7 @@ class LeftAmountValidator
 {
     public static function isAmountLeft(Entry $entry, ExecutionContextInterface $context)
     {
-        if ($entry->getEntryType() == 'voucher'
-                && $entry->getVoucher()
-                && $entry->getVoucher()->getAmount() !== null // getAmount == null oznacza, że karnet jest open!
-                && $entry->getVoucher()->getAmountLeft() == 0) {
+        if ($entry->isType(Entry::TYPE_VOUCHER) && $entry->voucher()->getFreeAmount() === 0) {
             $context->addViolation('Użytkownik wykorzystał już wszystkie wejścia z posiadanego karnetu!');
         }
     }

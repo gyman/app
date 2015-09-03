@@ -1,0 +1,60 @@
+Gyman\Bundle\VouchersBundle\Entity\Entry:
+  type:   entity
+  table:  entries
+  repositoryClass:  Gyman\Bundle\VouchersBundle\Entity\EntryRepository
+  embedded:
+    price:
+      class: Gyman\Bundle\VouchersBundle\Entity\Price
+      columnPrefix: false
+
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  manyToOne:
+
+    voucher:
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
+      inversedBy: entries
+
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
+  fields:
+
+    startDate:
+      type: datetime
+      nullable: true #false
+
+    endDate:
+      type: datetime
+      nullable: true #false
+
+    type:
+      type: string
+#      columnDefinition: enum('free', 'voucher', 'paid', 'multisport')
+      nullable: false
+
+    deletedAt:
+      name: deleted_at
+      type: datetime
+      nullable: true #false
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update

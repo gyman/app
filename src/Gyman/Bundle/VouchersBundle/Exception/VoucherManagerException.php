@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\VouchersBundle\Exception;
 
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;

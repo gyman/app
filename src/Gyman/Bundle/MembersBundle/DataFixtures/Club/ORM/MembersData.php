@@ -1,8 +1,8 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\DataFixtures\Club\ORM;
 
 use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 
 class MembersData extends BaseFixture
@@ -16,9 +16,9 @@ class MembersData extends BaseFixture
 
     public function insert($params)
     {
-        $params['sections'] = [];
-        $params['vouchers'] = [];
-        $params['entries'] = [];
+        $params['sections'] = new ArrayCollection();
+        $params['vouchers'] = new ArrayCollection();
+        $params['entries'] = new ArrayCollection();
         $params['current_voucher'] = null;
         $params['last_entry'] = null;
 

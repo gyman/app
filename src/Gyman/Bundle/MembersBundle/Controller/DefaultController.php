@@ -1,10 +1,10 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class DefaultController
+ * @package Gyman\Bundle\MembersBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -24,14 +28,18 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $manager = $this->get('gyman.members.members_manager');
-        $form = $this->createForm('gyman_members_member_form_type', $member);
+        $memberManager = $this->get('gyman.members.members_manager');
+        $form = $this->createForm('gyman_member_form', $member);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $manager->save($member);
+                /** @var Member $member */
+                $member = $form->getData();
+                $memberManager->save($member);
+
+                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $response->setStatusCode(400);
             }
@@ -55,14 +63,18 @@ class DefaultController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $memberManager = $this->get('gyman.members.members_manager');
-        $member = $memberManager->create();
-        $form = $this->createForm('gyman_members_member_form_type', $member);
+        $member = MemberFactory::createFromArray([]);
+        $form = $this->createForm('gyman_member_form', $member);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                /** @var Member $member */
+                $member = $form->getData();
                 $memberManager->save($member);
+
+                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $response->setStatusCode(400);
             }
