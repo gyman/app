@@ -1,0 +1,17 @@
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success flash-notice">
+        {{ flashMessage|trans }}
+    </div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger flash-notice">
+        {{ flashMessage|trans }}
+
+        <ul>
+        {% for error in form.vars.errors  %}
+            <li>{{ error.getMessage() }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endfor %}

@@ -918,12 +918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "2b3648c725f82efc1f1b12e8e3e35c76df990b58"
+                "reference": "233ebb0ba1e84f86c02b3affe5aa3680d35ae7b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/2b3648c725f82efc1f1b12e8e3e35c76df990b58",
-                "reference": "2b3648c725f82efc1f1b12e8e3e35c76df990b58",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/233ebb0ba1e84f86c02b3affe5aa3680d35ae7b8",
+                "reference": "233ebb0ba1e84f86c02b3affe5aa3680d35ae7b8",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +987,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-08-31 12:16:50"
+            "time": "2015-09-03 14:40:59"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1137,12 +1137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "35589cb0e31d5f678af7fdf551a94fc003e3a768"
+                "reference": "f021cb088149915353368eb9f5717922b62ae783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/35589cb0e31d5f678af7fdf551a94fc003e3a768",
-                "reference": "35589cb0e31d5f678af7fdf551a94fc003e3a768",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f021cb088149915353368eb9f5717922b62ae783",
+                "reference": "f021cb088149915353368eb9f5717922b62ae783",
                 "shasum": ""
             },
             "require": {
@@ -1196,20 +1196,20 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-09-02 15:31:06"
+            "time": "2015-09-03 09:54:17"
         },
         {
             "name": "gedmo/doctrine-extensions",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "df429676f995c31d0cdc3c3956c2752263065b7b"
+                "url": "git@github.com:Atlantic18/DoctrineExtensions.git",
+                "reference": "a147d31b6299e83c5b93abefac8e4f2aaae043a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/df429676f995c31d0cdc3c3956c2752263065b7b",
-                "reference": "df429676f995c31d0cdc3c3956c2752263065b7b",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/a147d31b6299e83c5b93abefac8e4f2aaae043a7",
+                "reference": "a147d31b6299e83c5b93abefac8e4f2aaae043a7",
                 "shasum": ""
             },
             "require": {
@@ -1275,7 +1275,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2015-09-02 05:11:18"
+            "time": "2015-09-03 08:40:33"
         },
         {
             "name": "gyman/supr",
@@ -1875,18 +1875,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "1908c05d0e6a6319fff185f761070fac121c7423"
+                "reference": "29da11f8aef51a70ed5b4e0eb6540197f3336e1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/1908c05d0e6a6319fff185f761070fac121c7423",
-                "reference": "1908c05d0e6a6319fff185f761070fac121c7423",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/29da11f8aef51a70ed5b4e0eb6540197f3336e1a",
+                "reference": "29da11f8aef51a70ed5b4e0eb6540197f3336e1a",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-components": "~1.2",
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.0",
+                "symfony/framework-bundle": "~2.3",
                 "twig/twig": "~1.12"
             },
             "require-dev": {
@@ -1928,7 +1928,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2015-09-02 11:22:29"
+            "time": "2015-09-03 10:17:52"
         },
         {
             "name": "knplabs/knp-time-bundle",
@@ -3059,12 +3059,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "a16e5a75aa8c3b97f224f42dbbad5b379ce14659"
+                "reference": "cd20bd76e96a945bfd3b4efa4fb0177456f3c65c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/a16e5a75aa8c3b97f224f42dbbad5b379ce14659",
-                "reference": "a16e5a75aa8c3b97f224f42dbbad5b379ce14659",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/cd20bd76e96a945bfd3b4efa4fb0177456f3c65c",
+                "reference": "cd20bd76e96a945bfd3b4efa4fb0177456f3c65c",
                 "shasum": ""
             },
             "require": {
@@ -3104,7 +3104,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2015-08-30 17:08:54"
+            "time": "2015-09-03 11:06:15"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -3228,12 +3228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2c4860877d13652e9c424629ec9a51a4ab876fa6"
+                "reference": "041dff57acec0411d39baceac56f206e8ba783de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2c4860877d13652e9c424629ec9a51a4ab876fa6",
-                "reference": "2c4860877d13652e9c424629ec9a51a4ab876fa6",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/041dff57acec0411d39baceac56f206e8ba783de",
+                "reference": "041dff57acec0411d39baceac56f206e8ba783de",
                 "shasum": ""
             },
             "require": {
@@ -3342,7 +3342,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-09-01 13:39:59"
+            "time": "2015-09-03 14:20:20"
         },
         {
             "name": "twig/extensions",
@@ -3980,12 +3980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "3f4cf9ccbe3cbc7bb949b088d3d6c52a1d649fbe"
+                "reference": "0b9f2a4b83b319bef3cbe569f288fa226b83e499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/3f4cf9ccbe3cbc7bb949b088d3d6c52a1d649fbe",
-                "reference": "3f4cf9ccbe3cbc7bb949b088d3d6c52a1d649fbe",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/0b9f2a4b83b319bef3cbe569f288fa226b83e499",
+                "reference": "0b9f2a4b83b319bef3cbe569f288fa226b83e499",
                 "shasum": ""
             },
             "require": {
@@ -4031,7 +4031,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-08-16 23:11:17"
+            "time": "2015-09-03 20:28:35"
         },
         {
             "name": "hamcrest/hamcrest-php",

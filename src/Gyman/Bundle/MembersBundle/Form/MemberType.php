@@ -48,20 +48,15 @@ class MemberType extends AbstractType
                 'choices' => array_combine(Details::$genders, Details::$genders)
             ])
             ->add('belt', 'choice', [
-                'choices' => array_combine(Belt::$colors, Belt::$colors)
+                'choices' => array_combine(Belt::$colors, Belt::$colors),
+                'placeholder' => 'choose',
             ])
             ->add('phone', 'text')
-            ->add('email', 'text', [
-                'cascade_validation' => true
-            ])
+            ->add('email', 'text')
             ->add('notes', 'textarea')
             ->add('zipcode', 'text')
             ->add('barcode', 'text')
-            ->add('foto', 'hidden')
-//                ->add('fotoUploader', 'file', [
-//                    'mapped' => false,
-//                    'attr'   => ['data-url' => $this->uploaderHelper->endpoint('gallery')],
-//                ])
+            ->add('foto', 'file')
         ;
 
         $builder->addViewTransformer(new NewMemberDataTransformer());
@@ -75,7 +70,15 @@ class MemberType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => 'Gyman\Bundle\MembersBundle\DTO\NewMember',
             'csrf_protection' => true,
-            'cascade_validation' => true
+            'error_mapping' => array(
+                'details.firstname' => 'firstname',
+                'details.lastname' => 'lastname',
+                'details.foto.foto' => 'foto',
+                'details.birthdate' => 'birthdate',
+                'email.email' => 'email',
+                'details.zipcode' => 'zipcode',
+                'details.barcode.barcode' => 'barcode',
+            ),
         ]);
     }
 

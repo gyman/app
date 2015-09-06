@@ -153,20 +153,20 @@ class Builder
             ]
         )->setExtra('translation_domain', 'MembersBundle');
 
-        $menu->addChild(
-            'member.modal.tab.camera_label',
-            [
-                'uri'            => '#webcamDiv',
-                'extras'         => ['icon' => 'icomoon-icon-camera'],
-                'linkAttributes' => [
-                    'class'       => '',
-                    'data-toggle' => 'tab',
-                ],
-                'attributes' => [
-                    'class' => '',
-                ],
-            ]
-        )->setExtra('translation_domain', 'MembersBundle');
+//        $menu->addChild(
+//            'member.modal.tab.camera_label',
+//            [
+//                'uri'            => '#webcamDiv',
+//                'extras'         => ['icon' => 'icomoon-icon-camera'],
+//                'linkAttributes' => [
+//                    'class'       => '',
+//                    'data-toggle' => 'tab',
+//                ],
+//                'attributes' => [
+//                    'class' => '',
+//                ],
+//            ]
+//        )->setExtra('translation_domain', 'MembersBundle');
 
         return $menu;
     }

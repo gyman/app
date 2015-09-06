@@ -1,13 +1,7 @@
 {% extends 'MembersBundle::layout.html.twig' %}
 
 {% block content %}
-
-    {% if not form.vars.valid %}
-        <div class="alert alert-error">
-            <strong>{{ 'members.modal.form_has_errors'|trans }}</strong>
-            {{ form_errors(form) }}
-        </div>
-    {% endif %}
+    {% include "::_flash.html.twig" %}
 
     {{ form_start(form, {
         attr : {

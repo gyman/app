@@ -3,44 +3,42 @@ namespace Gyman\Bundle\DefaultBundle\Lib;
 
 class Globals
 {
-    const CURRENT_CLUB_SESSION_KEY = 'current_club';
+    protected static $galleryPath;
 
     protected static $galleryDir = '/uploads/gallery/';
     protected static $noImage;
     protected static $compareChoices = [
-        'eq'         => 'równy',
-        'lt'         => 'wcześniej niż',
-        'gt'         => 'później niż',
-        'between'    => 'pomiędzy',
+        'eq' => 'równy',
+        'lt' => 'wcześniej niż',
+        'gt' => 'później niż',
+        'between' => 'pomiędzy',
         'notBetween' => 'poza',
-        'today'      => 'dzisiaj',
-        'yesterday'  => 'wczoraj',
-        'thisWeek'   => 'ten tydzień',
-        'lastWeek'   => 'poprzedni tydzień',
-        'thisMonth'  => 'ten miesiąc',
-        'lastMonth'  => 'poprzedni miesiąc',
-        'thisYear'   => 'ten rok',
-        'lastYear'   => 'poprzedni rok',
+        'today' => 'dzisiaj',
+        'yesterday' => 'wczoraj',
+        'thisWeek' => 'ten tydzień',
+        'lastWeek' => 'poprzedni tydzień',
+        'thisMonth' => 'ten miesiąc',
+        'lastMonth' => 'poprzedni miesiąc',
+        'thisYear' => 'ten rok',
+        'lastYear' => 'poprzedni rok',
     ];
     protected static $filtersLabels = [
-        'Activities'       => 'Zajęcia',
-        'Age'              => 'Wiek',
-        'Belt'             => 'Kolor pasa',
-        'CheckedIn'        => 'Obecny w klubie',
-        'CurrentVoucher'   => 'Aktualny karnet',
-        'EntryDate'        => 'Data wejścia',
-        'EntryType'        => 'Płatność za wejście',
-        'Gender'           => 'Płeć',
-        'Member'           => 'Uczestnik',
-        'Price'            => 'Płatność',
+        'Activities' => 'Zajęcia',
+        'Age' => 'Wiek',
+        'Belt' => 'Kolor pasa',
+        'CheckedIn' => 'Obecny w klubie',
+        'CurrentVoucher' => 'Aktualny karnet',
+        'EntryDate' => 'Data wejścia',
+        'EntryType' => 'Płatność za wejście',
+        'Gender' => 'Płeć',
+        'Member' => 'Uczestnik',
+        'Price' => 'Płatność',
         'RegistrationDate' => 'Data rejestracji',
-        'SearchName'       => 'Imię/nazwisko',
-        'Starred'          => 'Ulubiony',
-        'VoucherStart'     => 'Data rozpoczęcia karnetu',
-        'VoucherEnd'       => 'Data zakończenia karnetu',
+        'SearchName' => 'Imię/nazwisko',
+        'Starred' => 'Ulubiony',
+        'VoucherStart' => 'Data rozpoczęcia karnetu',
+        'VoucherEnd' => 'Data zakończenia karnetu',
     ];
-
-// <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     public static function getGalleryDir()
     {
@@ -52,6 +50,22 @@ class Globals
         self::$galleryDir = $galleryDir;
     }
 
+    /**
+     * @param mixed $galleryPath
+     */
+    public static function setGalleryPath($galleryPath)
+    {
+        self::$galleryPath = $galleryPath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getGalleryPath()
+    {
+        return self::$galleryPath;
+    }
+
     public static function getNoImage()
     {
         return self::$noImage;
@@ -61,8 +75,6 @@ class Globals
     {
         self::$noImage = $noImage;
     }
-
-// </editor-fold>
 
     public static function getFilterLabel($class)
     {
@@ -81,6 +93,11 @@ class Globals
         }
 
         return self::getNoImage();
+    }
+
+    public static function applyFilePath($string)
+    {
+        return self::getGalleryPath() . self::applyGalleryDir($string);
     }
 
     public static function checkIfImageExists($string)

@@ -37,10 +37,16 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 /** @var Member $member */
                 $member = $form->getData();
-                $memberManager->save($member);
+                $member->details()->foto()->upload(realpath(
+                    $this->getParameter("galleryPath") .
+                    $this->getParameter("gallery_dir")
+                ));
 
+                $memberManager->save($member);
+                $this->addFlash('success', 'flash.member_editted.success');
                 return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
+                $this->addFlash('error', 'flash.member_editted.errors');
                 $response->setStatusCode(400);
             }
         }
@@ -49,7 +55,6 @@ class DefaultController extends Controller
             $this->renderView('MembersBundle:Default:edit.html.twig', [
                     'form'     => $form->createView(),
                     'member'   => $member,
-                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper'),
             ])
         );
     }
@@ -72,10 +77,16 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 /** @var Member $member */
                 $member = $form->getData();
-                $memberManager->save($member);
+                $member->details()->foto()->upload(realpath(
+                    $this->getParameter("galleryPath") .
+                    $this->getParameter("gallery_dir")
+                ));
 
+                $memberManager->save($member);
+                $this->addFlash('success', 'flash.member_added.success');
                 return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
+                $this->addFlash('error', 'flash.member_added.errors');
                 $response->setStatusCode(400);
             }
         }
@@ -84,8 +95,6 @@ class DefaultController extends Controller
             $this->renderView('MembersBundle:Default:new.html.twig', [
                     'form'     => $form->createView(),
                     'member'   => $member,
-                    'isNew'    => true,
-                    'uploader' => $this->get('oneup_uploader.templating.uploader_helper'),
             ])
         );
     }

@@ -1,10 +1,12 @@
 <?php
 namespace Gyman\Bundle\MembersBundle\Form\DataTransformer;
 
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\MembersBundle\DTO\NewMember;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class NewMemberDataTransformer
@@ -30,7 +32,7 @@ class NewMemberDataTransformer implements DataTransformerInterface
         $dto->birthdate = $details->birthdate();
         $dto->phone = $details->phone();
         $dto->notes = $details->notes();
-        $dto->foto = $details->foto()->foto();
+        $dto->foto = new File(Globals::applyFilePath($details->foto()->foto()));
         $dto->zipcode = $details->zipcode();
         $dto->gender = $details->gender();
         $dto->belt = $details->belt()->color();

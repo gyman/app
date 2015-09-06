@@ -23,6 +23,7 @@ class DefaultExtension extends Extension
 
         $container->setParameter('default.galleryDir', $config['galleryDir']);
         $container->setParameter('default.noImage', $config['noImage']);
+        $container->setParameter('default.galleryPath', $config['galleryPath']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');

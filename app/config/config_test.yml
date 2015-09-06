@@ -44,3 +44,10 @@ security:
     firewalls:
         main:
             http_basic: ~
+
+monolog:
+  handlers:
+    main:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: ERROR

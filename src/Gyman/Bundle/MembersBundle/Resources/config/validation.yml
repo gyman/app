@@ -1,30 +1,34 @@
-Gyman\Bundle\MembersBundle\DTO\NewMember:
-  properties:
-    email:
-      - NotNull: ~
-      - NotBlank:
-          message: Pole nie może być puste!
-      - Email:
-          message: Adres '{{ value }}' nie jest poprawny.
-          checkMX: true
-
 Gyman\Bundle\MembersBundle\Entity\Member:
   constraints:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
         fields: [email.email]
         message: Ten email jest już zarejestrowany
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+        fields: [details.barcode.barcode]
+        message: Ten kod jest już zarejestrowany
+  properties:
+    details:
+      - Valid: ~
+    email:
+      - Valid: ~
 
-Gyman\Component\Members\Model\EmailAddress:
+Gyman\Bundle\MembersBundle\Entity\Foto:
+  properties:
+    foto:
+      - Image: ~
+      - NotBlank:
+          message: Pole nie może być puste!
+
+Gyman\Bundle\MembersBundle\Entity\EmailAddress:
   properties:
     email:
-      - NotNull: ~
       - NotBlank:
           message: Pole nie może być puste!
       - Email:
           message: Adres '{{ value }}' nie jest poprawny.
           checkMX: true
 
-Gyman\Component\Members\Model\Details:
+Gyman\Bundle\MembersBundle\Entity\Details:
   properties:
     firstname:
       - NotBlank:
@@ -42,12 +46,14 @@ Gyman\Component\Members\Model\Details:
           max: today
     phone: ~
     notes: ~
-    foto: ~
+    foto:
+      - Valid: ~
     zipcode:
       - Length:
           max: 6
           min: 6
-          minMessage: Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków
+          minMessage: Kod pocztowy musi zawierać 6 znaków
+          maxMessage: Kod pocztowy musi zawierać 6 znaków
       - Regex:
           pattern: /\d{2}\-\d{3}/
           match:  true

@@ -2,6 +2,8 @@ parameters:
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/default/images/no-profile.gif
   gallery_dir: /uploads/gallery/
+  galleryPath: %kernel.root_dir%/../web
+
   revision_file: "%kernel.root_dir%/../REVISION"
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
