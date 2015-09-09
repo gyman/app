@@ -2,7 +2,6 @@
 namespace Gyman\Bundle\DefaultBundle;
 
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Symfony\Component\Finder\Glob;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DefaultBundle extends Bundle

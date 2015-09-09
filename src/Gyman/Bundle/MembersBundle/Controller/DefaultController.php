@@ -38,12 +38,13 @@ class DefaultController extends Controller
                 /** @var Member $member */
                 $member = $form->getData();
                 $member->details()->foto()->upload(realpath(
-                    $this->getParameter("galleryPath") .
-                    $this->getParameter("gallery_dir")
+                    $this->getParameter('galleryPath') .
+                    $this->getParameter('gallery_dir')
                 ));
 
                 $memberManager->save($member);
                 $this->addFlash('success', 'flash.member_editted.success');
+
                 return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_editted.errors');
@@ -78,12 +79,13 @@ class DefaultController extends Controller
                 /** @var Member $member */
                 $member = $form->getData();
                 $member->details()->foto()->upload(realpath(
-                    $this->getParameter("galleryPath") .
-                    $this->getParameter("gallery_dir")
+                    $this->getParameter('galleryPath') .
+                    $this->getParameter('gallery_dir')
                 ));
 
                 $memberManager->save($member);
                 $this->addFlash('success', 'flash.member_added.success');
+
                 return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_added.errors');

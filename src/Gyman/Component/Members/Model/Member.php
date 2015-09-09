@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Component\Members\Exception\MemberHasNoLastEntryException;
 use Gyman\Component\Vouchers\Exception\LastEntryIsStillOpenedException;
 use Gyman\Component\Vouchers\Exception\NoCurrentVoucherForVoucherEntryException;
+use Gyman\Component\Vouchers\Exception\VouchersAreOverlappingException;
 use Gyman\Component\Vouchers\Model\Entry;
 use Gyman\Component\Vouchers\Model\Section;
 use Gyman\Component\Vouchers\Model\Voucher;
@@ -16,6 +17,11 @@ use Gyman\Component\Vouchers\Model\Voucher;
 class Member
 {
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
      * @var EmailAddress
      */
     protected $email;
@@ -26,7 +32,7 @@ class Member
     protected $details;
 
     /**
-     * @var ArrayCollection|Section[]
+     * @var ArrayCollection|Section[] // remove this
      */
     protected $sections;
 
@@ -64,12 +70,20 @@ class Member
         $this->email = $email;
         $this->details = $details;
 
-        $this->sections = empty($sections) ? new ArrayCollection() : $sections;
+        $this->sections = empty($sections) ? new ArrayCollection() : $sections; // remove this
         $this->vouchers = empty($vouchers) ? new ArrayCollection() : $vouchers;
         $this->entries = empty($entries) ? new ArrayCollection() : $entries;
 
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;
+    }
+
+    /**
+     * @return int
+     */
+    public function id()
+    {
+        return $this->id;
     }
 
     /**
@@ -121,30 +135,21 @@ class Member
     }
 
     /**
-     * @param $voucher
+     * @param $newVoucher
      */
-    public function addVoucher(Voucher $voucher)
+    public function addVoucher(Voucher $newVoucher)
     {
-        /** @var Voucher $lastVoucher */
-        $lastVoucher = $this->vouchers->last();
-
-        if (
-            $lastVoucher instanceof Voucher
-            && (
-                $lastVoucher->endDate() === null
-                || $lastVoucher->endDate()->getTimestamp() >= $voucher->startDate()->getTimestamp()
-            )
-        ) {
-            $lastVoucher->close($voucher->startDate());
+        if ($this->vouchers()->count() > 0) {
+            foreach ($this->vouchers() as $existingVoucher) {
+                if ($existingVoucher->overlaps($newVoucher)) {
+                    throw new VouchersAreOverlappingException($this, $existingVoucher, $newVoucher);
+                }
+            }
         }
 
-        $now = time();
+        $this->vouchers->add($newVoucher);
 
-        if ($voucher->startDate()->getTimestamp() <= $now && $voucher->endDate()->getTimestamp() >= $now) {
-            $this->currentVoucher = $voucher;
-        }
-
-        $this->vouchers->add($voucher);
+        $this->updateCurrentVoucher();
     }
 
     /**
@@ -199,5 +204,34 @@ class Member
     public function hasLastEntry()
     {
         return $this->lastEntry !== null;
+    }
+
+    /**
+     * Searches for voucher that is current for actual time and sets it to currentVoucher param
+     */
+    public function updateCurrentVoucher()
+    {
+        $now = time();
+
+        if ($this->hasCurrentVoucher()) {
+            $currentStart = $this->currentVoucher->startDate()->getTimestamp();
+            $currentEnd = $this->currentVoucher->endDate()->getTimestamp();
+
+            if ($currentStart <= $now && $now <= $currentEnd) {
+                return;
+            }
+        }
+
+        if ($this->vouchers()->count() > 0) {
+            foreach ($this->vouchers() as $voucher) {
+                $start = $voucher->startDate()->getTimestamp();
+                $end = $voucher->endDate()->getTimestamp();
+                if ($start <= $now && $now <= $end) {
+                    $this->currentVoucher = $voucher;
+
+                    return;
+                }
+            }
+        }
     }
 }

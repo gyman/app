@@ -4,9 +4,13 @@ namespace Gyman\Component\Vouchers\Tests\Context;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use DateTime;
+use Exception;
 use Gyman\Component\CoreDomain\Repository\InMemoryDomainEventRepository;
 use Gyman\Component\CoreDomain\Tests\LoggedAsAdministratorTrait;
 use Gyman\Component\Members\Model\Member;
+use Gyman\Component\Vouchers\Exception\ExceededMaximumAmountOfEntriesException;
+use Gyman\Component\Vouchers\Exception\LastEntryIsStillOpenedException;
+use Gyman\Component\Vouchers\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Component\Vouchers\Factory\VoucherFactory;
 use Gyman\Component\Vouchers\Model\Entry;
 use Gyman\Component\Vouchers\Model\Price;
@@ -14,7 +18,6 @@ use Gyman\Component\Vouchers\Repository\InMemoryEntryRepository;
 use Gyman\Component\Vouchers\Repository\InMemoryVoucherRepository;
 use Gyman\Component\Vouchers\Service\OpenEntry;
 use Gyman\Component\Vouchers\Service\SellVoucher;
-use Mockery\CountValidator\Exception;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -89,7 +92,7 @@ class EntriesContext implements Context
     public function memberHasNoLastEntry()
     {
         if (!is_null($this->member->lastEntry())) {
-            throw new \Exception("Member's last entry is set!");
+            throw new Exception("Member's last entry is set!");
         }
     }
 
@@ -119,7 +122,12 @@ class EntriesContext implements Context
 
         $entry = new Entry(new \DateTime(), $type, null, $price);
 
-        $this->openEntry->openEntry($this->member, $entry, $this->user);
+        try {
+            $this->openEntry->openEntry($this->member, $entry, $this->user);
+        } catch (LastEntryIsStillOpenedException $e) {
+        } catch (NoCurrentVoucherForVoucherEntryException $e) {
+        } catch (ExceededMaximumAmountOfEntriesException $e) {
+        }
     }
 
     /**
@@ -171,6 +179,10 @@ class EntriesContext implements Context
      */
     public function hisCurrentVoucherHasEntriesLeft($count)
     {
+        if (!$this->member->currentVoucher()) {
+            throw new Exception('Member has no current voucher');
+        }
+
         $freeEntries = $this->member->currentVoucher()->getFreeAmount();
 
         if ($freeEntries != $count) {
@@ -189,7 +201,8 @@ class EntriesContext implements Context
     public function currentVoucherIsAdded($amount = 10)
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate'     => 'now',
+            'startDate'     => '-1 hour',
+            'endDate'       => '+2 hour',
             'maximumAmount' => $amount,
         ]);
 
@@ -244,6 +257,10 @@ class EntriesContext implements Context
      */
     public function iCloseLastEntry()
     {
+        if (!$this->member->lastEntry()) {
+            throw new Exception('Member has no last entry');
+        }
+
         $this->member->lastEntry()->closeEntry(new DateTime());
     }
 

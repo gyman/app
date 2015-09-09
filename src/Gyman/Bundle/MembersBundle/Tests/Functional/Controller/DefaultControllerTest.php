@@ -14,14 +14,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class DefaultControllerTest extends BaseFunctionalTest
 {
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
-        copy(realpath(__DIR__.'/../../Resources/foto.jpg'), '/tmp/foto.jpg');
+        copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::setUp();
-        copy(realpath(__DIR__.'/../../Resources/foto.jpg'), '/tmp/foto.jpg');
+        copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
     }
 
     /**
@@ -55,8 +57,8 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function edit_member_form_renders_properly()
     {
-        $editedMember = $this->container->get("doctrine.orm.club_entity_manager")
-            ->getRepository("MembersBundle:Member")
+        $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
+            ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
@@ -103,8 +105,6 @@ class DefaultControllerTest extends BaseFunctionalTest
             'gyman_member_form[belt]'      => 'white',
             'gyman_member_form[notes]'     => 'some admin notes',
         ]);
-
-
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
@@ -154,8 +154,8 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function member_edit_form_is_posted_and_entity_is_changed()
     {
-        $editedMember = $this->container->get("doctrine.orm.club_entity_manager")
-            ->getRepository("MembersBundle:Member")
+        $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
+            ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
@@ -226,8 +226,8 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function new_member_form_is_posted_and_error_is_emitted($values, $files, $elementPath, $error)
     {
-        $editedMember = $this->container->get("doctrine.orm.club_entity_manager")
-            ->getRepository("MembersBundle:Member")
+        $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
+            ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
@@ -292,8 +292,8 @@ class DefaultControllerTest extends BaseFunctionalTest
                     'someTestFile.jpg',
                     'image/jpeg',
                     123
-                )
-            ]
+                ),
+            ],
         ];
 
         return [
@@ -304,7 +304,7 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[firstname]' => null,
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(1) .controls .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
@@ -315,7 +315,7 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[lastname]' => null,
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(2) .controls .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
@@ -326,13 +326,13 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => null,
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
             'empty file' => [
-                'values' => $correctData,
-                'files' => ['gyman_member_form' => ['foto' => null]],
+                'values'      => $correctData,
+                'files'       => ['gyman_member_form' => ['foto' => null]],
                 'elementPath' => '#filePane div.control-group.error .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
@@ -343,7 +343,7 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => 'errornous-address',
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
                 'error'       => "Adres '{{ value }}' nie jest poprawny.",
             ],
@@ -354,9 +354,9 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => 'test01@test.pl',
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
-                'error'       => "Ten email jest już zarejestrowany",
+                'error'       => 'Ten email jest już zarejestrowany',
             ],
             'existing barcode' => [
                 'values' => array_merge(
@@ -365,9 +365,9 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[barcode]' => 'abcd12301',
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#additionalsPane div.control-group.error:nth-child(1) .controls .help-block',
-                'error'       => "Ten kod jest już zarejestrowany",
+                'error'       => 'Ten kod jest już zarejestrowany',
             ],
             'wrong zipcode' => [
                 'values' => array_merge(
@@ -376,7 +376,7 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[zipcode]' => 'XYZTAAA',
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(5) .controls .help-block',
                 'error'       => "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.\n            Kod pocztowy musi być w formacie XX-XXX",
             ],
@@ -387,31 +387,31 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[birthdate]' => '2015-01-01',
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
-                'error'       => "This value is not valid.",
+                'error'       => 'This value is not valid.',
             ],
             'too late birthdate' => [
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[birthdate]' => (new \DateTime("+1 day"))->format("d.m.Y"),
+                        'gyman_member_form[birthdate]' => (new \DateTime('+1 day'))->format('d.m.Y'),
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
-                'error'       => "Data powinna być przed {{ limit }}.",
+                'error'       => 'Data powinna być przed {{ limit }}.',
             ],
             'too early birthdate' => [
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[birthdate]' => (new \DateTime("-100 years"))->format("d.m.Y"),
+                        'gyman_member_form[birthdate]' => (new \DateTime('-100 years'))->format('d.m.Y'),
                     ]
                 ),
-                'files' => $files,
+                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
-                'error'       => "Data powinna być po {{ limit }}.",
+                'error'       => 'Data powinna być po {{ limit }}.',
             ],
         ];
     }

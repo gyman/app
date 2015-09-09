@@ -2,31 +2,31 @@
 namespace Gyman\Bundle\MembersBundle\Form\DataTransformer;
 
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\MembersBundle\DTO\NewMember;
+use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class NewMemberDataTransformer
+ * Class MemberDataTransformer
  * @package Gyman\Bundle\MembersBundle
  */
-class NewMemberDataTransformer implements DataTransformerInterface
+class MemberDataTransformer implements DataTransformerInterface
 {
     /**
-     * @param Member $member
-     * @return null|NewMember
+     * @param Member $voucher
+     * @return null|MemberDTO
      */
-    public function transform($member)
+    public function transform($voucher)
     {
-        if ($member === null) {
+        if ($voucher === null) {
             return;
         }
 
-        $details = $member->details();
+        $details = $voucher->details();
 
-        $dto = new NewMember();
+        $dto = new MemberDTO();
         $dto->firstname = $details->firstname();
         $dto->lastname = $details->lastname();
         $dto->birthdate = $details->birthdate();
@@ -42,7 +42,7 @@ class NewMemberDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param NewMember $dto
+     * @param MemberDTO $dto
      * @return Member
      */
     public function reverseTransform($dto)

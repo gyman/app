@@ -58,7 +58,7 @@ class Builder
                 'route'          => '_member_new',
                 'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    'class' => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    'class' => 'btn btn-block btn-large btn-primary',
                     'id'    => 'actionEntry',
                 ],
             ]
@@ -67,10 +67,10 @@ class Builder
         $menu->addChild(
             'dashboard.actions.new_voucher_sale',
             [
-                'route'          => '_member_new',
+                'route'          => 'gyman_voucher_new',
                 'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
-                    'class' => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
+                    'class' => 'btn btn-block btn-large btn-primary',
                     'id'    => 'actionVoucher',
                 ],
             ]

@@ -59,9 +59,8 @@ clubs:
     prefix:   /clubs
 
 vouchers:
-    resource: "@VouchersBundle/Controller/DefaultController.php"
+    resource: "@VouchersBundle/Controller/"
     type:     annotation
-    prefix:   /vouchers
 
 # bundles
 

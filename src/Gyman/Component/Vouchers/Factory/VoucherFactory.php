@@ -15,7 +15,7 @@ final class VoucherFactory implements VoucherFactoryInterface
      * @param $params
      * @return Voucher
      */
-    public static function createFromArray($array)
+    public static function createFromArray($array = [])
     {
         $template = [
             'startDate'           => null,
@@ -36,5 +36,13 @@ final class VoucherFactory implements VoucherFactoryInterface
             ),
             $array['maximumAmount']
         );
+    }
+
+    /**
+     * @return Voucher
+     */
+    public static function create()
+    {
+        return self::createFromArray();
     }
 }

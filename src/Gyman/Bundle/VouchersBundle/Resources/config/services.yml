@@ -1,8 +1,19 @@
 parameters:
-    voucher_entity.class: Gyman\Bundle\VouchersBundle\Entity\Voucher
-    voucher_repository.class: Gyman\Bundle\VouchersBundle\Entity\VoucherRepository
     date_validator.class: Gyman\Bundle\VouchersBundle\Validator\VoucherDateValidator
+
 services:
+
+    gyman.vouchers.form.voucher:
+      class: Gyman\Bundle\VouchersBundle\Form\VoucherType
+      tags:
+        - { name: form.type, alias: gyman_voucher_form }
+
+    gyman.vouchers.sell_voucher:
+      class: Gyman\Component\Vouchers\Service\SellVoucher
+      arguments:
+        - @voucher_repository
+        - @event_dispatcher
+
     gyman.twig.voucher_extension:
         class: Gyman\Bundle\VouchersBundle\Twig\VoucherExtension
         calls:
@@ -18,16 +29,18 @@ services:
         - Gyman\Bundle\VouchersBundle\Entity\Entry
 
     voucher_repository:
-        class:          "%voucher_repository.class%"
-        factory_service: doctrine
+        class:          Gyman\Bundle\VouchersBundle\Entity\VoucherRepository
+        factory_service: doctrine.orm.club_entity_manager
         factory_method:  getRepository
-        arguments: [ "%voucher_entity.class%" ]
+        arguments:
+          - Gyman\Bundle\VouchersBundle\Entity\Voucher
+          -
 
     voucher_manager:
         class:          Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager
         parent:         gyman.base.entity_manager
         calls:
-             - [ setClass, [%voucher_entity.class%] ]
+             - [ setClass, [Gyman\Bundle\VouchersBundle\Entity\Voucher] ]
              - [ setEntityManager, [@doctrine.orm.club_entity_manager]]
 
     validator.voucher_date:

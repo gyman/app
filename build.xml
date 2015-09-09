@@ -57,11 +57,21 @@
         </exec>
     </target>
 
+    <target name="phpunit-functional"  description="PHPUnit Functional tests">
+        <exec command="./bin/phpunit -c ./app/phpunit.xml --testsuite=functional" passthru="true" checkreturn="true" />
+    </target>
+
+    <target name="phpunit-unit"  description="PHPUnit Unit tests">
+        <exec command="./bin/phpunit -c ./app/phpunit.xml --testsuite=unit" passthru="true" checkreturn="true" />
+    </target>
+
     <target name="test-dende">
         <property name="env" value="test" />
         <property name="club" value="dende" />
-        <!--<phingcall target="behat-ddd" />-->
-        <exec command="./bin/phpunit -c app/phpunit.xml ./src/Gyman/Bundle/MembersBundle/Tests/Functional/Controller/DefaultControllerTest.php" passthru="true" checkreturn="true" />
+        <phingcall target="behat-ddd" description="BDD for components"/>
+        <phingcall target="phpcsfixer" description="PHPCSFixer" />
+        <phingcall target="phpunit-functional" />
+        <phingcall target="phpunit-unit" />
     </target>
 
 </project>

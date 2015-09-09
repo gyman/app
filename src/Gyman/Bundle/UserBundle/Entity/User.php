@@ -5,12 +5,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gyman\Bundle\ClubBundle\Entity\Club;
+use Gyman\Component\CoreDomain\Model\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Gyman\Bundle\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="users")
  */
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
     /**
      * @ORM\Id

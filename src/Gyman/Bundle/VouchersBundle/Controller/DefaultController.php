@@ -1,10 +1,9 @@
 <?php
-
-// <editor-fold defaultstate="collapsed" desc="namespace related">
 namespace Gyman\Bundle\VouchersBundle\Controller;
 
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Gyman\Bundle\VouchersBundle\Factory\VoucherFactory;
 use Gyman\Bundle\VouchersBundle\Form\VoucherType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,16 +12,69 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-// </editor-fold>
-
+/**
+ * Class DefaultController
+ * @package Gyman\Bundle\VouchersBundle
+ * @Route("/vouchers")
+ */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/new/member/{id}/decision/{decision}", name="_voucher_new", defaults={"decision" = null})
+     * @Route("/new", name="gyman_voucher_new")
+     * @Template("VouchersBundle:Default:new.html.twig")
+     */
+    public function newAction(Request $request)
+    {
+        $form = $this->createForm(
+            'gyman_voucher_form',
+            VoucherFactory::create(),
+            [
+                'action' => $this->generateUrl('gyman_voucher_new'),
+            ]
+        );
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $voucher = $form->getData();
+                $member = $form->get('member')->getData();
+                $this->get('gyman.vouchers.sell_voucher')->sellVoucher($member, $voucher, $this->getUser());
+            }
+        }
+
+        return ['form' => $form->createView()];
+
+//        if ($request->getMethod() == 'POST') {
+//            $form->handleRequest($request);
+//
+//            if ($form->isValid()) {
+//                $voucher->setAmountLeft($voucher->getAmount());
+//                $voucherManager->save($voucher);
+//            } else {
+//                $response->setStatusCode(400);
+//            }
+//        }
+//
+//        return $response->setContent(
+//            $this->renderView(
+//                'VouchersBundle:Default:new.html.twig',
+//                [
+//                    'form'     => $form->createView(),
+//                    'voucher'  => $voucher,
+//                    'member'   => $member,
+//                    'decision' => $decision,
+//                ]
+//            )
+//        );
+    }
+
+    /**
+     * Route("/new/member/{id}/decision/{decision}", name="_voucher_new", defaults={"decision" = null})
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template("VouchersBundle:Default:new.html.twig")
      */
-    public function newAction(Request $request, Member $member, $decision)
+    public function newOldAction(Request $request, Member $member, $decision)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
@@ -38,7 +90,7 @@ class DefaultController extends Controller
 
         if ($currentVoucher && $decision != 'deny') {
             return $this->forward('VouchersBundle:Default:close', [
-                        'id' => $currentVoucher->getId(),
+                'id' => $currentVoucher->getId(),
             ]);
         }
 

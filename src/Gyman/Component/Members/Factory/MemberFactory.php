@@ -66,4 +66,12 @@ final class MemberFactory implements MemberFactoryInterface
             $array['last_entry']
         );
     }
+
+    /**
+     * @return Member
+     */
+    public static function create()
+    {
+        return self::createFromArray([]);
+    }
 }

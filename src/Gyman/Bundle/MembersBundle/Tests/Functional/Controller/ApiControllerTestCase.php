@@ -9,7 +9,7 @@ use Gyman\Component\Test\WebTestCase;
  * Class MemberControllerTest
  * @SuppressWarnings(PHPMD.ExcessiveParameterList)
  */
-class ApiControllerTest extends WebTestCase
+class ApiControllerTestCase extends WebTestCase
 {
     protected function setUp()
     {

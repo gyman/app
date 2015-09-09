@@ -2,10 +2,10 @@
 namespace Gyman\Bundle\MembersBundle\DTO;
 
 /**
- * Class NewMember
+ * Class MemberDTO
  * @package Gyman\Bundle\MembersBundle
  */
-class NewMember
+class MemberDTO
 {
     public $firstname;
     public $lastname;

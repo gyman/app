@@ -1,11 +1,7 @@
 <?php
-
 namespace Gyman\Bundle\MembersBundle\Form;
 
-use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\MembersBundle\Form\DataTransformer\DateToStringTransformer;
-use Gyman\Bundle\MembersBundle\Form\DataTransformer\NewMemberDataTransformer;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Gyman\Bundle\MembersBundle\Form\DataTransformer\MemberDataTransformer;
 use Gyman\Component\Members\Model\Belt;
 use Gyman\Component\Members\Model\Details;
 use Symfony\Component\Form\AbstractType;
@@ -45,10 +41,10 @@ class MemberType extends AbstractType
                 'format' => 'dd.MM.yyyy',
             ])
             ->add('gender', 'choice', [
-                'choices' => array_combine(Details::$genders, Details::$genders)
+                'choices' => array_combine(Details::$genders, Details::$genders),
             ])
             ->add('belt', 'choice', [
-                'choices' => array_combine(Belt::$colors, Belt::$colors),
+                'choices'     => array_combine(Belt::$colors, Belt::$colors),
                 'placeholder' => 'choose',
             ])
             ->add('phone', 'text')
@@ -56,10 +52,9 @@ class MemberType extends AbstractType
             ->add('notes', 'textarea')
             ->add('zipcode', 'text')
             ->add('barcode', 'text')
-            ->add('foto', 'file')
-        ;
+            ->add('foto', 'file');
 
-        $builder->addViewTransformer(new NewMemberDataTransformer());
+        $builder->addViewTransformer(new MemberDataTransformer());
     }
 
     /**
@@ -68,17 +63,17 @@ class MemberType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => 'Gyman\Bundle\MembersBundle\DTO\NewMember',
+            'data_class'      => 'Gyman\Bundle\MembersBundle\DTO\MemberDTO',
             'csrf_protection' => true,
-            'error_mapping' => array(
-                'details.firstname' => 'firstname',
-                'details.lastname' => 'lastname',
-                'details.foto.foto' => 'foto',
-                'details.birthdate' => 'birthdate',
-                'email.email' => 'email',
-                'details.zipcode' => 'zipcode',
+            'error_mapping'   => [
+                'details.firstname'       => 'firstname',
+                'details.lastname'        => 'lastname',
+                'details.foto.foto'       => 'foto',
+                'details.birthdate'       => 'birthdate',
+                'email.email'             => 'email',
+                'details.zipcode'         => 'zipcode',
                 'details.barcode.barcode' => 'barcode',
-            ),
+            ],
         ]);
     }
 

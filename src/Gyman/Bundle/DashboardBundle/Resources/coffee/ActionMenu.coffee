@@ -1,11 +1,11 @@
 class window.ActionMenu
 
   constructor: (selector, searchInput) ->
-    @$actionMenu = $(selector)
-    @searchInput = searchInput
-    @setupButtons()
-    @subscribeForUserChange()
-    @setupEmptyResults()
+#    @$actionMenu = $(selector)
+#    @searchInput = searchInput
+#    @setupButtons()
+#    @subscribeForUserChange()
+#    @setupEmptyResults()
 
   $actionMenu: null
   searchInput: null

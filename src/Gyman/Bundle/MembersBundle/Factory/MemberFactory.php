@@ -3,7 +3,7 @@ namespace Gyman\Bundle\MembersBundle\Factory;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\MembersBundle\DTO\NewMember;
+use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
 use Gyman\Bundle\MembersBundle\Entity\Barcode;
 use Gyman\Bundle\MembersBundle\Entity\Belt;
 use Gyman\Bundle\MembersBundle\Entity\Details;
@@ -70,7 +70,7 @@ final class MemberFactory implements MemberFactoryInterface
     }
 
     /**
-     * @param NewMember $dto
+     * @param MemberDTO $dto
      * @return Member
      */
     public static function createFromDto($dto)

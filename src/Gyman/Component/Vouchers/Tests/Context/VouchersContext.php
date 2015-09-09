@@ -134,4 +134,14 @@ class VouchersContext implements Context
             );
         }
     }
+
+    /**
+     * @Given /^first voucher is his currentVoucher$/
+     */
+    public function firstVoucherIsHisCurrentVoucher()
+    {
+        if ($this->member->currentVoucher() !== $this->member->vouchers()->first()) {
+            throw new Exception('Current voucher is different the first one!');
+        }
+    }
 }

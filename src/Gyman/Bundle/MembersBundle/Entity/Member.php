@@ -16,11 +16,6 @@ use Gyman\Component\Members\Model\Member as BaseMember;
 class Member extends BaseMember
 {
     /**
-     * @var integer
-     */
-    private $id;
-
-    /**
      * @var string
      */
     private $nameSlug;

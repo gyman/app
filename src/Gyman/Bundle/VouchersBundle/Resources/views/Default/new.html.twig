@@ -1,40 +1,62 @@
-<div class="alert alert-info" id="ui-activitiesInfo">
-    <strong>Uwaga!</strong>
-    <a class="close" data-dismiss="alert" href="#">&times;</a>
-    Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>
-</div>
+{% extends "::base.html.twig" %}
 
-<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_remove", {id : voucher.id})}}{% endif %}">
-    <div class="span12">
-        {{ form_row(form.startDate,{"label" : "Data rozpoczęcia", "attr" : {"placeholder" : "wybierz datę"}}) }}
-        {{ form_row(form.endDate,{"label" : "Data zakończenia", "attr" : {"placeholder" : "wybierz datę"}}) }}
-        {{ form_row(form.price,{"label" : "Cena (PLN)", "attr" : {"placeholder" : "podaj cenę"}}) }}
-        {{ form_row(form.amount,{"label" : "Ilość wejść", "attr" : {"placeholder" : "podaj liczbę"}}) }}
-        {{ form_row(form.activities,{"label" : "Grupy"}) }}
-    </div>
-    <div class="hidden">
-    {{ form_rest(form) }}
-    </div>
-</form>
+{% block content %}
+    <div class="contentwrapper">
 
-{% block modal %}
-<span class="hidden" id="ui-sellVoucherData">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>{% block title %}Nowy karnet dla {{ member.getName() }}{% endblock %}</h3>
+        <div class="heading">
+
+            <h3>Dodaj karnet</h3>
+
+        </div>
+
+        <div class="span12">
+            {% include "::_flash.html.twig" %}
+
+            {{ form(form) }}
+
+        </div>
+
     </div>
-    <div class="modal-footer">
-        <a href="" class="btn btn-primary pull-right" id="saveFormInModal">{% block button %}Sprzedaj{% endblock %}</a>
-    </div>
-</span>
+
 {% endblock %}
 
-{% block javascript %}
-<script>
-    $(function() {
-        modal.setupFromNode("span#ui-sellVoucherData");
-        modal.setModalWindowClass("newVoucherModal");
-        window.newVoucherModal = new NewVoucher();
-    });
-</script>
-{% endblock javascript %}
+{#<div class="alert alert-info" id="ui-activitiesInfo">#}
+    {#<strong>Uwaga!</strong>#}
+    {#<a class="close" data-dismiss="alert" href="#">&times;</a>#}
+    {#Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>#}
+{#</div>#}
+
+{#<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_remove", {id : voucher.id})}}{% endif %}">#}
+    {#<div class="span12">#}
+        {#{{ form_row(form.startDate,{"label" : "Data rozpoczęcia", "attr" : {"placeholder" : "wybierz datę"}}) }}#}
+        {#{{ form_row(form.endDate,{"label" : "Data zakończenia", "attr" : {"placeholder" : "wybierz datę"}}) }}#}
+        {#{{ form_row(form.price,{"label" : "Cena (PLN)", "attr" : {"placeholder" : "podaj cenę"}}) }}#}
+        {#{{ form_row(form.amount,{"label" : "Ilość wejść", "attr" : {"placeholder" : "podaj liczbę"}}) }}#}
+        {#{{ form_row(form.activities,{"label" : "Grupy"}) }}#}
+    {#</div>#}
+    {#<div class="hidden">#}
+    {#{{ form_rest(form) }}#}
+    {#</div>#}
+{#</form>#}
+
+{#{% block modal %}#}
+{#<span class="hidden" id="ui-sellVoucherData">#}
+    {#<div class="modal-header">#}
+        {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+        {#<h3>{% block title %}Nowy karnet dla {{ member.getName() }}{% endblock %}</h3>#}
+    {#</div>#}
+    {#<div class="modal-footer">#}
+        {#<a href="" class="btn btn-primary pull-right" id="saveFormInModal">{% block button %}Sprzedaj{% endblock %}</a>#}
+    {#</div>#}
+{#</span>#}
+{#{% endblock %}#}
+
+{#{% block javascript %}#}
+{#<script>#}
+    {#$(function() {#}
+        {#modal.setupFromNode("span#ui-sellVoucherData");#}
+        {#modal.setModalWindowClass("newVoucherModal");#}
+        {#window.newVoucherModal = new NewVoucher();#}
+    {#});#}
+{#</script>#}
+{#{% endblock javascript %}#}

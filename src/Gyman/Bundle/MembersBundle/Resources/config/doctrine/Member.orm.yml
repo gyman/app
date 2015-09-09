@@ -21,29 +21,31 @@ Gyman\Bundle\MembersBundle\Entity\Member:
       time_aware: false
 
   manyToMany:
-    sections:
-      targetEntity: Gyman\Bundle\SectionBundle\Entity\Section
-      mappedBy: members
-
-  oneToMany:
-
-    vouchers:
-      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
-      mappedBy: member
-      cascade: [remove]
-      orphanRemoval:  true
-
-    entries:
-      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
-      mappedBy: member
-      cascade: [remove]
-      orphanRemoval: true
+#    vouchers:
+#      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
+#      joinTable:
+#        name: members_has_vouchers
+#        joinColumns:
+#          member_id:
+#            referencedColumnName: id
+#        inverseJoinColumns:
+#          voucher_id:
+#            referencedColumnName: id
+#
+#    entries:
+#      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
+#      joinTable:
+#        name: members_has_entries
+#        joinColumns:
+#          member_id:
+#            referencedColumnName: id
+#        inverseJoinColumns:
+#          entry_id:
+#            referencedColumnName: id
 
   oneToOne:
-
     currentVoucher:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
-      inversedBy: member
       joinColumn:
         name: current_voucher_id
         referencedColumnName: id

@@ -1,6 +1,6 @@
 Gyman\Bundle\VouchersBundle\Entity\Voucher:
-  constraints:
-    - Gyman\Bundle\VouchersBundle\Validator\VoucherDateConstraint:
+  constraints: ~
+#    - Gyman\Bundle\VouchersBundle\Validator\VoucherDateConstraint:
   properties:
     startDate:
       - NotNull:

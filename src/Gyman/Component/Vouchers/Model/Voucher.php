@@ -47,12 +47,16 @@ class Voucher
      */
     public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [])
     {
+        if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
+            throw new VoucherClosingDateBeforeOpeningException();
+        }
+
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->price = $price;
         $this->maximumAmount = $maximumAmount;
 
-        if (!$entries instanceof ArrayCollection) {
+        if (!$entries instanceof ArrayCollection && is_array($entries)) {
             $entries = new ArrayCollection($entries);
         }
 
@@ -89,7 +93,9 @@ class Voucher
      */
     public function lastEntry()
     {
-        return $this->entries->last();
+        if ($this->entries->count() > 0) {
+            return $this->entries->last();
+        }
     }
 
     /**
@@ -160,8 +166,27 @@ class Voucher
     /***
      * @return bool
      */
-    private function isUnlimited()
+    public function isUnlimited()
     {
         return $this->maximumAmount === null;
+    }
+
+    /**
+     * @param Voucher $voucher
+     * @return bool
+     */
+    public function overlaps(Voucher $voucher)
+    {
+        $start = $voucher->startDate()->getTimestamp();
+        $end = $voucher->endDate()->getTimestamp();
+
+        $comparisionStart = $this->startDate()->getTimestamp();
+        $comparisionEnd = $this->endDate()->getTimestamp();
+
+        if ($end < $comparisionStart || $start > $comparisionEnd) {
+            return false;
+        }
+
+        return true;
     }
 }

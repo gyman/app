@@ -17,15 +17,15 @@ Gyman\Bundle\VouchersBundle\Entity\Voucher:
       field_name: deletedAt
       time_aware: false
 
-  oneToMany:
-
+  manyToMany:
     entries:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
-      cascade: [remove]
-      orphanRemoval:  true
-      mappedBy: voucher
+      joinTable:
+        name: voucher_has_entries
 
   fields:
+
+
 
     startDate:
       type: datetime
@@ -34,6 +34,10 @@ Gyman\Bundle\VouchersBundle\Entity\Voucher:
     endDate:
       type: datetime
       nullable: true #false
+
+    maximumAmount:
+      type: integer
+      nullable: true
 
     deletedAt:
       name: deleted_at

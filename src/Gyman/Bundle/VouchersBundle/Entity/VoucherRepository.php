@@ -7,9 +7,29 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Component\Vouchers\Model\Voucher;
+use Gyman\Component\Vouchers\Repository\VoucherRepositoryInterface;
 
-class VoucherRepository extends EntityRepository implements RepositoryListCompatible
+class VoucherRepository extends EntityRepository implements RepositoryListCompatible, VoucherRepositoryInterface
 {
+    /**
+     * @param Voucher $voucher
+     * @return mixed
+     */
+    public function remove(Voucher $voucher)
+    {
+        // TODO: Implement remove() method.
+    }
+
+    /**
+     * @param Voucher $voucher
+     * @return null
+     */
+    public function insert(Voucher $voucher)
+    {
+        // TODO: Implement insert() method.
+    }
+
     public function getAllVouchers()
     {
         return $this->getQuery()

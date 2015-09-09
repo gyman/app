@@ -50,8 +50,7 @@ class OpenEntry
             $member->enter($entry);
         } catch (\Exception $e) {
             $this->dispatcher->dispatch(self::FAILURE, new EntryEvent($member, $entry, $author, $e));
-
-            return;
+            throw $e;
         }
 
         $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($member, $entry, $author));

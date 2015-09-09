@@ -4,8 +4,17 @@ namespace Gyman\Bundle\VouchersBundle\Form\DataTransformer;
 use DateTime;
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * Fixes start and end date hour in voucher
+ *
+ * Class VoucherDateTransformer
+ * @package Gyman\Bundle\VouchersBundle\Form\DataTransformer
+ */
 class VoucherDateTransformer implements DataTransformerInterface
 {
+    /**
+     * @var string
+     */
     protected $mode;
 
     public function __construct($mode)
@@ -21,7 +30,6 @@ class VoucherDateTransformer implements DataTransformerInterface
     public function transform($datetime)
     {
         if (!$datetime instanceof DateTime) {
-            //            return new DateTime();
             return;
         }
 
@@ -36,7 +44,6 @@ class VoucherDateTransformer implements DataTransformerInterface
     public function reverseTransform($datetime)
     {
         if (!$datetime instanceof DateTime) {
-            //            return new DateTime();
             return;
         }
 
