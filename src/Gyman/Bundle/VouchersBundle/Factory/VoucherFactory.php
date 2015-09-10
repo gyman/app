@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\VouchersBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\VouchersBundle\DTO\VoucherDTO;
 use Gyman\Bundle\VouchersBundle\Entity\Price;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
@@ -20,8 +21,8 @@ final class VoucherFactory implements VoucherFactoryInterface
     public static function createFromArray($array = [])
     {
         $template = [
-            'startDate'           => null,
-            'endDate'             => null,
+            'startDate'           => (new \DateTime("now"))->format(Globals::getDefaultDateTimeFormat()),
+            'endDate'             => (new \DateTime("+1 month"))->format(Globals::getDefaultDateTimeFormat()),
             'price'               => null,
             'maximumAmount'       => null,
             'entries'             => new ArrayCollection(),
@@ -30,8 +31,8 @@ final class VoucherFactory implements VoucherFactoryInterface
         $array = array_merge($template, $array);
 
         return new Voucher(
-            new \DateTime($array['startDate']),
-            new \DateTime($array['endDate']),
+            (new \DateTime())->createFromFormat(Globals::getDefaultDateTimeFormat(), $array['startDate']),
+            (new \DateTime())->createFromFormat(Globals::getDefaultDateTimeFormat(), $array['endDate']),
             new Price(
                 $array['price']['amount'],
                 $array['price']['currency']
@@ -47,8 +48,8 @@ final class VoucherFactory implements VoucherFactoryInterface
     public static function createFromDto(VoucherDTO $dto)
     {
         return self::createFromArray([
-            'startDate' => $dto->startDate->format('Y/m/d H:i:s'),
-            'endDate'   => $dto->endDate->format('Y/m/d H:i:s'),
+            'startDate' => $dto->startDate->format(Globals::getDefaultDateTimeFormat()),
+            'endDate'   => $dto->endDate->format(Globals::getDefaultDateTimeFormat()),
             'price'     => [
                 'amount'   => $dto->price,
                 'currency' => 'PLN',

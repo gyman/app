@@ -20,12 +20,6 @@ class DefaultControllerTest extends BaseFunctionalTest
         copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
     }
 
-    public function tearDown()
-    {
-        parent::setUp();
-        copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
-    }
-
     /**
      * @test
      */

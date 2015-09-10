@@ -46,7 +46,8 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
      */
     public function insert($member)
     {
-        // TODO: Implement insert() method.
+        $this->getEntityManager()->persist($member);
+        $this->getEntityManager()->flush();
     }
 
     /**

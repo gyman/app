@@ -48,7 +48,7 @@ class Voucher
     public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [])
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
-            throw new VoucherClosingDateBeforeOpeningException();
+            throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
         }
 
         $this->startDate = $startDate;

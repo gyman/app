@@ -70,6 +70,7 @@ class Member
         $this->email = $email;
         $this->details = $details;
 
+
         $this->sections = empty($sections) ? new ArrayCollection() : $sections; // remove this
         $this->vouchers = empty($vouchers) ? new ArrayCollection() : $vouchers;
         $this->entries = empty($entries) ? new ArrayCollection() : $entries;
@@ -139,6 +140,11 @@ class Member
      */
     public function addVoucher(Voucher $newVoucher)
     {
+        if(!$this->vouchers instanceof ArrayCollection)
+        {
+            $this->vouchers = new ArrayCollection();
+        }
+
         if ($this->vouchers()->count() > 0) {
             foreach ($this->vouchers() as $existingVoucher) {
                 if ($existingVoucher->overlaps($newVoucher)) {

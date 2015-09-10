@@ -3,8 +3,8 @@ Voucher00:
     entries:			null
     previousVoucher:            null
     member:			Member01
-    startDate:			"2013-11-01 12:00:00"
-    endDate:			"2013-11-30 12:00:00"
+    startDate:			"2013.11.01 12:00:00"
+    endDate:			"2013.11.30 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10
@@ -14,8 +14,8 @@ Voucher01:
     entries:			null
     previousVoucher:            Voucher00
     member:			Member01
-    startDate:			now
-    endDate:			+1 month
+    startDate:			"2015.11.01 12:00:00"
+    endDate:			"2015.12.01 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10
@@ -25,8 +25,8 @@ Voucher02:
     entries:			null
     previousVoucher:            null
     member:			Member02
-    startDate:			"2013-12-01 12:00:00"
-    endDate:			"2013-12-31 12:00:00"
+    startDate:			"2013.12.01 12:00:00"
+    endDate:			"2013.12.31 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10
@@ -36,8 +36,8 @@ Voucher03:
     entries:			null
     previousVoucher:            null
     member:			Member03
-    startDate:			"2013-12-01"
-    endDate:			"2013-12-31"
+    startDate:			"2013.12.01 12:00:00"
+    endDate:			"2013.12.31 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10
@@ -47,8 +47,8 @@ Voucher04:
     entries:			null
     previousVoucher:            null
     member:			Member01
-    startDate:			"2014-01-01 12:00:00"
-    endDate:			"2014-12-31 12:00:00"
+    startDate:			"2014.01.01 12:00:00"
+    endDate:			"2014.12.31 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10
@@ -56,8 +56,8 @@ Voucher04:
 Voucher05:
     activities:			null
     member:			Member11
-    startDate:			"2014-01-01 12:00:00"
-    endDate:			"2014-02-02 12:00:00"
+    startDate:			"2014.01.01 12:00:00"
+    endDate:			"2014.02.02 12:00:00"
     price:			100
     amount:			10
     amountLeft:			10

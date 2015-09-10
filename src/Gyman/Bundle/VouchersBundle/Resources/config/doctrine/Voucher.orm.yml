@@ -24,9 +24,6 @@ Gyman\Bundle\VouchersBundle\Entity\Voucher:
         name: voucher_has_entries
 
   fields:
-
-
-
     startDate:
       type: datetime
       nullable: true #false

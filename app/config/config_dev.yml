@@ -26,3 +26,7 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: ERROR
+
+accelerator_cache:
+    host: dende.%base_url%
+    web_dir: %kernel.root_dir%/../web

@@ -1,4 +1,8 @@
 parameters:
+  date_format: "Y.m.d"
+  time_format: "H:i:s"
+  datetime_format: "Y.m.d H:i:s"
+
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/default/images/no-profile.gif
   gallery_dir: /uploads/gallery/
@@ -9,6 +13,12 @@ parameters:
     - { host: 127.0.0.1, port: 11211 }
 
 services:
+#    globals_object:
+#      class: Gyman\Bundle\DefaultBundle\Lib\Globals
+#      calls:
+#        - [setDefaultDateFormat, [%date_format%]]
+#        - [setDefaultDateTimeFormat, [%datetime_format%]]
+
     memcached:
         class: Memcached
         calls:

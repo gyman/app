@@ -46,7 +46,7 @@ final class MemberFactory implements MemberFactoryInterface
 
         $array = array_merge($template, $array);
 
-        return new Member(
+        $member = new Member(
             new EmailAddress($array['email']),
             new Details(
                 $array['firstname'],
@@ -67,6 +67,8 @@ final class MemberFactory implements MemberFactoryInterface
             $array['current_voucher'],
             $array['last_entry']
         );
+
+        return $member;
     }
 
     /**

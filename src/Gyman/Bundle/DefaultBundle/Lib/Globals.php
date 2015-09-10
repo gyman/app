@@ -1,8 +1,24 @@
 <?php
 namespace Gyman\Bundle\DefaultBundle\Lib;
 
+/**
+ * Class Globals
+ * @package Gyman\Bundle\DefaultBundle\Lib
+ */
 class Globals
 {
+    /**
+     * @var
+     */
+    public static $defaultDateTimeFormat = "Y.m.d H:i:s";
+    /**
+     * @var string
+     */
+    public static $defaultDateFormat = "Y.m.d";
+
+    /**
+     * @var
+     */
     protected static $galleryPath;
 
     protected static $galleryDir = '/uploads/gallery/';
@@ -116,5 +132,31 @@ class Globals
     public static function parseClassname($object)
     {
         return implode('', array_slice(explode('\\', get_class($object)), -1));
+    }
+
+    /**
+     * @param $format
+     */
+    public static function setDefaultDateFormat($format)
+    {
+        self::$defaultDateFormat = $format;
+    }
+
+    public static function getDefaultDateTimeFormat()
+    {
+        return self::$defaultDateTimeFormat;
+    }
+
+    public static function setDefaultDateTimeFormat($format)
+    {
+        self::$defaultDateTimeFormat = $format;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getDefaultDateFormat()
+    {
+        return self::$defaultDateFormat;
     }
 }

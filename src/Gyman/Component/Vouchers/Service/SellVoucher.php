@@ -3,6 +3,7 @@ namespace Gyman\Component\Vouchers\Service;
 
 use Gyman\Component\CoreDomain\Model\UserInterface;
 use Gyman\Component\Members\Model\Member;
+use Gyman\Component\Members\Repository\MemberRepositoryInterface;
 use Gyman\Component\Vouchers\Event\VoucherEvent;
 use Gyman\Component\Vouchers\Model\Voucher;
 use Gyman\Component\Vouchers\Repository\VoucherRepositoryInterface;
@@ -18,7 +19,7 @@ class SellVoucher
     const FAILURE = 'gyman.voucher_sell.failure';
 
     /**
-     * @var VoucherRepositoryInterface
+     * @var MemberRepositoryInterface
      */
     private $repository;
 
@@ -32,7 +33,7 @@ class SellVoucher
      * @param VoucherRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(VoucherRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
         $this->repository = $repository;
         $this->dispatcher = $dispatcher;
@@ -46,6 +47,8 @@ class SellVoucher
     public function sellVoucher(Member $member, Voucher $voucher, UserInterface $author)
     {
         $member->addVoucher($voucher);
+
+        $this->repository->insert($member);
 
         $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($member, $voucher, $author));
     }

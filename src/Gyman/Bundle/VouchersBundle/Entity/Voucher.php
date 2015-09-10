@@ -2,6 +2,8 @@
 namespace Gyman\Bundle\VouchersBundle\Entity;
 
 use DateTime;
+
+use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Component\Vouchers\Model\Voucher as BaseVoucher;
 
 /**
@@ -13,6 +15,11 @@ class Voucher extends BaseVoucher
      * @var integer
      */
     protected $id;
+
+    /**
+     * @var Member
+     */
+    protected $member;
 
     /**
      * @var DateTime $created

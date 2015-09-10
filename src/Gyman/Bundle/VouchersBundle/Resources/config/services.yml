@@ -11,7 +11,7 @@ services:
     gyman.vouchers.sell_voucher:
       class: Gyman\Component\Vouchers\Service\SellVoucher
       arguments:
-        - @voucher_repository
+        - @gyman.members.repository
         - @event_dispatcher
 
     gyman.twig.voucher_extension:

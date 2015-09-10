@@ -15,11 +15,11 @@ interface VoucherRepositoryInterface extends RepositoryInterface
      * @param Voucher $voucher
      * @return mixed
      */
-    public function remove(Voucher $voucher);
+    public function remove($voucher);
 
     /**
      * @param Voucher $voucher
      * @return null
      */
-    public function insert(Voucher $voucher);
+    public function insert($voucher);
 }
