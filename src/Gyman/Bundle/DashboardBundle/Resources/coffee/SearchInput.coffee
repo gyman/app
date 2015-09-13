@@ -40,8 +40,8 @@ class window.SearchInput
     @editUser()
 
   editUser: () =>
-#    window.modal.showFromUrl Routing.generate("_member_edit", {id: @user.id})
-    window.location = Routing.generate("_member_edit", {id: @user.id})
+#    window.modal.showFromUrl Routing.generate("gyman_member_edit", {id: @user.id})
+    window.location = Routing.generate("gyman_member_edit", {id: @user.id})
 
 
   subscribe: (handler) =>

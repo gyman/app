@@ -116,4 +116,10 @@ class Member extends BaseMember
     {
         return $this->sections;
     }
+
+    public function updateWithDto($dto)
+    {
+        $this->details()->updateWithDto($dto);
+        $this->email()->updateWithDto($dto);
+    }
 }

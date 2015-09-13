@@ -13,4 +13,19 @@ class GymanMultiDatabaseBundle extends Bundle
 
         parent::build($container);
     }
+
+    /**
+     * Boots the Bundle.
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        if ($this->container->getParameter('kernel.environment') !== 'prod') {
+            $this->container->get('gyman.multidatabase.doctrine_fixtures_load_listener')->setOptions([
+                'default' => $this->container->getParameter('standardfixtures'),
+                'club'    => $this->container->getParameter('clubfixtures'),
+            ]);
+        }
+    }
 }

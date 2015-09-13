@@ -23,7 +23,8 @@ services:
   gyman_members_member_form_type:
     class: Gyman\Bundle\MembersBundle\Form\MemberType
     arguments:
-      - @oneup_uploader.templating.uploader_helper
+      - @gyman.members.repository
+      - %gallerypath%/%gallery_dir%
     tags:
       - { name: form.type, alias: gyman_member_form }
 

@@ -43,7 +43,7 @@ class Builder
 //        $menu->addChild(
 //            'dashboard.actions.sell',
 //            [
-//                'route' => '_member_new',
+//                'route' => 'gyman_member_new',
 //                "extras" => ["icon" => 'icomoon-icon-users'],
 //                'linkAttributes' => [
 //                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
@@ -55,7 +55,7 @@ class Builder
         $menu->addChild(
             'dashboard.actions.new_entry',
             [
-                'route'          => '_member_new',
+                'route'          => 'gyman_member_new',
                 'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
                     'class' => 'btn btn-block btn-large btn-primary',
@@ -64,22 +64,23 @@ class Builder
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
-        $menu->addChild(
-            'dashboard.actions.new_voucher_sale',
-            [
-                'route'          => 'gyman_voucher_new',
-                'extras'         => ['icon' => 'icomoon-icon-users'],
-                'linkAttributes' => [
-                    'class' => 'btn btn-block btn-large btn-primary',
-                    'id'    => 'actionVoucher',
-                ],
-            ]
-        )->setExtra('translation_domain', 'DashboardBundle');
+//        $menu->addChild(
+//            'dashboard.actions.new_voucher_sale',
+//            [
+//                'route'          => 'gyman_voucher_new',
+//                'route_parameters' => ['id' => $member->id()],
+//                'extras'         => ['icon' => 'icomoon-icon-users'],
+//                'linkAttributes' => [
+//                    'class' => 'btn btn-block btn-large btn-primary',
+//                    'id'    => 'actionVoucher',
+//                ],
+//            ]
+//        )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.new_member',
             [
-                'route'          => '_member_new',
+                'route'          => 'gyman_member_new',
                 'extras'         => ['icon' => 'icomoon-icon-users'],
                 'linkAttributes' => [
                     'class' => 'btn btn-block btn-large btn-primary createNewMember',

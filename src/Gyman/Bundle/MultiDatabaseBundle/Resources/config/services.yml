@@ -44,8 +44,8 @@ services:
 
   gyman.multidatabase.doctrine_fixtures_load_listener:
       class: Gyman\Bundle\MultiDatabaseBundle\Listener\DoctrineFixturesLoadListener
-      calls:
-        - [setOptions, [{default: %standardFixtures%, club: %clubFixtures% }]]
+#      calls:
+#        - [setOptions, [{default: %standardFixtures%, club: %clubFixtures% }]]
       tags:
         - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
 

@@ -16,7 +16,7 @@ class LeftAmountValidator
 {
     public static function isAmountLeft(Entry $entry, ExecutionContextInterface $context)
     {
-        if ($entry->isType(Entry::TYPE_VOUCHER) && $entry->voucher()->getFreeAmount() === 0) {
+        if ($entry->isType(Entry::TYPE_VOUCHER) && $entry->voucher()->leftEntriesAmount() === 0) {
             $context->addViolation('Użytkownik wykorzystał już wszystkie wejścia z posiadanego karnetu!');
         }
     }

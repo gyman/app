@@ -21,7 +21,7 @@
             <dd>
                 <ol>
                     {% for entry in occurence.entries %}
-                        <li><a class="name openUrlInModal" href="{{ path("_member_edit", {"id" : entry.member.id}) }}"><strong>{{ entry.member.name }}</strong></a><br/>
+                        <li><a class="name openUrlInModal" href="{{ path("gyman_member_edit", {"id" : entry.member.id}) }}"><strong>{{ entry.member.name }}</strong></a><br/>
                                 {% endfor %}
                 </ol>
             </dd>

@@ -2,8 +2,6 @@
 namespace Gyman\VouchersBundle\Tests\Functional\Controller;
 
 use DateTime;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\ExpressionBuilder;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Gyman\Component\Members\Model\Belt;
@@ -20,16 +18,18 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function new_voucher_form_renders_properly()
     {
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new'));
+        $member = $this->container->get('gyman.members.repository')->findOneById(5);
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new', ['id' => $member->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
         $form = $crawler->filter('form[name="gyman_voucher_form"]')->first();
 
-        $this->assertCount(7, $form->filter('input, textarea, button, select'));
+        $this->assertCount(6, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(0, $form->filter('textarea'));
-        $this->assertCount(1, $form->filter('select'));
+        $this->assertCount(0, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
         $this->assertCount(5, $form->filter('input'));
         $this->assertCount(2, $form->filter('input[type=text]'));
@@ -39,13 +39,13 @@ class DefaultControllerTest extends BaseFunctionalTest
         $this->assertCount(1, $form->filter('input[type=hidden]'));
 
         $this->assertEquals(
-            (new \DateTime("now"))->format("d.m.Y"),
-            $form->filter("input#gyman_voucher_form_startDate")->first()->attr("value")
+            (new \DateTime('now'))->format('d.m.Y'),
+            $form->filter('input#gyman_voucher_form_startDate')->first()->attr('value')
         );
 
         $this->assertEquals(
-            (new \DateTime("+1 month"))->format("d.m.Y"),
-            $form->filter("input#gyman_voucher_form_endDate")->first()->attr("value")
+            (new \DateTime('+1 month'))->format('d.m.Y'),
+            $form->filter('input#gyman_voucher_form_endDate')->first()->attr('value')
         );
     }
 //
@@ -58,7 +58,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 //            ->getRepository('MembersBundle:Member')
 //            ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 //
-//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 //
 //        $this->assertEquals(200, $this->getStatusCode());
 //
@@ -84,58 +84,50 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function new_voucher_form_is_posted_and_entity_is_added()
     {
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new'));
+        $member = $this->container->get('gyman.members.repository')->findOneById(5);
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new', ['id' => $member->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
         $form = $crawler->filter('form[name="gyman_voucher_form"]')->first()->form();
 
-        $this->assertEquals("Jan Kowalski", $crawler->filter("select#gyman_voucher_form_member option")->text());
-
-        $start = (new DateTime("10.11.2015"))->format("d.m.Y");
-        $end = (new DateTime("10.12.2015"))->format("d.m.Y");
+        $start = (new DateTime('10.11.2015 00:00:00'))->format('d.m.Y');
+        $end = (new DateTime('10.12.2015 23:59:59'))->format('d.m.Y');
 
         $form->setValues([
-            'gyman_voucher_form[member]' => '1',
-            'gyman_voucher_form[startDate]'  => $start,
-            'gyman_voucher_form[endDate]' => $end,
-            'gyman_voucher_form[price]'    => '123',
+            'gyman_voucher_form[startDate]'       => $start,
+            'gyman_voucher_form[endDate]'         => $end,
+            'gyman_voucher_form[price]'           => '123',
             'gyman_voucher_form[maximumAmount]'   => '10',
         ]);
 
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
         $this->assertEquals(200, $this->getStatusCode());
 
-        $memberRepository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('MembersBundle:Member');
-
-        /** @var Member $member */
-        $member = $memberRepository->findOneBy(['details.firstname' => 'Jan', 'details.lastname' => 'Kowalski']);
+        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
 
         $this->assertNotNull($member->vouchers());
         $this->assertEquals(1, $member->vouchers()->count());
-//
-//        $expr = new ExpressionBuilder();
-//
-//        $criteria = new Criteria(
-//            $expr->andX(
-//                $expr->eq('startDate()', new DateTime($start)),
-//                $expr->eq('endDate()', new DateTime($end))
-//            )
-//        );
 
         /** @var Voucher $voucher */
         $voucher = $member->vouchers()->last();
 
-        $this->assertEquals($voucher->startDate()->getTimestamp(), (new DateTime($start))->getTimestamp());
-        $this->assertEquals($voucher->endDate()->getTimestamp(), (new DateTime($end))->getTimestamp());
+        $this->assertEquals($voucher->startDate()->format('Y-m-d H:i:s'), (new DateTime($start . ' 00:00:00'))->format('Y-m-d H:i:s'));
+        $this->assertEquals($voucher->endDate()->format('Y-m-d H:i:s'), (new DateTime($end . ' 23:59:59'))->format('Y-m-d H:i:s'));
         $this->assertEquals($voucher->price()->amount(), 123);
         $this->assertEquals($voucher->maximumAmount(), 10);
 
-//
-//        $alert = $crawler->filter('div.alert.alert-success');
-//        $this->assertEquals('flash.member_added.success', trim($alert->text()));
-//
-//        $this->assertEquals($this->container->get('router')->generate('_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
+        $alert = $crawler->filter('div.alert.alert-success');
+        $this->assertEquals('flash.voucher_added.success', trim($alert->text()));
+
+        $this->container->get('doctrine.orm.club_entity_manager')->refresh($voucher);
+
+//        $this->assertEquals(
+//            $this->container->get('router')->generate('gyman_member_edit', ['id' => $voucher->member()->id()]),
+//            $this->client->getRequest()->getRequestUri()
+//        );
+
 //        $this->assertEquals('GET', $this->client->getRequest()->getMethod());
 //
 //        $this->assertEquals($member->details()->firstname(), 'Andrzej');
@@ -162,7 +154,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 //            ->getRepository('MembersBundle:Member')
 //            ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 //
-//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 //
 //        $this->assertEquals(200, $this->getStatusCode());
 //
@@ -206,7 +198,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 //        $alert = $crawler->filter('div.alert.alert-success');
 //        $this->assertEquals('flash.member_editted.success', trim($alert->text()));
 //
-//        $this->assertEquals($this->container->get('router')->generate('_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
+//        $this->assertEquals($this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
 //        $this->assertEquals('GET', $this->client->getRequest()->getMethod());
 //
 //        $this->assertEquals($member->details()->firstname(), 'Andrzej');
@@ -234,7 +226,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 //            ->getRepository('MembersBundle:Member')
 //            ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 //
-//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 //
 //        $this->assertEquals(200, $this->getStatusCode());
 //
@@ -257,7 +249,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 //     */
 //    public function member_edit_form_is_posted_and_error_is_emitted($values, $files, $elementPath, $error)
 //    {
-//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_new'));
+//        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_new'));
 //
 //        $this->assertEquals(200, $this->getStatusCode());
 //

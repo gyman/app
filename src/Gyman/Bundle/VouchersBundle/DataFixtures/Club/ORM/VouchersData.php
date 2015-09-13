@@ -12,15 +12,12 @@ class VouchersData extends BaseFixture
     public function insert($array)
     {
         $voucher = VoucherFactory::createFromArray([
-            "startDate" => $array["startDate"],
-            "endDate" => $array["endDate"],
-            "maximumAmount" => $array["amount"],
-            "price" => ["amount" => $array["price"], "currency" => "PLN"]
+            'member'        => $this->getReference($array['member']),
+            'startDate'     => $array['startDate'],
+            'endDate'       => $array['endDate'],
+            'maximumAmount' => $array['amount'],
+            'price'         => ['amount' => $array['price'], 'currency' => 'PLN'],
         ]);
-
-        /** @var Member $member */
-        $member = $this->getReference($array["member"]);
-        $member->addVoucher($voucher);
 
         return $voucher;
     }

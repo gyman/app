@@ -21,11 +21,12 @@ final class VoucherFactory implements VoucherFactoryInterface
     public static function createFromArray($array = [])
     {
         $template = [
-            'startDate'           => (new \DateTime("now"))->format(Globals::getDefaultDateTimeFormat()),
-            'endDate'             => (new \DateTime("+1 month"))->format(Globals::getDefaultDateTimeFormat()),
+            'startDate'           => (new \DateTime('now'))->format(Globals::getDefaultDateTimeFormat()),
+            'endDate'             => (new \DateTime('+1 month'))->format(Globals::getDefaultDateTimeFormat()),
             'price'               => null,
             'maximumAmount'       => null,
             'entries'             => new ArrayCollection(),
+            'member'              => null,
         ];
 
         $array = array_merge($template, $array);
@@ -37,7 +38,9 @@ final class VoucherFactory implements VoucherFactoryInterface
                 $array['price']['amount'],
                 $array['price']['currency']
             ),
-            $array['maximumAmount']
+            $array['maximumAmount'],
+            [],
+            $array['member']
         );
     }
 
@@ -55,6 +58,7 @@ final class VoucherFactory implements VoucherFactoryInterface
                 'currency' => 'PLN',
             ],
             'maximumAmount' => $dto->maximumAmount,
+            'member'        => $dto->member,
         ]);
     }
 

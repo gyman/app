@@ -1,15 +1,17 @@
 <?php
 namespace Gyman\Component\Vouchers\Tests\Unit\Model;
 
+use DateTime;
 use Gyman\Component\Vouchers\Factory\VoucherFactory;
+use Gyman\Component\Vouchers\Model\Entry;
 use Gyman\Component\Vouchers\Model\Voucher;
 
 class VoucherTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException Gyman\Component\Vouchers\Exception\VoucherClosingDateBeforeOpeningException
+     * @expectedException \Gyman\Component\Vouchers\Exception\VoucherClosingDateBeforeOpeningException
      */
-    public function testConstructor()
+    public function testConstructorExceptionEndDateBeforeStartDate()
     {
         VoucherFactory::createFromArray([
             'startDate' => '2015-6-15 00:00:00',
@@ -29,6 +31,95 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($voucher->overlaps($testVoucher), $overlaps);
         $this->assertEquals($testVoucher->overlaps($voucher), $overlaps);
+    }
+
+    public function testLeftDaysAmount()
+    {
+        $voucher = VoucherFactory::createFromArray([
+            'startDate' => '-10 days',
+            'endDate'   => '+15 days',
+        ]);
+
+        $this->assertEquals($voucher->leftDaysAmount(), 15);
+        $this->assertEquals($voucher->leftDaysAmount('now'), 15);
+        $this->assertEquals($voucher->leftDaysAmount('-1 year'), 380);
+        $this->assertEquals($voucher->leftDaysAmount('+15 days'), 0);
+    }
+
+    public function testTotalDaysAmount()
+    {
+        $voucher = VoucherFactory::createFromArray([
+            'startDate' => '-10 days',
+            'endDate'   => '+15 days',
+        ]);
+
+        $this->assertEquals($voucher->totalDaysAmount(), 25);
+    }
+
+    public function testPassedDaysAmount()
+    {
+        $voucher = VoucherFactory::createFromArray([
+            'startDate' => '-10 days',
+            'endDate'   => '+15 days',
+        ]);
+
+        $this->assertEquals($voucher->passedDaysAmount(), 10);
+        $this->assertEquals($voucher->passedDaysAmount('now'), 10);
+        $this->assertEquals($voucher->passedDaysAmount('+15 days'), 25);
+    }
+
+    public function testLeftEntriesAmount()
+    {
+        $voucher = VoucherFactory::createFromArray([
+            'startDate'     => '-10 days',
+            'endDate'       => '+15 days',
+            'maximumAmount' => '10',
+        ]);
+
+        $this->assertEquals($voucher->leftEntriesAmount(), 10);
+
+        $voucher->addEntry(
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+        );
+
+        $this->assertEquals($voucher->leftEntriesAmount(), 9);
+
+        $voucher->entries()->last()->closeEntry(new DateTime());
+
+        $voucher->addEntry(
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+        );
+
+        $this->assertEquals($voucher->leftEntriesAmount(), 8);
+    }
+
+    /**
+     * @throws \Gyman\Component\Vouchers\Exception\EntryMustBeVoucherTypeException
+     * @throws \Gyman\Component\Vouchers\Exception\ExceededMaximumAmountOfEntriesException
+     * @throws \Gyman\Component\Vouchers\Exception\LastEntryIsStillOpenedException
+     * @expectedException \Gyman\Component\Vouchers\Exception\ExceededMaximumAmountOfEntriesException
+     */
+    public function testNoLeftEntriesAmountException()
+    {
+        $voucher = VoucherFactory::createFromArray([
+            'startDate'     => '-10 days',
+            'endDate'       => '+15 days',
+            'maximumAmount' => '1',
+        ]);
+
+        $this->assertEquals($voucher->leftEntriesAmount(), 1);
+
+        $voucher->addEntry(
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+        );
+
+        $this->assertEquals($voucher->leftEntriesAmount(), 0);
+
+        $voucher->entries()->last()->closeEntry(new DateTime());
+
+        $voucher->addEntry(
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+        );
     }
 
     /**

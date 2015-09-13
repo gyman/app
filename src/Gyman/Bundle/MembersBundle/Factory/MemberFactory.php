@@ -79,4 +79,9 @@ final class MemberFactory implements MemberFactoryInterface
     {
         return self::createFromArray(get_object_vars($dto));
     }
+
+    public static function create()
+    {
+        return self::createFromArray([]);
+    }
 }

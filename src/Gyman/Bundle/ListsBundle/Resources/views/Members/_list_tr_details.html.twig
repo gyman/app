@@ -67,7 +67,7 @@
     </div>
     <div class="span2">
         <div class="memberActions">
-            <a href="{{ path("_member_edit", {"id" : member.id}) }}" class="btn btn-block openUrlInModal">edytuj profil</a>
+            <a href="{{ path("gyman_member_edit", {"id" : member.id}) }}" class="btn btn-block openUrlInModal">edytuj profil</a>
             <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-block openUrlInModal">dodaj karnet</a>
             {% if member.getCurrentVoucher() %}
                 <a href="{{ path("_voucher_edit", {"id" : member.getCurrentVoucher().getId()})}}" class="btn btn-block openUrlInModal">edytuj karnet</a>

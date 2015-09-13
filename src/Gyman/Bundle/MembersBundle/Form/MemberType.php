@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\MembersBundle\Form;
 
+use Gyman\Bundle\MembersBundle\Entity\MemberRepository;
 use Gyman\Bundle\MembersBundle\Form\DataTransformer\MemberDataTransformer;
 use Gyman\Component\Members\Model\Belt;
 use Gyman\Component\Members\Model\Details;
@@ -15,16 +16,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class MemberType extends AbstractType
 {
     /**
-     * @var
+     * @var MemberRepository
      */
-    protected $uploaderHelper;
+    private $memberRepository;
 
     /**
-     * @param $uploaderHelper
+     * @var string
      */
-    public function __construct($uploaderHelper)
+    private $fotoDestinationDir;
+
+    /**
+     * MemberType constructor.
+     * @param MemberRepository $memberRepository
+     * @param $fotoDestinationDir
+     */
+    public function __construct(MemberRepository $memberRepository, $fotoDestinationDir)
     {
-        $this->uploaderHelper = $uploaderHelper;
+        $this->memberRepository = $memberRepository;
+        $this->fotoDestinationDir = $fotoDestinationDir;
     }
 
     /**
@@ -34,6 +43,7 @@ class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id', 'hidden')
             ->add('firstname', 'text')
             ->add('lastname', 'text')
             ->add('birthdate', 'date', [
@@ -52,9 +62,9 @@ class MemberType extends AbstractType
             ->add('notes', 'textarea')
             ->add('zipcode', 'text')
             ->add('barcode', 'text')
-            ->add('foto', 'file');
+            ->add('foto', 'file', ['required' => false]);
 
-        $builder->addViewTransformer(new MemberDataTransformer());
+        $builder->addViewTransformer(new MemberDataTransformer($this->memberRepository, $this->fotoDestinationDir));
     }
 
     /**

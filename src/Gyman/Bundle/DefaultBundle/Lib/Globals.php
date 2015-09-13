@@ -10,11 +10,11 @@ class Globals
     /**
      * @var
      */
-    public static $defaultDateTimeFormat = "Y.m.d H:i:s";
+    public static $defaultDateTimeFormat = 'Y.m.d H:i:s';
     /**
      * @var string
      */
-    public static $defaultDateFormat = "Y.m.d";
+    public static $defaultDateFormat = 'Y.m.d';
 
     /**
      * @var

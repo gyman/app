@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
+use Gyman\Bundle\MembersBundle\Entity\Foto;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{id}/edit", name="_member_edit")
+     * @Route("/{id}/edit", name="gyman_member_edit")
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
@@ -29,23 +29,18 @@ class DefaultController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
         $memberManager = $this->get('gyman.members.members_manager');
-        $form = $this->createForm('gyman_member_form', $member);
+        $form = $this->createForm('gyman_member_form', $member, [
+//            'validation_groups' => ['edit'],
+        ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                /** @var Member $member */
-                $member = $form->getData();
-                $member->details()->foto()->upload(realpath(
-                    $this->getParameter('galleryPath') .
-                    $this->getParameter('gallery_dir')
-                ));
-
                 $memberManager->save($member);
                 $this->addFlash('success', 'flash.member_editted.success');
 
-                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
+                return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_editted.errors');
                 $response->setStatusCode(400);
@@ -61,32 +56,34 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/new", name="_member_new")
+     * @Route("/new", name="gyman_member_new")
      * @Template()
      */
     public function newAction(Request $request)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
 
-        $memberManager = $this->get('gyman.members.members_manager');
-        $member = MemberFactory::createFromArray([]);
-        $form = $this->createForm('gyman_member_form', $member);
+        $member = MemberFactory::create();
+
+        $form = $this->createForm('gyman_member_form', null, [
+//            'validation_groups' => ['new'],
+        ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                /** @var Member $member */
                 $member = $form->getData();
+
                 $member->details()->foto()->upload(realpath(
                     $this->getParameter('galleryPath') .
                     $this->getParameter('gallery_dir')
                 ));
 
-                $memberManager->save($member);
+                $this->get('gyman.members.members_manager')->save($member);
                 $this->addFlash('success', 'flash.member_added.success');
 
-                return $this->redirectToRoute('_member_edit', ['id' => $member->id()]);
+                return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_added.errors');
                 $response->setStatusCode(400);
@@ -95,27 +92,10 @@ class DefaultController extends Controller
 
         return $response->setContent(
             $this->renderView('MembersBundle:Default:new.html.twig', [
-                    'form'     => $form->createView(),
-                    'member'   => $member,
+                'form'     => $form->createView(),
+                'member'   => $member,
             ])
         );
-    }
-
-    /**
-     * @Route("/{id}/delete", name="_member_delete")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
-     */
-    public function deleteAction(Member $member)
-    {
-        /**
-         * @var EntityManager $entityManager
-         */
-        $entityManager = $this->getDoctrine()->getEntityManager();
-        $entityManager->remove($member);
-        $entityManager->flush();
-
-        return [];
     }
 
     /**

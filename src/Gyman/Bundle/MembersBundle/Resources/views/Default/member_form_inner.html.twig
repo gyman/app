@@ -15,11 +15,13 @@
         <div id="detailsPane" class="tab-pane fade in active">
             {% include 'MembersBundle:Default:Modal/_details.html.twig' with {'form' : form} %}
         </div>
-        {#{% if member.currentVoucher() is not null %}#}
-            {#<div class="tab-pane fade in" id="voucherPane">#}
-                {#{{ render(controller('VouchersBundle:Default:voucherInfoInMemberModal', { 'voucher': member.getCurrentVoucher() })) }}#}
-            {#</div>#}
-        {#{% endif %}#}
+
+
+        {% if member.id() %}
+        <div class="tab-pane fade in" id="voucherPane">
+            {%  include '@Members/Default/Modal/_voucher.html.twig' with {'member' : member}%}
+        </div>
+        {% endif %}
 
         {#{% if member.id() is not null %}#}
             {#<div class="tab-pane fade in" id="historyPane">#}
@@ -48,14 +50,3 @@
 </div>
 
 {{ form_rest(form) }}
-
-<div class="row-fluid">
-
-<div class="span12">
-    <button class="btn btn-primary pull-right" id="saveFormInModal" type="submit">
-        Dodaj nowego użytkownika
-    </button>
-</div>
-</div>
-
-{{ form_end(form) }}

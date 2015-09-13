@@ -78,7 +78,7 @@ class Builder
                 ],
         ])->setExtra('translation_domain', 'MembersBundle');
 
-        if ($member && $voucher) {
+        if ($member) {
             $menu->addChild(
                 'member.modal.tab.voucher_label',
                 [
@@ -92,22 +92,22 @@ class Builder
             )->setExtra('translation_domain', 'MembersBundle');
         }
 
-        if ($member) {
-            $menu->addChild(
-                'member.modal.tab.history_label',
-                [
-                    'uri'            => '#historyPane',
-                    'extras'         => ['icon' => 'icomoon-icon-users'],
-                    'linkAttributes' => [
-                        'class'       => '',
-                        'data-toggle' => 'tab',
-                    ],
-                    'attributes' => [
-                        'class' => '',
-                    ],
-                ]
-            )->setExtra('translation_domain', 'MembersBundle');
-        }
+//        if ($member) {
+//            $menu->addChild(
+//                'member.modal.tab.history_label',
+//                [
+//                    'uri'            => '#historyPane',
+//                    'extras'         => ['icon' => 'icomoon-icon-users'],
+//                    'linkAttributes' => [
+//                        'class'       => '',
+//                        'data-toggle' => 'tab',
+//                    ],
+//                    'attributes' => [
+//                        'class' => '',
+//                    ],
+//                ]
+//            )->setExtra('translation_domain', 'MembersBundle');
+//        }
 
         $menu->addChild(
             'member.modal.tab.extras_label',

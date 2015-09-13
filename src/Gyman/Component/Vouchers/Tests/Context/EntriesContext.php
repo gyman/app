@@ -8,6 +8,7 @@ use Exception;
 use Gyman\Component\CoreDomain\Repository\InMemoryDomainEventRepository;
 use Gyman\Component\CoreDomain\Tests\LoggedAsAdministratorTrait;
 use Gyman\Component\Members\Model\Member;
+use Gyman\Component\Members\Repository\InMemoryMemberRepository;
 use Gyman\Component\Vouchers\Exception\ExceededMaximumAmountOfEntriesException;
 use Gyman\Component\Vouchers\Exception\LastEntryIsStillOpenedException;
 use Gyman\Component\Vouchers\Exception\NoCurrentVoucherForVoucherEntryException;
@@ -15,7 +16,6 @@ use Gyman\Component\Vouchers\Factory\VoucherFactory;
 use Gyman\Component\Vouchers\Model\Entry;
 use Gyman\Component\Vouchers\Model\Price;
 use Gyman\Component\Vouchers\Repository\InMemoryEntryRepository;
-use Gyman\Component\Vouchers\Repository\InMemoryVoucherRepository;
 use Gyman\Component\Vouchers\Service\OpenEntry;
 use Gyman\Component\Vouchers\Service\SellVoucher;
 use Symfony\Component\EventDispatcher\Event;
@@ -183,7 +183,7 @@ class EntriesContext implements Context
             throw new Exception('Member has no current voucher');
         }
 
-        $freeEntries = $this->member->currentVoucher()->getFreeAmount();
+        $freeEntries = $this->member->currentVoucher()->leftEntriesAmount();
 
         if ($freeEntries != $count) {
             throw new Exception(sprintf(
@@ -206,9 +206,9 @@ class EntriesContext implements Context
             'maximumAmount' => $amount,
         ]);
 
-        $voucherRepo = new InMemoryVoucherRepository();
+        $memberRepo = new InMemoryMemberRepository();
 
-        (new SellVoucher($voucherRepo, new EventDispatcher()))->sellVoucher($this->member, $voucher, $this->user);
+        (new SellVoucher($memberRepo, new EventDispatcher()))->sellVoucher($this->member, $voucher, $this->user);
     }
 
     /**
@@ -232,7 +232,7 @@ class EntriesContext implements Context
      */
     public function hisCurrentVoucherHasUnlimitedEntriesLeft()
     {
-        $free = $this->member->currentVoucher()->getFreeAmount();
+        $free = $this->member->currentVoucher()->leftEntriesAmount();
 
         if ($free !== null) {
             throw new Exception(sprintf(

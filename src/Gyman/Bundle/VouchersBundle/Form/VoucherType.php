@@ -17,13 +17,12 @@ class VoucherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('member', 'entity', [
-            'mapped'       => false,
-            'class'        => 'Gyman\Bundle\MembersBundle\Entity\Member',
-            'choice_label' => function (Member $member) {
-                return sprintf('%s %s', $member->details()->firstname(), $member->details()->lastname());
-            },
-        ])
+//        ->add('member', 'entity', [
+//            'class'        => 'Gyman\Bundle\MembersBundle\Entity\Member',
+//            'choice_label' => function (Member $member) {
+//                return sprintf('%s %s', $member->details()->firstname(), $member->details()->lastname());
+//            },
+//        ])
         ->add(
             $builder->create('startDate', 'date', [
                 'widget' => 'single_text',

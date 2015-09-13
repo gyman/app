@@ -37,7 +37,7 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      * @param Voucher $voucher
      * @return mixed
      */
-    public function remove(Voucher $voucher)
+    public function remove($voucher)
     {
         unset($this->vouchers[$voucher->email()->email()]);
     }
@@ -46,7 +46,7 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      * @param Voucher $voucher
      * @return null
      */
-    public function insert(Voucher $voucher)
+    public function insert($voucher)
     {
         $this->vouchers[$voucher->email()->email()] = $voucher;
     }

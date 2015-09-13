@@ -21,7 +21,9 @@ class MemberManager extends BaseManager
     {
         $isNew = $object->id() == null ? true : false;
 
-        parent::save($object, $withFlush);
+        $this->persist($object);
+        $this->flush();
+//        parent::save($object, $withFlush);
 
         if ($isNew) {
             $this->dispatcher->dispatch(MembersEvents::CREATED, new MemberCreatedEvent($object));

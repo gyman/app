@@ -20,50 +20,33 @@ Gyman\Bundle\MembersBundle\Entity\Member:
       field_name: deletedAt
       time_aware: false
 
-  manyToMany:
+  oneToMany:
     vouchers:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
-      cascade: ["persist", "merge"]
-      joinTable:
-        name: members_has_vouchers
-        joinColumns:
-          member_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          voucher_id:
-            referencedColumnName: id
+      mappedBy: member
+      cascade: ["persist"]
 
     entries:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
-      mappedBy: entries
-      joinTable:
-        name: members_has_entries
-        joinColumns:
-          member_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          entry_id:
-            referencedColumnName: id
+      mappedBy: member
 
   oneToOne:
     currentVoucher:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Voucher
-#      mappedBy: currentVoucher
       cascade: ["persist", "merge"]
-#      inversedBy: member
       joinColumn:
         name: current_voucher_id
         referencedColumnName: id
         onDelete: SET NULL
         nullable: true
 
-#    lastEntry:
-#      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
-#      joinColumn:
-#        name: last_entry_id
-#        referencedColumnName: id
-#        onDelete: SET NULL
-#        nullable: true #false
+    lastEntry:
+      targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
+      joinColumn:
+        name: last_entry_id
+        referencedColumnName: id
+        onDelete: SET NULL
+        nullable: true #false
 
   fields:
     nameSlug:

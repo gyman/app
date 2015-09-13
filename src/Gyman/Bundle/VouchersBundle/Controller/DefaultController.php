@@ -5,6 +5,7 @@ use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Gyman\Bundle\VouchersBundle\Factory\VoucherFactory;
 use Gyman\Bundle\VouchersBundle\Form\VoucherType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -20,16 +21,18 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/new", name="gyman_voucher_new")
+     * @Route("/member/{id}/new", name="gyman_voucher_new")
+     * @Method({"GET", "POST"})
+     * @ParamConverter("member", class="MembersBundle:Member")
      * @Template("VouchersBundle:Default:new.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Member $member)
     {
         $form = $this->createForm(
             'gyman_voucher_form',
             VoucherFactory::create(),
             [
-                'action' => $this->generateUrl('gyman_voucher_new'),
+                'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
             ]
         );
 
@@ -38,8 +41,12 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 $voucher = $form->getData();
-                $member = $form->get('member')->getData();
                 $this->get('gyman.vouchers.sell_voucher')->sellVoucher($member, $voucher, $this->getUser());
+                $this->addFlash('success', 'flash.voucher_added.success');
+
+                return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
+            } else {
+                $this->addFlash('error', 'flash.voucher_added.errors');
             }
         }
 
@@ -175,28 +182,6 @@ class DefaultController extends Controller
         $diff = $voucher->getEndDate()->diff(new \DateTime());
 
         return ['voucher'  => $voucher, 'leftDays' => $diff->days];
-    }
-
-    /**
-     * @Template("MembersBundle:Default:Modal/_voucher.html.twig")
-     */
-    public function voucherInfoInMemberModalAction(Voucher $voucher)
-    {
-        $totalDays = $voucher->getEndDate()->diff($voucher->getStartDate())->days;
-        $leftDays = $voucher->getEndDate()->diff(new \DateTime())->days;
-        $pastDays = $voucher->getStartDate()->diff(new \DateTime())->days;
-        $leftEntries = $voucher->getAmountLeft();
-        $usedEntries = $voucher->getAmount() - $voucher->getAmountLeft();
-
-        return [
-            'voucher'     => $voucher,
-            'member'      => $voucher->getMember(),
-            'leftDays'    => $leftDays,
-            'totalDays'   => $totalDays,
-            'pastDays'    => $pastDays,
-            'leftEntries' => $leftEntries,
-            'usedEntries' => $usedEntries,
-        ];
     }
 
     /**

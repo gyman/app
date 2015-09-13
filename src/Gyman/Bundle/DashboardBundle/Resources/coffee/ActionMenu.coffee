@@ -14,7 +14,7 @@ class window.ActionMenu
   actions:
     new_sell:
       selector:     "a#actionSell"
-      routing:      "_member_new"
+      routing:      "gyman_member_new"
       userRequired: true
     new_entry:
       selector:     "a#actionEntry"
@@ -26,7 +26,7 @@ class window.ActionMenu
       userRequired: true
     new_member:
       selector: "a#actionMember"
-      routing: "_member_new"
+      routing: "gyman_member_new"
     calendar:
       selector: "a#actionCalendar"
       routing: "_schedule_calendar"

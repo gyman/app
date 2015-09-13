@@ -17,11 +17,16 @@ Gyman\Bundle\VouchersBundle\Entity\Voucher:
       field_name: deletedAt
       time_aware: false
 
-  manyToMany:
+  manyToOne:
+    member:
+      targetEntity: Gyman\Bundle\MembersBundle\Entity\Member
+      inversedBy: vouchers
+      cascade: ["persist"]
+
+  oneToMany:
     entries:
       targetEntity: Gyman\Bundle\VouchersBundle\Entity\Entry
-      joinTable:
-        name: voucher_has_entries
+      mappedBy: voucher
 
   fields:
     startDate:

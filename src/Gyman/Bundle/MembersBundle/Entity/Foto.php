@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\MembersBundle\Entity;
 
+use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
 use Gyman\Component\Members\Model\Foto as BaseFoto;
 
 /**
@@ -9,4 +10,11 @@ use Gyman\Component\Members\Model\Foto as BaseFoto;
  */
 class Foto extends BaseFoto
 {
+    /**
+     * @param MemberDTO $dto
+     */
+    public function updateWithDto(MemberDTO $dto)
+    {
+        $this->foto = $dto->foto;
+    }
 }

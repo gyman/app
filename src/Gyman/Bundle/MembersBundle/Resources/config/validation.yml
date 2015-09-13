@@ -3,9 +3,11 @@ Gyman\Bundle\MembersBundle\Entity\Member:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
         fields: [email.email]
         message: Ten email jest już zarejestrowany
+#        groups: ['new', 'edit']
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
         fields: [details.barcode.barcode]
         message: Ten kod jest już zarejestrowany
+#        groups: ['new', 'edit']
   properties:
     details:
       - Valid: ~
@@ -16,8 +18,6 @@ Gyman\Bundle\MembersBundle\Entity\Foto:
   properties:
     foto:
       - Image: ~
-      - NotBlank:
-          message: Pole nie może być puste!
 
 Gyman\Bundle\MembersBundle\Entity\EmailAddress:
   properties:
@@ -27,6 +27,12 @@ Gyman\Bundle\MembersBundle\Entity\EmailAddress:
       - Email:
           message: Adres '{{ value }}' nie jest poprawny.
           checkMX: true
+
+Gyman\Bundle\MembersBundle\Entity\Barcode:
+  properties:
+    barcode:
+      - NotBlank:
+          message: Pole nie może być puste!
 
 Gyman\Bundle\MembersBundle\Entity\Details:
   properties:
@@ -60,5 +66,6 @@ Gyman\Bundle\MembersBundle\Entity\Details:
           message: Kod pocztowy musi być w formacie XX-XXX
     gender: ~
     belt: ~
-    barcode: ~
     starred: ~
+    barcode:
+      - Valid: ~

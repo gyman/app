@@ -1,5 +1,6 @@
 <?php
 namespace Gyman\Component\Vouchers\Exception;
+
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
 
 /**
@@ -8,7 +9,6 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
  */
 class VoucherClosingDateBeforeOpeningException extends \Exception
 {
-
     /**
      * VoucherClosingDateBeforeOpeningException constructor.
      * @param \DateTime $start

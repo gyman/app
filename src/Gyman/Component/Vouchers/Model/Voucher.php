@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Component\Vouchers\Model;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Component\Vouchers\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Component\Vouchers\Exception\ExceededMaximumAmountOfEntriesException;
@@ -73,7 +74,7 @@ class Voucher
             throw new EntryMustBeVoucherTypeException();
         }
 
-        if (!$this->isUnlimited() && $this->getFreeAmount() === 0) {
+        if (!$this->isUnlimited() && $this->leftEntriesAmount() === 0) {
             throw new ExceededMaximumAmountOfEntriesException();
         }
 
@@ -105,7 +106,7 @@ class Voucher
     public function close(\DateTime $date)
     {
         if ($this->startDate()->getTimestamp() > $date->getTimestamp()) {
-            throw new VoucherClosingDateBeforeOpeningException();
+            throw new VoucherClosingDateBeforeOpeningException($this->startDate(), $this->endDate());
         }
 
         $this->endDate = $date;
@@ -154,13 +155,47 @@ class Voucher
     /**
      * @return int|null
      */
-    public function getFreeAmount()
+    public function leftEntriesAmount()
     {
         if ($this->isUnlimited()) {
             return;
         }
 
         return $this->maximumAmount() - $this->entries()->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedEntriesAmount()
+    {
+        return $this->entries()->count();
+    }
+
+    /**
+     * @param string $relatedTo
+     * @return int
+     */
+    public function leftDaysAmount($relatedTo = 'now')
+    {
+        return $this->endDate->diff(new DateTime($relatedTo))->days;
+    }
+
+    /**
+     * @return int
+     */
+    public function totalDaysAmount()
+    {
+        return $this->endDate()->diff($this->startDate())->days;
+    }
+
+    /**
+     * @param string $relatedTo
+     * @return int
+     */
+    public function passedDaysAmount($relatedTo = 'now')
+    {
+        return $this->totalDaysAmount() - $this->leftDaysAmount($relatedTo);
     }
 
     /***

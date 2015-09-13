@@ -1,37 +1,35 @@
 {% extends 'MembersBundle::layout.html.twig' %}
 
 {% block content %}
+<div class="contentwrapper">
+    <div class="heading">
+        <h3>Edytuj użytkownika</h3>
+    </div>
+
+    <div class="span12">
     {% include "::_flash.html.twig" %}
 
     {{ form_start(form, {
         attr : {
             'id' : "memberForm",
-            'class' : "form-horizontal row-fluid"
+            'class' : "form-horizontal row-fluid",
+            'novalidate' : 'novalidate'
         },
-        action : path('_member_edit', {"id" : member.id})
+        action : path('gyman_member_edit', {"id" : member.id})
     }) }}
 
     {%  include "@Members/Default/member_form_inner.html.twig" %}
 
-{% block modal %}
-<div class="hidden" id="ui-editMemberData">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>{% block modalTitle %}{{ 'member.modal.edit_user_title'|trans({ '%member_name%': member.details.firstname() ~ " " ~ member.details.lastname}) }}{%endblock modalTitle%}</h3>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-large btn-primary pull-right" type="submit">
+                Zapisz
+            </button>
+        </div>
     </div>
-    <div class="modal-footer">
-        <form id="deleteForm" class="pull-left">
-            <label>
-                <input type="checkbox" id="deleteCheckbox" />
-                {{ 'member.modal.remove_user_checkbox_label'|trans }}
-            </label>
-        </form>
-        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">
-            {{ 'member.modal.save_button_label'|trans }}
-        </a>
+
+    {{ form_end(form) }}
+
     </div>
 </div>
-{% endblock modal %}
-
-
 {% endblock content %}

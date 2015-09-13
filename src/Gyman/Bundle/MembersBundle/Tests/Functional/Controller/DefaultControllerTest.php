@@ -14,18 +14,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class DefaultControllerTest extends BaseFunctionalTest
 {
-    public function setUp()
-    {
-        parent::setUp();
-        copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
-    }
-
     /**
      * @test
      */
     public function new_member_form_renders_properly()
     {
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_new'));
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_new'));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -55,7 +49,7 @@ class DefaultControllerTest extends BaseFunctionalTest
             ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -81,7 +75,9 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function new_member_form_is_posted_and_entity_is_added()
     {
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_new'));
+        $this->prepareFoto();
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_new'));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -125,8 +121,19 @@ class DefaultControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.member_added.success', trim($alert->text()));
 
-        $this->assertEquals($this->container->get('router')->generate('_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
+        $this->assertEquals($this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
         $this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+        $this->assertEquals($crawler->filter('input#gyman_member_form_firstname')->attr('value'), 'Andrzej');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_lastname')->attr('value'), 'Kaszuba');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_birthdate')->attr('value'), '18.01.1955');
+        $this->assertEquals($crawler->filter('select#gyman_member_form_gender option:selected')->attr('value'), 'male');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_zipcode')->attr('value'), '81-353');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_phone')->attr('value'), '600 000 000');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_email')->attr('value'), 'andrzej@gazeta.pl');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_barcode')->attr('value'), '123456789');
+        $this->assertEquals($crawler->filter('select#gyman_member_form_belt option:selected')->attr('value'), 'white');
+        $this->assertEquals($crawler->filter('textarea#gyman_member_form_notes')->text(), 'some admin notes');
 
         $this->assertEquals($member->details()->firstname(), 'Andrzej');
         $this->assertEquals($member->details()->lastname(), 'Kaszuba');
@@ -148,11 +155,13 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function member_edit_form_is_posted_and_entity_is_changed()
     {
+        $this->prepareFoto();
+
         $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
             ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -196,8 +205,19 @@ class DefaultControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.member_editted.success', trim($alert->text()));
 
-        $this->assertEquals($this->container->get('router')->generate('_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
+        $this->assertEquals($this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]), $this->client->getRequest()->getRequestUri());
         $this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+        $this->assertEquals($crawler->filter('input#gyman_member_form_firstname')->attr('value'), 'Andrzej');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_lastname')->attr('value'), 'Kaszuba');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_birthdate')->attr('value'), '18.01.1955');
+        $this->assertEquals($crawler->filter('select#gyman_member_form_gender option:selected')->attr('value'), 'male');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_zipcode')->attr('value'), '81-353');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_phone')->attr('value'), '600 000 000');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_email')->attr('value'), 'andrzej@gazeta.pl');
+        $this->assertEquals($crawler->filter('input#gyman_member_form_barcode')->attr('value'), '123456789');
+        $this->assertEquals($crawler->filter('select#gyman_member_form_belt option:selected')->attr('value'), 'white');
+        $this->assertEquals($crawler->filter('textarea#gyman_member_form_notes')->text(), 'some admin notes');
 
         $this->assertEquals($member->details()->firstname(), 'Andrzej');
         $this->assertEquals($member->details()->lastname(), 'Kaszuba');
@@ -211,20 +231,32 @@ class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals($member->details()->notes(), 'some admin notes');
 
         $this->assertFileExists(Globals::applyFilePath($member->details()->foto()->foto()));
-        unlink(Globals::applyFilePath($member->details()->foto()->foto()));
     }
 
     /**
      * @test
      * @dataProvider getErrorGeneratingForms
      */
-    public function new_member_form_is_posted_and_error_is_emitted($values, $files, $elementPath, $error)
+    public function new_member_form_is_posted_and_error_is_emitted($values, $elementPath, $error)
     {
+        $this->prepareFoto();
+
+        $files = [
+            'gyman_member_form' => [
+                'foto' => new UploadedFile(
+                    '/tmp/foto.jpg',
+                    'someTestFile.jpg',
+                    'image/jpeg',
+                    123
+                ),
+            ],
+        ];
+
         $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
             ->getRepository('MembersBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_edit', ['id' => $editedMember->id()]));
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -245,9 +277,22 @@ class DefaultControllerTest extends BaseFunctionalTest
      * @test
      * @dataProvider getErrorGeneratingForms
      */
-    public function member_edit_form_is_posted_and_error_is_emitted($values, $files, $elementPath, $error)
+    public function member_edit_form_is_posted_and_error_is_emitted($values, $elementPath, $error)
     {
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_member_new'));
+        $this->prepareFoto();
+
+        $files = [
+            'gyman_member_form' => [
+                'foto' => new UploadedFile(
+                    '/tmp/foto.jpg',
+                    'someTestFile.jpg',
+                    'image/jpeg',
+                    123
+                ),
+            ],
+        ];
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_new'));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -279,17 +324,6 @@ class DefaultControllerTest extends BaseFunctionalTest
             'gyman_member_form[notes]'     => 'some admin notes',
         ];
 
-        $files = [
-            'gyman_member_form' => [
-                'foto' => new UploadedFile(
-                    '/tmp/foto.jpg',
-                    'someTestFile.jpg',
-                    'image/jpeg',
-                    123
-                ),
-            ],
-        ];
-
         return [
             'empty firstname' => [
                 'values' => array_merge(
@@ -298,7 +332,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[firstname]' => null,
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(1) .controls .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
@@ -309,7 +342,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[lastname]' => null,
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(2) .controls .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
@@ -320,14 +352,7 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => null,
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
-                'error'       => 'Pole nie może być puste!',
-            ],
-            'empty file' => [
-                'values'      => $correctData,
-                'files'       => ['gyman_member_form' => ['foto' => null]],
-                'elementPath' => '#filePane div.control-group.error .help-block',
                 'error'       => 'Pole nie może być puste!',
             ],
             'wrong email' => [
@@ -337,7 +362,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => 'errornous-address',
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
                 'error'       => "Adres '{{ value }}' nie jest poprawny.",
             ],
@@ -348,7 +372,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[email]' => 'test01@test.pl',
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
                 'error'       => 'Ten email jest już zarejestrowany',
             ],
@@ -359,7 +382,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[barcode]' => 'abcd12301',
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#additionalsPane div.control-group.error:nth-child(1) .controls .help-block',
                 'error'       => 'Ten kod jest już zarejestrowany',
             ],
@@ -370,7 +392,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[zipcode]' => 'XYZTAAA',
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(5) .controls .help-block',
                 'error'       => "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.\n            Kod pocztowy musi być w formacie XX-XXX",
             ],
@@ -381,7 +402,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[birthdate]' => '2015-01-01',
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
                 'error'       => 'This value is not valid.',
             ],
@@ -392,7 +412,6 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[birthdate]' => (new \DateTime('+1 day'))->format('d.m.Y'),
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
                 'error'       => 'Data powinna być przed {{ limit }}.',
             ],
@@ -403,10 +422,14 @@ class DefaultControllerTest extends BaseFunctionalTest
                         'gyman_member_form[birthdate]' => (new \DateTime('-100 years'))->format('d.m.Y'),
                     ]
                 ),
-                'files'       => $files,
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
                 'error'       => 'Data powinna być po {{ limit }}.',
             ],
         ];
+    }
+
+    private function prepareFoto()
+    {
+        copy(realpath(__DIR__ . '/../../Resources/foto.jpg'), '/tmp/foto.jpg');
     }
 }

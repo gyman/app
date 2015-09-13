@@ -28,6 +28,7 @@ class VoucherDataTransformer implements DataTransformerInterface
         $dto->endDate = $voucher->endDate();
         $dto->price = $voucher->price()->amount();
         $dto->maximumAmount = $voucher->maximumAmount();
+        $dto->member = $voucher->member();
 
         return $dto;
     }

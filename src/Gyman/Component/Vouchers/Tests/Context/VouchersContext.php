@@ -9,6 +9,7 @@ use Exception;
 use Gyman\Component\CoreDomain\Repository\InMemoryDomainEventRepository;
 use Gyman\Component\CoreDomain\Tests\LoggedAsAdministratorTrait;
 use Gyman\Component\Members\Model\Member;
+use Gyman\Component\Members\Repository\InMemoryMemberRepository;
 use Gyman\Component\Vouchers\Factory\VoucherFactory;
 use Gyman\Component\Vouchers\Model\Voucher;
 use Gyman\Component\Vouchers\Repository\InMemoryVoucherRepository;
@@ -53,6 +54,11 @@ class VouchersContext implements Context
     private $member;
 
     /**
+     * @var InMemoryMemberRepository
+     */
+    private $memberRepository;
+
+    /**
      * @BeforeScenario
      * @param BeforeScenarioScope $scope
      */
@@ -61,9 +67,10 @@ class VouchersContext implements Context
         $dispatcher = new EventDispatcher();
 
         $this->voucherRepository = new InMemoryVoucherRepository();
+        $this->memberRepository = new InMemoryMemberRepository();
         $this->domainEventRepository = new InMemoryDomainEventRepository();
 
-        $this->sellVoucher = new SellVoucher($this->voucherRepository, $dispatcher);
+        $this->sellVoucher = new SellVoucher($this->memberRepository, $dispatcher);
 
         $dispatcher->addListener(SellVoucher::SUCCESS, [$this, 'recordNotification']);
         $dispatcher->addListener(SellVoucher::FAILURE, [$this, 'recordNotification']);

@@ -37,7 +37,12 @@
 
     <target name="clear-cache">
         <echo>Clearing cache - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} cache:clear --env=#{env}" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} cache:clear --env=${env}" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="ca">
+        <echo>Clearing cache - ${env} environment</echo>
+        <exec command="${php_bin} ${symfony_console} cache:accelerator:clear --env=${env}" checkreturn="true" passthru="true" />
     </target>
 
     <target name="cc">
@@ -65,6 +70,10 @@
         <exec command="./bin/phpunit -c ./app/phpunit.xml --testsuite=unit" passthru="true" checkreturn="true" />
     </target>
 
+    <target name="phpunit-integration"  description="PHPUnit Integration tests">
+        <exec command="./bin/phpunit -c ./app/phpunit.xml --testsuite=integration" passthru="true" checkreturn="true" />
+    </target>
+
     <target name="test-dende">
         <property name="env" value="test" />
         <property name="club" value="dende" />
@@ -72,6 +81,7 @@
         <phingcall target="phpcsfixer" description="PHPCSFixer" />
         <phingcall target="phpunit-functional" />
         <phingcall target="phpunit-unit" />
+        <phingcall target="phpunit-integration" />
     </target>
 
 </project>

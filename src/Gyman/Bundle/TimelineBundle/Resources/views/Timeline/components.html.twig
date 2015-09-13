@@ -2,7 +2,7 @@
     {% spaceless %}
         <div {{ block('component_attributes') }}>
             <img src="{{ value.getFoto() }}" class="thumbnail timelineAvatar"/>
-            <a href="{{ path("_member_edit", {id: value.getId()}) }}" class="openUrlInModal">
+            <a href="{{ path("gyman_member_edit", {id: value.getId()}) }}" class="openUrlInModal">
                 {{ value.getName() }}
             </a>
         </div>

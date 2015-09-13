@@ -2,7 +2,6 @@
 namespace Gyman\Component\Members\Model;
 
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Foto
@@ -34,19 +33,6 @@ class Foto
 
     public function fotoWithPath()
     {
-        //        die(var_dump(Globals::applyGalleryDir($this->foto)));
         return Globals::applyGalleryDir($this->foto);
-    }
-
-    public function upload($dir)
-    {
-        if (!$this->foto instanceof UploadedFile) {
-            return;
-        }
-
-        $filename = sprintf('%s.%s', md5(microtime(true)), $this->foto->getClientOriginalExtension());
-        $this->foto->move($dir, $filename);
-
-        $this->foto = $filename;
     }
 }
