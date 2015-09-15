@@ -1,41 +1,16 @@
-Gyman\Bundle\MembersBundle\Entity\Member:
-  constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        fields: [email.email]
-        message: Ten email jest już zarejestrowany
-#        groups: ['new', 'edit']
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        fields: [details.barcode.barcode]
-        message: Ten kod jest już zarejestrowany
-#        groups: ['new', 'edit']
-  properties:
-    details:
-      - Valid: ~
-    email:
-      - Valid: ~
-
-Gyman\Bundle\MembersBundle\Entity\Foto:
+Gyman\Domain\Command\UpdateMemberCommand:
   properties:
     foto:
       - Image: ~
-
-Gyman\Bundle\MembersBundle\Entity\EmailAddress:
-  properties:
     email:
       - NotBlank:
           message: Pole nie może być puste!
       - Email:
           message: Adres '{{ value }}' nie jest poprawny.
           checkMX: true
-
-Gyman\Bundle\MembersBundle\Entity\Barcode:
-  properties:
     barcode:
       - NotBlank:
           message: Pole nie może być puste!
-
-Gyman\Bundle\MembersBundle\Entity\Details:
-  properties:
     firstname:
       - NotBlank:
           message: Pole nie może być puste!
@@ -52,8 +27,6 @@ Gyman\Bundle\MembersBundle\Entity\Details:
           max: today
     phone: ~
     notes: ~
-    foto:
-      - Valid: ~
     zipcode:
       - Length:
           max: 6
@@ -67,5 +40,3 @@ Gyman\Bundle\MembersBundle\Entity\Details:
     gender: ~
     belt: ~
     starred: ~
-    barcode:
-      - Valid: ~

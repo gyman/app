@@ -1,0 +1,11 @@
+default:
+    suites:
+        members:
+            paths:    [%paths.base%/features/create_member.feature]
+            contexts: [Gyman\Domain\Tests\Context\MembersContext]
+        vouchers:
+            paths:    [%paths.base%/features/sell_voucher.feature]
+            contexts: [Gyman\Domain\Tests\Context\VouchersContext]
+        entries:
+            paths:    [%paths.base%/features/add_entry.feature]
+            contexts: [Gyman\Domain\Tests\Context\EntriesContext]

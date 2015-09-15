@@ -4,9 +4,9 @@ namespace Gyman\MembersBundle\Tests\Functional\Controller;
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\MembersBundle\Entity\EmailAddress;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Members\Model\Belt;
-use Gyman\Component\Members\Model\Details;
 use Gyman\Component\Test\BaseFunctionalTest;
+use Gyman\Domain\Model\Belt;
+use Gyman\Domain\Model\Details;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**

@@ -7,7 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Vouchers\Repository\VoucherRepositoryInterface;
+use Gyman\Domain\Repository\VoucherRepositoryInterface;
 
 class VoucherRepository extends EntityRepository implements RepositoryListCompatible, VoucherRepositoryInterface
 {

@@ -3,8 +3,8 @@ namespace Gyman\Bundle\VouchersBundle\Entity;
 
 use DateTime;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Vouchers\Model\Price;
-use Gyman\Component\Vouchers\Model\Voucher as BaseVoucher;
+use Gyman\Domain\Model\Price;
+use Gyman\Domain\Model\Voucher as BaseVoucher;
 
 /**
  * Voucher

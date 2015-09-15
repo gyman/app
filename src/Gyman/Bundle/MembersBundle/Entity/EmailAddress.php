@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Component\Members\Model\EmailAddress as BaseEmailAddress;
+use Gyman\Domain\Model\EmailAddress as BaseEmailAddress;
 
 class EmailAddress extends BaseEmailAddress
 {

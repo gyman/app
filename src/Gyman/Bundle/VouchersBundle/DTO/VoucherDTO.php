@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\VouchersBundle\DTO;
 
-use Gyman\Component\Members\Model\Member;
+use Gyman\Domain\Model\Member;
 
 /**
  * Class VoucherDTO

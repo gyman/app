@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\MembersBundle\Entity\Foto;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
+use Gyman\Domain\Command\UpdateMemberCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,19 +28,16 @@ class DefaultController extends Controller
     public function editAction(Member $member, Request $request)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-
-        $memberManager = $this->get('gyman.members.members_manager');
-        $form = $this->createForm('gyman_member_form', $member, [
-//            'validation_groups' => ['edit'],
-        ]);
+        $command = UpdateMemberCommand::createFromMember($member);
+        $form = $this->createForm('gyman_member_form', $command);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $memberManager->save($member);
-                $this->addFlash('success', 'flash.member_editted.success');
+                $this->get('gyman.members.update_member')->handle($form->getData());
 
+                $this->addFlash('success', 'flash.member_editted.success');
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_editted.errors');

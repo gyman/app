@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Component\Members\Model\Foto as BaseFoto;
+use Gyman\Domain\Model\Foto as BaseFoto;
 
 /**
  * Class Foto

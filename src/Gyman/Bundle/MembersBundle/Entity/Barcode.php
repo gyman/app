@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Component\Members\Model\Barcode as BaseBarcode;
+use Gyman\Domain\Model\Barcode as BaseBarcode;
 
 /**
  * Class Barcode

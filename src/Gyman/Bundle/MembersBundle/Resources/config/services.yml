@@ -1,6 +1,6 @@
 services:
   gyman.members.create_member:
-    class: Gyman\Component\Members\Service\CreateMember
+    class: Gyman\Domain\Service\CreateMember
     arguments:
       - @gyman.members.repository
       - @event_dispatcher
@@ -19,8 +19,7 @@ services:
     factory_service: doctrine.orm.club_entity_manager
     arguments: ["Gyman\Bundle\MembersBundle\Entity\Member"]
 
-
-  gyman_members_member_form_type:
+  gyman.members.member_form_type:
     class: Gyman\Bundle\MembersBundle\Form\MemberType
     arguments:
       - @gyman.members.repository
@@ -48,6 +47,9 @@ services:
       scope:            request
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
+
+  gyman.members.update_member:
+    class:
 
   # @todo: rename
   dende.upload_listener:

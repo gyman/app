@@ -4,9 +4,9 @@ namespace Gyman\VouchersBundle\Tests\Functional\Controller;
 use DateTime;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
-use Gyman\Component\Members\Model\Belt;
-use Gyman\Component\Members\Model\Details;
 use Gyman\Component\Test\BaseFunctionalTest;
+use Gyman\Domain\Model\Belt;
+use Gyman\Domain\Model\Details;
 
 /**
  * Class DefaultControllerTest

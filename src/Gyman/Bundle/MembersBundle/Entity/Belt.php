@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Component\Members\Model\Belt as BaseBelt;
+use Gyman\Domain\Model\Belt as BaseBelt;
 
 /**
  * Class Details

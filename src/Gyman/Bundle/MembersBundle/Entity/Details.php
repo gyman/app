@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MembersBundle\Entity;
 
 use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Component\Members\Model\Details as BaseDetails;
+use Gyman\Domain\Model\Details as BaseDetails;
 
 /**
  * Class Details

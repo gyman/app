@@ -3,7 +3,7 @@ namespace Gyman\Bundle\VouchersBundle\Entity;
 
 use DateTime;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Vouchers\Model\Entry as BaseEntry;
+use Gyman\Domain\Model\Entry as BaseEntry;
 
 class Entry extends BaseEntry
 {

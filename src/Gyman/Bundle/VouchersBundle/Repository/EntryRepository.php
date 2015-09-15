@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
-use Gyman\Component\Vouchers\Model\Entry;
-use Gyman\Component\Vouchers\Repository\EntryRepositoryInterface;
+use Gyman\Domain\Model\Entry;
+use Gyman\Domain\Repository\EntryRepositoryInterface;
 
 /**
  * EntryRepository

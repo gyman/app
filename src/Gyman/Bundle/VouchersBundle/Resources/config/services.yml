@@ -9,7 +9,7 @@ services:
         - { name: form.type, alias: gyman_voucher_form }
 
     gyman.vouchers.sell_voucher:
-      class: Gyman\Component\Vouchers\Service\SellVoucher
+      class: Gyman\Domain\Service\SellVoucher
       arguments:
         - @gyman.members.repository
         - @event_dispatcher

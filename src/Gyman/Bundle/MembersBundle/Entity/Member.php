@@ -7,7 +7,7 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\SectionBundle\Entity\Section;
 use Gyman\Bundle\VouchersBundle\Entity\Entry;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
-use Gyman\Component\Members\Model\Member as BaseMember;
+use Gyman\Domain\Model\Member as BaseMember;
 
 /**
  * Member

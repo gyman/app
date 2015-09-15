@@ -10,7 +10,7 @@ use Gyman\Bundle\MembersBundle\Entity\Details;
 use Gyman\Bundle\MembersBundle\Entity\EmailAddress;
 use Gyman\Bundle\MembersBundle\Entity\Foto;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Component\Members\Factory\MemberFactoryInterface;
+use Gyman\Domain\Factory\MemberFactoryInterface;
 
 /**
  * Class MemberFactory

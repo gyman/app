@@ -6,7 +6,7 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\VouchersBundle\DTO\VoucherDTO;
 use Gyman\Bundle\VouchersBundle\Entity\Price;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
-use Gyman\Component\Vouchers\Factory\VoucherFactoryInterface;
+use Gyman\Domain\Factory\VoucherFactoryInterface;
 
 /**
  * Class VoucherFactory

@@ -18,11 +18,11 @@ class @EditMember extends @AbstractModal
       'min':0
     
   initSelects: =>
-    $("#gyman_members_member_form_type_belt, #gyman_members_member_form_type_gender").select2 @selectSettings
+    $("#gyman.members.member_form_type_belt, #gyman.members.member_form_type_gender").select2 @selectSettings
   
   initActivities: =>
     activities = []
-    $.each $("#gyman_members_member_form_type_activities option"), (i,item) ->
+    $.each $("#gyman.members.member_form_type_activities option"), (i,item) ->
       activities.push $(item).val()  
 
   initCheckbox: =>

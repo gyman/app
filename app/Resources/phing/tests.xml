@@ -62,6 +62,6 @@
     </target>
 
     <target name="behat-ddd" description="behat ddd tests">
-        <exec command="./bin/behat -c src/Gyman/Component/CoreDomain/behat.yml" checkreturn="true" passthru="true" />
+        <exec command="./bin/behat -c src/Gyman/Domain/behat.yml" checkreturn="true" passthru="true" />
     </target>
 </project>

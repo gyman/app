@@ -6,7 +6,7 @@ Gyman\Bundle\VouchersBundle\Entity\Voucher:
       - NotNull:
           message: Należy podać datę początkową.
 
-Gyman\Component\VouchersBundle\Entity\Price:
+Gyman\DomainBundle\Entity\Price:
   properties:
     amount:
       - Regex:
@@ -18,7 +18,7 @@ Gyman\Component\VouchersBundle\Entity\Price:
           minMessage: "Najmniejsza możliwa liczba wejść na karnet to 1"
           maxMessage: "Maksymalna liczba wejść na karnet to 999"
 
-Gyman\Component\VouchersBundle\Entity\Entry:
+Gyman\DomainBundle\Entity\Entry:
   constraints:
     - Callback:
         methods: ~

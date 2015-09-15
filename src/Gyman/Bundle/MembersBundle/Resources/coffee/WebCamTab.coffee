@@ -14,7 +14,7 @@ class @WebCamTab
   cameraId : "#camera"
   buttonMakeFotoId : "a#makeFoto"
 
-  hidden_input_foto_selector: "#gyman_members_member_form_type_foto"
+  hidden_input_foto_selector: "#gyman.members.member_form_type_foto"
   foto_selector: "img#memberFoto"
 
   pos: 0
@@ -86,9 +86,9 @@ class @WebCamTab
       $("a[href='#filePane']").trigger "click"
           
   initFileUpload: () =>
-    $("#gyman_members_member_form_type_fotoUploader").uniform()
+    $("#gyman.members.member_form_type_fotoUploader").uniform()
 
-    $("#gyman_members_member_form_type_fotoUploader",$(@modalWindow)).fileupload
+    $("#gyman.members.member_form_type_fotoUploader",$(@modalWindow)).fileupload
       limitMultiFileUploads: 1
       done: (e, data) =>
         response = data.response().result

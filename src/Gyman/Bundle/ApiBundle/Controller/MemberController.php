@@ -48,7 +48,7 @@ class MemberController extends BaseApiController
     public function putMemberAction(Request $request, Member $member)
     {
         $form = $this->createForm(
-            'gyman_members_member_form_type',
+            'gyman.members.member_form_type',
             $member,
             ['csrf_protection' => false]
         );
@@ -87,7 +87,7 @@ class MemberController extends BaseApiController
         $member = $manager->create();
 
         $form = $this->createForm(
-            'gyman_members_member_form_type',
+            'gyman.members.member_form_type',
             $member,
             ['csrf_protection' => false]
         );

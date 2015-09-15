@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Bundle\UserBundle\Entity\User;
-use Gyman\Component\Members\Repository\MemberRepositoryInterface;
+use Gyman\Domain\Repository\MemberRepositoryInterface;
 
 /**
  * MemberRepository

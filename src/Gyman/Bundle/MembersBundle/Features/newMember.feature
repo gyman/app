@@ -17,7 +17,7 @@ Scenario: Open modal on new user button click
    When I click element "a#saveFormInModal"
    Then I will wait to see "Pole nie może być puste!"
 
-   When I fill in "gyman_members_member_form_type_name" with "Jan Kowalski"
+   When I fill in "gyman.members.member_form_type_name" with "Jan Kowalski"
     And I click element "a#saveFormInModal"
     And I wait for 5 seconds
    Then I should be on the homepage
