@@ -1,6 +1,8 @@
 <?php
 namespace Gyman\Domain\Model;
 
+use Gyman\Domain\Command\UpdateMemberCommand;
+
 /**
  * Class Details
  * @package Gyman\Domain
@@ -100,6 +102,23 @@ class Details
         $this->belt = $belt;
         $this->barcode = $barcode;
         $this->starred = $starred;
+    }
+
+    public static function createFromMemberUpdateCommand(UpdateMemberCommand $command)
+    {
+        return new self(
+            $command->firstname,
+            $command->lastname,
+            $command->birthdate,
+            $command->phone,
+            $command->notes,
+            new Foto($command->foto),
+            $command->zipcode,
+            $command->gender,
+            new Belt($command->belt),
+            new Barcode($command->barcode),
+            $command->starred
+        );
     }
 
     /**

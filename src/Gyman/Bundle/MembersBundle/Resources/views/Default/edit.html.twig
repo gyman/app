@@ -1,5 +1,9 @@
 {% extends 'MembersBundle::layout.html.twig' %}
 
+{% block title %}
+{{ parent() }} - edycja użytkownika {{ member.details.firstname ~ ' ' ~ member.details.lastname  }}
+{% endblock title %}
+
 {% block content %}
 <div class="contentwrapper">
     <div class="heading">

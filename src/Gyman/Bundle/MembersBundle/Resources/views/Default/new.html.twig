@@ -1,4 +1,4 @@
-{% extends "MembersBundle:Default:edit.html.twig" %}
+{% extends 'MembersBundle::layout.html.twig' %}
 
 {% block title %}
     {{ parent() }} - Dodaj użytkownika
@@ -42,19 +42,3 @@
 </div>
 
 {% endblock content %}
-
-{% block birthday %}
-    {{ form_row(form.birthdate,{"label" : "member.modal.birthday_label"|trans, "attr": { "value" : null }}) }}
-{% endblock birthday %}
-
-{% block modal %}
-{% endblock modal %}
-
-{% block memberToolbox %}
-    <label for="sell_voucher_after_creation">
-        <input type="checkbox" checked="CHECKED" value="1" name="sell_voucher_after_creation" />
-        {{ 'members.new.sell_voucher_after_creation' | trans }}
-    </label>
-
-    <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">{{ "member.modal.save_button_label"|trans }}</a>
-{% endblock memberToolbox %}

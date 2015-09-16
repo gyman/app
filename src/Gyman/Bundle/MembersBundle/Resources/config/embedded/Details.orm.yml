@@ -1,14 +1,14 @@
-Gyman\Bundle\MembersBundle\Entity\Details:
+Gyman\Domain\Model\Details:
   type:   embeddable
   embedded:
     belt:
-      class: Gyman\Bundle\MembersBundle\Entity\Belt
+      class: Gyman\Domain\Model\Belt
       columnPrefix: false
     foto:
-      class: Gyman\Bundle\MembersBundle\Entity\Foto
+      class: Gyman\Domain\Model\Foto
       columnPrefix: false
     barcode:
-      class: Gyman\Bundle\MembersBundle\Entity\Barcode
+      class: Gyman\Domain\Model\Barcode
       columnPrefix: false
 
   fields:

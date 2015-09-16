@@ -1,4 +1,4 @@
-Gyman\Bundle\MembersBundle\Entity\Foto:
+Gyman\Domain\Model\Foto:
   type:   embeddable
   fields:
     foto:

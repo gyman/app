@@ -7,6 +7,8 @@ use Gyman\Bundle\DefaultBundle\Lib\Globals;
 use Gyman\Bundle\SectionBundle\Entity\Section;
 use Gyman\Bundle\VouchersBundle\Entity\Entry;
 use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Gyman\Domain\Model\Details;
+use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Model\Member as BaseMember;
 
 /**
@@ -15,6 +17,11 @@ use Gyman\Domain\Model\Member as BaseMember;
  */
 class Member extends BaseMember
 {
+    /**
+     * @var integer
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -115,11 +122,5 @@ class Member extends BaseMember
     public function sections()
     {
         return $this->sections;
-    }
-
-    public function updateWithDto($dto)
-    {
-        $this->details()->updateWithDto($dto);
-        $this->email()->updateWithDto($dto);
     }
 }

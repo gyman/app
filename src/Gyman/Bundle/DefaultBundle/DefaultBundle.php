@@ -12,6 +12,6 @@ class DefaultBundle extends Bundle
 
         Globals::setNoImage($this->container->getParameter('default.noImage'));
         Globals::setGalleryDir($this->container->getParameter('default.galleryDir'));
-        Globals::setGalleryPath($this->container->getParameter('galleryPath'));
+        Globals::setGalleryPath($this->container->getParameter('default.galleryPath'));
     }
 }

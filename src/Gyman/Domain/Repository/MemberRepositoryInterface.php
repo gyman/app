@@ -15,7 +15,7 @@ interface MemberRepositoryInterface extends RepositoryInterface
      * @param EmailAddress $email
      * @return Member
      */
-    public function findOneByEmailAddress($email);
+    public function findOneByEmailAddress(EmailAddress $email);
 
     /**
      * @param Member $member

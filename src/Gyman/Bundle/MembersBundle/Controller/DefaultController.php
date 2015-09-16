@@ -2,10 +2,10 @@
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\MembersBundle\Entity\Foto;
 use Gyman\Bundle\MembersBundle\Entity\Member;
-use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
+use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Command\UpdateMemberCommand;
+use Gyman\Domain\Model\EmailAddress;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -29,6 +29,7 @@ class DefaultController extends Controller
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
+
         $form = $this->createForm('gyman_member_form', $command);
 
         if ($request->isMethod('POST')) {
@@ -38,6 +39,7 @@ class DefaultController extends Controller
                 $this->get('gyman.members.update_member')->handle($form->getData());
 
                 $this->addFlash('success', 'flash.member_editted.success');
+
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.member_editted.errors');
@@ -60,40 +62,29 @@ class DefaultController extends Controller
     public function newAction(Request $request)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-
-        $member = MemberFactory::create();
-
-        $form = $this->createForm('gyman_member_form', null, [
-//            'validation_groups' => ['new'],
+        $form = $this->createForm('gyman_member_form', new CreateMemberCommand(), [
+            'data_class' => CreateMemberCommand::class,
         ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $member = $form->getData();
+                $command = $form->getData();
+                $this->get('gyman.members.create_member')->handle($command);
 
-                $member->details()->foto()->upload(realpath(
-                    $this->getParameter('galleryPath') .
-                    $this->getParameter('gallery_dir')
-                ));
-
-                $this->get('gyman.members.members_manager')->save($member);
                 $this->addFlash('success', 'flash.member_added.success');
 
-                return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
+                return $this->redirectToRoute('gyman_member_edit', [
+                    'id' => $this->get('gyman.members.repository')->findOneByEmailAddress(new EmailAddress($command->email))->id(),
+                ]);
             } else {
                 $this->addFlash('error', 'flash.member_added.errors');
                 $response->setStatusCode(400);
             }
         }
 
-        return $response->setContent(
-            $this->renderView('MembersBundle:Default:new.html.twig', [
-                'form'     => $form->createView(),
-                'member'   => $member,
-            ])
-        );
+        return $response->setContent($this->renderView('MembersBundle:Default:new.html.twig', ['form'     => $form->createView()]));
     }
 
     /**

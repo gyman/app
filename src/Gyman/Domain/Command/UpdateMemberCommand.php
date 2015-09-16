@@ -3,12 +3,13 @@ namespace Gyman\Domain\Command;
 
 use DateTime;
 use Gyman\Domain\Model\Member;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class UpdateMemberCommand
  * @package Gyman\Domain\Command
  */
-final class UpdateMemberCommand
+class UpdateMemberCommand
 {
     /**
      * @var string
@@ -66,6 +67,16 @@ final class UpdateMemberCommand
     public $foto;
 
     /**
+     * @var bool
+     */
+    public $starred;
+
+    /**
+     * @var UploadedFile
+     */
+    public $uploadFile;
+
+    /**
      * @param Member $member
      * @return UpdateMemberCommand
      */
@@ -76,12 +87,14 @@ final class UpdateMemberCommand
         $command->lastname = $member->details()->lastname();
         $command->birthdate = $member->details()->birthdate();
         $command->gender = $member->details()->gender();
-        $command->zipcode = $member->details()->phone();
+        $command->zipcode = $member->details()->zipcode();
+        $command->phone = $member->details()->phone();
         $command->email = $member->email()->email();
         $command->barcode = $member->details()->barcode()->barcode();
         $command->belt = $member->details()->belt()->color();
         $command->notes = $member->details()->notes();
         $command->foto = $member->details()->foto()->foto();
+        $command->starred = $member->details()->isStarred();
 
         return $command;
     }

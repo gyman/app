@@ -7,29 +7,21 @@
 
 <div class="tab-content">
     <div id="filePane" class="tab-pane fade in active">
-        {% if member.id() == null and form.vars.submitted and form.foto.vars.value != '' %}
-            {% set foto = "/uploads/gallery/" ~ form.foto.vars.value %}
-        {% else %}
+        {% if member is defined %}
             {% set foto = member.details.foto.fotoWithPath %}
+        {% else %}
+            {% set foto = '/bundles/members/images/no-profile.gif' %}
         {% endif %}
 
         <img src="{{ foto }}" class="thumbnail" id="memberFoto"/>
 
-        {{ form_widget(form.foto) }}
+        {{ form_widget(form.uploadFile) }}
 
         <div class="control-group error">
             <div class="help-block">
-                {{ form_errors(form.foto) }}
+                {{ form_errors(form.uploadFile) }}
             </div>
         </div>
 
     </div>
-
-    {#<div class="tab-pane fade in" id="webcamDiv">#}
-        {#<div id="camera" data-upload-url="&#123;&#35; uploader.endpoint('gallery') &#35;&#125;"></div>#}
-        {#<a href="#" id="makeFoto" class="btn btn-danger">#}
-            {#<span class="icon16 entypo-icon-flash"></span>#}
-            {#{{ 'member.modal.make_picture_button_label'|trans }}#}
-        {#</a>#}
-    {#</div>#}
 </div>

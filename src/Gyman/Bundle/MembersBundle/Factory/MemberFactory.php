@@ -3,14 +3,14 @@ namespace Gyman\Bundle\MembersBundle\Factory;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\MembersBundle\DTO\MemberDTO;
-use Gyman\Bundle\MembersBundle\Entity\Barcode;
-use Gyman\Bundle\MembersBundle\Entity\Belt;
-use Gyman\Bundle\MembersBundle\Entity\Details;
-use Gyman\Bundle\MembersBundle\Entity\EmailAddress;
-use Gyman\Bundle\MembersBundle\Entity\Foto;
 use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Factory\MemberFactoryInterface;
+use Gyman\Domain\Model\Barcode;
+use Gyman\Domain\Model\Belt;
+use Gyman\Domain\Model\Details;
+use Gyman\Domain\Model\EmailAddress;
+use Gyman\Domain\Model\Foto;
 
 /**
  * Class MemberFactory
@@ -25,23 +25,24 @@ final class MemberFactory implements MemberFactoryInterface
     public static function createFromArray($array)
     {
         $template = [
-            'email'           => null,
-            'firstname'       => null,
-            'lastname'        => null,
-            'birthdate'       => null,
-            'phone'           => null,
-            'notes'           => null,
-            'foto'            => null,
-            'zipcode'         => null,
-            'gender'          => null,
-            'belt'            => null,
-            'barcode'         => null,
-            'starred'         => null,
-            'sections'        => new ArrayCollection(),
-            'vouchers'        => new ArrayCollection(),
-            'entries'         => new ArrayCollection(),
-            'current_voucher' => null,
-            'last_entry'      => null,
+            'id'               => null,
+            'email'            => null,
+            'firstname'        => null,
+            'lastname'         => null,
+            'birthdate'        => null,
+            'phone'            => null,
+            'notes'            => null,
+            'foto'             => null,
+            'zipcode'          => null,
+            'gender'           => null,
+            'belt'             => null,
+            'barcode'          => null,
+            'starred'          => null,
+            'sections'         => new ArrayCollection(),
+            'vouchers'         => new ArrayCollection(),
+            'entries'          => new ArrayCollection(),
+            'current_voucher'  => null,
+            'last_entry'       => null,
         ];
 
         $array = array_merge($template, $array);
@@ -71,17 +72,30 @@ final class MemberFactory implements MemberFactoryInterface
         return $member;
     }
 
-    /**
-     * @param MemberDTO $dto
-     * @return Member
-     */
-    public static function createFromDto($dto)
-    {
-        return self::createFromArray(get_object_vars($dto));
-    }
-
     public static function create()
     {
         return self::createFromArray([]);
+    }
+
+    /**
+     * @param CreateMemberCommand $command
+     * @return Member
+     */
+    public static function createFromCreateMemberCommand(CreateMemberCommand $command)
+    {
+        return static::createFromArray([
+            'email'            => $command->email,
+            'firstname'        => $command->firstname,
+            'lastname'         => $command->lastname,
+            'birthdate'        => $command->birthdate,
+            'phone'            => $command->phone,
+            'notes'            => $command->notes,
+            'foto'             => $command->foto,
+            'zipcode'          => $command->zipcode,
+            'gender'           => $command->gender,
+            'belt'             => $command->belt,
+            'barcode'          => $command->barcode,
+            'starred'          => $command->starred,
+        ]);
     }
 }

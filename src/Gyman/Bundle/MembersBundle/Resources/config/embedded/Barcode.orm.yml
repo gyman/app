@@ -1,4 +1,4 @@
-Gyman\Bundle\MembersBundle\Entity\Barcode:
+Gyman\Domain\Model\Barcode:
   type:   embeddable
   fields:
     barcode:

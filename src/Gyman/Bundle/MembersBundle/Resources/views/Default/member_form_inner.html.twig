@@ -1,6 +1,9 @@
-
 <div class="span4">
-    {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
+    {% if member is defined %}
+        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
+    {% else %}
+        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form} %}
+    {% endif %}
 </div>
 
 <div class="span8">
@@ -17,7 +20,7 @@
         </div>
 
 
-        {% if member.id() %}
+        {% if member is defined and member.id() %}
         <div class="tab-pane fade in" id="voucherPane">
             {%  include '@Members/Default/Modal/_voucher.html.twig' with {'member' : member}%}
         </div>

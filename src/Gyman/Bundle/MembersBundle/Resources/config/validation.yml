@@ -1,6 +1,6 @@
 Gyman\Domain\Command\UpdateMemberCommand:
   properties:
-    foto:
+    uploadFile:
       - Image: ~
     email:
       - NotBlank:
@@ -8,6 +8,7 @@ Gyman\Domain\Command\UpdateMemberCommand:
       - Email:
           message: Adres '{{ value }}' nie jest poprawny.
           checkMX: true
+
     barcode:
       - NotBlank:
           message: Pole nie może być puste!

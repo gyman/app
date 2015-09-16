@@ -2,11 +2,11 @@
 namespace Gyman\MembersBundle\Tests\Functional\Controller;
 
 use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\MembersBundle\Entity\EmailAddress;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Component\Test\BaseFunctionalTest;
 use Gyman\Domain\Model\Belt;
 use Gyman\Domain\Model\Details;
+use Gyman\Domain\Model\EmailAddress;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -25,15 +25,15 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(13, $form->filter('input, textarea, button, select'));
+        $this->assertCount(14, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(9, $form->filter('input'));
+        $this->assertCount(10, $form->filter('input'));
         $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(0, $form->filter('input[type=checkbox]'));
+        $this->assertCount(1, $form->filter('input[type=checkbox]'));
         $this->assertCount(1, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));
@@ -55,15 +55,15 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(13, $form->filter('input, textarea, button, select'));
+        $this->assertCount(14, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(9, $form->filter('input'));
+        $this->assertCount(10, $form->filter('input'));
         $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(0, $form->filter('input[type=checkbox]'));
+        $this->assertCount(1, $form->filter('input[type=checkbox]'));
         $this->assertCount(1, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));

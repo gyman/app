@@ -5,8 +5,9 @@ parameters:
 
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/default/images/no-profile.gif
-  gallery_dir: /uploads/gallery/
-  galleryPath: %kernel.root_dir%/../web
+
+  galleryDirectory: %kernel.root_dir%/../web/uploads/gallery/
+  galleryPath: /uploads/gallery/
 
   revision_file: "%kernel.root_dir%/../REVISION"
   memcached.servers:
@@ -79,7 +80,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
       sentry_url:     %sentry_url%
-      gallery_dir:    %gallery_dir%
+      gallery_dir:    %galleryPath%
     form:
         resources:
             - ::fields.html.twig
@@ -105,8 +106,9 @@ oneup_uploader:
                 
 default:
     noImage:                %no_image%
-    galleryDir:             %gallery_dir%
-    
+    galleryDir:             %galleryDirectory%
+    galleryPath:            %galleryPath%
+
 stof_doctrine_extensions:
     default_locale: pl_PL
     orm:

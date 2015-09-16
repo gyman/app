@@ -1,7 +1,8 @@
-{{ form_row(form.firstname,{"label" : "Imię"}) }}
-{{ form_row(form.lastname,{"label" : "Nazwisko"}) }}
-{% block birthday %}{{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}{% endblock birthday %}
-{{ form_row(form.gender,{"label" : "Płeć"}) }}
-{{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
-{{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
-{{ form_row(form.email,{"label" : "Adres email"}) }}
+{{ form_row(form.firstname) }}
+{{ form_row(form.lastname) }}
+{{ form_row(form.birthdate) }}
+{{ form_row(form.gender) }}
+{{ form_row(form.zipcode) }}
+{{ form_row(form.phone) }}
+{{ form_row(form.email) }}
+{{ form_row(form.starred) }}

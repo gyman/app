@@ -1,4 +1,4 @@
-Gyman\Bundle\MembersBundle\Entity\EmailAddress:
+Gyman\Domain\Model\EmailAddress:
   type:   embeddable
   fields:
     email:

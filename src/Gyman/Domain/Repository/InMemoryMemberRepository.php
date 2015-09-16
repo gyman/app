@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain\Repository;
 
+use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Model\Member;
 
 class InMemoryMemberRepository implements MemberRepositoryInterface
@@ -22,7 +23,7 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      * @param $email
      * @return Member
      */
-    public function findOneByEmailAddress($email)
+    public function findOneByEmailAddress(EmailAddress $email)
     {
         $address = $email->email();
 

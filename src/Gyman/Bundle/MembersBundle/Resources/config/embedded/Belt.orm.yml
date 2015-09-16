@@ -1,4 +1,4 @@
-Gyman\Bundle\MembersBundle\Entity\Belt:
+Gyman\Domain\Model\Belt:
   type:   embeddable
   fields:
     color:

@@ -70,6 +70,12 @@ doctrine:
               SectionBundle: ~
 #              TimelineBundle: ~
 #              SpyTimelineBundle: ~
+              model:
+                type: yml
+                dir: "%kernel.root_dir%/../src/Gyman/Bundle/MembersBundle/Resources/config/embedded"
+                prefix: Gyman\Domain\Model
+                alias: Model
+                is_bundle: false
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

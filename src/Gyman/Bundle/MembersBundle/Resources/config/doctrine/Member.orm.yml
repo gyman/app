@@ -4,10 +4,10 @@ Gyman\Bundle\MembersBundle\Entity\Member:
   repositoryClass:  Gyman\Bundle\MembersBundle\Entity\MemberRepository
   embedded:
     email:
-      class: Gyman\Bundle\MembersBundle\Entity\EmailAddress
+      class: Gyman\Domain\Model\EmailAddress
       columnPrefix: false
     details:
-      class: Gyman\Bundle\MembersBundle\Entity\Details
+      class: Gyman\Domain\Model\Details
       columnPrefix: false
 
   id:

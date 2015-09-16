@@ -1,11 +1,5 @@
 services:
-  gyman.members.create_member:
-    class: Gyman\Domain\Service\CreateMember
-    arguments:
-      - @gyman.members.repository
-      - @event_dispatcher
 
-  #@todo: rename to commas
   gyman.members.members_manager:
     parent: gyman.base.entity_manager
     class:  Gyman\Bundle\MembersBundle\EntityManager\MemberManager
@@ -21,9 +15,6 @@ services:
 
   gyman.members.member_form_type:
     class: Gyman\Bundle\MembersBundle\Form\MemberType
-    arguments:
-      - @gyman.members.repository
-      - %gallerypath%/%gallery_dir%
     tags:
       - { name: form.type, alias: gyman_member_form }
 
@@ -49,7 +40,13 @@ services:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
 
   gyman.members.update_member:
-    class:
+    class: Gyman\Domain\Handler\UpdateMemberHandler
+    arguments: [@gyman.members.repository, %galleryDirectory%]
+
+
+  gyman.members.create_member:
+    class: Gyman\Domain\Handler\CreateMemberHandler
+    arguments: [@gyman.members.repository, %galleryDirectory%]
 
   # @todo: rename
   dende.upload_listener:

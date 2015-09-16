@@ -105,7 +105,7 @@ class Globals
     public static function applyGalleryDir($string)
     {
         if (self::checkIfImageExists($string)) {
-            return self::getGalleryDir() . $string;
+            return self::getGalleryPath() . $string;
         }
 
         return self::getNoImage();
@@ -119,9 +119,8 @@ class Globals
     public static function checkIfImageExists($string)
     {
         $file = self::getGalleryDir() . $string;
-        $filepath = __DIR__ . '/../../../../../web/' . $file;
 
-        return is_file($filepath) && file_exists($filepath);
+        return is_file($file) && file_exists($file);
     }
 
     public static function getCompareChoices()

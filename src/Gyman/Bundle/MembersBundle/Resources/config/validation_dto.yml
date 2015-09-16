@@ -12,12 +12,12 @@ Gyman\Bundle\MembersBundle\Entity\Member:
     email:
       - Valid: ~
 
-Gyman\Bundle\MembersBundle\Entity\Foto:
+Gyman\Domain\Model\Foto:
   properties:
     foto:
       - Image: ~
 
-Gyman\Bundle\MembersBundle\Entity\EmailAddress:
+Gyman\Domain\Model\EmailAddress:
   properties:
     email:
       - NotBlank:
@@ -26,13 +26,13 @@ Gyman\Bundle\MembersBundle\Entity\EmailAddress:
           message: Adres '{{ value }}' nie jest poprawny.
           checkMX: true
 
-Gyman\Bundle\MembersBundle\Entity\Barcode:
+Gyman\Domain\Model\Barcode:
   properties:
     barcode:
       - NotBlank:
           message: Pole nie może być puste!
 
-Gyman\Bundle\MembersBundle\Entity\Details:
+Gyman\Domain\Model\Details:
   properties:
     firstname:
       - NotBlank:

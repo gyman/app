@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class MemberType
  * @package Gyman\Bundle\MembersBundle
  */
-class MemberType extends AbstractType
+final class MemberType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -52,9 +52,12 @@ class MemberType extends AbstractType
             ->add('barcode', 'text', [
                 'label' => 'member.form.barcode.label',
             ])
-            ->add('foto', 'file', [
+            ->add('uploadFile', 'file', [
                 'required' => false,
                 'label'    => 'member.form.foto.label',
+            ])
+            ->add('starred', 'checkbox', [
+                'label'    => 'member.form.starred.label',
             ]);
     }
 
@@ -64,18 +67,8 @@ class MemberType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-//            'data_class'      => 'Gyman\Bundle\MembersBundle\DTO\MemberDTO',
             'data_class'      => UpdateMemberCommand::class,
             'csrf_protection' => true,
-//            'error_mapping'   => [
-//                'details.firstname'       => 'firstname',
-//                'details.lastname'        => 'lastname',
-//                'details.foto.foto'       => 'foto',
-//                'details.birthdate'       => 'birthdate',
-//                'email.email'             => 'email',
-//                'details.zipcode'         => 'zipcode',
-//                'details.barcode.barcode' => 'barcode',
-//            ],
         ]);
     }
 
