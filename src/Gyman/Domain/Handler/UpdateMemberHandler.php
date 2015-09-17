@@ -1,17 +1,19 @@
 <?php
 namespace Gyman\Domain\Handler;
 
+use Gyman\Bundle\MembersBundle\Entity\MemberRepository;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Exception\MemberNotFoundException;
 use Gyman\Domain\Model\Details;
 use Gyman\Domain\Model\EmailAddress;
+use Gyman\Domain\Model\Member;
 use Gyman\Domain\Repository\MemberRepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateMemberHandler
 {
     /**
-     * @var MemberRepositoryInterface
+     * @var MemberRepository
      */
     protected $memberRepository;
 
@@ -37,7 +39,8 @@ class UpdateMemberHandler
      */
     public function handle(UpdateMemberCommand $command)
     {
-        $member = $this->memberRepository->findOneByEmailAddress(new EmailAddress($command->email));
+        /** @var Member $member */
+        $member = $this->memberRepository->findOneById($command->id);
 
         if (is_null($member)) {
             throw new MemberNotFoundException();
@@ -50,8 +53,10 @@ class UpdateMemberHandler
         }
 
         $details = Details::createFromMemberUpdateCommand($command);
+        $email = EmailAddress::createFromMemberUpdateCommand($command);
 
         $member->updateDetails($details);
+        $member->updateEmail($email);
 
         $this->memberRepository->insert($member);
     }

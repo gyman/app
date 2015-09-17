@@ -77,12 +77,18 @@ class UpdateMemberCommand
     public $uploadFile;
 
     /**
+     * @var integer
+     */
+    public $id;
+
+    /**
      * @param Member $member
      * @return UpdateMemberCommand
      */
     public static function createFromMember(Member $member)
     {
         $command = new self();
+        $command->id = $member->id();
         $command->firstname = $member->details()->firstname();
         $command->lastname = $member->details()->lastname();
         $command->birthdate = $member->details()->birthdate();

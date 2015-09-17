@@ -21,6 +21,7 @@ final class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id', 'hidden')
             ->add('firstname', 'text', ['label' => 'member.form.firstname.label'])
             ->add('lastname', 'text', ['label' => 'member.form.lastname.label'])
             ->add('birthdate', 'date', [

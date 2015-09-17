@@ -98,11 +98,11 @@ class Globals
     }
 
     /**
-     *
+     * Adds relative to DOCUMENT_ROOT path to file
      * @param  string $string
      * @return string
      */
-    public static function applyGalleryDir($string)
+    public static function applyGalleryPath($string)
     {
         if (self::checkIfImageExists($string)) {
             return self::getGalleryPath() . $string;
@@ -111,9 +111,14 @@ class Globals
         return self::getNoImage();
     }
 
-    public static function applyFilePath($string)
+    /**
+     * Adds absolute phisical path to file
+     * @param $string
+     * @return string
+     */
+    public static function applyFileDir($string)
     {
-        return self::getGalleryPath() . self::applyGalleryDir($string);
+        return self::$galleryDir . $string;
     }
 
     public static function checkIfImageExists($string)

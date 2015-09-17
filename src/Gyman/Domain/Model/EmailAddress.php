@@ -22,6 +22,15 @@ class EmailAddress
     }
 
     /**
+     * @param $command
+     * @return EmailAddress
+     */
+    public static function createFromMemberUpdateCommand($command)
+    {
+        return new self($command->email);
+    }
+
+    /**
      * @param EmailAddress $email
      * @return bool
      */

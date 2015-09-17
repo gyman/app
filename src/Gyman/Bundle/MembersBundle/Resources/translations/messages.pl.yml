@@ -27,6 +27,9 @@ member.form.barcode.label: "Kod"
 member.form.belt.label: "Kolor pasa"
 member.form.notes.label: "Notatki"
 
+member.type.email.already_registered: "Ten email jest już zarejestrowany"
+member.type.barcode.already_registered: "Ten kod jest już zarejestrowany"
+
 male: "mężczyzna"
 female: "kobieta"
 

@@ -6,6 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Bundle\UserBundle\Entity\User;
+use Gyman\Domain\Model\Barcode;
 use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Repository\MemberRepositoryInterface;
 
@@ -27,6 +28,23 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
 
         $query = $qb->where('m.email.email = :emailAddress')
             ->setParameter('emailAddress', $emailAddress->email())
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @param Barcode $barcode
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return Member
+     * @internal param Barcode $barcode
+     */
+    public function findOneByBarcode(Barcode $barcode)
+    {
+        $qb = $this->createQueryBuilder('m');
+
+        $query = $qb->where('m.details.barcode.barcode = :barcode')
+            ->setParameter('barcode', $barcode->barcode())
             ->getQuery();
 
         return $query->getOneOrNullResult();

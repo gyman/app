@@ -18,11 +18,6 @@ use Gyman\Domain\Model\Member as BaseMember;
 class Member extends BaseMember
 {
     /**
-     * @var integer
-     */
-    private $id;
-
-    /**
      * @var string
      */
     private $nameSlug;
@@ -106,14 +101,6 @@ class Member extends BaseMember
     public function entries()
     {
         return $this->entries;
-    }
-
-    /**
-     * @return int
-     */
-    public function id()
-    {
-        return $this->id;
     }
 
     /**

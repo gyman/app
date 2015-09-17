@@ -1,4 +1,9 @@
 Gyman\Domain\Command\UpdateMemberCommand:
+  constraints:
+    - Gyman\Bundle\MembersBundle\Validator\UniqueMemberEmail:
+        message: member.type.email.already_registered
+    - Gyman\Bundle\MembersBundle\Validator\UniqueMemberBarcode:
+        message: member.type.barcode.already_registered
   properties:
     uploadFile:
       - Image: ~
@@ -41,3 +46,4 @@ Gyman\Domain\Command\UpdateMemberCommand:
     gender: ~
     belt: ~
     starred: ~
+

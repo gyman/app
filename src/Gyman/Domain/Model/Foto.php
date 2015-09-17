@@ -33,6 +33,6 @@ class Foto
 
     public function fotoWithPath()
     {
-        return Globals::applyGalleryDir($this->foto);
+        return Globals::applyGalleryPath($this->foto);
     }
 }

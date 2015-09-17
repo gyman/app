@@ -48,6 +48,18 @@ services:
     class: Gyman\Domain\Handler\CreateMemberHandler
     arguments: [@gyman.members.repository, %galleryDirectory%]
 
+  gyman.members.unique_member_email.validator:
+    class: Gyman\Bundle\MembersBundle\Validator\UniqueMemberEmailValidator
+    arguments: [@gyman.members.repository]
+    tags:
+        - { name: validator.constraint_validator, alias: UniqueMemberEmailValidator }
+
+  gyman.members.unique_member_barcode.validator:
+    class: Gyman\Bundle\MembersBundle\Validator\UniqueMemberBarcodeValidator
+    arguments: [@gyman.members.repository]
+    tags:
+        - { name: validator.constraint_validator, alias: UniqueMemberBarcodeValidator }
+
   # @todo: rename
   dende.upload_listener:
       class: Gyman\Bundle\MembersBundle\Services\Listener\UploadListener

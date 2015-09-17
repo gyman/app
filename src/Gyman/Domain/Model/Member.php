@@ -14,6 +14,11 @@ use Gyman\Domain\Exception\VouchersAreOverlappingException;
 class Member
 {
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
      * @var EmailAddress
      */
     protected $email;
@@ -68,6 +73,14 @@ class Member
 
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;
+    }
+
+    /**
+     * @return int
+     */
+    public function id()
+    {
+        return $this->id;
     }
 
     /**
@@ -225,5 +238,10 @@ class Member
     public function updateDetails(Details $details)
     {
         $this->details = $details;
+    }
+
+    public function updateEmail(EmailAddress $email)
+    {
+        $this->email = $email;
     }
 }
