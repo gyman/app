@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Class MemberControllerTest
  */
-class DefaultControllerTest extends BaseFunctionalTest
+class MembersControllerTest extends BaseFunctionalTest
 {
     /**
      * @test

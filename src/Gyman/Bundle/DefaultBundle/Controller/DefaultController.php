@@ -11,6 +11,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->forward('MembersBundle:Default:index');
+        return $this->forward('MembersBundle:Members:index');
     }
 }

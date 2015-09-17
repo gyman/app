@@ -15,17 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class DefaultController
+ * Class MembersController
  * @package Gyman\Bundle\MembersBundle\Controller
  */
-class DefaultController extends Controller
+class MembersController extends Controller
 {
     /**
-     * @Route("/{id}/edit", name="gyman_member_edit")
+     * @Route("/{id}/update", name="gyman_member_edit")
      * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
      */
-    public function editAction(Member $member, Request $request)
+    public function updateAction(Member $member, Request $request)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
@@ -36,7 +35,7 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get('gyman.members.update_member')->handle($form->getData());
+                $this->get('gyman.members.update_member')->handle($form->getData(), $this->getUser());
 
                 $this->addFlash('success', 'flash.member_editted.success');
 
@@ -48,7 +47,7 @@ class DefaultController extends Controller
         }
 
         return $response->setContent(
-            $this->renderView('MembersBundle:Default:edit.html.twig', [
+            $this->renderView('MembersBundle:Members:edit.html.twig', [
                     'form'     => $form->createView(),
                     'member'   => $member,
             ])
@@ -56,10 +55,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/new", name="gyman_member_new")
-     * @Template()
+     * @Route("/create", name="gyman_member_new")
      */
-    public function newAction(Request $request)
+    public function createAction(Request $request)
     {
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $form = $this->createForm('gyman_member_form', new CreateMemberCommand(), [
@@ -71,7 +69,7 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 $command = $form->getData();
-                $this->get('gyman.members.create_member')->handle($command);
+                $this->get('gyman.members.create_member')->handle($command, $this->getUser());
 
                 $this->addFlash('success', 'flash.member_added.success');
 
@@ -84,7 +82,7 @@ class DefaultController extends Controller
             }
         }
 
-        return $response->setContent($this->renderView('MembersBundle:Default:new.html.twig', ['form'     => $form->createView()]));
+        return $response->setContent($this->renderView('MembersBundle:Members:new.html.twig', ['form'     => $form->createView()]));
     }
 
     /**

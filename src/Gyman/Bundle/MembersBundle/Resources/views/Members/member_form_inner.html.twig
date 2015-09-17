@@ -1,14 +1,14 @@
 <div class="span4">
     {% if member is defined %}
-        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
+        {% include 'MembersBundle:Members:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
     {% else %}
-        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form} %}
+        {% include 'MembersBundle:Members:Modal/_picture.html.twig' with {'form' : form} %}
     {% endif %}
 </div>
 
 <div class="span8">
     {{ knp_menu_render('gyman.members.menu.tabs', {
-        'template': 'MembersBundle:Default:Menu/tabs.html.twig',
+        'template': 'MembersBundle:Members:Menu/tabs.html.twig',
         'currentAsLink' : true,
         'depth' : 1,
         'currentClass' : 'active',
@@ -16,24 +16,24 @@
 
     <div class="tab-content">
         <div id="detailsPane" class="tab-pane fade in active">
-            {% include 'MembersBundle:Default:Modal/_details.html.twig' with {'form' : form} %}
+            {% include 'MembersBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
         </div>
 
 
         {% if member is defined and member.id() %}
         <div class="tab-pane fade in" id="voucherPane">
-            {%  include '@Members/Default/Modal/_voucher.html.twig' with {'member' : member}%}
+            {%  include '@Members/Members/Modal/_voucher.html.twig' with {'member' : member}%}
         </div>
         {% endif %}
 
         {#{% if member.id() is not null %}#}
             {#<div class="tab-pane fade in" id="historyPane">#}
-                {#&#123;&#35;{% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}&#35;&#125;#}
+                {#&#123;&#35;{% include 'MembersBundle:Members:Modal/_sell.html.twig' with {'member' : member} %}&#35;&#125;#}
                 {#&#123;&#35;<div id="timeline">{% render controller('TimelineBundle:Default:timeline', {subject: member }) %}</div>&#35;&#125;#}
             {#</div>#}
         {#{% endif %}#}
         <div class="tab-pane fade in" id="additionalsPane">
-            {% include 'MembersBundle:Default:Modal/_additional.html.twig' with {'form' : form} %}
+            {% include 'MembersBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
         </div>
     </div>
 

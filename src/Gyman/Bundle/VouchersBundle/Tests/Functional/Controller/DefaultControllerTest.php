@@ -9,7 +9,7 @@ use Gyman\Domain\Model\Belt;
 use Gyman\Domain\Model\Details;
 
 /**
- * Class DefaultControllerTest
+ * Class MembersControllerTest
  */
 class DefaultControllerTest extends BaseFunctionalTest
 {

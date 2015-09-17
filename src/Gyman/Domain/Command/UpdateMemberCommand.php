@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class UpdateMemberCommand
  * @package Gyman\Domain\Command
  */
-class UpdateMemberCommand
+class UpdateMemberCommand implements MemberCommandInterface
 {
     /**
      * @var string

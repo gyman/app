@@ -1,6 +1,6 @@
 <tr>
     <td class="profileColumn">
-        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : entity.getMember() } %}
+        {% include "MembersBundle:Members:_member_column.html.twig" with {"member" : entity.getMember() } %}
     </td>
     <td>
         {{ entity.getCreated()|date("d.m.y") }} {{ entity.getCreated()|date("H:i") }}

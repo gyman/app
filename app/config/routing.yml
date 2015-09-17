@@ -48,8 +48,8 @@ default:
     type:     annotation
     prefix:   /default
 
-members:
-    resource: "@MembersBundle/Controller/DefaultController.php"
+gyman_members:
+    resource: "@MembersBundle/Controller/MembersController.php"
     type:     annotation
     prefix:   /members
 
@@ -90,7 +90,7 @@ fos_user_group:
 #  prefix: /api/
 
 #gyman_api_members:
-#  resource: @ApiBundle/Controller/MemberController.php
+#  resource: @ApiBundle/Controller/MembersController.php
 #  type: rest
 #  prefix: /api/
 

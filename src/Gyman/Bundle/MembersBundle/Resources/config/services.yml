@@ -41,12 +41,12 @@ services:
 
   gyman.members.update_member:
     class: Gyman\Domain\Handler\UpdateMemberHandler
-    arguments: [@gyman.members.repository, %galleryDirectory%]
+    arguments: [@gyman.members.repository, %galleryDirectory%, @event_dispatcher]
 
 
   gyman.members.create_member:
     class: Gyman\Domain\Handler\CreateMemberHandler
-    arguments: [@gyman.members.repository, %galleryDirectory%]
+    arguments: [@gyman.members.repository, %galleryDirectory%, @event_dispatcher]
 
   gyman.members.unique_member_email.validator:
     class: Gyman\Bundle\MembersBundle\Validator\UniqueMemberEmailValidator
