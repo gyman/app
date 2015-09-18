@@ -4,7 +4,6 @@ namespace Gyman\Domain\Handler;
 use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
 use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Command\MemberCommandInterface;
-use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Event\MemberEvent;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

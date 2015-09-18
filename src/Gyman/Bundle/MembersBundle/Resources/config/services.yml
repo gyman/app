@@ -18,6 +18,11 @@ services:
     tags:
       - { name: form.type, alias: gyman_member_form }
 
+  gyman.members.member_search_form_type:
+    class: Gyman\Bundle\MembersBundle\Form\SearchType
+    tags:
+      - { name: form.type, alias: gyman_member_search_form }
+
   gyman.members.menu_builder:
       class: Gyman\Bundle\MembersBundle\Menu\Builder
       arguments: [@knp_menu.factory, @security.context]

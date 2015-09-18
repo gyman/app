@@ -308,6 +308,27 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertContains($error, trim($crawler->filter($elementPath)->text()));
     }
 
+    /**
+     * @test
+     * @dataProvider memberSearchProvider
+     */
+    public function member_search_form_on_dashboard_redirects_to_user($query, $id)
+    {
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_dashboard_index'));
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $form = $crawler->filter('form[name="gyman_member_search_form"]')->first()->form();
+
+        $form->setValues([
+            'gyman_member_search_form[query]' => $query
+        ]);
+
+        $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $this->assertEquals($this->container->get('router')->generate('gyman_member_edit', ['id' => $id]), $this->client->getRequest()->getRequestUri());
+    }
+
     public function getErrorGeneratingForms()
     {
         $correctData = [
@@ -424,6 +445,23 @@ class MembersControllerTest extends BaseFunctionalTest
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
                 'error'       => 'Data powinna być po {{ limit }}.',
             ],
+        ];
+    }
+
+    public function memberSearchProvider(){
+        return [
+            'by-lastname-lowercase' => ["query" => "grzeszczak", "id" => 5],
+            'by-lastname-uppercase' => ["query" => "GRZESZCZAK", "id" => 5],
+            'by-lastname-partially-01' => ["query" => "grze", "id" => 5],
+            'by-lastname-partially-02' => ["query" => "GRZE", "id" => 5],
+            'by-firstname-lowercase' => ["query" => "sylwia", "id" => 5],
+            'by-firstname-uppercase' => ["query" => "SYLWIA", "id" => 5],
+            'by-firstname-partially-01' => ["query" => "syl", "id" => 5],
+            'by-firstname-partially-02' => ["query" => "SYL", "id" => 5],
+            'barcode' => ["query" => "abcd12305", "id" => 5],
+            'barcode-uppercase' => ["query" => "ABCD12305", "id" => 5],
+            'email-uppercase' => ["query" => "test05@test2.pl", "id" => 5],
+            'email-lowercase' => ["query" => "test05@test2.pl", "id" => 5],
         ];
     }
 

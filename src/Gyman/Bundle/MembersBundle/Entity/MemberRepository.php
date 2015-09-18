@@ -121,4 +121,26 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
 
         return $queryBuilder;
     }
+
+    /**
+     * @param string $query
+     */
+    public function search($query = '')
+    {
+        if ($query == '') {
+            throw new \Exception('Paramater query is required!');
+        }
+
+        $qb = $this->createQueryBuilder('m');
+
+        $query = $qb->where('m.details.firstname LIKE :queryLike')
+            ->orWhere('m.details.lastname LIKE :queryLike')
+            ->orWhere('LOWER(m.details.barcode.barcode) = :query')
+            ->orWhere('LOWER(m.email.email) = :query')
+            ->setParameter('queryLike', "%" . $query . "%")
+            ->setParameter('query', strtolower($query))
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

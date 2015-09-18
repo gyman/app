@@ -2,8 +2,10 @@
 namespace Gyman\Bundle\MembersBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityNotFoundException;
 use Gyman\Bundle\MembersBundle\Entity\Member;
 use Gyman\Domain\Command\CreateMemberCommand;
+use Gyman\Domain\Command\SearchMemberCommand;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Model\EmailAddress;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -117,11 +119,44 @@ class MembersController extends Controller
      * )
      * @Template()
      */
-    public function searchForDashboardAction(ArrayCollection $members = null)
-    {
-        $serializer = $this->get('jms_serializer');
-        $data = $serializer->serialize(count($members) > 0 ? $members : [], 'json');
+//    public function searchForDashboardAction(ArrayCollection $members = null)
+//    {
+//        $serializer = $this->get('jms_serializer');
+//        $data = $serializer->serialize(count($members) > 0 ? $members : [], 'json');
+//
+//        return new Response($data, 200, ['content-type' => 'application/json']);
+//    }
 
-        return new Response($data, 200, ['content-type' => 'application/json']);
+    /**
+     * @Route("/search", name="gyman_members_search")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $form = $this->createForm('gyman_member_search_form', new SearchMemberCommand());
+
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $result = $this->get('gyman.members.repository')->search($form->getData()->query);
+
+                if (empty($result)) {
+                    throw new EntityNotFoundException(
+                        sprintf("No member was found for '%s' query", $form->getData()->query)
+                    );
+                }
+
+                if(count($result) > 1)
+                {
+                    $this->addFlash('error', 'flash.member_search.more_results_than_one_please_specify_query_more');
+                }
+
+                $result = $result[0];
+
+                return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
+            }
+        }
     }
 }
