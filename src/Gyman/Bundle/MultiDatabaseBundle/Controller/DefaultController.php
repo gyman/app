@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\MultiDatabaseBundle\Controller;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\MultiDatabaseBundle\Services\CredentialsStorage;
 use Gyman\Bundle\UserBundle\Entity\User;

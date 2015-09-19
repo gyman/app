@@ -3,11 +3,11 @@ namespace Gyman\Bundle\EntriesBundle\Validator;
 
 //use Symfony\Component\Validator\ConstraintValidator;
 //use Symfony\Component\Validator\Constraint;
-//use Gyman\Bundle\VouchersBundle\Entity\Voucher;
-//use Gyman\Bundle\MembersBundle\Entity\Member;
-//use Gyman\Bundle\VouchersBundle\Services\Manager\VoucherManager;
+//use Gyman\Bundle\AppBundle\Entity\Voucher;
+//use Gyman\Bundle\AppBundle\Entity\Member;
+//use Gyman\Bundle\AppBundle\Services\Manager\VoucherManager;
 //use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Gyman\Bundle\VouchersBundle\Entity\Entry;
+use Gyman\Bundle\AppBundle\Entity\Entry;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 // extends ConstraintValidator

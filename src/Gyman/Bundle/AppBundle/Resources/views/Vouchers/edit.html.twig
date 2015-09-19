@@ -1,0 +1,6 @@
+{% extends "GymanAppBundle:Vouchers:new.html.twig" %}
+
+{% block title %}Edytuj karnet{% endblock %}
+{% block button %}Zapisz{% endblock %}
+
+{% block action %}{{ path('_voucher_edit', {"id" : voucher.getId()}) }}{% endblock action %}

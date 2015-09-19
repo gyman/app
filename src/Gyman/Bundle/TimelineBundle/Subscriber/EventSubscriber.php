@@ -1,13 +1,13 @@
 <?php
 namespace Gyman\Bundle\TimelineBundle\Subscriber;
 
+use Gyman\Bundle\AppBundle\Event\MemberCreatedEvent;
+use Gyman\Bundle\AppBundle\Event\VoucherCreatedEvent;
+use Gyman\Bundle\AppBundle\MembersEvents;
+use Gyman\Bundle\AppBundle\VouchersEvents;
 use Gyman\Bundle\EntriesBundle\EntriesEvents;
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
-use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
-use Gyman\Bundle\MembersBundle\MembersEvents;
 use Gyman\Bundle\TimelineBundle\Timeline\EventsHandler;
-use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
-use Gyman\Bundle\VouchersBundle\VouchersEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSubscriber implements EventSubscriberInterface

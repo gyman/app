@@ -1,9 +1,0 @@
-Gyman\Bundle\MembersBundle\Entity\Member:
-  exclusion_policy: ALL
-  properties:
-    id:
-      expose: true
-    email:
-      expose: true
-    currentVoucher:
-      expose: true

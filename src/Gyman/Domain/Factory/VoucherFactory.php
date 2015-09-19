@@ -2,6 +2,7 @@
 namespace Gyman\Domain\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Domain\Model\Member;
 use Gyman\Domain\Model\Price;
 use Gyman\Domain\Model\Voucher;
 
@@ -23,6 +24,7 @@ final class VoucherFactory implements VoucherFactoryInterface
             'price'               => null,
             'maximumAmount'       => null,
             'entries'             => new ArrayCollection(),
+            'member'              => MemberFactory::create(),
         ];
 
         $array = array_merge($template, $array);
@@ -34,7 +36,9 @@ final class VoucherFactory implements VoucherFactoryInterface
                 $array['price']['amount'],
                 $array['price']['currency']
             ),
-            $array['maximumAmount']
+            $array['maximumAmount'],
+            [],
+            $array['member']
         );
     }
 

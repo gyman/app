@@ -13,7 +13,7 @@ class StarredTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $starredFilter = new Starred();
@@ -30,12 +30,12 @@ class StarredTest extends BaseTest
         return [
             [
                 'starred'       => true,
-                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.starred = true",
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.starred = true",
                 'expectedCount' => 0,
             ],
             [
                 'starred'       => false,
-                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.starred is null or m.starred = false",
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.starred is null or m.starred = false",
                 'expectedCount' => 0,
             ],
         ];

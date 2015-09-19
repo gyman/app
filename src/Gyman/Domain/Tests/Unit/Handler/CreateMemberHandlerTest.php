@@ -7,6 +7,7 @@ use Gyman\Domain\Handler\CreateMemberHandler;
 use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Repository\InMemoryMemberRepository;
 use Mockery as m;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
@@ -51,7 +52,12 @@ class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
             true
         );
 
-        $handler = new CreateMemberHandler($repository, '/tmp');
+        $dispatcher = new EventDispatcher();
+
+        $uploadHandler = m::mock('Gyman\Domain\Handler\UploadMemberFotoHandler');
+        $uploadHandler->shouldReceive('handle')->once()->with($command)->andReturnNull();
+
+        $handler = new CreateMemberHandler($repository, $uploadHandler, $dispatcher);
 
         $handler->handle($command);
 
@@ -67,6 +73,5 @@ class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($member->details()->barcode()->barcode(), 'new-barcode');
         $this->assertEquals($member->details()->belt()->color(), 'purple');
         $this->assertEquals($member->details()->notes(), 'updated note');
-        $this->assertNotEquals($member->details()->foto()->foto(), $md5);
     }
 }

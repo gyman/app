@@ -13,7 +13,7 @@ class CheckedInTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $checkedInFilter = new CheckedIn();
@@ -30,12 +30,12 @@ class CheckedInTest extends BaseTest
         return [
             [
                 'checkedIn'     => true,
-                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is not null and (m.lastEntry.endDate is null or m.lastEntry.endDate < :now)",
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.lastEntry is not null and (m.lastEntry.endDate is null or m.lastEntry.endDate < :now)",
                 'expectedCount' => 1,
             ],
             [
                 'checkedIn'     => false,
-                'expectedDql'   => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.lastEntry is null",
+                'expectedDql'   => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.lastEntry is null",
                 'expectedCount' => 0,
             ],
         ];

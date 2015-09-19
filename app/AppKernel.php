@@ -27,9 +27,7 @@ class AppKernel extends Kernel
 
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-//            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
-            new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
@@ -38,9 +36,8 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
-            new Gyman\Bundle\DefaultBundle\DefaultBundle(),
-            new Gyman\Bundle\MembersBundle\MembersBundle(),
-            new Gyman\Bundle\VouchersBundle\VouchersBundle(),
+            new \Gyman\Bundle\AppBundle\GymanAppBundle(),
+
             new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
             new Gyman\Bundle\EntriesBundle\EntriesBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
@@ -56,7 +53,6 @@ class AppKernel extends Kernel
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
 //            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
-//            new Gyman\Bundle\ApiBundle\ApiBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),

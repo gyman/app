@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\EntriesBundle\Event;
 
 use Doctrine\ORM\EntityManager;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
+use Gyman\Bundle\AppBundle\Entity\Voucher;
 
 class EventsHandler
 {

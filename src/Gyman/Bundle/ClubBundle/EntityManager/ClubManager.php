@@ -1,9 +1,9 @@
 <?php
 namespace Gyman\Bundle\ClubBundle\EntityManager;
 
+use Gyman\Bundle\AppBundle\ClubsEvents;
+use Gyman\Bundle\AppBundle\Event\ClubCreatedEvent;
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
-use Gyman\Bundle\MembersBundle\ClubsEvents;
-use Gyman\Bundle\MembersBundle\Event\ClubCreatedEvent;
 
 class ClubManager extends BaseManager
 {

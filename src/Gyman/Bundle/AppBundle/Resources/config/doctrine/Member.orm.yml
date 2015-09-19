@@ -1,0 +1,82 @@
+Gyman\Bundle\AppBundle\Entity\Member:
+  type:   entity
+  table:  members
+  repositoryClass:  Gyman\Bundle\AppBundle\Entity\MemberRepository
+  embedded:
+    email:
+      class: Gyman\Domain\Model\EmailAddress
+      columnPrefix: false
+    details:
+      class: Gyman\Domain\Model\Details
+      columnPrefix: false
+
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
+  oneToMany:
+    vouchers:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
+      mappedBy: member
+      cascade: ["persist"]
+
+    entries:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      mappedBy: member
+
+  oneToOne:
+    currentVoucher:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
+      cascade: ["persist", "merge"]
+      joinColumn:
+        name: current_voucher_id
+        referencedColumnName: id
+        onDelete: SET NULL
+        nullable: true
+
+    lastEntry:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      joinColumn:
+        name: last_entry_id
+        referencedColumnName: id
+        onDelete: SET NULL
+        nullable: true #false
+
+  fields:
+    nameSlug:
+      name: name_slug
+      type: string
+      nullable: true
+      gedmo:
+        slug:
+          fields: [ details.firstname, details.lastname]
+          updatable: true
+          separator: -
+          unique: true
+
+    deletedAt:
+      name: deleted_at
+      type: datetime
+      nullable: true #false
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update

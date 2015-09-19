@@ -21,10 +21,10 @@
         </a>
     </td>
     <td class="profileColumn">
-        {% include "MembersBundle:Members:_member_column.html.twig" with {"member" : entity } %}
+        {% include "GymanAppBundle:Members:_member_column.html.twig" with {"member" : entity } %}
     </td>
     <td class="voucherColumn">
-        {# { render(controller('MembersBundle:Members:currentVoucher', { 'id': entity.getId() })) } #}
+        {# { render(controller('GymanAppBundle:Members:currentVoucher', { 'id': entity.getId() })) } #}
         {% if entity.getCurrentVoucher() is not null %}
             {% set voucher = entity.getCurrentVoucher() %}
             {% if voucher is not null and voucher.getId() %}

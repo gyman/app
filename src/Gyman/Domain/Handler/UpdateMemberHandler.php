@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Domain\Handler;
 
-use Gyman\Bundle\MembersBundle\Entity\MemberRepository;
+use Gyman\Bundle\AppBundle\Entity\MemberRepository;
 use Gyman\Domain\Command\MemberCommandInterface;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Event\MemberEvent;
@@ -24,9 +24,9 @@ class UpdateMemberHandler
     protected $memberRepository;
 
     /**
-     * @var
+     * @var UploadMemberFotoHandler
      */
-    protected $fotoDestinationDir;
+    protected $uploadHandler;
 
     /**
      * @var EventDispatcherInterface
@@ -36,13 +36,13 @@ class UpdateMemberHandler
     /**
      * UpdateMemberHandler constructor.
      * @param MemberRepositoryInterface $memberRepository
-     * @param $fotoDestinationDir
+     * @param UploadMemberFotoHandler $uploadHandler
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $memberRepository, $fotoDestinationDir, EventDispatcherInterface $dispatcher)
+    public function __construct(MemberRepositoryInterface $memberRepository, UploadMemberFotoHandler $uploadHandler, EventDispatcherInterface $dispatcher)
     {
         $this->memberRepository = $memberRepository;
-        $this->fotoDestinationDir = $fotoDestinationDir;
+        $this->uploadHandler = $uploadHandler;
         $this->dispatcher = $dispatcher;
     }
 
@@ -60,11 +60,7 @@ class UpdateMemberHandler
             throw new MemberNotFoundException();
         }
 
-        if ($command->uploadFile instanceof UploadedFile) {
-            $filename = sprintf('%s.%s', md5(microtime(true)), strtolower($command->uploadFile->getClientOriginalExtension()));
-            $command->uploadFile->move($this->fotoDestinationDir, $filename);
-            $command->foto = $filename;
-        }
+        $this->uploadHandler->handle($command);
 
         $details = Details::createFromMemberUpdateCommand($command);
         $email = EmailAddress::createFromMemberUpdateCommand($command);

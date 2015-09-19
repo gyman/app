@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Domain\Model;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 
 /**
  * Class Foto

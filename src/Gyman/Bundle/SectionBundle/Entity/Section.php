@@ -36,7 +36,7 @@ class Section
 
     /**
      * @var Member[]
-     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\MembersBundle\Entity\Member", inversedBy="sections")
+     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\AppBundle\Entity\Member", inversedBy="sections")
      * @ORM\JoinTable(name="sections_has_members")
      * )
      */

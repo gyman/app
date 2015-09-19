@@ -1,10 +1,10 @@
 <?php
 namespace Gyman\Bundle\EntriesBundle\Subscriber;
 
+use Gyman\Bundle\AppBundle\EntityManager\MemberManager;
 use Gyman\Bundle\EntriesBundle\EntriesEvents;
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
 use Gyman\Bundle\EntriesBundle\Event\EventsHandler;
-use Gyman\Bundle\MembersBundle\EntityManager\MemberManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSubscriber implements EventSubscriberInterface

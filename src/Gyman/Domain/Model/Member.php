@@ -244,4 +244,9 @@ class Member
     {
         $this->email = $email;
     }
+
+    public function unsetCurrentVoucher()
+    {
+        $this->currentVoucher = null;
+    }
 }

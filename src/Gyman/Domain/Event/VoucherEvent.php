@@ -19,19 +19,13 @@ class VoucherEvent extends Event implements DomainEventInterface
     private $author;
 
     /**
-     * @var Member
-     */
-    private $member;
-
-    /**
      * VoucherEvent constructor.
      * @param Member $member
      * @param Voucher $voucher
      * @param UserInterface $author |null
      */
-    public function __construct(Member $member, Voucher $voucher, $author = null)
+    public function __construct(Voucher $voucher, $author = null)
     {
-        $this->member = $member;
         $this->voucher = $voucher;
         $this->author = $author;
     }

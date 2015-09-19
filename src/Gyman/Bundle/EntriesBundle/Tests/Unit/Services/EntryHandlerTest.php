@@ -392,7 +392,7 @@ class EntryHandlerTest extends UnitTestCase
      */
     private function getMemberMock()
     {
-        $memberMock = $this->getMockBuilder("Gyman\Bundle\MembersBundle\Entity\Member")
+        $memberMock = $this->getMockBuilder("Gyman\Bundle\AppBundle\Entity\Member")
             ->disableOriginalConstructor()
             ->getMock();
 

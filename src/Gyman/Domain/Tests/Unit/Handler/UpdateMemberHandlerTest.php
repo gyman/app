@@ -2,10 +2,11 @@
 namespace Gyman\Domain\Tests\Unit\Handler;
 
 use DateTime;
-use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
+use Gyman\Bundle\AppBundle\Factory\MemberFactory;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Handler\UpdateMemberHandler;
 use Mockery as m;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +41,7 @@ class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $repository = m::mock('Gyman\Domain\Repository\MemberRepositoryInterface');
-        $repository->shouldReceive('findOneByEmailAddress')->once()->andReturn($member);
+        $repository->shouldReceive('findOneById')->once()->andReturn($member);
         $repository->shouldReceive('insert')->with($member)->once()->andReturn($member);
 
         $md5 = md5('new-hash');
@@ -62,11 +63,15 @@ class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
             'original_name.jpg',
             'image/jpg',
             null,
-            null,
-            true
+            null
         );
 
-        $handler = new UpdateMemberHandler($repository, '/tmp');
+        $dispatcher = new EventDispatcher();
+
+        $uploadHandler = m::mock('Gyman\Domain\Handler\UploadMemberFotoHandler');
+        $uploadHandler->shouldReceive('handle')->once()->with($command)->andReturnNull();
+
+        $handler = new UpdateMemberHandler($repository, $uploadHandler, $dispatcher);
 
         $handler->handle($command);
 
@@ -80,6 +85,5 @@ class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($member->details()->barcode()->barcode(), 'new-barcode');
         $this->assertEquals($member->details()->belt()->color(), 'purple');
         $this->assertEquals($member->details()->notes(), 'updated note');
-        $this->assertNotEquals($member->details()->foto()->foto(), $md5);
     }
 }

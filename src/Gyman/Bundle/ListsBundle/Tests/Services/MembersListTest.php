@@ -24,7 +24,7 @@ class MembersListTest extends BaseTest
             $this->list->setListParameters($this->getListParametersMock());
             $this->list->setFilterProvider($this->getFilterProviderMock());
             $this->list->setRepository(
-                $this->getContainer()->get('doctrine.orm.club_entity_manager')->getRepository('MembersBundle:Member')
+                $this->getContainer()->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member')
             );
             $this->list->setTemplating($this->getTemplatingMock());
         }
@@ -48,7 +48,7 @@ class MembersListTest extends BaseTest
 
     public function getRepositoryMock()
     {
-        $mock = m::mock("Gyman\Bundle\MembersBundle\Entity\MemberRepository");
+        $mock = m::mock("Gyman\Bundle\AppBundle\Entity\MemberRepository");
 //        $mock->shouldReceive('foo')->with(5, m::any())->once()->andReturn(10);
         return $mock;
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Domain\Exception;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 
 /**
  * Class VoucherClosingDateBeforeOpeningException

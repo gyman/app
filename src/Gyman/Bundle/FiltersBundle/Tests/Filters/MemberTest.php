@@ -13,7 +13,7 @@ class MemberTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $memberFilter = new Member();
@@ -33,7 +33,7 @@ class MemberTest extends BaseTest
                 'options'        => [
                     'member' => 15,
                 ],
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.id = 15",
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.id = 15",
                 'parameterCount' => 0,
             ],
         ];

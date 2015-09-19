@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
 use Doctrine\ORM\EntityManager;
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 use Spy\Timeline\Model\ActionInterface;
 use Spy\Timeline\Spread\Entry\Entry;
 use Spy\Timeline\Spread\Entry\EntryCollection;
@@ -29,8 +29,8 @@ class Spread implements SpreadInterface
 
     const CLUB_CLASS = 'Gyman\Bundle\ClubBundle\Entity\Club';
     const USER_CLASS = 'Gyman\Bundle\UserBundle\Entity\User';
-    const MEMBER_CLASS = 'Gyman\Bundle\MembersBundle\Entity\Member';
-    const VOUCHER_CLASS = 'Gyman\Bundle\VouchersBundle\Entity\Voucher';
+    const MEMBER_CLASS = 'Gyman\Bundle\AppBundle\Entity\Member';
+    const VOUCHER_CLASS = 'Gyman\Bundle\AppBundle\Entity\Voucher';
     const ENTRY_CLASS = 'Gyman\Bundle\EntriesBundle\Entity\Entry';
 
     /**

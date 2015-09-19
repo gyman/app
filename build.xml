@@ -77,7 +77,7 @@
     <target name="test-dende">
         <property name="env" value="test" />
         <property name="club" value="dende" />
-        <phingcall target="behat-ddd" description="BDD for components"/>
+        <!--<phingcall target="behat-ddd" description="BDD for components"/>-->
         <phingcall target="phpcsfixer" description="PHPCSFixer" />
         <phingcall target="phpunit-functional" />
         <phingcall target="phpunit-unit" />

@@ -13,7 +13,7 @@ class PriceTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('VouchersBundle:Voucher')
+            ->getRepository('GymanAppBundle:Voucher')
             ->createQueryBuilder('v');
 
         $priceFilter = new Price();
@@ -44,7 +44,7 @@ class PriceTest extends BaseTest
                     'price1' => 1.22,
                     'price2' => 2.33,
                 ],
-                'expectedDql'        => "SELECT v FROM Gyman\Bundle\VouchersBundle\Entity\Voucher v WHERE v.price > :price1 AND v.price < :price2",
+                'expectedDql'        => "SELECT v FROM Gyman\Bundle\AppBundle\Entity\Voucher v WHERE v.price > :price1 AND v.price < :price2",
                 'parameterCount'     => 2,
                 'expectedParameters' => [
                     'price1',
@@ -60,7 +60,7 @@ class PriceTest extends BaseTest
                     'type'   => 'eq',
                     'price1' => 1.22,
                 ],
-                'expectedDql'        => "SELECT v FROM Gyman\Bundle\VouchersBundle\Entity\Voucher v WHERE v.price = :price",
+                'expectedDql'        => "SELECT v FROM Gyman\Bundle\AppBundle\Entity\Voucher v WHERE v.price = :price",
                 'parameterCount'     => 1,
                 'expectedParameters' => [
                     'price',
@@ -74,7 +74,7 @@ class PriceTest extends BaseTest
                     'type'   => 'lt',
                     'price1' => 1.22,
                 ],
-                'expectedDql'        => "SELECT v FROM Gyman\Bundle\VouchersBundle\Entity\Voucher v WHERE v.price < :price",
+                'expectedDql'        => "SELECT v FROM Gyman\Bundle\AppBundle\Entity\Voucher v WHERE v.price < :price",
                 'parameterCount'     => 1,
                 'expectedParameters' => [
                     'price',
@@ -88,7 +88,7 @@ class PriceTest extends BaseTest
                     'type'   => 'gt',
                     'price1' => 1.22,
                 ],
-                'expectedDql'        => "SELECT v FROM Gyman\Bundle\VouchersBundle\Entity\Voucher v WHERE v.price > :price",
+                'expectedDql'        => "SELECT v FROM Gyman\Bundle\AppBundle\Entity\Voucher v WHERE v.price > :price",
                 'parameterCount'     => 1,
                 'expectedParameters' => [
                     'price',

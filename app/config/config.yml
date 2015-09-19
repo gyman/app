@@ -4,7 +4,7 @@ parameters:
   datetime_format: "Y.m.d H:i:s"
 
   session_lifetime: 86400 # 24 hours
-  no_image: /bundles/default/images/no-profile.gif
+  no_image: /bundles/gymanapp/images/no-profile.gif
 
   galleryDirectory: %kernel.root_dir%/../web/uploads/gallery/
   galleryPath: /uploads/gallery/
@@ -15,7 +15,7 @@ parameters:
 
 services:
 #    globals_object:
-#      class: Gyman\Bundle\DefaultBundle\Lib\Globals
+#      class: Gyman\Bundle\AppBundle\Globals
 #      calls:
 #        - [setDefaultDateFormat, [%date_format%]]
 #        - [setDefaultDateTimeFormat, [%datetime_format%]]
@@ -96,18 +96,15 @@ swiftmailer:
     
     logging:        true
 
-oneup_uploader:
-    mappings:
-        gallery:
-            frontend: custom
-            custom_frontend:
-                class: Gyman\Bundle\MembersBundle\Controller\UploadController
-                name:  MyFancyCustomUploader
+#oneup_uploader:
+#    mappings:
+#        gallery:
+#            frontend: custom
+#            custom_frontend:
+#                class: Gyman\Bundle\AppBundle\Controller\UploadController
+#                name:  MyFancyCustomUploader
                 
-default:
-    noImage:                %no_image%
-    galleryDir:             %galleryDirectory%
-    galleryPath:            %galleryPath%
+gyman_app: ~
 
 stof_doctrine_extensions:
     default_locale: pl_PL

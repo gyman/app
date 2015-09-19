@@ -4,9 +4,9 @@ namespace Gyman\Bundle\EntriesBundle\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Bundle\AppBundle\Entity\Voucher;
 use Gyman\Bundle\ScheduleBundle\Entity\Occurence;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,14 +30,14 @@ class Entry
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\MembersBundle\Entity\Member", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\AppBundle\Entity\Member", inversedBy="entries")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
      * @var Member
      */
     private $member;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Gyman\Bundle\AppBundle\Entity\Voucher", inversedBy="entries")
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      * @var Voucher
      */

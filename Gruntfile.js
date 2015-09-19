@@ -79,7 +79,7 @@ module.exports = function (grunt) {
         'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
         'bower_components/jquery-file-upload/js/jquery.fileupload.js',
         'bower_components/webcam/jquery.webcam.js',
-        'vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public/js/router.js',
+        'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
     ];
 
     var coffeeFiles = [
@@ -98,9 +98,9 @@ module.exports = function (grunt) {
         //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
 
-        "src/Gyman/Bundle/MembersBundle/Resources/coffee/EditMember.coffee",
-        "src/Gyman/Bundle/MembersBundle/Resources/coffee/WebCamTab.coffee",
-        //"src/Gyman/Bundle/MembersBundle/Resources/coffee/Filter.coffee",
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/WebCamTab.coffee",
+        //"src/Gyman/Bundle/AppBundle/Resources/coffee/Filter.coffee",
 
         "src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
         //"src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
@@ -120,8 +120,8 @@ module.exports = function (grunt) {
         "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.newEntry.coffee",
         "src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.editEntry.coffee",
 
-        "src/Gyman/Bundle/VouchersBundle/Resources/coffee/vouchers.closeVoucher.coffee",
-        "src/Gyman/Bundle/VouchersBundle/Resources/coffee/vouchers.newVoucher.coffee"
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.closeVoucher.coffee",
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.newVoucher.coffee"
     ];
 
     grunt.initConfig({

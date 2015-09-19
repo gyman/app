@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class Activity
 {
     /**
-     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\VouchersBundle\Entity\Voucher" , mappedBy="activities")
+     * @ORM\ManyToMany(targetEntity="Gyman\Bundle\AppBundle\Entity\Voucher" , mappedBy="activities")
      */
     private $vouchers;
 

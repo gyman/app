@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Domain\Handler;
 
-use Gyman\Bundle\MembersBundle\Factory\MemberFactory;
+use Gyman\Bundle\AppBundle\Factory\MemberFactory;
 use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Command\MemberCommandInterface;
 use Gyman\Domain\Event\MemberEvent;
@@ -18,11 +18,7 @@ class CreateMemberHandler extends UpdateMemberHandler
      */
     public function handle(MemberCommandInterface $command, $author = null)
     {
-        if ($command->uploadFile instanceof UploadedFile) {
-            $filename = sprintf('%s.%s', md5(microtime(true)), strtolower($command->uploadFile->getClientOriginalExtension()));
-            $command->uploadFile->move($this->fotoDestinationDir, $filename);
-            $command->foto = $filename;
-        }
+        $this->uploadHandler->handle($command);
 
         $member = MemberFactory::createFromCreateMemberCommand($command);
 

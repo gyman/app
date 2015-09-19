@@ -2,11 +2,11 @@
 namespace Gyman\Bundle\EntriesBundle\Tests\Unit\Form;
 
 use DateTime;
+use Gyman\Bundle\AppBundle\Entity\Voucher;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
 use Gyman\Bundle\EntriesBundle\Form\EntryType;
 use Gyman\Bundle\ScheduleBundle\Entity\Event;
 use Gyman\Bundle\ScheduleBundle\Entity\Serial;
-use Gyman\Bundle\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

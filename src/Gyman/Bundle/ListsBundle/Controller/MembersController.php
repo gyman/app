@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\ListsBundle\Controller;
 
-use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -56,7 +56,7 @@ class MembersController extends Controller implements ListControllerInterface
     public function galleryAction(Request $request)
     {
         $members = $this->getDoctrine()
-            ->getRepository('MembersBundle:Member', 'club')
+            ->getRepository('GymanAppBundle:Member', 'club')
             ->findAll();
 
         return ['members' => $members];
@@ -65,7 +65,7 @@ class MembersController extends Controller implements ListControllerInterface
     /**
      * @Route("/member/{id}/details", name="_list_members_details")
      * @Security("has_role('ROLE_ADMIN')")
-     * @ParamConverter("member", class="MembersBundle:Member")
+     * @ParamConverter("member", class="GymanAppBundle:Member")
      */
     public function detailsAction(Member $member)
     {

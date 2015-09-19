@@ -3,7 +3,7 @@ parameters:
     - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
     - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection # to be removed
   clubFixtures:
-    - src/Gyman/Bundle/MembersBundle/DataFixtures/Club
+    - src/Gyman/Bundle/AppBundle/DataFixtures/Club
     - src/Gyman/Bundle/VouchersBundle/DataFixtures/Club
 #    - src/Gyman/Bundle/TestBundle/DataFixtures/Club # to be removed
 

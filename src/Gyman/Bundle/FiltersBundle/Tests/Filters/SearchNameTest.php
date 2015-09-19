@@ -13,7 +13,7 @@ class SearchNameTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $searchNameFilter = new SearchName();
@@ -37,7 +37,7 @@ class SearchNameTest extends BaseTest
                 'options'            => [
                     'search' => 'abc',
                 ],
-                'expectedDql'        => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.name LIKE :string OR m.notes LIKE :string",
+                'expectedDql'        => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.name LIKE :string OR m.notes LIKE :string",
                 'parameterCount'     => 1,
                 'expectedParameters' => [
                     'string',

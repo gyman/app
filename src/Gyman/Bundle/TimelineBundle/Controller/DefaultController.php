@@ -1,9 +1,9 @@
 <?php
 namespace Gyman\Bundle\TimelineBundle\Controller;
 
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
-use Gyman\Bundle\MembersBundle\Entity\Member;
+use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

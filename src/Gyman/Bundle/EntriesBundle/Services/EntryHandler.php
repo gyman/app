@@ -1,11 +1,11 @@
 <?php
 namespace Gyman\Bundle\EntriesBundle\Services;
 
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
 use Gyman\Bundle\EntriesBundle\EntityManager\EntryManager;
 use Gyman\Bundle\EntriesBundle\Exception\EntryFormInvalidException;
 use Gyman\Bundle\EntriesBundle\Form\EntryType;
-use Gyman\Bundle\MembersBundle\Entity\Member;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Form;

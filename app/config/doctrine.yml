@@ -43,7 +43,7 @@ doctrine:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
                 datetime_functions:
-                    dayname: Gyman\Bundle\MembersBundle\DQL\Dayname
+                    dayname: Gyman\Bundle\AppBundle\DQL\Dayname
             filters:
                 softdeleteable:
                     class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
@@ -62,8 +62,7 @@ doctrine:
             connection:       club
             mappings:
               StofDoctrineExtensionsBundle: ~
-              MembersBundle: ~
-              VouchersBundle: ~
+              GymanAppBundle: ~
               FiltersBundle: ~
 #              EntriesBundle: ~
               ScheduleBundle: ~
@@ -72,7 +71,7 @@ doctrine:
 #              SpyTimelineBundle: ~
               model:
                 type: yml
-                dir: "%kernel.root_dir%/../src/Gyman/Bundle/MembersBundle/Resources/config/embedded"
+                dir: "%kernel.root_dir%/../src/Gyman/Bundle/AppBundle/Resources/config/embedded"
                 prefix: Gyman\Domain\Model
                 alias: Model
                 is_bundle: false
@@ -80,7 +79,7 @@ doctrine:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
                 datetime_functions:
-                    dayname: Gyman\Bundle\MembersBundle\DQL\Dayname
+                    dayname: Gyman\Bundle\AppBundle\DQL\Dayname
             filters:
                 softdeleteable:
                     class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter

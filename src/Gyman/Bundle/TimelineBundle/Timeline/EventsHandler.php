@@ -1,10 +1,10 @@
 <?php
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
+use Gyman\Bundle\AppBundle\Event\MemberCreatedEvent;
+use Gyman\Bundle\AppBundle\Event\VoucherCreatedEvent;
 use Gyman\Bundle\EntriesBundle\Event\EntryCreatedEvent;
-use Gyman\Bundle\MembersBundle\Event\MemberCreatedEvent;
 use Gyman\Bundle\UserBundle\Entity\User;
-use Gyman\Bundle\VouchersBundle\Event\VoucherCreatedEvent;
 use Spy\TimelineBundle\Driver\ORM\ActionManager;
 use Symfony\Component\Security\Core\SecurityContext;
 

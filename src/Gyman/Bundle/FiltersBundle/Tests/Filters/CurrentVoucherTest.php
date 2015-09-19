@@ -13,7 +13,7 @@ class CurrentVoucherTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $currentVoucherFilter = new CurrentVoucher();
@@ -29,11 +29,11 @@ class CurrentVoucherTest extends BaseTest
         return [
             [
                 'currentVoucher' => true,
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.currentVoucher is not null",
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.currentVoucher is not null",
             ],
             [
                 'currentVoucher' => false,
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.currentVoucher is null",
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.currentVoucher is null",
             ],
         ];
     }

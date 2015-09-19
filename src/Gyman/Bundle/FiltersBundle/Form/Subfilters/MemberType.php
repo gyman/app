@@ -15,7 +15,7 @@ class MemberType extends AbstractSubfilterType
     {
         $builder
             ->add('member', 'entity', [
-                'class'         => 'MembersBundle:Member',
+                'class'         => 'GymanAppBundle:Member',
                 'property'      => 'name',
                 'multiple'      => false,
                 'query_builder' => function ($repository) {

@@ -13,7 +13,7 @@ class GenderTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $genderFilter = new Gender();
@@ -33,7 +33,7 @@ class GenderTest extends BaseTest
                 'options'        => [
                     'gender' => 'male',
                 ],
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m WHERE m.gender = :gender",
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m WHERE m.gender = :gender",
                 'parameterCount' => 1,
             ],
         ];

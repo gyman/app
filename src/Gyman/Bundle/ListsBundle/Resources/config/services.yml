@@ -23,7 +23,7 @@ services:
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
-            - [setRepository,[@voucher_repository]]
+            - [setRepository,[@gyman.vouchers.repository]]
             - [setTemplating, [@templating]]
 
     entries_list:

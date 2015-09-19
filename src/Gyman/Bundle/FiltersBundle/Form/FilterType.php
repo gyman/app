@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\FiltersBundle\Form;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\FiltersBundle\Form\Extension\ActivitiesChoiceList;
 use Gyman\Bundle\FiltersBundle\Traits\GetFormType;
 use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;

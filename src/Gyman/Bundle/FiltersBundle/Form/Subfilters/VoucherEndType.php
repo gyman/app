@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\FiltersBundle\Form\Subfilters;
 
-use Gyman\Bundle\DefaultBundle\Lib\Globals;
+use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\FiltersBundle\Form\AbstractSubfilterType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

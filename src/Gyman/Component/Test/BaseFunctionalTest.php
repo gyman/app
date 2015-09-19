@@ -15,9 +15,9 @@ abstract class BaseFunctionalTest extends BaseTest
         ], 'default');
 
         $this->loadFixtures([
-            "Gyman\Bundle\VouchersBundle\DataFixtures\Club\ORM\EntriesData",
-            "Gyman\Bundle\VouchersBundle\DataFixtures\Club\ORM\VouchersData",
-            "Gyman\Bundle\MembersBundle\DataFixtures\Club\ORM\MembersData",
+            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\EntriesData",
+            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\VouchersData",
+            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\MembersData",
             "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\ActivitiesData",
             "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\EventsData",
             "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\SectionsData",

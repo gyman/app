@@ -35,6 +35,16 @@ class Voucher
     protected $price;
 
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var Member
+     */
+    protected $member;
+
+    /**
      * @var Entry[]
      */
     protected $entries;
@@ -46,7 +56,7 @@ class Voucher
      * @param Price $price
      * @param int $maximumAmount
      */
-    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [])
+    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], Member $member)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
@@ -56,6 +66,7 @@ class Voucher
         $this->endDate = $endDate;
         $this->price = $price;
         $this->maximumAmount = $maximumAmount;
+        $this->member = $member;
 
         if (!$entries instanceof ArrayCollection && is_array($entries)) {
             $entries = new ArrayCollection($entries);
@@ -223,5 +234,13 @@ class Voucher
         }
 
         return true;
+    }
+
+    /**
+     * @return Member
+     */
+    public function member()
+    {
+        return $this->member;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Bundle\EntriesBundle\Controller;
 
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\EntriesBundle\Entity\Entry;
-use Gyman\Bundle\MembersBundle\Entity\Member;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,7 +15,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/new/member/{id}", name="_entrance_add")
-     * @ParamConverter("member", class="MembersBundle:Member")
+     * @ParamConverter("member", class="GymanAppBundle:Member")
      * @Template()
      */
     public function openAction(Member $member)
@@ -67,7 +67,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/quick/member/{barcode}", name="_entry_quickadd")
-     * @ParamConverter("member", class="MembersBundle:Member")
+     * @ParamConverter("member", class="GymanAppBundle:Member")
      */
     public function quickSearchAction(Member $member)
     {

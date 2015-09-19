@@ -13,7 +13,7 @@ class AgeTest extends BaseTest
     {
         $queryBuilder = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('MembersBundle:Member')
+            ->getRepository('GymanAppBundle:Member')
             ->createQueryBuilder('m');
 
         $ageFilter = new Age();
@@ -35,7 +35,7 @@ class AgeTest extends BaseTest
                     'age1' => '1',
                     'age2' => '2',
                 ],
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m "
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m "
                 . 'WHERE m.birthdate >= :dateFrom AND m.birthdate <= :dateTo',
                 'parameterCount' => 2,
             ],
@@ -45,7 +45,7 @@ class AgeTest extends BaseTest
                     'age1' => '1',
                     'age2' => '2',
                 ],
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m "
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m "
                 . 'WHERE m.birthdate <= :dateTo',
                 'parameterCount' => 1,
             ],
@@ -55,7 +55,7 @@ class AgeTest extends BaseTest
                     'age1' => '1',
                     'age2' => '2',
                 ],
-                'expectedDql'    => "SELECT m FROM Gyman\Bundle\MembersBundle\Entity\Member m "
+                'expectedDql'    => "SELECT m FROM Gyman\Bundle\AppBundle\Entity\Member m "
                 . 'WHERE m.birthdate >= :dateFrom',
                 'parameterCount' => 1,
             ],
