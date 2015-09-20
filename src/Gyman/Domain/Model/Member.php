@@ -14,7 +14,7 @@ use Gyman\Domain\Exception\VouchersAreOverlappingException;
 class Member
 {
     /**
-     * @var integer
+     * @var string
      */
     protected $id;
 
@@ -76,7 +76,7 @@ class Member
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function id()
     {
@@ -176,11 +176,11 @@ class Member
     public function enter(Entry $entry)
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
-            throw new LastEntryIsStillOpenedException();
+            throw new LastEntryIsStillOpenedException('Last entry is still opened, cannot add new one');
         }
 
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
-            throw new NoCurrentVoucherForVoucherEntryException();
+            throw new NoCurrentVoucherForVoucherEntryException("Cant add 'voucher' entry where there is no current voucher for member");
         }
 
         $this->lastEntry = $entry;
@@ -189,15 +189,17 @@ class Member
         if ($this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
             $this->currentVoucher->addEntry($entry);
         }
+
+        $entry->assignToMember($this);
     }
 
     public function exitLastEntry()
     {
-        if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
-            $this->lastEntry()->closeEntry(new \DateTime());
+        if (!$this->hasLastEntry() || !$this->lastEntry()->isOpened()) {
+            throw new MemberHasNoLastEntryException();
         }
 
-        throw new MemberHasNoLastEntryException();
+        $this->lastEntry()->closeEntry(new \DateTime());
     }
 
     /**

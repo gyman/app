@@ -29,6 +29,12 @@
             <button class="btn btn-large btn-primary pull-right" type="submit">
                 Zapisz
             </button>
+
+            {% if member.hasOpenedEntry %}
+                <a href="{{ path("gyman_entry_close", {id : member.lastEntry.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.close_entry"|trans }}</a>
+            {% else %}
+                <a href="{{ path("gyman_entry_new", {id : member.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.add_entry"|trans }}</a>
+            {% endif %}
         </div>
     </div>
 

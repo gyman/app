@@ -24,11 +24,6 @@ class EntryEvent extends Event implements DomainEventInterface
     private $author;
 
     /**
-     * @var Member
-     */
-    private $member;
-
-    /**
      * @var Exception
      */
     private $exception;
@@ -40,9 +35,8 @@ class EntryEvent extends Event implements DomainEventInterface
      * @param UserInterface $author |null
      * @param Exception $exception
      */
-    public function __construct(Member $member, Entry $entry, $author = null, $exception = null)
+    public function __construct(Entry $entry, $author = null, $exception = null)
     {
-        $this->member = $member;
         $this->entry = $entry;
         $this->author = $author;
         $this->exception = $exception;

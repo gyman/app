@@ -38,11 +38,6 @@ dashboard:
     type:     annotation
     prefix:   /
 
-entries:
-    resource: "@EntriesBundle/Controller/"
-    type:     annotation
-    prefix:   /entries
-
 schedule:
     resource: "@ScheduleBundle/Controller/"
     type:     annotation

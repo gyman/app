@@ -17,9 +17,6 @@ class ClubsData extends BaseFixture
     {
         $club = ClubFactory::createFromArray($params);
 
-        $this->manager->persist($club);
-        $this->manager->flush();
-
         return $club;
     }
 }

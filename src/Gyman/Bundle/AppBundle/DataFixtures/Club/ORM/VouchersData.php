@@ -3,11 +3,17 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\AppBundle\Factory\VoucherFactory;
 
 class VouchersData extends BaseFixture
 {
     protected $dir = __DIR__;
+
+    public function getOrder()
+    {
+        return 20;
+    }
 
     public function insert($array)
     {
@@ -16,11 +22,12 @@ class VouchersData extends BaseFixture
 
         $voucher = VoucherFactory::createFromArray($array);
 
-        return $voucher;
-    }
+        /** @var Member $member */
+        $member = $this->getReference($array['member']);
+        $member->addVoucher($voucher);
 
-    public function getOrder()
-    {
-        return 0;
+        $this->manager->persist($member);
+
+        return $voucher;
     }
 }

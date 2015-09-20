@@ -68,5 +68,32 @@ members:
         confirm_alert: 'Zamknąć aktualny karnet?\n(Tego nie da się cofnąć!)'
 member:
     form:
-        add_entry: 'Dodaj wejście'
         close_voucher: 'Zamknij karnet'
+        add_entry: 'Otwórz nowe wejście'
+        close_entry: 'Zamknij wejście'
+
+entries:
+    form:
+        start_date.label: "Data i godzina wejścia"
+        entry_type.label: "Rodzaj wejścia"
+        price.label: "opłata za wejście"
+        open_entry.label: "Dodaj wejście"
+
+
+entries.form.entry_type.free.label: "darmowe"
+entries.form.entry_type.voucher.label: "na karnet"
+entries.form.entry_type.paid.label: "płatne"
+
+entries.type.voucher: "na karnet"
+entries.type.free: "darmowe"
+entries.type.paid: "płatne"
+
+vouchers:
+    startDate:
+        table_header: Ważny od
+    endDate:
+        table_header: Ważny do
+    price:
+        table_header: Opłata
+    entries:
+        table_header: Wejścia

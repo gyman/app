@@ -5,20 +5,23 @@ Gyman\Bundle\AppBundle\Entity\Entry:
   embedded:
     price:
       class: Gyman\Domain\Model\Price
-      columnPrefix: false
+      columnPrefix: price_
 
   manyToOne:
     member:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
       inversedBy: entries
+      cascade: ["all"]
+
     voucher:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
       inversedBy: entries
+      cascade: ["all"]
 
   id:
     id:
-      type: integer
-      generator: { strategy: AUTO }
+      type: guid
+      generator: { strategy: UUID }
 
   gedmo:
     soft_deleteable:
@@ -28,7 +31,7 @@ Gyman\Bundle\AppBundle\Entity\Entry:
   fields:
     startDate:
       type: datetime
-      nullable: true #false
+      nullable: false
 
     endDate:
       type: datetime
@@ -41,12 +44,12 @@ Gyman\Bundle\AppBundle\Entity\Entry:
     deletedAt:
       name: deleted_at
       type: datetime
-      nullable: true #false
+      nullable: true
 
     createdAt:
       name: created_at
       type: datetime
-      nullable: true
+      nullable: false
       gedmo:
         timestampable:
           on: create
@@ -54,7 +57,7 @@ Gyman\Bundle\AppBundle\Entity\Entry:
     updatedAt:
       name: updated_at
       type: datetime
-      nullable: true
+      nullable: false
       gedmo:
         timestampable:
           on: update

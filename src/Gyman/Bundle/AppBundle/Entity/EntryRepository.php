@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Repository;
+namespace Gyman\Bundle\AppBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;

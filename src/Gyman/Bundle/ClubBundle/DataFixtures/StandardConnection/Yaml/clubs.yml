@@ -9,7 +9,7 @@ club-dende:
     password: root
 club-rio:
   name:       Rio Grappling Club
-  subdomain:  rio-grappling-club
+  subdomain:  rio
   sections: []
   owners: []
   database:
@@ -18,7 +18,7 @@ club-rio:
     password: root
 club-extreme:
   name:       Extreme Fighters
-  subdomain:  extreme-fighters
+  subdomain:  extreme
   sections: []
   owners: []
   database:

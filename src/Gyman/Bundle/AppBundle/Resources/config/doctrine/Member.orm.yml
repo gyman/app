@@ -12,8 +12,8 @@ Gyman\Bundle\AppBundle\Entity\Member:
 
   id:
     id:
-      type: integer
-      generator: { strategy: AUTO }
+      type: guid
+      generator: { strategy: UUID }
 
   gedmo:
     soft_deleteable:
@@ -29,11 +29,13 @@ Gyman\Bundle\AppBundle\Entity\Member:
     entries:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
       mappedBy: member
+      cascade: ["all"]
 
   oneToOne:
     currentVoucher:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
       cascade: ["all"]
+      inversedBy: member
       joinColumn:
         name: current_voucher_id
         referencedColumnName: id
@@ -42,11 +44,12 @@ Gyman\Bundle\AppBundle\Entity\Member:
 
     lastEntry:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      cascade: ["all"]
       joinColumn:
         name: last_entry_id
         referencedColumnName: id
         onDelete: SET NULL
-        nullable: true #false
+        nullable: true
 
   fields:
     nameSlug:

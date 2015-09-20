@@ -36,10 +36,8 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
-            new \Gyman\Bundle\AppBundle\GymanAppBundle(),
 
             new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
-            new Gyman\Bundle\EntriesBundle\EntriesBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
             new Gyman\Bundle\FiltersBundle\FiltersBundle(),
             new Gyman\Bundle\ListsBundle\ListsBundle(),
@@ -54,8 +52,10 @@ class AppKernel extends Kernel
             new Gyman\Bundle\BaseBundle\BaseBundle(),
 //            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
 
-            new Dende\CommonBundle\DendeCommonBundle(),
+            new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),
+
+            new Dende\CommonBundle\DendeCommonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

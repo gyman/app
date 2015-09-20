@@ -5,12 +5,12 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
   embedded:
     price:
       class: Gyman\Domain\Model\Price
-      columnPrefix: false
+      columnPrefix: price_
 
   id:
     id:
-      type: integer
-      generator: { strategy: AUTO }
+      type: guid
+      generator: { strategy: UUID }
 
   gedmo:
     soft_deleteable:
@@ -27,6 +27,7 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
     entries:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
       mappedBy: voucher
+      cascade: ["all"]
 
   fields:
     startDate:

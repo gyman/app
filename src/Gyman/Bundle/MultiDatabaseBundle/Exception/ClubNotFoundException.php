@@ -1,7 +1,11 @@
 <?php
 namespace Gyman\Bundle\MultiDatabaseBundle\Exception;
 
-class ClubNotFoundException extends \Exception
+/**
+ * Class ClubNotFoundException
+ * @package Gyman\Bundle\MultiDatabaseBundle\Exception
+ */
+final class ClubNotFoundException extends \Exception
 {
     /**
      * @param string $club

@@ -2,8 +2,9 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
-use Gyman\Domain\Command\CreateVoucherCommand;
+use Gyman\Domain\Command\CloseEntryCommand;
+use Gyman\Domain\Command\OpenEntryCommand;
+use Gyman\Domain\Model\Entry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,35 +15,34 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class VouchersController
  * @package Gyman\Bundle\AppBundle
- * @Route("/vouchers")
+ * @Route("/entries")
  */
-class VouchersController extends Controller
+class EntriesController extends Controller
 {
     /**
-     * @Route("/member/{id}/new", name="gyman_voucher_new")
+     * @Route("/member/{id}/new", name="gyman_entry_new")
      * @Method({"GET", "POST"})
      * @ParamConverter("member", class="GymanAppBundle:Member")
-     * @Template("GymanAppBundle:Vouchers:new.html.twig")
+     * @Template()
      */
     public function newAction(Request $request, Member $member)
     {
-        $form = $this->createForm('gyman_voucher_form', new CreateVoucherCommand(), [
-                'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
+        $form = $this->createForm('gyman_entry_form', new OpenEntryCommand($member), [
+                'action' => $this->generateUrl('gyman_entry_new', ['id' => $member->id()]),
         ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                /** @var OpenEntryCommand $command */
                 $command = $form->getData();
-                $command->member = $member;
-
-                $this->get('gyman.vouchers.create_voucher')->handle($command, $this->getUser());
-                $this->addFlash('success', 'flash.voucher_added.success');
+                $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
+                $this->addFlash('success', 'flash.entry_opened.success');
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
-                $this->addFlash('error', 'flash.voucher_added.errors');
+                $this->addFlash('error', 'flash.entry_opened.errors');
             }
         }
 
@@ -50,14 +50,15 @@ class VouchersController extends Controller
     }
 
     /**
-     * @Route("/{id}/close", name="gyman_vouchers_close")
-     * @ParamConverter("voucher", class="GymanAppBundle:Voucher")
+     * @Route("/{id}/close", name="gyman_entry_close")
+     * @ParamConverter("entry", class="GymanAppBundle:Entry")
      */
-    public function closeAction(Request $request, Voucher $voucher)
+    public function closeAction(Request $request, Entry $entry)
     {
-        $this->get('gyman.vouchers.close_voucher')->close($voucher, $this->getUser());
+        $command = CloseEntryCommand::createFromEntry($entry);
+        $this->get('gyman.entries.close_entry')->handle($command, $this->getUser());
 
-        return $this->redirectToRoute('gyman_member_edit', ['id' => $voucher->member()->id()]);
+        return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
     }
 
     /**

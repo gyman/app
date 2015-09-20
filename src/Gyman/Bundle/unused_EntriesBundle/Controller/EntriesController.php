@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class EntriesController extends Controller
 {
     /**
      * @Route("/new/member/{id}", name="_entrance_add")

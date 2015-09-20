@@ -15,14 +15,24 @@ class Entry
     const TYPE_FREE = 'free';
     const TYPE_VOUCHER = 'voucher';
     const TYPE_PAID = 'paid';
-    const TYPE_MULTISPORT = 'multisport';
+//    const TYPE_MULTISPORT = 'multisport';
 
     public static $availableTypes = [
         self::TYPE_FREE,
         self::TYPE_VOUCHER,
         self::TYPE_PAID,
-        self::TYPE_MULTISPORT,
+//        self::TYPE_MULTISPORT,
     ];
+
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var Member
+     */
+    protected $member;
 
     /**
      * @var \DateTime
@@ -53,10 +63,11 @@ class Entry
      * Entry constructor.
      * @param \DateTime $startDate
      * @param string $type
-     * @param \DateTime $endDate|null
-     * @param Price $price|null
+     * @param \DateTime $endDate |null
+     * @param Price $price |null
+     * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, $price = null)
+    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType();
@@ -147,7 +158,7 @@ class Entry
     public function assignToVoucher(Voucher $voucher)
     {
         if (!$this->isType(self::TYPE_VOUCHER)) {
-            throw new EntryMustBeVoucherTypeException();
+            throw new EntryMustBeVoucherTypeException("If you want to add entry to voucher it must be a 'voucher' type entry");
         }
 
         $this->voucher = $voucher;
@@ -159,5 +170,29 @@ class Entry
     public function voucher()
     {
         return $this->voucher;
+    }
+
+    /**
+     * @return Member
+     */
+    public function member()
+    {
+        return $this->member;
+    }
+
+    /**
+     * @return string
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param Member $member
+     */
+    public function assignToMember(Member $member)
+    {
+        $this->member = $member;
     }
 }

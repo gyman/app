@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>{{ 'vouchers.startDate.table_header'|trans }}</th>
+        <th>{{ 'vouchers.endDate.table_header'|trans }}</th>
+        <th>{{ 'vouchers.entries.table_header'|trans }}</th>
+        <th>{{ 'vouchers.price.table_header'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for voucher in member.vouchers|reverse %}
+        <tr>
+            <td>
+                {{  voucher.startDate|date("d.m.Y")  }}
+            </td>
+            <td>
+                {{  voucher.endDate|date("d.m.Y")  }}
+            </td>
+            <td>
+                zostało {{ voucher.leftEntriesAmount }} z {{ voucher.maximumAmount }}
+            </td>
+            <td>
+                {{  voucher.price }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

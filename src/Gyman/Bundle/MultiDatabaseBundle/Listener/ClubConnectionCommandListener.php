@@ -72,10 +72,6 @@ final class ClubConnectionCommandListener
 
         $db = $club->getDatabase();
 
-//        if (!in_array($db->getName(), $this->schemaManager->listDatabases())) {
-//            return;
-//        }
-
         $this->connectionWrapper->forceSwitch(
             $db->getName(),
             $db->getUsername(),

@@ -7,7 +7,7 @@
         {% if voucher.endDate() is not null %}
         <div class="span6">
             <div class="page-header">
-                <h4>Wykorzystane dni <small class="pull-right">z {{ voucher.leftDaysAmount() }}</small></h4>
+                <h4>Wykorzystane dni <small class="pull-right">z {{ voucher.totalDaysAmount() }}</small></h4>
             </div>
             <input type="text" class="dial"
                    value="{{ voucher.passedDaysAmount() }}"
@@ -81,7 +81,6 @@
         </div>
         <div class="span6">
             <a href="{{ path("gyman_vouchers_close", {id : member.currentVoucher.id}) }}" onClick="return confirm('{{ 'members.close_voucher.confirm_alert'|trans }}')" class="">{{ "member.form.close_voucher"|trans }}</a>
-            <a href="#" class="btn btn-large btn-success pull-right">{{ "member.form.add_entry"|trans }}</a>
         </div>
     </div>
         {% else %}

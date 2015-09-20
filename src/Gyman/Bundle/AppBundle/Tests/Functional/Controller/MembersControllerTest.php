@@ -55,13 +55,13 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(15, $form->filter('input, textarea, button, select'));
+        $this->assertCount(17, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(11, $form->filter('input'));
-        $this->assertCount(7, $form->filter('input[type=text]'));
+        $this->assertCount(13, $form->filter('input'));
+        $this->assertCount(9, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
         $this->assertCount(1, $form->filter('input[type=checkbox]'));
         $this->assertCount(2, $form->filter('input[type=hidden]'));
@@ -160,7 +160,10 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $repository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member');
 
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => 1]));
+        $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Jan', 'details.lastname' => 'Kowalski']);
+        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]));
 
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -197,7 +200,7 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
 
         /** @var Member $member */
-        $member = $repository->findOneById(1);
+        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
         $this->assertInstanceOf('Gyman\Bundle\AppBundle\Entity\Member', $member);
 
         $alert = $crawler->filter('div.alert.alert-success');
@@ -312,8 +315,13 @@ class MembersControllerTest extends BaseFunctionalTest
      * @test
      * @dataProvider memberSearchProvider
      */
-    public function member_search_form_on_dashboard_redirects_to_user($query, $id)
+    public function member_search_form_on_dashboard_redirects_to_user($query, $findBy)
     {
+        $repository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member');
+
+        $member = $this->container->get('gyman.members.repository')->findOneBy($findBy);
+        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('_dashboard_index'));
         $this->assertEquals(200, $this->getStatusCode());
 
@@ -326,7 +334,10 @@ class MembersControllerTest extends BaseFunctionalTest
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
         $this->assertEquals(200, $this->getStatusCode());
 
-        $this->assertEquals($this->container->get('router')->generate('gyman_member_edit', ['id' => $id]), $this->client->getRequest()->getRequestUri());
+        $this->assertEquals(
+            $this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]),
+            $this->client->getRequest()->getRequestUri()
+        );
     }
 
     public function getErrorGeneratingForms()
@@ -451,18 +462,18 @@ class MembersControllerTest extends BaseFunctionalTest
     public function memberSearchProvider()
     {
         return [
-            'by-lastname-lowercase'     => ['query' => 'grzeszczak', 'id' => 5],
-            'by-lastname-uppercase'     => ['query' => 'GRZESZCZAK', 'id' => 5],
-            'by-lastname-partially-01'  => ['query' => 'grze', 'id' => 5],
-            'by-lastname-partially-02'  => ['query' => 'GRZE', 'id' => 5],
-            'by-firstname-lowercase'    => ['query' => 'sylwia', 'id' => 5],
-            'by-firstname-uppercase'    => ['query' => 'SYLWIA', 'id' => 5],
-            'by-firstname-partially-01' => ['query' => 'syl', 'id' => 5],
-            'by-firstname-partially-02' => ['query' => 'SYL', 'id' => 5],
-            'barcode'                   => ['query' => 'abcd12305', 'id' => 5],
-            'barcode-uppercase'         => ['query' => 'ABCD12305', 'id' => 5],
-            'email-uppercase'           => ['query' => 'TEST05@TEST2.PL', 'id' => 5],
-            'email-lowercase'           => ['query' => 'test05@test2.pl', 'id' => 5],
+            'by-lastname-lowercase'     => ['query' => 'grzeszczak', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'by-lastname-uppercase'     => ['query' => 'GRZESZCZAK', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'by-lastname-partially-01'  => ['query' => 'grze', 'findBy' => ['details.firstname' => 'Grzegorz', 'details.lastname' => 'Kaszuba']],
+            'by-lastname-partially-02'  => ['query' => 'GRZE', 'findBy' => ['details.firstname' => 'Grzegorz', 'details.lastname' => 'Kaszuba']],
+            'by-firstname-lowercase'    => ['query' => 'sylwia', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'by-firstname-uppercase'    => ['query' => 'SYLWIA', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'by-firstname-partially-01' => ['query' => 'syl', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'by-firstname-partially-02' => ['query' => 'SYL', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'barcode'                   => ['query' => 'abcd12305', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'barcode-uppercase'         => ['query' => 'ABCD12305', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'email-uppercase'           => ['query' => 'TEST05@TEST2.PL', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
+            'email-lowercase'           => ['query' => 'test05@test2.pl', 'findBy' => ['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']],
         ];
     }
 

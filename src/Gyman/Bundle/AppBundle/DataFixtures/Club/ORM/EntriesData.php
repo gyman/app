@@ -1,42 +1,47 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use DateTime;
+use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
-use Gyman\Domain\Model\Price;
+use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Bundle\AppBundle\Factory\EntryFactory;
 
-class EntriesData extends BaseFixture
+/**
+ * Class EntriesData
+ * @package Gyman\Bundle\AppBundle\DataFixtures\Club\ORM
+ */
+final class EntriesData extends BaseFixture
 {
     protected $dir = __DIR__;
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
-        return 300;
+        return 30;
     }
 
+    /**
+     * @param $params
+     * @throws \Gyman\Domain\Exception\LastEntryIsStillOpenedException
+     * @throws \Gyman\Domain\Exception\NoCurrentVoucherForVoucherEntryException
+     * @return \Gyman\Bundle\AppBundle\Entity\Entry
+     */
     public function insert($params)
     {
-        $price = null;
+        /** @var Member $member */
+        $member = $this->getReference($params['member']);
 
-        if ($params['price']) {
-            list($amount, $currency) = sscanf($params['price'], '%d %s');
-            $price = new Price($amount, $currency);
-        }
+        $entry = EntryFactory::createFromArray([
+            'startDate' => Carbon::parse($params['startDate']),
+            'type'      => $params['type'],
+            'endDate'   => is_null($params['endDate']) ? null : Carbon::parse($params['endDate']),
+            'price'     => ['amount' => $params['price'], 'currency' => 'PLN'],
+        ]);
 
-        $entry = new Entry(
-            new DateTime($params['startDate']),
-            $params['type'],
-            new DateTime($params['endDate']),
-            $price
-        );
-
-        if ($entry->isType(Entry::TYPE_VOUCHER)) {
-            /** @var Voucher $voucher */
-            $voucher = $this->getReference($params['voucher']);
-            $voucher->addEntry($entry);
-        }
+        $member->enter($entry);
+        $this->manager->persist($member);
 
         return $entry;
     }

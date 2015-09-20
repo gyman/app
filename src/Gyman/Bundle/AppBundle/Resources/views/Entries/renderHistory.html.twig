@@ -1,0 +1,34 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{ 'entry.type.table_header'|trans }}</th>
+            <th>{{ 'entry.startDate.table_header'|trans }}</th>
+            <th>{{ 'entry.endDate.table_header'|trans }}</th>
+            <th>{{ 'entry.price.table_header'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entry in member.entries|reverse %}
+        <tr>
+            <td>
+                {{ ("entries.type." ~ entry.type)|trans }}
+            </td>
+            <td>
+            {{  entry.startDate|date("d.m.Y H:i:s")  }}
+            </td>
+            <td>
+                {% if entry.endDate is not null %}
+                    {{  entry.endDate|date("d.m.Y H:i:s")  }}
+                {% else %}
+                    <a href="{{ path("gyman_entry_close", {id: entry.id()}) }}">{{ 'member.form.close_entry'|trans }}</a>
+                {% endif %}
+            </td>
+            <td>
+                {% if entry.price is not null %}
+                    {{  entry.price  }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

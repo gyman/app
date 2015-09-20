@@ -4,6 +4,7 @@ namespace Gyman\Domain\Tests\Unit\Model;
 use DateTime;
 use Gyman\Domain\Factory\VoucherFactory;
 use Gyman\Domain\Model\Entry;
+use Gyman\Domain\Model\Price;
 use Gyman\Domain\Model\Voucher;
 
 class VoucherTest extends \PHPUnit_Framework_TestCase
@@ -79,7 +80,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($voucher->leftEntriesAmount(), 10);
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 9);
@@ -87,7 +88,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $voucher->entries()->last()->closeEntry(new DateTime());
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 8);
@@ -110,7 +111,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($voucher->leftEntriesAmount(), 1);
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 0);
@@ -118,7 +119,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $voucher->entries()->last()->closeEntry(new DateTime());
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER)
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
         );
     }
 

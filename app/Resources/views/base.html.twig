@@ -47,7 +47,7 @@
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
                             <li>
-                                {{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}
+                                {#{{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}#}
                             </li>
 
                             {# todo: przywrócić!!!
@@ -134,14 +134,6 @@
         </script>
 
     {% endblock javascripts %}
-
-
-    <!-- @todo zamienić na fosjsroutingbundle -->
-        <span id="applicationData"
-              data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
-              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}"/>
-
-    {% include '::modal.html.twig' %}
     </body>
 {% endblock overraid_body %}
 </html>

@@ -47,6 +47,19 @@ Gyman\Domain\Command\UpdateMemberCommand:
     belt: ~
     starred: ~
 
+Gyman\Domain\Command\OpenEntryCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntry: ~
+  properties:
+    price:
+      - Range:
+          min: 0
+          minMessage: Cena nie może być mniejsza niż 0 PLN.
+    startDate:
+      - Gyman\Bundle\AppBundle\Validator\DateRangeConstraint:
+          min: "today 00:00:00"
+          max: "today 23:59:59"
+
 Gyman\Bundle\AppBundle\Entity\Voucher:
   constraints: ~
 #    - Gyman\Bundle\AppBundle\Validator\VoucherDateConstraint:

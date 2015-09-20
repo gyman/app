@@ -105,3 +105,13 @@ user.user.form.invoice.street: "Ulica"
 user.user.form.invoice.zipcode: "Kod pocztowy"
 user.user.form.invoice.city: "Miasto"
 user.user.form.invoice.country: "Kraj"
+
+entry:
+    type:
+        table_header: Typ
+    price:
+        table_header: Cena
+    startDate:
+        table_header: Wejście
+    endDate:
+        table_header: Wyjście

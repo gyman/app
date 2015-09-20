@@ -1,0 +1,30 @@
+services:
+  gyman.entries.entry_form_type:
+    class: Gyman\Bundle\AppBundle\Form\EntryType
+    tags:
+      - { name: form.type, alias: gyman_entry_form }
+
+  gyman.entries.repository:
+    class:          Gyman\Bundle\AppBundle\Entity\EntryRepository
+    factory_service: doctrine.orm.club_entity_manager
+    factory_method:  getRepository
+    arguments:
+      - Gyman\Bundle\AppBundle\Entity\Entry
+
+  gyman.entries.open_entry:
+    class: Gyman\Domain\Handler\OpenEntryHandler
+    arguments:
+      - @gyman.members.repository
+      - @event_dispatcher
+
+  gyman.entries.close_entry:
+    class: Gyman\Domain\Handler\CloseEntryHandler
+    arguments:
+      - @gyman.members.repository
+      - @event_dispatcher
+
+  gyman.entries.price_set_for_paid_entry.validator:
+    class: Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntryValidator
+    tags:
+        - { name: validator.constraint_validator, alias: PriceSetForPaidEntryValidator }
+

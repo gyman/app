@@ -28,12 +28,21 @@ class Price
         $this->currency = $currency;
     }
 
+    public static function zero()
+    {
+        return new self(0, 'PLN');
+    }
+
     /**
      * @return string
      */
     public function __toString()
     {
-        return sprintf('%s %s', $this->amount, $this->currency);
+        if ($this->amount() > 0) {
+            return sprintf('%s %s', $this->amount, $this->currency);
+        }
+
+        return '';
     }
 
     /**

@@ -52,17 +52,17 @@ class Builder
 //            ]
 //        )->setExtra('translation_domain', 'DashboardBundle');
 
-        $menu->addChild(
-            'dashboard.actions.new_entry',
-            [
-                'route'          => 'gyman_member_new',
-                'extras'         => ['icon' => 'icomoon-icon-users'],
-                'linkAttributes' => [
-                    'class' => 'btn btn-block btn-large btn-primary',
-                    'id'    => 'actionEntry',
-                ],
-            ]
-        )->setExtra('translation_domain', 'DashboardBundle');
+//        $menu->addChild(
+//            'dashboard.actions.new_entry',
+//            [
+//                'route'          => 'gyman_member_new',
+//                'extras'         => ['icon' => 'icomoon-icon-users'],
+//                'linkAttributes' => [
+//                    'class' => 'btn btn-block btn-large btn-primary',
+//                    'id'    => 'actionEntry',
+//                ],
+//            ]
+//        )->setExtra('translation_domain', 'DashboardBundle');
 
 //        $menu->addChild(
 //            'dashboard.actions.new_voucher_sale',

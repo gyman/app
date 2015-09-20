@@ -33,7 +33,8 @@ class SubdomainNameListener
         $this->container = $container;
     }
 
-    public function onKernelRequest(GetResponseEvent $event){
+    public function onKernelRequest(GetResponseEvent $event)
+    {
         if (!$event->isMasterRequest()) {
             return;
         }

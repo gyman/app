@@ -5,39 +5,46 @@ Voucher00:
   price: 100
   startDate: "-1 month"
   endDate: "+2 days"
+  member: Member00
 Voucher01:
   activities: "bjjAdvanced,bjjIntermediate,bjjBegginers"
   maximumAmount: 10
   price: 100
   startDate: "-2 weeks"
   endDate: "+2 weeks"
+  member: Member01
 Voucher02:
   activities: "bjjAdvanced,bjjIntermediate"
   maximumAmount: 10
   price: 100
   startDate: "-2 weeks"
   endDate: "+3 weeks"
+  member: Member02
 Voucher03:
   activities: nogiAdvanced
   maximumAmount: 10
   price: 100
   startDate: "-1 week"
   endDate: "+3 weeks"
+  member: Member03
 Voucher04:
   activities: "nogiAdvanced,bjjMorning"
   maximumAmount: 10
   price: 100
   startDate: "-1 week"
   endDate: "+3 weeks"
+  member: Member04
 Voucher05:
   activities: ~
   maximumAmount: 10
   price: 100
   startDate: "-1 week"
   endDate: "+3 weeks"
+  member: Member05
 Voucher06:
   activities: ~
   maximumAmount: 10
   price: 100
   startDate: "-1 week"
   endDate: "+3 weeks"
+  member: Member06

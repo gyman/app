@@ -15,3 +15,10 @@ services:
       - @service_container
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  gyman.default.request.arraycollection_converter:
+    class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
+    calls:
+      - [setEntityManager, [@doctrine.orm.club_entity_manager]]
+    tags:
+      - { name: request.param_converter}

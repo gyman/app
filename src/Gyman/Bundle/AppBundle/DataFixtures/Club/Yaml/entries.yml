@@ -3,6 +3,7 @@ Entry001:
   startDate:  now
   endDate:    +1 hour 30 minutes
   price:      ~
+  member:     Member01
 
 Entry002:
   voucher:    Voucher00
@@ -10,9 +11,19 @@ Entry002:
   startDate:  now
   endDate:    +1 hour 30 minutes
   price:      ~
+  member:     Member00
 
 Entry003:
   type:       paid
   startDate:  now
   endDate:    ~
   price:      15 PLN
+  member:     Member01
+
+Entry004:
+  voucher:    Voucher00
+  type:       voucher
+  startDate:  -27 hours
+  endDate:    -26 hours
+  price:      ~
+  member:     Member02
