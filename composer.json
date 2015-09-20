@@ -53,7 +53,8 @@
 
         "imagine/imagine": "0.6.*",
         "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a",
-        "dende/common-bundle": "dev-master"
+        "dende/common-bundle": "dev-master",
+        "nesbot/carbon": "dev-master"
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",

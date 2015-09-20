@@ -2,6 +2,8 @@
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\ORM\EntityManager;
+use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
+use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
@@ -15,11 +17,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class DatabaseSwitcher
 {
     /**
-     * @var string
-     */
-    private $baseUrl;
-
-    /**
      * @var EntityManager
      */
     private $entityManager;
@@ -30,14 +27,20 @@ class DatabaseSwitcher
     private $clubConnection;
 
     /**
+     * @var SubdomainProvider
+     */
+    private $subdomainProvider;
+
+    /**
      * DatabaseSwitcher constructor.
-     * @param $baseUrl
+     * @param SubdomainProviderInterface $provider
      * @param EntityManager $entityManager
      * @param ConnectionWrapper $connectionWrapper
+     * @internal param $baseUrl
      */
-    public function __construct($baseUrl, EntityManager $entityManager, ConnectionWrapper $connectionWrapper)
+    public function __construct(SubdomainProviderInterface $provider, EntityManager $entityManager, ConnectionWrapper $connectionWrapper)
     {
-        $this->baseUrl = $baseUrl;
+        $this->subdomainProvider = $provider;
         $this->entityManager = $entityManager;
         $this->clubConnection = $connectionWrapper;
     }
@@ -47,13 +50,7 @@ class DatabaseSwitcher
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $currentHost = $event->getRequest()->getHttpHost();
-
-        if ($currentHost === 'localhost') {
-            return;
-        }
-
-        $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
+        $subdomain = $this->subdomainProvider->getSubdomain();
 
         /** @var Club $club */
         $club = $this->entityManager->getRepository('ClubBundle:Club')->findOneBySubdomain(new Subdomain($subdomain));

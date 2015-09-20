@@ -1,64 +1,43 @@
-Voucher00:
-    activities:			bjjAdvanced,bjjIntermediate,bjjBegginers
-    entries:			null
-    previousVoucher:            null
-    member:			Member01
-    startDate:			"2013.11.01 12:00:00"
-    endDate:			"2013.11.30 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+--- 
+Voucher00: 
+  activities: "bjjAdvanced,bjjIntermediate,bjjBegginers"
+  maximumAmount: 10
+  price: 100
+  startDate: "-1 month"
+  endDate: "+2 days"
 Voucher01:
-    activities:			bjjAdvanced,bjjIntermediate,bjjBegginers
-    entries:			null
-    previousVoucher:            Voucher00
-    member:			Member01
-    startDate:			"2015.11.01 12:00:00"
-    endDate:			"2015.12.01 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+  activities: "bjjAdvanced,bjjIntermediate,bjjBegginers"
+  maximumAmount: 10
+  price: 100
+  startDate: "-2 weeks"
+  endDate: "+2 weeks"
 Voucher02:
-    activities:			bjjAdvanced,bjjIntermediate
-    entries:			null
-    previousVoucher:            null
-    member:			Member02
-    startDate:			"2013.12.01 12:00:00"
-    endDate:			"2013.12.31 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+  activities: "bjjAdvanced,bjjIntermediate"
+  maximumAmount: 10
+  price: 100
+  startDate: "-2 weeks"
+  endDate: "+3 weeks"
 Voucher03:
-    activities:			nogiAdvanced
-    entries:			null
-    previousVoucher:            null
-    member:			Member03
-    startDate:			"2013.12.01 12:00:00"
-    endDate:			"2013.12.31 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+  activities: nogiAdvanced
+  maximumAmount: 10
+  price: 100
+  startDate: "-1 week"
+  endDate: "+3 weeks"
 Voucher04:
-    activities:			nogiAdvanced,bjjMorning
-    entries:			null
-    previousVoucher:            null
-    member:			Member01
-    startDate:			"2014.01.01 12:00:00"
-    endDate:			"2014.12.31 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+  activities: "nogiAdvanced,bjjMorning"
+  maximumAmount: 10
+  price: 100
+  startDate: "-1 week"
+  endDate: "+3 weeks"
 Voucher05:
-    activities:			null
-    member:			Member11
-    startDate:			"2014.01.01 12:00:00"
-    endDate:			"2014.02.02 12:00:00"
-    price:			100
-    amount:			10
-    amountLeft:			10
-    isActive:			true
+  activities: ~
+  maximumAmount: 10
+  price: 100
+  startDate: "-1 week"
+  endDate: "+3 weeks"
+Voucher06:
+  activities: ~
+  maximumAmount: 10
+  price: 100
+  startDate: "-1 week"
+  endDate: "+3 weeks"

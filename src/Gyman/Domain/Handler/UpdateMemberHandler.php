@@ -11,7 +11,6 @@ use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Model\Member;
 use Gyman\Domain\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateMemberHandler
 {

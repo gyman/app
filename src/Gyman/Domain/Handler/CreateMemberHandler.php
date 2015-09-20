@@ -5,7 +5,6 @@ use Gyman\Bundle\AppBundle\Factory\MemberFactory;
 use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Command\MemberCommandInterface;
 use Gyman\Domain\Event\MemberEvent;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CreateMemberHandler extends UpdateMemberHandler
 {

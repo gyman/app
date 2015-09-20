@@ -39,9 +39,7 @@ class CreateVoucherCommand implements VoucherCommandInterface
      */
     public function __construct()
     {
-        $this->startDate = new \DateTime("now");
-        $this->endDate = new \DateTime("+1 month");
+        $this->startDate = new \DateTime('now');
+        $this->endDate = new \DateTime('+1 month');
     }
-
-
 }

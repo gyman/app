@@ -150,6 +150,8 @@ class Member
 
         $this->vouchers->add($newVoucher);
         $this->updateCurrentVoucher();
+
+        $newVoucher->setMember($this);
     }
 
     /**

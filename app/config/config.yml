@@ -13,6 +13,9 @@ parameters:
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
 
+
+  subdomain_provider_service: gyman.app.subdomain_provider
+
 services:
 #    globals_object:
 #      class: Gyman\Bundle\AppBundle\Globals

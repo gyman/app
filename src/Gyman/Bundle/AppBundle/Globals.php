@@ -3,23 +3,32 @@ namespace Gyman\Bundle\AppBundle;
 
 /**
  * Class Globals
+ *
+ * OK, I know. This one earned me a huge kick in the balls. But hey, life is not perfect. Neither this code is ;)
+ *
  * @package Gyman\Bundle\AppBundle
  */
-class Globals
+final class Globals
 {
     /**
      * @var
      */
-    public static $defaultDateTimeFormat = 'Y.m.d H:i:s';
+    protected static $defaultDateTimeFormat = 'Y.m.d H:i:s';
+
     /**
      * @var string
      */
-    public static $defaultDateFormat = 'Y.m.d';
+    protected static $defaultDateFormat = 'Y.m.d';
 
     /**
-     * @var
+     * @var string
      */
     protected static $galleryPath;
+
+    /**
+     * @var string
+     */
+    protected static $subdomain;
 
     protected static $galleryDir = '/uploads/gallery/';
     protected static $noImage;
@@ -167,5 +176,21 @@ class Globals
     public static function getDefaultCurrency()
     {
         return 'PLN';
+    }
+
+    /**
+     * @param $subdomain
+     */
+    public static function setSubdomain($subdomain)
+    {
+        self::$subdomain = $subdomain;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getSubdomain()
+    {
+        return self::$subdomain;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
+use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\AppBundle\Factory\VoucherFactory;
 
 class VouchersData extends BaseFixture
@@ -11,19 +11,16 @@ class VouchersData extends BaseFixture
 
     public function insert($array)
     {
-        $voucher = VoucherFactory::createFromArray([
-            'member'        => $this->getReference($array['member']),
-            'startDate'     => $array['startDate'],
-            'endDate'       => $array['endDate'],
-            'maximumAmount' => $array['amount'],
-            'price'         => ['amount' => $array['price'], 'currency' => 'PLN'],
-        ]);
+        $array['startDate'] = Carbon::parse($array['startDate']);
+        $array['endDate'] = Carbon::parse($array['endDate']);
+
+        $voucher = VoucherFactory::createFromArray($array);
 
         return $voucher;
     }
 
     public function getOrder()
     {
-        return 20;
+        return 0;
     }
 }

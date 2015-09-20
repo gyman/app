@@ -56,7 +56,7 @@ class Voucher
      * @param Price $price
      * @param int $maximumAmount
      */
-    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], Member $member)
+    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
@@ -242,5 +242,15 @@ class Voucher
     public function member()
     {
         return $this->member;
+    }
+
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
+    }
+
+    public function id()
+    {
+        return $this->id;
     }
 }

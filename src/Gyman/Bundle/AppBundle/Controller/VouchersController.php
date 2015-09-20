@@ -27,7 +27,7 @@ class VouchersController extends Controller
     public function newAction(Request $request, Member $member)
     {
         $form = $this->createForm('gyman_voucher_form', new CreateVoucherCommand(), [
-                'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()])
+                'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
         ]);
 
         if ($request->isMethod('POST')) {

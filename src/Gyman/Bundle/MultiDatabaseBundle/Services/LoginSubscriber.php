@@ -3,8 +3,8 @@ namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\AppBundle\Globals;
+use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper;
 use Gyman\Bundle\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

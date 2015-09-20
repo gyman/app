@@ -64,12 +64,11 @@ doctrine:
               StofDoctrineExtensionsBundle: ~
               GymanAppBundle: ~
               FiltersBundle: ~
-#              EntriesBundle: ~
               ScheduleBundle: ~
               SectionBundle: ~
 #              TimelineBundle: ~
 #              SpyTimelineBundle: ~
-              model:
+              Embedded:
                 type: yml
                 dir: "%kernel.root_dir%/../src/Gyman/Bundle/AppBundle/Resources/config/embedded"
                 prefix: Gyman\Domain\Model

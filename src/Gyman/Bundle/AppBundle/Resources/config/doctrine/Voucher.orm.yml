@@ -21,7 +21,7 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
     member:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
       inversedBy: vouchers
-      cascade: ["persist"]
+      cascade: ["all"]
 
   oneToMany:
     entries:

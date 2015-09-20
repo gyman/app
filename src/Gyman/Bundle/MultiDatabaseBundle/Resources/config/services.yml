@@ -1,8 +1,9 @@
 services:
   gyman.multidatabase.database_switcher:
     class: Gyman\Bundle\MultiDatabaseBundle\Listener\DatabaseSwitcher
+    scope: request
     arguments:
-      - %base_url%
+      - @=service(parameter('subdomain_provider_service'))
       - @doctrine.orm.entity_manager
       - @doctrine.dbal.club_connection
     tags:

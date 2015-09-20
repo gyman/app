@@ -1,0 +1,17 @@
+services:
+  gyman.app.subdomain_provider:
+    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
+    arguments:
+      - @request_stack
+      - %base_url%
+
+  gyman.app.test_subdomain_provider:
+      class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
+
+  gyman.app.subdomain_name_lister:
+    class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
+    arguments:
+      - @=service(parameter('subdomain_provider_service'))
+      - @service_container
+    tags:
+      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

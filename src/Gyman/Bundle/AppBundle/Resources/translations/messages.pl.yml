@@ -50,13 +50,23 @@ flash.member_search.more_results_than_one_please_specify_query_more: "Dla zapyta
 
 voucher.entries.open: "open"
 
-navigation.menu.dashboard: "Panel nawigatora"
-navigation.menu.members: "Uczestnicy"
-navigation.menu.schedule: "Grafik zajęć"
-navigation.menu.vouchers: "Karnety"
-navigation.menu.entries: "Wejścia"
-navigation.menu.analytics: "Analityka"
-navigation.menu.employees: "Pracownicy"
-navigation.menu.clubs_and_sections: "Kluby i sekcje"
-navigation.menu.payments: "Płatności"
-navigation.menu.dontknow: "..."
+navigation:
+    menu:
+        dashboard: "Panel nawigatora"
+        members: "Uczestnicy"
+        schedule: "Grafik zajęć"
+        vouchers: "Karnety"
+        entries: "Wejścia"
+        analytics: "Analityka"
+        employees: "Pracownicy"
+        clubs_and_sections: "Kluby i sekcje"
+        payments: "Płatności"
+        dontknow: "..."
+
+members:
+    close_voucher:
+        confirm_alert: 'Zamknąć aktualny karnet?\n(Tego nie da się cofnąć!)'
+member:
+    form:
+        add_entry: 'Dodaj wejście'
+        close_voucher: 'Zamknij karnet'

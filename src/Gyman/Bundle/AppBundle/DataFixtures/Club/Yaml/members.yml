@@ -63,6 +63,9 @@ Member05:
     zipcode:            88-888
     belt:               purple
     barcode:            abcd12305
+    Voucher:
+        - Voucher06
+
 Member06:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -76,6 +79,8 @@ Member06:
     zipcode:            88-888
     belt:               black
     barcode:            abcd12306
+    vouchers:
+        - Voucher05
 Member07:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -89,6 +94,8 @@ Member07:
     zipcode:            88-888
     belt:               white
     barcode:            abcd12307
+    vouchers:
+        - Voucher04
 Member08:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -102,6 +109,8 @@ Member08:
     zipcode:            88-888
     belt:               blue
     barcode:            abcd12308
+    vouchers:
+        - Voucher03
 Member09:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -115,6 +124,8 @@ Member09:
     zipcode:            88-888
     belt:               blue
     barcode:            abcd12309
+    vouchers:
+        - Voucher02
 Member10:
     birthdate:          "1975-10-15 12:00:00"
     deletedAt:          null
@@ -128,6 +139,8 @@ Member10:
     zipcode:            88-888
     belt:
     barcode:            abcd12310
+    vouchers:
+        - Voucher01
 Member11:
     birthdate:          "1980-10-15 12:00:00"
     deletedAt:          null
@@ -141,3 +154,5 @@ Member11:
     zipcode:            88-888
     belt:
     barcode:            abcd12311
+    vouchers:
+        - Voucher00

@@ -2,6 +2,7 @@
 namespace Gyman\VouchersBundle\Tests\Functional\Controller;
 
 use DateTime;
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\AppBundle\Entity\Voucher;
 use Gyman\Component\Test\BaseFunctionalTest;
 
@@ -75,7 +76,7 @@ class VouchersControllerTest extends BaseFunctionalTest
         $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
 
         $this->assertNotNull($member->vouchers());
-        $this->assertEquals(1, $member->vouchers()->count());
+        $this->assertEquals(2, $member->vouchers()->count());
 
         /** @var Voucher $voucher */
         $voucher = $member->vouchers()->last();
@@ -89,5 +90,29 @@ class VouchersControllerTest extends BaseFunctionalTest
         $this->assertEquals('flash.voucher_added.success', trim($alert->text()));
 
         $this->container->get('doctrine.orm.club_entity_manager')->refresh($voucher);
+    }
+
+    /**
+     * @test
+     */
+    public function voucher_is_closed_and_removed_from_members_current_voucher()
+    {
+        /** @var Member $member */
+        $member = $this->container->get('gyman.members.repository')->findOneById(5);
+
+        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Voucher", $member->currentVoucher());
+
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_vouchers_close', [
+            'id' => $member->currentVoucher()->id(),
+        ]));
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $this->assertEquals(
+            $this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]),
+            $this->client->getRequest()->getRequestUri()
+        );
+
+        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->assertNull($member->currentVoucher());
     }
 }

@@ -3,6 +3,7 @@ imports:
 
 parameters:
     translator.class: Gyman\Bundle\AppBundle\Translator\NoTranslator
+    subdomain_provider_service: gyman.app.test_subdomain_provider
 
 framework:
     test: ~

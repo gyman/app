@@ -24,7 +24,7 @@ Gyman\Bundle\AppBundle\Entity\Member:
     vouchers:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
       mappedBy: member
-      cascade: ["persist"]
+      cascade: ["all"]
 
     entries:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
@@ -33,7 +33,7 @@ Gyman\Bundle\AppBundle\Entity\Member:
   oneToOne:
     currentVoucher:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
-      cascade: ["persist", "merge"]
+      cascade: ["all"]
       joinColumn:
         name: current_voucher_id
         referencedColumnName: id
