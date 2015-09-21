@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
 use Gyman\Bundle\ScheduleBundle\Entity\Activity;

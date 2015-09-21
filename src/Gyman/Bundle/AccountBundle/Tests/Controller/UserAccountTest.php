@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
 use Gyman\Bundle\TestBundle\Tests\BaseTest;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Form;
 
 use Gyman\Bundle\AppBundle\Globals;

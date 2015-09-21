@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Gyman\Bundle\AppBundle\Services\Manager\VoucherManager;

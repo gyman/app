@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\EntriesBundle\Tests\Unit\Form;
 
 use DateTime;

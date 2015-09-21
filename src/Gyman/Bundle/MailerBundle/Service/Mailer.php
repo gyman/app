@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MailerBundle\Service;
 
 use Swift_Mailer;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Bundle\AppBundle\Entity\Member;
@@ -57,6 +58,7 @@ class EntriesController extends Controller
     {
         $command = CloseEntryCommand::createFromEntry($entry);
         $this->get('gyman.entries.close_entry')->handle($command, $this->getUser());
+        $this->addFlash('success', 'flash.entry_closed.success');
 
         return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
     }

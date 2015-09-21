@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TimelineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

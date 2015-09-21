@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\Traits;
 
 trait SetupTrait

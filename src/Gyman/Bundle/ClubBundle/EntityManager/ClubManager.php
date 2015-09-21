@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle\EntityManager;
 
 use Gyman\Bundle\AppBundle\ClubsEvents;

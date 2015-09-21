@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TimelineBundle\Controller;
 
 use Gyman\Bundle\AppBundle\Entity\Member;

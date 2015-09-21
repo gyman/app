@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Handler;
 
 use Gyman\Bundle\AppBundle\Factory\VoucherFactory;

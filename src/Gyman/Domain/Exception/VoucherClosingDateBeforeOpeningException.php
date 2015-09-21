@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Exception;
 
 use Gyman\Bundle\AppBundle\Globals;

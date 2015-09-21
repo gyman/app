@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ScheduleBundle\Entity;
 
 use DateTime;

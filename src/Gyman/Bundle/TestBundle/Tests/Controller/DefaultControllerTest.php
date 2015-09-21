@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Dende\CommonBundle\DataFixtures\BaseFixture;

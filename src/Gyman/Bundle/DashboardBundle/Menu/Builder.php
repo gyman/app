@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\DashboardBundle\Menu;
 
 use Knp\Menu\FactoryInterface;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Component\Test;
 
 use Dende\CommonBundle\Tests\BaseFunctionalTest as BaseTest;

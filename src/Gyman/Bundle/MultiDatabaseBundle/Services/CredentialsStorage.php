@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Services;
 
 use Gyman\Bundle\MultiDatabaseBundle\Exception\CredentialsUnchangedException;

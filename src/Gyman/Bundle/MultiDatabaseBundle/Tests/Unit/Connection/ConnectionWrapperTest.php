@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Tests\Unit\Connection;
 
 use Doctrine\DBAL\Platforms\MySQL57Platform;

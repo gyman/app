@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
 use Gyman\Bundle\AppBundle\Event\MemberCreatedEvent;

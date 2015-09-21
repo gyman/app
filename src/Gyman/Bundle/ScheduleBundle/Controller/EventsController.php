@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ScheduleBundle\Controller;
 
 use Gyman\Bundle\ScheduleBundle\Entity as Event;

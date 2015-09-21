@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Tests\Traits;
 
 use Gyman\Bundle\FiltersBundle\Traits\ParseClassname;

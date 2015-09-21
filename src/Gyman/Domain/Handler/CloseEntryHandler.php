@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Handler;
 
 use Gyman\Domain\Command\CloseEntryCommand;

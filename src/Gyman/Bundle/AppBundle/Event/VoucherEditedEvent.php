@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Event;
 
 use Gyman\Bundle\AppBundle\Entity\Voucher;

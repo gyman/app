@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\EntriesBundle\Validator;
 
 //use Symfony\Component\Validator\ConstraintValidator;

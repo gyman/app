@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;

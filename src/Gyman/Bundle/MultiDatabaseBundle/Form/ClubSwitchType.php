@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Form;
 
 use Gyman\Bundle\UserBundle\Entity\User;

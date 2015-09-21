@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\EntriesBundle\Twig;
 
 use Gyman\Bundle\EntriesBundle\Entity\Entry;

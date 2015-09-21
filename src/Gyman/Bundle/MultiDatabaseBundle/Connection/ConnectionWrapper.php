@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Connection;
 
 use Doctrine\Common\EventManager;

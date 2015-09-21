@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ListsBundle\Services;
 
 use Doctrine\ORM\QueryBuilder;
