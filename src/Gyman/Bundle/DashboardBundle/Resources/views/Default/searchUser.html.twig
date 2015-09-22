@@ -1,9 +1,5 @@
 <div class="reminder" id="searchTab">
-    <h4>Szukaj uczestnika
-    {#{% if is_granted("ROLE_ADMIN") %}#}
-        {#<a class="icon tip" href="{{ path("_list_members") }}"><span class="icon16 icomoon-icon-users"></span></a>#}
-    {#{% endif %}#}
-    </h4>
+    <h4>Szukaj uczestnika</h4>
 
     <form name="gyman_member_search_form" id="membersSearchAutocompleteForm" class="input-append" method="POST" action="{{ path('gyman_members_search') }}">
         <input name="gyman_member_search_form[query]" id="membersSearchAutocomplete" placeholder="imię/nazwisko uczestnika lub kod" autocomplete="off">

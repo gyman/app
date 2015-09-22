@@ -1,0 +1,155 @@
+#    sunday:     false
+#    monday:     true
+#    tuesday:    false
+#    wednesday:  true
+#    thursdays:  false
+#    friday:     true
+#    saturday:   false
+
+### BJJ PORANNE
+### pon, śro, pią: 9:00 - 10:30
+### wto, czw: 12:00 - 13:30
+
+bjjMorning001:
+    activity:   bjjMorning
+    startDate:	2014-03-24 09:00
+    endDate:	2015-03-28 09:00
+    duration:	90
+    type:       weekly
+    monday:     true
+    wednesday:  true
+    friday:     true
+
+bjjMorning002:
+    activity:   bjjMorning
+    startDate:	2014-03-25 12:00
+    duration:	90
+    type:       weekly
+    tuesday:    true
+    thursday:   true
+
+### BJJ DZIECI
+### pon, śro: 12:00 - 13:00
+### sob: 11:00 - 12:00
+
+bjjKids001:
+    activity:   bjjKids
+    startDate:	2014-03-24 12:00
+    duration:	60
+    type:       weekly
+    monday:     true
+    wednesday:  true
+bjjKids002:
+    activity:   bjjKids
+    startDate:	2014-03-29 11:00
+    duration:	60
+    type:       weekly
+    saturday:   true
+
+### MMA mieszana
+### pon, śro: 18:00 - 19:30
+
+mmaMixed001:
+    activity:   mmaMixed
+    startDate:	2014-03-24 18:00
+    duration:	90
+    type:       weekly
+    saturday:   true
+
+### BJJ ŚREDNIOZAAWANSOWANI
+### pon, śro, pią : 19:30 - 20:30
+
+bjjIntermediate001:
+    activity:   bjjIntermediate
+    startDate:	2014-03-24 19:30
+    duration:	60
+    type:       weekly
+    monday:     true
+    wednesday:  true
+    friday:     true
+
+### BJJ POCZĄTKUJĄCY
+### wto, czw : 19:30 - 20:30
+
+bjjBegginers001:
+    activity:   bjjBegginers
+    startDate:	2014-03-25 19:30
+    duration:	60
+    type:       weekly
+    tuesday:    true
+    thursday:  true
+
+### NO-GI ZAAWANSOWANI
+### wto, czw: 20:30 - 22:00
+
+nogiAdvanced001:
+    activity:   nogiAdvanced
+    startDate:	2014-03-25 20:30
+    duration:	90
+    type:       weekly
+    tuesday:    true
+    thursday:  true
+
+### KOBIETY BOKS
+### wto, pią: 18:00 - 19:30
+
+boxWoman001:
+    activity:   boxWoman
+    startDate:	2014-03-25 18:00
+    duration:	90
+    type:       weekly
+    tuesday:    true
+    friday:     true
+
+
+### BJJ ZAAWANSOWANI
+### pon, śro: 20:30 - 22:00
+
+bjjAdvanced001:
+    activity:   bjjAdvanced
+    startDate:	2014-03-24 20:30
+    duration:	90
+    type:       weekly
+    monday:     true
+    wednesday:  true
+
+### MMA ZAAWANSOWANI
+### wto, czw: 20:30 - 22:00
+
+mmaAdvanced001:
+    activity:   mmaAdvanced
+    startDate:	2014-03-25 20:30
+    duration:	90
+    type:       weekly
+    tuesday:    true
+    thursday:   true
+
+### WOLNA MATA
+### pią: 20:30 - 22:00
+
+free001:
+    activity:   free
+    startDate:	2014-03-28 20:30
+    duration:	90
+    type:       weekly
+    friday:     true
+
+### CROSSFIT
+### pią: 17:00 - 18:00
+
+crossfit001:
+    activity:   crossfit
+    startDate:	2014-03-28 17:00
+    duration:	60
+    type:       weekly
+    friday:     true
+
+### SPARINGI
+### sob: 12:00 - 13:30
+
+sparings001:
+    activity:   sparings
+    startDate:	2014-03-29 12:00
+    duration:	90
+    type:       weekly
+    saturday:   true

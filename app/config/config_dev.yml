@@ -4,6 +4,7 @@ parameters:
     - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection # to be removed
   clubFixtures:
     - src/Gyman/Bundle/AppBundle/DataFixtures/Club
+    - src/Gyman/Bundle/ScheduleBundle/DataFixtures/Club
 
 imports:
     - { resource: config.yml }

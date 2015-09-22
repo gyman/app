@@ -63,7 +63,7 @@ doctrine:
             mappings:
               StofDoctrineExtensionsBundle: ~
               GymanAppBundle: ~
-              FiltersBundle: ~
+#              FiltersBundle: ~
               ScheduleBundle: ~
               SectionBundle: ~
 #              TimelineBundle: ~

@@ -5,10 +5,9 @@ use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Gyman\Bundle\ListsBundle\Entity\RepositoryListCompatible;
 use Gyman\Domain\Repository\VoucherRepositoryInterface;
 
-class VoucherRepository extends EntityRepository implements RepositoryListCompatible, VoucherRepositoryInterface
+class VoucherRepository extends EntityRepository implements VoucherRepositoryInterface
 {
     /**
      * @param Voucher $voucher

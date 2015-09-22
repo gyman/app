@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
@@ -98,7 +99,6 @@ class EntriesControllerTest extends BaseFunctionalTest
         ]);
 
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
-
         $this->assertEquals(200, $this->getStatusCode());
 
         $this->assertEquals(
@@ -134,7 +134,7 @@ class EntriesControllerTest extends BaseFunctionalTest
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
         $form->setValues([
-            'gyman_entry_form[startDate]' => (string) Carbon::now()->format('d.m.Y H:i'),
+            'gyman_entry_form[startDate]' => Carbon::now()->format('d.m.Y H:i'),
             'gyman_entry_form[entryType]' => Entry::TYPE_VOUCHER,
             'gyman_entry_form[price]'     => '123',
         ]);
@@ -165,8 +165,6 @@ class EntriesControllerTest extends BaseFunctionalTest
      */
     public function free_open_entry_form_is_posted()
     {
-        $this->client->followRedirects(true);
-
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);

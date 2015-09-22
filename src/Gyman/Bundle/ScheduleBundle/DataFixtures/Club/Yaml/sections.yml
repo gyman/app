@@ -1,0 +1,35 @@
+section_001:
+  name: Mma
+  club: club-rio
+  members:
+    - Member01
+    - Member02
+
+section_002:
+  name: Capoeira
+  club: club-dende
+  members:
+    - Member03
+    - Member04
+
+section_003:
+  name: Brazilian Jiu Jitsu
+  club: club-rio
+  members:
+    - Member05
+    - Member06
+    - Member07
+
+section_004:
+  name: Mma
+  club: club-extreme
+  members:
+    - Member08
+    - Member09
+
+section_005:
+  name: Muay Thai
+  club: club-extreme
+  members:
+    - Member10
+    - Member11

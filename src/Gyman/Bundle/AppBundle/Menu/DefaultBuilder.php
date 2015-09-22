@@ -84,14 +84,14 @@ class DefaultBuilder
             ],
         ])->setExtra('translation_domain', 'DefaultBundle');
 
-        $menu->addChild('navigation.menu.members', [
-            'route'          => '_list_members',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+//        $menu->addChild('navigation.menu.members', [
+//            'route'          => '_list_members',
+//            'extras'         => ['icon' => 'fa-user'],
+//            'linkAttributes' => [
+//                'class'            => 'tipB',
+//                'aria-describedby' => 'qtip-21',
+//            ],
+//        ])->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.schedule', [
             'route'          => '_schedule_calendar',
@@ -102,23 +102,23 @@ class DefaultBuilder
             ],
         ])->setExtra('translation_domain', 'DefaultBundle');
 
-        $menu->addChild('navigation.menu.vouchers', [
-            'route'          => '_vouchers_list',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+//        $menu->addChild('navigation.menu.vouchers', [
+//            'route'          => '_vouchers_list',
+//            'extras'         => ['icon' => 'fa-user'],
+//            'linkAttributes' => [
+//                'class'            => 'tipB',
+//                'aria-describedby' => 'qtip-21',
+//            ],
+//        ])->setExtra('translation_domain', 'DefaultBundle');
 
-        $menu->addChild('navigation.menu.entries', [
-            'route'          => '_list_entries',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+//        $menu->addChild('navigation.menu.entries', [
+//            'route'          => '_list_entries',
+//            'extras'         => ['icon' => 'fa-user'],
+//            'linkAttributes' => [
+//                'class'            => 'tipB',
+//                'aria-describedby' => 'qtip-21',
+//            ],
+//        ])->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.analytics', [
             'uri'            => '/',
