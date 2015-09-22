@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MailerBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

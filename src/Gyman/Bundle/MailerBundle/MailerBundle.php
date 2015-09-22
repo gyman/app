@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MailerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

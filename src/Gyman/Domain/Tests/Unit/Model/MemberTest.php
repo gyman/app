@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Tests\Unit\Model;
 
 use Gyman\Domain\Factory\MemberFactory;

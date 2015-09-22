@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\TimelineBundle\Timeline;
 
 use Doctrine\ORM\EntityManager;

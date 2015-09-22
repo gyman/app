@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Twig;
 
 use Gyman\Bundle\AppBundle\Entity\Voucher;

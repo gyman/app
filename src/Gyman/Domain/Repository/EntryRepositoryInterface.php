@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Repository;
 
 use Gyman\Domain\Model\Entry;

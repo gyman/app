@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\TestBundle\DataFixtures\Club\ORM;
 
 use DateTime;

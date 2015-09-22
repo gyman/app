@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Handler;
 
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;

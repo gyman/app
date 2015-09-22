@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Model;
 
 class Belt

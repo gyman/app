@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Gyman\Domain\Command\OpenEntryCommand;

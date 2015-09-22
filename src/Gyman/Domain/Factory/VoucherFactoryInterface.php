@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Factory;
 
 use Gyman\Domain\Model\Voucher;

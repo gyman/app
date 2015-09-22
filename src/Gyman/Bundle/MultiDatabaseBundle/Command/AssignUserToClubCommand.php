@@ -17,32 +17,31 @@ class AssignUserToClubCommand extends AbstractCommand
             ->setName('gyman:club:assign-user')
             ->setDescription('Assigns existing user to club entity')
             ->addArgument('email', InputArgument::REQUIRED, 'Users email')
-            ->addArgument('subdomain', InputArgument::REQUIRED, 'Subdomain name')
-        ;
+            ->addArgument('subdomain', InputArgument::REQUIRED, 'Subdomain name');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $arguments = $input->getArguments();
 
-        $em = $this->getContainer()->get("doctrine.orm.default_entity_manager");
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
         /** @var User $user */
-        $user = $em->getRepository("UserBundle:User")->findOneByEmailAddress(new EmailAddress($arguments["email"]));
+        $user = $em->getRepository('UserBundle:User')->findOneByEmailAddress(new EmailAddress($arguments['email']));
 
-        if(is_null($user)) {
-            throw new \Exception("User not found");
+        if (is_null($user)) {
+            throw new \Exception('User not found');
         }
 
         /** @var Club $club */
-        $club = $em->getRepository("ClubBundle:Club")->findOneBySubdomain(new Subdomain($arguments["subdomain"]));
+        $club = $em->getRepository('ClubBundle:Club')->findOneBySubdomain(new Subdomain($arguments['subdomain']));
 
-        if(is_null($club)) {
-            throw new \Exception("Club not found");
+        if (is_null($club)) {
+            throw new \Exception('Club not found');
         }
 
-        if($user->getClubs()->contains($club)) {
-            throw new \Exception("User already assigned to club!");
+        if ($user->getClubs()->contains($club)) {
+            throw new \Exception('User already assigned to club!');
         }
 
         $user->getClubs()->add($club);

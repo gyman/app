@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\EntriesBundle\Tests\Entity;
 
 use Gyman\Bundle\TestBundle\Tests\BaseTest;

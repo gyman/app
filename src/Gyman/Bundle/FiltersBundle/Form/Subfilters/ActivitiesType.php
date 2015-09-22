@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Form\Subfilters;
 
 use Doctrine\Common\Collections\ArrayCollection;

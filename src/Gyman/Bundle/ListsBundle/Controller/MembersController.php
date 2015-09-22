@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ListsBundle\Controller;
 
 use Gyman\Bundle\AppBundle\Entity\Member;

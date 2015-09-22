@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Tests\Context;
 
 use Behat\Behat\Context\Context;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
@@ -134,13 +133,15 @@ class EntriesControllerTest extends BaseFunctionalTest
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
         $form->setValues([
-            'gyman_entry_form[startDate]' => Carbon::now()->format('d.m.Y H:i:s'),
+            'gyman_entry_form[startDate]' => (string) Carbon::now()->format('d.m.Y H:i:s'),
             'gyman_entry_form[entryType]' => Entry::TYPE_VOUCHER,
             'gyman_entry_form[price]'     => '123',
         ]);
 
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
         $this->assertEquals(200, $this->getStatusCode());
+
+//        die(print_r($crawler->filter('form[name="gyman_entry_form"]')->text()));
 
         $this->assertEquals(
             $this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]),

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\Tests\DependencyInjection\CompilerPass;
 
 use Gyman\Bundle\FiltersBundle\DependencyInjection\CompilerPass\AddFiltersToProviderPerList;

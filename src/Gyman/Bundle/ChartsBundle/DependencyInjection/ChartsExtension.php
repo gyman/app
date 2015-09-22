@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ChartsBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AccountBundle\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Controller;
 
 use Gyman\Bundle\AppBundle\Globals;
