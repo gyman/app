@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -200,6 +201,7 @@ class Member
         }
 
         $this->lastEntry()->closeEntry(new \DateTime());
+        $this->lastEntry = null;
     }
 
     /**

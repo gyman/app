@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Command;
 
 use Gyman\Domain\Model\Entry;

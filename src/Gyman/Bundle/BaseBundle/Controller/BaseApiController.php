@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\BaseBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;

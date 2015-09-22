@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle\Factory;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;

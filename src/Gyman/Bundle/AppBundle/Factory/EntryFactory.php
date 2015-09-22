@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use Gyman\Bundle\AppBundle\Entity\Entry;

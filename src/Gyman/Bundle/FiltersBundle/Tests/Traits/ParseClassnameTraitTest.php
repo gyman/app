@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Tests\Services;
 
 use Gyman\Bundle\FiltersBundle\Tests\Traits\ParseClassnameTraitStub;

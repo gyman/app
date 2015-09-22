@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 final class Database

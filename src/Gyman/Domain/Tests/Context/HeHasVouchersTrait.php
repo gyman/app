@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Tests\Context;
 
 trait HeHasVouchersTrait

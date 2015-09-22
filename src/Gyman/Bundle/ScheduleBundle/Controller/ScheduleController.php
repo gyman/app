@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ScheduleBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

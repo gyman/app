@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;

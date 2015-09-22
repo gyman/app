@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\BaseBundle\EntityManager;
 
 use Doctrine\ORM\EntityManager;

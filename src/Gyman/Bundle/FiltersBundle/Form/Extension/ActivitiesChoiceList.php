@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Form\Extension;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;

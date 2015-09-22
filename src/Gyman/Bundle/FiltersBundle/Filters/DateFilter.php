@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Filters;
 
 use DateTime;

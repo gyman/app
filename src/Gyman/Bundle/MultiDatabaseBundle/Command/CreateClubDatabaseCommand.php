@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\MultiDatabaseBundle\Command;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;

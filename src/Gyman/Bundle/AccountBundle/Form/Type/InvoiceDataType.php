@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\BaseType;

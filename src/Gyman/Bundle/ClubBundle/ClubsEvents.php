@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ClubBundle;
 
 final class ClubsEvents

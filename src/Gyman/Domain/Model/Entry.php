@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Domain\Model;
 
 use Gyman\Domain\Exception\EntryClosingDateBeforeOpeningException;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ScheduleBundle\Services\Subscriber;
 
 use Doctrine\Common\EventSubscriber;

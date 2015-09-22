@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Filters;
 
 class VoucherStart extends DateFilter

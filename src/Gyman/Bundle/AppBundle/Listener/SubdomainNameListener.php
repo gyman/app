@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Gyman\Bundle\AppBundle\Globals;

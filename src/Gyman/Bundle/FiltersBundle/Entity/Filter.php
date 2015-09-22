@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\FiltersBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;

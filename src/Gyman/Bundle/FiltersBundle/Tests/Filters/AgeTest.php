@@ -1,4 +1,5 @@
 <?php
+
 namespace Dende\Filters\Tests\Filters;
 
 use Gyman\Bundle\FiltersBundle\Filters\Age;

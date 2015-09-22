@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\TimelineBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

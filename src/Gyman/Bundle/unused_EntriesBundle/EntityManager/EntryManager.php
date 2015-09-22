@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\EntriesBundle\EntityManager;
 
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;

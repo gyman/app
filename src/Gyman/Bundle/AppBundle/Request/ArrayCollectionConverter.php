@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\AppBundle\Request;
 
 use Doctrine\Common\Collections\ArrayCollection;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ReportsBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

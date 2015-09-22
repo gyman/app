@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\ChartsBundle\Services;
 
 use DateTime;

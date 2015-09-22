@@ -1,4 +1,5 @@
 <?php
+
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
 use DateTime;
