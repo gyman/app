@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Event;
 
 use Gyman\Domain\Model\Member;

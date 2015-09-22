@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Gyman\Domain\Command\OpenEntryCommand;

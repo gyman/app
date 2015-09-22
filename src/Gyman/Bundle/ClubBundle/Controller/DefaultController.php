@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ClubBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Tests\Unit\Handler;
 
 use DateTime;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Translator;
 
 use Symfony\Component\Translation\MessageCatalogue;

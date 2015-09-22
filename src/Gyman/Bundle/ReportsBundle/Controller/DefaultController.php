@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\ReportsBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

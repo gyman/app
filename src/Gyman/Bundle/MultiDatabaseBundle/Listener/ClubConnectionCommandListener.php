@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Listener;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;

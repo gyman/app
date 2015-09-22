@@ -1,5 +1,4 @@
 <?php
-
 namespace Dende\Filters\Tests\Filters;
 
 use Doctrine\Common\Collections\ArrayCollection;

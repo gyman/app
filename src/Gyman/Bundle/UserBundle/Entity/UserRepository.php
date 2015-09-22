@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
@@ -9,8 +8,8 @@ class UserRepository extends EntityRepository
 {
     /**
      * @param EmailAddress $emailAddress
-     * @return User|null
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return User|null
      */
     public function findOneByEmailAddress(EmailAddress $emailAddress)
     {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\FiltersBundle\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;

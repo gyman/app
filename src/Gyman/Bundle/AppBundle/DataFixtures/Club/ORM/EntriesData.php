@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Carbon\Carbon;

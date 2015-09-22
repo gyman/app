@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\TestBundle\Services;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Services;
 
 use Symfony\Component\HttpFoundation\RequestStack;

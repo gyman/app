@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;

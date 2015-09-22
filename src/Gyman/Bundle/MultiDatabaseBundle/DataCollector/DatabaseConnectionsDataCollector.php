@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\MultiDatabaseBundle\DataCollector;
 
 use Doctrine\DBAL\Connection;

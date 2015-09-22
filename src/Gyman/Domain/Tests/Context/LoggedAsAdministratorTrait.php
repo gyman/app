@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Tests\Context;
 
 use Gyman\Domain\Model\User;

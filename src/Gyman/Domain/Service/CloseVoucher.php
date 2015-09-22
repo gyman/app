@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Domain\Service;
 
 use Gyman\Domain\Event\VoucherEvent;
