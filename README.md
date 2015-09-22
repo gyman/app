@@ -9,3 +9,31 @@ My own project. I would like to provide to the end-user and his business easy to
 - let user to step into live interaction with user: invoices, interviews, notification tru email/sms, present to user his progress data
 - let user to do all reservation of trainings or facilities from start to end on website
 - implement payment functionality etc.
+
+
+Dodawanie nowego klubu oraz użytkownika
+
+1. utworzenie wpisu do "clubs", utworzenie bazy, usera z hasłem:
+
+> sf gyman:club:create "Trening Club" trening gyman_trening trening test123
+
+2. zbudowanie schemy w gyman_trening
+
+> sf doctrine:schema:create --club="trening"
+
+3. utworzenie usera w gyman
+
+> sf fos:user:create "john.doe" user@server.com lampka123
+
+4. przypisanie usera do subdomeny
+
+> sf gyman:club:assign-user user@server.com trening
+
+5. dodanie subdomeny do /etc/hosts
+
+> echo "127.0.0.1    trening.gyman.pl" >> /etc/hosts
+
+6. utworzenie katalogu w /web/uploads/gallery/trening
+
+> mkdir -p /web/uploads/gallery/trening
+

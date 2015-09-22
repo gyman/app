@@ -58,7 +58,11 @@ services:
 
   gyman.multidatabase.command.create_database:
     class: Gyman\Bundle\MultiDatabaseBundle\Command\CreateClubDatabaseCommand
-    parent: gyman.multidatabase.command
+    tags:
+      - { name: console.command }
+
+  gyman.multidatabase.command.assign_user_to_club:
+    class: Gyman\Bundle\MultiDatabaseBundle\Command\AssignUserToClubCommand
     tags:
       - { name: console.command }
 

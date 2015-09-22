@@ -1,1 +1,7 @@
-services: ~
+services:
+  gyman.users.user_manager:
+    class: Gyman\Bundle\UserBundle\Entity\UserManager
+    parent: fos_user.user_manager.default
+    calls:
+      - [setSubdomainProvider, [@gyman.app.subdomain_provider]]
+      - [setClubRepository, [@gyman.club.repository]]

@@ -12,30 +12,30 @@
 
         <!--User have to always set club property unless it's test environment-->
 
-        <if>
-            <and>
-                <not>
-                    <equals arg1="${env}" arg2="test" />
-                </not>
-                <not>
-                    <isset property="club" />
-                </not>
-            </and>
-            <then>
-                <fail message="No club (-Dclub) property set" />
-            </then>
-        </if>
+        <!--<if>-->
+            <!--<and>-->
+                <!--<not>-->
+                    <!--<equals arg1="${env}" arg2="test" />-->
+                <!--</not>-->
+                <!--<not>-->
+                    <!--<isset property="club" />-->
+                <!--</not>-->
+            <!--</and>-->
+            <!--<then>-->
+                <!--<fail message="No club (-Dclub) property set" />-->
+            <!--</then>-->
+        <!--</if>-->
 
         <!--If we're performing testing - it is done on test club db-->
 
-        <if>
-            <and>
-                <equals arg1="${env}" arg2="test" />
-            </and>
-            <then>
-                <property name="club" value="test" />
-            </then>
-        </if>
+        <!--<if>-->
+            <!--<and>-->
+                <!--<equals arg1="${env}" arg2="test" />-->
+            <!--</and>-->
+            <!--<then>-->
+                <!--<property name="club" value="dende" />-->
+            <!--</then>-->
+        <!--</if>-->
 
         <!--If no env is provided, we assume it's dev-->
 
@@ -49,46 +49,55 @@
             </then>
         </if>
 
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:drop" />
-            <arg value="--em=default" />
-            <arg value="--env=${env}" />
-            <arg value="--force" />
-        </exec>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:create" />
-            <arg value="--em=default" />
-            <arg value="--env=${env}" />
-            <arg value="--no-interaction" />
-        </exec>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:fixtures:load" />
-            <arg value="--em=default" />
-            <arg value="--env=${env}" />
-            <arg value="--no-interaction" />
-        </exec>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:drop" />
-            <arg value="--em=club" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="--force" />
-        </exec>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:create" />
-            <arg value="--em=club" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="--no-interaction" />
-        </exec>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:fixtures:load" />
-            <arg value="--append" />
-            <arg value="--em=club" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="--no-interaction" />
-        </exec>
+        <if>
+            <not>
+                <isset property="club" />
+            </not>
+            <then>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:schema:drop" />
+                    <arg value="--em=default" />
+                    <arg value="--env=${env}" />
+                    <arg value="--force" />
+                </exec>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:schema:create" />
+                    <arg value="--em=default" />
+                    <arg value="--env=${env}" />
+                    <arg value="--no-interaction" />
+                </exec>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:fixtures:load" />
+                    <arg value="--em=default" />
+                    <arg value="--env=${env}" />
+                    <arg value="--no-interaction" />
+                </exec>
+            </then>
+            <else>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:schema:drop" />
+                    <arg value="--em=club" />
+                    <arg value="--club=${club}" />
+                    <arg value="--env=${env}" />
+                    <arg value="--force" />
+                </exec>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:schema:create" />
+                    <arg value="--em=club" />
+                    <arg value="--club=${club}" />
+                    <arg value="--env=${env}" />
+                    <arg value="--no-interaction" />
+                </exec>
+                <exec executable="${sf}" checkreturn="true" passthru="true">
+                    <arg value="doctrine:fixtures:load" />
+                    <arg value="--append" />
+                    <arg value="--em=club" />
+                    <arg value="--club=${club}" />
+                    <arg value="--env=${env}" />
+                    <arg value="--no-interaction" />
+                </exec>
+            </else>
+        </if>
     </target>
 </project>
 

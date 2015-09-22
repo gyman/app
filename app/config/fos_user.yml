@@ -42,7 +42,7 @@ fos_user:
         email_canonicalizer:    fos_user.util.canonicalizer.default
         username_canonicalizer: fos_user.util.canonicalizer.default
         token_generator:        fos_user.util.token_generator.default
-        user_manager:           fos_user.user_manager.default
+        user_manager:           gyman.users.user_manager
     group:
             group_class: Gyman\Bundle\UserBundle\Entity\Group
 #    group:

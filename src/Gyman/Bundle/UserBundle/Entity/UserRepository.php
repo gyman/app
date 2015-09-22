@@ -2,9 +2,26 @@
 namespace Gyman\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Gyman\Domain\Model\EmailAddress;
 
 class UserRepository extends EntityRepository
 {
+    /**
+     * @param EmailAddress $emailAddress
+     * @return User|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByEmailAddress(EmailAddress $emailAddress)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $query = $qb->where('u.email = :emailAddress')
+            ->setParameter('emailAddress', $emailAddress->email())
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     /**
      * @param $roles
      * @return mixed

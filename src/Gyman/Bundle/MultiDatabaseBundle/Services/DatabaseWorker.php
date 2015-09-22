@@ -71,9 +71,9 @@ final class DatabaseWorker
      * Setup database for given club name
      * @param $clubName
      */
-    public function setupDatabase($clubName)
+    public function setupDatabase($options)
     {
-        $this->dbName = $this->createDatabaseName($clubName);
+        $this->options = $options;
 
         $this->createDatabase();
         $this->updateClubConnection();
