@@ -5,3 +5,8 @@ imports:
   - { resource: services_members.yml }
   - { resource: services_entries.yml }
 
+services:
+  gyman.app.command.dump_hosts:
+    class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
+    tags:
+      - {name: console.command}
