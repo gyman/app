@@ -37,7 +37,7 @@ class AppKernel extends Kernel
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
 
-            new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
+//            new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
 //            new Gyman\Bundle\FiltersBundle\FiltersBundle(),
 //            new Gyman\Bundle\ListsBundle\ListsBundle(),

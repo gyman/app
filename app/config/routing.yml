@@ -23,25 +23,10 @@ reports:
     type:     annotation
     prefix:   /report
 
-#lists:
-#    resource: "@ListsBundle/Controller/"
-#    type:     annotation
-#    prefix:   /list
-#
-#filters:
-#    resource: "@FiltersBundle/Controller/"
-#    type:     annotation
-#    prefix:   /filter
-
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation
     prefix:   /
-
-schedule:
-    resource: "@ScheduleBundle/Controller/"
-    type:     annotation
-    prefix:   /schedule
 
 clubs:
     resource: "@ClubBundle/Controller/"

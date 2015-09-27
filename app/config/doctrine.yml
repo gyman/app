@@ -64,7 +64,7 @@ doctrine:
               StofDoctrineExtensionsBundle: ~
               GymanAppBundle: ~
 #              FiltersBundle: ~
-              ScheduleBundle: ~
+#              ScheduleBundle: ~
               SectionBundle: ~
 #              TimelineBundle: ~
 #              SpyTimelineBundle: ~

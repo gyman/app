@@ -9,3 +9,6 @@ default:
         entries:
             paths:    [%paths.base%/features/add_entry.feature]
             contexts: [Gyman\Domain\Tests\Context\EntriesContext]
+        schedule:
+            paths:    [%paths.base%/features/schedule.feature]
+            contexts: [Gyman\Domain\Tests\Context\ScheduleContext]

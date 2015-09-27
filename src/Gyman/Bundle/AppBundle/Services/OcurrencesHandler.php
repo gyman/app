@@ -2,9 +2,15 @@
 namespace Gyman\AppBundle\Services;
 
 use Gyman\Bundle\ScheduleBundle\Entity as Entity;
+use Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository;
 
 class OcurrencesHandler
 {
+    /**
+     * @var OccurenceRepository
+     */
+    public $occurenceRepository;
+
     public function addOccurencesForEvent(Entity\Event $event)
     {
         if ($event instanceof Entity\Single) {
@@ -40,7 +46,7 @@ class OcurrencesHandler
             $occurence->setDuration($event->getDuration());
             $occurence->setEvent($event);
 
-            $this->getEntityManager()->persist($occurence);
+            $this->occurenceRepository->insert($occurence);
 
             next($days);
         }
