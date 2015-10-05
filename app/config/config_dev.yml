@@ -1,10 +1,10 @@
 parameters:
   standardFixtures:
     - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
-    - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection # to be removed
+#    - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection # to be removed
   clubFixtures:
     - src/Gyman/Bundle/AppBundle/DataFixtures/Club
-    - src/Gyman/Bundle/ScheduleBundle/DataFixtures/Club
+#    - src/Gyman/Bundle/ScheduleBundle/DataFixtures/Club
 
 imports:
     - { resource: config.yml }

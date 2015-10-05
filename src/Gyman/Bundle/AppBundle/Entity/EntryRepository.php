@@ -67,7 +67,7 @@ class EntryRepository extends EntityRepository
                             'SUBSTRING(o.startDate,1,10) as date',
                             'count(e) as cnt',
                         ])
-                        ->join('e.occurence', 'o')
+                        ->join('e.occurrence', 'o')
                         ->join('o.event', 'ev')
                         ->join('ev.activity', 'a')
                         ->groupBy('date, a.name')

@@ -2,32 +2,32 @@
 namespace Gyman\AppBundle\Services;
 
 use Gyman\Bundle\ScheduleBundle\Entity as Entity;
-use Gyman\Bundle\ScheduleBundle\Entity\OccurenceRepository;
+use Gyman\Bundle\ScheduleBundle\Entity\OccurrenceRepository;
 
 class OcurrencesHandler
 {
     /**
-     * @var OccurenceRepository
+     * @var OccurrenceRepository
      */
-    public $occurenceRepository;
+    public $occurrenceRepository;
 
-    public function addOccurencesForEvent(Entity\Event $event)
+    public function addOccurrencesForEvent(Entity\Event $event)
     {
         if ($event instanceof Entity\Single) {
-            $this->insertSingleOccurence($event);
+            $this->insertSingleOccurrence($event);
         }
 
         if ($event instanceof Entity\Weekly) {
-            $this->insertWeeklyOccurences($event);
+            $this->insertWeeklyOccurrences($event);
         }
     }
 
-    private function insertWeeklyOccurences(Entity\Weekly $event)
+    private function insertWeeklyOccurrences(Entity\Weekly $event)
     {
         $days = $this->getDays($event);
 
-        if ($occurence = $this->getOccurence()) {
-            $startDate = clone($occurence->getStartDate());
+        if ($occurrence = $this->getOccurrence()) {
+            $startDate = clone($occurrence->getStartDate());
         } else {
             $startDate = clone($event->getStartDate());
         }
@@ -38,37 +38,37 @@ class OcurrencesHandler
 
         while ($startDate->getTimestamp() <= $event->getEndDate()->getTimestamp()) {
             $day = current($days) == false ? reset($days) : current($days);
-            $occurence = new Entity\Serial();
+            $occurrence = new Entity\Serial();
 
             $newStartDate = clone($startDate->modify(sprintf('%s %s', $day, $hour)));
             $startDate->modify('+1 day');
-            $occurence->setStartDate($newStartDate);
-            $occurence->setDuration($event->getDuration());
-            $occurence->setEvent($event);
+            $occurrence->setStartDate($newStartDate);
+            $occurrence->setDuration($event->getDuration());
+            $occurrence->setEvent($event);
 
-            $this->occurenceRepository->insert($occurence);
+            $this->occurrenceRepository->insert($occurrence);
 
             next($days);
         }
     }
 
-    private function insertSingleOccurence(Entity\Single $event)
+    private function insertSingleOccurrence(Entity\Single $event)
     {
         $startDate = clone($event->getStartDate());
         $collection = new ArrayCollection();
 
-        $occurence = new Entity\Singular();
-        $occurence->setStartDate($startDate);
-        $occurence->setDuration($event->getDuration());
-        $occurence->setEvent($event);
+        $occurrence = new Entity\Singular();
+        $occurrence->setStartDate($startDate);
+        $occurrence->setDuration($event->getDuration());
+        $occurrence->setEvent($event);
 
         if ($form = $this->getForm()) {
-            $occurence->setDescription($form->get('description')->getData());
+            $occurrence->setDescription($form->get('description')->getData());
         }
 
-        $collection->add($occurence);
+        $collection->add($occurrence);
 
-        $event->setOccurences($collection);
+        $event->setOccurrences($collection);
     }
 
     private function setupDaysArrayToNearestDay(\DateTime $startDate, array &$days)
@@ -109,22 +109,22 @@ class OcurrencesHandler
         return $days;
     }
 
-    public function updateOccurencesForEvent(Entity\Event $event, Entity\Occurence $editedOccurence, Form $form)
+    public function updateOccurrencesForEvent(Entity\Event $event, Entity\Occurrence $editedOccurrence, Form $form)
     {
         $this->setForm($form);
 
-        if ($editedOccurence->isPast()) {
-            throw new \Exception('Cannot edit past occurences');
+        if ($editedOccurrence->isPast()) {
+            throw new \Exception('Cannot edit past occurrences');
         }
 
-        $this->setOccurence($editedOccurence);
+        $this->setOccurrence($editedOccurrence);
 
-        $startDate = $editedOccurence->getStartDate();
+        $startDate = $editedOccurrence->getStartDate();
 
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->delete()
-            ->from('ScheduleBundle:Occurence', 'o')
+            ->from('ScheduleBundle:Occurrence', 'o')
             ->where('o.event = :event')
             ->andWhere('o.startDate >= :start')
             ->setParameters([
@@ -135,9 +135,9 @@ class OcurrencesHandler
         $qb->getQuery()->execute();
 
         if ($event instanceof Entity\Single) {
-            $this->insertSingleOccurence($event);
+            $this->insertSingleOccurrence($event);
         } elseif ($event instanceof Entity\Weekly) {
-            $this->insertWeeklyOccurences($event);
+            $this->insertWeeklyOccurrences($event);
         }
     }
 }

@@ -93,14 +93,14 @@ class DefaultBuilder
 //            ],
 //        ])->setExtra('translation_domain', 'DefaultBundle');
 
-        $menu->addChild('navigation.menu.schedule', [
-            'route'          => '_schedule_calendar',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+//        $menu->addChild('navigation.menu.schedule', [
+//            'route'          => '_schedule_calendar',
+//            'extras'         => ['icon' => 'fa-user'],
+//            'linkAttributes' => [
+//                'class'            => 'tipB',
+//                'aria-describedby' => 'qtip-21',
+//            ],
+//        ])->setExtra('translation_domain', 'DefaultBundle');
 
 //        $menu->addChild('navigation.menu.vouchers', [
 //            'route'          => '_vouchers_list',

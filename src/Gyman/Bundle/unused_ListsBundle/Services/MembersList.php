@@ -19,7 +19,7 @@ class MembersList extends AbstractList
         $query->leftJoin('m.vouchers', 'v');
         $query->leftJoin('m.currentVoucher', 'cv');
         $query->leftJoin('m.entries', 'e');
-        $query->leftJoin('e.occurence', 'o');
+        $query->leftJoin('e.occurrence', 'o');
         $query->leftJoin('o.event', 'ev');
         $query->leftJoin('ev.activity', 'a');
 

@@ -56,6 +56,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
+            new Dende\CalendarBundle\DendeCalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

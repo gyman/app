@@ -24,7 +24,7 @@
 {% block _gyman_bundle_entriesbundle_entity_entry_default_component %}
     {% spaceless %}
         <span {{ block('component_attributes') }}>
-            <a href="{{ path("_events_show", {occurence: value.getId()}) }}" class="openUrlInModal">
+            <a href="{{ path("_events_show", {occurrence: value.getId()}) }}" class="openUrlInModal">
                 {{ value|activity_label }}
             </a>
         </span>

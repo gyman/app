@@ -19,7 +19,7 @@ class EntriesList extends AbstractList
     {
         $query->join('e.member', 'm');
         $query->leftJoin('e.voucher', 'v');
-        $query->join('e.occurence', 'o');
+        $query->join('e.occurrence', 'o');
         $query->join('o.event', 'ev');
         $query->join('ev.activity', 'a');
     }

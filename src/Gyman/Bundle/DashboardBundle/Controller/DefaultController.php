@@ -18,7 +18,7 @@ class DefaultController extends Controller
     {
         //        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
 
-//        $occurences = $this->get('schedule')->getOccurencesForDashboard(new DateTime());
+//        $occurrences = $this->get('schedule')->getOccurrencesForDashboard(new DateTime());
 
 //        $popularChart = $this->get("chart")->getMostPopularChart(new Highchart());
 //        $frequencyChart = $this->get("chart")->getFrequencyChart(new Highchart(), new DateTime());
@@ -26,7 +26,7 @@ class DefaultController extends Controller
         return [
             'date'            => new DateTime(),
 //            "filters"         => $pinnedFilters,
-            'occurences'      => [], // $occurences,
+            'occurrences'      => [], // $occurrences,
 //            "popularityChart" => $popularChart,
 //            "frequencyChart"  => $frequencyChart
         ];
@@ -37,14 +37,14 @@ class DefaultController extends Controller
      */
     public function getActivitiesAction(DateTime $date)
     {
-//        $occurences = $this->get('schedule')->getOccurencesForDashboard($date);
+        //        $occurrences = $this->get('schedule')->getOccurrencesForDashboard($date);
 
         return new Response(
             $this->renderView(
                 'DashboardBundle:Default:activities.html.twig',
                 [
-                    'date'       => $date,
-                    'occurences' => [], // $occurences
+                    'date'        => $date,
+                    'occurrences' => [], // $occurrences
                 ]
             ),
             200

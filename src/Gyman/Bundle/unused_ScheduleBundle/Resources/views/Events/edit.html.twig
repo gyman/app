@@ -1,0 +1,95 @@
+{% extends "ScheduleBundle:Events:new.html.twig" %}
+
+{% block form %}
+<div class="alert alert-info">
+    <dl>
+        <dt>Informacja o wydarzeniu:</dt>
+        <dd> Zajęcia {{ event.getActivity().getName() }} od {{ event.getStartDate()|date("d.m.Y") }} do {{ event.getEndDate()|date("d.m.Y") }} o godz. {{ event.getStartDate()|date("H:i") }},
+            wybrałeś wystąpienie dla dnia {{ occurrence.getStartDate()|date("d.m.Y") }}
+        </dd>
+    </dl>
+
+    {% if "Single" not in eventType and "Singular" in occurrenceType %}
+    Edytujesz pojedyncze wystąpienie cyklicznego wydarzenia
+    (należy do serii, ale różni się od niej w szczegółach).
+    {%endif%}
+
+    {% if "Single" not in eventType and "Serial" in occurrenceType %}
+    Edytujesz wystąpienie cyklicznego wydarzenia
+    (jest identyczne jak pozostałe wystąpienia).
+    {%endif%}
+
+    {% if "Single" in eventType %}
+    Edytujesz pojedyncze wydarzenie.
+    {%endif%}
+</div>
+<form
+    id="editEventForm"
+    action="{{ path("_events_edit", {occurrence: occurrence.id}) }}"
+    class="form form-horizontal" method="POST"
+    data-occurrence="{{ occurrenceSerialized }}"
+    data-event="{{ eventSerialized }}"
+    >
+    {% if form.editType is defined %}
+        {{ form_row(form.editType) }}
+    {% endif %}
+
+    {% if form.activity is defined %}
+        {{ form_row(form.activity) }}
+        {{ form_row(form.newActivity) }}
+    {% endif %}
+
+    {% if form.eventType is defined %}
+        {{ form_row(form.eventType) }}
+    {% endif %}
+
+    {{ form_row(form.startDate) }}
+    {{ form_row(form.duration) }}
+
+    {% if form.endDate is defined %}
+        {{ form_row(form.endDate) }}
+    {% endif %}
+
+    {% if form.days is defined %}
+        {{ form_row(form.days) }}
+    {% endif %}
+
+    {% if form.description is defined %}
+        {{ form_row(form.description) }}
+    {% endif %}
+
+    {{ form_rest(form) }}
+</form>
+{% endblock form %}
+
+{% block modal %}
+<div class="hidden" id="ui-editEventData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Edytuj wydarzenie</h3>
+    </div>
+    <div class="modal-footer">
+        <form id="deleteForm" class="pull-left">
+            <label>
+                <input type="checkbox" id="deleteCheckbox" />
+                <span class="serial hidden">Usuń wszystkie następne wystąpienia wydarzenia</span>
+                <span class="singular">Usuń to wystąpienie wydarzenia</span>
+            </label>
+        </form>
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary" id="saveFormInModal">Zapisz</a>
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-editEventData");
+        modal.setModalWindowClass("editEvent");
+
+        window.editEventModal = new EditEvent();
+    });
+</script>
+{% endblock javascript %}

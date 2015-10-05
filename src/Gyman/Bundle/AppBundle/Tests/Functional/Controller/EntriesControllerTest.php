@@ -1,5 +1,4 @@
 <?php
-
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;

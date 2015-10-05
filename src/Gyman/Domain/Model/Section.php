@@ -28,5 +28,4 @@ class Section
     {
         return $this->title;
     }
-
 }
