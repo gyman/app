@@ -1,5 +1,5 @@
 <?php
-namespace Dende\Calendar\Infrastructure\Persistence;
+namespace Dende\Calendar\Domain\Repository\Specification;
 
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 

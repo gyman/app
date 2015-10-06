@@ -1,8 +1,9 @@
 <?php
-namespace Dende\Calendar\Handler;
+namespace Dende\Calendar\Application\Handler;
 
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Factory\EventFactory;
+use Dende\Calendar\Application\Factory\OccurrenceFactory;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
@@ -13,11 +14,6 @@ use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
  */
 final class CreateEventHandler
 {
-    /**
-     * @var Calendar
-     */
-    private $calendar;
-
     /**
      * @var EventRepositoryInterface
      */
@@ -30,12 +26,10 @@ final class CreateEventHandler
 
     /**
      * CreateEventHandler constructor.
-     * @param Calendar $calendar
      * @param EventRepositoryInterface $eventRepository
      */
-    public function __construct(Calendar $calendar, EventRepositoryInterface $eventRepository, OccurrenceRepositoryInterface $occurrenceRepository)
+    public function __construct(EventRepositoryInterface $eventRepository, OccurrenceRepositoryInterface $occurrenceRepository)
     {
-        $this->calendar = $calendar;
         $this->eventRepository = $eventRepository;
         $this->occurrenceRepository = $occurrenceRepository;
     }
@@ -46,7 +40,13 @@ final class CreateEventHandler
     public function handle(CreateEventCommand $command)
     {
         $event = EventFactory::createFromCommand($command);
-        $event->resetAllOccurrences();
+
         $this->eventRepository->insert($event);
+
+        $occurrences = OccurrenceFactory::generateCollectionFromEvent($event);
+
+        foreach($occurrences as $occurrence) {
+            $this->occurrenceRepository->insert($occurrence);
+        }
     }
 }

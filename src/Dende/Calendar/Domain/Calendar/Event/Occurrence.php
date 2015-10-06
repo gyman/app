@@ -4,6 +4,7 @@ namespace Dende\Calendar\Domain\Calendar\Event;
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 
 /**
  * Class Occurrence
@@ -37,7 +38,7 @@ class Occurrence
     private $event;
 
     /**
-     * @var OccurenceId
+     * @var OccurrenceId
      */
     private $id;
 
@@ -48,7 +49,7 @@ class Occurrence
      * @param Duration $duration
      * @param Event $event
      */
-    public function __construct(Event\Occurrence\OccurrenceId $id, DateTime $startDate, Duration $duration, Event $event)
+    public function __construct(OccurrenceId $id, DateTime $startDate, Duration $duration, Event $event)
     {
         $this->id = $id;
         $this->startDate = $startDate;
@@ -138,18 +139,10 @@ class Occurrence
     }
 
     /**
-     * @return DateTime
+     * @return OccurrenceId
      */
-    public function getEndDate()
+    public function id()
     {
-        return $this->endDate();
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate();
+        return $this->id;
     }
 }

@@ -1,9 +1,11 @@
 <?php
 namespace Dende\Calendar\Infrastructure\Persistence\InMemory;
 
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
-use Dende\Calendar\Infrastructure\Persistence\InMemoryOccurrenceSpecificationInterface;
+use Dende\Calendar\Domain\Repository\Specification\InMemoryOccurrenceSpecificationInterface;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByDateAndCalendarSpecification;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -40,25 +42,10 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
      */
     public function findAllByEvent($event)
     {
-        return (new ArrayCollection($this->occurrences))
-            ->filter(function (Occurrence $occurrence) use ($event) {
-                return $occurrence->event() === $event;
-            });
-    }
-
-    public function findAllByDay($date)
-    {
-        // TODO: Implement findAllByDay() method.
-    }
-
-    public function findAllByWeek($date)
-    {
-        // TODO: Implement findAllByWeek() method.
-    }
-
-    public function findAllByMonth($date)
-    {
-        // TODO: Implement findAllByMonth() method.
+//        return (new ArrayCollection($this->occurrences))
+//            ->filter(function (Occurrence $occurrence) use ($event) {
+//                return $occurrence->event() === $event;
+//            });
     }
 
     /**
@@ -80,10 +67,17 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
     {
         $result = array_values(array_filter($this->occurrences, $callback));
 
-        usort($result, function(Occurrence $a, Occurrence $b) {
-            return $a->startDate() > $b->startDate() ? -1 : 1;
+        usort($result, function (Occurrence $a, Occurrence $b) {
+            return $a->startDate() < $b->startDate() ? -1 : 1;
         });
 
         return $result;
+    }
+
+    public function findOneByDateAndCalendar(\DateTime $date, Calendar $calendar)
+    {
+        return $this->query(
+            new InMemoryOccurrenceByDateAndCalendarSpecification($date, $calendar)
+        );
     }
 }

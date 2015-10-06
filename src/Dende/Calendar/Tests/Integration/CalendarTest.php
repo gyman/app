@@ -83,7 +83,24 @@ class CalendarTest extends \PHPUnit_Framework_TestCase
             new Repetitions([
                 Repetitions::MONDAY,
                 Repetitions::WEDNESDAY,
-                Repetitions::FRIDAY,            ]),
+                Repetitions::FRIDAY,
+            ]),
+            new Duration(90),
+            new ArrayCollection()
+        );
+
+        $event5 = new Event(
+            new EventId(5),
+            $calendar,
+            new EventType(EventType::TYPE_WEEKLY),
+            new DateTime('2015-10-01 12:15:00'),
+            new DateTime('2015-10-30 13:00:00'),
+            'fifth event',
+            new Repetitions([
+                Repetitions::MONDAY,
+                Repetitions::WEDNESDAY,
+                Repetitions::FRIDAY,
+            ]),
             new Duration(90),
             new ArrayCollection()
         );
@@ -93,6 +110,7 @@ class CalendarTest extends \PHPUnit_Framework_TestCase
         $eventRepository->insert($event2);
         $eventRepository->insert($event3);
         $eventRepository->insert($event4);
+        $eventRepository->insert($event5);
 
         $eventCollection = $eventRepository->query(
             new InMemoryEventByWeekSpecification(2015, 38)
@@ -102,9 +120,9 @@ class CalendarTest extends \PHPUnit_Framework_TestCase
 
         $occurrenceRepository = new InMemoryOccurrenceRepository();
 
-        foreach($eventCollection as $event) {
+        foreach ($eventCollection as $event) {
             $occurrencesCollection = OccurrenceFactory::generateCollectionFromEvent($event);
-            foreach($occurrencesCollection as $occurrence) {
+            foreach ($occurrencesCollection as $occurrence) {
                 $occurrenceRepository->insert($occurrence);
             }
         }
@@ -115,18 +133,28 @@ class CalendarTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(8, $occurenceCollection);
 
-        $this->assertDatesEqual($occurenceCollection[0]->startDate(), '2015-09-02 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[1]->startDate(), '2015-09-04 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[2]->startDate(), '2015-09-07 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[3]->startDate(), '2015-09-09 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[4]->startDate(), '2015-09-11 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[5]->startDate(), '2015-09-14 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[6]->startDate(), '2015-09-16 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[7]->startDate(), '2015-09-18 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[8]->startDate(), '2015-09-21 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[9]->startDate(), '2015-09-23 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[10]->startDate(), '2015-09-25 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[11]->startDate(), '2015-09-28 12:00:00');
-        $this->assertDatesEqual($occurenceCollection[12]->startDate(), '2015-09-30 12:00:00');
+        $this->assertDatesEqual($occurenceCollection[0]->startDate(), '2015-09-14 12:00:00');
+        $this->assertEquals($occurenceCollection[0]->event()->id()->id(), 1);
+
+        $this->assertDatesEqual($occurenceCollection[1]->startDate(), '2015-09-14 12:15:00');
+        $this->assertEquals($occurenceCollection[1]->event()->id()->id(), 3);
+
+        $this->assertDatesEqual($occurenceCollection[2]->startDate(), '2015-09-14 12:15:00');
+        $this->assertEquals($occurenceCollection[2]->event()->id()->id(), 4);
+
+        $this->assertDatesEqual($occurenceCollection[3]->startDate(), '2015-09-16 12:00:00');
+        $this->assertEquals($occurenceCollection[3]->event()->id()->id(), 1);
+
+        $this->assertDatesEqual($occurenceCollection[4]->startDate(), '2015-09-16 12:15:00');
+        $this->assertEquals($occurenceCollection[4]->event()->id()->id(), 2);
+
+        $this->assertDatesEqual($occurenceCollection[5]->startDate(), '2015-09-16 12:15:00');
+        $this->assertEquals($occurenceCollection[5]->event()->id()->id(), 4);
+
+        $this->assertDatesEqual($occurenceCollection[6]->startDate(), '2015-09-18 12:00:00');
+        $this->assertEquals($occurenceCollection[6]->event()->id()->id(), 1);
+
+        $this->assertDatesEqual($occurenceCollection[7]->startDate(), '2015-09-18 12:15:00');
+        $this->assertEquals($occurenceCollection[7]->event()->id()->id(), 4);
     }
 }

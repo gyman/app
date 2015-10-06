@@ -3,7 +3,7 @@ namespace Dende\Calendar\Infrastructure\Persistence\InMemory\Specification;
 
 use Carbon\Carbon;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Infrastructure\Persistence\InMemoryEventSpecificationInterface;
+use Dende\Calendar\Domain\Repository\Specification\InMemoryEventSpecificationInterface;
 
 class InMemoryEventByWeekSpecification implements InMemoryEventSpecificationInterface
 {

@@ -2,23 +2,32 @@
 namespace Dende\Calendar\Tests\Context;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
+use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Application\Handler\CreateEventHandler;
-use Dende\Calendar\Command\CreateEventCommand;
+use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Application\Service\FindCurrentEvent;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\CalendarId;
+use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEventByWeekSpecification;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByCalendarSpecification;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByWeekSpecification;
 use Doctrine\Common\Collections\Criteria;
 use Exception;
 use Gyman\Domain\Model\Section;
-use Gyman\Domain\Repository\InMemoryEventRepository;
-use Gyman\Domain\Repository\InMemoryOccurrenceRepository;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryEventRepository;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryOccurrenceRepository;
+use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class ScheduleContext
  * @package Gyman\Domain\Tests\Context
  */
-class CalendarContext implements Context
+final class CalendarContext implements Context
 {
     /**
      * @var Calendar
@@ -45,11 +54,10 @@ class CalendarContext implements Context
      */
     public function prepareUseCases()
     {
-        $this->calendar = new Calendar(new Section('test'));
+        $this->calendar = new Calendar(new CalendarId(0), 'calendar-title');
         $this->eventRepository = new InMemoryEventRepository();
         $this->occurrenceRepository = new InMemoryOccurrenceRepository();
         $this->createEventHandler = new CreateEventHandler(
-            $this->calendar,
             $this->eventRepository,
             $this->occurrenceRepository
         );
@@ -68,19 +76,31 @@ class CalendarContext implements Context
     public function iAddNewCalendarEventWithData(TableNode $table)
     {
         foreach ($table as $row) {
+            $repetitions = [];
+
+            $days = array_map("trim", explode(",", $row["repetition"]));
+
+            if($days[0] != "-") {
+                foreach($days as $day) {
+                    $repetitions[] = Carbon::parse("last ".$day)->dayOfWeek;
+                }
+            }
+
             $command = new CreateEventCommand();
+            $command->section = new Section(new SectionId(0), 'some-section', $this->calendar);
             $command->type = $row['type'];
-            $command->startDate = new DateTime($row['startDate']);
+            $command->startDate = Carbon::parse($row['startDate']);
+            $command->endDate = Carbon::parse($row['endDate']);
             $command->duration = $row['duration'];
             $command->title = $row['title'];
+            $command->repetitionDays = $repetitions;
 
-            $event = EventFactory::createFromCommand($command);
-            $this->calendar->insertEvent($event);
+            $this->createEventHandler->handle($command);
         }
     }
 
     /**
-     * @Then /^calendar has (\d+) event$/
+     * @Then /^calendar has (\d+) events$/
      */
     public function calendarHasEvent($count)
     {
@@ -111,7 +131,8 @@ class CalendarContext implements Context
      */
     public function currentEventHasTitle($title)
     {
-        $event = $this->calendar->getCurrentEvent();
+        $provider = new FindCurrentEvent($this->occurrenceRepository);
+        $event = $provider->getCurrentEvent($this->calendar);
 
         if ($event->title() === $title) {
             return;
@@ -123,16 +144,43 @@ class CalendarContext implements Context
     /**
      * @Given /^calendar returns (\d+) event for current week$/
      */
-    public function calendarReturnsEventForCurrentWeek($arg1)
+    public function calendarReturnsEventForCurrentWeek($count)
     {
-        if (count($this->calendar->getEventsForCurrentWeek()) === $arg1) {
+        $year = Carbon::create()->year;
+        $week = Carbon::create()->weekOfYear;
+
+        $events = $this->eventRepository->query(
+            new InMemoryEventByWeekSpecification($year, $week)
+        );
+
+        if (count($events) === intval($count)) {
             return;
         }
 
         throw new \Exception(sprintf(
-            'Expected %d events for current weekd, actually got %d events',
-            $arg1,
-            count($this->calendar->getEventsForCurrentWeek())
+            'Expected %d events for current week, actually got %d events',
+            $count,
+            count($events)
+        ));
+    }
+
+    /**
+     * @Given /^calendar has (\d+) occurences$/
+     */
+    public function calendarHasOccurences($count)
+    {
+        $occurrences = $this->occurrenceRepository->query(
+            new InMemoryOccurrenceByCalendarSpecification($this->calendar)
+        );
+
+        if (count($occurrences) === intval($count)) {
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            'Expected %d occurrences for calendar, actually got %d occurrences',
+            $count,
+            count($occurrences)
         ));
     }
 }

@@ -25,4 +25,13 @@ class CalendarId
     {
         return $this->id;
     }
+
+    /**
+     * @param CalendarId $id
+     * @return bool
+     */
+    public function isEqual(CalendarId $id)
+    {
+        return $this->id === $id->id();
+    }
 }

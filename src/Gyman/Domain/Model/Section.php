@@ -1,5 +1,7 @@
 <?php
 namespace Gyman\Domain\Model;
+use Dende\Calendar\Domain\Calendar;
+use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class Section
@@ -13,12 +15,21 @@ class Section
     private $title;
 
     /**
-     * Section constructor.
-     * @param $title
+     * @var Calendar
      */
-    public function __construct($title)
+    private $calendar;
+
+    /**
+     * Section constructor.
+     * @param SectionId $id
+     * @param $title
+     * @param Calendar $calendar
+     */
+    public function __construct(SectionId $id, $title, Calendar $calendar)
     {
+        $this->id = $id;
         $this->title = $title;
+        $this->calendar = $calendar;
     }
 
     /**
@@ -27,5 +38,13 @@ class Section
     public function title()
     {
         return $this->title;
+    }
+
+    /**
+     * @return Calendar
+     */
+    public function calendar()
+    {
+        return $this->calendar;
     }
 }

@@ -56,6 +56,14 @@ final class Calendar
         return $this->events;
     }
 
+    /**
+     * @return CalendarId
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
 //    public function getCurrentEvent()
 //    {
 //        return $this->getEventsByDate(new DateTime('now'));

@@ -43,10 +43,11 @@ final class OccurrenceFactory
     public static function generateCollectionFromEvent(Event $event)
     {
         $dates = $event->calculateOccurrencesDates();
+
         $occurences = new ArrayCollection();
 
         foreach ($dates as $date) {
-            $occurences->add(OccurrenceFactory::createFromArray([
+            $occurences->add(self::createFromArray([
                 'startDate' => $date,
                 'duration'  => $event->duration(),
                 'event'     => $event,

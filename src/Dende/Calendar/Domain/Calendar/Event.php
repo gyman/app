@@ -13,7 +13,6 @@ use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Globals;
 
 /**
@@ -112,10 +111,10 @@ class Event
     /**
      * @return bool
      */
-    public function isOngoing()
-    {
-        return !is_null($this->getCurrentOccurrence());
-    }
+//    public function isOngoing()
+//    {
+//        return !is_null($this->getCurrentOccurrence());
+//    }
 
     /**
      * @return string
@@ -183,7 +182,9 @@ class Event
         if ($this->type->isType(EventType::TYPE_SINGLE)) {
             $occurrences->add($this->startDate);
         } elseif ($this->type->isType(EventType::TYPE_WEEKLY)) {
+
             $interval = new DateInterval('P1D');
+
             /** @var DateTime[] $period */
             $period = new DatePeriod($this->startDate, $interval, $this->endDate);
             foreach ($period as $date) {
@@ -222,27 +223,6 @@ class Event
 //    public function getCurrentOccurrence()
 //    {
 //        return $this->getOccurenceByDate(new DateTime('now'));
-//    }
-
-    /**
-     * @param DateTime $date
-     * @return Occurrence|null
-     */
-//    public function getOccurenceByDate(DateTime $date)
-//    {
-//        $expr = Criteria::expr();
-//        $criteria = Criteria::create();
-//
-//        $criteria->where(
-//            $expr->andX(
-//                $expr->lte('startDate', $date),
-//                $expr->gte('endDate', $date)
-//            )
-//        );
-//
-//        $filtered = $this->occurrences()->matching($criteria);
-//
-//        return $filtered->isEmpty() ? null : $filtered->first();
 //    }
 
     /**

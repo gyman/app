@@ -10,7 +10,6 @@ use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Model\Section;
 
 /**
  * Class EventFactory
@@ -65,11 +64,18 @@ final class EventFactory implements EventFactoryInterface
      */
     public static function createFromCommand(CreateEventCommand $command)
     {
+        $calendar = $command->section->calendar();
+
         return self::createFromArray([
             'title'        => $command->title,
+            'calendar'        => $calendar,
             'repetitions'  => new Repetitions($command->repetitionDays),
             'type'         => new EventType($command->type),
             'occurrences'  => new ArrayCollection(),
+            'startDate'    => $command->startDate,
+            'endDate'    => $command->endDate,
+            'duration'    => new Duration($command->duration),
+
         ]);
     }
 }

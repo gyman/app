@@ -2,14 +2,11 @@
 namespace Dende\Calendar\Infrastructure\Persistence\InMemory\Specification;
 
 use Carbon\Carbon;
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryOccurrenceSpecificationInterface;
 
-/**
- * Class InMemoryOccurrenceByWeekSpecification
- * @package Dende\Calendar\Infrastructure\Persistence\InMemory\Specification
- */
-final class InMemoryOccurrenceByWeekSpecification implements InMemoryOccurrenceSpecificationInterface
+class InMemoryOccurrenceByDateAndCalendarSpecification implements InMemoryOccurrenceSpecificationInterface
 {
     /**
      * @var \DateTime
@@ -22,18 +19,27 @@ final class InMemoryOccurrenceByWeekSpecification implements InMemoryOccurrenceS
     private $rangeEnd;
 
     /**
+     * @var Calendar
+     */
+    private $calendar;
+
+    /**
      * InMemoryEventByWeekSpecificationInterface constructor.
      * @param \DateTime $rangeStart
      * @param \DateTime $rangeEnd
      */
-    public function __construct($year, $weekNumber)
+    public function __construct(\DateTime $date, Calendar $calendar)
     {
-        $weekStart = Carbon::instance(new \DateTime(sprintf('%d-W%d-1', $year, $weekNumber)));
-        $weekEnd = clone($weekStart);
-        $weekEnd->addDays(7);
+        $start = Carbon::instance($date);
+        $end = Carbon::instance($date);
 
-        $this->rangeStart = $weekStart;
-        $this->rangeEnd = $weekEnd;
+        $start->setTime(0,0,0);
+        $end->setTime(23,59,59);
+
+        $this->calendar = $calendar;
+
+        $this->rangeStart = $start;
+        $this->rangeEnd = $end;
     }
 
     /**
@@ -44,6 +50,12 @@ final class InMemoryOccurrenceByWeekSpecification implements InMemoryOccurrenceS
     public function specifies(Occurrence $occurrence)
     {
         $date = $occurrence->startDate();
+
+        $calendarId =$occurrence->event()->calendar()->id();
+
+        if(!$calendarId->isEqual($this->calendar->id())) {
+            return false;
+        }
 
         if ($date >= $this->rangeStart && $date < $this->rangeEnd) {
             return true;

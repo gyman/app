@@ -3,7 +3,7 @@ namespace Dende\Calendar\Infrastructure\Persistence\InMemory;
 
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
-use Dende\Calendar\Infrastructure\Persistence\InMemoryEventSpecificationInterface;
+use Dende\Calendar\Domain\Repository\Specification\InMemoryEventSpecificationInterface;
 
 class InMemoryEventRepository implements EventRepositoryInterface
 {
