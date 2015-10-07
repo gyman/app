@@ -7,6 +7,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,7 +25,7 @@ final class EventFactory implements EventFactoryInterface
     public static function createFromArray($array)
     {
         $template = [
-            'id'                     => new Event\EventId(null),
+            'id'                     => new EventId(null),
             'title'                  => '',
             'repetitions'            => new Repetitions([]),
             'type'                   => new EventType(),
@@ -67,14 +68,14 @@ final class EventFactory implements EventFactoryInterface
         $calendar = $command->section->calendar();
 
         return self::createFromArray([
-            'title'        => $command->title,
+            'title'           => $command->title,
             'calendar'        => $calendar,
-            'repetitions'  => new Repetitions($command->repetitionDays),
-            'type'         => new EventType($command->type),
-            'occurrences'  => new ArrayCollection(),
-            'startDate'    => $command->startDate,
-            'endDate'    => $command->endDate,
-            'duration'    => new Duration($command->duration),
+            'repetitions'     => new Repetitions($command->repetitionDays),
+            'type'            => new EventType($command->type),
+            'occurrences'     => new ArrayCollection(),
+            'startDate'       => $command->startDate,
+            'endDate'         => $command->endDate,
+            'duration'        => new Duration($command->duration),
 
         ]);
     }

@@ -3,7 +3,7 @@ namespace Dende\Calendar\UserInterface\Symfony\CalendarBundle\Tests\Integration;
 
 class InMemoryOccurrenceRepositoryTestCase extends \PHPUnit_Framework_TestCase
 {
-//    public function testGetOccurenceByDateWeekly()
+    //    public function testGetOccurenceByDateWeekly()
 //    {
 //        $event = new Event(
 //            new EventId(0),

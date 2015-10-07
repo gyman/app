@@ -1,9 +1,12 @@
 <?php
 namespace Dende\Calendar\Infrastructure\Persistence\InMemory;
 
+use DateTime;
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryEventSpecificationInterface;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEventsByDateRangeAndCalendarSpecification;
 
 class InMemoryEventRepository implements EventRepositoryInterface
 {
@@ -42,6 +45,10 @@ class InMemoryEventRepository implements EventRepositoryInterface
         );
     }
 
+    /**
+     * @param callable $callback
+     * @return array
+     */
     private function filterEvents(callable $callback)
     {
         $result = array_values(array_filter($this->events, $callback));
@@ -51,5 +58,18 @@ class InMemoryEventRepository implements EventRepositoryInterface
         });
 
         return $result;
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @param $calendar
+     * @return array
+     */
+    public function findAllByCalendarInDateRange(DateTime $startDate, DateTime $endDate, Calendar $calendar)
+    {
+        return $this->query(
+            new InMemoryEventsByDateRangeAndCalendarSpecification($startDate, $endDate, $calendar)
+        );
     }
 }

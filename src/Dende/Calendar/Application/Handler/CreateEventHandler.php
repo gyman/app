@@ -4,9 +4,9 @@ namespace Dende\Calendar\Application\Handler;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Application\Factory\OccurrenceFactory;
-use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
+use Exception;
 
 /**
  * Class CreateEventHandler
@@ -45,7 +45,11 @@ final class CreateEventHandler
 
         $occurrences = OccurrenceFactory::generateCollectionFromEvent($event);
 
-        foreach($occurrences as $occurrence) {
+        if (count($occurrences) === 0) {
+            throw new Exception('Could not generate occurrences from event');
+        }
+
+        foreach ($occurrences as $occurrence) {
             $this->occurrenceRepository->insert($occurrence);
         }
     }

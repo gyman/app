@@ -5,6 +5,7 @@ use DateTime;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -20,7 +21,7 @@ final class OccurrenceFactory
     public static function createFromArray($array = [])
     {
         $template = [
-            'id'             => new Occurrence\OccurrenceId(null),
+            'id'             => new OccurrenceId(),
             'startDate'      => new DateTime(),
             'duration'       => new Duration(90),
             'event'          => EventFactory::create(),

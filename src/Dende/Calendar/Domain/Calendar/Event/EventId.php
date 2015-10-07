@@ -16,8 +16,12 @@ class EventId
      * EventId constructor.
      * @param $id
      */
-    public function __construct($id)
+    public function __construct($id = null)
     {
+        if (is_null($id)) {
+            $id = uniqid('event_');
+        }
+
         $this->id = $id;
     }
 

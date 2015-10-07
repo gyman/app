@@ -1,5 +1,6 @@
 <?php
 namespace Gyman\Domain\Model;
+
 use Dende\Calendar\Domain\Calendar;
 use Gyman\Domain\Model\Section\SectionId;
 

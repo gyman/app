@@ -2,25 +2,22 @@
 namespace Dende\Calendar\Tests\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Carbon\Carbon;
 use DateTime;
-use Dende\Calendar\Application\Factory\EventFactory;
-use Dende\Calendar\Application\Handler\CreateEventHandler;
 use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Application\Handler\CreateEventHandler;
 use Dende\Calendar\Application\Service\FindCurrentEvent;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
-use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryEventRepository;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryOccurrenceRepository;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEventByWeekSpecification;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByCalendarSpecification;
-use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByWeekSpecification;
 use Doctrine\Common\Collections\Criteria;
 use Exception;
 use Gyman\Domain\Model\Section;
-use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryEventRepository;
-use Dende\Calendar\Infrastructure\Persistence\InMemory\InMemoryOccurrenceRepository;
 use Gyman\Domain\Model\Section\SectionId;
 
 /**
@@ -78,11 +75,11 @@ final class CalendarContext implements Context
         foreach ($table as $row) {
             $repetitions = [];
 
-            $days = array_map("trim", explode(",", $row["repetition"]));
+            $days = array_map('trim', explode(',', $row['repetition']));
 
-            if($days[0] != "-") {
-                foreach($days as $day) {
-                    $repetitions[] = Carbon::parse("last ".$day)->dayOfWeek;
+            if ($days[0] != '-') {
+                foreach ($days as $day) {
+                    $repetitions[] = Carbon::parse('last ' . $day)->dayOfWeek;
                 }
             }
 
@@ -131,14 +128,18 @@ final class CalendarContext implements Context
      */
     public function currentEventHasTitle($title)
     {
-        $provider = new FindCurrentEvent($this->occurrenceRepository);
-        $event = $provider->getCurrentEvent($this->calendar);
+        $service = new FindCurrentEvent($this->occurrenceRepository);
+        $event = $service->getCurrentEvent($this->calendar);
 
-        if ($event->title() === $title) {
+        if (!is_null($event) && $event->title() === $title) {
             return;
         }
 
-        throw new \Exception(sprintf("Current event with title '%s' not found", $title));
+        throw new \Exception(sprintf(
+            "Current event should have title '%s' but actualy has '%s'",
+            $title,
+            $event->title()
+        ));
     }
 
     /**
@@ -172,6 +173,69 @@ final class CalendarContext implements Context
         $occurrences = $this->occurrenceRepository->query(
             new InMemoryOccurrenceByCalendarSpecification($this->calendar)
         );
+
+        if (count($occurrences) === intval($count)) {
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            'Expected %d occurrences for calendar, actually got %d occurrences',
+            $count,
+            count($occurrences)
+        ));
+    }
+
+    /**
+     * @Given /^calendar returns (\d+) events for date range from "([^"]*)" to "([^"]*)"$/
+     */
+    public function calendarReturnsEventsForDateRangeFromTo($count, $startDate, $endDate)
+    {
+        $events = $this->eventRepository->findAllByCalendarInDateRange(
+            new DateTime($startDate),
+            new DateTime($endDate),
+            $this->calendar
+        );
+
+        if (count($events) === intval($count)) {
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            'Expected %d occurrences for calendar, actually got %d occurrences',
+            $count,
+            count($events)
+        ));
+    }
+
+    /**
+     * @Given /^calendar returns (\d+) occurrences for date range from "([^"]*)" to "([^"]*)"$/
+     */
+    public function calendarReturnsOccurrencesForDateRangeFromTo($count, $startDate, $endDate)
+    {
+        $occurrences = $this->occurrenceRepository->findAllByCalendarInDateRange(
+            new DateTime($startDate),
+            new DateTime($endDate),
+            $this->calendar
+        );
+
+        if (count($occurrences) === intval($count)) {
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            'Expected %d occurrences for calendar, actually got %d occurrences',
+            $count,
+            count($occurrences)
+        ));
+    }
+
+    /**
+     * @Given /^there are (\d+) occurrences$/
+     */
+    public function thereAreOccurrences($count)
+    {
+        /** @var Occurrence[] $occurrences */
+        $occurrences = $this->occurrenceRepository->findAllByCalendar($this->calendar);
 
         if (count($occurrences) === intval($count)) {
             return;

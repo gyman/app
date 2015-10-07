@@ -5,7 +5,7 @@ namespace Dende\Calendar\Domain\Calendar\Event\Occurrence;
  * Class OccurrenceId
  * @package Dende\Calendar\Domain\Calendar\Event\Occurrence
  */
-class OccurrenceId
+final class OccurrenceId
 {
     /**
      * @var
@@ -16,8 +16,12 @@ class OccurrenceId
      * OccurrenceId constructor.
      * @param $id
      */
-    public function __construct($id)
+    public function __construct($id = null)
     {
+        if (is_null($id)) {
+            $id = uniqid('occurrence_');
+        }
+
         $this->id = $id;
     }
 

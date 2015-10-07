@@ -1,11 +1,14 @@
 <?php
 namespace Dende\Calendar\Infrastructure\Persistence\InMemory;
 
+use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryOccurrenceSpecificationInterface;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByCalendarSpecification;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByDateAndCalendarSpecification;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByDateRangeAndCalendarSpecification;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -33,7 +36,7 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
      */
     public function insert($occurrence)
     {
-        $this->occurrences[] = $occurrence;
+        $this->occurrences[$occurrence->id()->id()] = $occurrence;
     }
 
     /**
@@ -42,7 +45,7 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
      */
     public function findAllByEvent($event)
     {
-//        return (new ArrayCollection($this->occurrences))
+        //        return (new ArrayCollection($this->occurrences))
 //            ->filter(function (Occurrence $occurrence) use ($event) {
 //                return $occurrence->event() === $event;
 //            });
@@ -74,10 +77,39 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
         return $result;
     }
 
-    public function findOneByDateAndCalendar(\DateTime $date, Calendar $calendar)
+    /**
+     * @param DateTime $date
+     * @param Calendar $calendar
+     * @return Occurrence[]|ArrayCollection
+     */
+    public function findOneByDateAndCalendar(DateTime $date, Calendar $calendar)
     {
         return $this->query(
             new InMemoryOccurrenceByDateAndCalendarSpecification($date, $calendar)
+        );
+    }
+
+    /**
+     * @param DateTime $startDate
+     * @param DateTime $endDate
+     * @param Calendar $calendar
+     * @return Occurrence[]|ArrayCollection
+     */
+    public function findAllByCalendarInDateRange(DateTime $startDate, DateTime $endDate, Calendar $calendar)
+    {
+        return $this->query(
+            new InMemoryOccurrenceByDateRangeAndCalendarSpecification($startDate, $endDate, $calendar)
+        );
+    }
+
+    /**
+     * @param $calendar
+     * @return Occurrence[]|ArrayCollection
+     */
+    public function findAllByCalendar($calendar)
+    {
+        return $this->query(
+            new InMemoryOccurrenceByCalendarSpecification($calendar)
         );
     }
 }

@@ -65,6 +65,11 @@ class Event
     private $occurrences;
 
     /**
+     * @var DateTime[]
+     */
+    private $occurrencesDates;
+
+    /**
      * Event constructor.
      * @param EventId $id
      * @param Calendar $calendar
@@ -177,24 +182,26 @@ class Event
      */
     public function calculateOccurrencesDates()
     {
-        $occurrences = new ArrayCollection();
+        if (is_null($this->occurrencesDates)) {
+            $occurrences = new ArrayCollection();
 
-        if ($this->type->isType(EventType::TYPE_SINGLE)) {
-            $occurrences->add($this->startDate);
-        } elseif ($this->type->isType(EventType::TYPE_WEEKLY)) {
-
-            $interval = new DateInterval('P1D');
-
-            /** @var DateTime[] $period */
-            $period = new DatePeriod($this->startDate, $interval, $this->endDate);
-            foreach ($period as $date) {
-                if (in_array($date->format('N'), $this->repetitions->weekly())) {
-                    $occurrences->add($date);
+            if ($this->type->isType(EventType::TYPE_SINGLE)) {
+                $occurrences->add($this->startDate);
+            } elseif ($this->type->isType(EventType::TYPE_WEEKLY)) {
+                $interval = new DateInterval('P1D');
+                /** @var DateTime[] $period */
+                $period = new DatePeriod($this->startDate, $interval, $this->endDate);
+                foreach ($period as $date) {
+                    if (in_array($date->format('N'), $this->repetitions->weekly())) {
+                        $occurrences->add($date);
+                    }
                 }
             }
+
+            $this->occurrencesDates = $occurrences;
         }
 
-        return $occurrences;
+        return $this->occurrencesDates;
     }
 
 //    public function resetAllOccurrences()
