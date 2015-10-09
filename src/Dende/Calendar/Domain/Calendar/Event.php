@@ -146,7 +146,7 @@ class Event
     }
 
     /**
-     * @return mixed
+     * @return Duration
      */
     public function duration()
     {

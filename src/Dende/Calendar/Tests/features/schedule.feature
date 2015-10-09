@@ -48,3 +48,68 @@ Feature: Schedule adding, removing, editting
     And calendar returns 7 occurrences for date range from "2015-09-21" to "2015-09-27"
     And calendar returns 2 events for date range from "2015-09-28" to "2015-09-30"
     And calendar returns 4 occurrences for date range from "2015-09-28" to "2015-09-30"
+
+  Scenario: Updating occurrence of single event changes event also
+    When I add new calendar event with data
+      | type    | startDate | endDate     | duration | title      | repetition  |
+      | single  | now       | +90 minutes | 90       | Test event |           - |
+    And I update occurrence '0' with data in 'single' mode
+      | type    | startDate | endDate     | duration | title         | repetition  |
+      | single  | -1 hour   | +90 minutes | 150      | Updated event |           - |
+    Then event with title 'Test event' has data
+      | type    | startDate | endDate     | duration | title         | repetition  |
+      | single  | -1 hour   | +90 minutes | 150      | Updated event |           - |
+
+#  Scenario: Updating occurrence of weekly event with 'all' strategy changes
+#            whole event and all occurrences without "modified = true" flag
+#    When I add new calendar event with data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#    And I update occurrence '0' with data in 'all_inclusive' mode
+#      | type    | startDate | duration | title      | repetition  | modification |
+#      | single  | -1 hour   | 90       | Test event |           - | single       |
+#    Then event with title 'Test event' has data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#
+#  Scenario: Updating occurrence of weekly event with 'all_next' strategy changes
+#            whole event and all occurrences after the changed one to new data, but
+#            modifies old occurrence to stay as they were (and sets them a modified
+#            flag as technically they're changed)
+#    When I add new calendar event with data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#    And I update occurrence '0' with data in 'next_inclusive' mode
+#      | type    | startDate | duration | title      | repetition  | modification |
+#      | single  | -1 hour   | 90       | Test event |           - | single       |
+#    Then event with title 'Test event' has data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#
+#  Scenario: Updating occurrence of weekly event with 'single' strategy changes
+#            only updatego occurrence setting a "modified" flag
+#    When I add new calendar event with data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#    And I update occurrence '0' with data in 'single' mode
+#      | type    | startDate | duration | title      | repetition  | modification |
+#      | single  | -1 hour   | 90       | Test event |           - | single       |
+#    Then event with title 'Test event' has data
+#      | type    | startDate | endDate     | duration | title      | repetition  |
+#      | single  | now       | +90 minutes | 90       | Test event |           - |
+#
+#  Scenario: Updating startDate and endDate of event adds and deletes occurrences
+#
+#  Scenario: Updating calendar moves event and all event to new calendar
+#
+#  Scenario: Deleting occurrence of single event deletes also event (sets flag 'deleted' for both)
+#
+#  Scenario: Deleting occurrence of weekly event with 'all' strategy deletes
+#  whole event and all occurrences (sets flags 'deleted')
+#
+#  Scenario: Deleting occurrence of weekly event with 'all_next' strategy deletes
+#  all future occurrences and modifies events endDate
+#
+#  Scenario: Deleting occurrence of weekly event with 'single' strategy removes
+#  only deleted occurrence (sets flag "deleted")
+

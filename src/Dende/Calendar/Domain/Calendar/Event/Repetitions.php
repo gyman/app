@@ -29,7 +29,7 @@ class Repetitions
     ];
 
     /**
-     * @var array
+     * @var int[]
      */
     private $weekdays = [];
 
@@ -48,5 +48,20 @@ class Repetitions
     public function weekly()
     {
         return $this->weekdays;
+    }
+
+    /**
+     * @param int[] $repetitions
+     * @return bool
+     */
+    public function sameDays($repetitions)
+    {
+        $a = $this->weekdays;
+        $b = $repetitions;
+
+        sort($a);
+        sort($b);
+
+        return $a == $b;
     }
 }

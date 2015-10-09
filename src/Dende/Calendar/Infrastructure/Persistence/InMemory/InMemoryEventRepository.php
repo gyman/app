@@ -7,6 +7,7 @@ use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryEventSpecificationInterface;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEventsByDateRangeAndCalendarSpecification;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEventsByTitleSpecification;
 
 class InMemoryEventRepository implements EventRepositoryInterface
 {
@@ -70,6 +71,18 @@ class InMemoryEventRepository implements EventRepositoryInterface
     {
         return $this->query(
             new InMemoryEventsByDateRangeAndCalendarSpecification($startDate, $endDate, $calendar)
+        );
+    }
+
+    /**
+     * @param $title
+     * @param Calendar|null $calendar
+     * @return array
+     */
+    public function findOneByTitle($title, Calendar $calendar = null)
+    {
+        return $this->query(
+            new InMemoryEventsByTitleSpecification($title, $calendar)
         );
     }
 }
