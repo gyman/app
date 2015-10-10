@@ -5,7 +5,11 @@ use Carbon\Carbon;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryEventSpecificationInterface;
 
-class InMemoryEventByWeekSpecification implements InMemoryEventSpecificationInterface
+/**
+ * Class InMemoryEventByWeekSpecification
+ * @package Dende\Calendar\Infrastructure\Persistence\InMemory\Specification
+ */
+final class InMemoryEventByWeekSpecification implements InMemoryEventSpecificationInterface
 {
     /**
      * @var \DateTime

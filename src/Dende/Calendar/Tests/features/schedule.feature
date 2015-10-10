@@ -53,24 +53,27 @@ Feature: Schedule adding, removing, editting
     When I add new calendar event with data
       | type    | startDate | endDate     | duration | title      | repetition  |
       | single  | now       | +90 minutes | 90       | Test event |           - |
-    And I update occurrence '0' with data in 'single' mode
+    And I update occurrence '0' of event with title 'Test event' with data in 'single' mode
       | type    | startDate | endDate     | duration | title         | repetition  |
       | single  | -1 hour   | +90 minutes | 150      | Updated event |           - |
-    Then event with title 'Test event' has data
+    Then event with title 'Updated event' has data
       | type    | startDate | endDate     | duration | title         | repetition  |
       | single  | -1 hour   | +90 minutes | 150      | Updated event |           - |
+    And occurence of single event with title 'Updated event' has data
+      | startDate | endDate     | duration |
+      | -1 hour   | +90 minutes | 150      |
 
-#  Scenario: Updating occurrence of weekly event with 'all' strategy changes
-#            whole event and all occurrences without "modified = true" flag
-#    When I add new calendar event with data
-#      | type    | startDate | endDate     | duration | title      | repetition  |
-#      | single  | now       | +90 minutes | 90       | Test event |           - |
-#    And I update occurrence '0' with data in 'all_inclusive' mode
-#      | type    | startDate | duration | title      | repetition  | modification |
-#      | single  | -1 hour   | 90       | Test event |           - | single       |
-#    Then event with title 'Test event' has data
-#      | type    | startDate | endDate     | duration | title      | repetition  |
-#      | single  | now       | +90 minutes | 90       | Test event |           - |
+  Scenario: Updating occurrence of weekly event with 'all' strategy changes
+            whole event and all occurrences without "modified = true" flag
+    When I add new calendar event with data
+      | type    | startDate | endDate     | duration | title      | repetition  |
+      | weekly | now       | +90 minutes | 90       | Test event |           - |
+    And I update occurrence '0' of event with title 'Test event' with data in 'all_inclusive' mode
+      | type    | startDate | duration | title      | repetition  | modification |
+      | weekly  | -1 hour   | 90       | Test event |           - | single       |
+    Then event with title 'Test event' has data
+      | type    | startDate | endDate     | duration | title      | repetition  |
+      | single  | now       | +90 minutes | 90       | Test event |           - |
 #
 #  Scenario: Updating occurrence of weekly event with 'all_next' strategy changes
 #            whole event and all occurrences after the changed one to new data, but

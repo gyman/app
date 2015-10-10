@@ -3,6 +3,7 @@ namespace Dende\Calendar\Domain\Repository;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -16,13 +17,13 @@ interface OccurrenceRepositoryInterface
      * @param $occurrence
      * @return mixed
      */
-    public function insert($occurrence);
+    public function insert(Occurrence $occurrence);
 
     /**
-     * @param $event
+     * @param Event $event
      * @return ArrayCollection|Occurrence[]
      */
-    public function findAllByEvent($event);
+    public function findAllByEvent(Event $event);
 
     /**
      * @param DateTime $date
@@ -31,5 +32,8 @@ interface OccurrenceRepositoryInterface
      */
     public function findOneByDateAndCalendar(DateTime $date, Calendar $calendar);
 
+    /**
+     * @return ArrayCollection|array|Occurrence[]
+     */
     public function findAll();
 }

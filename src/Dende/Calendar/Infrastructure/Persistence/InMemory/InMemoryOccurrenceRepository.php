@@ -3,12 +3,14 @@ namespace Dende\Calendar\Infrastructure\Persistence\InMemory;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Repository\Specification\InMemoryOccurrenceSpecificationInterface;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByCalendarSpecification;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByDateAndCalendarSpecification;
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByDateRangeAndCalendarSpecification;
+use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByEventSpecification;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -34,7 +36,7 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
      * @param Occurrence $occurrence
      * @return null
      */
-    public function insert($occurrence)
+    public function insert(Occurrence $occurrence)
     {
         $this->occurrences[$occurrence->id()->id()] = $occurrence;
     }
@@ -43,12 +45,11 @@ class InMemoryOccurrenceRepository implements OccurrenceRepositoryInterface
      * @param $event
      * @return ArrayCollection|Occurrence[]
      */
-    public function findAllByEvent($event)
+    public function findAllByEvent(Event $event)
     {
-        //        return (new ArrayCollection($this->occurrences))
-//            ->filter(function (Occurrence $occurrence) use ($event) {
-//                return $occurrence->event() === $event;
-//            });
+        return $this->query(
+            new InMemoryOccurrenceByEventSpecification($event)
+        );
     }
 
     /**

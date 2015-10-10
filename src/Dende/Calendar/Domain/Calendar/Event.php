@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use DateInterval;
 use DatePeriod;
 use DateTime;
-use Dende\Calendar\Application\Factory\OccurrenceFactory;
+use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\EventId;
@@ -82,7 +82,7 @@ class Event
      * @param ArrayCollection|Occurrence[] $occurrences
      * @throws \Exception
      */
-    public function __construct(EventId $id, Calendar $calendar, EventType $type, DateTime $startDate, DateTime $endDate, $title, Repetitions $repetitions, Duration $duration, $occurrences)
+    public function __construct(EventId $id, Calendar $calendar, EventType $type, DateTime $startDate, DateTime $endDate, $title, Repetitions $repetitions, Duration $duration)
     {
         if (Carbon::instance($startDate)->gt(Carbon::instance($endDate))) {
             throw new \Exception(sprintf(
@@ -102,7 +102,6 @@ class Event
         $this->title = $title;
         $this->repetitions = $repetitions;
         $this->duration = $duration;
-        $this->occurrences = $occurrences;
     }
 
     /**
@@ -112,14 +111,6 @@ class Event
     {
         return $this->occurrences;
     }
-
-    /**
-     * @return bool
-     */
-//    public function isOngoing()
-//    {
-//        return !is_null($this->getCurrentOccurrence());
-//    }
 
     /**
      * @return string
@@ -204,34 +195,6 @@ class Event
         return $this->occurrencesDates;
     }
 
-//    public function resetAllOccurrences()
-//    {
-//        $this->occurrences = $this->generateOccurencesCollection();
-//    }
-
-    /**
-     * @return ArrayCollection|Occurrence[]
-     */
-//    public function generateOccurencesCollection()
-//    {
-//        $occurences = new ArrayCollection();
-//
-//        foreach ($this->calculateOccurrencesDates() as $date) {
-//            $occurences->add(OccurrenceFactory::createFromArray([
-//                'startDate' => $date,
-//                'duration'  => $this->duration,
-//                'event'     => $this,
-//            ]));
-//        }
-//
-//        return $occurences;
-//    }
-
-//    public function getCurrentOccurrence()
-//    {
-//        return $this->getOccurenceByDate(new DateTime('now'));
-//    }
-
     /**
      * @param Repetitions $repetitions
      */
@@ -270,5 +233,21 @@ class Event
     public function id()
     {
         return $this->id;
+    }
+
+    public function update(UpdateEventCommand $command)
+    {
+        $this->title = $command->title;
+        $this->type = new EventType($command->type);
+        $this->calendar = $command->calendar;
+        $this->startDate = $command->startDate;
+        $this->endDate = $command->endDate;
+        $this->duration = new Duration($command->duration);
+        $this->repetitions = new Repetitions($command->repetitionDays);
+    }
+
+    public function setOccurrences(ArrayCollection $occurrences)
+    {
+        $this->occurrences = $occurrences;
     }
 }

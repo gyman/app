@@ -145,4 +145,13 @@ class Occurrence
     {
         return $this->id;
     }
+
+    public function updateToEvent()
+    {
+        if ($this->event()->type()->isType(EventType::TYPE_SINGLE)) {
+            $this->startDate = $this->event()->startDate();
+            $this->duration = $this->event()->duration();
+            $this->updateEndDate();
+        }
+    }
 }

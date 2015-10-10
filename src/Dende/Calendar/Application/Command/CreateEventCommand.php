@@ -2,7 +2,7 @@
 namespace Dende\Calendar\Application\Command;
 
 use DateTime;
-use Gyman\Domain\Model\Section;
+use Dende\Calendar\Domain\Calendar;
 
 /**
  * Class CreateEventCommand
@@ -16,9 +16,9 @@ final class CreateEventCommand
     public $type;
 
     /**
-     * @var Section
+     * @var Calendar
      */
-    public $section;
+    public $calendar;
 
     /**
      * @var DateTime

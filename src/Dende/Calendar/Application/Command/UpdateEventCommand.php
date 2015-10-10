@@ -2,8 +2,9 @@
 namespace Dende\Calendar\Application\Command;
 
 use DateTime;
+use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Gyman\Domain\Model\Section;
 
 /**
  * Class CreateEventCommand
@@ -17,14 +18,19 @@ final class UpdateEventCommand
     public $occurrence;
 
     /**
+     * @var EventType
+     */
+    public $type;
+
+    /**
      * @var string
      */
     public $method;
 
     /**
-     * @var Section
+     * @var Calendar
      */
-    public $section;
+    public $calendar;
 
     /**
      * @var DateTime

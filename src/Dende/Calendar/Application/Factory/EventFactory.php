@@ -46,8 +46,7 @@ final class EventFactory implements EventFactoryInterface
             $array['endDate'],
             $array['title'],
             $array['repetitions'],
-            $array['duration'],
-            $array['occurrences']
+            $array['duration']
         );
     }
 
@@ -65,18 +64,14 @@ final class EventFactory implements EventFactoryInterface
      */
     public static function createFromCommand(CreateEventCommand $command)
     {
-        $calendar = $command->section->calendar();
-
         return self::createFromArray([
             'title'           => $command->title,
-            'calendar'        => $calendar,
+            'calendar'        => $command->calendar,
             'repetitions'     => new Repetitions($command->repetitionDays),
             'type'            => new EventType($command->type),
-            'occurrences'     => new ArrayCollection(),
             'startDate'       => $command->startDate,
             'endDate'         => $command->endDate,
             'duration'        => new Duration($command->duration),
-
         ]);
     }
 }

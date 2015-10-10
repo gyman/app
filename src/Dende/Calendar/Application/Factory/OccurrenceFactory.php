@@ -22,7 +22,7 @@ final class OccurrenceFactory
     {
         $template = [
             'id'             => new OccurrenceId(),
-            'startDate'      => new DateTime(),
+            'startDate'      => new DateTime('now'),
             'duration'       => new Duration(90),
             'event'          => EventFactory::create(),
         ];

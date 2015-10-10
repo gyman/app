@@ -21,8 +21,6 @@ use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryEve
 use Dende\Calendar\Infrastructure\Persistence\InMemory\Specification\InMemoryOccurrenceByCalendarSpecification;
 use Doctrine\Common\Collections\Criteria;
 use Exception;
-use Gyman\Domain\Model\Section;
-use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class ScheduleContext
@@ -104,7 +102,7 @@ final class CalendarContext implements Context
             }
 
             $command = new CreateEventCommand();
-            $command->section = new Section(new SectionId(0), 'some-section', $this->calendar);
+            $command->calendar = $this->calendar;
             $command->type = $row['type'];
             $command->startDate = Carbon::parse($row['startDate']);
             $command->endDate = Carbon::parse($row['endDate']);
@@ -327,14 +325,6 @@ final class CalendarContext implements Context
                 ));
             }
 
-            if ($event->duration()->minutes() !== (int) $row['duration']) {
-                throw new Exception(sprintf(
-                    'Expected duration was %s actually is %s',
-                    $row['duration'],
-                    $event->duration()->minutes()
-                ));
-            }
-
             if (!$event->repetitions()->sameDays($repetitions)) {
                 throw new Exception(sprintf(
                     'Expected repetitions was %s actually is %s',
@@ -346,12 +336,14 @@ final class CalendarContext implements Context
     }
 
     /**
-     * @Given /^I update occurrence \'([^\']*)\' with data in \'([^\']*)\' mode$/
+     * @Given /^I update occurrence \'(\d+)\' of event with title \'([^\']*)\' with data in \'([^\']*)\' mode$/
      */
-    public function iUpdateOccurrenceWithDataInMode($index, $mode, TableNode $table)
+    public function iUpdateOccurrenceWithDataInMode($index, $title, $mode, TableNode $table)
     {
-        $occurrences = $this->occurrenceRepository->findAll();
-        $occurrence = array_slice($occurrences, $index, 1);
+        $event = current($this->eventRepository->findOneByTitle($title));
+        $occurrences = $this->occurrenceRepository->findAllByEvent($event);
+
+        $occurrence = current(array_slice($occurrences->toArray(), $index, 1));
 
         foreach ($table as $row) {
             $repetitions = [];
@@ -371,10 +363,47 @@ final class CalendarContext implements Context
             $command->endDate = new DateTime($row['endDate']);
             $command->duration = $row['duration'];
             $command->repetitionDays = $repetitions;
-            $command->section = null;
             $command->title = $row['title'];
+            $command->type = $row['type'];
+            $command->calendar = $this->calendar;
 
             $this->updateEventHandler->handle($command);
+        }
+    }
+
+    /**
+     * @Given /^occurence of single event with title \'([^\']*)\' has data$/
+     */
+    public function occurenceOfEventWithTitleHasData($title, TableNode $table)
+    {
+        /** @var Event $event */
+        $event = current($this->eventRepository->findOneByTitle($title));
+        $occurrence = current($event->occurrences()->toArray());
+
+        foreach ($table as $row) {
+            if (!Carbon::instance($occurrence->startDate())->eq(Carbon::parse($row['startDate']))) {
+                throw new Exception(sprintf(
+                    'Expected startDate was %s actually is %s',
+                    Carbon::parse($row['startDate'])->format('Y-m-d H:i:s'),
+                    $occurrence->startDate()->format('Y-m-d H:i:s')
+                ));
+            }
+
+            if (!Carbon::instance($occurrence->endDate())->eq(Carbon::parse($row['endDate']))) {
+                throw new Exception(sprintf(
+                    'Expected endDate was %s actually is %s',
+                    Carbon::parse($row['endDate'])->format('Y-m-d H:i:s'),
+                    $occurrence->endDate()->format('Y-m-d H:i:s')
+                ));
+            }
+
+            if ($occurrence->duration()->minutes() !== (int) $row['duration']) {
+                throw new Exception(sprintf(
+                    'Expected duration was %s actually is %s',
+                    $row['duration'],
+                    $occurrence->duration()->minutes()
+                ));
+            }
         }
     }
 }

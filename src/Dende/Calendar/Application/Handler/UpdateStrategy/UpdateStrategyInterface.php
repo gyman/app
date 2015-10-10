@@ -17,7 +17,15 @@ interface UpdateStrategyInterface
      */
     public function update(UpdateEventCommand $command);
 
+    /**
+     * @param EventRepositoryInterface $eventRepository
+     * @return mixed
+     */
     public function setEventRepository(EventRepositoryInterface $eventRepository);
 
+    /**
+     * @param OccurrenceRepositoryInterface $occurrenceRepository
+     * @return mixed
+     */
     public function setOccurrenceRepository(OccurrenceRepositoryInterface $occurrenceRepository);
 }

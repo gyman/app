@@ -45,6 +45,8 @@ final class CreateEventHandler
 
         $occurrences = OccurrenceFactory::generateCollectionFromEvent($event);
 
+        $event->setOccurrences($occurrences);
+
         if (count($occurrences) === 0) {
             throw new Exception('Could not generate occurrences from event');
         }

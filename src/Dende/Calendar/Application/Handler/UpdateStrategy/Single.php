@@ -17,6 +17,10 @@ final class Single implements UpdateStrategyInterface
      */
     public function update(UpdateEventCommand $command)
     {
-        // TODO: Implement update() method.
+        $occurrence = $command->occurrence;
+        $event = $occurrence->event();
+
+        $event->update($command);
+        $occurrence->updateToEvent();
     }
 }
