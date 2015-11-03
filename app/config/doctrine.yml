@@ -33,9 +33,9 @@ doctrine:
 
         entity_managers:
           default:
-            metadata_cache_driver: apc
-            result_cache_driver: apc
-            query_cache_driver: apc
+#            metadata_cache_driver: apc
+#            result_cache_driver: apc
+#            query_cache_driver: apc
 
             auto_mapping: false # disabled so we can assign entities to our own connections
             connection:       default
@@ -63,9 +63,9 @@ doctrine:
                 is_bundle: false
                 alias: ViewModel
           club:
-            metadata_cache_driver: apc
-            result_cache_driver: apc
-            query_cache_driver: apc
+#            metadata_cache_driver: apc
+#            result_cache_driver: apc
+#            query_cache_driver: apc
 
             auto_mapping:     false # disabled so we can assign entities to our own connections
             connection:       club

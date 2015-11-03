@@ -108,6 +108,9 @@ swiftmailer:
                 
 gyman_app: ~
 
+dende_calendar:
+  entity_manager: club
+
 stof_doctrine_extensions:
     default_locale: pl_PL
     orm:

@@ -8,15 +8,15 @@
 
     <ul>
         {% for occurrence in occurrences if occurrences|length > 0 %}
-            <li class="clearfix{% if occurrence.isOngoing() %} ongoingEvent{% elseif occurrence.isPast() %} passedEvent{% endif %}">
+            <li class="clearfix{# % if occurrence.isOngoing() %} ongoingEvent{% elseif occurrence.isPast() %} passedEvent{% endif % #}">
                 <span class="number">{{ occurrence.startDate|date("H:i") }} - {{ occurrence.endDate|date("H:i") }}</span>
-                <span class="txt">{{ occurrence.event.activity.name }}</span>
+                <span class="txt">{{ occurrence.event.title }}</span>
 
-                {% if occurrence.isOngoing() %}<span class="label label-success" style="margin-left: 10px; margin-top: 7px;">trwa</span>{% endif %}
+                {#&#123;&#35; if occurrence.isOngoing() %}<span class="label label-success" style="margin-left: 10px; margin-top: 7px;">trwa</span>{% endif %}#}
 
-                {% if occurrence.isPast(true) %}<span class="label" style="margin-left: 10px; margin-top: 7px;">zakonczone</span>{% endif %}
+                {#{% if occurrence.isPast(true) %}<span class="label" style="margin-left: 10px; margin-top: 7px;">zakonczone</span>{% endif %}#}
 
-                <a class="btn btn-warning openUrlInModal" href="{{ path("_events_show", {occurrence: occurrence.id}) }}">{{ occurrence.entries|length }} osób</a>
+                <a class="btn btn-warning openUrlInModal" href="#">{# occurrence.entries|length #} osób</a>
             </li>
         {% else %}
             <li>brak wydarzeń dla tego dnia</li>

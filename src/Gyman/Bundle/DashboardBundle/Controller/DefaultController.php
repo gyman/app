@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
+use Carbon\Carbon;
 use DateTime;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -37,17 +39,18 @@ class DefaultController extends Controller
      */
     public function getActivitiesAction(DateTime $date)
     {
-        //        $occurrences = $this->get('schedule')->getOccurrencesForDashboard($date);
+        /** @var Carbon $startDate */
+        $startDate = Carbon::instance($date)->setTime(0,0,0);
 
-        return new Response(
-            $this->renderView(
-                'DashboardBundle:Default:activities.html.twig',
-                [
+        /** @var Carbon $endDate */
+        $endDate = Carbon::instance($date)->setTime(0,0,0)->addDays(1);
+
+        /** @var Occurrence[] $occurrences */
+        $occurrences = $this->get('dende_calendar.occurrences_repository')->findByPeriod($startDate, $endDate);
+
+        return new Response($this->renderView('DashboardBundle:Default:activities.html.twig', [
                     'date'        => $date,
-                    'occurrences' => [], // $occurrences
-                ]
-            ),
-            200
-        );
+                    'occurrences' => $occurrences
+        ]));
     }
 }

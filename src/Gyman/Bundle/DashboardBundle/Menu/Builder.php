@@ -89,17 +89,17 @@ class Builder
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
-//        $menu->addChild(
-//            'dashboard.actions.calendar',
-//            array(
-//                'route' => '_schedule_calendar',
-//                "extras" => array("icon" => 'icomoon-icon-users'),
-//                'linkAttributes' => array(
-//                    "class" => 'btn btn-block btn-large btn-primary',
-//                    "id" => "actionCalendar"
-//                )
-//            )
-//        )->setExtra('translation_domain', 'DashboardBundle');
+        $menu->addChild(
+            'dashboard.actions.calendar',
+            array(
+                'route' => 'dende_calendar_default_index',
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => array(
+                    "class" => 'btn btn-block btn-large btn-primary',
+                    "id" => "actionCalendar"
+                )
+            )
+        )->setExtra('translation_domain', 'DashboardBundle');
 
         return $menu;
     }
