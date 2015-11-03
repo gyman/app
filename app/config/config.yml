@@ -13,7 +13,6 @@ parameters:
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
 
-
   subdomain_provider_service: gyman.app.subdomain_provider
 
 services:
@@ -133,9 +132,13 @@ jms_serializer:
   handlers:
     datetime:
       default_format: "Y-m-d H:i:s"
-      default_timezone: "UTC"
+      default_timezone: "Europe/Warsaw"
   metadata:
     auto_detection: true
+    directories:
+      Domain:
+        namespace_prefix: "Dende\\Calendar\\Domain"
+        path: "%kernel.root_dir%/../../Resources/config/serializer/"
 
 fos_rest:
   param_fetcher_listener: true
@@ -157,9 +160,13 @@ sensio_framework_extra:
   request: { converters: true }
 
 knp_time: ~
-
 nelmio_api_doc: ~
-
 accelerator_cache:
     host: %base_url%
     web_dir: %kernel.root_dir%/../web
+
+bazinga_hateoas:
+  metadata:
+    cache:                file
+    file_cache:
+      dir:              %kernel.cache_dir%/hateoas

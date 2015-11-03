@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.6.0",
 
         "symfony/symfony": "2.7.*",
         "symfony/swiftmailer-bundle": "2.3.*",
@@ -33,7 +33,7 @@
 
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/jsrouting-bundle": "1.5.*",
-        "friendsofsymfony/rest-bundle": "1.6.*",
+        "friendsofsymfony/rest-bundle": "^1.7",
 
         "knplabs/knp-menu-bundle": "~1",
         "knplabs/knp-menu": "~1",
@@ -50,11 +50,14 @@
         
         "gyman/supr": "dev-master",
         "nelmio/api-doc-bundle": "~2.7@dev",
-
         "imagine/imagine": "0.6.*",
         "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a",
+        "nesbot/carbon": "dev-master",
+
         "dende/common-bundle": "dev-master",
-        "nesbot/carbon": "dev-master"
+        "dende/calendar": "dev-master",
+        "dende/calendar-bundle": "dev-master"
+
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",

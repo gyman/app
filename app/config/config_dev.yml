@@ -4,6 +4,7 @@ parameters:
 #    - src/Gyman/Bundle/TestBundle/DataFixtures/StandardConnection # to be removed
   clubFixtures:
     - src/Gyman/Bundle/AppBundle/DataFixtures/Club
+    - vendor/dende/calendar-bundle/Tests/DataFixtures/Standard/ORM
 #    - src/Gyman/Bundle/ScheduleBundle/DataFixtures/Club
 
 imports:

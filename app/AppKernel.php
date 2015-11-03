@@ -8,7 +8,6 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -36,7 +35,6 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
 
-
 //            new Gyman\Bundle\ScheduleBundle\ScheduleBundle(),
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
 //            new Gyman\Bundle\FiltersBundle\FiltersBundle(),
@@ -56,7 +54,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
-            new Dende\CalendarBundle\DendeCalendarBundle(),
+            new Dende\CalendarBundle\DendeCalendarBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

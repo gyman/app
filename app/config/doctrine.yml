@@ -52,7 +52,16 @@ doctrine:
                 StofDoctrineExtensionsBundle: ~
                 UserBundle: ~
                 ClubBundle: ~
-
+          view_model:
+            auto_mapping: false
+            connection: club
+            mappings:
+              ViewModel:
+                type: yml
+                prefix: Dende\Calendar\Domain
+                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine-viewmodel
+                is_bundle: false
+                alias: ViewModel
           club:
             metadata_cache_driver: apc
             result_cache_driver: apc
@@ -74,6 +83,12 @@ doctrine:
                 prefix: Gyman\Domain\Model
                 alias: Model
                 is_bundle: false
+              Calendar:
+                type: yml
+                prefix: Dende\Calendar\Domain
+                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine
+                is_bundle: false
+                alias: Calendar
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

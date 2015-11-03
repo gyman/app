@@ -20,9 +20,10 @@ app/config/behat_local.yml
 web/css/*
 !web/css/*
 /nbproject/
-/nbproject/*
+/bower_components
+/nbproject/*d
 web/index.php
-bower_components/
+bower_components/d
 node_modules/
 .idea/
 phantomjsdriver.log
