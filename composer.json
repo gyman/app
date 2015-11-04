@@ -94,11 +94,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
-        "preferred-install": "dist",
-        "github-oauth": {
-            "github.com": "66b302af2c7a920b1673df3549d83c90338e4076"
-        }
+        "bin-dir": "bin"
     },
     "minimum-stability": "dev",
     "extra": {

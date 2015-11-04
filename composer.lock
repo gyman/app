@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b54c5f7db0fd64daeb924e2bdf9c781d",
+    "hash": "be78e09559f8cd4b8fc0d999cb96c48c",
     "content-hash": "cfb8bbbee6fdce4c271375826c9d2531",
     "packages": [
         {
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "416590c740937f936ad2b55dff61498f9fece2f0"
+                "reference": "7dc1a7b25a224e6391fd6eb8a0dfb318f7fd8eb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/416590c740937f936ad2b55dff61498f9fece2f0",
-                "reference": "416590c740937f936ad2b55dff61498f9fece2f0",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/7dc1a7b25a224e6391fd6eb8a0dfb318f7fd8eb9",
+                "reference": "7dc1a7b25a224e6391fd6eb8a0dfb318f7fd8eb9",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2015-11-03 17:52:27"
+            "time": "2015-11-03 23:33:50"
         },
         {
             "name": "dende/common-bundle",
@@ -1154,12 +1154,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "955c9000f7460a686cf2a861780458a175d268a0"
+                "reference": "9fab551f0b821ef067dfb02d7a619cb4ace2da80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/955c9000f7460a686cf2a861780458a175d268a0",
-                "reference": "955c9000f7460a686cf2a861780458a175d268a0",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9fab551f0b821ef067dfb02d7a619cb4ace2da80",
+                "reference": "9fab551f0b821ef067dfb02d7a619cb4ace2da80",
                 "shasum": ""
             },
             "require": {
@@ -1205,7 +1205,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-10-27 19:58:26"
+            "time": "2015-11-03 19:15:40"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3246,7 +3246,7 @@
                 "task",
                 "wincache"
             ],
-            "time": "2015-10-10 15:36:39"
+            "time": "2015-02-17 12:15:39"
         },
         {
             "name": "stephpy/timeline",
@@ -3781,12 +3781,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e7e334c8b200b74c5937f9497f81e77202c9a97a"
+                "reference": "fd84403ac725fe1a053a0a109e26ecdb9928c912"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e7e334c8b200b74c5937f9497f81e77202c9a97a",
-                "reference": "e7e334c8b200b74c5937f9497f81e77202c9a97a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/fd84403ac725fe1a053a0a109e26ecdb9928c912",
+                "reference": "fd84403ac725fe1a053a0a109e26ecdb9928c912",
                 "shasum": ""
             },
             "require": {
@@ -3834,7 +3834,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-11-02 18:00:50"
+            "time": "2015-11-03 18:31:41"
         },
         {
             "name": "willdurand/hateoas",

@@ -83,12 +83,12 @@ doctrine:
                 prefix: Gyman\Domain\Model
                 alias: Model
                 is_bundle: false
-              Calendar:
-                type: yml
-                prefix: Dende\Calendar\Domain
-                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine
-                is_bundle: false
-                alias: Calendar
+#              Calendar:
+#                type: yml
+#                prefix: Dende\Calendar\Domain
+#                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine
+#                is_bundle: false
+#                alias: Calendar
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
