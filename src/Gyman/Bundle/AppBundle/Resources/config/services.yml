@@ -4,6 +4,7 @@ imports:
   - { resource: services_vouchers.yml }
   - { resource: services_members.yml }
   - { resource: services_entries.yml }
+  - { resource: services_admin.yml }
 
 services:
   gyman.app.command.dump_hosts:

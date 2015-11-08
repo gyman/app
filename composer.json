@@ -28,6 +28,9 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "2.5.*",
 
+        "sonata-project/admin-bundle": "2.3.*",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.*",
+
         "stephpy/timeline": "1.1.*@dev",
         "stephpy/timeline-bundle": "2.1.*@dev",
 

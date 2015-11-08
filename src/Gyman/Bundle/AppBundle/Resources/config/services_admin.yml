@@ -1,0 +1,10 @@
+---
+services:
+    gyman.app.admin.members:
+        class: Gyman\Bundle\AppBundle\Admin\MemberAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Gyman CRUD Panel, label: Uczestnicy }
+        arguments:
+            - ~
+            - Gyman\Bundle\AppBundle\Entity\Member
+            - ~

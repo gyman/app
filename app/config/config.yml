@@ -16,12 +16,6 @@ parameters:
   subdomain_provider_service: gyman.app.subdomain_provider
 
 services:
-#    globals_object:
-#      class: Gyman\Bundle\AppBundle\Globals
-#      calls:
-#        - [setDefaultDateFormat, [%date_format%]]
-#        - [setDefaultDateTimeFormat, [%datetime_format%]]
-
     memcached:
         class: Memcached
         calls:
@@ -53,6 +47,7 @@ imports:
     - { resource: fos_user.yml }
 #    - { resource: timeline.yml }
     - { resource: doctrine.yml }
+#    - { resource: sonata.yml }
 
 framework:
     translator:      { fallback: %locale% }
@@ -164,7 +159,9 @@ sensio_framework_extra:
   request: { converters: true }
 
 knp_time: ~
+
 nelmio_api_doc: ~
+
 accelerator_cache:
     host: %base_url%
     web_dir: %kernel.root_dir%/../web

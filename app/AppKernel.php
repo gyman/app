@@ -55,9 +55,17 @@ class AppKernel extends Kernel
 
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\MultiDatabaseBundle\GymanMultiDatabaseBundle(),
+
+            // can't work with Doctrine Embeddables
+            // conflicts with Liip/Functional Bundle
+//            new Sonata\CoreBundle\SonataCoreBundle(),
+//            new Sonata\BlockBundle\SonataBlockBundle(),
+//            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+//            new Sonata\AdminBundle\SonataAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
