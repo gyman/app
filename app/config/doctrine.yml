@@ -78,7 +78,7 @@ doctrine:
               GymanAppBundle: ~
 #              FiltersBundle: ~
 #              ScheduleBundle: ~
-              SectionBundle: ~
+#              SectionBundle: ~
 #              TimelineBundle: ~
 #              SpyTimelineBundle: ~
               Embedded:

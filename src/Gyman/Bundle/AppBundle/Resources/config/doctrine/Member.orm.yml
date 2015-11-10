@@ -20,6 +20,12 @@ Gyman\Bundle\AppBundle\Entity\Member:
       field_name: deletedAt
       time_aware: false
 
+  manyToMany:
+    sections:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Section
+      mappedBy: members
+      cascade: ["all"]
+
   oneToMany:
     vouchers:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher

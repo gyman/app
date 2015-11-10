@@ -1,0 +1,21 @@
+--- 
+Section00:
+  title: "MMA"
+  calendar: calendar-001
+  members:
+    - Member00
+    - Member01
+    - Member02
+    - Member03
+    - Member04
+Section01:
+  title: "Capoeira"
+  calendar: calendar-002
+  members:
+    - Member00
+    - Member01
+    - Member02
+    - Member05
+    - Member06
+    - Member07
+    - Member08

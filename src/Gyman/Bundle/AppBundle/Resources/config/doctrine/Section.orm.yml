@@ -1,7 +1,6 @@
-Gyman\Domain\Entity\Section:
+Gyman\Bundle\AppBundle\Entity\Section:
   type:   entity
   table:  sections
-  repositoryClass:  Gyman\Bundle\AppBundle\Entity\VoucherRepository
 
   id:
     id:
@@ -11,6 +10,10 @@ Gyman\Domain\Entity\Section:
   oneToOne:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
+
+  manyToMany:
+    members:
+      targetEntity: Gyman\Bundle\AppBundle\Entity\Member
 
   fields:
     title:
