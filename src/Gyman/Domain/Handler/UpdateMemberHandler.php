@@ -66,6 +66,8 @@ class UpdateMemberHandler
 
         $member->updateDetails($details);
         $member->updateEmail($email);
+        $member->setSections($command->sections);
+
         $this->memberRepository->insert($member);
 
         $this->dispatcher->dispatch(self::SUCCESS, new MemberEvent($member, $author));

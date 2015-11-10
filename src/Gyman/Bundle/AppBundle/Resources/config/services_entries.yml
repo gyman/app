@@ -1,6 +1,9 @@
 services:
   gyman.entries.entry_form_type:
     class: Gyman\Bundle\AppBundle\Form\EntryType
+    arguments:
+      - @dende_calendar.occurrences_repository
+      - @gyman.repository.section
     tags:
       - { name: form.type, alias: gyman_entry_form }
 

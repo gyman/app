@@ -2,6 +2,8 @@
 namespace Gyman\Domain\Command;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Domain\Model\Member;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -82,6 +84,11 @@ class UpdateMemberCommand implements MemberCommandInterface
     public $id;
 
     /**
+     * @var Section[]|ArrayCollection
+     */
+    public $sections;
+
+    /**
      * @param Member $member
      * @return UpdateMemberCommand
      */
@@ -101,6 +108,7 @@ class UpdateMemberCommand implements MemberCommandInterface
         $command->notes = $member->details()->notes();
         $command->foto = $member->details()->foto()->foto();
         $command->starred = $member->details()->isStarred();
+        $command->sections = $member->sections();
 
         return $command;
     }

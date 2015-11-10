@@ -2,7 +2,9 @@
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
-use Gyman\Domain\Model\Section;
+use Gyman\Bundle\AppBundle\Entity\SectionRepository;
+use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class CreateSectionForCalendarListener
@@ -17,12 +19,21 @@ class CreateSectionForCalendarListener
     private $sectionRepository;
 
     /**
+     * CreateSectionForCalendarListener constructor.
+     * @param SectionRepository $sectionRepository
+     */
+    public function __construct(SectionRepository $sectionRepository)
+    {
+        $this->sectionRepository = $sectionRepository;
+    }
+
+    /**
      * @param CalendarAfterCreationEvent $event
      */
     public function onCalendarCreate(CalendarAfterCreationEvent $event)
     {
         $section = new Section(
-            new Section\SectionId('some id'),
+            new SectionId('some id'),
             $event->calendar->name(),
             $event->calendar
         );

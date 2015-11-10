@@ -47,6 +47,6 @@ final class UniqueMemberBarcodeValidator extends ConstraintValidator
      */
     private function areTheSame(Member $member, UpdateMemberCommand $command)
     {
-        return $member->id() === (int) $command->id;
+        return $member->id() === $command->id;
     }
 }

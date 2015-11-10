@@ -59,7 +59,16 @@ final class MemberType extends AbstractType
             ])
             ->add('starred', 'checkbox', [
                 'label'    => 'member.form.starred.label',
-            ]);
+            ])
+            ->add('sections', 'entity', [
+                'class' => 'Gyman\Bundle\AppBundle\Entity\Section',
+                'property' => 'title',
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true
+            ])
+        ;
+
     }
 
     /**

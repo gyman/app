@@ -254,4 +254,12 @@ class Member
     {
         $this->currentVoucher = null;
     }
+
+    /**
+     * @param Section[]|ArrayCollection $sections
+     */
+    public function setSections($sections)
+    {
+        $this->sections = $sections;
+    }
 }

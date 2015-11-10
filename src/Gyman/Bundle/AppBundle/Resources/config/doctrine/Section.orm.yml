@@ -1,6 +1,7 @@
 Gyman\Bundle\AppBundle\Entity\Section:
   type:   entity
   table:  sections
+  repositoryClass: Gyman\Bundle\AppBundle\Entity\SectionRepository
 
   id:
     id:
@@ -10,10 +11,13 @@ Gyman\Bundle\AppBundle\Entity\Section:
   oneToOne:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
+      cascade: ["all"]
 
   manyToMany:
     members:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
+      mappedBy: sections
+#      inversedBy: sections
 
   fields:
     title:

@@ -96,6 +96,7 @@ final class MemberFactory implements MemberFactoryInterface
             'belt'             => $command->belt,
             'barcode'          => $command->barcode,
             'starred'          => $command->starred,
+            'sections'         => $command->sections
         ]);
     }
 }

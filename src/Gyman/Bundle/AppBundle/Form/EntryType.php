@@ -1,6 +1,12 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
+use Carbon\Carbon;
+use DateTime;
+use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Bundle\AppBundle\Entity\SectionRepository;
 use Gyman\Domain\Command\OpenEntryCommand;
 use Gyman\Domain\Model\Entry;
 use Symfony\Component\Form\AbstractType;
@@ -9,15 +15,65 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class EntryType
+ * @package Gyman\Bundle\AppBundle\Form
+ */
 final class EntryType extends AbstractType
 {
+    /**
+     * @var OccurrenceRepository
+     */
+    private $occurrenceRepository;
+
+    /**
+     * @var SectionRepository
+     */
+    private $sectionRepository;
+
+    /**
+     * EntryType constructor.
+     * @param OccurrenceRepository $occurrenceRepository
+     * @param SectionRepository $sectionRepository
+     */
+    public function __construct(OccurrenceRepository $occurrenceRepository, SectionRepository $sectionRepository)
+    {
+        $this->occurrenceRepository = $occurrenceRepository;
+        $this->sectionRepository = $sectionRepository;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $date = $options["date"];
+
+        /** @var Carbon $startDate */
+        $startDate = Carbon::instance($date)->setTime(0,0,0);
+
+        /** @var Carbon $endDate */
+        $endDate = Carbon::instance($date)->setTime(0,0,0)->addDays(1);
+
+        $sectionRepository = $this->sectionRepository;
+
         $builder
+        ->add('occurrence', 'entity', [
+            'mapped' => false,
+            'expanded' => true,
+            "multiple" => false,
+            'label' => 'entries.form.occurrence.label',
+            'class' => 'Calendar:Calendar\Event\Occurrence',
+            'property' => function(Occurrence $occurrence) use ($sectionRepository) {
+                $start = $occurrence->startDate()->format("H:i");
+                $stop = $occurrence->endDate()->format("H:i");
+                $activity = $occurrence->event()->title();
+                $section = $sectionRepository->findOneByCalendar($occurrence->event()->calendar());
+                return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $section->title());
+            },
+            'choices' => $this->occurrenceRepository->findByPeriod($startDate, $endDate)
+        ])
         ->add('startDate', 'datetime', [
             'widget' => 'single_text',
             'format' => 'dd.MM.yyyy HH:mm',
@@ -70,6 +126,7 @@ final class EntryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Gyman\Domain\Command\OpenEntryCommand',
+            'date' => new DateTime()
         ]);
     }
 
