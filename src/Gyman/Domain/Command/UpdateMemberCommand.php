@@ -86,7 +86,7 @@ class UpdateMemberCommand implements MemberCommandInterface
     /**
      * @var Section[]|ArrayCollection
      */
-    public $sections;
+    public $sections = [];
 
     /**
      * @param Member $member

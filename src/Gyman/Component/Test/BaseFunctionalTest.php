@@ -10,17 +10,18 @@ abstract class BaseFunctionalTest extends BaseTest
         parent::setUp();
 
         $this->loadFixtures([
-            "Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM\UsersData",
-            "Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM\ClubsData",
+            "Gyman\\Bundle\\TestBundle\\DataFixtures\\StandardConnection\\ORM\\UsersData",
+            "Gyman\\Bundle\\ClubBundle\\DataFixtures\\StandardConnection\\ORM\\ClubsData",
         ], 'default');
 
         $this->loadFixtures([
-            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\EntriesData",
-            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\VouchersData",
-            "Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\MembersData",
-//            "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\ActivitiesData",
-//            "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\EventsData",
-//            "Gyman\Bundle\TestBundle\DataFixtures\Club\ORM\SectionsData",
+            "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\EntriesData",
+            "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\VouchersData",
+            "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\MembersData",
+            "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\SectionsData",
+            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\CalendarsData",
+            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\EventsData",
+            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\OccurrencesData",
         ], 'club');
     }
 }

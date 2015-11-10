@@ -1,12 +1,9 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Gyman\Domain\Model\Section;
-use Gyman\Domain\Repository\VoucherRepositoryInterface;
 
 /**
  * Class SectionRepository

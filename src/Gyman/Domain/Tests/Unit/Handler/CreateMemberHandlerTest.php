@@ -43,6 +43,7 @@ class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
         $command->belt      = 'purple';
         $command->notes     = 'updated note';
         $command->foto      = $md5;
+        $command->sections  = [];
         $command->uploadFile = new UploadedFile(
             $testFile,
             'original_name.jpg',
