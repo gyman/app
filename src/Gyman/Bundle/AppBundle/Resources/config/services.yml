@@ -6,8 +6,22 @@ imports:
   - { resource: services_entries.yml }
   - { resource: services_admin.yml }
 
+parameters:
+  gyman.section_repository.class: Gyman\Bundle\AppBundle\Entity\SectionRepository
+
 services:
   gyman.app.command.dump_hosts:
     class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
     tags:
       - {name: console.command}
+
+  gyman.listener.create_section_for_calendar:
+    class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
+    tags:
+      - {name: kernel.event_listener, method: onCalendarCreate, event: dende_calendar.calendar.after_creation}
+
+  gyman.repository.section:
+    class: %gyman.section_repository.class%
+    factory_service: doctrine.orm.club_entity_manager
+    factory_method: "getRepository"
+    arguments: ["Section"]

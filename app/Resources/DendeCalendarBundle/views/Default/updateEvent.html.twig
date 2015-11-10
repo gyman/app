@@ -4,6 +4,24 @@
     {{ parent() }} - Edytuj wydarzenie
 {% endblock title %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/dendecalendar/js/locales/bootstrap-datetimepicker.pl.js') }}"></script>
+    <script src="{{ asset('bundles/dendecalendar/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
+{% endblock stylesheets %}
+
 {% block content %}
 <div class="contentwrapper">
     <div class="heading">
@@ -11,7 +29,7 @@
     </div>
     <div class="span12">
         {% include "::_flash.html.twig" %}
-        {{ form(form, {attr: {class: "form"}}) }}
+        {{ form(form, {attr: {class: "form form-horizontal"}}) }}
     </div>
 </div>
 {% endblock content %}

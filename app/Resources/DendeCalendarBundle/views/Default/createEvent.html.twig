@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '@DendeCalendar/Default/updateEvent.html.twig' %}
 
 {% block title %}
     {{ parent() }} - Dodaj wydarzenie
@@ -11,7 +11,7 @@
     </div>
     <div class="span12">
         {% include "::_flash.html.twig" %}
-        {{ form(form, {attr: {class: "form"}}) }}
+        {{ form(form, {attr: {class: "form form-horizontal"}}) }}
     </div>
 </div>
 {% endblock content %}

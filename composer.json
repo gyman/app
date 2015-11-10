@@ -56,6 +56,7 @@
         "imagine/imagine": "0.6.*",
         "smart-core/accelerator-cache-bundle": "dev-master#83f2e34be2d521cca5bd72ac31be1df01233750a",
         "nesbot/carbon": "dev-master",
+        "braincrafted/bootstrap-bundle": "1.4.2",
 
         "dende/common-bundle": "dev-master",
         "dende/calendar": "dev-master",

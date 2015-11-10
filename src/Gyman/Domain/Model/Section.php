@@ -11,6 +11,11 @@ use Gyman\Domain\Model\Section\SectionId;
 class Section
 {
     /**
+     * @var SectionId
+     */
+    private $id;
+
+    /**
      * @var string
      */
     private $title;
@@ -19,6 +24,11 @@ class Section
      * @var Calendar
      */
     private $calendar;
+
+    /**
+     * @var Member[]
+     */
+    private $members = [];
 
     /**
      * Section constructor.
@@ -47,5 +57,9 @@ class Section
     public function calendar()
     {
         return $this->calendar;
+    }
+
+    public function id(){
+        return $this->id;
     }
 }

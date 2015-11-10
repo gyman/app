@@ -62,10 +62,10 @@ doctrine:
 #                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine-viewmodel
 #                is_bundle: false
 #                alias: ViewModel
-          viewmodel_club:
-            auto_mapping: false
-            connection: club
-            mappings: ~
+#          viewmodel_club:
+#            auto_mapping: false
+#            connection: club
+#            mappings: ~
           club:
 #            metadata_cache_driver: apc
 #            result_cache_driver: apc

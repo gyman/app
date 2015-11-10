@@ -84,4 +84,16 @@
         <phingcall target="phpunit-integration" />
     </target>
 
+    <target name="rebuild-dende">
+        <property name="env" value="dev" />
+        <phingcall target="reset-db" />
+
+        <property name="club" value="dende" />
+        <phingcall target="reset-db"  />
+
+        <exec command="./app/console fos:user:create admin admin@dende.com admin" passthru="true" checkreturn="true" />
+        <exec command="./app/console gyman:club:assign-user admin@dende.com dende" passthru="true" checkreturn="true" />
+        <exec command="mkdir -p web/uploads/gallery/dende" passthru="true" checkreturn="true" />
+    </target>
+
 </project>

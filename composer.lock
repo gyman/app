@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "665beb3f3056845f0a41849985d8e7d3",
-    "content-hash": "7f4eddb77f624ac92b9b55293a9c6c58",
+    "hash": "2c9a18f74d769cfafd391f32165441c3",
+    "content-hash": "f3022843947a351a1113934beda583c6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -49,45 +49,42 @@
         },
         {
             "name": "braincrafted/bootstrap-bundle",
-            "version": "dev-master",
-            "target-dir": "Braincrafted/Bundle/BootstrapBundle",
+            "version": "1.4.2",
+            "target-dir": "Bc/Bundle/BootstrapBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braincrafted/bootstrap-bundle.git",
-                "reference": "dd53559cfe15428f07ac3681826573fab1557bd9"
+                "reference": "9d25ca1dca74722091efef00b4184761adf82549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/dd53559cfe15428f07ac3681826573fab1557bd9",
-                "reference": "dd53559cfe15428f07ac3681826573fab1557bd9",
+                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/9d25ca1dca74722091efef00b4184761adf82549",
+                "reference": "9d25ca1dca74722091efef00b4184761adf82549",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "symfony/console": "~2.3",
-                "symfony/finder": "~2.3",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/twig-bundle": "~2.3"
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "knplabs/knp-menu": "~2.0@alpha",
-                "knplabs/knp-menu-bundle": "~2.0@alpha",
+                "instaclick/php-code-sniffer": "dev-master",
+                "instaclick/symfony2-coding-standard": "dev-master",
+                "knplabs/knp-markdown-bundle": "dev-master",
+                "knplabs/knp-menu": "dev-master",
+                "knplabs/knp-menu-bundle": "dev-master",
                 "knplabs/knp-paginator-bundle": "dev-master",
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "3.7.*",
-                "symfony/assetic-bundle": "~2.3"
+                "nikic/php-parser": "dev-master",
+                "phpmd/phpmd": "1.4.*"
             },
             "suggest": {
                 "knplabs/knp-menu": "Required to use KnpMenuBundle.",
                 "knplabs/knp-menu-bundle": "BraincraftedBootstrapBundle styles the menus provided by KnpMenuBundle.",
                 "knplabs/knp-paginator-bundle": "BraincraftedBootstrapBundle styles the pagination provided by KnpPaginatorBundle.",
-                "twbs/bootstrap": "Twitter Bootstrap provides the assets (images, CSS and JS)"
+                "twitter/bootstrap": "Twitter Bootstrap provides the assets (images, CSS and JS)"
             },
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
-                    "Braincrafted\\Bundle\\BootstrapBundle": ""
+                    "Bc\\Bundle\\BootstrapBundle": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -98,14 +95,15 @@
                 {
                     "name": "Florian Eckerstorfer",
                     "email": "florian@eckerstorfer.co",
-                    "homepage": "http://florian.ec"
+                    "homepage": "http://florian.ec",
+                    "role": "Developer"
                 }
             ],
-            "description": "BraincraftedBootstrapBundle integrates Bootstrap into Symfony2 by providing templates, Twig extensions, services and commands.",
+            "description": "Twitter Bootstrap for Symfony2",
             "keywords": [
                 "bootstrap"
             ],
-            "time": "2015-04-15 11:59:36"
+            "time": "2013-04-12 23:57:05"
         },
         {
             "name": "cocur/slugify",
@@ -219,16 +217,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "3c3e9d4a673f2406bebba886901d5e5fda716051"
+                "reference": "5299c29ff109a829556ed92e0e5b56dcef6799c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/3c3e9d4a673f2406bebba886901d5e5fda716051",
-                "reference": "3c3e9d4a673f2406bebba886901d5e5fda716051",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/5299c29ff109a829556ed92e0e5b56dcef6799c6",
+                "reference": "5299c29ff109a829556ed92e0e5b56dcef6799c6",
                 "shasum": ""
             },
             "require": {
-                "braincrafted/bootstrap-bundle": "dev-master",
+                "braincrafted/bootstrap-bundle": "1.4.2",
                 "dende/calendar": "dev-master",
                 "dende/common-bundle": "dev-master",
                 "doctrine/doctrine-bundle": "^1.5",
@@ -266,7 +264,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2015-11-05 02:10:48"
+            "time": "2015-11-09 02:22:00"
         },
         {
             "name": "dende/common-bundle",
@@ -1141,12 +1139,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "28cebeca1c2abc8a6fa016a658354fd851056258"
+                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/28cebeca1c2abc8a6fa016a658354fd851056258",
-                "reference": "28cebeca1c2abc8a6fa016a658354fd851056258",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ada97d55ced7f376700c19bcb50603897f8d66de",
+                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de",
                 "shasum": ""
             },
             "require": {
@@ -1210,7 +1208,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-11-07 04:11:42"
+            "time": "2015-11-07 16:44:02"
         },
         {
             "name": "fabpot/php-cs-fixer",
@@ -3266,7 +3264,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Smart-Core/AcceleratorCacheBundle/zipball/29cd6b0c4b57b32d5a5f96a31ff58a3e0698715f",
+                "url": "https://api.github.com/repos/Smart-Core/AcceleratorCacheBundle/zipball/9ba8758a0bf0e0229a61021855fcde16cdd6e312",
                 "reference": "83f2e34be2d521cca5bd72ac31be1df01233750a",
                 "shasum": ""
             },
@@ -4261,12 +4259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581"
+                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
-                "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7c124bae00ab0a019a084c6b99f1df023bcb996",
+                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996",
                 "shasum": ""
             },
             "require": {
@@ -4314,7 +4312,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-11-05 12:52:08"
+            "time": "2015-11-08 09:55:30"
         },
         {
             "name": "willdurand/hateoas",
@@ -4698,16 +4696,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "dc6df78862e1c1e1faa7bffd396d7c3179d6749d"
+                "reference": "149f8881a1df56496c37094f32d05b53e0cde37b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/dc6df78862e1c1e1faa7bffd396d7c3179d6749d",
-                "reference": "dc6df78862e1c1e1faa7bffd396d7c3179d6749d",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/149f8881a1df56496c37094f32d05b53e0cde37b",
+                "reference": "149f8881a1df56496c37094f32d05b53e0cde37b",
                 "shasum": ""
             },
             "require": {
-                "behat/gherkin": "~4.3",
+                "behat/gherkin": "~4.4",
                 "behat/transliterator": "~1.0",
                 "ext-mbstring": "*",
                 "php": ">=5.3.3",
@@ -4771,7 +4769,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2015-08-22 11:49:54"
+            "time": "2015-11-07 19:03:37"
         },
         {
             "name": "behat/gherkin",

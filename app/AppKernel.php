@@ -34,6 +34,7 @@ class AppKernel extends Kernel
 //            new Spy\TimelineBundle\SpyTimelineBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
+            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),

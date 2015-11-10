@@ -1,0 +1,18 @@
+Gyman\Domain\Entity\Section:
+  type:   entity
+  table:  sections
+  repositoryClass:  Gyman\Bundle\AppBundle\Entity\VoucherRepository
+
+  id:
+    id:
+      type: guid
+      generator: { strategy: UUID }
+
+  oneToOne:
+    calendar:
+      targetEntity: Dende\Calendar\Domain\Calendar
+
+  fields:
+    title:
+      type: text
+      nullable: false
