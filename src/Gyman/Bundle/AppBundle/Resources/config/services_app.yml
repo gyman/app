@@ -22,3 +22,8 @@ services:
       - [setEntityManager, [@doctrine.orm.club_entity_manager]]
     tags:
       - { name: request.param_converter}
+
+  gyman.app.club_settings_type:
+    class: Gyman\Bundle\AppBundle\Form\SettingsType
+    tags:
+      - { name: form.type, alias: club_settings }
