@@ -24,7 +24,7 @@ services:
   gyman.multidatabase.database_worker:
     class: Gyman\Bundle\MultiDatabaseBundle\Services\DatabaseWorker
     arguments:
-      - "%club_database_name_template%"
+#      - "%club_database_name_template%"
       - "%database_user%"
       - "%database_password%"
     calls:
@@ -63,12 +63,6 @@ services:
 
   gyman.multidatabase.command.assign_user_to_club:
     class: Gyman\Bundle\MultiDatabaseBundle\Command\AssignUserToClubCommand
-    tags:
-      - { name: console.command }
-
-  gyman.multidatabase.command.drop_database:
-    class: Gyman\Bundle\MultiDatabaseBundle\Command\DropClubDatabaseCommand
-    parent: gyman.multidatabase.command
     tags:
       - { name: console.command }
 

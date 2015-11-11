@@ -60,9 +60,13 @@ final class DatabaseWorker
      */
     private $defaultConnection;
 
-    public function __construct($clubDatabaseNameTemplate, $username, $password)
+    /**
+     * DatabaseWorker constructor.
+     * @param $username
+     * @param $password
+     */
+    public function __construct($username, $password)
     {
-        $this->clubDatabaseNameTemplate = $clubDatabaseNameTemplate;
         $this->username = $username;
         $this->password = $password;
     }
@@ -89,18 +93,6 @@ final class DatabaseWorker
     {
         $this->defaultConnection->exec(
             $this->getCreateDatabaseQuery($this->dbName)
-        );
-    }
-
-    /**
-     * @param $clubName
-     */
-    public function dropDatabase($clubName)
-    {
-        $dbname = $this->createDatabaseName($clubName);
-
-        $this->defaultConnection->exec(
-            $this->getDropDatabaseQuery($dbname)
         );
     }
 
@@ -176,18 +168,6 @@ final class DatabaseWorker
     public function setSlugifier(Slugify $slugifier)
     {
         $this->slugifier = $slugifier;
-    }
-
-    /**
-     * @param string $clubName
-     * @return string mixed
-     */
-    protected function createDatabaseName($clubName)
-    {
-        $clubSlug = $this->slugifier->convert($clubName);
-        $dbname = str_replace('{{club_name}}', $clubSlug, $this->clubDatabaseNameTemplate);
-
-        return $dbname;
     }
 
     private function updateClubConnection($club = null)

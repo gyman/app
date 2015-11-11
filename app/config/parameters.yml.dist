@@ -3,9 +3,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     ~
-    database_user:     ~
-    database_password: ~
+    database_name:     gyman
+    database_user:     root
+    database_password: root
     mailer_transport:  smtp
     mailer_host:       smtp.gmail.com
     mailer_user:       ~
@@ -17,8 +17,5 @@ parameters:
     debug_redirects:        false
     sentry_url:             http://0@sentry
     base_url:               localhost
-    blank_club_database_name: %database_name%_default
-    club_database_name_template: '%database_name%_{{club_name}}'
-
     sqlite_database_user:     admin
     sqlite_database_password: admin
