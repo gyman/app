@@ -84,6 +84,8 @@ entries.form.entry_type.free.label: "darmowe"
 entries.form.entry_type.voucher.label: "na karnet"
 entries.form.entry_type.paid.label: "płatne"
 
+entries.form.occurrence.label: 'Dzisiejsze zajęcia'
+
 entries.type.voucher: "na karnet"
 entries.type.free: "darmowe"
 entries.type.paid: "płatne"

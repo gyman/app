@@ -3,6 +3,7 @@ namespace Gyman\Bundle\AppBundle\Form;
 
 use Carbon\Carbon;
 use DateTime;
+use Dende\Calendar\Domain\Calendar;
 use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Bundle\AppBundle\Entity\Section;
@@ -69,7 +70,17 @@ final class EntryType extends AbstractType
                 $start = $occurrence->startDate()->format("H:i");
                 $stop = $occurrence->endDate()->format("H:i");
                 $activity = $occurrence->event()->title();
-                $section = $sectionRepository->findOneByCalendar($occurrence->event()->calendar());
+
+                /** @var Calendar $calendar */
+                $calendar = $occurrence->event()->calendar();
+
+                /** @var Section $section */
+                $section = $sectionRepository->findOneByCalendar($calendar);
+
+                if(is_null($section)) {
+                    return;
+                }
+
                 return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $section->title());
             },
             'choices' => $this->occurrenceRepository->findByPeriod($startDate, $endDate)

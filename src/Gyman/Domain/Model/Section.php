@@ -36,10 +36,11 @@ class Section
      * @param string $title
      * @param Calendar $calendar
      */
-    public function __construct($id = null, $title = '')
+    public function __construct($id = null, $title = '', Calendar $calendar)
     {
         $this->id = $id;
         $this->title = $title;
+        $this->calendar = $calendar;
         $this->members = new ArrayCollection();
     }
 
