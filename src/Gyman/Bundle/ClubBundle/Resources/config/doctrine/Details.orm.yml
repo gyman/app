@@ -1,0 +1,36 @@
+Gyman\Bundle\ClubBundle\Entity\Details:
+  type:   embeddable
+  fields:
+    address:
+      type: string
+      nullable: true
+    zipcode:
+      type: string
+      nullable: true
+    city:
+      type: string
+      nullable: true
+    country:
+      type: string
+      nullable: true
+    phone_number:
+      type: string
+      nullable: true
+    email_address:
+      type: string
+      nullable: true
+    opened_from:
+      type: string
+      nullable: true
+    opened_till:
+      type: string
+      nullable: true
+    logo:
+      type: string
+      nullable: true
+    about:
+      type: string
+      nullable: true
+    account_number:
+      type: string
+      nullable: true

@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\SectionBundle\Entity\Section;
+use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Bundle\UserBundle\Entity\User;
 
 /**
@@ -41,15 +41,20 @@ class Club
     protected $database;
 
     /**
+     * @var Details
+     */
+    protected $details;
+
+    /**
      * Club constructor.
      * @param int $id
      * @param string $name
      * @param ArrayCollection|\Gyman\Bundle\UserBundle\Entity\User[] $owners
-     * @param ArrayCollection|\Gyman\Bundle\SectionBundle\Entity\Section[] $sections
+     * @param ArrayCollection|Section[] $sections
      * @param Subdomain $subdomain
      * @param Database $database
      */
-    public function __construct($id, $name, $owners, $sections, Subdomain $subdomain, Database $database)
+    public function __construct($id, $name, $owners, $sections, Subdomain $subdomain, Database $database, Details $details)
     {
         $this->id = $id;
         $this->name = $name;
@@ -57,6 +62,7 @@ class Club
         $this->sections = $sections;
         $this->subdomain = $subdomain;
         $this->database = $database;
+        $this->details = $details;
     }
 
     /**
@@ -84,7 +90,7 @@ class Club
     }
 
     /**
-     * @return ArrayCollection|\Gyman\Bundle\SectionBundle\Entity\Section[]
+     * @return ArrayCollection|Section[]
      */
     public function getSections()
     {
@@ -105,5 +111,18 @@ class Club
     public function getDatabase()
     {
         return $this->database;
+    }
+
+    /**
+     * @return Details
+     */
+    public function details()
+    {
+        return $this->details;
+    }
+
+    public function setDetails(Details $details)
+    {
+        $this->details = $details;
     }
 }

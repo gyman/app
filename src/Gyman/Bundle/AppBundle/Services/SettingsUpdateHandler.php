@@ -4,6 +4,8 @@ namespace Gyman\Bundle\AppBundle\Services;
 use Dende\Calendar\Domain\Calendar;
 use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Bundle\AppBundle\Entity\SectionRepository;
+use Gyman\Bundle\ClubBundle\Entity\Club;
+use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Domain\Command\UpdateSettingsCommand;
 
 /**
@@ -18,12 +20,25 @@ class SettingsUpdateHandler
     private $sectionRepository;
 
     /**
+     * @var ClubRepository
+     */
+    private $clubRepository;
+
+    /**
+     * @var Club
+     */
+    private $club;
+
+    /**
      * SettingsUpdateHandler constructor.
      * @param SectionRepository $sectionRepository
+     * @param ClubRepository $clubRepository
      */
-    public function __construct(SectionRepository $sectionRepository)
+    public function __construct(SectionRepository $sectionRepository, ClubRepository $clubRepository, Club $currentClub)
     {
         $this->sectionRepository = $sectionRepository;
+        $this->clubRepository = $clubRepository;
+        $this->club = $currentClub;
     }
 
     /**
@@ -47,5 +62,9 @@ class SettingsUpdateHandler
                 $this->sectionRepository->update($section);
             }
         }
+
+        $this->club->setDetails($command->details);
+
+        $this->clubRepository->update($this->club);
     }
 }

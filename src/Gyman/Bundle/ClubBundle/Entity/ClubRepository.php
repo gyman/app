@@ -17,4 +17,11 @@ final class ClubRepository extends EntityRepository
     {
         return $this->findOneBy(['subdomain.name' => $subdomain->getName()]);
     }
+
+    public function update(Club $club)
+    {
+        $em = $this->getEntityManager();
+        $em->persist($club);
+        $em->flush();
+    }
 }

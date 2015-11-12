@@ -7,6 +7,18 @@ club-dende:
     name:     gyman_dende
     user:     root
     password: root
+  details:
+    address: Poranna 41/10
+    zipcode: 53-026
+    city:    Wrocław
+    country:  Poland
+    phone_number: "604 411 089"
+    email_address: "dende@dende.com.pl"
+    opened_from: 8:00
+    opened_till: 16:00
+    logo: ~
+    about: "Welcome to our club"
+    account_number: "000000000000000000000000"
 club-rio:
   name:       Rio Grappling Club
   subdomain:  rio
@@ -16,6 +28,18 @@ club-rio:
     name:     gyman_rio
     user:     root
     password: root
+  details:
+    address: ~
+    zipcode: ~
+    city:    ~
+    country:  ~
+    phone_number: ~
+    email_address: ~
+    opened_from: ~
+    opened_till: ~
+    logo: ~
+    about: ~
+    account_number: ~
 club-extreme:
   name:       Extreme Fighters
   subdomain:  extreme
@@ -25,3 +49,15 @@ club-extreme:
     name:     gyman_extreme
     user:     root
     password: root
+  details:
+    address: ~
+    zipcode: ~
+    city:    ~
+    country:  ~
+    phone_number: ~
+    email_address: ~
+    opened_from: ~
+    opened_till: ~
+    logo: ~
+    about: ~
+    account_number: ~

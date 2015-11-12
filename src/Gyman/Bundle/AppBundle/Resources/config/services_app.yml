@@ -28,7 +28,14 @@ services:
     tags:
       - { name: form.type, alias: club_settings }
 
+  gyman.app.club_details_type:
+    class: Gyman\Bundle\AppBundle\Form\ClubDetailsType
+    tags:
+      - { name: form.type, alias: club_details }
+
   gyman.app.handler.settings_update:
     class: Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler
     arguments:
       - @gyman.repository.section
+      - @gyman.club.repository
+      - @=service('gyman.club.provider').getCurrentClub()

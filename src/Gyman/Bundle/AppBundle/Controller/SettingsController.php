@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use Exception;
 use Gyman\Domain\Command\UpdateSettingsCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -20,8 +21,21 @@ class SettingsController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $club = $this->get("gyman.club.provider")->getCurrentClub();
+
+        if(is_null($club)) {
+           throw new Exception('No club found in database!');
+        }
+
         $command = new UpdateSettingsCommand();
         $command->sections = $this->get('gyman.repository.section')->findAll();
+        $command->subdomain = sprintf(
+            '%s.%s',
+            $club->getSubdomain()->getName(),
+            $this->getParameter('base_url')
+        );
+
+        $command->details = $club->details();
 
         $form = $this->createForm('club_settings', $command);
 

@@ -46,9 +46,9 @@
 
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
-                            <li>
-                                {{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}
-                            </li>
+                            {#<li>#}
+                                {#{{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}#}
+                            {#</li>#}
 
                             <li>
                                 <a href="{{ path("gyman_settings") }}">
@@ -62,6 +62,10 @@
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'layout.logged_in_as'|trans({'%username%' : app.user.username}) }}</span>
                                 </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ path("fos_user_security_logout") }}">wyloguj</a>
                             </li>
 
                             {# todo: przywrócić!!!

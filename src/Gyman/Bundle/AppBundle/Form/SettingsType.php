@@ -19,20 +19,10 @@ final class SettingsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('subdomain', 'text', [
-//                "read_only" => true
-//            ])
-//            ->add('name', 'text')
-//            ->add('address', 'text')
-//            ->add('zipcode', 'text')
-//            ->add('city', 'text')
-//            ->add('country', 'text')
-//            ->add('phone_number', 'text')
-//            ->add('email_address', 'text')
-//            ->add('opened_from', 'text')
-//            ->add('opened_till', 'text')
-//            ->add('upload_logo', 'file')
-//            ->add('about', 'textarea')
+            ->add('subdomain', 'text', [
+                "read_only" => true,
+            ])
+            ->add('details', 'club_details')
 //            ->add('administrators', 'choice', [
 //                'choices' => ['kowalski', 'nowak', 'dupa'],
 //                'expanded' => true,

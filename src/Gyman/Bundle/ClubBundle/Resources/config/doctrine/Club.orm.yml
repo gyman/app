@@ -3,9 +3,12 @@ Gyman\Bundle\ClubBundle\Entity\Club:
   table:  clubs
   repositoryClass:  Gyman\Bundle\ClubBundle\Entity\ClubRepository
   embedded:
+    details:
+      class: Gyman\Bundle\ClubBundle\Entity\Details
+      columnPrefix: details_
     database:
       class: Gyman\Bundle\ClubBundle\Entity\Database
-      columnPrefix: false
+      columnPrefix: database_
     subdomain:
       class: Gyman\Bundle\ClubBundle\Entity\Subdomain
       columnPrefix: subdomain_
