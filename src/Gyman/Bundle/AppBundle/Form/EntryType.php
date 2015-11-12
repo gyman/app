@@ -51,10 +51,10 @@ final class EntryType extends AbstractType
         $date = $options["date"];
 
         /** @var Carbon $startDate */
-        $startDate = Carbon::instance($date)->setTime(0,0,0);
+        $startDate = Carbon::instance($date)->setTime(0, 0, 0);
 
         /** @var Carbon $endDate */
-        $endDate = Carbon::instance($date)->setTime(0,0,0)->addDays(1);
+        $endDate = Carbon::instance($date)->setTime(0, 0, 0)->addDays(1);
 
         $sectionRepository = $this->sectionRepository;
 
@@ -65,7 +65,7 @@ final class EntryType extends AbstractType
             "multiple" => false,
             'label' => 'entries.form.occurrence.label',
             'class' => 'Calendar:Calendar\Event\Occurrence',
-            'property' => function(Occurrence $occurrence) use ($sectionRepository) {
+            'property' => function (Occurrence $occurrence) use ($sectionRepository) {
                 $start = $occurrence->startDate()->format("H:i");
                 $stop = $occurrence->endDate()->format("H:i");
                 $activity = $occurrence->event()->title();

@@ -27,3 +27,8 @@ services:
     class: Gyman\Bundle\AppBundle\Form\SettingsType
     tags:
       - { name: form.type, alias: club_settings }
+
+  gyman.app.handler.settings_update:
+    class: Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler
+    arguments:
+      - @gyman.repository.section

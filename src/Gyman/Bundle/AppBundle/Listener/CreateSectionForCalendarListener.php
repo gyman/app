@@ -4,7 +4,6 @@ namespace Gyman\Bundle\AppBundle\Listener;
 use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
 use Gyman\Bundle\AppBundle\Entity\SectionRepository;
 use Gyman\Bundle\AppBundle\Entity\Section;
-use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class CreateSectionForCalendarListener
@@ -33,7 +32,7 @@ class CreateSectionForCalendarListener
     public function onCalendarCreate(CalendarAfterCreationEvent $event)
     {
         $section = new Section(
-            new SectionId('some id'),
+            null,
             $event->calendar->name(),
             $event->calendar
         );

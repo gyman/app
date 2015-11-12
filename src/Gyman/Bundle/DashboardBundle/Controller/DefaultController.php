@@ -40,10 +40,10 @@ class DefaultController extends Controller
     public function getActivitiesAction(DateTime $date)
     {
         /** @var Carbon $startDate */
-        $startDate = Carbon::instance($date)->setTime(0,0,0);
+        $startDate = Carbon::instance($date)->setTime(0, 0, 0);
 
         /** @var Carbon $endDate */
-        $endDate = Carbon::instance($date)->setTime(0,0,0)->addDays(1);
+        $endDate = Carbon::instance($date)->setTime(0, 0, 0)->addDays(1);
 
         /** @var Occurrence[] $occurrences */
         $occurrences = $this->get('dende_calendar.occurrences_repository')->findByPeriod($startDate, $endDate);

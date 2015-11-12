@@ -68,7 +68,6 @@ final class MemberType extends AbstractType
                 'expanded' => true
             ])
         ;
-
     }
 
     /**

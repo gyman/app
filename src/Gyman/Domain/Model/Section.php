@@ -3,7 +3,6 @@ namespace Gyman\Domain\Model;
 
 use Dende\Calendar\Domain\Calendar;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Model\Section\SectionId;
 
 /**
  * Class Section
@@ -12,7 +11,7 @@ use Gyman\Domain\Model\Section\SectionId;
 class Section
 {
     /**
-     * @var SectionId
+     * @var string
      */
     protected $id;
 
@@ -33,15 +32,14 @@ class Section
 
     /**
      * Section constructor.
-     * @param SectionId $id
-     * @param $title
+     * @param string $id
+     * @param string $title
      * @param Calendar $calendar
      */
-    public function __construct(SectionId $id, $title, Calendar $calendar)
+    public function __construct($id = null, $title = '')
     {
         $this->id = $id;
         $this->title = $title;
-        $this->calendar = $calendar;
         $this->members = new ArrayCollection();
     }
 
@@ -62,9 +60,10 @@ class Section
     }
 
     /**
-     * @return SectionId
+     * @return string
      */
-    public function id(){
+    public function id()
+    {
         return $this->id;
     }
 
@@ -74,5 +73,29 @@ class Section
     public function addMember(Member $member)
     {
         $this->members->add($member);
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param Calendar $calendar
+     */
+    public function setCalendar(Calendar $calendar)
+    {
+        $this->calendar = $calendar;
     }
 }

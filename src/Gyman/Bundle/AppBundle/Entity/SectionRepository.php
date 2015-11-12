@@ -21,4 +21,24 @@ class SectionRepository extends EntityRepository
         $em->persist($section);
         $em->flush();
     }
+
+    /**
+     * @param Section $section
+     */
+    public function remove(Section $section)
+    {
+        $em = $this->getEntityManager();
+        $em->remove($section);
+        $em->flush();
+    }
+
+    /**
+     * @param $section
+     */
+    public function update($section)
+    {
+        $em = $this->getEntityManager();
+        $em->persist($section);
+        $em->flush();
+    }
 }

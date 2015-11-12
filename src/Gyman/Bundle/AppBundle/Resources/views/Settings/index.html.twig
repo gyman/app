@@ -1,7 +1,79 @@
 {% extends '::base.html.twig' %}
 
-{% block content %}
-    settings page
+{% block stylesheets %}
+    {{ parent() }}
+<style>
+    div#club_settings_sections > div.control-group > label.control-label {
+        display: none;
+    }
+</style>
+{% endblock stylesheets %}
 
-    {{ form(form) }}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var $form = $("form[name='club_settings']");
+        var collectionHolderSelector = 'div#club_settings_sections';
+
+        var removeEventName = 'click.removeSection';
+        var removeButtonClass = 'a.remove-collection-entry';
+        var removeButtonHandler = function(e) {
+            if(confirm('{{ 'remove_collection_element_confirmation'|trans }}')) {
+                $("#" + $(e.target).data('entry-id')).remove();
+            }
+        };
+
+        var addEventName = 'click.addSection';
+        var addButtonId = '#club_settings_add_section';
+        var addHandler = function(e) {
+            $collectionHolder = $(collectionHolderSelector);
+            var prototype = $collectionHolder.data('prototype');
+            var index = $collectionHolder.data('index');
+            var newForm = prototype.replace(/__name__label__/g, index);
+            newForm = newForm.replace(/__name__/g, index);
+            $collectionHolder.data('index', index + 1);
+            $collectionHolder.append(newForm);
+        };
+
+        jQuery(document).ready(function() {
+            $collectionHolder = $(collectionHolderSelector);
+            $collectionHolder.data('index', $collectionHolder.find(':input:text').length);
+
+            $form.on(addEventName, addButtonId, addHandler);
+            $collectionHolder.on(removeEventName, removeButtonClass, removeButtonHandler);
+        });
+    </script>
+{% endblock javascripts %}
+
+
+
+{% block content %}
+    <div class="contentwrapper">
+        <div class="heading">
+            <h3>{{ 'settings.header.title' }}</h3>
+        </div>
+
+        <div class="span12">
+            {% include "::_flash.html.twig" %}
+
+            {{ form_start(form) }}
+
+            <fieldset>
+                <legend>Sections</legend>
+                {{ form_row(form.sections) }}
+                {{ form_row(form.add_section) }}
+            </fieldset>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="form-actions">
+                        {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock content %}

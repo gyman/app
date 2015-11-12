@@ -5,5 +5,4 @@ use Gyman\Domain\Model\Section as BaseSection;
 
 class Section extends BaseSection
 {
-
 }

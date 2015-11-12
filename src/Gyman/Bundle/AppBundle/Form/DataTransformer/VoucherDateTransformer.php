@@ -27,13 +27,13 @@ class VoucherDateTransformer implements DataTransformerInterface
      * @param  string   $string
      * @return DateTime | null
      */
-    public function transform($datetime)
+    public function transform($id)
     {
-        if (!$datetime instanceof DateTime) {
+        if (!$id instanceof DateTime) {
             return;
         }
 
-        return $this->fixHour($datetime);
+        return $this->fixHour($id);
     }
 
     /**

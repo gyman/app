@@ -6,24 +6,30 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\AppBundle\Entity\Section;
-use Gyman\Domain\Model\Section\SectionId;
 
 class SectionsData extends BaseFixture
 {
     protected $dir = __DIR__;
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
         return 50;
     }
 
+    /**
+     * @param $array
+     * @return Section
+     */
     public function insert($array)
     {
         /** @var Calendar $calendar */
         $calendar = $this->getReference($array["calendar"]);
-        $section = new Section(new SectionId(null), $array["title"], $calendar);
+        $section = new Section(null, $array["title"], $calendar);
 
-        foreach($array["members"] as $memberReference) {
+        foreach ($array["members"] as $memberReference) {
             /** @var Member $member */
             $member = $this->getReference($memberReference);
             $section->addMember($member);

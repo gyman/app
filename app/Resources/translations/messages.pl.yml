@@ -14,3 +14,6 @@ navigation.settings: Ustawienia
 navigation.logout: Wyloguj
 
 navigation.menu: Nawigacja
+remove_collection_element: 'usuń'
+remove_collection_element_confirmation: 'Czy na pewno usunąć element?'
+open_settings: 'ustawienia'
