@@ -17,7 +17,6 @@ Gyman\Bundle\AppBundle\Entity\Section:
     members:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
       mappedBy: sections
-#      inversedBy: sections
 
   fields:
     title:

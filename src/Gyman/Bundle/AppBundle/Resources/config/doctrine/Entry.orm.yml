@@ -18,6 +18,11 @@ Gyman\Bundle\AppBundle\Entity\Entry:
       inversedBy: entries
       cascade: ["all"]
 
+    occurrence:
+      targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
+      mappedBy: occurrence
+      nullable: true
+
   id:
     id:
       type: guid

@@ -59,9 +59,11 @@ final class EntryType extends AbstractType
 
         $sectionRepository = $this->sectionRepository;
 
+        $todayOccurrences = $this->occurrenceRepository->findByPeriod($startDate, $endDate);
+
         $builder
         ->add('occurrence', 'entity', [
-            'mapped' => false,
+            'required' => false,
             'expanded' => true,
             "multiple" => false,
             'label' => 'entries.form.occurrence.label',
@@ -83,7 +85,7 @@ final class EntryType extends AbstractType
 
                 return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $section->title());
             },
-            'choices' => $this->occurrenceRepository->findByPeriod($startDate, $endDate)
+            'choices' => $todayOccurrences
         ])
         ->add('startDate', 'datetime', [
             'widget' => 'single_text',

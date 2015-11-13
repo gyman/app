@@ -16,7 +16,8 @@
 
                 {#{% if occurrence.isPast(true) %}<span class="label" style="margin-left: 10px; margin-top: 7px;">zakonczone</span>{% endif %}#}
 
-                <a class="btn btn-warning openUrlInModal" href="#">{# occurrence.entries|length #} osób</a>
+                <a class="btn btn-warning openUrlInModal" href="#">{{ entries_count(occurrence) }} osób</a>
+
             </li>
         {% else %}
             <li>brak wydarzeń dla tego dnia</li>

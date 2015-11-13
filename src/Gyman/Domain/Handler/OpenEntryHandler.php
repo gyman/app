@@ -23,7 +23,7 @@ final class OpenEntryHandler
     /**
      * @var MemberRepositoryInterface
      */
-    private $repository;
+    private $memberRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -35,9 +35,9 @@ final class OpenEntryHandler
      * @param EntryRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {
-        $this->repository = $repository;
+        $this->memberRepository = $memberRepository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -51,9 +51,9 @@ final class OpenEntryHandler
         $entry = EntryFactory::createFromOpenEntryCommand($command);
 
         $member = $command->member;
-        $member->enter($entry);
+        $member->enter($entry, $command->occurrence);
 
-        $this->repository->insert($member);
+        $this->memberRepository->insert($member);
 
         $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($entry, $author));
     }

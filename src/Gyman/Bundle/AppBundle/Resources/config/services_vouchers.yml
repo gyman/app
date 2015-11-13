@@ -28,10 +28,10 @@ services:
       calls:
         - [setTranslator, [@translator]]
       tags:
-          - { name: twig.extension }
+        - { name: twig.extension }
 
   gyman.vouchers.repository.entry:
-    class:          Gyman\Bundle\AppBundle\Repository\EntryRepository
+    class:          Gyman\Bundle\AppBundle\Entity\EntryRepository
     factory_service: doctrine.orm.club_entity_manager
     factory_method:  getRepository
     arguments:

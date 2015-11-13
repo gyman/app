@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain\Model;
 
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Exception\EntryClosingDateBeforeOpeningException;
 use Gyman\Domain\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Domain\Exception\NotSupportedEntryType;
@@ -15,13 +16,11 @@ class Entry
     const TYPE_FREE = 'free';
     const TYPE_VOUCHER = 'voucher';
     const TYPE_PAID = 'paid';
-//    const TYPE_MULTISPORT = 'multisport';
 
     public static $availableTypes = [
         self::TYPE_FREE,
         self::TYPE_VOUCHER,
         self::TYPE_PAID,
-//        self::TYPE_MULTISPORT,
     ];
 
     /**
@@ -60,6 +59,11 @@ class Entry
     protected $voucher;
 
     /**
+     * @var Occurrence
+     */
+    protected $occurrence;
+
+    /**
      * Entry constructor.
      * @param \DateTime $startDate
      * @param string $type
@@ -67,7 +71,7 @@ class Entry
      * @param Price $price |null
      * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price)
+    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType();
@@ -77,6 +81,7 @@ class Entry
         $this->endDate = $endDate;
         $this->price = $price;
         $this->type = $type;
+        $this->occurrence = $occurrence;
     }
 
     /**
@@ -194,5 +199,12 @@ class Entry
     public function assignToMember(Member $member)
     {
         $this->member = $member;
+    }
+
+    /**
+     * @return Occurrence
+     */
+    public function occurrence(){
+        return $this->occurrence;
     }
 }

@@ -2,6 +2,7 @@
 namespace Gyman\Domain\Command;
 
 use DateTime;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Model\Entry;
 use Gyman\Domain\Model\Member;
 use Gyman\Domain\Model\Voucher;
@@ -36,6 +37,11 @@ final class OpenEntryCommand
      * @var Voucher
      */
     public $voucher;
+
+    /**
+     * @var Occurrence
+     */
+    public $occurrence;
 
     /**
      * CreateVoucherCommand constructor.

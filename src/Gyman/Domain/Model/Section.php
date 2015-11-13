@@ -36,7 +36,7 @@ class Section
      * @param string $title
      * @param Calendar $calendar
      */
-    public function __construct($id = null, $title = '', Calendar $calendar)
+    public function __construct($id = null, $title = '', Calendar $calendar = null)
     {
         $this->id = $id;
         $this->title = $title;
