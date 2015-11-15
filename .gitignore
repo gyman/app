@@ -29,3 +29,4 @@ node_modules/
 phantomjsdriver.log
 auth.json
 .php_cs.cache
+.rsync_cache

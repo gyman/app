@@ -44,18 +44,18 @@ class SettingsUpdateHandler
     /**
      * @param UpdateSettingsCommand $command
      */
-    public function handle(UpdateSettingsCommand $command){
-
+    public function handle(UpdateSettingsCommand $command)
+    {
         $existingSections = $this->sectionRepository->findAll();
 
-        foreach($existingSections as $existing) {
-            if(!in_array($existing, $command->sections)) {
+        foreach ($existingSections as $existing) {
+            if (!in_array($existing, $command->sections)) {
                 $this->sectionRepository->remove($existing);
             }
         }
 
-        foreach($command->sections as $section) {
-            if(is_null($section->id())) {
+        foreach ($command->sections as $section) {
+            if (is_null($section->id())) {
                 $section->setCalendar(new Calendar(null, $section->title()));
                 $this->sectionRepository->insert($section);
             } else {

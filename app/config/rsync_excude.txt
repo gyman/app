@@ -1,0 +1,11 @@
+deploy.sh
+- app/config/rsync_exclude.txt
+.*
+*.md
+*.pem
+sftp-*.json
+nbproject
+.idea
+- app/cache
+- app/logs
+- app/config/parameters.yml

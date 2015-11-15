@@ -24,17 +24,17 @@ class EntriesControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first();
 
-        $this->assertCount(7, $form->filter('input, textarea, button, select'));
+        $this->assertCount(8, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(0, $form->filter('textarea'));
         $this->assertCount(0, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(6, $form->filter('input'));
+        $this->assertCount(7, $form->filter('input'));
         $this->assertCount(1, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=date]'));
         $this->assertCount(1, $form->filter('input[type=number]'));
         $this->assertCount(0, $form->filter('input[type=checkbox]'));
-        $this->assertCount(3, $form->filter('input[type=radio]'));
+        $this->assertCount(4, $form->filter('input[type=radio]'));
         $this->assertCount(1, $form->filter('input[type=hidden]'));
 
         $this->assertEquals(
@@ -56,18 +56,18 @@ class EntriesControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first();
 
-        $this->assertCount(6, $form->filter('input, textarea, button, select'));
+        $this->assertCount(7, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(0, $form->filter('textarea'));
         $this->assertCount(0, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(5, $form->filter('input'));
+        $this->assertCount(6, $form->filter('input'));
         $this->assertCount(1, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=date]'));
         $this->assertCount(1, $form->filter('input[type=number]'));
         $this->assertCount(0, $form->filter('input[type=checkbox]'));
         $this->assertCount(1, $form->filter('input[type=hidden]'));
-        $this->assertCount(2, $form->filter('input[type=radio]'));
+        $this->assertCount(3, $form->filter('input[type=radio]'));
 
         $this->assertEquals(
             Carbon::now()->format('d.m.Y H:i'),

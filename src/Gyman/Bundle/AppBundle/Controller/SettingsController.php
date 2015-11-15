@@ -23,8 +23,8 @@ class SettingsController extends Controller
     {
         $club = $this->get("gyman.club.provider")->getCurrentClub();
 
-        if(is_null($club)) {
-           throw new Exception('No club found in database!');
+        if (is_null($club)) {
+            throw new Exception('No club found in database!');
         }
 
         $command = new UpdateSettingsCommand();

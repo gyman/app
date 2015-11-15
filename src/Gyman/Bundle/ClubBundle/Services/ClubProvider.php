@@ -36,7 +36,8 @@ class ClubProvider
     /**
      * @return Club|null
      */
-    public function getCurrentClub(){
+    public function getCurrentClub()
+    {
         return $this->getClub(
             $this->subdomainProvider->getSubdomain()
         );
@@ -46,7 +47,8 @@ class ClubProvider
      * @param string $subdomainName
      * @return Club|null
      */
-    public function getClub($subdomainName){
+    public function getClub($subdomainName)
+    {
         return $this->clubRepository->findOneBySubdomain(new Subdomain($subdomainName));
     }
 }

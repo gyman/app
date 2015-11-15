@@ -4,7 +4,6 @@ namespace Gyman\Bundle\AppBundle\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\AppBundle\Globals;
-use Gyman\Bundle\SectionBundle\Entity\Section;
 use Gyman\Domain\Model\Details;
 use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Model\Member as BaseMember;

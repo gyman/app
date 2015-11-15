@@ -79,7 +79,7 @@ final class EntryType extends AbstractType
                 /** @var Section $section */
                 $section = $sectionRepository->findOneByCalendar($calendar);
 
-                if(is_null($section)) {
+                if (is_null($section)) {
                     return;
                 }
 

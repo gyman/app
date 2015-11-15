@@ -204,7 +204,8 @@ class Entry
     /**
      * @return Occurrence
      */
-    public function occurrence(){
+    public function occurrence()
+    {
         return $this->occurrence;
     }
 }

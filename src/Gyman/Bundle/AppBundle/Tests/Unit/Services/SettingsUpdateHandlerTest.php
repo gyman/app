@@ -12,7 +12,6 @@ use Mockery as m;
  */
 class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function tearDown()
     {
         m::close();
@@ -21,7 +20,8 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testHandle(){
+    public function testHandle()
+    {
         $sectionOld1 = new Section(111, 'will-be-left-1');
         $sectionOld2 = new Section(112, 'will-be-left-2');
         $sectionOld3 = new Section(113, 'will-be-left-3');
