@@ -3,6 +3,11 @@ namespace Gyman\Bundle\AppBundle\Services;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Class SubdomainProvider
+ * @package Gyman\Bundle\AppBundle\Services
+ * @todo should return Subdomain object not a string
+ */
 final class SubdomainProvider implements SubdomainProviderInterface
 {
     /**

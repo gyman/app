@@ -36,7 +36,7 @@ class UploadMemberFotoHandler
     public function handle(MemberCommandInterface $command)
     {
         if ($command->uploadFile instanceof UploadedFile) {
-            $destinationDir = $this->fotoDestinationDir . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
+            $destinationDir = realpath($this->fotoDestinationDir) . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
 
             if (!file_exists($destinationDir)) {
                 mkdir($destinationDir, 0755);
