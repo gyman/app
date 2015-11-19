@@ -9,6 +9,7 @@
 
     <script src="{{ asset('bundles/dendecalendar/js/locales/bootstrap-datetimepicker.pl.js') }}"></script>
     <script src="{{ asset('bundles/dendecalendar/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/gymanapp/js/calendar_form.js') }}"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -42,6 +43,11 @@
     <div class="row-fluid">
         <div class="span12">
             <div class="form-actions">
+                {% if form.delete_event is defined %}
+                    {{ form_row(form.delete_event, {attr: {class: 'btn btn-link pull-right'}}) }}
+                    {{ form_row(form.delete_occurrence, {attr: {class: 'btn btn-link pull-right'}}) }}
+                {% endif %}
+
                 {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
 
                 <a href='{{ path('dende_calendar_default_index') }}'>{{ 'dende_calendar.link.back_to_calendar'|trans }}</a>
