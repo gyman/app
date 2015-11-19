@@ -133,7 +133,7 @@ class User extends BaseUser implements UserInterface
 
     public function getFoto()
     {
-        return '/bundles/default/images/no-profile.gif';
+        return '/bundles/gymanapp/images/no-profile.gif';
     }
 
     /**

@@ -23,13 +23,31 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<div class="contentwrapper">
-    <div class="heading">
-        <h3>Edytuj wydarzenie</h3>
+<div class="heading">
+    <h3>{{ header_title|default('Edytuj wydarzenie') }}</h3>
+</div>
+<div class="span12">
+    {% include "::_flash.html.twig" %}
+    {{ form_start(form, {attr: {class: "form form-horizontal"}}) }}
+
+    {{ form_row(form.calendar) }}
+    {{ form_row(form.new_calendar_name) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.startDate) }}
+    {{ form_row(form.endDate) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.repetitionDays) }}
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="form-actions">
+                {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
+
+                <a href='{{ path('dende_calendar_default_index') }}'>{{ 'dende_calendar.link.back_to_calendar'|trans }}</a>
+            </div>
+        </div>
     </div>
-    <div class="span12">
-        {% include "::_flash.html.twig" %}
-        {{ form(form, {attr: {class: "form form-horizontal"}}) }}
-    </div>
+    {{ form_end(form) }}
 </div>
 {% endblock content %}

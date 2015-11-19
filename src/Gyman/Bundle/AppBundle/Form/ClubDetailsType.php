@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
-use Gyman\Bundle\AppBundle\Form\CollectionType\SectionType;
+use Gyman\Bundle\ClubBundle\Entity\Details;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -39,7 +39,7 @@ final class ClubDetailsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => 'Gyman\Bundle\ClubBundle\Entity\Details',
+            'data_class'      => Details::class,
             'csrf_protection' => true,
         ]);
     }

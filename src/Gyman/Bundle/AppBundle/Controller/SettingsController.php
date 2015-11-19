@@ -49,7 +49,7 @@ class SettingsController extends Controller
 
                 return $this->redirectToRoute('gyman_settings');
             } else {
-                $this->addFlash('warninig', 'flash.settings_updated.error');
+                $this->addFlash('warning', 'flash.settings_updated.error');
             }
         }
 

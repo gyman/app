@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
 
+use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**

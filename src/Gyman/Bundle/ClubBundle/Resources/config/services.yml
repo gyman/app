@@ -20,5 +20,5 @@ services:
   gyman.club.provider:
     class: Gyman\Bundle\ClubBundle\Services\ClubProvider
     arguments:
-      - @gyman.app.subdomain_provider
+      - @=service(parameter('subdomain_provider_service'))
       - @gyman.club.repository

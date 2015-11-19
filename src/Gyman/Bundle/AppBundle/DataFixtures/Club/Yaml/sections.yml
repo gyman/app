@@ -19,3 +19,12 @@ Section01:
     - Member06
     - Member07
     - Member08
+Section02:
+  title: "Brazilian Jiu Jitsu"
+  calendar: calendar-003
+  members:
+    - Member00
+    - Member01
+    - Member05
+    - Member06
+    - Member08

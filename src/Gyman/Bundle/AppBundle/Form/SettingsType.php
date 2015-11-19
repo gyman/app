@@ -2,13 +2,14 @@
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Gyman\Bundle\AppBundle\Form\CollectionType\SectionType;
+use Gyman\Domain\Command\UpdateSettingsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class MemberType
- * @package Gyman\Bundle\AppBundle
+ * Class SettingsType
+ * @package Gyman\Bundle\AppBundle\Form
  */
 final class SettingsType extends AbstractType
 {
@@ -55,7 +56,7 @@ final class SettingsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => 'Gyman\Domain\Command\UpdateSettingsCommand',
+            'data_class'      => UpdateSettingsCommand::class,
             'csrf_protection' => true,
         ]);
     }

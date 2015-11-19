@@ -19,9 +19,9 @@ abstract class BaseFunctionalTest extends BaseTest
             "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\VouchersData",
             "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\MembersData",
             "Gyman\\Bundle\\AppBundle\\DataFixtures\\Club\\ORM\\SectionsData",
-            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\CalendarsData",
-            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\EventsData",
-            "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\OccurrencesData",
+            "Dende\\CalendarBundle\\DataFixtures\\ORM\\CalendarsData",
+            "Dende\\CalendarBundle\\DataFixtures\\ORM\\EventsData",
+            "Dende\\CalendarBundle\\DataFixtures\\ORM\\OccurrencesData",
         ], 'club');
     }
 }

@@ -25,15 +25,15 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(17, $form->filter('input, textarea, button, select'));
+        $this->assertCount(18, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(13, $form->filter('input'));
+        $this->assertCount(14, $form->filter('input'));
         $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(3, $form->filter('input[type=checkbox]'));
+        $this->assertCount(4, $form->filter('input[type=checkbox]'));
         $this->assertCount(2, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));
@@ -55,15 +55,15 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(19, $form->filter('input, textarea, button, select'));
+        $this->assertCount(20, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(15, $form->filter('input'));
+        $this->assertCount(16, $form->filter('input'));
         $this->assertCount(9, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(3, $form->filter('input[type=checkbox]'));
+        $this->assertCount(4, $form->filter('input[type=checkbox]'));
         $this->assertCount(2, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));

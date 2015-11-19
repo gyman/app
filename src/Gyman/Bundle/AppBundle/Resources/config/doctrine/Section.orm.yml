@@ -12,6 +12,8 @@ Gyman\Bundle\AppBundle\Entity\Section:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       cascade: ["all"]
+      joinColumn:
+        onDelete: CASCADE
 
   manyToMany:
     members:
