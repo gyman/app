@@ -35,7 +35,7 @@ reports:
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /dashboard
 
 clubs:
     resource: "@ClubBundle/Controller/"

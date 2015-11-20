@@ -17,6 +17,8 @@
         var eventClickHandler = function() {};
         var dende_calendar_lang = '{{ lang }}';
         var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
+        var minTime = '{{ club.details.opened_from }}:00';
+        var maxTime = '{{ club.details.opened_till }}:00';
     </script>
 {% endblock javascripts %}
 

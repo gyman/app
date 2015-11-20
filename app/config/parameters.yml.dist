@@ -19,3 +19,4 @@ parameters:
     base_url:               localhost
     sqlite_database_user:     admin
     sqlite_database_password: admin
+    google_maps_api_key: ~

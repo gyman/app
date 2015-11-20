@@ -44,6 +44,7 @@
                         <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" />
                     </a>
 
+                    {% if app.user is not null %}
                     <div class="nav-no-collapse">
                         <ul class="nav pull-right usernav">
                             {#<li>#}
@@ -86,7 +87,15 @@
                             #}
                         </ul>
                     </div>
-
+                    {% else %}
+                    <div class="nav-no-collapse">
+                        <ul class="nav pull-right usernav">
+                            <li>
+                                <a href="{{ path("fos_user_security_login") }}">zaloguj</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <!-- /navbar-inner -->

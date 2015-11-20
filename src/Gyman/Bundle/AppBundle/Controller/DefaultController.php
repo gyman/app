@@ -8,11 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/hello/{name}")
+     * @Route("/")
      * @Template()
      */
-    public function indexAction($name)
+    public function indexAction()
     {
-        return ['name' => $name];
+        return [
+            "club" => $this->get('gyman.club.provider')->getCurrentClub()
+        ];
     }
 }

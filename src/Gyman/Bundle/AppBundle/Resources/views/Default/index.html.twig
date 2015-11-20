@@ -1,0 +1,89 @@
+{% extends 'GymanAppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ "title.welcome.main_page"|trans }}
+{% endblock title %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
+    <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/lang/" ~ lang ~ ".js") }}'></script>
+
+    <script>
+        var eventClickHandler = function() {};
+        var dende_calendar_lang = '{{ lang }}';
+        var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
+
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaWeek',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                minTime: '{{ club.details.opened_from }}:00',
+                maxTime: '{{ club.details.opened_till }}:00',
+                timeZone: dende_calendar_tz,
+                slotLabelFormat: 'H:00',
+                selectable: false,
+                lang: dende_calendar_lang,
+                events: Routing.generate('dende_calendar_default_getevents', {noroute: true}),
+                contentHeight: "auto",
+                height: "auto",
+                editable: false,
+                eventStartEditable: false,
+                eventDurationEditable: false
+            })
+        });
+
+    </script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
+{% endblock stylesheets %}
+
+{% block content %}
+    <fieldset class="row-fluid">
+        <legend>Grafik zajęć</legend>
+        <div id="calendar" class="span6"></div>
+    </fieldset>
+
+    <fieldset class="row-fluid">
+        <legend>Kontakt</legend>
+        <address class="span3">
+            <dl>
+                <dt>Street</dt>
+                <dd>{{ club.details.address }}</dd>
+                <dt>Postcode</dt>
+                <dd>{{ club.details.zipcode }}</dd>
+                <dt>City</dt>
+                <dd>{{ club.details.city }}</dd>
+                <dt>Country</dt>
+                <dd>{{ club.details.country }}</dd>
+                <dt>Tel:</dt>
+                <dd>{{ club.details.phone_number }}</dd>
+                <dt>e-mail:</dt>
+                <dd><a href="mailto:{{ club.details.email_address }}">{{ club.details.email_address }}</a></dd>
+            </dl>
+        </address>
+
+        <dl class="span4">
+            <dt>Opened from</dt>
+            <dd>{{ club.details.opened_from }}</dd>
+            <dt>Opened till</dt>
+            <dd>{{ club.details.opened_till }}</dd>
+            <dt>About us</dt>
+            <dd>{{ club.details.about }}</dd>
+        </dl>
+
+        <div class="span4">
+            <iframe width="100%" height="100%" frameborder="0" style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key={{ google_maps_api_key }}&q={{ club.details.address|url_encode }},{{ club.details.city|url_encode }},{{ club.details.country|url_encode }}" allowfullscreen>
+            </iframe>
+        </div>
+    </fieldset>
+{% endblock content %}
