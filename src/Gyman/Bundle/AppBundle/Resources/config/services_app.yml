@@ -39,6 +39,7 @@ services:
       - @gyman.repository.section
       - @gyman.club.repository
       - @=service('gyman.club.provider').getCurrentClub()
+      - @gyman.members.upload_club_logo_handler
 
   gyman.app.twig.entries_extension:
     class: Gyman\Bundle\AppBundle\Twig\EntriesExtension
@@ -56,3 +57,9 @@ services:
         - [setTranslator, [@translator]]
       tags:
         - { name: twig.extension }
+
+  gyman.members.upload_club_logo_handler:
+    class: Gyman\Domain\Handler\UploadClubLogoHandler
+    arguments:
+      - %galleryDirectory%
+      - @=service(parameter('subdomain_provider_service'))

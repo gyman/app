@@ -1,3 +1,44 @@
+Gyman\Domain\Command\UpdateSettingsCommand:
+  properties:
+    details:
+      - Valid: ~
+    sections:
+      - Valid: ~
+
+Gyman\Bundle\AppBundle\Entity\Section:
+  constraints:
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields:
+            - title
+          message: Już istnieje sekcja o takiej nazwie!
+  properties:
+    title:
+      - NotBlank:
+          message: Pole nie może być puste!
+      - Length:
+          min: 1
+          max: 50
+
+Gyman\Bundle\ClubBundle\Entity\Details:
+  properties:
+    opened_from:
+      - Regex:
+          pattern: /^\d{2}\:\d{2}$/
+          match:  true
+          message: Godzina otwarcia musi być w formacie XX:XX
+    opened_till:
+      - Regex:
+          pattern: /^\d{2}\:\d{2}$/
+          match:  true
+          message: Godzina zamknięcia musi być w formacie XX:XX
+    zipcode:
+      - Regex:
+          pattern: /^\d{2}\-\d{3}$/
+          match:  true
+          message: Kod pocztowy musi być w formacie XX-XXX
+    email_address:
+      - Email: ~
+
 Gyman\Domain\Command\UpdateMemberCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\UniqueMemberEmail:
@@ -40,7 +81,7 @@ Gyman\Domain\Command\UpdateMemberCommand:
           minMessage: Kod pocztowy musi zawierać 6 znaków
           maxMessage: Kod pocztowy musi zawierać 6 znaków
       - Regex:
-          pattern: /\d{2}\-\d{3}/
+          pattern: /^\d{2}\-\d{3}$/
           match:  true
           message: Kod pocztowy musi być w formacie XX-XXX
     gender: ~

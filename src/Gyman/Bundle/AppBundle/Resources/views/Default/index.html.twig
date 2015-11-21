@@ -8,6 +8,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
+    {% set club = app.session.get('current_club') %}
+
     <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
     <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
     <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>

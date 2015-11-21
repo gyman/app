@@ -3,6 +3,7 @@ namespace Gyman\Domain\Command;
 
 use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Bundle\ClubBundle\Entity\Details;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateSettingsCommand
 {
@@ -10,6 +11,11 @@ class UpdateSettingsCommand
      * @var string
      */
     public $subdomain;
+
+    /**
+     * @var UploadedFile
+     */
+    public $uploadLogo;
 
     /**
      * @var Details

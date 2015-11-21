@@ -41,7 +41,10 @@
                 <div class="container-fluid">
 
                     <a href="{{ path("_dashboard_index") }}" class="brand">
-                        <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" />
+                        {% set logo = app.session.get('current_club').details.logo %}
+                        <img src="{% if logo is not null %}{{ asset('uploads/gallery/dende/' ~ logo) }}{% else %}{{ asset('bundles/gymanapp/images/gyman_logo.png') }}{% endif %}"
+                        id="applogo" />
+                        <span id="appname">{{ app.session.get('current_club').name }}</span>
                     </a>
 
                     {% if app.user is not null %}

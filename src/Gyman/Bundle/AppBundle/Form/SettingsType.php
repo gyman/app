@@ -23,7 +23,12 @@ final class SettingsType extends AbstractType
             ->add('subdomain', 'text', [
                 "read_only" => true,
             ])
-            ->add('details', 'club_details')
+            ->add('details', 'club_details', [
+                "cascade_validation" => true
+            ])
+            ->add('uploadLogo', 'file', [
+                'required' => false
+            ])
 //            ->add('administrators', 'choice', [
 //                'choices' => ['kowalski', 'nowak', 'dupa'],
 //                'expanded' => true,
@@ -36,7 +41,8 @@ final class SettingsType extends AbstractType
                 'type' => new SectionType(),
                 'allow_add' => true,
                 'allow_delete' => true,
-                'label' => false
+                'label' => false,
+                'cascade_validation' => true,
             ])
 //            ->add('voucher_types', 'collection', [
 //                ''
@@ -58,6 +64,9 @@ final class SettingsType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => UpdateSettingsCommand::class,
             'csrf_protection' => true,
+            "attr" => [
+                "novalidate" => "novalidate"
+            ]
         ]);
     }
 

@@ -27,7 +27,6 @@ final class ClubDetailsType extends AbstractType
             ->add('email_address', 'text')
             ->add('opened_from', 'text')
             ->add('opened_till', 'text')
-            ->add('upload_logo', 'file', ["mapped" => false, 'required' => false])
             ->add('about', 'textarea')
             ->add('account_number', 'text')
         ;
@@ -41,6 +40,7 @@ final class ClubDetailsType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => Details::class,
             'csrf_protection' => true,
+            'cascade_validation' => true,
         ]);
     }
 

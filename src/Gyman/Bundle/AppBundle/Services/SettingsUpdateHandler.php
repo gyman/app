@@ -7,6 +7,7 @@ use Gyman\Bundle\AppBundle\Entity\SectionRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Domain\Command\UpdateSettingsCommand;
+use Gyman\Domain\Handler\UploadClubLogoHandler;
 
 /**
  * Class SettingsUpdateHandler
@@ -30,15 +31,21 @@ class SettingsUpdateHandler
     private $club;
 
     /**
+     * @var UploadClubLogoHandler
+     */
+    private $uploadHandler;
+
+    /**
      * SettingsUpdateHandler constructor.
      * @param SectionRepository $sectionRepository
      * @param ClubRepository $clubRepository
      */
-    public function __construct(SectionRepository $sectionRepository, ClubRepository $clubRepository, Club $currentClub)
+    public function __construct(SectionRepository $sectionRepository, ClubRepository $clubRepository, Club $currentClub, UploadClubLogoHandler $uploadHandler)
     {
         $this->sectionRepository = $sectionRepository;
         $this->clubRepository = $clubRepository;
         $this->club = $currentClub;
+        $this->uploadHandler = $uploadHandler;
     }
 
     /**
@@ -59,12 +66,14 @@ class SettingsUpdateHandler
                 $section->setCalendar(new Calendar(null, $section->title()));
                 $this->sectionRepository->insert($section);
             } else {
+                $section->calendar()->updateName($section->title());
                 $this->sectionRepository->update($section);
             }
         }
 
-        $this->club->setDetails($command->details);
+        $this->uploadHandler->handle($command);
 
+        $this->club->setDetails($command->details);
         $this->clubRepository->update($this->club);
     }
 }

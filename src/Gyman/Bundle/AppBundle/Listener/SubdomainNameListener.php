@@ -3,6 +3,7 @@ namespace Gyman\Bundle\AppBundle\Listener;
 
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -39,11 +40,16 @@ class SubdomainNameListener
             return;
         }
 
-        $subdomain = $this->subdomainProvider->getSubdomain();
+        $subdomainName = $this->subdomainProvider->getSubdomain();
 
         Globals::setNoImage($this->container->getParameter('no_image'));
-        Globals::setGalleryDir($this->container->getParameter('gallerydirectory') . $subdomain . DIRECTORY_SEPARATOR);
-        Globals::setGalleryPath($this->container->getParameter('gallerypath') . $subdomain . DIRECTORY_SEPARATOR);
-        Globals::setSubdomain($subdomain);
+        Globals::setGalleryDir($this->container->getParameter('gallerydirectory') . $subdomainName . DIRECTORY_SEPARATOR);
+        Globals::setGalleryPath($this->container->getParameter('gallerypath') . $subdomainName . DIRECTORY_SEPARATOR);
+        Globals::setSubdomain($subdomainName);
+
+        $club = $this->container->get('doctrine.orm.default_entity_manager')
+            ->getRepository('ClubBundle:Club')
+            ->findOneBySubdomain(new Subdomain($subdomainName));
+        $this->container->get('session')->set('current_club', $club);
     }
 }
