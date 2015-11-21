@@ -74,6 +74,7 @@ class SettingsUpdateHandler
         $this->uploadHandler->handle($command);
 
         $this->club->setDetails($command->details);
+        $this->club->updateName($command->name);
         $this->clubRepository->update($this->club);
     }
 }

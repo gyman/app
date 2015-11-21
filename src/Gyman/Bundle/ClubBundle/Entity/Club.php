@@ -125,4 +125,12 @@ class Club
     {
         $this->details = $details;
     }
+
+    /**
+     * @param string $name
+     */
+    public function updateName($name)
+    {
+        $this->name = $name;
+    }
 }

@@ -13,6 +13,11 @@ class UpdateSettingsCommand
     public $subdomain;
 
     /**
+     * @var string
+     */
+    public $name;
+
+    /**
      * @var UploadedFile
      */
     public $uploadLogo;

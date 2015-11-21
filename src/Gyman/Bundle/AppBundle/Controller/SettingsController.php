@@ -36,6 +36,7 @@ class SettingsController extends Controller
         );
 
         $command->details = $club->details();
+        $command->name = $club->getName();
 
         $form = $this->createForm('club_settings', $command);
 

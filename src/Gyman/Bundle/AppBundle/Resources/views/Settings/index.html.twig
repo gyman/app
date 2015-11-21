@@ -55,11 +55,23 @@
         <div class="span12">
             {% include "::_flash.html.twig" %}
         </div>
+        {% if form.vars.errors|length > 0 %}
+            <div class="alert alert-danger flash-notice">
+                <ul>
+                    {% for error in form.vars.errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 
     {{ form_start(form) }}
+
+
     <div class="row-fluid">
         <div class="span6">
+            {{ form_row(form.name) }}
             {{ form_row(form.subdomain) }}
             {{ form_row(form.uploadLogo) }}
             <fieldset>

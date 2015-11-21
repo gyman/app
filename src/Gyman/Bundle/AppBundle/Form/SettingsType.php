@@ -20,6 +20,7 @@ final class SettingsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name', 'text')
             ->add('subdomain', 'text', [
                 "read_only" => true,
             ])
