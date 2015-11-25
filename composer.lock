@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c9a18f74d769cfafd391f32165441c3",
-    "content-hash": "f3022843947a351a1113934beda583c6",
+    "hash": "112c9e4eacfda24abf6203fc7994d765",
+    "content-hash": "925ef9905b85b7b7cd2c989051b0f0e9",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -221,7 +221,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/9be9a91625a050f5aab868d8df45d6b4ed92d109",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/e9106d0bb06696b13155e003d9baae6a1c0fd46f",
                 "reference": "9be9a91625a050f5aab868d8df45d6b4ed92d109",
                 "shasum": ""
             },
@@ -333,6 +333,55 @@
                 "public"
             ],
             "time": "2015-05-20 22:13:02"
+        },
+        {
+            "name": "dende/multidatabase-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UirapuruDende/MultidatabaseBundle.git",
+                "reference": "1a4860ed978a0254eae94a6904b52cd7dbcbe35d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UirapuruDende/MultidatabaseBundle/zipball/1a4860ed978a0254eae94a6904b52cd7dbcbe35d",
+                "reference": "1a4860ed978a0254eae94a6904b52cd7dbcbe35d",
+                "shasum": ""
+            },
+            "require": {
+                "dende/common-bundle": "dev-master",
+                "doctrine/doctrine-bundle": "^1.5",
+                "doctrine/doctrine-fixtures-bundle": "dev-master",
+                "doctrine/orm": "dev-master",
+                "liip/functional-test-bundle": "^1.2",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony/http-kernel": "2.7.5",
+                "symfony/symfony": "^2.7"
+            },
+            "require-dev": {
+                "behat/behat": "^3.0",
+                "fabpot/php-cs-fixer": "2.0.*@dev",
+                "mockery/mockery": "^0.9.4",
+                "phing/phing": "*",
+                "phpunit/phpunit": "^5.0",
+                "symfony/framework-bundle": "2.7.5",
+                "symfony/monolog-bundle": "2.7.*",
+                "twig/extensions": "1.2.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dende\\MultidatabaseBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Grzegorz Kaszuba",
+                    "email": "uirapuruadg@gmail.com"
+                }
+            ],
+            "time": "2015-11-25 02:09:38"
         },
         {
             "name": "doctrine/annotations",
@@ -1143,7 +1192,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/0b45d96c74f08f2673af844b9c0d1cba58f76122",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/57b22bd646b54d094db55635b7b9b90c179ce93e",
                 "reference": "0b45d96c74f08f2673af844b9c0d1cba58f76122",
                 "shasum": ""
             },
@@ -1219,7 +1268,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/ccbc65b2e0da5c6c308ee97672bc34c3ed295ef9",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/2b605ba045bbeaacc2c305b644707f0be861104f",
                 "reference": "ccbc65b2e0da5c6c308ee97672bc34c3ed295ef9",
                 "shasum": ""
             },
@@ -1337,7 +1386,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/f80dd961f805b7fc20dd2d5e92af5e2a9eebb8d4",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/9a16b0ec5a2655a0fda28efe5be9789eb9417b8c",
                 "reference": "f80dd961f805b7fc20dd2d5e92af5e2a9eebb8d4",
                 "shasum": ""
             },
@@ -1488,7 +1537,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/f40f71fb62230a1de2c92c16acb14e38950b6464",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/e2f0efa3a4bbdc3ec5354d6b8fdb4ac3bc19e8b9",
                 "reference": "f40f71fb62230a1de2c92c16acb14e38950b6464",
                 "shasum": ""
             },
@@ -2160,7 +2209,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/340b3bc6182b5295e842c09284987be71b71e26d",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/5147740faff4d32e6f42acf64475314c35320fa4",
                 "reference": "340b3bc6182b5295e842c09284987be71b71e26d",
                 "shasum": ""
             },
@@ -2389,7 +2438,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/7d20351afc85aa23c5795309c9984a1e93d81c27",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/055125a98d92ce5fa8946e5f80cdf52405244120",
                 "reference": "7d20351afc85aa23c5795309c9984a1e93d81c27",
                 "shasum": ""
             },
@@ -2468,7 +2517,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/eafa2ade0b140adb9af99d7dc7526bf37a6fcb41",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/97707ea5f438622ce31ab836e1d78bb70bfe101d",
                 "reference": "eafa2ade0b140adb9af99d7dc7526bf37a6fcb41",
                 "shasum": ""
             },
@@ -2716,7 +2765,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/4d070df68e456dc456104b5855efd7e83990dcf9",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/81b3d37876bc97dab0e0a5fa71ae0dcdb2628b6d",
                 "reference": "4d070df68e456dc456104b5855efd7e83990dcf9",
                 "shasum": ""
             },
@@ -3535,7 +3584,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/414287970af7c0054ba06d7708d337f3fa182a23",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/abc144d9fa06d6fccda83e81a3d1842cdc18b137",
                 "reference": "414287970af7c0054ba06d7708d337f3fa182a23",
                 "shasum": ""
             },
@@ -3674,7 +3723,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/eff43ec981c1d3f5e2c748bafd67c0136bdfb9f9",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/474be8b9dbb8ca1c378aa24e701df940a89ec124",
                 "reference": "eff43ec981c1d3f5e2c748bafd67c0136bdfb9f9",
                 "shasum": ""
             },
@@ -3860,7 +3909,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/7b3144572617b0555f9a443317dbc2f9cf5b524e",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/12df2454bd3840d94892fe932eadc0138bf36922",
                 "reference": "7b3144572617b0555f9a443317dbc2f9cf5b524e",
                 "shasum": ""
             },
@@ -4669,7 +4718,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/6b3f8cf3560dc4909c4cddd4f1af3e1f6e9d80af",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/6cc874d262e841439651374012c95d62736c2cbb",
                 "reference": "6b3f8cf3560dc4909c4cddd4f1af3e1f6e9d80af",
                 "shasum": ""
             },
@@ -5101,7 +5150,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4f9b1eaf0a7da77c362f8d91cbc68ab1f4718d62",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/826f28f4cd17b31e4d42aa21729e52f88d91bc39",
                 "reference": "4f9b1eaf0a7da77c362f8d91cbc68ab1f4718d62",
                 "shasum": ""
             },
@@ -5939,7 +5988,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/security-advisories/zipball/b61537128b6ac2869c76e3e123365750029fb420",
+                "url": "https://api.github.com/repos/FriendsOfPHP/security-advisories/zipball/f1ff98c2154fd33389d3f4e082f63d38d7352257",
                 "reference": "b61537128b6ac2869c76e3e123365750029fb420",
                 "shasum": ""
             },
@@ -6095,6 +6144,7 @@
         "dende/common-bundle": 20,
         "dende/calendar": 20,
         "dende/calendar-bundle": 20,
+        "dende/multidatabase-bundle": 20,
         "sensiolabs/security-checker": 20,
         "fabpot/php-cs-fixer": 20,
         "sensiolabs/security-advisories": 20,

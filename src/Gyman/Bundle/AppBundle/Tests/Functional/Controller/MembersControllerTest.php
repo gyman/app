@@ -28,12 +28,12 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertCount(18, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
-        $this->assertCount(2, $form->filter('select'));
+        $this->assertCount(3, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(14, $form->filter('input'));
+        $this->assertCount(11, $form->filter('input'));
         $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(4, $form->filter('input[type=checkbox]'));
+        $this->assertCount(1, $form->filter('input[type=checkbox]'));
         $this->assertCount(2, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));
@@ -97,6 +97,10 @@ class MembersControllerTest extends BaseFunctionalTest
             'gyman_member_form[starred]'   => 1,
         ]);
 
+        $value = $crawler->filter('select#gyman_member_form_sections option')->first()->extract("value")[0];
+
+        $form['gyman_member_form[sections]']->select($value);
+
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
             'someTestFile.jpg',
@@ -158,8 +162,6 @@ class MembersControllerTest extends BaseFunctionalTest
     {
         $this->prepareFoto();
 
-        $repository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member');
-
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Jan', 'details.lastname' => 'Kowalski']);
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
 
@@ -182,6 +184,9 @@ class MembersControllerTest extends BaseFunctionalTest
             'gyman_member_form[notes]'       => 'some admin notes',
             'gyman_member_form[starred]'     => 1,
         ]);
+
+        $value = $crawler->filter('select#gyman_member_form_sections option')->first()->extract("value")[0];
+        $form['gyman_member_form[sections]']->select($value);
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',

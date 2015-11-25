@@ -30,7 +30,7 @@ class Details
      * @param $account_number
      * @param $upload_foto
      */
-    public function __construct($address, $zipcode, $city, $country, $phone_number, $email_address, $opened_from, $opened_till, $logo, $about, $account_number, $upload_foto)
+    public function __construct($address, $zipcode, $city, $country, $phone_number, $email_address, $opened_from, $opened_till, $logo, $about, $account_number)
     {
         $this->address = $address;
         $this->zipcode = $zipcode;
@@ -43,6 +43,5 @@ class Details
         $this->logo = $logo;
         $this->about = $about;
         $this->account_number = $account_number;
-        $this->upload_foto = $upload_foto;
     }
 }

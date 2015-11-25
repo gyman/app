@@ -60,7 +60,8 @@
 
         "dende/common-bundle": "dev-master",
         "dende/calendar": "dev-master",
-        "dende/calendar-bundle": "dev-master"
+        "dende/calendar-bundle": "dev-master",
+        "dende/multidatabase-bundle": "dev-master"
 
     },
     "require-dev": {

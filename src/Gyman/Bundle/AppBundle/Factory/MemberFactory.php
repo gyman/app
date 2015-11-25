@@ -62,7 +62,7 @@ final class MemberFactory implements MemberFactoryInterface
                 new Barcode($array['barcode']),
                 $array['starred']
             ),
-            $array['sections'] instanceof ArrayCollection ? $array['sections'] : new ArrayCollection($array['sections']),
+            $array['sections'],
             $array['vouchers'] instanceof ArrayCollection ? $array['vouchers'] : new ArrayCollection($array['vouchers']),
             $array['entries'] instanceof ArrayCollection ? $array['entries'] : new ArrayCollection($array['entries']),
             $array['current_voucher'],

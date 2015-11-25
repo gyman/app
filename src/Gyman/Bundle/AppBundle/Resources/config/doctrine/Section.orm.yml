@@ -18,9 +18,11 @@ Gyman\Bundle\AppBundle\Entity\Section:
   manyToMany:
     members:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
-      mappedBy: sections
+      inversedBy: sections
 
   fields:
     title:
-      type: text
+      type: string
       nullable: false
+      unique: true
+      length: 60

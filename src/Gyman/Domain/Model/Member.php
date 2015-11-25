@@ -62,14 +62,14 @@ class Member
      * @param Voucher $currentVoucher
      * @param Entry $lastEntry
      */
-    public function __construct(EmailAddress $email, Details $details, ArrayCollection $sections, ArrayCollection $vouchers, $entries = [], $currentVoucher = null, $lastEntry = null)
+    public function __construct(EmailAddress $email, Details $details, $sections = [], $vouchers = [], $entries = [], $currentVoucher = null, $lastEntry = null)
     {
         $this->email = $email;
         $this->details = $details;
 
-        $this->sections = empty($sections) ? new ArrayCollection() : $sections; // remove this
-        $this->vouchers = empty($vouchers) ? new ArrayCollection() : $vouchers;
-        $this->entries = empty($entries) ? new ArrayCollection() : $entries;
+        $this->sections = $sections;
+        $this->vouchers = $vouchers;
+        $this->entries = $entries;
 
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;

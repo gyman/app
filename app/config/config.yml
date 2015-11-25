@@ -108,6 +108,8 @@ dende_calendar:
   model_manager_name:   club
   backend_type:         ORM
 
+dende_multidatabase: ~
+
 stof_doctrine_extensions:
     default_locale: pl_PL
     orm:

@@ -12,8 +12,8 @@ gyman_app:
     type:     annotation
     prefix:   /
 
-gyman_multi_database:
-    resource: "@GymanMultiDatabaseBundle/Controller/"
+dende_multidatabase:
+    resource: "@DendeMultidatabaseBundle/Controller/"
     type:     annotation
     prefix:   /
 

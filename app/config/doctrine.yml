@@ -23,7 +23,7 @@ doctrine:
           user:     ~
           password: ~
           charset:  UTF8
-          wrapper_class: Gyman\Bundle\MultiDatabaseBundle\Connection\ConnectionWrapper
+          wrapper_class: Dende\MultidatabaseBundle\Connection\ConnectionWrapper
           mapping_types:
               enum: string
     orm:
@@ -52,20 +52,6 @@ doctrine:
                 StofDoctrineExtensionsBundle: ~
                 UserBundle: ~
                 ClubBundle: ~
-#          view_model:
-#            auto_mapping: false
-#            connection: club
-#            mappings:
-#              ViewModel:
-#                type: yml
-#                prefix: Dende\Calendar\Domain
-#                dir: %kernel.root_dir%/../vendor/dende/calendar-bundle/Resources/config/doctrine-viewmodel
-#                is_bundle: false
-#                alias: ViewModel
-#          viewmodel_club:
-#            auto_mapping: false
-#            connection: club
-#            mappings: ~
           club:
 #            metadata_cache_driver: apc
 #            result_cache_driver: apc
@@ -76,9 +62,6 @@ doctrine:
             mappings:
               StofDoctrineExtensionsBundle: ~
               GymanAppBundle: ~
-#              FiltersBundle: ~
-#              ScheduleBundle: ~
-#              SectionBundle: ~
 #              TimelineBundle: ~
 #              SpyTimelineBundle: ~
               Embedded:

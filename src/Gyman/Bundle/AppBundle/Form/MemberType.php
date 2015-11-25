@@ -1,6 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
+use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Bundle\AppBundle\Entity\SectionRepository;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Model\Belt;
 use Gyman\Domain\Model\Details;
@@ -61,11 +63,11 @@ final class MemberType extends AbstractType
                 'label'    => 'member.form.starred.label',
             ])
             ->add('sections', 'entity', [
-                'class' => 'Gyman\Bundle\AppBundle\Entity\Section',
+                'class' => 'GymanAppBundle:Section',
                 'property' => 'title',
-                'required' => false,
+                'required' => true,
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
         ;
     }

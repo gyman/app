@@ -3,14 +3,6 @@ services:
     class: Gyman\Bundle\ClubBundle\EntityManager\ClubManager
     parent: gyman.base.entity_manager
 
-  gyman.club.subscriber:
-      class: Gyman\Bundle\ClubBundle\Services\ClubSubscriber
-      calls:
-        - [setDatabaseWorker, [@gyman.multidatabase.database_worker]]
-        - [setClubEntityManager, [@gyman.club.club_manager] ]
-      tags:
-          - { name: kernel.event_subscriber }
-
   gyman.club.repository:
       class:  "Gyman\Bundle\ClubBundle\Entity\ClubRepository"
       factory_method: getRepository

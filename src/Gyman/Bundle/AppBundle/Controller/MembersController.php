@@ -60,8 +60,10 @@ class MembersController extends Controller
      */
     public function createAction(Request $request)
     {
+        $command = new CreateMemberCommand();
+
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-        $form = $this->createForm('gyman_member_form', new CreateMemberCommand(), [
+        $form = $this->createForm('gyman_member_form', $command, [
             'data_class' => CreateMemberCommand::class,
         ]);
 
