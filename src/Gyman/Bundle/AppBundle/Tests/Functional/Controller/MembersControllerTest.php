@@ -28,12 +28,12 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertCount(18, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
-        $this->assertCount(3, $form->filter('select'));
+        $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(11, $form->filter('input'));
+        $this->assertCount(14, $form->filter('input'));
         $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
-        $this->assertCount(1, $form->filter('input[type=checkbox]'));
+        $this->assertCount(4, $form->filter('input[type=checkbox]'));
         $this->assertCount(2, $form->filter('input[type=hidden]'));
 
         $this->assertCount(count(Details::$genders), $crawler->filter('select#gyman_member_form_gender option'));
@@ -97,9 +97,7 @@ class MembersControllerTest extends BaseFunctionalTest
             'gyman_member_form[starred]'   => 1,
         ]);
 
-        $value = $crawler->filter('select#gyman_member_form_sections option')->first()->extract("value")[0];
-
-        $form['gyman_member_form[sections]']->select($value);
+        $form['gyman_member_form[sections][0]']->tick();
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
@@ -151,6 +149,9 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertEquals($member->details()->belt()->color(), 'white');
         $this->assertEquals($member->details()->notes(), 'some admin notes');
 
+        $this->assertCount(1, $member->sections());
+        $this->assertEquals("MMA", $member->sections()->first()->title());
+
         $this->assertTrue(Globals::checkIfImageExists($member->details()->foto()->foto()));
         unlink(Globals::applyFileDir($member->details()->foto()->foto()));
     }
@@ -185,8 +186,7 @@ class MembersControllerTest extends BaseFunctionalTest
             'gyman_member_form[starred]'     => 1,
         ]);
 
-        $value = $crawler->filter('select#gyman_member_form_sections option')->first()->extract("value")[0];
-        $form['gyman_member_form[sections]']->select($value);
+        $form['gyman_member_form[sections][1]']->tick();
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
@@ -235,6 +235,9 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertEquals('123456789', $member->details()->barcode()->barcode());
         $this->assertEquals('white', $member->details()->belt()->color());
         $this->assertEquals('some admin notes', $member->details()->notes());
+
+        $this->assertCount(1, $member->sections());
+        $this->assertEquals("Capoeira", $member->sections()->first()->title());
 
         $this->assertTrue(Globals::checkIfImageExists($member->details()->foto()->foto()));
         unlink(Globals::applyFileDir($member->details()->foto()->foto()));

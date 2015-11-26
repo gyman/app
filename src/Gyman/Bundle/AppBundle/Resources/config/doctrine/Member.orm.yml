@@ -23,7 +23,8 @@ Gyman\Bundle\AppBundle\Entity\Member:
   manyToMany:
     sections:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Section
-      mappedBy: members
+#      mappedBy: members
+      inversedBy: members
 
   oneToMany:
     vouchers:

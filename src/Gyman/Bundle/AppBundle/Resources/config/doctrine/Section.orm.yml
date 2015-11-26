@@ -18,8 +18,8 @@ Gyman\Bundle\AppBundle\Entity\Section:
   manyToMany:
     members:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
-      inversedBy: sections
-
+#      inversedBy: sections
+      mappedBy: sections
   fields:
     title:
       type: string
