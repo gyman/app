@@ -13,7 +13,7 @@ doctrine:
           server_version: "5.6"
           mapping_types:
               enum: string
-        club:
+        tenant:
           driver:   %database_driver%
           host:     %database_host%
           port:     %database_port%
@@ -52,13 +52,13 @@ doctrine:
                 StofDoctrineExtensionsBundle: ~
                 UserBundle: ~
                 ClubBundle: ~
-          club:
+          tenant:
 #            metadata_cache_driver: apc
 #            result_cache_driver: apc
 #            query_cache_driver: apc
 
             auto_mapping:     false # disabled so we can assign entities to our own connections
-            connection:       club
+            connection:       tenant
             mappings:
               StofDoctrineExtensionsBundle: ~
               GymanAppBundle: ~

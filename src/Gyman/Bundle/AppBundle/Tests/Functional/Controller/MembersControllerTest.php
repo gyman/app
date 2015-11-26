@@ -45,7 +45,7 @@ class MembersControllerTest extends BaseFunctionalTest
      */
     public function edit_member_form_renders_properly()
     {
-        $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
+        $editedMember = $this->container->get('doctrine.orm.tenant_entity_manager')
             ->getRepository('GymanAppBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
@@ -116,7 +116,7 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $repository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member');
+        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
 
         /** @var Member $member */
         $member = $repository->findOneByEmailAddress(new EmailAddress('andrzej@gazeta.pl'));
@@ -205,7 +205,7 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
 
         /** @var Member $member */
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
         $this->assertInstanceOf('Gyman\Bundle\AppBundle\Entity\Member', $member);
 
         $alert = $crawler->filter('div.alert.alert-success');
@@ -262,7 +262,7 @@ class MembersControllerTest extends BaseFunctionalTest
             ],
         ];
 
-        $editedMember = $this->container->get('doctrine.orm.club_entity_manager')
+        $editedMember = $this->container->get('doctrine.orm.tenant_entity_manager')
             ->getRepository('GymanAppBundle:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
@@ -325,7 +325,7 @@ class MembersControllerTest extends BaseFunctionalTest
      */
     public function member_search_form_on_dashboard_redirects_to_user($query, $findBy)
     {
-        $repository = $this->container->get('doctrine.orm.club_entity_manager')->getRepository('GymanAppBundle:Member');
+        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
 
         $member = $this->container->get('gyman.members.repository')->findOneBy($findBy);
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);

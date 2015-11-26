@@ -13,7 +13,7 @@ parameters:
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
 
-  subdomain_provider_service: gyman.app.subdomain_provider
+  subdomain_provider_service: dende.subdomain_provider # move under dende_multidatabase
 
 services:
     memcached:
@@ -25,7 +25,7 @@ services:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:
             - { name: doctrine.event_subscriber, connection: default }
-            - { name: doctrine.event_subscriber, connection: club }
+            - { name: doctrine.event_subscriber, connection: tenant }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
 
@@ -105,7 +105,7 @@ swiftmailer:
 gyman_app: ~
 
 dende_calendar:
-  model_manager_name:   club
+  model_manager_name:   tenant
   backend_type:         ORM
 
 dende_multidatabase: ~
@@ -116,7 +116,7 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             sluggable: true
-        club:
+        tenant:
             timestampable: true
             sluggable: true
 

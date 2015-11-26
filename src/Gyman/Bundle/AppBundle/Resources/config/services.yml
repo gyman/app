@@ -24,6 +24,6 @@ services:
 
   gyman.repository.section:
     class: %gyman.section_repository.class%
-    factory_service: doctrine.orm.club_entity_manager
+    factory_service: doctrine.orm.tenant_entity_manager
     factory_method: "getRepository"
     arguments: ["GymanAppBundle:Section"]

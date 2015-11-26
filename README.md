@@ -19,7 +19,7 @@ Dodawanie nowego klubu oraz użytkownika
 
 2. zbudowanie schemy w gyman_trening
 
-> sf doctrine:schema:create --club="trening"
+> sf doctrine:schema:create --tenant="trening"
 
 3. utworzenie usera w gyman
 

@@ -1,7 +1,7 @@
 spy_timeline:
     drivers: # define only one.
         orm:
-            object_manager: doctrine.orm.club_entity_manager
+            object_manager: doctrine.orm.tenant_entity_manager
             classes:
                 timeline:         'Gyman\Bundle\TimelineBundle\Entity\Timeline'
                 action:           'Gyman\Bundle\TimelineBundle\Entity\Action'

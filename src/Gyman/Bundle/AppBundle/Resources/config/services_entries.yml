@@ -9,7 +9,7 @@ services:
 
   gyman.entries.repository:
     class:          Gyman\Bundle\AppBundle\Entity\EntryRepository
-    factory_service: doctrine.orm.club_entity_manager
+    factory_service: doctrine.orm.tenant_entity_manager
     factory_method:  getRepository
     arguments:
       - Gyman\Bundle\AppBundle\Entity\Entry

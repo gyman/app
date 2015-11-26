@@ -9,7 +9,7 @@ services:
   gyman.members.repository:
     class:  "Gyman\Bundle\AppBundle\Entity\MemberRepository"
     factory_method: getRepository
-    factory_service: doctrine.orm.club_entity_manager
+    factory_service: doctrine.orm.tenant_entity_manager
     arguments: ["Gyman\Bundle\AppBundle\Entity\Member"]
 
   gyman.members.member_form_type:

@@ -27,7 +27,7 @@ class ClubProvider
      * @param SubdomainProviderInterface $subdomainProvider
      * @param ClubRepository $clubRepository
      */
-    public function __construct(SubdomainProviderInterface $subdomainProvider, ClubRepository $clubRepository)
+    public function __construct($subdomainProvider, ClubRepository $clubRepository)
     {
         $this->subdomainProvider = $subdomainProvider;
         $this->clubRepository = $clubRepository;
@@ -49,6 +49,6 @@ class ClubProvider
      */
     public function getClub($subdomainName)
     {
-        return $this->clubRepository->findOneBySubdomain(new Subdomain($subdomainName));
+        return $this->clubRepository->findOneBySubdomain($subdomainName);
     }
 }

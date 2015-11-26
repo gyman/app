@@ -2,7 +2,7 @@ services:
   gyman.timeline.spread:
     class: Gyman\Bundle\TimelineBundle\Timeline\Spread
     calls:
-      - [setClubManager, [@doctrine.orm.club_entity_manager]]
+      - [setClubManager, [@doctrine.orm.tenant_entity_manager]]
       - [setDefaultManager, [@doctrine.orm.default_entity_manager]]
       - [setSession, [@session]]
     tags:

@@ -59,7 +59,7 @@ class SettingsControllerTest extends BaseFunctionalTest
         $this->assertContains('flash.settings_updated.success', $crawler->text());
         $this->assertEquals('/settings/', $this->client->getRequest()->getRequestUri());
 
-        $em = $this->getContainer()->get('doctrine.orm.club_entity_manager');
+        $em = $this->getContainer()->get('doctrine.orm.tenant_entity_manager');
 
         $calendar = $em->getRepository('Calendar:Calendar')->findOneByName('newly_added_section');
         $section = $em->getRepository('GymanAppBundle:Section')->findOneByTitle('newly_added_section');

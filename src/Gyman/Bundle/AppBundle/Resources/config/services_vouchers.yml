@@ -18,7 +18,7 @@ services:
 
   gyman.vouchers.repository:
       class:          Gyman\Bundle\AppBundle\Entity\VoucherRepository
-      factory_service: doctrine.orm.club_entity_manager
+      factory_service: doctrine.orm.tenant_entity_manager
       factory_method:  getRepository
       arguments:
         - Gyman\Bundle\AppBundle\Entity\Voucher
@@ -32,7 +32,7 @@ services:
 
   gyman.vouchers.repository.entry:
     class:          Gyman\Bundle\AppBundle\Entity\EntryRepository
-    factory_service: doctrine.orm.club_entity_manager
+    factory_service: doctrine.orm.tenant_entity_manager
     factory_method:  getRepository
     arguments:
       - Gyman\Bundle\AppBundle\Entity\Entry
@@ -42,7 +42,7 @@ services:
       parent:         gyman.base.entity_manager
       calls:
            - [ setClass, [Gyman\Bundle\AppBundle\Entity\Voucher] ]
-           - [ setEntityManager, [@doctrine.orm.club_entity_manager]]
+           - [ setEntityManager, [@doctrine.orm.tenant_entity_manager]]
 
   validator.voucher_date:
       class:          Gyman\Bundle\AppBundle\Validator\VoucherDateValidator

@@ -75,7 +75,7 @@ class VouchersControllerTest extends BaseFunctionalTest
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
         $this->assertEquals(200, $this->getStatusCode());
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
         $this->assertNotNull($member->vouchers());
         $this->assertEquals(2, $member->vouchers()->count());
@@ -91,7 +91,7 @@ class VouchersControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.voucher_added.success', trim($alert->text()));
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($voucher);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($voucher);
     }
 
     /**
@@ -114,7 +114,7 @@ class VouchersControllerTest extends BaseFunctionalTest
             $this->client->getRequest()->getRequestUri()
         );
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
         $this->assertNull($member->currentVoucher());
     }
 }

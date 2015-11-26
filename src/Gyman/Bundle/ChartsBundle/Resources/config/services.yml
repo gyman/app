@@ -2,4 +2,4 @@ services:
     chart:
         class: Gyman\Bundle\ChartsBundle\Services\Chart
         calls:
-             - [ setEntityManager, ["@doctrine.orm.club_entity_manager"] ]
+             - [ setEntityManager, ["@doctrine.orm.tenant_entity_manager"] ]

@@ -133,4 +133,14 @@ class Club
     {
         $this->name = $name;
     }
+
+    public function getTenant()
+    {
+        $tenant = new \stdClass();
+        $tenant->dbname = $this->getDatabase()->getName();
+        $tenant->username = $this->getDatabase()->getUsername();
+        $tenant->password = $this->getDatabase()->getPassword();
+
+        return $tenant;
+    }
 }

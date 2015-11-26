@@ -1,9 +1,9 @@
 services:
-  gyman.app.subdomain_provider:
-    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
-    arguments:
-      - @request_stack
-      - %base_url%
+#  gyman.app.subdomain_provider:
+#    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
+#    arguments:
+#      - @request_stack
+#      - %base_url%
 
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
@@ -19,7 +19,7 @@ services:
   gyman.default.request.arraycollection_converter:
     class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
     calls:
-      - [setEntityManager, [@doctrine.orm.club_entity_manager]]
+      - [setEntityManager, [@doctrine.orm.tenant_entity_manager]]
     tags:
       - { name: request.param_converter}
 

@@ -28,7 +28,7 @@ class SubdomainNameListener
      * @param SubdomainProviderInterface $subdomainProvider
      * @param $container
      */
-    public function __construct(SubdomainProviderInterface $subdomainProvider, Container $container)
+    public function __construct($subdomainProvider, Container $container)
     {
         $this->subdomainProvider = $subdomainProvider;
         $this->container = $container;
@@ -49,7 +49,7 @@ class SubdomainNameListener
 
         $club = $this->container->get('doctrine.orm.default_entity_manager')
             ->getRepository('ClubBundle:Club')
-            ->findOneBySubdomain(new Subdomain($subdomainName));
+            ->findOneBySubdomain($subdomainName);
         $this->container->get('session')->set('current_club', $club);
     }
 }

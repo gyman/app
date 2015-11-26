@@ -108,7 +108,7 @@ class EntriesControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.entry_opened.success', trim($alert->text()));
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
     }
@@ -151,7 +151,7 @@ class EntriesControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.entry_opened.success', trim($alert->text()));
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
 
@@ -194,7 +194,7 @@ class EntriesControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.entry_opened.success', trim($alert->text()));
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
         $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
 
@@ -226,8 +226,8 @@ class EntriesControllerTest extends BaseFunctionalTest
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.entry_closed.success', trim($alert->text()));
 
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($member);
-        $this->container->get('doctrine.orm.club_entity_manager')->refresh($lastEntry);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($lastEntry);
 
         $this->assertNull($member->lastEntry());
         $this->assertInstanceOf("\DateTime", $lastEntry->endDate());
