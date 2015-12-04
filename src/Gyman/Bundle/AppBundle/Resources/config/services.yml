@@ -10,6 +10,12 @@ parameters:
   gyman.section_repository.class: Gyman\Bundle\AppBundle\Entity\SectionRepository
 
 services:
+  gyman.app.tenant_provider:
+    class: Gyman\Bundle\AppBundle\Services\TenantProvider
+    arguments:
+      - @=service(parameter('subdomain_provider_service'))
+      - @gyman.club.repository
+
   gyman.app.command.dump_hosts:
     class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
     tags:

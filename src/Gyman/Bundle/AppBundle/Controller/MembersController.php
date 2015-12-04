@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -120,5 +121,15 @@ class MembersController extends Controller
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
             }
         }
+    }
+
+    /**
+     * @Route("/query", name="gyman_members_typeahead")
+     */
+    public function typeaheadAction(Request $request)
+    {
+        $query = $request->get('query');
+        $result = $this->get('gyman.members.repository')->search($query);
+        return new Response($this->get("jms_serializer")->serialize($result, "json"));
     }
 }

@@ -1,9 +1,9 @@
 services:
-#  gyman.app.subdomain_provider:
-#    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
-#    arguments:
-#      - @request_stack
-#      - %base_url%
+  gyman.app.subdomain_provider:
+    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
+    arguments:
+      - @request_stack
+      - %base_url%
 
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider

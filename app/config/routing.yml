@@ -12,11 +12,6 @@ gyman_app:
     type:     annotation
     prefix:   /
 
-dende_multidatabase:
-    resource: "@DendeMultidatabaseBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 #timeline:
 #    resource: "@TimelineBundle/Controller/"
 #    type:     annotation

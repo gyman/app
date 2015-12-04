@@ -18,12 +18,17 @@ class window.SearchInput
         highlight: true,
       },
       {
-        name: 'members_search',
-        displayKey: 'name'
+        name: 'members_search'
+#        displayKey: 'email.email'
+        display: (a,b,c,d) =>
+          console.log a, b, c, d
         templates:
-          empty: '<span class="emptyResultsInTypeahead label label-important">brak wyników</span><script>$(window).trigger("dashboard.typeahead.emptyResults");</script>'
+          empty: [
+            '<span class="emptyResultsInTypeahead label label-important">brak wyników</span>',
+#            '<script>$(window).trigger("dashboard.typeahead.emptyResults");</script>'
+          ]
         source: (query, cb) ->
-          $.get Routing.generate("_members_dashboard_search", {members: query}), {}, cb
+          $.get Routing.generate("gyman_members_typeahead", {query: query}), {}, cb
       })
     .on("typeahead:selected", @typeAheadSelectedHandler)
 

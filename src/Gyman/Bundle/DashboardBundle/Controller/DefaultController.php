@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,5 +53,16 @@ class DefaultController extends Controller
                     'date'        => $date,
                     'occurrences' => $occurrences
         ]));
+    }
+
+    /**
+     * @Route("/dashboard/activity/{id}", name="dashboard_list_class_members")
+     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @Template()
+     * @param Occurrence $occurrence
+     * @return array
+     */
+    public function listClassMembersAction(Occurrence $occurrence){
+        return ["occurrence" => $occurrence];
     }
 }

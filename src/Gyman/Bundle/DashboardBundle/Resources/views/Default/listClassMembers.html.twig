@@ -1,0 +1,26 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+{% block content %}
+
+    Uczestnicy:
+
+    <ol>
+    {% for entry in get_entries(occurrence) %}
+        <li>
+            <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="height: 20px"/>
+            <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
+                {{ entry.member.details.firstname }}
+                {{ entry.member.details.lastname }}
+            </a>
+            {% if entry.member.currentVoucher is not null %}
+            , karnet ważny od
+            <strong>{{ entry.member.currentVoucher.startDate|date("Y-m-d") }}</strong>
+                do
+            <strong>{{ entry.member.currentVoucher.endDate|date("Y-m-d") }}</strong>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ol>
+
+{% endblock content %}
+

@@ -59,42 +59,48 @@
                     <arg value="--em=default" />
                     <arg value="--env=${env}" />
                     <arg value="--force" />
+                    <arg value="-vvv" />
                 </exec>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:create" />
                     <arg value="--em=default" />
                     <arg value="--env=${env}" />
                     <arg value="--no-interaction" />
+                    <arg value="-vvv" />
                 </exec>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--em=default" />
                     <arg value="--env=${env}" />
                     <arg value="--no-interaction" />
+                    <arg value="-vvv" />
                 </exec>
             </then>
             <else>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:drop" />
                     <arg value="--em=tenant" />
-                    <arg value="--tenant=${club}" />
+                    <arg value="--club=${club}" />
                     <arg value="--env=${env}" />
                     <arg value="--force" />
+                    <arg value="-vvv" />
                 </exec>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:create" />
                     <arg value="--em=tenant" />
-                    <arg value="--tenant=${club}" />
+                    <arg value="--club=${club}" />
                     <arg value="--env=${env}" />
                     <arg value="--no-interaction" />
+                    <arg value="-vvv" />
                 </exec>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--append" />
                     <arg value="--em=tenant" />
-                    <arg value="--tenant=${club}" />
+                    <arg value="--club=${club}" />
                     <arg value="--env=${env}" />
                     <arg value="--no-interaction" />
+                    <arg value="-vvv" />
                 </exec>
             </else>
         </if>

@@ -64,6 +64,7 @@ Gyman\Domain\Command\UpdateMemberCommand:
         message: member.type.email.already_registered
     - Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcode:
         message: member.type.barcode.already_registered
+
   properties:
     uploadFile:
       - Image: ~
@@ -106,6 +107,10 @@ Gyman\Domain\Command\UpdateMemberCommand:
     gender: ~
     belt: ~
     starred: ~
+    sections:
+      - Count:
+          max: 1
+          maxMessage: Uczestnik może należeć tylko do 1 sekcji
 
 Gyman\Domain\Command\OpenEntryCommand:
   constraints:

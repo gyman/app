@@ -13,7 +13,7 @@ parameters:
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
 
-  subdomain_provider_service: dende.subdomain_provider # move under dende_multidatabase
+  subdomain_provider_service: gyman.app.subdomain_provider
 
 services:
     memcached:
@@ -108,7 +108,18 @@ dende_calendar:
   model_manager_name:   tenant
   backend_type:         ORM
 
-dende_multidatabase: ~
+dende_multidatabase:
+  provider:         gyman.app.tenant_provider
+  connection:       doctrine.dbal.tenant_connection
+  entity_manager:   doctrine.orm.tenant_entity_manager
+  parameter_name:           club
+  parameter_description:    Club subdomain's name
+  fixtures:
+    default:
+        - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
+    tenant:
+        - src/Gyman/Bundle/AppBundle/DataFixtures/Club
+        - vendor/dende/calendar-bundle/DataFixtures/ORM
 
 stof_doctrine_extensions:
     default_locale: pl_PL

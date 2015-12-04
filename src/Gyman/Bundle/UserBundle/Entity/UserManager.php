@@ -42,7 +42,7 @@ final class UserManager extends BaseUserManager
     /**
      * {@inheritDoc}
      */
-    public function findUserBy(array $criteria)
+    public function __findUserBy(array $criteria)
     {
         $subdomainName = $this->subdomainProvider->getSubdomain();
 

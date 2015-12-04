@@ -37,7 +37,13 @@ final class SubdomainProvider implements SubdomainProviderInterface
      */
     public function getSubdomain()
     {
-        $currentHost = $this->requestStack->getCurrentRequest()->getHttpHost();
+        $request = $this->requestStack->getCurrentRequest();
+
+        if ($request === null) {
+            return;
+        }
+
+        $currentHost = $request->getHttpHost();
 
         if ($currentHost === 'localhost') {
             return;
