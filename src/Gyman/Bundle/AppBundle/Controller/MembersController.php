@@ -129,7 +129,14 @@ class MembersController extends Controller
     public function typeaheadAction(Request $request)
     {
         $query = $request->get('query');
+
+        /** @var Member[] $result */
         $result = $this->get('gyman.members.repository')->search($query);
+
+        $result = array_map(function(Member $member) {
+            return $member->email();
+        }, $result);
+
         return new Response($this->get("jms_serializer")->serialize($result, "json"));
     }
 }

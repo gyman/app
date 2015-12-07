@@ -19,7 +19,7 @@ class window.SearchInput
       },
       {
         name: 'members_search'
-#        displayKey: 'email.email'
+        displayKey: 'email'
         display: (a,b,c,d) =>
           console.log a, b, c, d
         templates:
