@@ -50,6 +50,7 @@ imports:
 #    - { resource: sonata.yml }
 
 framework:
+    ide: "phpstorm://%%f:%%l"
     translator:      { fallback: %locale% }
     secret:          %secret%
     router:
@@ -119,7 +120,6 @@ dende_multidatabase:
         - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
     tenant:
         - src/Gyman/Bundle/AppBundle/DataFixtures/Club
-        - vendor/dende/calendar-bundle/DataFixtures/ORM
 
 stof_doctrine_extensions:
     default_locale: pl_PL

@@ -1,30 +1,37 @@
 --- 
-Section00:
+section-kids-4-8:
+  title: "Kids 4-8"
+  calendar: kids-4-8
+  members: []
+section-junior-8-14:
+  title: "Junior 8-14"
+  calendar: junior-8-14
+  members: []
+section-mma:
   title: "MMA"
-  calendar: calendar-001
-  members:
-    - Member00
-    - Member01
-    - Member02
-    - Member03
-    - Member04
-Section01:
-  title: "Capoeira"
-  calendar: calendar-002
-  members:
-    - Member00
-    - Member01
-    - Member02
-    - Member05
-    - Member06
-    - Member07
-    - Member08
-Section02:
-  title: "Brazilian Jiu Jitsu"
-  calendar: calendar-003
-  members:
-    - Member00
-    - Member01
-    - Member05
-    - Member06
-    - Member08
+  calendar: mma
+  members: []
+section-bjj-poczatkujacy:
+  title: "BJJ Początkujący"
+  calendar: bjj-poczatkujacy
+  members: []
+section-bjj-sredniozaawansowani:
+  title: "BJJ średniozaawansowani"
+  calendar: bjj-sredniozaawansowani
+  members: []
+section-bjj-zaawansowani:
+  title: "BJJ zaawansowani"
+  calendar: bjj-zaawansowani
+  members: []
+section-boks-kobiety:
+  title: "Boks Kobiety"
+  calendar: boks-kobiety
+  members: []
+section-zapasy:
+  title: "Zapasy"
+  calendar: zapasy
+  members: []
+section-nogi:
+  title: "NoGi"
+  calendar: nogi
+  members: []

@@ -26,10 +26,12 @@ class DefaultController extends Controller
 //        $popularChart = $this->get("chart")->getMostPopularChart(new Highchart());
 //        $frequencyChart = $this->get("chart")->getFrequencyChart(new Highchart(), new DateTime());
 
+        $date = new DateTime();
+
         return [
             'date'            => new DateTime(),
 //            "filters"         => $pinnedFilters,
-            'occurrences'      => [], // $occurrences,
+            'occurrences'      => $this->getOccurrencesForDay($date),
 //            "popularityChart" => $popularChart,
 //            "frequencyChart"  => $frequencyChart
         ];
@@ -40,18 +42,9 @@ class DefaultController extends Controller
      */
     public function getActivitiesAction(DateTime $date)
     {
-        /** @var Carbon $startDate */
-        $startDate = Carbon::instance($date)->setTime(0, 0, 0);
-
-        /** @var Carbon $endDate */
-        $endDate = Carbon::instance($date)->setTime(0, 0, 0)->addDays(1);
-
-        /** @var Occurrence[] $occurrences */
-        $occurrences = $this->get('dende_calendar.occurrences_repository')->findByPeriod($startDate, $endDate);
-
         return new Response($this->renderView('DashboardBundle:Default:activities.html.twig', [
                     'date'        => $date,
-                    'occurrences' => $occurrences
+                    'occurrences' => $this->getOccurrencesForDay($date)
         ]));
     }
 
@@ -64,5 +57,19 @@ class DefaultController extends Controller
      */
     public function listClassMembersAction(Occurrence $occurrence){
         return ["occurrence" => $occurrence];
+    }
+
+    private function getOccurrencesForDay($date)
+    {
+        /** @var Carbon $startDate */
+        $startDate = Carbon::instance($date)->setTime(0, 0, 0);
+
+        /** @var Carbon $endDate */
+        $endDate = Carbon::instance($date)->setTime(0, 0, 0)->addDays(1);
+
+        /** @var Occurrence[] $occurrences */
+        $occurrences = $this->get('dende_calendar.occurrences_repository')->findByPeriod($startDate, $endDate);
+
+        return $occurrences;
     }
 }

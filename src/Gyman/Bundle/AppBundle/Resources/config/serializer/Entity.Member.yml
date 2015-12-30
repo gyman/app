@@ -7,3 +7,5 @@ Gyman\Bundle\AppBundle\Entity\Member:
       expose: true
     currentVoucher:
       expose: true
+    details:
+      expose: true
