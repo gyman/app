@@ -31,3 +31,8 @@ services:
     tags:
         - { name: validator.constraint_validator, alias: PriceSetForPaidEntryValidator }
 
+  gyman.entries.only_enter_once.validator:
+    class: Gyman\Bundle\AppBundle\Validator\OnlyEnterOnceValidator
+    tags:
+        - { name: validator.constraint_validator, alias: OnlyEnterOnceValidator }
+

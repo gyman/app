@@ -111,14 +111,15 @@ class MembersController extends Controller
                     );
                 }
 
-                if (count($result) > 1) {
-                    $this->addFlash('error', 'flash.member_search.more_results_than_one_please_specify_query_more');
+                if (count($result) == 1) {
+                    /** @var Member $result */
+                    $result = $result[0];
+                    return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
                 }
 
-                /** @var Member $result */
-                $result = $result[0];
-
-                return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
+                return [
+                    'members' => $result
+                ];
             }
         }
     }

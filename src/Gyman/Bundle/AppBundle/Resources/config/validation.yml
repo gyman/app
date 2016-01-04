@@ -115,6 +115,7 @@ Gyman\Domain\Command\UpdateMemberCommand:
 Gyman\Domain\Command\OpenEntryCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntry: ~
+    - Gyman\Bundle\AppBundle\Validator\OnlyEnterOnce: ~
   properties:
     price:
       - Range:

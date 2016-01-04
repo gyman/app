@@ -54,6 +54,7 @@
                 <isset property="club" />
             </not>
             <then>
+                <echo>dropping main schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:drop" />
                     <arg value="--em=default" />
@@ -61,6 +62,7 @@
                     <arg value="--force" />
                     <arg value="-vvv" />
                 </exec>
+                <echo>creating main schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:create" />
                     <arg value="--em=default" />
@@ -68,6 +70,7 @@
                     <arg value="--no-interaction" />
                     <arg value="-vvv" />
                 </exec>
+                <echo>fixtures loading to main schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--em=default" />
@@ -77,6 +80,7 @@
                 </exec>
             </then>
             <else>
+                <echo>dropping tenant schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:drop" />
                     <arg value="--em=tenant" />
@@ -85,6 +89,7 @@
                     <arg value="--force" />
                     <arg value="-vvv" />
                 </exec>
+                <echo>creating tenant schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:schema:create" />
                     <arg value="--em=tenant" />
@@ -93,6 +98,7 @@
                     <arg value="--no-interaction" />
                     <arg value="-vvv" />
                 </exec>
+                <echo>fixtures loading to tenant schema:</echo>
                 <exec executable="${sf}" checkreturn="true" passthru="true">
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--append" />

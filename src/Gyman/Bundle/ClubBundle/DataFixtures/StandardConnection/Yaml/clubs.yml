@@ -14,8 +14,8 @@ club-dende:
     country:  Poland
     phone_number: "604 411 089"
     email_address: "dende@dende.com.pl"
-    opened_from: 08:00
-    opened_till: 16:00
+    opened_from: 12:00
+    opened_till: 22:00
     logo: ~
     about: "Welcome to our club"
     account_number: "000000000000000000000000"

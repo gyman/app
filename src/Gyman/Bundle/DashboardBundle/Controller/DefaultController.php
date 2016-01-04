@@ -59,6 +59,10 @@ class DefaultController extends Controller
         return ["occurrence" => $occurrence];
     }
 
+    /**
+     * @param $date
+     * @return \Dende\Calendar\Domain\Calendar\Event\Occurrence[]
+     */
     private function getOccurrencesForDay($date)
     {
         /** @var Carbon $startDate */

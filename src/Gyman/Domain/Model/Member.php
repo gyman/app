@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain\Model;
 
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Exception\LastEntryIsStillOpenedException;
 use Gyman\Domain\Exception\MemberHasNoLastEntryException;
@@ -173,7 +174,7 @@ class Member
     /**
      * @param Entry $entry
      */
-    public function enter(Entry $entry)
+    public function enter(Entry $entry, Occurrence $occurrence)
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
             throw new LastEntryIsStillOpenedException('Last entry is still opened, cannot add new one');
@@ -182,6 +183,15 @@ class Member
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
             throw new NoCurrentVoucherForVoucherEntryException("Cant add 'voucher' entry where there is no current voucher for member");
         }
+
+        foreach($this->entries as $entry) {
+            if($entry->occurrence()->id() == $occurrence->id())
+            {
+                throw new \Exception("Already joined this class! Can't do it again!");
+            }
+        }
+
+        // @todo: check if user haven't already entered this class
 
         $this->lastEntry = $entry;
         $this->entries->add($entry);

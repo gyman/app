@@ -13,8 +13,13 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        if ($this->has('security.csrf.token_manager')) {
+            $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+        }
+
         return [
-            "club" => $this->get('gyman.club.provider')->getCurrentClub()
+            "club" => $this->get('gyman.club.provider')->getCurrentClub(),
+            "csrf_token" => $csrfToken
         ];
     }
 }

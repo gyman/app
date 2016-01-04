@@ -41,6 +41,17 @@ class DefaultBuilder
         $menu->setChildrenAttribute('class', 'span6');
 
         $menu->addChild(
+            'navigation.dashboard',
+            [
+                'route'          => '_dashboard_index',
+                'extras'         => ['icon' => 'fa-user'],
+                'linkAttributes' => [
+                    'class' => 'btn btn-block',
+                ],
+            ]
+        )->setExtra('translation_domain', 'DefaultBundle');
+
+        $menu->addChild(
             'navigation.edit_profile',
             [
                 'route'          => 'profile_edit',

@@ -110,9 +110,9 @@ dende_calendar:
   backend_type:         ORM
 
 dende_multidatabase:
-  provider:         gyman.app.tenant_provider
-  connection:       doctrine.dbal.tenant_connection
-  entity_manager:   doctrine.orm.tenant_entity_manager
+  provider:                 gyman.app.tenant_provider
+  connection:               doctrine.dbal.tenant_connection
+  entity_manager:           doctrine.orm.tenant_entity_manager
   parameter_name:           club
   parameter_description:    Club subdomain's name
   fixtures:

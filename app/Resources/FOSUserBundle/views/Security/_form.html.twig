@@ -1,0 +1,51 @@
+<form id="loginForm" class="form-horizontal form-content login-form" action="{{ path("fos_user_security_check") }}" method="POST">
+    {% if error %}
+        <div class="alert alert-danger fade in ">
+            <i class="fa fa-envelope alert-icon"></i>
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ "account.login.there_were_errors"|trans }}</strong>
+            <ul>
+                <li>{{ error.messageKey|trans(error.messageData, 'security') }}</li>
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="form-row row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <label class="form-label span12" for="username">{{ "account.login.label.username"|trans }}: <span class="required">*</span></label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control span12"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <label class="form-label span12" for="password">
+                    {{ "account.login.label.password"|trans }}:
+                    <span class="required">*</span>
+                    <span class="icon16 icomoon-icon-lock right gray marginR10"></span>
+                    <span class="forgot"><a href="{{ path("fos_user_resetting_request") }}">{{ "account.login.password_recovery"|trans }}</a></span>
+                </label>
+                <input type="password" id="password" name="_password" required="required" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="form-actions">
+                    <div class="span12 controls">
+                        <button name="_submit" type="submit" class="btn btn-info right" id="loginBtn">
+                            <span class="icon16 icomoon-icon-enter white"></span> {{ "account.login.label.submit"|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+</form>
