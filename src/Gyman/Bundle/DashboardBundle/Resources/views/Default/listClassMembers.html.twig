@@ -9,26 +9,31 @@
 </div>
 
 <div class="span12">
-    Uczestnicy:
-
-    <ol>
-    {% for entry in get_entries(occurrence) %}
-        <li>
-            <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="height: 20px"/>
-            <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
-                {{ entry.member.details.firstname }}
-                {{ entry.member.details.lastname }}
-            </a>
-            {% if entry.member.currentVoucher is not null %}
-            , karnet ważny od
-            <strong>{{ entry.member.currentVoucher.startDate|date("Y-m-d") }}</strong>
-                do
-            <strong>{{ entry.member.currentVoucher.endDate|date("Y-m-d") }}</strong>
-            {% endif %}
-        </li>
-    {% endfor %}
-    </ol>
+    <ul class="thumbnails">
+        {% for entry in get_entries(occurrence) %}
+            <li class="span3" style="text-align: center">
+                <div class="thumbnail">
+                    <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
+                        <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="max-height: 200px" />
+                    </a>
+                    <div class="caption">
+                        <h3>
+                            {{ entry.member.details.firstname }}
+                            {{ entry.member.details.lastname }}
+                        </h3>
+                        <p>
+                            {% if entry.member.currentVoucher is not null %}
+                                , karnet ważny od
+                                <strong>{{ entry.member.currentVoucher.startDate|date("Y-m-d") }}</strong>
+                                do
+                                <strong>{{ entry.member.currentVoucher.endDate|date("Y-m-d") }}</strong>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 
 {% endblock content %}
-
