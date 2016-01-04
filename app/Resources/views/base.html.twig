@@ -40,9 +40,9 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
 
-                    <a href="{{ path("_dashboard_index") }}" class="brand">
-                        {% set logo = app.session.get('current_club').details.logo %}
-                        <img src="{% if logo is not null %}{{ asset('uploads/gallery/dende/' ~ logo) }}{% else %}{{ asset('bundles/gymanapp/images/gyman_logo.png') }}{% endif %}"
+                    <a href="{{ path("gyman_app_default_index") }}" class="brand">
+                        {% set logo = app.session.get('current_club').subdomain.name ~ '/' ~ app.session.get('current_club').details.logo %}
+                        <img src="{% if logo is not null %}{{ asset('uploads/gallery/' ~ logo) }}{% else %}{{ asset('bundles/gymanapp/images/gyman_logo.png') }}{% endif %}"
                         id="applogo" />
                         <span id="appname">{{ app.session.get('current_club').name }}</span>
                     </a>
