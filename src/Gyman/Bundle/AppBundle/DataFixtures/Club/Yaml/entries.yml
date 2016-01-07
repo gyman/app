@@ -4,6 +4,7 @@ Entry001:
   endDate:    +1 hour 30 minutes
   price:      ~
   member:     Member01
+  occurrence: event-bjj-zaawansowani-0098
 
 Entry002:
   voucher:    Voucher00
@@ -12,6 +13,7 @@ Entry002:
   endDate:    +1 hour 30 minutes
   price:      ~
   member:     Member00
+  occurrence: event-bjj-zaawansowani-0098
 
 Entry003:
   type:       paid
@@ -19,6 +21,7 @@ Entry003:
   endDate:    ~
   price:      15 PLN
   member:     Member01
+  occurrence: event-bjj-sredniozaawansowani-0098
 
 Entry004:
   voucher:    Voucher00
@@ -27,3 +30,4 @@ Entry004:
   endDate:    -26 hours
   price:      ~
   member:     Member02
+  occurrence: event-bjj-zaawansowani-sparingi-0127

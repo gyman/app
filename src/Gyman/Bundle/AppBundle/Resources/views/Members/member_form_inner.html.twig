@@ -29,12 +29,12 @@
         {% if member is defined and member.id() %}
         <div class="tab-pane fade in" id="historyPane">
             <div class="page-header">
-                <h4>Wejścia</h4>
+                <h4>Wejścia <small>(ostatnich 15)</small></h4>
             </div>
             {{ render(controller('GymanAppBundle:Entries:renderHistory', {'member' : member})) }}
 
             <div class="page-header">
-                <h4>Karnety</h4>
+                <h4>Karnety<small>(ostatnich 10)</small></h4>
             </div>
             {{ render(controller('GymanAppBundle:Vouchers:renderHistory', {'member' : member})) }}
             {#{% include 'GymanAppBundle:Members:Modal/_sell.html.twig' with {'member' : member} %}#}

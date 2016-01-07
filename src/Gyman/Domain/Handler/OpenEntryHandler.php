@@ -51,7 +51,7 @@ final class OpenEntryHandler
         $entry = EntryFactory::createFromOpenEntryCommand($command);
 
         $member = $command->member;
-        $member->enter($entry, $command->occurrence);
+        $member->enter($entry);
 
         $this->memberRepository->insert($member);
 

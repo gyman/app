@@ -23,6 +23,12 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
       inversedBy: vouchers
       cascade: ["all"]
 
+#  oneToOne:
+#    member:
+#      targetEntity: Gyman\Bundle\AppBundle\Entity\Member
+#      inversedBy: currentVoucher
+#      cascade: ["all"]
+
   oneToMany:
     entries:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry

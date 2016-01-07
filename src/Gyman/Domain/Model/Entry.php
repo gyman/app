@@ -71,7 +71,7 @@ class Entry
      * @param Price $price |null
      * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null)
+    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType();

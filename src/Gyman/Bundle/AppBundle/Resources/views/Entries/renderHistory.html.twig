@@ -2,16 +2,20 @@
     <thead>
         <tr>
             <th>{{ 'entry.type.table_header'|trans }}</th>
+            <th>{{ 'entry.event.table_header'|trans }}</th>
             <th>{{ 'entry.startDate.table_header'|trans }}</th>
             <th>{{ 'entry.endDate.table_header'|trans }}</th>
             <th>{{ 'entry.price.table_header'|trans }}</th>
         </tr>
     </thead>
     <tbody>
-    {% for entry in member.entries|reverse %}
+    {% for entry in entries %}
         <tr>
             <td>
                 {{ ("entries.type." ~ entry.type)|trans }}
+            </td>
+            <td>
+                {{ entry.occurrence.event.title }}
             </td>
             <td>
             {{  entry.startDate|date("d.m.Y H:i:s")  }}

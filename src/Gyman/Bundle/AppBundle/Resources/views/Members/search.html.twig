@@ -10,10 +10,9 @@
         <h3>Wyniki wyszukiwania</h3>
     </div>
 
-    <div class="span12">
         <ul class="thumbnails">
             {% for member in members %}
-                <li class="span3" style="text-align: center">
+                <li class="span2" style="text-align: center">
                     <div class="thumbnail">
                         <a href="{{ path('gyman_member_edit', {id : member.id}) }}">
                             <img src="{{ member.details.foto.fotoWithPath }}" style="max-height: 200px" />
@@ -22,15 +21,14 @@
                             <h3>
                                 {{ member.details.lastname }} {{ member.details.firstname }}
                             </h3>
-                            <p>
-                                jakiś opis
-                            </p>
+                            {#<p>#}
+                                {#jakiś opis#}
+                            {#</p>#}
                         </div>
                     </div>
                 </li>
             {% endfor %}
         </ul>
     </div>
-</div>
 {% endblock %}
 

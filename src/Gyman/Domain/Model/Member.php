@@ -173,8 +173,15 @@ class Member
 
     /**
      * @param Entry $entry
+     * @param Occurrence $occurrence
+     * @throws LastEntryIsStillOpenedException
+     * @throws NoCurrentVoucherForVoucherEntryException
+     * @throws \Exception
+     * @throws \Gyman\Domain\Exception\EntryMustBeVoucherTypeException
+     * @throws \Gyman\Domain\Exception\ExceededMaximumAmountOfEntriesException
+     * @throws \Gyman\Domain\Exception\UnsupportedEntryTypeException
      */
-    public function enter(Entry $entry, Occurrence $occurrence)
+    public function enter(Entry $entry)
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
             throw new LastEntryIsStillOpenedException('Last entry is still opened, cannot add new one');
@@ -184,14 +191,20 @@ class Member
             throw new NoCurrentVoucherForVoucherEntryException("Cant add 'voucher' entry where there is no current voucher for member");
         }
 
-        foreach($this->entries as $entry) {
-            if($entry->occurrence()->id() == $occurrence->id())
-            {
-                throw new \Exception("Already joined this class! Can't do it again!");
-            }
+        if($this->checkIfAlreadyEntered($entry->occurrence()))
+        {
+            throw new \Exception(
+                sprintf(
+                    "Member %s %s (id: %s) already joined this class (occurrence id: %s date: %s, event name: %s)! Can't do it again!",
+                    $this->details()->firstname(),
+                    $this->details()->lastname(),
+                    $this->id(),
+                    $entry->occurrence()->id(),
+                    $entry->occurrence()->startDate()->format("Y-m-d H:i:s"),
+                    $entry->occurrence()->event()->title()
+                )
+            );
         }
-
-        // @todo: check if user haven't already entered this class
 
         $this->lastEntry = $entry;
         $this->entries->add($entry);
@@ -271,5 +284,15 @@ class Member
     public function setSections($sections)
     {
         $this->sections = $sections;
+    }
+
+    public function checkIfAlreadyEntered(Occurrence $occurrence)
+    {
+        $filtered = $this->entries()->filter(function(Entry $entry) use ($occurrence) {
+            $entryOccurrenceId = $entry->occurrence()->id();
+            return $entryOccurrenceId === $occurrence->id();
+        });
+
+        return $filtered->count() > 0 && $filtered->current()->occurrence()->id() === $occurrence->id();
     }
 }

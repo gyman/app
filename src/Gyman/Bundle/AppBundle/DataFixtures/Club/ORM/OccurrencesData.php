@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class EventsData
  * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
  */
-final class EventsData extends BaseFixture implements ContainerAwareInterface
+final class OccurrencesData extends BaseFixture implements ContainerAwareInterface
 {
     /** @var string $dir */
     protected $dir = __DIR__;
@@ -30,7 +30,7 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function getOrder()
     {
-        return 10;
+        return 20;
     }
 
     /**
@@ -39,18 +39,15 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        $command = new CreateEventCommand();
-        $command->calendar = $this->getReference($params["calendar"]);
-        $command->duration = $params["duration"];
-        $command->startDate = new DateTime($params["startDate"]);
-        $command->endDate = new DateTime($params["endDate"]);
-        $command->repetitionDays = $params["repetitions"];
-        $command->title = $params["title"];
-        $command->type = $params["type"];
+        $event = $this->getReference($params["event"]);
 
-        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromCommand($command);
+        $occurrence = $this->getContainer()->get('dende_calendar.factory.occurrence')->createFromArray([
+            'startDate' => new DateTime($params["startDate"]),
+            'duration'  => new Duration($params["minutes"]),
+            'event'     => $event,
+        ]);
 
-        return $event;
+        return $occurrence;
     }
 
     /**
