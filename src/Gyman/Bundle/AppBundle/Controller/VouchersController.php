@@ -66,6 +66,8 @@ class VouchersController extends Controller
      */
     public function renderHistoryAction(Member $member)
     {
-        return [];
+        return [
+            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'ASC'], 10)
+        ];
     }
 }
