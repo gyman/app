@@ -2,7 +2,7 @@ set :application, "app.gyman"
 set :domain,      "gyman.pl"
 set :deploy_to,   "/home/gyman.pl/"
 set :app_path,    "app"
-
+set :clear_controllers, false
 set :user, "root"
 
 set :ssh_options, {
