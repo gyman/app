@@ -340,22 +340,5 @@ $(document).ready ->
   $("#qLoverlay").fadeOut 250
   $("#qLbar").fadeOut 250
 
-  # setup switchClub
 
-#  todo: re-add
-#  window.switchClub = new SwitchClub("form[name=\"gyman_default_clubswitch\"]")
-
-  # modal setup
-
-  gyman = gyman || {}
-  gyman.modal = new ModalContainer({}, "div#modalWindow")
-            
-  $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) =>
-    e.stopPropagation()
-    e.preventDefault()
-
-    if $(e.target).hasClass 'disabled'
-      return false
-
-    href = $(this).attr "href"
-    gyman.modal.showFromUrl(href)
+  $("#webcamDiv").webCamPlugin()

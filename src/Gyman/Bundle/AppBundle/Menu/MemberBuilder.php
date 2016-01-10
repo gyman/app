@@ -151,20 +151,20 @@ class MemberBuilder
             ]
         )->setExtra('translation_domain', 'GymanAppBundle');
 
-//        $menu->addChild(
-//            'member.modal.tab.camera_label',
-//            [
-//                'uri'            => '#webcamDiv',
-//                'extras'         => ['icon' => 'icomoon-icon-camera'],
-//                'linkAttributes' => [
-//                    'class'       => '',
-//                    'data-toggle' => 'tab',
-//                ],
-//                'attributes' => [
-//                    'class' => '',
-//                ],
-//            ]
-//        )->setExtra('translation_domain', 'GymanAppBundle');
+        $menu->addChild(
+            'member.modal.tab.camera_label',
+            [
+                'uri'            => '#webcamDiv',
+                'extras'         => ['icon' => 'icomoon-icon-camera'],
+                'linkAttributes' => [
+                    'class'       => '',
+                    'data-toggle' => 'tab',
+                ],
+                'attributes' => [
+                    'class' => '',
+                ],
+            ]
+        )->setExtra('translation_domain', 'GymanAppBundle');
 
         return $menu;
     }

@@ -59,6 +59,7 @@ final class MemberType extends AbstractType
                 'required' => false,
                 'label'    => 'member.form.foto.label',
             ])
+            ->add('fotoData', 'hidden')
             ->add('starred', 'checkbox', [
                 'label'    => 'member.form.starred.label',
             ])

@@ -69,7 +69,7 @@ class EntriesController extends Controller
     public function renderHistoryAction(Member $member)
     {
         return [
-            'entries' =>$this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'ASC'], 15)
+            'entries' =>$this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC'])
         ];
     }
 }

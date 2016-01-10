@@ -69,6 +69,11 @@ class UpdateMemberCommand implements MemberCommandInterface
     public $foto;
 
     /**
+     * @var
+     */
+    public $fotoData;
+
+    /**
      * @var bool
      */
     public $starred;

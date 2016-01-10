@@ -65,44 +65,44 @@ module.exports = function (grunt) {
         "bower_components/select2/select2.js",
         //"bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
         //"bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
-        //"bower_components/DataTables/media/js/jquery.dataTables.js",
-        //"bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
+        "bower_components/DataTables/media/js/jquery.dataTables.js",
+        "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
         "bower_components/modernizr/modernizr.js",
-        //"bower_components/blockui/jquery.blockUI.js",
-        //"bower_components/pnotify/pnotify.core.js",
+        "bower_components/blockui/jquery.blockUI.js",
+        "bower_components/pnotify/pnotify.core.js",
         "bower_components/jquery.uniform/jquery.uniform.js",
-        //"bower_components/jquery.knob/js/jquery.knob.js",
-        //"bower_components/qTip/jquery.qtip.js",
-        //"bower_components/highcharts/highcharts.js",
+        "bower_components/jquery.knob/js/jquery.knob.js",
+        "bower_components/qTip/jquery.qtip.js",
+        "bower_components/highcharts/highcharts.js",
         //"bower_components/highcharts/modules/exporting.js",
         //'bower_components/fullcalendar/dist/fullcalendar.js',
         //'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
         //'bower_components/jquery-file-upload/js/jquery.fileupload.js',
         //'bower_components/webcam/jquery.webcam.js',
         'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
+        'src/Gyman/Bundle/AppBundle/Resources/public/js/photobooth_min.js'
     ];
 
     var coffeeFiles = [
-        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/configs.coffee',
-        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/main.coffee',
-        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
-        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/ModalContainer.coffee',
-        'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
+        'src/Gyman/Bundle/AppBundle/Resources/coffee/spinner.coffee',
+        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
+        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/ModalContainer.coffee',
+        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
         //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/SwitchClub.coffee', @todo: re-add
 
-        'web/bundles/lists/coffee/reloadAjax.coffee',
+        //'web/bundles/lists/coffee/reloadAjax.coffee',
 
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
-        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
-        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
-        //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
+        //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
+        //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
+        ////"src/Gyman/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
         "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
 
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
-        //"src/Gyman/Bundle/AppBundle/Resources/coffee/WebCamTab.coffee",
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/WebCamPlugin.coffee",
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/Filter.coffee",
 
-        "src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
+        //"src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
         //"src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
         //"src/Gyman/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
         //"src/Gyman/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
@@ -122,6 +122,7 @@ module.exports = function (grunt) {
 
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.closeVoucher.coffee",
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.newVoucher.coffee"
+        'src/Gyman/Bundle/AppBundle/Resources/coffee/main.coffee'
     ];
 
     grunt.initConfig({
@@ -285,7 +286,7 @@ module.exports = function (grunt) {
         "clean:web",
         "css:development",
         "js:development",
-        "copy:webcam-swf",
+        //"copy:webcam-swf",
         "copy:images",
         "copy:fonts",
     ]);
