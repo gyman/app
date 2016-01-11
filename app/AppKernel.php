@@ -41,7 +41,6 @@ class AppKernel extends Kernel
             new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
-            new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\TestBundle\TestBundle(),
             new Gyman\Bundle\ChartsBundle\ChartsBundle(),
             new Gyman\Bundle\UserBundle\UserBundle(),
@@ -52,6 +51,7 @@ class AppKernel extends Kernel
 //            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
 
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
+            new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
 
             // can't work with Doctrine Embeddables
             // conflicts with Liip/Functional Bundle

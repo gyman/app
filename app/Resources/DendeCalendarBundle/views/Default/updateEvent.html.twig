@@ -45,7 +45,7 @@
             <div class="form-actions">
                 {% if form.delete_event is defined %}
                     {{ form_row(form.delete_event, {attr: {class: 'btn btn-link pull-right'}}) }}
-                    {{ form_row(form.delete_occurrence, {attr: {class: 'btn btn-link pull-right'}}) }}
+                    {#{{ form_row(form.delete_occurrence, {attr: {class: 'btn btn-link pull-right'}}) }}#}
                 {% endif %}
 
                 {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
