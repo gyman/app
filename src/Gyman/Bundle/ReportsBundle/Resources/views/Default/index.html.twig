@@ -10,7 +10,17 @@
 
         Zakres czasu:
 
-        {{ form(form) }}
+        {{ form_start(form) }}
+
+        <div class="row-fluid">
+            <div class="span3">
+                {{ form_widget(form.startDate) }}
+                {{ form_widget(form.endDate) }}
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
+
+        {{ form_end(form) }}
 
         <ol>
         {% for section in moneyPerSection %}
