@@ -15,7 +15,9 @@
                 {{ ("entries.type." ~ entry.type)|trans }}
             </td>
             <td>
-                {{ entry.occurrence.event.title }}
+                {% if entry.occurrence is not null %}
+                    {{ entry.occurrence.event.title }}
+                {% endif %}
             </td>
             <td>
             {{  entry.startDate|date("d.m.Y H:i:s")  }}

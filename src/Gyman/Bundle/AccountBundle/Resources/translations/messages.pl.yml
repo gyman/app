@@ -109,6 +109,8 @@ user.user.form.invoice.country: "Kraj"
 entry:
     type:
         table_header: Typ
+    event:
+        table_header: Zajęcia
     price:
         table_header: Cena
     startDate:

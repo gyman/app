@@ -22,12 +22,12 @@ class CreateVoucherCommand implements VoucherCommandInterface
     /**
      * @var integer
      */
-    public $maximumAmount;
+    public $maximumAmount = 12;
 
     /**
-     * @var string
+     * @var float
      */
-    public $price;
+    public $price = "20.00";
 
     /**
      * @var Member

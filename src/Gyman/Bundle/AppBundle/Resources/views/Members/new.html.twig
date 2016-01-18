@@ -5,40 +5,37 @@
 {% endblock title %}
 
 {% block content %}
-<div class="contentwrapper">
+<div class="heading">
 
-    <div class="heading">
+    <h3>Dodaj użytkownika</h3>
 
-        <h3>Dodaj użytkownika</h3>
+</div>
 
-    </div>
+<div class="span12">
+{% include "::_flash.html.twig" %}
 
+{{ form_start(form, {
+    attr : {
+        'id' : "memberForm",
+        'class' : "form-horizontal row-fluid",
+        'novalidate' : 'NOVALIDATE'
+    },
+    action : path('gyman_member_new'),
+    method : 'POST'
+}) }}
+
+{%  include "@GymanApp/Members/member_form_inner.html.twig" %}
+
+<div class="row-fluid">
     <div class="span12">
-    {% include "::_flash.html.twig" %}
-
-    {{ form_start(form, {
-        attr : {
-            'id' : "memberForm",
-            'class' : "form-horizontal row-fluid",
-            'novalidate' : 'NOVALIDATE'
-        },
-        action : path('gyman_member_new'),
-        method : 'POST'
-    }) }}
-
-    {%  include "@GymanApp/Members/member_form_inner.html.twig" %}
-
-    <div class="row-fluid">
-        <div class="span12">
-            <button class="btn btn-large btn-primary pull-right" type="submit">
-                Zapisz
-            </button>
-        </div>
+        <button class="btn btn-large btn-primary pull-right" type="submit">
+            Zapisz
+        </button>
     </div>
+</div>
 
-    {{ form_end(form) }}
+{{ form_end(form) }}
 
-    </div>
 </div>
 
 {% endblock content %}

@@ -26,7 +26,7 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     public function getOrder()
     {
-        return 0;
+        return -20;
     }
 
     /**

@@ -5,41 +5,39 @@
 {% endblock title %}
 
 {% block content %}
-<div class="contentwrapper">
-    <div class="heading">
-        <h3>Edytuj użytkownika</h3>
+<div class="heading">
+    <h3>Edytuj użytkownika</h3>
+</div>
+
+<div class="row-fluid">
+{% include "::_flash.html.twig" %}
+
+{{ form_start(form, {
+    attr : {
+        'id' : "memberForm",
+        'class' : "form-horizontal row-fluid",
+        'novalidate' : 'novalidate'
+    },
+    action : path('gyman_member_edit', {"id" : member.id})
+}) }}
+
+{%  include "@GymanApp/Members/member_form_inner.html.twig" %}
+
+<div class="row-fluid">
+    <div class="span12">
+        <button class="btn btn-large btn-primary pull-right" type="submit">
+            Zapisz
+        </button>
+
+        {% if member.hasOpenedEntry %}
+            <a href="{{ path("gyman_entry_close", {id : member.lastEntry.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.close_entry"|trans }}</a>
+        {% else %}
+            <a href="{{ path("gyman_entry_new", {id : member.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.add_entry"|trans }}</a>
+        {% endif %}
     </div>
+</div>
 
-    <div class="row-fluid">
-    {% include "::_flash.html.twig" %}
+{{ form_end(form) }}
 
-    {{ form_start(form, {
-        attr : {
-            'id' : "memberForm",
-            'class' : "form-horizontal row-fluid",
-            'novalidate' : 'novalidate'
-        },
-        action : path('gyman_member_edit', {"id" : member.id})
-    }) }}
-
-    {%  include "@GymanApp/Members/member_form_inner.html.twig" %}
-
-    <div class="row-fluid">
-        <div class="span12">
-            <button class="btn btn-large btn-primary pull-right" type="submit">
-                Zapisz
-            </button>
-
-            {% if member.hasOpenedEntry %}
-                <a href="{{ path("gyman_entry_close", {id : member.lastEntry.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.close_entry"|trans }}</a>
-            {% else %}
-                <a href="{{ path("gyman_entry_new", {id : member.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.add_entry"|trans }}</a>
-            {% endif %}
-        </div>
-    </div>
-
-    {{ form_end(form) }}
-
-    </div>
 </div>
 {% endblock content %}

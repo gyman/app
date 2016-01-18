@@ -1,6 +1,8 @@
 services:
   gyman.vouchers.form.voucher:
     class: Gyman\Bundle\AppBundle\Form\VoucherType
+    arguments:
+      - @gyman.members.repository
     tags:
       - { name: form.type, alias: gyman_voucher_form }
 
@@ -50,3 +52,8 @@ services:
           - "@voucher_manager"
       tags:
           - { name: validator.constraint_validator, alias: validator.voucher_date_constraint}
+
+  gyman.app.validator.voucher_amount_for_credit_entries_constraint:
+      class:          Gyman\Bundle\AppBundle\Validator\MaximumAmountGreaterThanCreditEntriesValidator
+      tags:
+          - { name: validator.constraint_validator, alias: validator.voucher_amount_for_credit_entries_constraint}

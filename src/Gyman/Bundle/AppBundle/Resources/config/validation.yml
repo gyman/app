@@ -134,6 +134,10 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
       - NotNull:
           message: Należy podać datę początkową.
 
+Gyman\Domain\Command\CreateVoucherCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\MaximumAmountGreaterThanCreditEntriesConstraint: ~
+
 Gyman\DomainBundle\Entity\Price:
   properties:
     amount:

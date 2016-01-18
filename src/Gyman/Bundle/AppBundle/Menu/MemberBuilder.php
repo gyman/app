@@ -90,22 +90,22 @@ class MemberBuilder
                     ],
                 ]
             )->setExtra('translation_domain', 'GymanAppBundle');
-        }
 
-        $menu->addChild(
-            'member.modal.tab.history_label',
-            [
-                'uri'            => '#historyPane',
-                'extras'         => ['icon' => 'icomoon-icon-users'],
-                'linkAttributes' => [
-                    'class'       => '',
-                    'data-toggle' => 'tab',
-                ],
-                'attributes' => [
-                    'class' => '',
-                ],
-            ]
-        )->setExtra('translation_domain', 'GymanAppBundle');
+            $menu->addChild(
+                'member.modal.tab.history_label',
+                [
+                    'uri'            => '#historyPane',
+                    'extras'         => ['icon' => 'icomoon-icon-users'],
+                    'linkAttributes' => [
+                        'class'       => '',
+                        'data-toggle' => 'tab',
+                    ],
+                    'attributes' => [
+                        'class' => '',
+                    ],
+                ]
+            )->setExtra('translation_domain', 'GymanAppBundle');
+        }
 
         $menu->addChild(
             'member.modal.tab.extras_label',

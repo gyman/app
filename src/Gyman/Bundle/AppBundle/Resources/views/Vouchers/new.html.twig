@@ -1,19 +1,30 @@
 {% extends "::base.html.twig" %}
 
 {% block content %}
-    <div class="contentwrapper">
+<div class="heading">
+    <h3>Dodaj karnet</h3>
+</div>
 
-        <div class="heading">
-
-            <h3>Dodaj karnet</h3>
-
-        </div>
-
-        <div class="span12">
+    <div class="row-fluid">
+        <div class="span6">
             {% include "::_flash.html.twig" %}
 
             {{ form(form) }}
-
+        </div>
+        <div class="span6">
+            {% for flashMessage in app.session.flashbag.get('creditEntries') %}
+                <div class="alert alert-danger flash-notice">
+                    <p>{{ flashMessage|raw }}</p>
+                    <ol>
+                        {% for entry in creditEntries if creditEntries|length > 0 %}
+                        <li>
+                            <strong>{{ entry.startDate|date("Y-m-d H:i") }}</strong> na <strong>{{ entry.occurrence.event.title }}</strong>
+                            (sekcja: {{ entry.occurrence.event.calendar.name }})
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            {% endfor %}
         </div>
 
     </div>

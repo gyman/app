@@ -19,6 +19,7 @@ class VouchersData extends BaseFixture
     {
         $array['startDate'] = Carbon::parse($array['startDate']);
         $array['endDate'] = Carbon::parse($array['endDate']);
+        $array["price"] = ["amount" => $array["price"], "currency" => "PLN"];
 
         $voucher = VoucherFactory::createFromArray($array);
 

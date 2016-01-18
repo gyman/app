@@ -18,15 +18,15 @@ class VoucherDateValidator extends ConstraintValidator
         $this->voucherManager = $voucherManager;
     }
 
-    public function validate($voucher, Constraint $constraint)
+    public function validate($createVoucherCommand, Constraint $constraint)
     {
-        $currentVoucher = $voucher->getMember()->getCurrentVoucher();
+        $currentVoucher = $createVoucherCommand->getMember()->getCurrentVoucher();
 
-        if ($currentVoucher == $voucher) {
+        if ($currentVoucher == $createVoucherCommand) {
             return;
         }
 
-        if ($currentVoucher && $currentVoucher->getEndDate() > $voucher->getStartDate() && !$currentVoucher->getDeletedAt()) {
+        if ($currentVoucher && $currentVoucher->getEndDate() > $createVoucherCommand->getStartDate() && !$currentVoucher->getDeletedAt()) {
             $currentEndDate = $currentVoucher->getEndDate();
 
             if ($currentEndDate) {
@@ -35,7 +35,7 @@ class VoucherDateValidator extends ConstraintValidator
             }
         }
 
-        if ($voucher->getEndDate() != null && $voucher->getStartDate() > $voucher->getEndDate()) {
+        if ($createVoucherCommand->getEndDate() != null && $createVoucherCommand->getStartDate() > $createVoucherCommand->getEndDate()) {
             $this->context->addViolationAt('endDate', 'Data końcowa musi być po dacie początkowej!');
         }
     }

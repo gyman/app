@@ -1,1 +1,5 @@
-services: ~
+services:
+  gyman.reports.filter_date:
+    class: Gyman\Bundle\ReportsBundle\Form\Type\DateFilterType
+    tags:
+      - { name: form.type, alias: reports_date_filter }

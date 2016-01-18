@@ -1,0 +1,27 @@
+{%  extends 'GymanReportsBundle::layout.html.twig' %}
+
+{% block body %}
+<div class="heading">
+    <h3>Raporty</h3>
+</div>
+
+<div class="form-row row-fluid">
+    <div class="span12">
+
+        Zakres czasu:
+
+        {{ form(form) }}
+
+        <ol>
+        {% for section in moneyPerSection %}
+            <li>
+                {{ section.title }} - {{ section.1 }} PLN
+            </li>
+        {%  endfor %}
+        </ol>
+        <strong>suma: {{ sum }} PLN</strong>
+
+    </div>
+</div>
+
+{% endblock body %}

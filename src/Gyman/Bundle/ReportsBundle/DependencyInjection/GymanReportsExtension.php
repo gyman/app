@@ -11,13 +11,15 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class ReportsExtension extends Extension
+class GymanReportsExtension extends Extension
 {
     /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        die(var_dump("ok"));
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 

@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use Gyman\Bundle\AppBundle\Entity\Entry;
 use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Bundle\AppBundle\Entity\Voucher;
 use Gyman\Domain\Command\CreateVoucherCommand;
@@ -26,17 +27,36 @@ class VouchersController extends Controller
      */
     public function newAction(Request $request, Member $member)
     {
-        $form = $this->createForm('gyman_voucher_form', new CreateVoucherCommand(), [
+        $command = new CreateVoucherCommand();
+        $command->member = $member;
+
+        $form = $this->createForm('gyman_voucher_form', $command, [
                 'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
+                'memberId' => $member->id(),
+                'member' => $member
         ]);
+        
+        $creditEntries = $member->entries()->filter(function(Entry $entry){
+            return $entry->isType(Entry::TYPE_CREDIT);
+        });
+
+        $creditEntriesCount = count($creditEntries);
+
+        if(!$creditEntries->isEmpty()) {
+            $this->addFlash('creditEntries', $this->get("translator")->transChoice(
+                'flash.member_has_credit_entries',
+                $creditEntriesCount,
+                [
+                    '%creditEntriesCount%' => $creditEntriesCount
+                ]
+            ));
+        }
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $command = $form->getData();
-                $command->member = $member;
-
                 $this->get('gyman.vouchers.create_voucher')->handle($command, $this->getUser());
                 $this->addFlash('success', 'flash.voucher_added.success');
 
@@ -46,7 +66,10 @@ class VouchersController extends Controller
             }
         }
 
-        return ['form' => $form->createView()];
+        return [
+            'form' => $form->createView(),
+            'creditEntries' => $creditEntries
+        ];
     }
 
     /**

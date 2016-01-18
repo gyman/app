@@ -101,6 +101,18 @@ class Builder
             )
         )->setExtra('translation_domain', 'DashboardBundle');
 
+        $menu->addChild(
+            'dashboard.actions.reports',
+            array(
+                'route' => 'gyman_reports_index',
+                "extras" => array("icon" => 'icomoon-icon-users'),
+                'linkAttributes' => array(
+                    "class" => 'btn btn-block btn-large btn-primary',
+                    "id" => "actionReports"
+                )
+            )
+        )->setExtra('translation_domain', 'DashboardBundle');
+
         return $menu;
     }
 }

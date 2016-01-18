@@ -2,7 +2,8 @@
 section-kids-4-8:
   title: "Kids 4-8"
   calendar: kids-4-8
-  members: []
+  members:
+    - Member00
 section-junior-8-14:
   title: "Junior 8-14"
   calendar: junior-8-14

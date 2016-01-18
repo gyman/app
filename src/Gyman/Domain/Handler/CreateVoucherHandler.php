@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Domain\Handler;
 
+use Gyman\Bundle\AppBundle\Entity\Entry;
 use Gyman\Bundle\AppBundle\Factory\VoucherFactory;
+use Gyman\Domain\Command\CreateVoucherCommand;
 use Gyman\Domain\Command\VoucherCommandInterface;
 use Gyman\Domain\Event\VoucherEvent;
 use Gyman\Domain\Model\Member;
@@ -42,15 +44,31 @@ class CreateVoucherHandler
     }
 
     /**
-     * @param Member $member
-     * @param Voucher $voucher
+     * @param CreateVoucherCommand $createVoucherCommand
      * @param UserInterface $author
+     * @throws \Exception
+     * @throws \Gyman\Domain\Exception\VouchersAreOverlappingException
+     * @internal param Member $member
+     * @internal param Voucher $voucher
      */
-    public function handle(VoucherCommandInterface $command, UserInterface $author)
+    public function handle(CreateVoucherCommand $createVoucherCommand, UserInterface $author)
     {
-        $voucher = VoucherFactory::createFromVoucherCommand($command);
-
+        $voucher = VoucherFactory::createFromVoucherCommand($createVoucherCommand);
         $voucher->member()->addVoucher($voucher);
+
+        $creditEntries = $voucher->member()->filterCreditEntries();
+
+        if($createVoucherCommand->maximumAmount <= count($creditEntries)) {
+            throw new \Exception(
+                sprintf("User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries")
+            );
+        }
+
+        if(!$creditEntries->isEmpty()) {
+            $creditEntries->forAll(function($key, Entry $entry) use ($voucher) {
+                $entry->payOffWithVoucher($voucher);
+            });
+        }
 
         $this->repository->insert($voucher->member());
 

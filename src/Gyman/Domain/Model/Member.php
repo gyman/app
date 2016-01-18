@@ -184,7 +184,7 @@ class Member
     public function enter(Entry $entry)
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
-            throw new LastEntryIsStillOpenedException('Last entry is still opened, cannot add new one');
+            throw new LastEntryIsStillOpenedException($entry, $this->lastEntry());
         }
 
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
@@ -286,13 +286,32 @@ class Member
         $this->sections = $sections;
     }
 
-    public function checkIfAlreadyEntered(Occurrence $occurrence)
+    /**
+     * @param Occurrence|null $occurrence
+     * @return bool
+     */
+    public function checkIfAlreadyEntered(Occurrence $occurrence = null)
     {
+        if(is_null($occurrence))
+        {
+            return false;
+        }
+
         $filtered = $this->entries()->filter(function(Entry $entry) use ($occurrence) {
             $entryOccurrenceId = $entry->occurrence()->id();
             return $entryOccurrenceId === $occurrence->id();
         });
 
         return $filtered->count() > 0 && $filtered->current()->occurrence()->id() === $occurrence->id();
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|static
+     */
+    public function filterCreditEntries()
+    {
+        return $this->entries->filter(function(Entry $entry){
+            return $entry->isType(Entry::TYPE_CREDIT);
+        });
     }
 }

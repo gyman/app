@@ -12,6 +12,11 @@ gyman_app:
     type:     annotation
     prefix:   /
 
+gyman_reports:
+    resource: "@GymanReportsBundle/Controller/"
+    type:     annotation
+    prefix:   /reports
+
 #timeline:
 #    resource: "@TimelineBundle/Controller/"
 #    type:     annotation
@@ -21,11 +26,6 @@ account:
     resource: "@AccountBundle/Controller/"
     type:     annotation
     prefix:   /
-
-reports:
-    resource: "@ReportsBundle/Controller/"
-    type:     annotation
-    prefix:   /report
 
 dashboard:
     resource: "@DashboardBundle/Controller/"

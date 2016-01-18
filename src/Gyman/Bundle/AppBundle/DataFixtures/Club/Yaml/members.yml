@@ -12,6 +12,8 @@ Member00:
     zipcode:            88-888
     belt:               white
     barcode:            abcd840427
+    sections:
+      - section-kids-4-8
 Member01:
     birthdate:          "1984-09-27 12:00:00"
     deletedAt:          null
@@ -25,6 +27,8 @@ Member01:
     zipcode:            88-888
     belt:               white
     barcode:            abcd12301
+    sections:
+      - section-kids-4-8
 Member02:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -38,6 +42,8 @@ Member02:
     zipcode:            88-888
     belt:               white
     barcode:            abcd12302
+    sections:
+      - section-nogi
 Member03:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -51,6 +57,8 @@ Member03:
     zipcode:            88-888
     belt:               blue
     barcode:            abcd12303
+    sections:
+      - section-kids-4-8
 Member04:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -64,6 +72,8 @@ Member04:
     zipcode:            88-888
     belt:               brown
     barcode:            abcd12304
+    sections:
+      - section-kids-4-8
 Member05:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -77,6 +87,8 @@ Member05:
     zipcode:            88-888
     belt:               purple
     barcode:            abcd12305
+    sections:
+      - section-nogi
 Member06:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -90,6 +102,8 @@ Member06:
     zipcode:            88-888
     belt:               black
     barcode:            abcd12306
+    sections:
+      - section-kids-4-8
 Member07:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -103,6 +117,8 @@ Member07:
     zipcode:            88-888
     belt:               white
     barcode:            abcd12307
+    sections:
+      - section-kids-4-8
 Member08:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -116,6 +132,8 @@ Member08:
     zipcode:            88-888
     belt:               blue
     barcode:            abcd12308
+    sections:
+      - section-nogi
 Member09:
     birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
@@ -129,6 +147,8 @@ Member09:
     zipcode:            88-888
     belt:               blue
     barcode:            abcd12309
+    sections:
+      - section-kids-4-8
 Member10:
     birthdate:          "1975-10-15 12:00:00"
     deletedAt:          null
@@ -142,6 +162,8 @@ Member10:
     zipcode:            88-888
     belt:
     barcode:            abcd12310
+    sections:
+      - section-nogi
 Member11:
     birthdate:          "1980-10-15 12:00:00"
     deletedAt:          null
@@ -155,3 +177,5 @@ Member11:
     zipcode:            88-888
     belt:
     barcode:            abcd12311
+    sections:
+      - section-kids-4-8

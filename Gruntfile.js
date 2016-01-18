@@ -100,6 +100,7 @@ module.exports = function (grunt) {
 
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
         "src/Gyman/Bundle/AppBundle/Resources/coffee/WebCamPlugin.coffee",
+        "src/Gyman/Bundle/AppBundle/Resources/coffee/OnlyOneActivityPlugin.coffee",
         //"src/Gyman/Bundle/AppBundle/Resources/coffee/Filter.coffee",
 
         //"src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",

@@ -83,10 +83,12 @@ entries:
 entries.form.entry_type.free.label: "darmowe"
 entries.form.entry_type.voucher.label: "na karnet"
 entries.form.entry_type.paid.label: "płatne"
+entries.form.entry_type.credit.label: "kredytowe"
 
 entries.form.occurrence.label: 'Dzisiejsze zajęcia'
 
 entries.type.voucher: "na karnet"
+entries.type.credit: "kredytowe"
 entries.type.free: "darmowe"
 entries.type.paid: "płatne"
 
@@ -99,3 +101,9 @@ vouchers:
         table_header: Opłata
     entries:
         table_header: Wejścia
+flash:
+    member_has_credit_entries: >-
+      {1} Uczestnik wszedł 1 raz na zajęcia wykorzystując kredyt!<br /> Poniższe wejście zostanie przypisane do karnetu i odliczone od pozostałych wejść.
+      |]1,Inf[ Uczestnik wszedł %creditEntriesCount% razy na zajęcia wykorzystując kredyt!<br /> Poniższe wejścia zostaną przypisane do nowego karnetu i odliczone od pozostałych wejść.
+
+

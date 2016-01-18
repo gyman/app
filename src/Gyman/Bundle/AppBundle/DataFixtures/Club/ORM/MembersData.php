@@ -16,13 +16,19 @@ class MembersData extends BaseFixture
 
     public function insert($params)
     {
-        $params['sections'] = new ArrayCollection();
-        $params['entries'] = new ArrayCollection();
-        $params['vouchers'] = new ArrayCollection();
-        $params['current_voucher'] = null;
-        $params['last_entry'] = null;
+        $factoryParams = $params;
+        $factoryParams['sections'] = new ArrayCollection();
+        $factoryParams['entries'] = new ArrayCollection();
+        $factoryParams['vouchers'] = new ArrayCollection();
+        $factoryParams['current_voucher'] = null;
+        $factoryParams['last_entry'] = null;
 
-        $member = MemberFactory::createFromArray($params);
+        $member = MemberFactory::createFromArray($factoryParams);
+
+        foreach($params["sections"] as $sectionName)
+        {
+            $member->sections()->add($this->getReference($sectionName));
+        }
 
         $this->manager->persist($member);
         $this->manager->flush();

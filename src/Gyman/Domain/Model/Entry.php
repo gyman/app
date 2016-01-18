@@ -16,11 +16,13 @@ class Entry
     const TYPE_FREE = 'free';
     const TYPE_VOUCHER = 'voucher';
     const TYPE_PAID = 'paid';
+    const TYPE_CREDIT = 'credit';
 
     public static $availableTypes = [
         self::TYPE_FREE,
         self::TYPE_VOUCHER,
         self::TYPE_PAID,
+        self::TYPE_CREDIT,
     ];
 
     /**
@@ -71,7 +73,7 @@ class Entry
      * @param Price $price |null
      * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence)
+    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType();
@@ -167,6 +169,15 @@ class Entry
         }
 
         $this->voucher = $voucher;
+    }
+
+    /**
+     * @param Voucher $voucher
+     */
+    public function payOffWithVoucher(Voucher $voucher)
+    {
+        $this->type = self::TYPE_VOUCHER;
+        $this->assignToVoucher($voucher);
     }
 
     /**

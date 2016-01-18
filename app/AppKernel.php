@@ -41,7 +41,7 @@ class AppKernel extends Kernel
             new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
-            new Gyman\Bundle\ReportsBundle\ReportsBundle(),
+            new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\TestBundle\TestBundle(),
             new Gyman\Bundle\ChartsBundle\ChartsBundle(),
             new Gyman\Bundle\UserBundle\UserBundle(),

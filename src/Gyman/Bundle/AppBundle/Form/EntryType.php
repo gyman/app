@@ -108,16 +108,22 @@ final class EntryType extends AbstractType
             $form = $event->getForm();
 
             $choices = [
+                Entry::TYPE_CREDIT  => 'entries.form.entry_type.credit.label',
                 Entry::TYPE_VOUCHER => 'entries.form.entry_type.voucher.label',
                 Entry::TYPE_FREE    => 'entries.form.entry_type.free.label',
                 Entry::TYPE_PAID    => 'entries.form.entry_type.paid.label',
             ];
             if (!$data->member->hasCurrentVoucher() || $data->member->currentVoucher()->leftEntriesAmount() === 0) {
                 unset($choices[Entry::TYPE_VOUCHER]);
+                $defaultChoice = $choices[Entry::TYPE_CREDIT];
+            } else {
+                unset($choices[Entry::TYPE_CREDIT]);
+                $defaultChoice = $choices[Entry::TYPE_VOUCHER];
             }
 
             $form->add('entryType', 'choice', [
                 'choices'  => $choices,
+                'data'     => $defaultChoice,
                 'expanded' => true,
                 'label'    => 'entries.form.entry_type.label',
             ]);
