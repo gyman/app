@@ -3,7 +3,7 @@ set :domain,      "gyman.pl"
 set :deploy_to,   "/home/gyman.pl/"
 set :app_path,    "app"
 set :clear_controllers, false
-set :user, "root"
+set :user, "deploy"
 
 set :ssh_options, {
     :forward_agent => true,
@@ -15,8 +15,8 @@ default_run_options[:pty] = true
 set :repository,  "git@github.com:gyman/app.git"
 set :scm,         :git
 set :branch, 	   "develop"
-# set :deploy_via,   :remote_cache
-set :deploy_via, :rsync_with_remote_cache
+set :deploy_via,   :remote_cache
+# set :deploy_via, :rsync_with_remote_cache
 set :copy_via, :scp
 
 set :interactive_mode, false
