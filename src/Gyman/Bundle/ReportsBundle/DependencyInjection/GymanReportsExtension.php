@@ -18,8 +18,6 @@ class GymanReportsExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        die(var_dump("ok"));
-
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 

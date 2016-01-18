@@ -8,6 +8,7 @@ use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Bundle\AppBundle\Entity\SectionRepository;
+use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Gyman\Domain\Command\OpenEntryCommand;
 use Gyman\Domain\Model\Entry;
 use Symfony\Component\Form\AbstractType;
@@ -34,19 +35,21 @@ final class DateFilterType extends AbstractType
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
                     'readonly' => 'READONLY',
+                    "class" => "span4"
                 ],
-                'label' => 'entries.form.start_date.label',
+                'label' => 'Początek',
             ])
             ->add('endDate', 'datetime', [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
                     'readonly' => 'READONLY',
+                    "class" => "span4"
                 ],
-                'label' => 'entries.form.start_date.label',
+                'label' => 'Koniec',
             ])
             ->add('submit', 'submit', [
-                'label' => 'entries.form.open_entry.label',
+                'label' => 'ustaw',
         ]);
     }
 
@@ -56,7 +59,7 @@ final class DateFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => null,
+            'data_class' => DateFilter::class
         ]);
     }
 

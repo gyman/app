@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Bundle\ReportsBundle\Controller;
 
+use Carbon\Carbon;
 use DateTime;
+use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,28 +20,34 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm("gyman_reports_date_filter");
+        $filter = new DateFilter();
+        $form = $this->createForm("reports_date_filter", $filter);
+        $result = [];
 
+        if($request->isMethod("POST"))
+        {
+            $form->handleRequest($request);
 
+            $qb = $this->get("gyman.vouchers.repository")->createQueryBuilder("v");
 
-        $qb = $this->get("gyman.vouchers.repository")->createQueryBuilder("v");
+            $qb
+                ->select("SUM(v.price.amount), s.title")
+                ->leftJoin("v.member", "m")
+                ->leftJoin("m.sections", "s")
+                ->where("v.startDate > :startDate")
+                ->andWhere("v.startDate < :endDate")
+                ->andWhere("v.price.amount is not null")
+                ->groupBy("s.title")
+                ->setParameters([
+                    "startDate" => $filter->startDate,
+                    "endDate" => $filter->endDate
+                ]);
 
-        $qb
-            ->select("SUM(v.price.amount), s.title")
-            ->leftJoin("v.member", "m")
-            ->leftJoin("m.sections", "s")
-            ->where("v.startDate > :startDate")
-            ->andWhere("v.startDate < :endDate")
-            ->andWhere("v.price.amount is not null")
-            ->groupBy("s.title")
-            ->setParameters([
-                    "startDate" => new DateTime("2016-01-01 00:00:00"),
-                    "endDate" => new DateTime("2016-02-01 00:00:00")
-            ]);
-
-        $result = $qb->getQuery()->getResult();
+            $result = $qb->getQuery()->getResult();
+        }
 
         return [
+            "form" => $form,
             "moneyPerSection" => $result,
             "sum" => array_sum(array_column($result, 1))
         ];
