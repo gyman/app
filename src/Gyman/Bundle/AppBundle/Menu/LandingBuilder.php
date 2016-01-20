@@ -46,7 +46,7 @@ class LandingBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => 'active',
+                    'class' => '',
                 ],
         ])->setExtra('translation_domain', 'GymanAppBundle');
 
@@ -57,7 +57,7 @@ class LandingBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => 'active',
+                    'class' => '',
                 ],
         ])->setExtra('translation_domain', 'GymanAppBundle');
 

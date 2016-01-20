@@ -1,3 +1,8 @@
+title.welcome.main_page: "Gyman.pl"
+schedule_label: Grafik
+address_label: Kontakt
+map_label: Dojazd
+
 members.new.sell_voucher_after_creation: "Sprzedaj karnet po utworzeniu uczestnika"
 
 member.modal.new_user_title: "Nowy uczestnik"
