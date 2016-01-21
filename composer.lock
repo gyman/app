@@ -174,12 +174,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "ae3405e3a9012a0fb80ead85a119b09d1176af5a"
+                "reference": "6c839cc4b6d086f504e7e6e4d9c05b9f48e43fdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/ae3405e3a9012a0fb80ead85a119b09d1176af5a",
-                "reference": "ae3405e3a9012a0fb80ead85a119b09d1176af5a",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/6c839cc4b6d086f504e7e6e4d9c05b9f48e43fdc",
+                "reference": "6c839cc4b6d086f504e7e6e4d9c05b9f48e43fdc",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2016-01-01 19:04:03"
+            "time": "2016-01-21 00:11:37"
         },
         {
             "name": "dende/calendar-bundle",
@@ -2379,7 +2379,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipFunctionalTestBundle/zipball/da1402baf2a7304f036e557c49965dab3c067e2d",
+                "url": "https://api.github.com/repos/liip/LiipFunctionalTestBundle/zipball/f0489a1e2284794ced305358237c47976fa72bea",
                 "reference": "da1402baf2a7304f036e557c49965dab3c067e2d",
                 "shasum": ""
             },
