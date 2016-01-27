@@ -21,19 +21,13 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
     member:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
       inversedBy: vouchers
-      cascade: ["all"]
-
-#  oneToOne:
-#    member:
-#      targetEntity: Gyman\Bundle\AppBundle\Entity\Member
-#      inversedBy: currentVoucher
-#      cascade: ["all"]
+      cascade: ["persist"]
 
   oneToMany:
     entries:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
       mappedBy: voucher
-      cascade: ["all"]
+      cascade: ["persist"]
 
   fields:
     startDate:

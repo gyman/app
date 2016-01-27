@@ -26,7 +26,7 @@ final class OpenEntryCommand
     /**
      * @var integer
      */
-    public $price;
+    public $price = 20;
 
     /**
      * @var Member
@@ -52,12 +52,12 @@ final class OpenEntryCommand
 
         $this->entryType = Entry::TYPE_PAID;
 
-        if ($member->hasCurrentVoucher()) {
+        if ($member->hasCurrentVoucher() && $member->currentVoucher()->leftEntriesAmount() > 0) {
             $this->voucher = $member->currentVoucher();
             $this->entryType = Entry::TYPE_VOUCHER;
+        } else {
+            $this->entryType = Entry::TYPE_CREDIT;
         }
-
-        $this->price = 15;
 
         $this->startDate = new \DateTime('now');
     }

@@ -1,0 +1,5 @@
+Gyman\Bundle\AppBundle\Entity\Voucher:
+  exclusion_policy: ALL
+  properties:
+    id:
+      exclude: false

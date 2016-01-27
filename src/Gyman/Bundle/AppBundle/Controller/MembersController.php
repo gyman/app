@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -134,10 +133,14 @@ class MembersController extends Controller
         /** @var Member[] $result */
         $result = $this->get('gyman.members.repository')->search($query);
 
-        $result = array_map(function(Member $member) {
-            return $member->email();
-        }, $result);
+//        $result = array_map(function(Member $member) {
+//            return $member->email();
+//        }, $result);
 
-        return new Response($this->get("jms_serializer")->serialize($result, "json"));
+
+        $serializer = $this->get("jms_serializer");
+        $data = $serializer->serialize($result[0], "json");
+
+        return new Response($data);
     }
 }

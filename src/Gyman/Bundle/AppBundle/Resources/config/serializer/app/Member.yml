@@ -1,0 +1,2 @@
+Gyman\Bundle\AppBundle\Entity\Member:
+  exclusion_policy: all

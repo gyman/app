@@ -8,7 +8,7 @@
 
     <ul>
         {% for occurrence in occurrences if occurrences|length > 0 %}
-            <li class="clearfix{# % if occurrence.isOngoing() %} ongoingEvent{% elseif occurrence.isPast() %} passedEvent{% endif % #}">
+            <li class="clearfix{% if occurrence.isOngoing() %} ongoingEvent{% elseif occurrence.isPast() %} passedEvent{% endif %}">
                 <span class="number">{{ occurrence.startDate|date("H:i") }} - {{ occurrence.endDate|date("H:i") }}</span>
                 <span class="txt">{{ occurrence.event.title }}</span>
 

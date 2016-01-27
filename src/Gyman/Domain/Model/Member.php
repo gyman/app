@@ -7,6 +7,7 @@ use Gyman\Domain\Exception\LastEntryIsStillOpenedException;
 use Gyman\Domain\Exception\MemberHasNoLastEntryException;
 use Gyman\Domain\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Domain\Exception\VouchersAreOverlappingException;
+use Mockery\CountValidator\Exception;
 
 /**
  * Class Member
@@ -67,11 +68,9 @@ class Member
     {
         $this->email = $email;
         $this->details = $details;
-
         $this->sections = $sections;
         $this->vouchers = $vouchers;
         $this->entries = $entries;
-
         $this->currentVoucher = $currentVoucher;
         $this->lastEntry = $lastEntry;
     }
@@ -183,6 +182,10 @@ class Member
      */
     public function enter(Entry $entry)
     {
+        if(is_null($entry->occurrence())) {
+            throw new Exception("Entry must be on purpose, you have to choose activity occurrence to enter to. (\$occurrence is null)");
+        }
+
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
             throw new LastEntryIsStillOpenedException($entry, $this->lastEntry());
         }
@@ -204,6 +207,15 @@ class Member
                     $entry->occurrence()->event()->title()
                 )
             );
+        }
+
+        if($entry->occurrence()->isPast()) {
+            throw new \Exception(sprintf(
+                    "Can't enter on occurence that already finished in %s!\nMember Id: %s, Occurrence Id: %d",
+                    $entry->occurrence()->endDate()->format("Y-m-d H:i:s"),
+                    $this->id(),
+                    $entry->occurrence()->id()
+            ));
         }
 
         $this->lastEntry = $entry;
@@ -298,6 +310,12 @@ class Member
         }
 
         $filtered = $this->entries()->filter(function(Entry $entry) use ($occurrence) {
+
+            if(is_null($entry->occurrence())) // null occurrence can happen if user entered to activity that has deleted occurence from calendar
+            {
+                return false;
+            }
+
             $entryOccurrenceId = $entry->occurrence()->id();
             return $entryOccurrenceId === $occurrence->id();
         });

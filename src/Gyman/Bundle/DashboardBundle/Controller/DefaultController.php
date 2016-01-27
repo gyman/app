@@ -4,6 +4,8 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Bundle\AppBundle\Entity\Entry;
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -56,7 +58,31 @@ class DefaultController extends Controller
      * @return array
      */
     public function listClassMembersAction(Occurrence $occurrence){
-        return ["occurrence" => $occurrence];
+        $allMembers = $this->get("gyman.members.repository")->findBy([], [
+            "currentVoucher" => "DESC",
+            "details.lastname" => "ASC",
+            "details.firstname" => "ASC"
+        ]);
+
+        $entries = $this->get('gyman.entries.repository')->findByOccurrence($occurrence);
+
+        $usedMembersIds = array_map(function(Entry $entry) {
+            return $entry->member()->id();
+        }, $entries);
+
+        if(count($entries) > 0) {
+            $members = array_filter($allMembers, function(Member $member) use ($usedMembersIds){
+                return !in_array($member->id(), $usedMembersIds) && (is_null($member->lastEntry()) || !is_null($member->lastEntry()->endDate()));
+            });
+        } else {
+            $members = $allMembers;
+        }
+
+        return [
+            "entries"   =>  $entries,
+            "occurrence" => $occurrence,
+            "allMembers" => $members,
+        ];
     }
 
     /**

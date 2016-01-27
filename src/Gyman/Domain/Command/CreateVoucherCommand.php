@@ -27,7 +27,7 @@ class CreateVoucherCommand implements VoucherCommandInterface
     /**
      * @var float
      */
-    public $price = "20.00";
+    public $price = 120.00;
 
     /**
      * @var Member

@@ -1,0 +1,19 @@
+Gyman\Domain\Model\Member:
+  exclusion_policy: all
+  properties:
+    id:
+      expose: true
+      groups:
+        - DEFAULT
+    email:
+      expose: true
+      groups:
+        - DEFAULT
+    currentVoucher:
+      expose: false
+    details:
+      expose: true
+    vouchers:
+      expose: false
+    sections:
+      expose: false

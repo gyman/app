@@ -23,6 +23,7 @@ final class EntryFactory
             'price'                => ['amount' => 0, 'currency' => 'PLN'],
             'type'                 => null,
             'occurrence'           => null,
+            'member'               => null,
         ];
 
         $array = array_merge($template, $array);
@@ -32,7 +33,8 @@ final class EntryFactory
             $array['type'],
             $array['endDate'],
             new Price($array['price']['amount'], $array['price']['currency']),
-            $array['occurrence']
+            $array['occurrence'],
+            $array['member']
         );
 
         return $entry;

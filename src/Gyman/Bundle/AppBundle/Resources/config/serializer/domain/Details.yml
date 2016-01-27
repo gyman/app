@@ -1,0 +1,11 @@
+Gyman\Domain\Model\Details:
+  exclusion_policy: all
+  properties:
+    firstname:
+      expose: true
+    lastname:
+      expose: true
+    foto:
+      expose: true
+    barcode:
+      expose: true

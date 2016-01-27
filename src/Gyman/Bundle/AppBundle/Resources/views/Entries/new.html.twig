@@ -1,5 +1,10 @@
 {% extends "::base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
+{% endblock stylesheets %}
+
 {% block content %}
     <div class="contentwrapper">
 
@@ -12,7 +17,6 @@
         <div class="span12">
             {% include "::_flash.html.twig" %}
             {{ form_start(form) }}
-            {{ form_row(form.startDate) }}
             {{ form_row(form.entryType) }}
             {{ form_row(form.price) }}
             {{ form_rest(form) }}

@@ -55,6 +55,9 @@ class Voucher
      * @param \DateTime $endDate
      * @param Price $price
      * @param int $maximumAmount
+     * @param array $entries
+     * @param null $member
+     * @throws VoucherClosingDateBeforeOpeningException
      */
     public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null)
     {
@@ -77,7 +80,10 @@ class Voucher
 
     /**
      * @param Entry $entry
+     * @throws EntryMustBeVoucherTypeException
      * @throws ExceededMaximumAmountOfEntriesException
+     * @throws LastEntryIsStillOpenedException
+     * @throws \Gyman\Domain\Exception\UnsupportedEntryTypeException
      */
     public function addEntry(Entry $entry)
     {
@@ -119,6 +125,15 @@ class Voucher
         if ($this->startDate()->getTimestamp() > $date->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($this->startDate(), $this->endDate());
         }
+
+        /** @var Entry $lastEntry */
+        $lastEntry = $this->lastEntry();
+
+        if(!is_null($lastEntry) && $lastEntry->isOpened()) {
+            $lastEntry->closeEntry(new DateTime("now"));
+        }
+
+        $this->member()->unsetCurrentVoucher();
 
         $this->endDate = $date;
     }
@@ -252,5 +267,14 @@ class Voucher
     public function id()
     {
         return $this->id;
+    }
+
+    public function removeEntry(Entry $entry)
+    {
+        if(!is_null($this->lastEntry()) && $this->lastEntry()->id() === $entry->id()) {
+            $this->lastEntry = null;
+        }
+
+        $this->entries->removeElement($entry);
     }
 }

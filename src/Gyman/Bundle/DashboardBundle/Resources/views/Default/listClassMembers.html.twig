@@ -3,37 +3,75 @@
 {% block content %}
 <div class="heading">
     <h3>
-        {{ occurrence.startDate|date("y.m.d H:i") }}:
         {{ occurrence.event.title }}
     </h3>
+    {{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}
 </div>
 
-<div class="span12">
-    <ul class="thumbnails">
-        {% for entry in get_entries(occurrence) %}
-            <li class="span3" style="text-align: center">
-                <div class="thumbnail">
-                    <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
-                        <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="max-height: 200px" />
-                    </a>
-                    <div class="caption">
-                        <h3>
-                            {{ entry.member.details.firstname }}
-                            {{ entry.member.details.lastname }}
-                        </h3>
-                        <p>
-                            {% if entry.member.currentVoucher is not null %}
-                                , karnet ważny od
-                                <strong>{{ entry.member.currentVoucher.startDate|date("Y-m-d") }}</strong>
-                                do
-                                <strong>{{ entry.member.currentVoucher.endDate|date("Y-m-d") }}</strong>
-                            {% endif %}
-                        </p>
+    {% if occurrence.isOngoing() %}
+    <div class="alert alert-warning">
+        Wydarzenie nadal trwa, możesz dodawać i usuwać osoby z listy
+    </div>
+    {% endif %}
+
+{{ include("_flash.html.twig") }}
+
+<div class="row-fluid">
+    <div class="span10">
+        <ul class="thumbnails">
+            {% for entry in entries %}
+                <li style="text-align: center">
+                    <div class="thumbnail" style="height: 260px; width: 120px;">
+                        <strong>{{ entry.member.details.firstname }} {{ entry.member.details.lastname }}</strong>
+                        <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
+                            <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="max-height: 200px" />
+                        </a>
+                        <div class="caption">
+                            <p>
+                                <span class="badge">{{ entry.type }}</span>
+                                {% if entry.member.currentVoucher is not null %}
+                                <span class="badge badge-warning">
+                                        {{ entry.member.currentVoucher.startDate|date("d.m") }}
+                                        -
+                                        {{ entry.member.currentVoucher.endDate|date("d.m") }}
+                                </span>
+                                {% endif %}
+                            </p>
+                            <p>
+                                <a onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: entry.member.id}) }}">
+                                    usuń
+                                </a>
+                            </p>
+                        </div>
                     </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="span2">
+        {% if not occurrence.isPast() %}
+        <ul class="media-list">
+            {%  for member in allMembers %}
+            <li class="media">
+                <a class="pull-left" href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}">
+                    <img class="media-object thumbnail" src="{{ asset(member.details.foto.fotoWithPath) }}" style="max-width: 30px"/>
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ member.details.firstname }} {{ member.details.lastname }}</h4>
+                    karnet:
+                    {% if member.currentVoucher is not null %}
+                        {{ member.currentVoucher.startDate|date("d.m.Y") }} - {{ member.currentVoucher.endDate|date("d.m.Y") }}
+                    {% else %}
+                        brak
+                    {% endif %}
+
                 </div>
             </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock content %}

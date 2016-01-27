@@ -1,9 +1,14 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Command;
 
+use Carbon\Carbon;
+use DateTime;
 use Doctrine\ORM\QueryBuilder;
+use Gyman\Bundle\AppBundle\Entity\Entry;
+use Gyman\Bundle\AppBundle\Entity\Member;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateEntriesCommand extends ContainerAwareCommand
@@ -11,66 +16,62 @@ class UpdateEntriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-                ->setName('entries:update')
-                ->setDescription('Closes old entries');
+                ->setName('gyman:entries:update')
+                ->setDescription('Closes old entries')
+                ->addOption(
+                    'em',
+                    null,
+                    InputOption::VALUE_REQUIRED,
+                    'Entity manager name'
+                )
+                ->addOption(
+                    'minutes',
+                    90,
+                    InputOption::VALUE_REQUIRED,
+                    'Maximum time of entry, after this time entry is closed'
+                )
+
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()->get($input->getOption("em"));
 
-        $now = new \DateTime();
-        $memberRepository = $this->getContainer()->get('entity_manager')->getRepository('GymanAppBundle:Member');
+        $memberRepository = $this->getContainer()->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
 
-        /** @var QueryBuilder $query * */
-        $query = $memberRepository->getQuery('m');
+        /** @var QueryBuilder $queryBuilder * */
+        $queryBuilder = $memberRepository->createQueryBuilder("m");
 
-        $members = $query->select('m')
-                        ->addSelect('l')
-                        ->addSelect('a')
-                        ->addSelect('e')
-                        ->join('m.lastEntry', 'l')
-                        ->join('l.activity', 'a')
-                        ->join('a.events', 'e')
-                        ->where('m.lastEntry is not null')
-                        ->andWhere('e.dayOfWeek = dayname(l.startDate)')
-                        ->getQuery()->execute();
+        // 1. search memembers with currentEntry not null and member.currentEntry.endDate not null and member.currentEntry.startdate lower than 1.5h ago
 
-        if (count($members) == 0) {
-            return;
-        }
+        $expr = $queryBuilder->expr();
 
-        $ids = [];
-        $now = new \DateTime();
+        $queryBuilder
+            ->join("m.lastEntry", "e")
+            ->where($expr->andX(
+                $expr->isNotNull("m.lastEntry"),
+                $expr->isNull("e.endDate"),
+                $expr->lt("e.startDate", ":date")
+            ))
+            ->setParameters([
+                "date" => Carbon::parse(sprintf("-%d minutes", $input->getOption("minutes")))
+            ])
+        ;
 
-        foreach ($members as $member) {
-            /** @var \Gyman\Bundle\AppBundle\Entity\Member $member * */
-            $lastEntry = $member->getLastEntry();
-
-            $lastEvent = $lastEntry
-                    ->getActivity()
-                    ->getEvents()
-                    ->first();
-
-            $endDate = new \DateTime($lastEntry->getStartDate()->format('Y-m-d ' . $lastEvent->getEndHour()));
-            $endDate->add(new \DateInterval('PT15M'));
-
-            $diff = $endDate->getTimestamp() - $now->getTimestamp();
-
-            if ($diff <= 0) {
-                $member->setLastEntry(null);
-                $lastEntry->setEndDate($endDate);
-
-                $em->persist($member);
-                $em->persist($lastEntry);
-            }
-        }
+        /** @var Entry[] $entries */
+        $entries = array_map(function(Member $member) use ($em) {
+            $entry = $member->lastEntry();
+            $entry->closeEntry(new DateTime("now"));
+            $em->persist($entry);
+            return $entry->id();
+        }, $queryBuilder->getQuery()->getResult());
 
         $em->flush();
 
-        $message = sprintf('Found and updated %d members', count($ids));
+        $message = sprintf('Found and updated %d member\'s last entries', count($entries));
 
         $output->writeln($message);
-        $this->getContainer()->get('logger')->info($message, $ids);
+        $this->getContainer()->get('logger')->info($message, $entries);
     }
 }

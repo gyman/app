@@ -21,3 +21,7 @@ monolog:
 accelerator_cache:
     host: dende.%base_url%
     web_dir: %kernel.root_dir%/../web
+
+jms_serializer:
+  metadata:
+    cache: false

@@ -36,3 +36,12 @@ services:
     tags:
         - { name: validator.constraint_validator, alias: OnlyEnterOnceValidator }
 
+  gyman.entries.cant_enter_past_occurrence.validator:
+    class: Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrenceValidator
+    tags:
+        - { name: validator.constraint_validator, alias: CantEnterPastOccurrenceValidator }
+
+  gyman.app.remove_entry_from_occurrence:
+    class: Gyman\Bundle\AppBundle\Services\RemoveEntryFromOccurrence
+    arguments:
+      - @gyman.entries.repository

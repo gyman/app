@@ -11,18 +11,19 @@ Gyman\Bundle\AppBundle\Entity\Entry:
     member:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Member
       inversedBy: entries
-      cascade: ["all"]
+      cascade: ["persist"]
 
     voucher:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
       inversedBy: entries
-      cascade: ["all"]
+      cascade: ["persist"]
 
     occurrence:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
       inversedBy: occurrence
       nullable: true
       orphanRemoval: false
+      cascade: ["persist"]
       joinColumns:
         occurrence_id:
           referencedColumnName: id

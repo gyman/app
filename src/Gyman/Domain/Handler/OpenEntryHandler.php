@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain\Handler;
 
+use DateTime;
 use Gyman\Bundle\AppBundle\Factory\EntryFactory;
 use Gyman\Domain\Command\OpenEntryCommand;
 use Gyman\Domain\Event\EntryEvent;

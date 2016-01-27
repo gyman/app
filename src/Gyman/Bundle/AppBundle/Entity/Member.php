@@ -35,16 +35,6 @@ class Member extends BaseMember
     private $deletedAt;
 
     /**
-     * Get foto
-     *
-     * @return string
-     */
-    public function getFoto()
-    {
-        return Globals::applyGalleryDir($this->foto);
-    }
-
-    /**
      * @return bool
      */
     public function hasOpenedEntry()
@@ -106,5 +96,14 @@ class Member extends BaseMember
     public function sections()
     {
         return $this->sections;
+    }
+
+    public function removeEntry(Entry $entry)
+    {
+        if(!is_null($this->lastEntry()) && $this->lastEntry()->id() === $entry->id()) {
+            $this->lastEntry = null;
+        }
+
+        $this->entries->removeElement($entry);
     }
 }

@@ -23,7 +23,6 @@ Gyman\Bundle\AppBundle\Entity\Member:
   manyToMany:
     sections:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Section
-#      mappedBy: members
       inversedBy: members
 
   oneToMany:
@@ -40,7 +39,7 @@ Gyman\Bundle\AppBundle\Entity\Member:
   oneToOne:
     currentVoucher:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
-      cascade: ["all"]
+      cascade: ["persist"]
       inversedBy: member
       joinColumn:
         name: current_voucher_id
@@ -50,7 +49,7 @@ Gyman\Bundle\AppBundle\Entity\Member:
 
     lastEntry:
       targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
-      cascade: ["all"]
+      cascade: ["persist"]
       joinColumn:
         name: last_entry_id
         referencedColumnName: id

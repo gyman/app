@@ -71,12 +71,14 @@ class Entry
      * @param string $type
      * @param \DateTime $endDate |null
      * @param Price $price |null
+     * @param Occurrence $occurrence
+     * @param Member $member
      * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null)
+    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null, Member $member = null)
     {
         if (!in_array($type, self::$availableTypes)) {
-            throw new NotSupportedEntryType();
+            throw new NotSupportedEntryType($type, self::$availableTypes);
         }
 
         $this->startDate = $startDate;
@@ -84,6 +86,7 @@ class Entry
         $this->price = $price;
         $this->type = $type;
         $this->occurrence = $occurrence;
+        $this->member = $member;
     }
 
     /**

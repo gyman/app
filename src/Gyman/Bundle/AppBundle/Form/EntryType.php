@@ -87,16 +87,20 @@ final class EntryType extends AbstractType
             },
             'choices' => $todayOccurrences
         ])
-        ->add('startDate', 'datetime', [
-            'widget' => 'single_text',
-            'format' => 'dd.MM.yyyy HH:mm',
-            'attr'   => [
-                'readonly' => 'READONLY',
-            ],
-            'label' => 'entries.form.start_date.label',
-        ])
+//        ->add('startDate', 'datetime', [
+//            'widget' => 'single_text',
+//            'format' => 'dd.MM.yyyy HH:mm',
+//            'attr'   => [
+//                'readonly' => 'READONLY',
+//            ],
+//            'label' => 'entries.form.start_date.label',
+//        ])
         ->add('price', 'integer', [
             'label' => 'entries.form.price.label',
+            "attr" => [
+                "min" => 0,
+                "step" => 5,
+            ]
         ])
         ->add('submit', 'submit', [
             'label' => 'entries.form.open_entry.label',
@@ -113,6 +117,7 @@ final class EntryType extends AbstractType
                 Entry::TYPE_FREE    => 'entries.form.entry_type.free.label',
                 Entry::TYPE_PAID    => 'entries.form.entry_type.paid.label',
             ];
+
             if (!$data->member->hasCurrentVoucher() || $data->member->currentVoucher()->leftEntriesAmount() === 0) {
                 unset($choices[Entry::TYPE_VOUCHER]);
                 $defaultChoice = $choices[Entry::TYPE_CREDIT];
@@ -144,7 +149,7 @@ final class EntryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Gyman\Domain\Command\OpenEntryCommand',
+            'data_class' => OpenEntryCommand::class,
             'date' => new DateTime()
         ]);
     }

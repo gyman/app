@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Domain\Command\CloseEntryCommand;
 use Gyman\Domain\Command\OpenEntryCommand;
@@ -71,5 +72,45 @@ class EntriesController extends Controller
         return [
             'entries' =>$this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC'])
         ];
+    }
+
+    /**
+     * @Route("/quick-entry/occurrence/{occurrence}/member/{member}", name="gyman_entry_create_for_member")
+     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @param Member $member
+     * @param Occurrence $occurrence
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function quickCreateEntryAction(Member $member, Occurrence $occurrence)
+    {
+        $command =  new OpenEntryCommand($member);
+        $command->startDate = new \DateTime();
+        $command->entryType = is_null($member->currentVoucher()) ? Entry::TYPE_CREDIT : Entry::TYPE_VOUCHER;
+        $command->occurrence = $occurrence;
+        $command->voucher = $member->currentVoucher();
+        $command->member = $member;
+        $command->price = null;
+
+        $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
+        $this->addFlash('success', 'User added to occurrence');
+
+        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
+    }
+
+    /**
+     * @Route("/quick-remove/occurrence/{occurrence}/member/{member}", name="gyman_entry_remove_from_occurrence")
+     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @param Member $member
+     * @param Occurrence $occurrence
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function quickRemoveEntryAction(Member $member, Occurrence $occurrence)
+    {
+        $this->get("gyman.app.remove_entry_from_occurrence")->remove($member, $occurrence);
+        $this->addFlash('success', 'User removed from occurrence');
+
+        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
     }
 }

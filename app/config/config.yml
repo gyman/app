@@ -16,6 +16,9 @@ parameters:
   subdomain_provider_service: gyman.app.subdomain_provider
 
 services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
     memcached:
         class: Memcached
         calls:
@@ -115,6 +118,12 @@ dende_multidatabase:
   entity_manager:           doctrine.orm.tenant_entity_manager
   parameter_name:           club
   parameter_description:    Club subdomain's name
+  commands:
+    - doctrine:schema:update
+    - doctrine:schema:create
+    - doctrine:schema:drop
+    - doctrine:fixtures:load
+    - gyman:entries:update
   fixtures:
     default:
         - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
@@ -147,11 +156,18 @@ jms_serializer:
       default_format: "Y-m-d H:i:s"
       default_timezone: "Europe/Warsaw"
   metadata:
-    auto_detection: true
+    cache: true
+    auto_detection: false
     directories:
-      Domain:
-        namespace_prefix: "Dende\\Calendar\\Domain"
-        path: "%kernel.root_dir%/../../Resources/config/serializer/"
+      app:
+        namespace_prefix: Gyman\Bundle\AppBundle\Entity
+        path:             @GymanAppBundle/Resources/config/serializer/app
+      domain:
+        namespace_prefix: Gyman\Domain\Model
+        path:             @GymanAppBundle/Resources/config/serializer/domain
+      calendar:
+        namespace_prefix: Dende\Calendar\Domain
+        path:             @GymanAppBundle/Resources/config/serializer/calendar
 
 fos_rest:
   param_fetcher_listener: true

@@ -1,0 +1,5 @@
+Gyman\Domain\Model\Voucher:
+  exclusion_policy: all
+  properties:
+    id:
+      exclude: false

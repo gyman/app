@@ -1,0 +1,6 @@
+Gyman\Domain\Model\Foto:
+  exclusion_policy: NONE
+  virtual_properties:
+    fotoWithPath:
+        serialized_name: foto
+        type: string

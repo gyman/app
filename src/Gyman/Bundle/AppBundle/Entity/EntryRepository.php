@@ -16,7 +16,9 @@ class EntryRepository extends EntityRepository
      */
     public function remove(Entry $entry)
     {
-        // TODO: Implement remove() method.
+        $em = $this->getEntityManager();
+        $em->remove($entry);
+        $em->flush();
     }
 
     /**

@@ -1,0 +1,2 @@
+Dende\Calendar\Domain\Calendar\Event:
+  exclusion_policy: all
