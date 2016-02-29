@@ -3,6 +3,7 @@ namespace Gyman\Bundle\ReportsBundle\Controller;
 
 use Carbon\Carbon;
 use DateTime;
+use Gyman\Bundle\AppBundle\Entity\Entry;
 use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,39 +18,108 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="gyman_reports_index")
      * @Template()
+     * @param Request $request
+     * @return array
      */
     public function indexAction(Request $request)
     {
-        $filter = new DateFilter();
-        $form = $this->createForm("reports_date_filter", $filter);
-        $result = [];
+        $filter = new DateFilter(new DateTime("-1 month"), new DateTime("now"));
+        $form = $this->createForm("reports_date_filter", $filter, [
+            "method" => "GET"
+        ]);
 
-        if($request->isMethod("POST"))
-        {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
+        $filter = $form->getData();
 
-            $qb = $this->get("gyman.vouchers.repository")->createQueryBuilder("v");
+        $startDate = Carbon::instance($filter->startDate)->setTime(0,0,0);
+        $endDate = Carbon::instance($filter->endDate)->setTime(23, 59, 59);
 
-            $qb
-                ->select("SUM(v.price.amount), s.title")
-                ->leftJoin("v.member", "m")
-                ->leftJoin("m.sections", "s")
-                ->where("v.startDate > :startDate")
-                ->andWhere("v.startDate < :endDate")
-                ->andWhere("v.price.amount is not null")
-                ->groupBy("s.title")
-                ->setParameters([
-                    "startDate" => $filter->startDate,
-                    "endDate" => $filter->endDate
-                ]);
+        $queryBuilderVouchers = $this->get("gyman.vouchers.repository")->createQueryBuilder("v");
 
-            $result = $qb->getQuery()->getResult();
-        }
+        $queryBuilderVouchers
+            ->select("v.price.amount as price, s.title as section, v.startDate")
+            ->leftJoin("v.member", "m")
+            ->leftJoin("m.sections", "s")
+            ->where("v.startDate > :startDate")
+            ->andWhere("v.startDate < :endDate")
+            ->andWhere("v.price.amount is not null")
+            ->setParameters([
+                "startDate" => $startDate,
+                "endDate" => $endDate
+            ])
+        ;
 
+        $vouchersData = $queryBuilderVouchers->getQuery()->getArrayResult();
+        $vouchersSum = array_sum(array_column($vouchersData, "price"));
+
+        $queryBuilderEntries = $this->get("gyman.entries.repository")->createQueryBuilder("e");
+        $queryBuilderEntries
+            ->select("e.price.amount as price, s.title as section, e.startDate")
+            ->leftJoin("e.member", "m")
+            ->leftJoin("m.sections", "s")
+            ->where("e.startDate > :startDate")
+            ->andWhere("e.startDate < :endDate")
+            ->andWhere("e.price.amount is not null")
+            ->andWhere("e.type = :type")
+            ->setParameters([
+                "startDate" => $startDate,
+                "endDate" => $endDate,
+                "type" => Entry::TYPE_PAID
+            ])
+        ;
+
+        $entriesData = $queryBuilderEntries->getQuery()->getArrayResult();
+        $entriesSum = array_sum(array_column($entriesData, "price"));
+
+        $process = function($data = [], $result = []) {
+            foreach ($data as $row) {
+                $hash = md5($row["section"]);
+
+                if (isset($result[$hash])) {
+                    $vouchersSum = $result[$hash]["sum"];
+                    $vouchersSum += floatval($row["price"]);
+                } else {
+                    $vouchersSum = floatval($row["price"]);
+                }
+                $result[$hash] = ["title" => $row["section"], "sum" => $vouchersSum];
+            }
+
+            return $result;
+        };
+
+        $result = $process($entriesData, $process($vouchersData, []));
+
+        $sum = $vouchersSum + $entriesSum;
+
+        $router = $this->get("router");
+        
+        $getLink = function(DateTime $startDate, DateTime $endDate) use ($form, $router) {
+            return $router->generate("gyman_reports_index", [
+                $form->getName() => [
+                    "startDate" => $startDate->format("d.m.Y"),
+                    "endDate" => $endDate->format("d.m.Y"),
+                    "submit" => null
+                ]
+            ]);
+        };
+
+        $todayLink = $getLink(Carbon::parse("today")->setTime(0,0,0), Carbon::parse("today"));
+        $yesterdayLink = $getLink(Carbon::parse("yesterday")->setTime(0,0,0), Carbon::parse("yesterday"));
+        $thisWeekLink = $getLink(Carbon::parse("this week"), Carbon::parse("this week +6 days"));
+        $lastWeekLink = $getLink(Carbon::parse("previous week"), Carbon::parse("previous week +6 days"));
+        $thisMonthLink = $getLink(Carbon::parse("first day of this month"), Carbon::parse("last day of this month"));
+        $lastMonthLink = $getLink(Carbon::parse("first day of last month"), Carbon::parse("last day of last month"));
+        
         return [
             "form" => $form,
             "moneyPerSection" => $result,
-            "sum" => array_sum(array_column($result, 1))
+            "sum" => $sum,
+            "todayLink" => $todayLink,
+            "yesterdayLink" => $yesterdayLink,
+            "thisWeekLink" => $thisWeekLink,
+            "lastWeekLink" => $lastWeekLink,
+            "thisMonthLink" => $thisMonthLink,
+            "lastMonthLink" => $lastMonthLink,
         ];
     }
 }

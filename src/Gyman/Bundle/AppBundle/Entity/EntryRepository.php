@@ -21,6 +21,11 @@ class EntryRepository extends EntityRepository
         $em->flush();
     }
 
+    public function save(Entry $entry){
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @param Entry $entry
      */

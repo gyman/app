@@ -14,11 +14,14 @@ class DateFilter
     /** @var  \DateTime */
     public $endDate;
 
-    public function __construct()
+    /**
+     * DateFilter constructor.
+     * @param DateTime $startDate
+     * @param DateTime $endDate
+     */
+    public function __construct(DateTime $startDate, DateTime $endDate)
     {
-        $this->startDate = new DateTime("now");
-        $this->endDate = new DateTime("+1 month");
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
     }
-
-
 }

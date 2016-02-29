@@ -6,6 +6,8 @@
         {{ occurrence.event.title }}
     </h3>
     {{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}
+
+    <a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>
 </div>
 
     {% if occurrence.isOngoing() %}
@@ -21,7 +23,7 @@
         <ul class="thumbnails">
             {% for entry in entries %}
                 <li style="text-align: center">
-                    <div class="thumbnail" style="height: 260px; width: 120px;">
+                    <div class="thumbnail" style="height: 280px; width: 120px;">
                         <strong>{{ entry.member.details.firstname }} {{ entry.member.details.lastname }}</strong>
                         <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
                             <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="max-height: 200px" />
@@ -36,6 +38,7 @@
                                         {{ entry.member.currentVoucher.endDate|date("d.m") }}
                                 </span>
                                 {% endif %}
+                                <span class="badge badge-success">{% if entry.isOpened() %}otwarte{% else %}zamknięte{% endif %}</span>
                             </p>
                             <p>
                                 <a onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: entry.member.id}) }}">
@@ -58,10 +61,14 @@
                     <img class="media-object thumbnail" src="{{ asset(member.details.foto.fotoWithPath) }}" style="max-width: 30px"/>
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">{{ member.details.firstname }} {{ member.details.lastname }}</h4>
+                    <h4 class="media-heading">
+                        <a href="{{ path("gyman_member_edit", {id: member.id()}) }}">
+                            {{ member.details.firstname }} {{ member.details.lastname }}
+                        </a>
+                    </h4>
                     karnet:
                     {% if member.currentVoucher is not null %}
-                        {{ member.currentVoucher.startDate|date("d.m.Y") }} - {{ member.currentVoucher.endDate|date("d.m.Y") }}
+                        {{ member.currentVoucher.startDate|date("d.m") }} - {{ member.currentVoucher.endDate|date("d.m") }}
                     {% else %}
                         brak
                     {% endif %}

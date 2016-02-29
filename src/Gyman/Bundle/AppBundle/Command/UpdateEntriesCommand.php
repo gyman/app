@@ -16,21 +16,14 @@ class UpdateEntriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-                ->setName('gyman:entries:update')
-                ->setDescription('Closes old entries')
+                ->setName('gyman:entries:close')
+                ->setDescription('Closes finished entries')
                 ->addOption(
                     'em',
                     null,
                     InputOption::VALUE_REQUIRED,
                     'Entity manager name'
                 )
-                ->addOption(
-                    'minutes',
-                    90,
-                    InputOption::VALUE_REQUIRED,
-                    'Maximum time of entry, after this time entry is closed'
-                )
-
         ;
     }
 
@@ -42,9 +35,6 @@ class UpdateEntriesCommand extends ContainerAwareCommand
 
         /** @var QueryBuilder $queryBuilder * */
         $queryBuilder = $memberRepository->createQueryBuilder("m");
-
-        // 1. search memembers with currentEntry not null and member.currentEntry.endDate not null and member.currentEntry.startdate lower than 1.5h ago
-
         $expr = $queryBuilder->expr();
 
         $queryBuilder

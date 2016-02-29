@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Bundle\AppBundle\Entity\Member;
 use Gyman\Domain\Command\CloseEntryCommand;
@@ -110,6 +111,27 @@ class EntriesController extends Controller
     {
         $this->get("gyman.app.remove_entry_from_occurrence")->remove($member, $occurrence);
         $this->addFlash('success', 'User removed from occurrence');
+
+        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
+    }
+
+    /**
+     * @Route("/quick-close/activity/{occurrence}", name="gyman_entries_close_for_occurrence")
+     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @param Occurrence $occurrence
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function quickCloseEntriesAction(Occurrence $occurrence)
+    {
+        /** @var Entry[] $entries */
+        $entries = $this->get("gyman.entries.repository")->findByOccurrence($occurrence);
+
+        foreach($entries as $entry) {
+            $entry->closeEntry(new DateTime());
+            $this->get("gyman.entries.repository")->save($entry);
+        }
+
+        $this->addFlash('success', 'All entries closed.');
 
         return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
     }

@@ -34,7 +34,6 @@ final class DateFilterType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
-                    'readonly' => 'READONLY',
                     "class" => "span4"
                 ],
                 'label' => 'Początek',
@@ -43,7 +42,6 @@ final class DateFilterType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
-                    'readonly' => 'READONLY',
                     "class" => "span4"
                 ],
                 'label' => 'Koniec',
@@ -59,7 +57,8 @@ final class DateFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DateFilter::class
+            'data_class' => DateFilter::class,
+            'csrf_protection' => false
         ]);
     }
 
