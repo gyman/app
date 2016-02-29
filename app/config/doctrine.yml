@@ -26,6 +26,17 @@ doctrine:
           wrapper_class: Dende\MultidatabaseBundle\Connection\ConnectionWrapper
           mapping_types:
               enum: string
+        old_rio:
+          driver:   %database_driver%
+          host:     %database_host%
+          port:     %database_port%
+          dbname:   gyman_rio_old
+          user:     %database_user%
+          password: %database_password%
+          charset:  UTF8
+          server_version: "5.6"
+          mapping_types:
+              enum: string
     orm:
 
         auto_generate_proxy_classes: %kernel.debug%
@@ -52,6 +63,11 @@ doctrine:
                 StofDoctrineExtensionsBundle: ~
                 UserBundle: ~
                 ClubBundle: ~
+          old_rio:
+            auto_mapping:       false # disabled so we can assign entities to our own connections
+            connection:       old_rio
+            mappings:
+                GymanOldRioBundle: ~
           tenant:
 #            metadata_cache_driver: apc
 #            result_cache_driver: apc

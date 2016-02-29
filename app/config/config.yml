@@ -124,6 +124,7 @@ dende_multidatabase:
     - doctrine:schema:drop
     - doctrine:fixtures:load
     - gyman:entries:close
+    - gyman:importoldrio
   fixtures:
     default:
         - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection

@@ -59,6 +59,7 @@ class AppKernel extends Kernel
 //            new Sonata\BlockBundle\SonataBlockBundle(),
 //            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 //            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Gyman\Bundle\OldRioBundle\GymanOldRioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

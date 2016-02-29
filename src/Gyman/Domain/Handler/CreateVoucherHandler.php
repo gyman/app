@@ -51,16 +51,16 @@ class CreateVoucherHandler
      * @internal param Member $member
      * @internal param Voucher $voucher
      */
-    public function handle(CreateVoucherCommand $createVoucherCommand, UserInterface $author)
+    public function handle(CreateVoucherCommand $createVoucherCommand, UserInterface $author = null)
     {
         $voucher = VoucherFactory::createFromVoucherCommand($createVoucherCommand);
         $voucher->member()->addVoucher($voucher);
 
         $creditEntries = $voucher->member()->filterCreditEntries();
 
-        if($createVoucherCommand->maximumAmount <= count($creditEntries)) {
+        if(!is_null($createVoucherCommand->maximumAmount) && $createVoucherCommand->maximumAmount < count($creditEntries)) {
             throw new \Exception(
-                sprintf("User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries")
+                sprintf("User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries", count($creditEntries))
             );
         }
 
@@ -72,6 +72,6 @@ class CreateVoucherHandler
 
         $this->repository->insert($voucher->member());
 
-        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
+//        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
     }
 }

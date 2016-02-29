@@ -97,4 +97,36 @@
         <exec command="mkdir -p web/uploads/gallery/dende" passthru="true" checkreturn="true" />
     </target>
 
+    <target name="import-rio">
+        <property name="env" value="dev" />
+        <property name="club" value="rio" />
+
+        <echo>dropping tenant schema:</echo>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:drop" />
+            <arg value="--em=tenant" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="--force" />
+            <arg value="-vvv" />
+        </exec>
+        <echo>creating tenant schema:</echo>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:create" />
+            <arg value="--em=tenant" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+            <arg value="-vvv" />
+        </exec>
+        <echo>importing data:</echo>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="gyman:importoldrio" />
+            <arg value="--em=tenant" />
+            <arg value="--club=${club}" />
+            <arg value="--env=${env}" />
+            <arg value="-vvv" />
+        </exec>
+    </target>
+
 </project>

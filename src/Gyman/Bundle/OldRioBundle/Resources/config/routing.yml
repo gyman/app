@@ -1,0 +1,3 @@
+gyman_old_rio_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GymanOldRioBundle:Default:index }

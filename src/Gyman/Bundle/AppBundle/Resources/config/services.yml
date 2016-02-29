@@ -21,6 +21,11 @@ services:
     tags:
       - {name: console.command}
 
+  gyman.app.import_old_rio:
+    class: Gyman\Bundle\AppBundle\Command\ImportOldRioCommand
+    tags:
+      - {name: console.command}
+
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
     arguments:
