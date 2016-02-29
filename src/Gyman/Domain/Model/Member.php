@@ -187,7 +187,8 @@ class Member
         }
 
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
-            throw new LastEntryIsStillOpenedException($entry, $this->lastEntry());
+            $this->exitLastEntry();
+//            throw new LastEntryIsStillOpenedException($entry, $this->lastEntry());
         }
 
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
