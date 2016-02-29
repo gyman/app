@@ -24,42 +24,48 @@ class UpdateEntriesCommand extends ContainerAwareCommand
                     InputOption::VALUE_REQUIRED,
                     'Entity manager name'
                 )
+                ->addOption("dry")
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get($input->getOption("em"));
-
-        $memberRepository = $this->getContainer()->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
+        $em = $this->getContainer()->get("doctrine")->getManager($input->getOption("em"));
+        $entryRepository = $em->getRepository('GymanAppBundle:Entry');
 
         /** @var QueryBuilder $queryBuilder * */
-        $queryBuilder = $memberRepository->createQueryBuilder("m");
+        $queryBuilder = $entryRepository->createQueryBuilder("e");
         $expr = $queryBuilder->expr();
 
         $queryBuilder
-            ->join("m.lastEntry", "e")
+            ->join("e.occurrence", "o")
             ->where($expr->andX(
-                $expr->isNotNull("m.lastEntry"),
+                $expr->lt("e.startDate", ":now"),
                 $expr->isNull("e.endDate"),
-                $expr->lt("e.startDate", ":date")
+                $expr->lte("o.endDate", ":now")
             ))
             ->setParameters([
-                "date" => Carbon::parse(sprintf("-%d minutes", $input->getOption("minutes")))
+                "now" => new DateTime(),
             ])
         ;
 
+        $results = $queryBuilder->getQuery()->getResult();
+
         /** @var Entry[] $entries */
-        $entries = array_map(function(Member $member) use ($em) {
-            $entry = $member->lastEntry();
-            $entry->closeEntry(new DateTime("now"));
-            $em->persist($entry);
+        $entries = array_map(function(Entry $entry) use ($em, $input) {
+            if(!$input->getOption("dry")) {
+                $entry->closeEntry(new DateTime("now"));
+                $em->persist($entry);
+            }
             return $entry->id();
-        }, $queryBuilder->getQuery()->getResult());
+        }, $results);
 
-        $em->flush();
-
-        $message = sprintf('Found and updated %d member\'s last entries', count($entries));
+        if(!$input->getOption("dry")) {
+            $em->flush();
+        } else {
+            $output->writeln("<error>Dry mode!</error>");
+        }
+        $message = sprintf('Found and updated %d entries', count($entries));
 
         $output->writeln($message);
         $this->getContainer()->get('logger')->info($message, $entries);
