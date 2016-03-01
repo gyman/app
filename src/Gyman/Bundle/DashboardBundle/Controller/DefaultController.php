@@ -4,6 +4,7 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Entity\Entry;
 use Gyman\Bundle\AppBundle\Entity\Member;
 use Ob\HighchartsBundle\Highcharts\Highchart;
@@ -58,11 +59,18 @@ class DefaultController extends Controller
      * @return array
      */
     public function listClassMembersAction(Occurrence $occurrence){
-        $allMembers = $this->get("gyman.members.repository")->findBy([], [
-            "currentVoucher" => "DESC",
-            "details.lastname" => "ASC",
-            "details.firstname" => "ASC"
-        ]);
+        $memberRepository = $this->get("gyman.members.repository");
+
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->neq("currentVoucher", null))
+            ->orderBy([
+                "currentVoucher" => "DESC",
+                "details.lastname" => "ASC",
+                "details.firstname" => "ASC"
+            ])
+        ;
+
+        $allMembers = $memberRepository->matching($criteria)->toArray();
 
         $entries = $this->get('gyman.entries.repository')->findByOccurrence($occurrence);
 
