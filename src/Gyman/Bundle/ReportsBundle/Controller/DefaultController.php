@@ -114,8 +114,8 @@ class DefaultController extends Controller
             ]);
         };
 
-        $todayLink = $getLink(Carbon::parse("today")->setTime(0,0,0), Carbon::parse("today"));
-        $yesterdayLink = $getLink(Carbon::parse("yesterday")->setTime(0,0,0), Carbon::parse("yesterday"));
+        $todayLink = $getLink(Carbon::parse("today"), Carbon::parse("today"));
+        $yesterdayLink = $getLink(Carbon::parse("yesterday"), Carbon::parse("yesterday"));
         $thisWeekLink = $getLink(Carbon::parse("this week"), Carbon::parse("this week +6 days"));
         $lastWeekLink = $getLink(Carbon::parse("previous week"), Carbon::parse("previous week +6 days"));
         $thisMonthLink = $getLink(Carbon::parse("first day of this month"), Carbon::parse("last day of this month"));
@@ -216,8 +216,8 @@ class DefaultController extends Controller
             ]);
         };
 
-        $todayLink = $getLink(Carbon::parse("today")->setTime(0,0,0), Carbon::parse("today"));
-        $yesterdayLink = $getLink(Carbon::parse("yesterday")->setTime(0,0,0), Carbon::parse("yesterday"));
+        $todayLink = $getLink(Carbon::parse("today"), Carbon::parse("today"));
+        $yesterdayLink = $getLink(Carbon::parse("yesterday"), Carbon::parse("yesterday"));
         $thisWeekLink = $getLink(Carbon::parse("this week"), Carbon::parse("this week +6 days"));
         $lastWeekLink = $getLink(Carbon::parse("previous week"), Carbon::parse("previous week +6 days"));
         $thisMonthLink = $getLink(Carbon::parse("first day of this month"), Carbon::parse("last day of this month"));
