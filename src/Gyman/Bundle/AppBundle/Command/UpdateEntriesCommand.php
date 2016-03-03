@@ -30,7 +30,8 @@ class UpdateEntriesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get("doctrine")->getManager($input->getOption("em"));
+//        $em = $this->getContainer()->get("doctrine")->getManager($input->getOption("em"));
+        $em = $this->getContainer()->get("doctrine")->getManager("tenant");
         $entryRepository = $em->getRepository('GymanAppBundle:Entry');
 
         /** @var QueryBuilder $queryBuilder * */
@@ -40,34 +41,40 @@ class UpdateEntriesCommand extends ContainerAwareCommand
         $queryBuilder
             ->join("e.occurrence", "o")
             ->where($expr->andX(
-                $expr->lt("e.startDate", ":now"),
+                $expr->lt("e.startDate", ":date"),
                 $expr->isNull("e.endDate"),
-                $expr->lte("o.endDate", ":now")
+                $expr->lte("o.endDate", ":date")
             ))
             ->setParameters([
-                "now" => new DateTime(),
+                "date" => Carbon::parse("now"),
             ])
         ;
 
         $results = $queryBuilder->getQuery()->getResult();
 
-        /** @var Entry[] $entries */
-        $entries = array_map(function(Entry $entry) use ($em, $input) {
-            if(!$input->getOption("dry")) {
-                $entry->closeEntry(new DateTime("now"));
-                $em->persist($entry);
-            }
-            return $entry->id();
-        }, $results);
+        if(count($results) === 0) {
+            $output->writeln("No entries found!");
+        }
 
         if(!$input->getOption("dry")) {
+            /** @var Entry[] $entries */
+            $entries = array_map(function(Entry $entry) use ($em, $input) {
+                    $entry->closeEntry($entry->occurrence()->endDate());
+                    $em->persist($entry);
+                return $entry->id();
+            }, $results);
+
             $em->flush();
-        } else {
-            $output->writeln("<error>Dry mode!</error>");
+            $message = sprintf('Found and updated %d entries', count($entries));
+            $this->getContainer()->get('logger')->info($message, $entries);
         }
-        $message = sprintf('Found and updated %d entries', count($entries));
+
+        if($input->getOption("dry")) {
+            $entries = $results;
+            $output->writeln("<error>Dry mode!</error>");
+            $message = sprintf('Found %d entries', count($entries));
+        }
 
         $output->writeln($message);
-        $this->getContainer()->get('logger')->info($message, $entries);
     }
 }

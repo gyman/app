@@ -52,14 +52,7 @@ class AppKernel extends Kernel
 
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
-
-            // can't work with Doctrine Embeddables
-            // conflicts with Liip/Functional Bundle
-//            new Sonata\CoreBundle\SonataCoreBundle(),
-//            new Sonata\BlockBundle\SonataBlockBundle(),
-//            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-//            new Sonata\AdminBundle\SonataAdminBundle(),
-            new Gyman\Bundle\OldRioBundle\GymanOldRioBundle(),
+//            new Gyman\Bundle\OldRioBundle\GymanOldRioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

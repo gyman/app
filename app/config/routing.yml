@@ -1,6 +1,6 @@
-gyman_old_rio:
-    resource: "@GymanOldRioBundle/Resources/config/routing.yml"
-    prefix:   /
+#gyman_old_rio:
+#    resource: "@GymanOldRioBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 #admin_area:
 #    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
