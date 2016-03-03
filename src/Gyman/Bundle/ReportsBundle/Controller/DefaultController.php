@@ -122,7 +122,7 @@ class DefaultController extends Controller
         $lastMonthLink = $getLink(Carbon::parse("first day of last month"), Carbon::parse("last day of last month"));
         
         return [
-            "form" => $form,
+            "form" => $form->createView(),
             "moneyPerSection" => $result,
             "sum" => $sum,
             "todayLink" => $todayLink,
@@ -224,7 +224,7 @@ class DefaultController extends Controller
         $lastMonthLink = $getLink(Carbon::parse("first day of last month"), Carbon::parse("last day of last month"));
 
         return [
-            "form" => $form,
+            "form" => $form->createView(),
             "moneyPerSection" => $result,
             "sum" => $sum,
             "todayLink" => $todayLink,
