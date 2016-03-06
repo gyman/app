@@ -5,30 +5,48 @@
 {% endblock %}
 
 {% block content %}
-<div class="contentwrapper">
-    <div class="heading">
-        <h3>Wyniki wyszukiwania</h3>
-    </div>
+<div class="heading">
+    <h3>Wyniki wyszukiwania</h3>
+</div>
 
+<div class="row-fluid">
+    <div class="span10">
         <ul class="thumbnails">
-            {% for member in members %}
-                <li class="span2" style="text-align: center">
-                    <div class="thumbnail">
+            {% for member in members if members|length > 0 %}
+                <li style="text-align: center">
+                    <div class="thumbnail" style="height: 280px; width: 120px;">
+                        <strong>{{ member.details.firstname }} {{ member.details.lastname }}</strong>
                         <a href="{{ path('gyman_member_edit', {id : member.id}) }}">
                             <img src="{{ member.details.foto.fotoWithPath }}" style="max-height: 200px" />
                         </a>
                         <div class="caption">
-                            <h3>
-                                {{ member.details.lastname }} {{ member.details.firstname }}
-                            </h3>
-                            {#<p>#}
-                                {#jakiś opis#}
-                            {#</p>#}
+
+                            <p>
+                                {% if member.currentVoucher is not null %}
+                                    <span class="badge badge-warning">
+                                        {{ member.currentVoucher.startDate|date("d.m") }}
+                                        -
+                                        {{ member.currentVoucher.endDate|date("d.m") }}
+                                </span>
+                                {% endif %}
+                                <span class="badge badge-success">
+                                    {% if member.lastEntry is not null and member.lastEntry.isOpened() %}
+                                        otwarte
+                                    {% else %}
+                                        zamknięte
+                                    {% endif %}
+                                </span>
+                            </p>
                         </div>
                     </div>
+                </li>
+                {% else %}
+                <li>
+                    Brak wyników
                 </li>
             {% endfor %}
         </ul>
     </div>
+</div>
 {% endblock %}
 

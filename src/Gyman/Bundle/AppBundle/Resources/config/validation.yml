@@ -116,7 +116,7 @@ Gyman\Domain\Command\OpenEntryCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntry: ~
     - Gyman\Bundle\AppBundle\Validator\OnlyEnterOnce: ~
-    - Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrence: ~
+#    - Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrence: ~
   properties:
     price:
       - Range:

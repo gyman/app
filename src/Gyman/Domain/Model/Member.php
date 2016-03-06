@@ -210,14 +210,14 @@ class Member
             );
         }
 
-        if($entry->occurrence()->isPast()) {
-            throw new \Exception(sprintf(
-                    "Can't enter on occurence that already finished in %s!\nMember Id: %s, Occurrence Id: %d",
-                    $entry->occurrence()->endDate()->format("Y-m-d H:i:s"),
-                    $this->id(),
-                    $entry->occurrence()->id()
-            ));
-        }
+//        if($entry->occurrence()->isPast()) {
+//            throw new \Exception(sprintf(
+//                    "Can't enter on occurence that already finished in %s!\nMember Id: %s, Occurrence Id: %d",
+//                    $entry->occurrence()->endDate()->format("Y-m-d H:i:s"),
+//                    $this->id(),
+//                    $entry->occurrence()->id()
+//            ));
+//        }
 
         $this->lastEntry = $entry;
         $this->entries->add($entry);

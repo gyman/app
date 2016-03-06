@@ -7,6 +7,7 @@ use Gyman\Domain\Command\CreateMemberCommand;
 use Gyman\Domain\Command\SearchMemberCommand;
 use Gyman\Domain\Command\UpdateMemberCommand;
 use Gyman\Domain\Model\EmailAddress;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -89,37 +90,39 @@ class MembersController extends Controller
     }
 
     /**
+     * @Route("/search", name="gyman_members_search_form")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function searchFormAction(Request $request)
+    {
+        $form = $this->createForm('gyman_member_search_form', new SearchMemberCommand(), [
+            "action" => $this->generateUrl("gyman_members_search"),
+        ]);
+
+        return [
+            "form" => $form->createView()
+        ];
+    }
+
+    /**
      * @Route("/search", name="gyman_members_search")
+     * @Method({"POST"})
      * @Template()
      */
     public function searchAction(Request $request)
     {
         $form = $this->createForm('gyman_member_search_form', new SearchMemberCommand());
+        $form->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
+        if ($form->isValid()) {
 
-            if ($form->isValid()) {
+            /** @var Member[] $result */
+            $result = $this->get('gyman.members.repository')->search($form->getData());
 
-                /** @var Member[] $result */
-                $result = $this->get('gyman.members.repository')->search($form->getData()->query);
-
-                if (empty($result)) {
-                    throw new EntityNotFoundException(
-                        sprintf("No member was found for '%s' query", $form->getData()->query)
-                    );
-                }
-
-                if (count($result) == 1) {
-                    /** @var Member $result */
-                    $result = $result[0];
-                    return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
-                }
-
-                return [
-                    'members' => $result
-                ];
-            }
+            return [
+                'members' => $result
+            ];
         }
     }
 

@@ -7,6 +7,7 @@ use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Entity\Entry;
 use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Command\SearchMemberCommand;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,7 +23,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        //        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
+//        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
 
 //        $occurrences = $this->get('schedule')->getOccurrencesForDashboard(new DateTime());
 
@@ -31,8 +32,13 @@ class DefaultController extends Controller
 
         $date = new DateTime();
 
+        $searchForm = $this->createForm('gyman_member_search_form', new SearchMemberCommand(), [
+            "action" => $this->generateUrl("gyman_members_search")
+        ]);
+
         return [
             'date'            => new DateTime(),
+            'searchForm'      => $searchForm->createView(),
 //            "filters"         => $pinnedFilters,
             'occurrences'      => $this->getOccurrencesForDay($date),
 //            "popularityChart" => $popularChart,

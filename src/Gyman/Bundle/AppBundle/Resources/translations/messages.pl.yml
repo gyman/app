@@ -112,3 +112,21 @@ flash:
       |]1,Inf[ Uczestnik wszedł %creditEntriesCount% razy na zajęcia wykorzystując kredyt!<br /> Poniższe wejścia zostaną przypisane do nowego karnetu i odliczone od pozostałych wejść.
 
 
+
+member_search_form.query: Imię, nazwisko lub numer karnetu
+member_search_form.submit: Szukaj
+member_search_form.section: Uczestnik należy do sekcji
+member_search_form.section.none: wybierz
+member_search_form.has_opened_entry: Otwarte wejście
+member_search_form.has_opened_entry.null: wszyscy
+member_search_form.has_opened_entry.true: tylko z otwartymi wejściami
+member_search_form.has_opened_entry.false: tylko bez otwartych wejść
+member_search_form.has_voucher: Aktualny karnet
+member_search_form.has_voucher.null: wszyscy
+member_search_form.has_voucher.true: tylko z aktualnym karnetem
+member_search_form.has_voucher.false: tylko bez karnetu
+member_search_form.starred: Oznaczenie "gwiazdką"
+member_search_form.starred.null: wszyscy
+member_search_form.starred.true: tylko oznaczeni gwiazdką
+member_search_form.belt: Kolor pasa
+member_search_form.belt.none: wybierz

@@ -10,11 +10,6 @@
     <a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>
 </div>
 
-    {% if occurrence.isOngoing() %}
-    <div class="alert alert-warning">
-        Wydarzenie nadal trwa, możesz dodawać i usuwać osoby z listy
-    </div>
-    {% endif %}
 
 {{ include("_flash.html.twig") }}
 
@@ -53,7 +48,6 @@
     </div>
 
     <div class="span2">
-        {% if not occurrence.isPast() %}
         <ul class="media-list">
             {%  for member in allMembers %}
             <li class="media">
@@ -77,7 +71,6 @@
             </li>
             {% endfor %}
         </ul>
-        {% endif %}
     </div>
 </div>
 

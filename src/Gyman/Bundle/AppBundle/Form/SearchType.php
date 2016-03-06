@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
+use Gyman\Bundle\AppBundle\Entity\Section;
 use Gyman\Domain\Command\SearchMemberCommand;
+use Gyman\Domain\Model\Belt;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,7 +20,64 @@ final class SearchType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('query', 'text', ['label' => null]);
+        $builder
+            ->add('query', 'text', [
+                'label' => 'member_search_form.query',
+                'required' => false
+            ])
+            ->add('section', 'entity', [
+                'label' => 'member_search_form.section',
+                'expanded' => true,
+                'multiple' => false,
+                'class' => Section::class,
+                'property' => 'title',
+                'empty_value' => 'member_search_form.section.none',
+                'required' => false,
+            ])
+            ->add('belt', 'choice', [
+                'label' => 'member_search_form.belt',
+                'expanded' => true,
+                'multiple' => false,
+                'choices' => array_combine(Belt::$colors, Belt::$colors),
+                'empty_value' => 'member_search_form.belt.none',
+                'required' => false,
+            ])
+            ->add('hasVoucher', 'choice', [
+                'required' => false,
+                'label' => 'member_search_form.has_voucher',
+                'expanded' => true,
+                'multiple' => false,
+                'empty_value' => 'member_search_form.has_voucher.null',
+                'choices' => [
+                    true => 'member_search_form.has_voucher.true',
+                    false => 'member_search_form.has_voucher.false',
+                ]
+            ])
+            ->add('hasOpenedEntry', 'choice', [
+                'required' => false,
+                'label' => 'member_search_form.has_opened_entry',
+                'expanded' => true,
+                'multiple' => false,
+                'empty_value' => 'member_search_form.has_opened_entry.null',
+                'choices' => [
+                    true => 'member_search_form.has_opened_entry.true',
+                    false => 'member_search_form.has_opened_entry.false',
+                ],
+            ])
+            ->add('starred', 'choice', [
+                'required' => false,
+                'label' => 'member_search_form.starred',
+                'expanded' => true,
+                'multiple' => false,
+                'empty_value' => 'member_search_form.starred.null',
+                'choices' => [
+                    true => 'member_search_form.starred.true',
+                ],
+            ])
+            ->add('submit', 'submit', [
+                'label' => 'member_search_form.submit',
+            ])
+        ;
     }
 
     /**

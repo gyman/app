@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Bundle\UserBundle\Entity\User;
+use Gyman\Domain\Command\SearchMemberCommand;
 use Gyman\Domain\Model\Barcode;
 use Gyman\Domain\Model\EmailAddress;
 use Gyman\Domain\Repository\MemberRepositoryInterface;
@@ -124,22 +125,55 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
     /**
      * @param string $query
      */
-    public function search($query = '')
+    public function search(SearchMemberCommand $command)
     {
-        if ($query == '') {
-            throw new \Exception('Paramater query is required!');
+        $qb = $this->createQueryBuilder('m');
+        $expr = $qb->expr();
+
+        if (!is_null($command->query)) {
+            $qb->andWhere('m.details.firstname LIKE :queryLike')
+                ->orWhere('m.details.lastname LIKE :queryLike')
+                ->orWhere('LOWER(m.details.barcode.barcode) = :query')
+                ->orWhere('LOWER(m.email.email) = :query')
+                ->setParameter('queryLike', '%' . strtolower($command->query) . '%')
+                ->setParameter('query', strtolower($command->query));
         }
 
-        $qb = $this->createQueryBuilder('m');
+        if (!is_null($command->section)) {
+            $qb->join("m.sections", "s")
+                ->andWhere("s.id = :section")
+                ->setParameter('section', $command->section->id())
+            ;
+        }
 
-        $query = $qb->where('m.details.firstname LIKE :queryLike')
-            ->orWhere('m.details.lastname LIKE :queryLike')
-            ->orWhere('LOWER(m.details.barcode.barcode) = :query')
-            ->orWhere('LOWER(m.email.email) = :query')
-            ->setParameter('queryLike', '%' . $query . '%')
-            ->setParameter('query', strtolower($query))
-            ->getQuery();
+        if (!is_null($command->hasOpenedEntry)) {
+            $qb->join("m.lastEntry", "e");
+            $column = "e.endDate";
+            $qb->andWhere($expr->andX(
+                boolval($command->hasOpenedEntry) ? $expr->isNull($column) : $expr->isNotNull($column)
+            ));
+        }
 
+        if (!is_null($command->hasVoucher)) {
+            $qb->andWhere(
+                boolval($command->hasVoucher) ? $expr->isNotNull("m.currentVoucher") : $expr->isNull("m.currentVoucher")
+            );
+        }
+
+        if (!is_null($command->starred)) {
+            $qb->andWhere(
+                $expr->eq("m.details.starred", true)
+            );
+        }
+
+        if (!is_null($command->belt)) {
+            $qb->andWhere("m.details.belt.color = :color")
+                ->setParameter("color", $command->belt)
+            ;
+        }
+
+
+        $query = $qb->getQuery();
         return $query->getResult();
     }
 }
