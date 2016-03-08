@@ -2,9 +2,9 @@
 namespace Gyman\Bundle\AppBundle\Services;
 
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Bundle\AppBundle\Entity\EntryRepository;
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Entry;
+use Gyman\Domain\EntryRepository;
+use Gyman\Domain\Member;
 
 class RemoveEntryFromOccurrence
 {

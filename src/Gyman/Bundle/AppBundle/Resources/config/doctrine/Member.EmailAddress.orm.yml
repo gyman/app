@@ -1,0 +1,8 @@
+Gyman\Domain\Member\EmailAddress:
+  type:   embeddable
+  fields:
+    email:
+      type: string
+      length: 255
+      nullable: false
+      unique: true

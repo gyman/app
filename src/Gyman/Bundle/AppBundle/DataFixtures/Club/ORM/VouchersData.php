@@ -3,7 +3,7 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Factory\VoucherFactory;
 
 class VouchersData extends BaseFixture

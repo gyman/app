@@ -18,7 +18,7 @@ class UpdateVouchersCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $now = new \DateTime();
-        $memberRepository = $this->getContainer()->get('entity_manager')->getRepository('GymanAppBundle:Member');
+        $memberRepository = $this->getContainer()->get('entity_manager')->getRepository('Gyman:Member');
         $members = $memberRepository->getQuery()
                         ->leftJoin('m.currentVoucher', 'v')
                         ->where('v.endDate < :now')

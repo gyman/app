@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gyman\Bundle\ClubBundle\Entity\Club;
-use Gyman\Domain\Model\UserInterface;
+use Gyman\Domain\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Gyman\Bundle\UserBundle\Entity\UserRepository")

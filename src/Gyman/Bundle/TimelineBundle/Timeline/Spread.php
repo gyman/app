@@ -29,8 +29,8 @@ class Spread implements SpreadInterface
 
     const CLUB_CLASS = 'Gyman\Bundle\ClubBundle\Entity\Club';
     const USER_CLASS = 'Gyman\Bundle\UserBundle\Entity\User';
-    const MEMBER_CLASS = 'Gyman\Bundle\AppBundle\Entity\Member';
-    const VOUCHER_CLASS = 'Gyman\Bundle\AppBundle\Entity\Voucher';
+    const MEMBER_CLASS = 'Gyman\Domain\Member';
+    const VOUCHER_CLASS = 'Gyman\Domain\Voucher';
     const ENTRY_CLASS = 'Gyman\Bundle\EntriesBundle\Entity\Entry';
 
     /**

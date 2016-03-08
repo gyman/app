@@ -49,7 +49,7 @@ logger.level = Logger::MAX_LEVEL
 
 # Run migrations before warming the cache
 after "deploy:restart", "assets"
-# after "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup"
 # after "deploy", "symfony:clear_accelerator_cache"
 # after "deploy:rollback:cleanup", "symfony:clear_accelerator_cache"
 

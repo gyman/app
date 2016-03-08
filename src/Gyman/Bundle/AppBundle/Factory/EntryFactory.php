@@ -1,9 +1,9 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Factory;
 
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Domain\Command\OpenEntryCommand;
-use Gyman\Domain\Model\Price;
+use Gyman\Domain\Entry;
+use Gyman\Application\Command\OpenEntryCommand;
+use Gyman\Domain\Entry\Price;
 
 /**
  * Class EntryFactory

@@ -1,7 +1,7 @@
-Gyman\Bundle\AppBundle\Entity\Section:
+Gyman\Domain\Section:
   type:   entity
   table:  sections
-  repositoryClass: Gyman\Bundle\AppBundle\Entity\SectionRepository
+  repositoryClass: Gyman\Bundle\AppBundle\Repository\SectionRepository
 
   id:
     id:
@@ -17,7 +17,7 @@ Gyman\Bundle\AppBundle\Entity\Section:
 
   manyToMany:
     members:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Member
+      targetEntity: Gyman\Domain\Member
 #      inversedBy: sections
       mappedBy: sections
   fields:

@@ -1,0 +1,8 @@
+Gyman\Domain\Member\Details\Barcode:
+  type:   embeddable
+  fields:
+    barcode:
+      type: string
+      nullable: true
+      unique: true
+      length: 64

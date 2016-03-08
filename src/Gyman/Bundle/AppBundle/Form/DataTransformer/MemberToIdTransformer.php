@@ -1,9 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form\DataTransformer;
 
-use DateTime;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\MemberRepository;
+use Gyman\Domain\Member;
+use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**

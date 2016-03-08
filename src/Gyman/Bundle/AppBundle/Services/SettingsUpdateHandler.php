@@ -2,12 +2,11 @@
 namespace Gyman\Bundle\AppBundle\Services;
 
 use Dende\Calendar\Domain\Calendar;
-use Gyman\Bundle\AppBundle\Entity\Section;
-use Gyman\Bundle\AppBundle\Entity\SectionRepository;
+use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
-use Gyman\Domain\Command\UpdateSettingsCommand;
-use Gyman\Domain\Handler\UploadClubLogoHandler;
+use Gyman\Application\Command\UpdateSettingsCommand;
+use Gyman\Application\Handler\UploadClubLogoHandler;
 
 /**
  * Class SettingsUpdateHandler

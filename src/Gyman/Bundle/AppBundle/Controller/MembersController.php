@@ -1,12 +1,11 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
-use Doctrine\ORM\EntityNotFoundException;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Domain\Command\CreateMemberCommand;
-use Gyman\Domain\Command\SearchMemberCommand;
-use Gyman\Domain\Command\UpdateMemberCommand;
-use Gyman\Domain\Model\EmailAddress;
+use Gyman\Domain\Member;
+use Gyman\Application\Command\CreateMemberCommand;
+use Gyman\Application\Command\SearchMemberCommand;
+use Gyman\Application\Command\UpdateMemberCommand;
+use Gyman\Domain\Member\EmailAddress;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,7 +23,7 @@ class MembersController extends Controller
 {
     /**
      * @Route("/{id}/update", name="gyman_member_edit")
-     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @ParamConverter("member", class="Gyman:Member")
      */
     public function updateAction(Member $member, Request $request)
     {

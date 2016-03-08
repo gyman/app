@@ -1,0 +1,11 @@
+Gyman\Domain\Voucher\Price:
+  type:   embeddable
+  fields:
+    amount:
+      type: decimal
+      scale: 2
+      nullable: true
+    currency:
+      type: string
+      length: 10
+      nullable: true

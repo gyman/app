@@ -2,8 +2,8 @@
 namespace Gyman\Bundle\AppBundle\Twig;
 
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Bundle\AppBundle\Entity\EntryRepository;
+use Gyman\Application\Repository\EntryRepositoryInterface;
+use Gyman\Domain\Entry;
 
 /**
  * Class EntriesExtension
@@ -12,7 +12,7 @@ use Gyman\Bundle\AppBundle\Entity\EntryRepository;
 class EntriesExtension extends \Twig_Extension
 {
     /**
-     * @var EntryRepository
+     * @var EntryRepositoryInterface
      */
     private $entryRepository;
 
@@ -54,9 +54,9 @@ class EntriesExtension extends \Twig_Extension
     }
 
     /**
-     * @param EntryRepository $repository
+     * @param EntryRepositoryInterface $repository
      */
-    public function setEntryRepository(EntryRepository $repository)
+    public function setEntryRepository(EntryRepositoryInterface $repository)
     {
         $this->entryRepository = $repository;
     }

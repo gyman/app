@@ -59,7 +59,7 @@ services:
         - { name: twig.extension }
 
   gyman.members.upload_club_logo_handler:
-    class: Gyman\Domain\Handler\UploadClubLogoHandler
+    class: Gyman\Application\Handler\UploadClubLogoHandler
     arguments:
       - %galleryDirectory%
       - @=service(parameter('subdomain_provider_service'))

@@ -1,4 +1,4 @@
-Gyman\Domain\Model\Details:
+Gyman\Domain\Member\Details:
   exclusion_policy: all
   properties:
     firstname:

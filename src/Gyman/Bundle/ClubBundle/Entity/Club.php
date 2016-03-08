@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Section;
 use Gyman\Bundle\UserBundle\Entity\User;
 
 /**

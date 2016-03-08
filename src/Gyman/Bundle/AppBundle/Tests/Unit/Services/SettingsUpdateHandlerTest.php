@@ -1,9 +1,9 @@
 <?php
 namespace Gyman\AppBundle\Tests\Unit\Services;
 
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Section;
 use Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler;
-use Gyman\Domain\Command\UpdateSettingsCommand;
+use Gyman\Application\Command\UpdateSettingsCommand;
 use Mockery as m;
 
 /**
@@ -50,7 +50,7 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
             $sectionNew2
         ];
 
-        $repositoryMock = m::mock('Gyman\Bundle\AppBundle\Entity\SectionRepository');
+        $repositoryMock = m::mock('Gyman\Domain\SectionRepository');
         $repositoryMock->shouldReceive('findAll')->once()->andReturn($existingSections);
         $repositoryMock->shouldReceive('remove')->once()->with($sectionToRemove1);
         $repositoryMock->shouldReceive('remove')->once()->with($sectionToRemove2);

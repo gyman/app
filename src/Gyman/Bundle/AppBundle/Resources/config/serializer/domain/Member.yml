@@ -1,4 +1,4 @@
-Gyman\Domain\Model\Member:
+Gyman\Domain\Member:
   exclusion_policy: all
   properties:
     id:

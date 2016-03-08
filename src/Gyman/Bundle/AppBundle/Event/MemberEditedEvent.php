@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Event;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

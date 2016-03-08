@@ -1,8 +1,0 @@
-Gyman\Domain\Model\Belt:
-  type:   embeddable
-  fields:
-    color:
-      name: belt_color
-      type: string
-      length: 255
-      nullable: true

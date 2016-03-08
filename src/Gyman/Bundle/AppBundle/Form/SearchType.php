@@ -1,9 +1,9 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
-use Gyman\Bundle\AppBundle\Entity\Section;
-use Gyman\Domain\Command\SearchMemberCommand;
-use Gyman\Domain\Model\Belt;
+use Gyman\Domain\Member\Details\Belt;
+use Gyman\Domain\Section;
+use Gyman\Application\Command\SearchMemberCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

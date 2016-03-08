@@ -3,10 +3,10 @@ namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Domain\Command\CloseEntryCommand;
-use Gyman\Domain\Command\OpenEntryCommand;
-use Gyman\Domain\Model\Entry;
+use Gyman\Domain\Member;
+use Gyman\Application\Command\CloseEntryCommand;
+use Gyman\Application\Command\OpenEntryCommand;
+use Gyman\Domain\Entry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,7 +24,7 @@ class EntriesController extends Controller
     /**
      * @Route("/member/{id}/new", name="gyman_entry_new")
      * @Method({"GET", "POST"})
-     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @ParamConverter("member", class="Gyman:Member")
      * @Template()
      */
     public function newAction(Request $request, Member $member)
@@ -53,7 +53,7 @@ class EntriesController extends Controller
 
     /**
      * @Route("/{id}/close", name="gyman_entry_close")
-     * @ParamConverter("entry", class="GymanAppBundle:Entry")
+     * @ParamConverter("entry", class="Gyman:Entry")
      */
     public function closeAction(Request $request, Entry $entry)
     {
@@ -78,7 +78,7 @@ class EntriesController extends Controller
     /**
      * @Route("/quick-entry/occurrence/{occurrence}/member/{member}", name="gyman_entry_create_for_member")
      * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
-     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @ParamConverter("member", class="Gyman:Member")
      * @param Member $member
      * @param Occurrence $occurrence
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -102,7 +102,7 @@ class EntriesController extends Controller
     /**
      * @Route("/quick-remove/occurrence/{occurrence}/member/{member}", name="gyman_entry_remove_from_occurrence")
      * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
-     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @ParamConverter("member", class="Gyman:Member")
      * @param Member $member
      * @param Occurrence $occurrence
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

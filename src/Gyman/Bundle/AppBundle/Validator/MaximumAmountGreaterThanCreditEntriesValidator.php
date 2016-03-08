@@ -2,9 +2,9 @@
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\AppBundle\Entity\Entry;
+use Gyman\Domain\Entry;
 use Gyman\Bundle\AppBundle\Services\Manager\VoucherManager;
-use Gyman\Domain\Command\CreateVoucherCommand;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

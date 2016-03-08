@@ -1,4 +1,4 @@
-Gyman\Domain\Model\Barcode:
+Gyman\Domain\Member\Details\Barcode:
   exclusion_policy: all
   properties:
     barcode:

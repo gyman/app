@@ -1,10 +1,10 @@
-Gyman\Bundle\AppBundle\Entity\Voucher:
+Gyman\Domain\Voucher:
   type:   entity
   table:  vouchers
-  repositoryClass:  Gyman\Bundle\AppBundle\Entity\VoucherRepository
+  repositoryClass:  Gyman\Bundle\AppBundle\Repository\VoucherRepository
   embedded:
     price:
-      class: Gyman\Domain\Model\Price
+      class: Gyman\Domain\Voucher\Price
       columnPrefix: price_
 
   id:
@@ -19,13 +19,13 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
 
   manyToOne:
     member:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Member
+      targetEntity: Gyman\Domain\Member
       inversedBy: vouchers
       cascade: ["persist"]
 
   oneToMany:
     entries:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      targetEntity: Gyman\Domain\Entry
       mappedBy: voucher
       cascade: ["persist"]
 

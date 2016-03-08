@@ -1,2 +1,2 @@
-Gyman\Domain\Model\EmailAddress:
+Gyman\Domain\Member\EmailAddress:
   exclusion_policy: NONE

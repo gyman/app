@@ -7,10 +7,10 @@ services:
     arguments: ["Member"]
 
   gyman.members.repository:
-    class:  "Gyman\Bundle\AppBundle\Entity\MemberRepository"
+    class:  "Gyman\Bundle\AppBundle\Repository\MemberRepository"
     factory_method: getRepository
     factory_service: doctrine.orm.tenant_entity_manager
-    arguments: ["Gyman\Bundle\AppBundle\Entity\Member"]
+    arguments: ["Gyman\Domain\Member"]
 
   gyman.members.member_form_type:
     class: Gyman\Bundle\AppBundle\Form\MemberType
@@ -23,17 +23,17 @@ services:
       - { name: form.type, alias: gyman_member_search_form }
 
   gyman.members.upload_member_foto_handler:
-    class: Gyman\Domain\Handler\UploadMemberFotoHandler
+    class: Gyman\Application\Handler\UploadMemberFotoHandler
     arguments:
       - %galleryDirectory%
       - @=service(parameter('subdomain_provider_service'))
 
   gyman.members.update_member:
-    class: Gyman\Domain\Handler\UpdateMemberHandler
+    class: Gyman\Application\Handler\UpdateMemberHandler
     arguments: [@gyman.members.repository, @gyman.members.upload_member_foto_handler, @event_dispatcher]
 
   gyman.members.create_member:
-    class: Gyman\Domain\Handler\CreateMemberHandler
+    class: Gyman\Application\Handler\CreateMemberHandler
     arguments: [@gyman.members.repository, @gyman.members.upload_member_foto_handler, @event_dispatcher]
 
   gyman.members.unique_member_email.validator:

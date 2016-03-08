@@ -1,2 +1,2 @@
-Gyman\Bundle\AppBundle\Entity\Member:
+Gyman\Domain\Member:
   exclusion_policy: all

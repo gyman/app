@@ -2,7 +2,7 @@
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
 use Dende\Calendar\Domain\Calendar;
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Section;
 use Gyman\Component\Test\BaseFunctionalTest;
 use Symfony\Component\DomCrawler\Field\FormField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -62,13 +62,13 @@ class SettingsControllerTest extends BaseFunctionalTest
         $em = $this->getContainer()->get('doctrine.orm.tenant_entity_manager');
 
         $calendar = $em->getRepository('Calendar:Calendar')->findOneByName('newly_added_section');
-        $section = $em->getRepository('GymanAppBundle:Section')->findOneByTitle('newly_added_section');
+        $section = $em->getRepository('Gyman:Section')->findOneByTitle('newly_added_section');
 
         $this->assertInstanceOf(Calendar::class, $calendar);
         $this->assertInstanceOf(Section::class, $section);
 
         $calendar = $em->getRepository('Calendar:Calendar')->findOneByName('Brazilian Jiu Jitsu');
-        $section = $em->getRepository('GymanAppBundle:Section')->findOneByTitle('Brazilian Jiu Jitsu');
+        $section = $em->getRepository('Gyman:Section')->findOneByTitle('Brazilian Jiu Jitsu');
 
         $this->assertNull($calendar);
         $this->assertNull($section);

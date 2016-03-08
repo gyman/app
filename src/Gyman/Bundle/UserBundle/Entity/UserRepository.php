@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Gyman\Domain\Model\EmailAddress;
+use Gyman\Domain\Member\EmailAddress;
 
 class UserRepository extends EntityRepository
 {

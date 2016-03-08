@@ -3,7 +3,7 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Factory\EntryFactory;
 
 /**
@@ -26,7 +26,7 @@ final class EntriesData extends BaseFixture
      * @param $params
      * @throws \Gyman\Domain\Exception\LastEntryIsStillOpenedException
      * @throws \Gyman\Domain\Exception\NoCurrentVoucherForVoucherEntryException
-     * @return \Gyman\Bundle\AppBundle\Entity\Entry
+     * @return \Gyman\Domain\Entry
      */
     public function insert($params)
     {

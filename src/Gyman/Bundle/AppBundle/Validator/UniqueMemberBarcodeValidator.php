@@ -1,11 +1,11 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Validator;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\MemberRepository;
-use Gyman\Domain\Command\UpdateMemberCommand;
-use Gyman\Domain\Model\Barcode;
-use Gyman\Domain\Repository\MemberRepositoryInterface;
+use Gyman\Domain\Member;
+use Gyman\Bundle\AppBundle\Repository\MemberRepository;
+use Gyman\Application\Command\UpdateMemberCommand;
+use Gyman\Domain\Member\Details\Barcode;
+use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

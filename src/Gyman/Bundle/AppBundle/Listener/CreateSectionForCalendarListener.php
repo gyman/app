@@ -2,8 +2,8 @@
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
-use Gyman\Bundle\AppBundle\Entity\SectionRepository;
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\SectionRepository;
+use Gyman\Domain\Section;
 
 /**
  * Class CreateSectionForCalendarListener

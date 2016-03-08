@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form\CollectionType;
 
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Section;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

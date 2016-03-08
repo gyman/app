@@ -69,13 +69,19 @@ doctrine:
             connection:       tenant
             mappings:
               StofDoctrineExtensionsBundle: ~
-              GymanAppBundle: ~
-              Embedded:
-                type: yml
-                dir: "%kernel.root_dir%/../src/Gyman/Bundle/AppBundle/Resources/config/embedded"
-                prefix: Gyman\Domain\Model
-                alias: Model
-                is_bundle: false
+              DendeCalendarBundle:
+                mapping:    true
+                dir:        Resources/config/doctrine
+                prefix:     Dende\Calendar\Domain
+                alias:      Calendar
+                is_bundle:  true
+              GymanAppBundle:
+                type:       yml
+                mapping:    true
+                dir:        Resources/config/doctrine
+                prefix:     Gyman\Domain
+                alias:      Gyman
+                is_bundle:  true
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

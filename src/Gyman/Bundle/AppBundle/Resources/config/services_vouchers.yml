@@ -7,7 +7,7 @@ services:
       - { name: form.type, alias: gyman_voucher_form }
 
   gyman.vouchers.create_voucher:
-    class: Gyman\Domain\Handler\CreateVoucherHandler
+    class: Gyman\Application\Handler\CreateVoucherHandler
     arguments:
       - @gyman.members.repository
       - @event_dispatcher
@@ -19,11 +19,11 @@ services:
       - @event_dispatcher
 
   gyman.vouchers.repository:
-      class:          Gyman\Bundle\AppBundle\Entity\VoucherRepository
+      class:          Gyman\Domain\VoucherRepository
       factory_service: doctrine.orm.tenant_entity_manager
       factory_method:  getRepository
       arguments:
-        - Gyman\Bundle\AppBundle\Entity\Voucher
+        - Gyman\Domain\Voucher
 
   gyman.twig.voucher_extension:
       class: Gyman\Bundle\AppBundle\Twig\VoucherExtension
@@ -33,17 +33,17 @@ services:
         - { name: twig.extension }
 
   gyman.vouchers.repository.entry:
-    class:          Gyman\Bundle\AppBundle\Entity\EntryRepository
+    class:          Gyman\Domain\EntryRepository
     factory_service: doctrine.orm.tenant_entity_manager
     factory_method:  getRepository
     arguments:
-      - Gyman\Bundle\AppBundle\Entity\Entry
+      - Gyman\Domain\Entry
 
   voucher_manager:
       class:          Gyman\Bundle\AppBundle\Services\Manager\VoucherManager
       parent:         gyman.base.entity_manager
       calls:
-           - [ setClass, [Gyman\Bundle\AppBundle\Entity\Voucher] ]
+           - [ setClass, [Gyman\Domain\Voucher] ]
            - [ setEntityManager, [@doctrine.orm.tenant_entity_manager]]
 
   validator.voucher_date:

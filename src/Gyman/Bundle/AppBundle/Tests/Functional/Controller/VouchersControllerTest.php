@@ -2,8 +2,8 @@
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use DateTime;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
 use Gyman\Component\Test\BaseFunctionalTest;
 
 /**
@@ -17,7 +17,7 @@ class VouchersControllerTest extends BaseFunctionalTest
     public function new_voucher_form_renders_properly()
     {
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new', ['id' => $member->id()]));
 
@@ -54,7 +54,7 @@ class VouchersControllerTest extends BaseFunctionalTest
     public function new_voucher_form_is_posted_and_entity_is_added()
     {
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new', ['id' => $member->id()]));
 
@@ -101,8 +101,8 @@ class VouchersControllerTest extends BaseFunctionalTest
     {
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Voucher", $member->currentVoucher());
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Voucher", $member->currentVoucher());
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_vouchers_close', [
             'id' => $member->currentVoucher()->id(),

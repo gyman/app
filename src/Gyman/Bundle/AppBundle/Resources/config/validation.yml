@@ -1,4 +1,4 @@
-Gyman\Domain\Command\UpdateSettingsCommand:
+Gyman\Application\Command\UpdateSettingsCommand:
   properties:
     details:
       - Valid: ~
@@ -24,7 +24,7 @@ Gyman\Domain\Command\UpdateSettingsCommand:
             - image/jpg
             - image/jpeg
             - image/gif
-Gyman\Bundle\AppBundle\Entity\Section:
+Gyman\Domain\Section:
   constraints:
       - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
           fields:
@@ -58,7 +58,7 @@ Gyman\Bundle\ClubBundle\Entity\Details:
     email_address:
       - Email: ~
 
-Gyman\Domain\Command\UpdateMemberCommand:
+Gyman\Application\Command\UpdateMemberCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\UniqueMemberEmail:
         message: member.type.email.already_registered
@@ -112,7 +112,7 @@ Gyman\Domain\Command\UpdateMemberCommand:
           max: 1
           maxMessage: Uczestnik może należeć tylko do 1 sekcji
 
-Gyman\Domain\Command\OpenEntryCommand:
+Gyman\Application\Command\OpenEntryCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntry: ~
     - Gyman\Bundle\AppBundle\Validator\OnlyEnterOnce: ~
@@ -127,7 +127,7 @@ Gyman\Domain\Command\OpenEntryCommand:
           min: "today 00:00:00"
           max: "today 23:59:59"
 
-Gyman\Bundle\AppBundle\Entity\Voucher:
+Gyman\Domain\Voucher:
   constraints: ~
 #    - Gyman\Bundle\AppBundle\Validator\VoucherDateConstraint:
   properties:
@@ -135,7 +135,7 @@ Gyman\Bundle\AppBundle\Entity\Voucher:
       - NotNull:
           message: Należy podać datę początkową.
 
-Gyman\Domain\Command\CreateVoucherCommand:
+Gyman\Application\Command\CreateVoucherCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\MaximumAmountGreaterThanCreditEntriesConstraint: ~
 

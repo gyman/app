@@ -1,0 +1,50 @@
+Gyman\Domain\Member\Details:
+  type:   embeddable
+  embedded:
+    belt:
+      class: Gyman\Domain\Member\Details\Belt
+      columnPrefix: false
+    foto:
+      class: Gyman\Domain\Member\Details\Foto
+      columnPrefix: false
+    barcode:
+      class: Gyman\Domain\Member\Details\Barcode
+      columnPrefix: false
+
+  fields:
+    firstname:
+      type: string
+      length: 255
+      nullable: false
+
+    lastname:
+      type: string
+      length: 255
+      nullable: false
+
+    birthdate:
+      type: date
+      nullable: true
+
+    phone:
+      type: string
+      length: 64
+      nullable: true
+
+    notes:
+      type: text
+      nullable: true
+
+    zipcode:
+      type: string
+      nullable: true
+
+    gender:
+      type: string
+#      columnDefinition: enum('male', 'female')
+      nullable: true
+
+    starred:
+      name: is_starred
+      type: boolean
+      nullable: true

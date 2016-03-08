@@ -1,10 +1,10 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\MemberToIdTransformer;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\VoucherDateTransformer;
-use Gyman\Domain\Command\CreateVoucherCommand;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Component\Test\RestTestCase;
 use Gyman\Component\Test\WebTestCase;
 
@@ -98,7 +98,7 @@ class ApiControllerTestCase extends WebTestCase
         );
 
         $member = $this->container->get('doctrine.orm.entity_manager')
-            ->getRepository('GymanAppBundle:Member')
+            ->getRepository('Gyman:Member')
             ->find(12);
 
         $this->assertEquals($member->getId(), 12);
@@ -137,7 +137,7 @@ class ApiControllerTestCase extends WebTestCase
         );
 
         $member = $this->container->get('doctrine.orm.entity_manager')
-            ->getRepository('GymanAppBundle:Member')
+            ->getRepository('Gyman:Member')
             ->find(1);
 
         $this->assertEquals($member->getId(), 1);

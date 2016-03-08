@@ -2,8 +2,8 @@
 namespace Gyman\Bundle\AppBundle\Command;
 
 use DateTime;
-use Gyman\Domain\Command\CreateMemberCommand;
-use Gyman\Domain\Command\CreateVoucherCommand;
+use Gyman\Application\Command\CreateMemberCommand;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -78,7 +78,7 @@ class ImportOldRioCommand extends ContainerAwareCommand
         $createVoucher = $this->getContainer()->get("gyman.vouchers.create_voucher");
 
         foreach($vouchers as $oldVoucher) {
-            $member = $this->getContainer()->get("doctrine.orm.tenant_entity_manager")->getRepository("GymanAppBundle:Member")->findOneBy(["details.notes" => $oldVoucher["memberId"]]);
+            $member = $this->getContainer()->get("doctrine.orm.tenant_entity_manager")->getRepository("Gyman:Member")->findOneBy(["details.notes" => $oldVoucher["memberId"]]);
 
             $command = new CreateVoucherCommand();
             $command->startDate = $oldVoucher["startdate"];

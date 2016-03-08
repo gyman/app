@@ -1,4 +1,4 @@
-Gyman\Domain\Model\Foto:
+Gyman\Domain\Foto:
   exclusion_policy: NONE
   virtual_properties:
     fotoWithPath:

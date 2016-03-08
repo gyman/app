@@ -3,8 +3,8 @@ namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
 use Gyman\Component\Test\BaseFunctionalTest;
-use Gyman\Domain\Model\Entry;
-use Gyman\Domain\Model\Member;
+use Gyman\Domain\Entry;
+use Gyman\Domain\Member;
 
 /**
  * Class EntriesControllerTest
@@ -17,7 +17,7 @@ class EntriesControllerTest extends BaseFunctionalTest
     public function new_entry_form_renders_properly_for_member_with_voucher()
     {
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_entry_new', ['id' => $member->id()]));
         $this->assertEquals(200, $this->getStatusCode());
@@ -49,7 +49,7 @@ class EntriesControllerTest extends BaseFunctionalTest
     public function new_entry_form_renders_properly_for_member_without_voucher()
     {
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Tomasz', 'details.lastname' => 'Marek']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_entry_new', ['id' => $member->id()]));
         $this->assertEquals(200, $this->getStatusCode());
@@ -82,7 +82,7 @@ class EntriesControllerTest extends BaseFunctionalTest
     {
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Kryspin', 'details.lastname' => 'Kryszak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
         $this->assertFalse($member->hasCurrentVoucher());
         $this->assertNull($member->lastEntry());
 
@@ -110,7 +110,7 @@ class EntriesControllerTest extends BaseFunctionalTest
 
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
+        $this->assertInstanceOf("Gyman\Domain\Entry", $member->lastEntry());
     }
 
     /**
@@ -120,7 +120,7 @@ class EntriesControllerTest extends BaseFunctionalTest
     {
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
         $this->assertTrue($member->hasCurrentVoucher());
         $this->assertNull($member->lastEntry());
 
@@ -153,7 +153,7 @@ class EntriesControllerTest extends BaseFunctionalTest
 
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
+        $this->assertInstanceOf("Gyman\Domain\Entry", $member->lastEntry());
 
         $voucherEntries = $member->currentVoucher()->leftEntriesAmount();
         $this->assertEquals(9, $voucherEntries);
@@ -166,7 +166,7 @@ class EntriesControllerTest extends BaseFunctionalTest
     {
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
         $this->assertTrue($member->hasCurrentVoucher());
         $this->assertNull($member->lastEntry());
 
@@ -196,7 +196,7 @@ class EntriesControllerTest extends BaseFunctionalTest
 
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
 
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
+        $this->assertInstanceOf("Gyman\Domain\Entry", $member->lastEntry());
 
         $this->assertEquals(10, $member->currentVoucher()->leftEntriesAmount());
     }
@@ -208,8 +208,8 @@ class EntriesControllerTest extends BaseFunctionalTest
     {
         /** @var Member $member */
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Jan', 'details.lastname' => 'Kowalski']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Entry", $member->lastEntry());
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Entry", $member->lastEntry());
 
         $lastEntry = $member->lastEntry();
 

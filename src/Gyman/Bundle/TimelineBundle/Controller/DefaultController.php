@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\TimelineBundle\Controller;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\UserBundle\Entity\User;

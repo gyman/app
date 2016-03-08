@@ -1,4 +1,4 @@
-Gyman\Bundle\AppBundle\Entity\Voucher:
+Gyman\Domain\Voucher:
   exclusion_policy: ALL
   properties:
     id:

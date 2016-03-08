@@ -1,13 +1,13 @@
-Gyman\Bundle\AppBundle\Entity\Member:
+Gyman\Domain\Member:
   type:   entity
   table:  members
-  repositoryClass:  Gyman\Bundle\AppBundle\Entity\MemberRepository
+  repositoryClass:  Gyman\Bundle\AppBundle\Repository\MemberRepository
   embedded:
     email:
-      class: Gyman\Domain\Model\EmailAddress
+      class: Gyman\Domain\Member\EmailAddress
       columnPrefix: false
     details:
-      class: Gyman\Domain\Model\Details
+      class: Gyman\Domain\Member\Details
       columnPrefix: false
 
   id:
@@ -22,23 +22,23 @@ Gyman\Bundle\AppBundle\Entity\Member:
 
   manyToMany:
     sections:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Section
+      targetEntity: Gyman\Domain\Section
       inversedBy: members
 
   oneToMany:
     vouchers:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
+      targetEntity: Gyman\Domain\Voucher
       mappedBy: member
       cascade: ["all"]
 
     entries:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      targetEntity: Gyman\Domain\Entry
       mappedBy: member
       cascade: ["all"]
 
   oneToOne:
     currentVoucher:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Voucher
+      targetEntity: Gyman\Domain\Voucher
       cascade: ["persist"]
       inversedBy: member
       joinColumn:
@@ -48,7 +48,7 @@ Gyman\Bundle\AppBundle\Entity\Member:
         nullable: true
 
     lastEntry:
-      targetEntity: Gyman\Bundle\AppBundle\Entity\Entry
+      targetEntity: Gyman\Domain\Entry
       cascade: ["persist"]
       joinColumn:
         name: last_entry_id

@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Event;
 
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Voucher;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -32,7 +32,7 @@ class VoucherCreatedEvent extends Event
     }
 
     /**
-     * @return \Gyman\Bundle\AppBundle\Entity\Member
+     * @return \Gyman\Domain\Member
      */
     public function getMember()
     {

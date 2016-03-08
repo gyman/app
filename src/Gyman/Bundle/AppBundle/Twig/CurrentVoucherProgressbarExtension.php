@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Twig;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Services\Manager\MemberManager;
 
 class CurrentVoucherProgressbarExtension extends \Twig_Extension

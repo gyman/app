@@ -161,7 +161,7 @@ jms_serializer:
     auto_detection: false
     directories:
       app:
-        namespace_prefix: Gyman\Bundle\AppBundle\Entity
+        namespace_prefix: Gyman\Domain\Entity
         path:             @GymanAppBundle/Resources/config/serializer/app
       domain:
         namespace_prefix: Gyman\Domain\Model

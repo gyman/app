@@ -3,7 +3,7 @@ namespace Gyman\Bundle\ReportsBundle\Controller;
 
 use Carbon\Carbon;
 use DateTime;
-use Gyman\Bundle\AppBundle\Entity\Entry;
+use Gyman\Domain\Entry;
 use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

@@ -3,12 +3,12 @@ namespace Gyman\Bundle\AppBundle\Factory;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Voucher;
 use Gyman\Bundle\AppBundle\Globals;
-use Gyman\Domain\Command\CreateVoucherCommand;
-use Gyman\Domain\Command\VoucherCommandInterface;
-use Gyman\Domain\Factory\VoucherFactoryInterface;
-use Gyman\Domain\Model\Price;
+use Gyman\Application\Command\CreateVoucherCommand;
+use Gyman\Application\Command\VoucherCommandInterface;
+use Gyman\Application\Factory\VoucherFactoryInterface;
+use Gyman\Domain\Voucher\Price;
 
 /**
  * Class VoucherFactory
@@ -22,8 +22,6 @@ final class VoucherFactory implements VoucherFactoryInterface
      */
     public static function createFromArray($array = [])
     {
-        $format  = Globals::getDefaultDateTimeFormat();
-
         $template = [
             'startDate'           => Carbon::now(),
             'endDate'             => Carbon::parse('+1 month'),

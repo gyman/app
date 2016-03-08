@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Validator;
 
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Domain\Command\OpenEntryCommand;
+use Gyman\Domain\Entry;
+use Gyman\Application\Command\OpenEntryCommand;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

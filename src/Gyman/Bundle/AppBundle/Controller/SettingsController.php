@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Exception;
-use Gyman\Domain\Command\UpdateSettingsCommand;
+use Gyman\Application\Command\UpdateSettingsCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

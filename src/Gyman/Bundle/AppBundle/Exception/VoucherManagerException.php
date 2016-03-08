@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Exception;
 
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Voucher;
 
 class VoucherManagerException extends \Exception
 {
@@ -30,7 +30,7 @@ class VoucherManagerException extends \Exception
 
     /**
      *
-     * @param  \Gyman\Bundle\AppBundle\Entity\Voucher                    $voucher
+     * @param  \Gyman\Domain\Voucher                    $voucher
      * @return \Gyman\Bundle\AppBundle\Exception\VoucherManagerException
      */
     public function setVoucher(Voucher $voucher)

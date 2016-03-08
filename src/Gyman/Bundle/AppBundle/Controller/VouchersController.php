@@ -1,10 +1,10 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
-use Gyman\Domain\Command\CreateVoucherCommand;
+use Gyman\Domain\Entry;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,7 +22,7 @@ class VouchersController extends Controller
     /**
      * @Route("/member/{id}/new", name="gyman_voucher_new")
      * @Method({"GET", "POST"})
-     * @ParamConverter("member", class="GymanAppBundle:Member")
+     * @ParamConverter("member", class="Gyman:Member")
      * @Template("GymanAppBundle:Vouchers:new.html.twig")
      */
     public function newAction(Request $request, Member $member)
@@ -74,7 +74,7 @@ class VouchersController extends Controller
 
     /**
      * @Route("/{id}/close", name="gyman_vouchers_close")
-     * @ParamConverter("voucher", class="GymanAppBundle:Voucher")
+     * @ParamConverter("voucher", class="Gyman:Voucher")
      */
     public function closeAction(Request $request, Voucher $voucher)
     {

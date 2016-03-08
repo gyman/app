@@ -7,7 +7,7 @@ imports:
   - { resource: services_admin.yml }
 
 parameters:
-  gyman.section_repository.class: Gyman\Bundle\AppBundle\Entity\SectionRepository
+  gyman.section_repository.class: Gyman\Domain\SectionRepository
 
 services:
   gyman.app.tenant_provider:
@@ -37,4 +37,4 @@ services:
     class: %gyman.section_repository.class%
     factory_service: doctrine.orm.tenant_entity_manager
     factory_method: "getRepository"
-    arguments: ["GymanAppBundle:Section"]
+    arguments: ["Gyman:Section"]

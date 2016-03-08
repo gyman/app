@@ -1,4 +1,4 @@
-Gyman\Domain\Model\Voucher:
+Gyman\Domain\Voucher:
   exclusion_policy: all
   properties:
     id:

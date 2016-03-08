@@ -4,8 +4,8 @@ namespace Gyman\Bundle\AppBundle\Command;
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\ORM\QueryBuilder;
-use Gyman\Bundle\AppBundle\Entity\Entry;
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Entry;
+use Gyman\Domain\Member;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -32,7 +32,7 @@ class UpdateEntriesCommand extends ContainerAwareCommand
     {
 //        $em = $this->getContainer()->get("doctrine")->getManager($input->getOption("em"));
         $em = $this->getContainer()->get("doctrine")->getManager("tenant");
-        $entryRepository = $em->getRepository('GymanAppBundle:Entry');
+        $entryRepository = $em->getRepository('Gyman:Entry');
 
         /** @var QueryBuilder $queryBuilder * */
         $queryBuilder = $entryRepository->createQueryBuilder("e");

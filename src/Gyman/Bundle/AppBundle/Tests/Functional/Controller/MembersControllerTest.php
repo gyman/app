@@ -1,12 +1,12 @@
 <?php
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
+use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Component\Test\BaseFunctionalTest;
-use Gyman\Domain\Model\Belt;
-use Gyman\Domain\Model\Details;
-use Gyman\Domain\Model\EmailAddress;
+use Gyman\Domain\Member\Details\Belt;
+use Gyman\Domain\Member\Details;
+use Gyman\Domain\Member\EmailAddress;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -46,7 +46,7 @@ class MembersControllerTest extends BaseFunctionalTest
     public function edit_member_form_renders_properly()
     {
         $editedMember = $this->container->get('doctrine.orm.tenant_entity_manager')
-            ->getRepository('GymanAppBundle:Member')
+            ->getRepository('Gyman:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
@@ -116,7 +116,7 @@ class MembersControllerTest extends BaseFunctionalTest
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
+        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('Gyman:Member');
 
         /** @var Member $member */
         $member = $repository->findOneByEmailAddress(new EmailAddress('andrzej@gazeta.pl'));
@@ -164,7 +164,7 @@ class MembersControllerTest extends BaseFunctionalTest
         $this->prepareFoto();
 
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Jan', 'details.lastname' => 'Kowalski']);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $member->id()]));
 
@@ -206,7 +206,7 @@ class MembersControllerTest extends BaseFunctionalTest
 
         /** @var Member $member */
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
-        $this->assertInstanceOf('Gyman\Bundle\AppBundle\Entity\Member', $member);
+        $this->assertInstanceOf('Gyman\Domain\Member', $member);
 
         $alert = $crawler->filter('div.alert.alert-success');
         $this->assertEquals('flash.member_editted.success', trim($alert->text()));
@@ -263,7 +263,7 @@ class MembersControllerTest extends BaseFunctionalTest
         ];
 
         $editedMember = $this->container->get('doctrine.orm.tenant_entity_manager')
-            ->getRepository('GymanAppBundle:Member')
+            ->getRepository('Gyman:Member')
             ->findOneByEmailAddress(new EmailAddress('test01@test.pl'));
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_member_edit', ['id' => $editedMember->id()]));
@@ -325,10 +325,10 @@ class MembersControllerTest extends BaseFunctionalTest
      */
     public function member_search_form_on_dashboard_redirects_to_user($query, $findBy)
     {
-        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('GymanAppBundle:Member');
+        $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('Gyman:Member');
 
         $member = $this->container->get('gyman.members.repository')->findOneBy($findBy);
-        $this->assertInstanceOf("Gyman\Bundle\AppBundle\Entity\Member", $member);
+        $this->assertInstanceOf("Gyman\Domain\Member", $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('_dashboard_index'));
         $this->assertEquals(200, $this->getStatusCode());

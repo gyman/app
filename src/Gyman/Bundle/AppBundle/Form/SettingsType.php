@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Gyman\Bundle\AppBundle\Form\CollectionType\SectionType;
-use Gyman\Domain\Command\UpdateSettingsCommand;
+use Gyman\Application\Command\UpdateSettingsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

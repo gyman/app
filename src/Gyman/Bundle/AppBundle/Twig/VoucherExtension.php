@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Twig;
 
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Voucher;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 

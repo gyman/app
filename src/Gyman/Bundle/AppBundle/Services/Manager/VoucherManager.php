@@ -3,8 +3,8 @@ namespace Gyman\Bundle\AppBundle\Services\Manager;
 
 use Doctrine\ORM\QueryBuilder;
 use Exception;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
 use Gyman\Bundle\AppBundle\Event\VoucherCreatedEvent;
 use Gyman\Bundle\AppBundle\Event\VoucherEditedEvent;
 use Gyman\Bundle\AppBundle\VouchersEvents;
@@ -102,9 +102,9 @@ class VoucherManager extends BaseManager
 
     /**
      *
-     * @param  \Gyman\Bundle\AppBundle\Entity\Member   $member
+     * @param  \Gyman\Domain\Member   $member
      * @param  bool                                        $usePreviousEndDate
-     * @return \Gyman\Bundle\AppBundle\Entity\Voucher
+     * @return \Gyman\Domain\Voucher
      */
     public function createNewVoucher(Member $member, $usePreviousEndDate = false)
     {

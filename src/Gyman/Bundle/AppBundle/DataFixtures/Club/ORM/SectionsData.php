@@ -4,8 +4,8 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 use Carbon\Carbon;
 use Dende\Calendar\Domain\Calendar;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Section;
+use Gyman\Domain\Member;
+use Gyman\Domain\Section;
 
 class SectionsData extends BaseFixture
 {

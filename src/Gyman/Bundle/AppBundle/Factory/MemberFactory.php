@@ -3,14 +3,14 @@ namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Domain\Command\CreateMemberCommand;
-use Gyman\Domain\Factory\MemberFactoryInterface;
-use Gyman\Domain\Model\Barcode;
-use Gyman\Domain\Model\Belt;
-use Gyman\Domain\Model\Details;
-use Gyman\Domain\Model\EmailAddress;
-use Gyman\Domain\Model\Foto;
+use Gyman\Domain\Member;
+use Gyman\Application\Command\CreateMemberCommand;
+use Gyman\Application\Factory\MemberFactoryInterface;
+use Gyman\Domain\Member\Details\Barcode;
+use Gyman\Domain\Member\Details\Belt;
+use Gyman\Domain\Member\Details;
+use Gyman\Domain\Member\EmailAddress;
+use Gyman\Domain\Foto;
 
 /**
  * Class MemberFactory

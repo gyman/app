@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Menu;
 
-use Gyman\Bundle\AppBundle\Entity\Member;
-use Gyman\Bundle\AppBundle\Entity\Voucher;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
