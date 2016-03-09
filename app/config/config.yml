@@ -48,9 +48,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-#    - { resource: timeline.yml }
     - { resource: doctrine.yml }
-#    - { resource: sonata.yml }
 
 framework:
     ide: "phpstorm://%%f:%%l"
@@ -78,7 +76,7 @@ framework:
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    strict_variables: false # %kernel.debug%
     globals:
       sentry_url:     %sentry_url%
       gallery_dir:    %galleryPath%

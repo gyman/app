@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Factory;
+namespace Gyman\Application\Factory;
 
 use Gyman\Domain\Entry;
 use Gyman\Application\Command\OpenEntryCommand;

@@ -2,7 +2,6 @@
 namespace Gyman\Application\Handler;
 
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
-use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Application\Event\MemberEvent;
 use Gyman\Application\Exception\MemberNotFoundException;
@@ -50,7 +49,7 @@ class UpdateMemberHandler
      * @param null $author
      * @throws MemberNotFoundException
      */
-    public function handle(MemberCommandInterface $command, $author = null)
+    public function handle(UpdateMemberCommand $command, $author = null)
     {
         /** @var Member $member */
         $member = $this->memberRepository->findOneById($command->id);

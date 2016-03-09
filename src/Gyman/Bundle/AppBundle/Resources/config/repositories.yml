@@ -1,0 +1,37 @@
+---
+services:
+
+  gyman.repository.section:
+    class:            Gyman\Bundle\AppBundle\Repository\SectionRepository
+    factory_service:  doctrine.orm.tenant_entity_manager
+    factory_method:   getRepository
+    arguments:
+      - Gyman\Domain\Section
+
+  gyman.vouchers.repository.entry:
+    class:            Gyman\Bundle\AppBundle\Repository\EntryRepository
+    factory_service:  doctrine.orm.tenant_entity_manager
+    factory_method:   getRepository
+    arguments:
+      - Gyman\Domain\Entry
+
+  gyman.vouchers.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\VoucherRepository
+    factory_service:  doctrine.orm.tenant_entity_manager
+    factory_method:   getRepository
+    arguments:
+      - Gyman\Domain\Voucher
+
+  gyman.members.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\MemberRepository
+    factory_method:   getRepository
+    factory_service:  doctrine.orm.tenant_entity_manager
+    arguments:
+      - Gyman\Domain\Member
+
+  gyman.entries.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\EntryRepository
+    factory_service:  doctrine.orm.tenant_entity_manager
+    factory_method:   getRepository
+    arguments:
+      - Gyman\Domain\Entry

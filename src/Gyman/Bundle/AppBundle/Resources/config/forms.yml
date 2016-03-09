@@ -1,0 +1,37 @@
+---
+services:
+
+  gyman.app.club_settings_type:
+    class: Gyman\Bundle\AppBundle\Form\SettingsType
+    tags:
+      - { name: form.type, alias: club_settings }
+
+  gyman.app.club_details_type:
+    class: Gyman\Bundle\AppBundle\Form\ClubDetailsType
+    tags:
+      - { name: form.type, alias: club_details }
+
+  gyman.vouchers.form.voucher:
+    class: Gyman\Bundle\AppBundle\Form\VoucherType
+    arguments:
+      - @gyman.members.repository
+    tags:
+      - { name: form.type, alias: gyman_voucher_form }
+
+  gyman.members.member_form_type:
+    class: Gyman\Bundle\AppBundle\Form\MemberType
+    tags:
+      - { name: form.type, alias: gyman_member_form }
+
+  gyman.members.member_search_form_type:
+    class: Gyman\Bundle\AppBundle\Form\SearchType
+    tags:
+      - { name: form.type, alias: gyman_member_search_form }
+
+  gyman.entries.entry_form_type:
+    class: Gyman\Bundle\AppBundle\Form\EntryType
+    arguments:
+      - @dende_calendar.occurrences_repository
+      - @gyman.repository.section
+    tags:
+      - { name: form.type, alias: gyman_entry_form }

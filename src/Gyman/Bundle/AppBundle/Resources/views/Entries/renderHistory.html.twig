@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for entry in entries %}
+    {% for entry in entries if entries|length > 0 %}
         <tr>
             <td>
                 {{ ("entries.type." ~ entry.type)|trans }}

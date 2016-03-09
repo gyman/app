@@ -94,4 +94,14 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
 
         return $query->getQuery()->getOneOrNullResult();
     }
+
+    /**
+     * @param Voucher $voucher
+     * @return null
+     */
+    public function save(Voucher $voucher)
+    {
+        $em = $this->getEntityManager();
+        $em->flush($voucher);
+    }
 }

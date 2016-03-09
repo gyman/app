@@ -52,13 +52,13 @@ class UpdateEntriesCommand extends ContainerAwareCommand
 
         $results = $queryBuilder->getQuery()->getResult();
 
-        if(count($results) === 0) {
+        if (count($results) === 0) {
             $output->writeln("No entries found!");
         }
 
-        if(!$input->getOption("dry")) {
+        if (!$input->getOption("dry")) {
             /** @var Entry[] $entries */
-            $entries = array_map(function(Entry $entry) use ($em, $input) {
+            $entries = array_map(function (Entry $entry) use ($em, $input) {
                     $entry->closeEntry($entry->occurrence()->endDate());
                     $em->persist($entry);
                 return $entry->id();
@@ -69,7 +69,7 @@ class UpdateEntriesCommand extends ContainerAwareCommand
             $this->getContainer()->get('logger')->info($message, $entries);
         }
 
-        if($input->getOption("dry")) {
+        if ($input->getOption("dry")) {
             $entries = $results;
             $output->writeln("<error>Dry mode!</error>");
             $message = sprintf('Found %d entries', count($entries));

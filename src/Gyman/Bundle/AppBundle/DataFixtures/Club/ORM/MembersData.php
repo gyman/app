@@ -3,7 +3,7 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Bundle\AppBundle\Factory\MemberFactory;
+use Gyman\Application\Factory\MemberFactory;
 
 class MembersData extends BaseFixture
 {
@@ -25,8 +25,7 @@ class MembersData extends BaseFixture
 
         $member = MemberFactory::createFromArray($factoryParams);
 
-        foreach($params["sections"] as $sectionName)
-        {
+        foreach ($params["sections"] as $sectionName) {
             $member->sections()->add($this->getReference($sectionName));
         }
 

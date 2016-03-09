@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Application\Service;
 
+use Gyman\Application\Command\CloseVoucherCommand;
 use Gyman\Application\Event\VoucherEvent;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
@@ -18,7 +19,7 @@ class CloseVoucher
     const FAILURE = 'gyman.voucher_close.failure';
 
     /**
-     * @var MemberRepositoryInterface
+     * @var VoucherRepositoryInterface
      */
     private $repository;
 
@@ -32,23 +33,27 @@ class CloseVoucher
      * @param VoucherRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(VoucherRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
         $this->repository = $repository;
         $this->dispatcher = $dispatcher;
     }
 
     /**
-     * @param Voucher $voucher
-     * @param UserInterface $author
+     * @param CloseVoucherCommand $command
+     * @param UserInterface|null $user
+     * @throws \Gyman\Application\Exception\VoucherClosingDateBeforeOpeningException
      */
-    public function close(Voucher $voucher, UserInterface $author)
+    public function handle(CloseVoucherCommand $command, UserInterface $user = null)
     {
-        $voucher->close(new \DateTime());
-        $voucher->member()->unsetCurrentVoucher();
+        $voucher = $command->voucher;
+        $member = $command->voucher->member();
 
-        $this->repository->insert($voucher);
+        $voucher->close($command->closingDate);
+        $member->unsetCurrentVoucher();
 
-        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
+        $this->repository->save($voucher);
+
+        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $user));
     }
 }

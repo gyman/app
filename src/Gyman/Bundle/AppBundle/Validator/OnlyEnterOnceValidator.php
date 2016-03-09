@@ -16,12 +16,11 @@ final class OnlyEnterOnceValidator extends ConstraintValidator
     {
         $member = $command->member;
 
-        if(count($member->entries()) === 0) {
+        if (count($member->entries()) === 0) {
             return;
         }
 
-        if($member->checkIfAlreadyEntered($command->occurrence))
-        {
+        if ($member->checkIfAlreadyEntered($command->occurrence)) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('occurrence')
                 ->addViolation();

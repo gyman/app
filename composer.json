@@ -65,7 +65,9 @@
         "dende/common-bundle": "dev-master",
         "dende/calendar": "dev-master",
         "dende/calendar-bundle": "^1.1",
-        "dende/multidatabase-bundle": "dev-master"
+        "dende/multidatabase-bundle": "dev-master",
+        "league/tactician": "^1.0",
+        "league/tactician-bundle": "^0.4.0"
 
     },
     "require-dev": {

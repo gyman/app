@@ -33,13 +33,14 @@ class VoucherType extends AbstractType
             $builder->create('startDate', 'date', [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
-            ])->addModelTransformer(new VoucherDateTransformer('start')))
-        ->add(
-            $builder->create('endDate', 'date', [
+            ])->addModelTransformer(new VoucherDateTransformer('start'))
+        )
+            ->add(
+                $builder->create('endDate', 'date', [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
-            ])->addModelTransformer(new VoucherDateTransformer('end'))
-        )
+                ])->addModelTransformer(new VoucherDateTransformer('end'))
+            )
         ->add('price', 'integer', [
             "attr" => [
                 "min" => 0

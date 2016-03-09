@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class UpdateMemberCommand
  * @package Gyman\Application\Command
  */
-class UpdateMemberCommand implements MemberCommandInterface
+class UpdateMemberCommand
 {
     /**
      * @var string

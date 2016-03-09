@@ -2,15 +2,12 @@
 namespace Gyman\Application\Handler;
 
 use Gyman\Domain\Entry;
-use Gyman\Bundle\AppBundle\Factory\VoucherFactory;
+use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Command\CreateVoucherCommand;
-use Gyman\Application\Command\VoucherCommandInterface;
-use Gyman\Application\Event\VoucherEvent;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
 use Gyman\Application\Repository\MemberRepositoryInterface;
-use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -34,7 +31,7 @@ class CreateVoucherHandler
 
     /**
      * CreateMember constructor.
-     * @param VoucherRepositoryInterface $repository
+     * @param MemberRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)

@@ -1,9 +1,8 @@
 <?php
 namespace Gyman\Application\Handler;
 
-use Gyman\Bundle\AppBundle\Factory\MemberFactory;
+use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Command\CreateMemberCommand;
-use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Application\Event\MemberEvent;
 
 class CreateMemberHandler extends UpdateMemberHandler
@@ -15,7 +14,7 @@ class CreateMemberHandler extends UpdateMemberHandler
      * @param CreateMemberCommand $command
      * @param null $author
      */
-    public function handle(MemberCommandInterface $command, $author = null)
+    public function handle(CreateMemberCommand $command, $author = null)
     {
         $this->uploadHandler->handle($command);
 

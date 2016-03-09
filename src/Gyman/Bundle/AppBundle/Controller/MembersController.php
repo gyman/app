@@ -36,7 +36,7 @@ class MembersController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get('gyman.members.update_member')->handle($form->getData(), $this->getUser());
+                $this->get("tactician.commandbus")->handle($form->getData());
 
                 $this->addFlash('success', 'flash.member_editted.success');
 
@@ -91,7 +91,7 @@ class MembersController extends Controller
     /**
      * @Route("/search", name="gyman_members_search_form")
      * @Method({"GET"})
-     * @Template()
+     * @Template("@GymanApp/Members/searchForm.html.twig")
      */
     public function searchFormAction(Request $request)
     {
@@ -107,7 +107,7 @@ class MembersController extends Controller
     /**
      * @Route("/search", name="gyman_members_search")
      * @Method({"POST"})
-     * @Template()
+     * @Template("@GymanApp/Members/search.html.twig")
      */
     public function searchAction(Request $request)
     {

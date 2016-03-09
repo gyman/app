@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
-use Gyman\Domain\SectionRepository;
+use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
 
 /**

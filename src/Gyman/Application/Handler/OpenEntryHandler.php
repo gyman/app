@@ -1,8 +1,7 @@
 <?php
 namespace Gyman\Application\Handler;
 
-use DateTime;
-use Gyman\Bundle\AppBundle\Factory\EntryFactory;
+use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Application\Event\EntryEvent;
 use Gyman\Domain\Member;
@@ -33,8 +32,9 @@ final class OpenEntryHandler
 
     /**
      * CreateMember constructor.
-     * @param EntryRepositoryInterface $repository
+     * @param MemberRepositoryInterface $memberRepository
      * @param EventDispatcherInterface $dispatcher
+     * @internal param EntryRepositoryInterface $repository
      */
     public function __construct(MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {

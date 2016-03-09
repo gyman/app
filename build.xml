@@ -5,50 +5,6 @@
     <import file="${project.basedir}/app/Resources/phing/database.xml"/>
     <import file="${project.basedir}/app/Resources/phing/tests.xml"/>
 
-    <target name="find-translations-unused" description="looks for translations and adds them to translation files">
-        <if>
-            <not>
-                <isset property="lang" />
-            </not>
-            <then>
-                <echo>Setting to default language (${default_language})</echo>
-                <property name="lang" value="${default_language}" />
-            </then>
-        </if>
-        <foreach param="bundle" absparam="absname" target="trans-bundle">
-            <fileset dir="src/Dende">
-                <type type="dir" />
-                <depth max="0" min="0" />
-            </fileset>
-        </foreach>
-    </target>
-    
-    <target name="trans-bundle">
-        <exec command="${php_bin} ${symfony_console} translation:update --force --no-interaction ${lang} ${bundle}" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="test-translations">
-        <foreach list="AccountBundle,AdminBundle,FrontBundle,MailerBundle,SubscriptionBundle,TestBundle" param="bundle" target="find-translations" delimiter="," /> 
-    </target>
-
-     <target name="find-translations">
-        <exec command="${php_bin} ${symfony_console} translation:debug --only-missing pl ${bundle}" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="clear-cache">
-        <echo>Clearing cache - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} cache:clear --env=${env}" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="ca">
-        <echo>Clearing cache - ${env} environment</echo>
-        <exec command="${php_bin} ${symfony_console} cache:accelerator:clear --env=${env}" checkreturn="true" passthru="true" />
-    </target>
-
-    <target name="cc">
-        <phingcall target="clear-cache" />
-    </target>
-
     <target name="composer:download">
         <exec executable="sh" passthru="true" checkreturn="true">
             <arg value="-c 'curl -sS https://getcomposer.org/installer | php'" />
@@ -96,37 +52,4 @@
         <exec command="./app/console gyman:club:assign-user admin@dende.com dende -vvv" passthru="true" checkreturn="true" />
         <exec command="mkdir -p web/uploads/gallery/dende" passthru="true" checkreturn="true" />
     </target>
-
-    <target name="import-rio">
-        <property name="env" value="dev" />
-        <property name="club" value="rio" />
-
-        <echo>dropping tenant schema:</echo>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:drop" />
-            <arg value="--em=tenant" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="--force" />
-            <arg value="-vvv" />
-        </exec>
-        <echo>creating tenant schema:</echo>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="doctrine:schema:create" />
-            <arg value="--em=tenant" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="--no-interaction" />
-            <arg value="-vvv" />
-        </exec>
-        <echo>importing data:</echo>
-        <exec executable="${sf}" checkreturn="true" passthru="true">
-            <arg value="gyman:importoldrio" />
-            <arg value="--em=tenant" />
-            <arg value="--club=${club}" />
-            <arg value="--env=${env}" />
-            <arg value="-vvv" />
-        </exec>
-    </target>
-
 </project>

@@ -21,4 +21,10 @@ interface VoucherRepositoryInterface extends RepositoryInterface
      * @return null
      */
     public function insert($voucher);
+
+    /**
+     * @param Voucher $voucher
+     * @return null
+     */
+    public function save(Voucher $voucher);
 }

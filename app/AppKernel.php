@@ -31,10 +31,11 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-//            new Spy\TimelineBundle\SpyTimelineBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
+
+            new League\Tactician\Bundle\TacticianBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),

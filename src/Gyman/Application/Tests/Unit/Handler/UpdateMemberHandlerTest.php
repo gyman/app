@@ -2,7 +2,7 @@
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use DateTime;
-use Gyman\Bundle\AppBundle\Factory\MemberFactory;
+use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Application\Handler\UpdateMemberHandler;
 use Mockery as m;

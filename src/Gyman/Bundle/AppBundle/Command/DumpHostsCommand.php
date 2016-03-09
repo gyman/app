@@ -22,7 +22,8 @@ class DumpHostsCommand extends ContainerAwareCommand
 
         foreach ($clubs as $club) {
             $output->writeln(sprintf(
-                "127.0.0.1\t\t%s", $club->getSubdomain()->getName() . '.' . $this->getContainer()->getParameter('base_url')
+                "127.0.0.1\t\t%s",
+                $club->getSubdomain()->getName() . '.' . $this->getContainer()->getParameter('base_url')
             ));
         }
     }

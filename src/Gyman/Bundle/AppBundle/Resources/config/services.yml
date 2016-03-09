@@ -1,13 +1,10 @@
 imports:
+  - { resource: forms.yml }
+  - { resource: handlers.yml }
   - { resource: menu.yml }
-  - { resource: services_app.yml }
-  - { resource: services_vouchers.yml }
-  - { resource: services_members.yml }
-  - { resource: services_entries.yml }
-  - { resource: services_admin.yml }
-
-parameters:
-  gyman.section_repository.class: Gyman\Domain\SectionRepository
+  - { resource: repositories.yml }
+  - { resource: twig_extensions.yml }
+  - { resource: validators.yml }
 
 services:
   gyman.app.tenant_provider:
@@ -21,11 +18,6 @@ services:
     tags:
       - {name: console.command}
 
-  gyman.app.import_old_rio:
-    class: Gyman\Bundle\AppBundle\Command\ImportOldRioCommand
-    tags:
-      - {name: console.command}
-
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
     arguments:
@@ -33,8 +25,39 @@ services:
     tags:
       - {name: kernel.event_listener, method: onCalendarCreate, event: dende_calendar.calendar.after_creation}
 
-  gyman.repository.section:
-    class: %gyman.section_repository.class%
-    factory_service: doctrine.orm.tenant_entity_manager
-    factory_method: "getRepository"
-    arguments: ["Gyman:Section"]
+  gyman.app.subdomain_provider:
+    class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
+    arguments:
+      - @request_stack
+      - %base_url%
+
+  gyman.app.test_subdomain_provider:
+      class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
+
+  gyman.app.subdomain_name_lister:
+    class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
+    arguments:
+      - @=service(parameter('subdomain_provider_service'))
+      - @service_container
+    tags:
+      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  gyman.default.request.arraycollection_converter:
+    class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
+    calls:
+      - [setEntityManager, [@doctrine.orm.tenant_entity_manager]]
+    tags:
+      - { name: request.param_converter}
+
+  gyman.members.members_manager:
+    class: %doctrine.orm.entity_manager.class%
+    factory_service:  doctrine
+    factory_method:   getEntityManager
+    arguments: ["Member"]
+
+  voucher_manager:
+      class:          Gyman\Bundle\AppBundle\Services\Manager\VoucherManager
+      parent:         gyman.base.entity_manager
+      calls:
+           - [ setClass, [Gyman\Domain\Voucher] ]
+           - [ setEntityManager, [@doctrine.orm.tenant_entity_manager]]

@@ -64,7 +64,8 @@ class DefaultController extends Controller
      * @param Occurrence $occurrence
      * @return array
      */
-    public function listClassMembersAction(Occurrence $occurrence){
+    public function listClassMembersAction(Occurrence $occurrence)
+    {
         $memberRepository = $this->get("gyman.members.repository");
 
         $criteria = Criteria::create()
@@ -80,12 +81,12 @@ class DefaultController extends Controller
 
         $entries = $this->get('gyman.entries.repository')->findByOccurrence($occurrence);
 
-        $usedMembersIds = array_map(function(Entry $entry) {
+        $usedMembersIds = array_map(function (Entry $entry) {
             return $entry->member()->id();
         }, $entries);
 
-        if(count($entries) > 0) {
-            $members = array_filter($allMembers, function(Member $member) use ($usedMembersIds){
+        if (count($entries) > 0) {
+            $members = array_filter($allMembers, function (Member $member) use ($usedMembersIds) {
                 return !in_array($member->id(), $usedMembersIds) && (is_null($member->lastEntry()) || !is_null($member->lastEntry()->endDate()));
             });
         } else {

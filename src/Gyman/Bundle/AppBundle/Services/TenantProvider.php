@@ -43,7 +43,7 @@ class TenantProvider implements TenantProviderInterface
      */
     public function getTenant($tenant = null)
     {
-        if(is_null($tenant)) {
+        if (is_null($tenant)) {
             $subdomain = $this->subdomainProvider->getSubdomain();
         } else {
             $subdomain = $tenant;

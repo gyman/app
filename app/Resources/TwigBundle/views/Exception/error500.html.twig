@@ -1,7 +1,5 @@
 {% extends "::errorLayout.html.twig" %}
 
-{% block title %}Wystąpił błąd! Strona nie istnieje - {{ parent() }}{% endblock %}
-
 {% block title %}Wystąpił błąd! ({{ status_text }}) {{ parent() }}{% endblock %}
 
 {% block caption %}

@@ -4,7 +4,7 @@ namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 use Carbon\Carbon;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Member;
-use Gyman\Bundle\AppBundle\Factory\EntryFactory;
+use Gyman\Application\Factory\EntryFactory;
 
 /**
  * Class EntriesData

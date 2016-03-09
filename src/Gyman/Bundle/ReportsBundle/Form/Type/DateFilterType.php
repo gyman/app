@@ -48,7 +48,7 @@ final class DateFilterType extends AbstractType
             ])
             ->add('submit', 'submit', [
                 'label' => 'ustaw',
-        ]);
+            ]);
     }
 
     /**

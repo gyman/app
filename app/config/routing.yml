@@ -1,14 +1,5 @@
-#admin_area:
-#    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
-#    prefix: /admin
-#
-#_sonata_admin:
-#    resource: .
-#    type: sonata_admin
-#    prefix: /admin
-
 gyman_app:
-    resource: "@GymanAppBundle/Controller/"
+    resource: @GymanAppBundle/Controller/
     type:     annotation
     prefix:   /
 
@@ -16,11 +7,6 @@ gyman_reports:
     resource: "@GymanReportsBundle/Controller/"
     type:     annotation
     prefix:   /reports
-
-#timeline:
-#    resource: "@TimelineBundle/Controller/"
-#    type:     annotation
-#    prefix:   /timeline
 
 account:
     resource: "@AccountBundle/Controller/"

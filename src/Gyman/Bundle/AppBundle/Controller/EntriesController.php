@@ -25,9 +25,12 @@ class EntriesController extends Controller
      * @Route("/member/{id}/new", name="gyman_entry_new")
      * @Method({"GET", "POST"})
      * @ParamConverter("member", class="Gyman:Member")
-     * @Template()
+     * @Template("GymanAppBundle:Entries:createNewEntry.html.twig")
+     * @param Request $request
+     * @param Member $member
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function newAction(Request $request, Member $member)
+    public function createEntryAction(Request $request, Member $member)
     {
         $form = $this->createForm('gyman_entry_form', new OpenEntryCommand($member), [
                 'action' => $this->generateUrl('gyman_entry_new', ['id' => $member->id()]),
@@ -58,7 +61,7 @@ class EntriesController extends Controller
     public function closeAction(Request $request, Entry $entry)
     {
         $command = CloseEntryCommand::createFromEntry($entry);
-        $this->get('gyman.entries.close_entry')->handle($command, $this->getUser());
+        $this->get('tactician.commandbus')->handle($command);
         $this->addFlash('success', 'flash.entry_closed.success');
 
         return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
@@ -66,13 +69,13 @@ class EntriesController extends Controller
 
     /**
      * @param Member $member
-     * @Template()
+     * @return array
      */
     public function renderHistoryAction(Member $member)
     {
-        return [
-            'entries' =>$this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC'])
-        ];
+        return $this->render("GymanAppBundle:Entries:renderHistory.html.twig", [
+            'entries' => $this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC'])
+        ]);
     }
 
     /**
@@ -126,7 +129,7 @@ class EntriesController extends Controller
         /** @var Entry[] $entries */
         $entries = $this->get("gyman.entries.repository")->findByOccurrence($occurrence);
 
-        foreach($entries as $entry) {
+        foreach ($entries as $entry) {
             $entry->closeEntry(new DateTime());
             $this->get("gyman.entries.repository")->save($entry);
         }

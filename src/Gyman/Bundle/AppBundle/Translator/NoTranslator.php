@@ -41,4 +41,9 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
     {
         return new MessageCatalogue($locale, []);
     }
+
+    public function setConfigCacheFactory()
+    {
+
+    }
 }

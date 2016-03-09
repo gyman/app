@@ -1,7 +1,0 @@
-<ul class="timeline messages">
-    {% for action in timeline %}
-        {{ timeline_render(action, "TimelineBundle:Default:action.html.twig") }}
-    {% else %}
-        <li>{{ "timeline.empty.message"|trans }}</li>
-    {% endfor %}
-</ul>

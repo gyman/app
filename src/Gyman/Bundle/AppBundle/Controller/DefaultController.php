@@ -9,10 +9,12 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/")
-     * @Template()
+     * @Template("GymanAppBundle:Default:index.html.twig")
      */
     public function indexAction()
     {
+        $csrfToken = null;
+
         if ($this->has('security.csrf.token_manager')) {
             $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
         }

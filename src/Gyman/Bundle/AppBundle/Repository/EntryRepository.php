@@ -23,7 +23,8 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
         $em->flush();
     }
 
-    public function save(Entry $entry){
+    public function save(Entry $entry)
+    {
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
     }
@@ -85,7 +86,7 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
                         ->setParameters([
                             'start' => $startDate,
                             'end'   => $endDate,
-        ]);
+                        ]);
     }
 
     public function getCountByActivities(DateTime $startDate, DateTime $endDate)

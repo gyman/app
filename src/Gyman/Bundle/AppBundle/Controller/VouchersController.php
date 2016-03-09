@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use Gyman\Application\Command\CloseVoucherCommand;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
@@ -36,13 +37,13 @@ class VouchersController extends Controller
                 'member' => $member
         ]);
         
-        $creditEntries = $member->entries()->filter(function(Entry $entry){
+        $creditEntries = $member->entries()->filter(function (Entry $entry) {
             return $entry->isType(Entry::TYPE_CREDIT);
         });
 
         $creditEntriesCount = count($creditEntries);
 
-        if(!$creditEntries->isEmpty()) {
+        if (!$creditEntries->isEmpty()) {
             $this->addFlash('creditEntries', $this->get("translator")->transChoice(
                 'flash.member_has_credit_entries',
                 $creditEntriesCount,
@@ -56,8 +57,7 @@ class VouchersController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $command = $form->getData();
-                $this->get('gyman.vouchers.create_voucher')->handle($command, $this->getUser());
+                $this->get("tactician.commandbus")->handle($form->getData());
                 $this->addFlash('success', 'flash.voucher_added.success');
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
@@ -78,19 +78,22 @@ class VouchersController extends Controller
      */
     public function closeAction(Request $request, Voucher $voucher)
     {
-        $this->get('gyman.vouchers.close_voucher')->close($voucher, $this->getUser());
+        $command = new CloseVoucherCommand();
+        $command->voucher = $voucher;
+        $command->closingDate = new \DateTime();
+
+        $this->get('tactician.commandbus')->handle($command);
 
         return $this->redirectToRoute('gyman_member_edit', ['id' => $voucher->member()->id()]);
     }
 
     /**
      * @param Member $member
-     * @Template()
      */
     public function renderHistoryAction(Member $member)
     {
-        return [
+        return $this->render("@GymanApp/Vouchers/renderHistory.html.twig", [
             'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC'])
-        ];
+        ]);
     }
 }

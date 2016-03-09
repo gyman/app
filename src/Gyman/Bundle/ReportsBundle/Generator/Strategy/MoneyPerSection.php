@@ -5,7 +5,8 @@ use Doctrine\ORM\QueryBuilder;
 
 class MoneyPerSection extends AbstractStrategy
 {
-    public function createQuery(QueryBuilder $queryBuilder){
+    public function createQuery(QueryBuilder $queryBuilder)
+    {
 
     }
 }

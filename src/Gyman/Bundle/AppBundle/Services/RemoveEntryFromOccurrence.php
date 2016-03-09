@@ -3,7 +3,7 @@ namespace Gyman\Bundle\AppBundle\Services;
 
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
-use Gyman\Domain\EntryRepository;
+use Gyman\Bundle\AppBundle\Repository\EntryRepository;
 use Gyman\Domain\Member;
 
 class RemoveEntryFromOccurrence
@@ -37,8 +37,7 @@ class RemoveEntryFromOccurrence
         /** @var Entry $entry */
         $entry = array_pop($entry);
 
-        if($entry->isType(Entry::TYPE_VOUCHER))
-        {
+        if ($entry->isType(Entry::TYPE_VOUCHER)) {
             $voucher = $entry->voucher();
             $voucher->removeEntry($entry);
         }

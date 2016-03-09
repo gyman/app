@@ -40,7 +40,8 @@ class SettingsControllerTest extends BaseFunctionalTest
     /**
      * @test
      */
-    public function adding_new_section_creates_a_new_section_entity_and_a_calendar(){
+    public function adding_new_section_creates_a_new_section_entity_and_a_calendar()
+    {
         $crawler = $this->client->request('GET', '/settings/');
         $this->assertEquals(200, $this->getStatusCode());
 
