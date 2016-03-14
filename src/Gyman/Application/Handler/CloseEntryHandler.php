@@ -45,7 +45,7 @@ final class CloseEntryHandler
      * @param Voucher $voucher
      * @param UserInterface $author
      */
-    public function handle(CloseEntryCommand $command, UserInterface $author)
+    public function handle(CloseEntryCommand $command, UserInterface $author = null)
     {
         /** @var Member $member */
         $member = $command->member;

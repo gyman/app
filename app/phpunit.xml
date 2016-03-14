@@ -18,7 +18,7 @@
             <directory>../src/Gyman/*/*/Tests/Functional/**</directory>
         </testsuite>
         <testsuite name="unit">
-            <directory>../src/Gyman/Domain/Tests/Unit/**</directory>
+            <directory>../src/Gyman/Application/Tests/Unit/**</directory>
         </testsuite>
         <testsuite name="integration">
             <directory>../src/Gyman/*/*/Tests/Integration/**</directory>

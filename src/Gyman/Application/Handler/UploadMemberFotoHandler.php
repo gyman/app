@@ -4,7 +4,6 @@ namespace Gyman\Application\Handler;
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Gyman\Application\Command\CreateMemberCommand;
-use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -51,10 +50,16 @@ final class UploadMemberFotoHandler
     }
 
     /**
-     * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
+     * @param UpdateMemberCommand|CreateMemberCommand $command
+     * @throws \Exception
      */
-    public function handle(MemberCommandInterface $command)
+    public function handle($command)
     {
+        if(!$command instanceof UpdateMemberCommand && !$command instanceof CreateMemberCommand)
+        {
+            throw new \Exception(sprintf("Upload Foto Command can be only %s or %s type"), UpdateMemberCommand::class, CreateMemberCommand::class);
+        }
+
         $this->destinationDir = $this->createDestinationDir();
         $this->filename = $this->createFilename($command);
         $this->filepath = $this->createFilepath();
@@ -77,7 +82,7 @@ final class UploadMemberFotoHandler
     /**
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
      */
-    private function handleDataSrc(MemberCommandInterface $command)
+    private function handleDataSrc($command)
     {
         $encodedData = $command->fotoData;
         $encodedData = str_replace(' ','+',$encodedData);
@@ -91,7 +96,7 @@ final class UploadMemberFotoHandler
     /**
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
      */
-    private function handleFile(MemberCommandInterface $command)
+    private function handleFile($command)
     {
         $command->uploadFile->move($this->destinationDir, $this->filename);
     }
@@ -100,7 +105,7 @@ final class UploadMemberFotoHandler
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
      * @return string
      */
-    private function createFilename(MemberCommandInterface $command)
+    private function createFilename($command)
     {
         return sprintf(
             '%d-%s.%s',
