@@ -30,7 +30,7 @@ class Details
      * @param $account_number
      * @param $upload_foto
      */
-    public function __construct($address, $zipcode, $city, $country, $phone_number, $email_address, $opened_from, $opened_till, $logo, $about, $account_number)
+    public function __construct($address = null, $zipcode = null, $city = null, $country = null, $phone_number = null, $email_address = null, $opened_from = null, $opened_till = null, $logo = null, $about = null, $account_number = null)
     {
         $this->address = $address;
         $this->zipcode = $zipcode;

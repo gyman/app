@@ -38,6 +38,8 @@ class SettingsUpdateHandler
      * SettingsUpdateHandler constructor.
      * @param SectionRepository $sectionRepository
      * @param ClubRepository $clubRepository
+     * @param Club $currentClub
+     * @param UploadClubLogoHandler $uploadHandler
      */
     public function __construct(SectionRepository $sectionRepository, ClubRepository $clubRepository, Club $currentClub, UploadClubLogoHandler $uploadHandler)
     {

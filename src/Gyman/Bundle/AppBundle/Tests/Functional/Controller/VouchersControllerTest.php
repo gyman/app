@@ -17,7 +17,7 @@ class VouchersControllerTest extends BaseFunctionalTest
     public function new_voucher_form_renders_properly()
     {
         $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
-        $this->assertInstanceOf("Gyman\Domain\Member", $member);
+        $this->assertInstanceOf(Member::class, $member);
 
         $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_voucher_new', ['id' => $member->id()]));
 

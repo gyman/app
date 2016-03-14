@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
  * Class ClubRepository
  * @package Gyman\Bundle\ClubBundle
  */
-final class ClubRepository extends EntityRepository
+class ClubRepository extends EntityRepository
 {
     /**
      * @param Subdomain $subdomain

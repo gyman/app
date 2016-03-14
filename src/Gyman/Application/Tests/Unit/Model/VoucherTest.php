@@ -1,11 +1,13 @@
 <?php
 namespace Gyman\Application\Tests\Unit\Entity;
 
+use Carbon\Carbon;
 use DateTime;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Domain\Entry;
-use Gyman\Domain\Price;
 use Gyman\Domain\Voucher;
+use Gyman\Domain\Voucher\Price;
+use Gyman\Domain\Entry\Price as EntryPrice;
 
 class VoucherTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,8 +17,8 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testConstructorExceptionEndDateBeforeStartDate()
     {
         VoucherFactory::createFromArray([
-            'startDate' => '2015-6-15 00:00:00',
-            'endDate'   => '2015-6-1 23:59:59',
+            'startDate' => Carbon::parse('2015-6-15 00:00:00'),
+            'endDate'   => Carbon::parse('2015-6-1 23:59:59'),
         ]);
     }
 
@@ -26,8 +28,8 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testOverlaps(Voucher $testVoucher, $overlaps)
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate' => '2015-6-1 00:00:00',
-            'endDate'   => '2015-6-15 23:59:59',
+            'startDate' => Carbon::parse('2015-6-1 00:00:00'),
+            'endDate'   => Carbon::parse('2015-6-15 23:59:59'),
         ]);
 
         $this->assertEquals($voucher->overlaps($testVoucher), $overlaps);
@@ -37,21 +39,21 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testLeftDaysAmount()
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate' => '-10 days',
-            'endDate'   => '+15 days',
+            'startDate' => Carbon::parse('-10 days'),
+            'endDate'   => Carbon::parse('+15 days'),
         ]);
 
         $this->assertEquals($voucher->leftDaysAmount(), 15);
         $this->assertEquals($voucher->leftDaysAmount('now'), 15);
-        $this->assertEquals($voucher->leftDaysAmount('-1 year'), 380);
+        $this->assertEquals($voucher->leftDaysAmount('-1 year'), 381);
         $this->assertEquals($voucher->leftDaysAmount('+15 days'), 0);
     }
 
     public function testTotalDaysAmount()
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate' => '-10 days',
-            'endDate'   => '+15 days',
+            'startDate' => Carbon::parse('-10 days'),
+            'endDate'   => Carbon::parse('+15 days'),
         ]);
 
         $this->assertEquals($voucher->totalDaysAmount(), 25);
@@ -60,8 +62,8 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testPassedDaysAmount()
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate' => '-10 days',
-            'endDate'   => '+15 days',
+            'startDate' => Carbon::parse('-10 days'),
+            'endDate'   => Carbon::parse('+15 days'),
         ]);
 
         $this->assertEquals($voucher->passedDaysAmount(), 10);
@@ -72,15 +74,15 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testLeftEntriesAmount()
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate'     => '-10 days',
-            'endDate'       => '+15 days',
+            'startDate'     => Carbon::parse('-10 days'),
+            'endDate'       => Carbon::parse('+15 days'),
             'maximumAmount' => '10',
         ]);
 
         $this->assertEquals($voucher->leftEntriesAmount(), 10);
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 9);
@@ -88,7 +90,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $voucher->entries()->last()->closeEntry(new DateTime());
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 8);
@@ -103,15 +105,15 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
     public function testNoLeftEntriesAmountException()
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate'     => '-10 days',
-            'endDate'       => '+15 days',
+            'startDate'     => Carbon::parse('-10 days'),
+            'endDate'       => Carbon::parse('+15 days'),
             'maximumAmount' => '1',
         ]);
 
         $this->assertEquals($voucher->leftEntriesAmount(), 1);
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
         $this->assertEquals($voucher->leftEntriesAmount(), 0);
@@ -119,7 +121,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $voucher->entries()->last()->closeEntry(new DateTime());
 
         $voucher->addEntry(
-            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, Price::zero())
+            new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
     }
 
@@ -131,36 +133,36 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         return [
             'before' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => '2015-5-15 00:00:00',
-                    'endDate'   => '2015-5-31 23:59:59',
+                    'startDate' => Carbon::parse('2015-5-15 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-5-31 23:59:59'),
                 ]),
                 'overlaps' => false,
             ],
             'overlaps from left' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => '2015-5-25 00:00:00',
-                    'endDate'   => '2015-6-2 23:59:59',
+                    'startDate' => Carbon::parse('2015-5-25 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-2 23:59:59'),
                 ]),
                 'overlaps' => true,
             ],
             'overlaps fully' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => '2015-6-5 00:00:00',
-                    'endDate'   => '2015-6-10 23:59:59',
+                    'startDate' => Carbon::parse('2015-6-5 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-10 23:59:59'),
                 ]),
                 'overlaps' => true,
             ],
             'overlaps from right' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => '2015-6-10 00:00:00',
-                    'endDate'   => '2015-6-20 23:59:59',
+                    'startDate' => Carbon::parse('2015-6-10 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-20 23:59:59'),
                 ]),
                 'overlaps' => true,
             ],
             'after' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => '2015-6-16 00:00:00',
-                    'endDate'   => '2015-6-31 23:59:59',
+                    'startDate' => Carbon::parse('2015-6-16 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-31 23:59:59'),
                 ]),
                 'overlaps' => false,
             ],

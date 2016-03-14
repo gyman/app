@@ -4,6 +4,7 @@ namespace Gyman\Application\Tests\Unit\Handler;
 use DateTime;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Handler\CreateMemberHandler;
+use Gyman\Application\Handler\UploadMemberFotoHandler;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Application\Repository\InMemoryMemberRepository;
 use Mockery as m;
@@ -12,10 +13,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     */
     protected function tearDown()
     {
         parent::tearDown();
@@ -55,7 +52,7 @@ class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 
         $dispatcher = new EventDispatcher();
 
-        $uploadHandler = m::mock('Gyman\Application\Handler\UploadMemberFotoHandler');
+        $uploadHandler = m::mock(UploadMemberFotoHandler::class);
         $uploadHandler->shouldReceive('handle')->once()->with($command)->andReturnNull();
 
         $handler = new CreateMemberHandler($repository, $uploadHandler, $dispatcher);

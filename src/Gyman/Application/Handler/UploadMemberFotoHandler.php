@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class UploadMemberFotoHandler
  * @package Gyman\Application\Handler
  */
-final class UploadMemberFotoHandler
+class UploadMemberFotoHandler
 {
     /**
      * @var string

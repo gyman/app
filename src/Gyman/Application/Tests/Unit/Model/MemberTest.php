@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Application\Tests\Unit\Entity;
 
+use Carbon\Carbon;
 use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Factory\VoucherFactory;
 
@@ -11,16 +12,16 @@ class MemberTest extends \PHPUnit_Framework_TestCase
         $member = MemberFactory::create();
 
         $voucher1 = VoucherFactory::createFromArray([
-            'startDate' => '-3 hour',
-            'endDate'   => '-2hour',
+            'startDate' => Carbon::parse('-3 hour'),
+            'endDate'   => Carbon::parse('-2hour'),
         ]);
         $voucher2 = VoucherFactory::createFromArray([
-            'startDate' => '-1 hour',
-            'endDate'   => '+1 hour',
+            'startDate' => Carbon::parse('-1 hour'),
+            'endDate'   => Carbon::parse('+1 hour'),
         ]);
         $voucher3 = VoucherFactory::createFromArray([
-            'startDate' => '+2 hour',
-            'endDate'   => '+3 hour',
+            'startDate' => Carbon::parse('+2 hour'),
+            'endDate'   => Carbon::parse('+3 hour'),
         ]);
 
         $member->addVoucher($voucher1);

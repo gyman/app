@@ -20,7 +20,7 @@ class SectionRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $em->persist($section);
-        $em->flush();
+        $em->flush($section);
     }
 
     /**
@@ -30,7 +30,7 @@ class SectionRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $em->remove($section);
-        $em->flush();
+        $em->flush($section);
     }
 
     /**
@@ -40,6 +40,6 @@ class SectionRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $em->persist($section);
-        $em->flush();
+        $em->flush($section);
     }
 }
