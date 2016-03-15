@@ -1,3 +1,4 @@
+/.vagrant
 /web/bundles/
 /web/assets/
 /web/js/
@@ -30,3 +31,5 @@ phantomjsdriver.log
 auth.json
 .php_cs.cache
 .rsync_cache
+composer.phar
+composer.phar*

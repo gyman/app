@@ -37,3 +37,7 @@ Dodawanie nowego klubu oraz użytkownika
 
 > mkdir -p /web/uploads/gallery/trening
 
+Uruchomienie vagranta
+
+1. sudo apt-get install vagrant virtualbox install nfs-common nfs-kernel-server
+2. vagrant up
