@@ -1,0 +1,13 @@
+server:
+  name: gyman.vagrant
+  ip: 10.10.10.150
+  ssh_port: 22152
+  memory: 2048
+  cpu: 2
+
+databaseMain:
+  name: gyman
+  user: root
+  password: root
+
+githubToken: ~
