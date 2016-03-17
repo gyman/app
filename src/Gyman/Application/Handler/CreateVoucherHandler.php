@@ -62,9 +62,9 @@ class CreateVoucherHandler
         }
 
         if(!$creditEntries->isEmpty()) {
-            $creditEntries->forAll(function($key, Entry $entry) use ($voucher) {
+            array_map(function(Entry $entry) use ($voucher) {
                 $entry->payOffWithVoucher($voucher);
-            });
+            }, $creditEntries->toArray());
         }
 
         $this->repository->insert($voucher->member());

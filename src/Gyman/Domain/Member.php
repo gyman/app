@@ -226,7 +226,6 @@ class Member
      * @throws NoCurrentVoucherForVoucherEntryException
      * @throws \Exception
      * @throws \Gyman\Application\Exception\UnsupportedEntryTypeException
-     * @internal param Occurrence $occurrence
      */
     public function enter(Entry $entry)
     {

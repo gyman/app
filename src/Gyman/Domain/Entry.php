@@ -188,6 +188,7 @@ class Entry
             throw new EntryMustBeVoucherTypeException("If you want to add entry to voucher it must be a 'voucher' type entry");
         }
 
+        $voucher->entries()->add($this);
         $this->voucher = $voucher;
     }
 

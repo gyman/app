@@ -56,7 +56,7 @@ final class VoucherFactory implements VoucherFactoryInterface
      * @param CreateVoucherCommand $command
      * @return Voucher
      */
-    public static function createFromVoucherCommand(VoucherCommandInterface $command)
+    public static function createFromVoucherCommand(CreateVoucherCommand $command)
     {
         $format  = Globals::getDefaultDateTimeFormat();
 
