@@ -17,7 +17,7 @@ class SettingsController extends Controller
 {
     /**
      * @Route("/", name="gyman_settings")
-     * @Template()
+     * @Template("GymanAppBundle:Settings:index.html.twig")
      */
     public function indexAction(Request $request)
     {

@@ -1,3 +1,9 @@
+gyman_landing_page:
+    resource: @GymanLandingPageBundle/Controller/
+    type:     annotation
+    prefix:   /
+    host:     %base_url%
+
 gyman_app:
     resource: @GymanAppBundle/Controller/
     type:     annotation

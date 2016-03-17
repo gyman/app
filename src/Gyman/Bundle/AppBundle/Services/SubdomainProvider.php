@@ -51,6 +51,10 @@ final class SubdomainProvider implements SubdomainProviderInterface
 
         $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
+        if($subdomain === $currentHost) {
+            return;
+        }
+
         return $subdomain;
     }
 }

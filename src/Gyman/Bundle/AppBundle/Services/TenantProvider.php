@@ -13,11 +13,6 @@ use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 class TenantProvider implements TenantProviderInterface
 {
     /**
-     * @var Tenant
-     */
-    private $tenant;
-
-    /**
      * @var ClubRepository
      */
     private $clubRepository;
@@ -41,23 +36,26 @@ class TenantProvider implements TenantProviderInterface
     /**
      * @return Tenant
      */
-    public function getTenant($tenant = null)
+    public function getTenant($subdomain = null)
     {
-        if (is_null($tenant)) {
+        if (is_null($subdomain)) {
             $subdomain = $this->subdomainProvider->getSubdomain();
-        } else {
-            $subdomain = $tenant;
         }
 
         $club = $this->clubRepository->findOneBySubdomain($subdomain);
 
-        $this->tenant = new Tenant(
+        if(is_null($club))
+        {
+            return;
+        }
+
+        $tenant = new Tenant(
             null,
             $club->getDatabase()->getName(),
             $club->getDatabase()->getUsername(),
             $club->getDatabase()->getPassword()
         );
 
-        return $this->tenant;
+        return $tenant;
     }
 }

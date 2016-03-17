@@ -53,6 +53,7 @@ class AppKernel extends Kernel
 
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
+            new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
