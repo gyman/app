@@ -1,14 +1,14 @@
 $ () ->
   $("#spinner").fadeOut 250
 
-#  $.blockUI.defaults =
-#    message: '<img src="/images/072.gif" alt="loading"/>'
-#    css:
-#      border: "none"
-#      backgroundColor: "transparent"
-#    overlayCSS:
-#      backgroundColor: "#E8EAEB"
-#      textAlign: "center"
+  $.blockUI.defaults =
+  message: '<img src="/images/072.gif" alt="loading"/>'
+  css:
+    border: "none"
+    backgroundColor: "transparent"
+  overlayCSS:
+    backgroundColor: "#E8EAEB"
+    textAlign: "center"
 
   $(document).bind "beforeSend", (event, jqXHR, ajaxOptions) ->
     $("#spinner").fadeIn 250

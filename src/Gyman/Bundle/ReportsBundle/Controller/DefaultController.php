@@ -50,8 +50,8 @@ class DefaultController extends Controller
             ->select("v.price.amount as price, s.title as section, v.startDate")
             ->leftJoin("v.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("v.startDate > :startDate")
-            ->andWhere("v.startDate < :endDate")
+            ->where("v.createdAt > :startDate")
+            ->andWhere("v.createdAt < :endDate")
             ->andWhere("v.price.amount is not null")
             ->setParameters([
                 "startDate" => $startDate,
@@ -67,8 +67,8 @@ class DefaultController extends Controller
             ->select("e.price.amount as price, s.title as section, e.startDate")
             ->leftJoin("e.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("e.startDate > :startDate")
-            ->andWhere("e.startDate < :endDate")
+            ->where("e.createdAt > :startDate")
+            ->andWhere("e.createdAt < :endDate")
             ->andWhere("e.price.amount is not null")
             ->andWhere("e.type = :type")
             ->setParameters([
@@ -159,8 +159,8 @@ class DefaultController extends Controller
             ->select("v.price.amount as price, s.title as section, v.startDate")
             ->leftJoin("v.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("v.startDate > :startDate")
-            ->andWhere("v.startDate < :endDate")
+            ->where("v.createdAt > :startDate")
+            ->andWhere("v.createdAt < :endDate")
             ->andWhere("v.price.amount is not null")
             ->setParameters([
                 "startDate" => $startDate,
@@ -176,8 +176,8 @@ class DefaultController extends Controller
             ->select("e.price.amount as price, s.title as section, e.startDate")
             ->leftJoin("e.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("e.startDate > :startDate")
-            ->andWhere("e.startDate < :endDate")
+            ->where("e.createdAt > :startDate")
+            ->andWhere("e.createdAt < :endDate")
             ->andWhere("e.price.amount is not null")
             ->andWhere("e.type = :type")
             ->setParameters([
@@ -269,8 +269,8 @@ class DefaultController extends Controller
             ->select("v.price.amount as price, v.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('karnet') as type")
             ->leftJoin("v.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("v.startDate > :startDate")
-            ->andWhere("v.startDate < :endDate")
+            ->where("v.createdAt > :startDate")
+            ->andWhere("v.createdAt < :endDate")
             ->andWhere("v.price.amount is not null")
             ->setParameters([
                 "startDate" => $startDate,
@@ -286,8 +286,8 @@ class DefaultController extends Controller
             ->select("e.price.amount as price, s.title as section, e.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('entry') as type")
             ->leftJoin("e.member", "m")
             ->leftJoin("m.sections", "s")
-            ->where("e.startDate > :startDate")
-            ->andWhere("e.startDate < :endDate")
+            ->where("e.createdAt > :startDate")
+            ->andWhere("e.createdAt < :endDate")
             ->andWhere("e.price.amount is not null")
             ->andWhere("e.type = :type")
             ->setParameters([
