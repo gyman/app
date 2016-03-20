@@ -15,14 +15,19 @@ class DateFilter
     /** @var  \DateTime */
     public $endDate;
 
+    /** @var string */
+    public $strategy;
+
     /**
      * DateFilter constructor.
      * @param DateTime $startDate
      * @param DateTime $endDate
+     * @param $strategy
      */
-    public function __construct(DateTime $startDate, DateTime $endDate)
+    public function __construct(DateTime $startDate, DateTime $endDate, $strategy)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->strategy = $strategy;
     }
 }

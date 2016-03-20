@@ -23,6 +23,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 final class DateFilterType extends AbstractType
 {
+    private $availableStrategies = [];
+
+    /**
+     * @param array $availableStrategies
+     */
+    public function setAvailableStrategies($availableStrategies = [])
+    {
+        $this->availableStrategies = $availableStrategies;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -30,6 +40,13 @@ final class DateFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('strategy', 'choice', [
+                'choices' => $this->availableStrategies,
+                'attr'   => [
+                    "class" => "span4"
+                ],
+                'label' => 'Rodzaj raportu',
+            ])
             ->add('startDate', 'datetime', [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',

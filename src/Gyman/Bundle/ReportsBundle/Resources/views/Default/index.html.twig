@@ -7,11 +7,70 @@
 
 <div class="form-row row-fluid">
     <div class="span12">
-        <ul>
-            <li><a href="{{ path("gyman_reports_per_section") }}">Przychody z podziałem na sekcje</a></li>
-            <li><a href="{{ path("gyman_reports_all") }}">Wszystkie przychody</a></li>
-            <li><a href="{{ path("gyman_reports_per_member") }}">Wszystkie przychody z uczestnika</a></li>
-        </ul>
+
+        Zakres czasu:
+
+        {{ form_start(form) }}
+        <div class="row-fluid">
+            {{ form_widget(form.strategy) }}
+
+            {{ form_widget(form.startDate) }}
+            {{ form_widget(form.endDate) }}
+
+            <div>
+                <ul class="inline">
+                    <li>{{ form_widget(form.submit, {attr: { class: "btn btn-success"}}) }}</li>
+                    <li><a class="btn" href="{{ links.lastMonthLink }}">Poprzedni miesiąc</a></li>
+                    <li><a class="btn" href="{{ links.thisMonthLink }}">Ten miesiąc</a></li>
+                    <li><a class="btn" href="{{ links.lastWeekLink }}">Poprzedni tydzień</a></li>
+                    <li><a class="btn" href="{{ links.thisWeekLink }}">Ten tydzień</a></li>
+                    <li><a class="btn" href="{{ links.yesterdayLink }}">Wczoraj</a></li>
+                    <li><a class="btn" href="{{ links.todayLink }}">Dzisiaj</a></li>
+                </ul>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+        <ol>
+            {% for section in moneyPerSection if moneyPerSection|length > 0 %}
+                <li>
+                    {{ section.title }} - {{ section.sum }} PLN
+                </li>
+            {% else %}
+                <li>Brak wyników - zmień zakres czasu</li>
+            {%  endfor %}
+        </ol>
+
+        <strong>suma: {{ sum }} PLN</strong>
+
     </div>
 </div>
+
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/jquery-ui-1.9.2.custom.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/bootstrap-datetimepicker.min.js") }}"></script>
+
+    <script type="text/javascript">
+        $("input[name*='startDate'], input[name*='endDate']").datetimepicker({
+            format: 'dd.mm.yyyy',
+            weekStart: 1,
+            autoclose: true,
+            startView: 2,
+            minView: 2,
+            maxView: 2,
+            clearBtn: true,
+            todayBtn: true,
+            todayHighlight: true,
+            language: "pl"
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bundles/dendecalendar/css/bootstrap-datetimepicker.min.css") }}" />
+{% endblock stylesheets %}

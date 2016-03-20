@@ -2,30 +2,12 @@
 namespace Gyman\Bundle\ReportsBundle\Generator\Strategy;
 
 use Doctrine\ORM\EntityRepository;
+use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Gyman\Bundle\ReportsBundle\Generator\StrategyInterface;
 
 abstract class AbstractStrategy implements StrategyInterface
 {
-    /**
-     * @var EntityRepository
-     */
-    private $repository;
+    abstract public function getName();
 
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
-    /**
-     * @param EntityRepository $repository
-     */
-    public function setRepository($repository)
-    {
-        $this->repository = $repository;
-    }
-
-    abstract public function createQuery($qb);
+    abstract public function result(DateFilter $filter);
 }

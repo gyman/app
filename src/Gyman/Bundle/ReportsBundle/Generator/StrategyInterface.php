@@ -10,9 +10,5 @@ namespace Gyman\Bundle\ReportsBundle\Generator;
 
 interface StrategyInterface
 {
-    public function getRepository();
 
-    public function setRepository(EntityRepository $repository);
-
-    public function createQuery($qb);
 }
