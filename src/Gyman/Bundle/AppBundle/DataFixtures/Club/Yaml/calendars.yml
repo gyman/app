@@ -1,28 +1,19 @@
 --- 
 kids-4-8:
-  id: ~
   name: "Kids 4-8"
 junior-8-14:
-  id: ~
   name: "Junior 8-14"
 mma:
-  id: ~
   name: "MMA"
 bjj-poczatkujacy:
-  id: ~
   name: "BJJ Początkujący"
 bjj-sredniozaawansowani:
-  id: ~
   name: "BJJ średniozaawansowani"
 bjj-zaawansowani:
-  id: ~
   name: "BJJ zaawansowani"
 boks-kobiety:
-  id: ~
   name: "Boks Kobiety"
 zapasy:
-  id: ~
   name: "Zapasy"
 nogi:
-  id: ~
   name: "NoGi"

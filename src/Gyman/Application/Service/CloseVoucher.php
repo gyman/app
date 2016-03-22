@@ -21,7 +21,10 @@ class CloseVoucher
     /**
      * @var VoucherRepositoryInterface
      */
-    private $repository;
+    private $voucherRepository;
+
+    /** @var  MemberRepositoryInterface */
+    private $memberRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -29,13 +32,15 @@ class CloseVoucher
     private $dispatcher;
 
     /**
-     * CreateMember constructor.
-     * @param VoucherRepositoryInterface $repository
+     * CloseVoucher constructor.
+     * @param VoucherRepositoryInterface $voucherRepository
+     * @param MemberRepositoryInterface $memberRepository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(VoucherRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(VoucherRepositoryInterface $voucherRepository, MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {
-        $this->repository = $repository;
+        $this->voucherRepository = $voucherRepository;
+        $this->memberRepository = $memberRepository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -52,7 +57,8 @@ class CloseVoucher
         $voucher->close($command->closingDate);
         $member->unsetCurrentVoucher();
 
-        $this->repository->save($voucher);
+        $this->voucherRepository->save($voucher);
+        $this->memberRepository->save($member);
 
         $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $user));
     }

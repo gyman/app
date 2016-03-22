@@ -113,13 +113,6 @@ class Voucher
             throw new ExceededMaximumAmountOfEntriesException();
         }
 
-//        /** @var Entry $lastEntry */
-//        $lastEntry = $this->lastEntry();
-//
-//        if ($lastEntry && $lastEntry->isOpened()) {
-//            throw new LastEntryIsStillOpenedException($entry, $lastEntry);
-//        }
-
         $this->entries->add($entry);
         $entry->assignToVoucher($this);
     }
@@ -153,7 +146,7 @@ class Voucher
 
         $this->member()->unsetCurrentVoucher();
 
-        $this->endDate = $date;
+//        $this->endDate = $date;
     }
 
     /**

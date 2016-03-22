@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Application\Handler;
 
+use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Gyman\Domain\Entry;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Command\CreateVoucherCommand;
@@ -20,9 +21,9 @@ class CreateVoucherHandler
     const FAILURE = 'gyman.voucher_created.failure';
 
     /**
-     * @var MemberRepositoryInterface
+     * @var VoucherRepositoryInterface
      */
-    private $repository;
+    private $voucherRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -34,9 +35,9 @@ class CreateVoucherHandler
      * @param MemberRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(VoucherRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
-        $this->repository = $repository;
+        $this->voucherRepository = $repository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -67,7 +68,8 @@ class CreateVoucherHandler
             }, $creditEntries->toArray());
         }
 
-        $this->repository->insert($voucher->member());
+        $this->voucherRepository->save($voucher);
+
 
 //        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
     }

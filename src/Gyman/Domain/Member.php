@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain;
 
+use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -216,7 +217,9 @@ class Member
      */
     public function hasCurrentVoucher()
     {
-        return !is_null($this->currentVoucher());
+        $currentVoucher = $this->currentVoucher();
+
+        return !is_null($currentVoucher);
     }
 
     /**
@@ -257,15 +260,6 @@ class Member
             );
         }
 
-//        if($entry->occurrence()->isPast()) {
-//            throw new \Exception(sprintf(
-//                    "Can't enter on occurence that already finished in %s!\nMember Id: %s, Occurrence Id: %d",
-//                    $entry->occurrence()->endDate()->format("Y-m-d H:i:s"),
-//                    $this->id(),
-//                    $entry->occurrence()->id()
-//            ));
-//        }
-
         $this->lastEntry = $entry;
         $this->entries->add($entry);
 
@@ -278,11 +272,10 @@ class Member
 
     public function exitLastEntry()
     {
-        if (!$this->hasLastEntry() || !$this->lastEntry()->isOpened()) {
-            throw new MemberHasNoLastEntryException();
+        if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
+            $this->lastEntry()->closeEntry(new \DateTime("now"));
         }
 
-        $this->lastEntry()->closeEntry(new \DateTime());
         $this->lastEntry = null;
     }
 

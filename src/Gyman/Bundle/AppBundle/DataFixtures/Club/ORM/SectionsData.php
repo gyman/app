@@ -16,7 +16,7 @@ class SectionsData extends BaseFixture
      */
     public function getOrder()
     {
-        return -10;
+        return 0;
     }
 
     /**
@@ -28,8 +28,6 @@ class SectionsData extends BaseFixture
         /** @var Calendar $calendar */
         $calendar = $this->getReference($array["calendar"]);
         $section = new Section(null, $array["title"], $calendar);
-
-        $this->manager->persist($section);
 
         return $section;
     }

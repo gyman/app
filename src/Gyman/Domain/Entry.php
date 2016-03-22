@@ -156,11 +156,7 @@ class Entry
      */
     public function isOpened()
     {
-        if (!is_null($this->startDate) && is_null($this->endDate)) {
-            return true;
-        }
-
-        return false;
+        return is_null($this->endDate);
     }
 
     /**
@@ -188,7 +184,6 @@ class Entry
             throw new EntryMustBeVoucherTypeException("If you want to add entry to voucher it must be a 'voucher' type entry");
         }
 
-        $voucher->entries()->add($this);
         $this->voucher = $voucher;
     }
 
@@ -198,6 +193,7 @@ class Entry
     public function payOffWithVoucher(Voucher $voucher)
     {
         $this->type = self::TYPE_VOUCHER;
+        $voucher->addEntry($this);
         $this->assignToVoucher($voucher);
     }
 

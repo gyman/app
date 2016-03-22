@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Application\Tests\Unit\Entity;
+namespace Gyman\Application\Tests\Unit\Model;
 
 use Carbon\Carbon;
 use DateTime;
@@ -79,13 +79,13 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
             'maximumAmount' => '10',
         ]);
 
-        $this->assertEquals($voucher->leftEntriesAmount(), 10);
+        $this->assertEquals(10, $voucher->leftEntriesAmount());
 
         $voucher->addEntry(
             new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
-        $this->assertEquals($voucher->leftEntriesAmount(), 9);
+        $this->assertEquals(9, $voucher->leftEntriesAmount());
 
         $voucher->entries()->last()->closeEntry(new DateTime());
 
@@ -93,7 +93,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
             new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
-        $this->assertEquals($voucher->leftEntriesAmount(), 8);
+        $this->assertEquals(8, $voucher->leftEntriesAmount());
     }
 
     /**
@@ -110,13 +110,13 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
             'maximumAmount' => '1',
         ]);
 
-        $this->assertEquals($voucher->leftEntriesAmount(), 1);
+        $this->assertEquals(1, $voucher->leftEntriesAmount());
 
         $voucher->addEntry(
             new Entry(new DateTime('now'), Entry::TYPE_VOUCHER, null, EntryPrice::zero())
         );
 
-        $this->assertEquals($voucher->leftEntriesAmount(), 0);
+        $this->assertEquals(0, $voucher->leftEntriesAmount());
 
         $voucher->entries()->last()->closeEntry(new DateTime());
 

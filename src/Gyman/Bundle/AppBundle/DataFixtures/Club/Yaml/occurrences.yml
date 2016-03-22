@@ -23543,3 +23543,9 @@ event-nogi-0314:
   endDate: "2018-05-31 21:00:00"
   modified: 0
   minutes: 90
+event-nogi-today:
+  event: event-nogi
+  startDate: "today 19:30:00"
+  endDate: "today 21:00:00"
+  modified: 0
+  minutes: 90

@@ -13,7 +13,7 @@ use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
 /**
  * @todo: refactor class and move to entitymanagers
  * Manages Vouchers
- * @method VouchersRepository getRepository() getRepo() Returns entity repository
+ * @method VouchersRepository getRepository() getRepo() Returns entity memberRepository
  */
 class VoucherManager extends BaseManager
 {

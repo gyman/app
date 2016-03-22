@@ -14,6 +14,7 @@ Member00:
     barcode:            abcd840427
     sections:
       - section-kids-4-8
+
 Member01:
     birthdate:          "1984-09-27 12:00:00"
     deletedAt:          null

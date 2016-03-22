@@ -1,8 +1,8 @@
 parameters:
   available_reporting_strategies:
-    all: Wszystkie
-    per-member: Uczestnicy
-    per-section: Sekcje
+    all: Wszystkie operacje
+    per-member: Z podziałem na uczestników
+    per-section: Z podziałem na sekcje
 
 services:
   gyman.reports.filter_date:

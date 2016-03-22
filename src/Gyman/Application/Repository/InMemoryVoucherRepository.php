@@ -40,7 +40,7 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      */
     public function remove($voucher)
     {
-        unset($this->vouchers[$voucher->email()->email()]);
+        unset($this->vouchers[$voucher->member()->email()->email()]);
     }
 
     /**
@@ -49,6 +49,10 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      */
     public function insert($voucher)
     {
-        $this->vouchers[$voucher->email()->email()] = $voucher;
+        $this->vouchers[$voucher->member()->email()->email()] = $voucher;
+    }
+
+    public function save(Voucher $voucher){
+        $this->insert($voucher);
     }
 }

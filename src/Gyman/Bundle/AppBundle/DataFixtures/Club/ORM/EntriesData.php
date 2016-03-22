@@ -24,8 +24,6 @@ final class EntriesData extends BaseFixture
 
     /**
      * @param $params
-     * @throws \Gyman\Domain\Exception\LastEntryIsStillOpenedException
-     * @throws \Gyman\Domain\Exception\NoCurrentVoucherForVoucherEntryException
      * @return \Gyman\Domain\Entry
      */
     public function insert($params)
@@ -42,7 +40,7 @@ final class EntriesData extends BaseFixture
             'member'    => $member
         ]);
 
-//        $member->enter($entry);
+        $member->enter($entry);
 
         return $entry;
     }

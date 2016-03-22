@@ -34,7 +34,7 @@ final class OpenEntryHandler
      * CreateMember constructor.
      * @param MemberRepositoryInterface $memberRepository
      * @param EventDispatcherInterface $dispatcher
-     * @internal param EntryRepositoryInterface $repository
+     * @internal param EntryRepositoryInterface $voucherRepository
      */
     public function __construct(MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {
@@ -54,7 +54,7 @@ final class OpenEntryHandler
         $member = $command->member;
         $member->enter($entry);
 
-        $this->memberRepository->insert($member);
+        $this->memberRepository->save($member);
 
         $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($entry, $author));
     }

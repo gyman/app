@@ -13,6 +13,7 @@ use Gyman\Application\Handler\CreateVoucherHandler;
 use Gyman\Application\Handler\OpenEntryHandler;
 use Gyman\Application\Handler\UpdateMemberHandler;
 use Gyman\Application\Repository\InMemoryMemberRepository;
+use Gyman\Application\Repository\InMemoryVoucherRepository;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Voucher;
 use Mockery as m;
@@ -37,7 +38,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function new_user_buys_voucher()
     {
-        $repository = new InMemoryMemberRepository();
+        $repository = new InMemoryVoucherRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);
@@ -65,7 +66,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function user_with_credit_entries_buys_voucher()
     {
-        $repository = new InMemoryMemberRepository();
+        $repository = new InMemoryVoucherRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);

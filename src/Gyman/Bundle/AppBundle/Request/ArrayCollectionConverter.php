@@ -58,7 +58,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
             // Create a new default query builder with WHERE user_id clause
             $builder = $repo->createQueryBuilder('m');
         } else {
-            // Call finder method on repository
+            // Call finder method on voucherRepository
             $builder = $repo->$finder();
         }
 

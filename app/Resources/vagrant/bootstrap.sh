@@ -24,7 +24,7 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password_again passwo
 
 apt-get install -y --force-yes apache2 mysql-server-5.6 php5 php-pear php5-curl php5-intl php5-mcrypt php5-mysql php5-xdebug php5-imagick mc git curl vim ruby
 
-curl -sL https://deb.nodesource.com/setup_4.x | bash -
+# curl -sL https://deb.nodesource.com/setup_4.x | bash -
 apt-get install -y nodejs
 
 # sudo gem install mailcatcher
@@ -51,13 +51,6 @@ less /vagrant/app/Resources/vagrant/xdebug.ini >> /etc/php5/mods-available/xdebu
 less /vagrant/app/Resources/vagrant/.bash_aliases >> /home/vagrant/.bash_aliases
 
 ln -s /var/www/gyman /home/vagrant/www
-
-su vagrant <<'EOF'
-cd /var/www/gyman
-npm install
-./node_modules/.bin/bower install
-./node_modules/.bin/grunt production
-EOF
 
 su vagrant <<'EOF'
 cd /var/www/gyman

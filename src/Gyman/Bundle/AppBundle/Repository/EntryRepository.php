@@ -26,7 +26,7 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
     public function save(Entry $entry)
     {
         $this->getEntityManager()->persist($entry);
-        $this->getEntityManager()->flush();
+        $this->getEntityManager()->flush($entry);
     }
 
     /**

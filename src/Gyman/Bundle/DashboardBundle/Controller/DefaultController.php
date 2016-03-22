@@ -60,7 +60,7 @@ class DefaultController extends Controller
     /**
      * @Route("/dashboard/activity/{id}", name="dashboard_list_class_members")
      * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
-     * @Template()
+     * @Template("DashboardBundle:Default:listClassMembers.html.twig")
      * @param Occurrence $occurrence
      * @return array
      */

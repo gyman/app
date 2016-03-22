@@ -26,7 +26,7 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     public function getOrder()
     {
-        return -20;
+        return -100;
     }
 
     /**
@@ -43,9 +43,10 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        return $this->container->get("dende_calendar.factory.calendar")->createFromArray([
-            "id" => $params["id"],
+        $calendar = $this->container->get("dende_calendar.factory.calendar")->createFromArray([
             "title" => $params["name"]
         ]);
+
+        return $calendar;
     }
 }

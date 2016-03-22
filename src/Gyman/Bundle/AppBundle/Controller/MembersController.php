@@ -119,6 +119,12 @@ class MembersController extends Controller
             /** @var Member[] $result */
             $result = $this->get('gyman.members.repository')->search($form->getData());
 
+            if (count($result) == 1) {
+                /** @var Member $result */
+                $result = $result[0];
+                return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
+            }
+
             return [
                 'members' => $result
             ];

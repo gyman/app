@@ -12,7 +12,8 @@ Entry002:
   voucher:    Voucher00
   type:       voucher
   startDate:  now
-  endDate:    +1 hour 30 minutes
+#  endDate:    +1 hour 30 minutes
+  endDate:    ~
   price:      ~
   member:     Member00
   occurrence: event-bjj-zaawansowani-0098

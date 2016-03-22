@@ -3,6 +3,7 @@ namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Application\Exception\MemberHasNoLastEntryException;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CloseEntryCommand;
 use Gyman\Application\Command\OpenEntryCommand;
@@ -61,9 +62,14 @@ class EntriesController extends Controller
     public function closeAction(Request $request, Entry $entry)
     {
         $command = CloseEntryCommand::createFromEntry($entry);
-        $this->get('tactician.commandbus')->handle($command);
-        $this->addFlash('success', 'flash.entry_closed.success');
+        try {
+            $this->get('tactician.commandbus')->handle($command);
+        } catch (MemberHasNoLastEntryException $e) {
+            $this->addFlash('success', 'flash.entry_closed.success');
+            return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
+        }
 
+        $this->addFlash('success', 'flash.entry_closed.success');
         return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
     }
 

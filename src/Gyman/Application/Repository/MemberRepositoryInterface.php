@@ -28,4 +28,6 @@ interface MemberRepositoryInterface extends RepositoryInterface
      * @return null
      */
     public function insert($member);
+
+    public function save(Member $member);
 }

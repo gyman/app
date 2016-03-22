@@ -102,6 +102,7 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
     public function save(Voucher $voucher)
     {
         $em = $this->getEntityManager();
+        $em->persist($voucher);
         $em->flush($voucher);
     }
 }

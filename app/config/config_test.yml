@@ -29,7 +29,7 @@ doctrine:
           dbname:   %database_name%
           path:     %kernel.cache_dir%/default.db
 
-        club:
+        tenant:
           driver:   pdo_sqlite
           dbname:   %database_name%_dende
           path:     %kernel.cache_dir%/club.db

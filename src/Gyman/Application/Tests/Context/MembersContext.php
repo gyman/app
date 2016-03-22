@@ -54,7 +54,7 @@ class MembersContext implements Context
 
     /**
      * @Given /^there is no members$/
-     * @Then /^I have (\d+) user in repository$/
+     * @Then /^I have (\d+) user in voucherRepository$/
      */
     public function thereIsMembersCount($amount = 0)
     {
@@ -125,7 +125,7 @@ class MembersContext implements Context
     }
 
     /**
-     * @Given /^domain event on success is stored in repository$/
+     * @Given /^domain event on success is stored in voucherRepository$/
      */
     public function domainEventOnSuccessIsStoredInRepository()
     {
@@ -138,7 +138,7 @@ class MembersContext implements Context
     }
 
     /**
-     * @Given /^domain event on failure is not stored in repository$/
+     * @Given /^domain event on failure is not stored in voucherRepository$/
      */
     public function domainEventOnFailureIsNotStoredInRepository()
     {

@@ -3,7 +3,7 @@ namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
 use Dende\Calendar\Domain\Calendar;
 use Gyman\Domain\Section;
-use Gyman\Component\Test\BaseFunctionalTest;
+use Gyman\Component\Test\BaseFunctionalTestCase;
 use Symfony\Component\DomCrawler\Field\FormField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class SettingsControllerTest
  * @package Gyman\GymanAppBundle\Tests\Functional\Controller
  */
-class SettingsControllerTest extends BaseFunctionalTest
+class SettingsControllerTest extends BaseFunctionalTestCase
 {
     /**
      * @test
@@ -23,18 +23,18 @@ class SettingsControllerTest extends BaseFunctionalTest
 
         $form = $crawler->filter('form[name="club_settings"]')->first();
 
-        $this->assertCount(22, $form->filter('input, textarea, button, select'));
+        $this->assertCount(34, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(0, $form->filter('select'));
         $this->assertCount(2, $form->filter('button'));
-        $this->assertCount(19, $form->filter('input'));
-        $this->assertCount(14, $form->filter('input[type=text]'));
+        $this->assertCount(31, $form->filter('input'));
+        $this->assertCount(20, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
         $this->assertCount(0, $form->filter('input[type=checkbox]'));
-        $this->assertCount(4, $form->filter('input[type=hidden]'));
+        $this->assertCount(10, $form->filter('input[type=hidden]'));
 
-        $this->assertCount(3, $crawler->filter('input[id*="club_settings_sections"][type=text]'));
+        $this->assertCount(9, $crawler->filter('input[id*="club_settings_sections"][type=text]'));
     }
 
     /**

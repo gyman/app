@@ -22,7 +22,7 @@ final class CloseEntryHandler
     /**
      * @var MemberRepositoryInterface
      */
-    private $repository;
+    private $memberRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -31,29 +31,27 @@ final class CloseEntryHandler
 
     /**
      * CreateMember constructor.
-     * @param EntryRepositoryInterface $repository
+     * @param MemberRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
-        $this->repository = $repository;
+        $this->memberRepository = $repository;
         $this->dispatcher = $dispatcher;
     }
 
     /**
-     * @param Member $member
-     * @param Voucher $voucher
+     * @param CloseEntryCommand $command
      * @param UserInterface $author
+     * @throws \Gyman\Application\Exception\MemberHasNoLastEntryException
      */
     public function handle(CloseEntryCommand $command, UserInterface $author = null)
     {
         /** @var Member $member */
         $member = $command->member;
-
-        $entry = $member->lastEntry();
         $member->exitLastEntry();
 
-        $this->repository->insert($member);
-        $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($entry, $author));
+        $this->memberRepository->save($member);
+//        $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($entry, $author));
     }
 }

@@ -1,36 +1,43 @@
 <?php
 namespace Gyman\Component\Test;
 
-use Dende\CalendarBundle\DataFixtures\ORM\CalendarsData;
-use Dende\CalendarBundle\DataFixtures\ORM\EventsData;
-use Dende\CalendarBundle\DataFixtures\ORM\OccurrencesData;
 use Dende\CommonBundle\Tests\BaseFunctionalTest as BaseTest;
+use Doctrine\Common\DataFixtures\ReferenceRepository;
+use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\CalendarsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\EntriesData;
+use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\EventsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\MembersData;
+use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\OccurrencesData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\SectionsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\VouchersData;
 use Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM\ClubsData;
 use Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM\UsersData;
 
-abstract class BaseFunctionalTest extends BaseTest
+abstract class BaseFunctionalTestCase extends BaseTest
 {
+    /** @var  ReferenceRepository */
+    protected $fixtures;
+
+    /** @var  ReferenceRepository */
+    protected $tenantFixtures;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->loadFixtures([
+        $this->fixtures = $this->loadFixtures([
             UsersData::class,
             ClubsData::class,
-        ], 'default');
+        ], 'default')->getReferenceRepository();
 
-        $this->loadFixtures([
+        $this->tenantFixtures = $this->loadFixtures([
             EntriesData::class,
             VouchersData::class,
             MembersData::class,
-            SectionsData::class,
             CalendarsData::class,
+            SectionsData::class,
             EventsData::class,
             OccurrencesData::class,
-        ], 'tenant');
+        ], 'tenant')->getReferenceRepository();
     }
 }

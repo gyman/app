@@ -24,7 +24,7 @@ class UserController extends Controller
      *
      * @Route("/", name="admin_users")
      * @Method("GET")
-     * @Template()
+     * @Template("AccountBundle:User:index.html.twig")
      */
     public function indexAction()
     {
@@ -87,7 +87,7 @@ class UserController extends Controller
      *
      * @Route("/new", name="admin_users_new")
      * @Method("GET")
-     * @Template()
+     * @Template("AccountBundle:User:new.html.twig")
      */
     public function newAction()
     {
@@ -105,7 +105,7 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="admin_users_show")
      * @Method("GET")
-     * @Template()
+     * @Template("AccountBundle:User:show.html.twig")
      */
     public function showAction($id)
     {
@@ -130,7 +130,7 @@ class UserController extends Controller
      *
      * @Route("/{id}/edit", name="admin_users_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("AccountBundle:User:edit.html.twig")
      */
     public function editAction($id)
     {
