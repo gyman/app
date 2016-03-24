@@ -70,3 +70,10 @@ services:
       - @gyman.club.repository
       - @=service('gyman.club.provider').getCurrentClub()
       - @gyman.members.upload_club_logo_handler
+
+  gyman.app.handler.clear_expired_current_vouchers:
+    class: Gyman\Application\Handler\ClearExpiredCurrentVouchersHandler
+    arguments:
+      - @gyman.members.repository
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\ClearExpiredCurrentVouchersCommand }

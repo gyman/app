@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Repository;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -10,6 +11,7 @@ use Gyman\Domain\Member;
 use Gyman\Domain\Member\Details\Barcode;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Application\Repository\MemberRepositoryInterface;
+use Traversable;
 
 /**
  * MemberRepository
@@ -181,9 +183,78 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
     /**
      * @param Member $member
      */
-    public function save(Member $member){
+    public function save($members){
         $em = $this->getEntityManager();
-        $em->persist($member);
-        $em->flush($member);
+
+        if($members instanceof Member) {
+            $em->persist($members);
+            $em->flush($members);
+
+            return;
+        } elseif(is_array($members) || $members instanceof Traversable) {
+            /** @var Member $member */
+            foreach($members as $member) {
+                $em->persist($member);
+            }
+
+            $em->flush();
+
+            return;
+        }
+
+        throw new \Exception("Argument is unknown type! Should be Member class or collection/array of Member class!");
+    }
+
+    /**
+     * @return array|Member[]
+     */
+    public function findAllByExpiredCurrentVoucher(){
+        $qb = $this->createQueryBuilder('m');
+        $expr = $qb->expr();
+
+        /*
+        $qb->select()
+            ->join("m.currentVoucher", "v")
+            ->join("v.entries", "e")
+            ->where($expr->andX(
+                $expr->isNotNull("m.currentVoucher"),
+                $expr->orX(
+                    $expr->andX(
+                        $expr->isNotNull("v.endDate"),
+                        $expr->lt("v.endDate", ":now")
+                    ),
+                    $expr->andX(
+                        $expr->isNotNull("v.maximumAmount"),
+                        $expr->gte("COUNT(e.id)", "v.maximumAmount")
+                    )
+                )
+            ))
+            ->setParameter(":now", new DateTime("now"))
+        ;
+
+        */
+
+        $sql = <<< SQL
+SELECT
+  COUNT(e2_.id) as used_entries,
+  v1_.maximumAmount as maximum_voucher_entries,
+  v1_.endDate as voucher_end_date,
+  m0_.id as member_id
+FROM members m0_
+  INNER JOIN vouchers v1_ ON m0_.current_voucher_id = v1_.id
+  INNER JOIN entries e2_ ON v1_.id = e2_.voucher_id
+WHERE
+  m0_.deletedAt IS NULL 
+  AND v1_.deletedAt IS NULL
+  AND e2_.deletedAt IS NULL
+GROUP BY current_voucher_id
+HAVING (maximum_voucher_entries IS NOT NULL AND used_entries >= maximum_voucher_entries) OR (voucher_end_date <= '%now%')
+;
+SQL;
+        $sql = str_replace("%now%", (new DateTime())->format("Y-m-d H:i:s"), $sql);
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

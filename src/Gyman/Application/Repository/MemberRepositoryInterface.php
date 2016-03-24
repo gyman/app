@@ -29,5 +29,5 @@ interface MemberRepositoryInterface extends RepositoryInterface
      */
     public function insert($member);
 
-    public function save(Member $member);
+    public function save($member);
 }

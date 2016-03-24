@@ -44,8 +44,8 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
         $member = MemberFactory::createFromArray([]);
 
         $command = new CreateVoucherCommand();
-        $command->startDate = new DateTime("+1 day");
-        $command->endDate = new DateTime("+30 days");
+        $command->startDate = new DateTime("-30 day");
+        $command->endDate = new DateTime("-2 days");
         $command->member = $member;
         $command->price = 100.00;
         $command->maximumAmount = 10;
@@ -55,6 +55,16 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $member->vouchers());
         $this->assertCount(1, $repository->findAll());
+        $this->assertNull($member->currentVoucher());
+
+        $command = clone($command);
+        $command->startDate = new DateTime("-1 day");
+        $command->endDate = new DateTime("+30 days");
+        $handler->handle($command);
+
+        $this->assertCount(2, $member->vouchers());
+        $this->assertCount(2, $repository->findAll());
+        $this->assertInstanceOf(Voucher::class, $member->currentVoucher());
     }
 
     /**

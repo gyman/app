@@ -29,9 +29,7 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      */
     public function findOneByEmailAddress(EmailAddress $email)
     {
-        $address = $email->email();
-
-        return array_key_exists($address, $this->vouchers) ? $this->vouchers[$address] : null;
+        throw \Exception("implement this!");
     }
 
     /**
@@ -40,7 +38,9 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      */
     public function remove($voucher)
     {
-        unset($this->vouchers[$voucher->member()->email()->email()]);
+        unset($this->vouchers[spl_object_hash($voucher)]);
+
+
     }
 
     /**
@@ -49,7 +49,7 @@ class InMemoryVoucherRepository implements VoucherRepositoryInterface
      */
     public function insert($voucher)
     {
-        $this->vouchers[$voucher->member()->email()->email()] = $voucher;
+        $this->vouchers[spl_object_hash($voucher)] = $voucher;
     }
 
     public function save(Voucher $voucher){

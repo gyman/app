@@ -48,7 +48,7 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
         $this->members[$member->email()->email()] = $member;
     }
 
-    public function save(Member $member)
+    public function save($member)
     {
         $this->insert($member);
     }
