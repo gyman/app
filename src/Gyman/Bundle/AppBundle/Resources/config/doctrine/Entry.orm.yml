@@ -12,11 +12,23 @@ Gyman\Domain\Entry:
       targetEntity: Gyman\Domain\Member
       inversedBy: entries
       cascade: ["persist"]
+      joinColumns:
+        member_id:
+          referencedColumnName: id
+          unique: false
+          onDelete: SET NULL
+          onUpdate: RESTRICT
 
     voucher:
       targetEntity: Gyman\Domain\Voucher
       inversedBy: entries
       cascade: ["persist"]
+      joinColumns:
+        voucher_id:
+          referencedColumnName: id
+          unique: false
+          onDelete: SET NULL
+          onUpdate: RESTRICT
 
     occurrence:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence

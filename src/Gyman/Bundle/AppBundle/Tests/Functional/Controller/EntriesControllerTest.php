@@ -3,6 +3,7 @@ namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
 use DateTime;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Component\Test\BaseFunctionalTestCase;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
@@ -91,6 +92,7 @@ class EntriesControllerTest extends BaseFunctionalTestCase
         $this->assertEquals(200, $this->getStatusCode());
 
         $occurrence = $this->getContainer()->get("dende_calendar.occurrences_repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
+        $this->assertInstanceOf(Occurrence::class, $occurrence);
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
@@ -136,6 +138,7 @@ class EntriesControllerTest extends BaseFunctionalTestCase
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
         $occurrence = $this->getContainer()->get("dende_calendar.occurrences_repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
+        $this->assertInstanceOf(Occurrence::class, $occurrence);
 
         $form->setValues([
             'gyman_entry_form[entryType]' => Entry::TYPE_VOUCHER,
@@ -183,7 +186,8 @@ class EntriesControllerTest extends BaseFunctionalTestCase
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
         $occurrence = $this->getContainer()->get("dende_calendar.occurrences_repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
-
+        $this->assertInstanceOf(Occurrence::class, $occurrence);
+        
         $form->setValues([
             'gyman_entry_form[entryType]' => Entry::TYPE_FREE,
             'gyman_entry_form[price]'     => '123',

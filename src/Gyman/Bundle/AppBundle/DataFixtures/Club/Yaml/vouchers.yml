@@ -48,3 +48,30 @@ Voucher06:
   startDate: "-1 week"
   endDate: "+3 weeks"
   member: Member06
+
+voucher-to-be-removed-as-current-cause-expired:
+  activities: ~
+  maximumAmount: 10
+  price: 100
+  startDate: "-3 week"
+  endDate: "-1 weeks"
+  member: Member11
+  currentVoucher: true
+
+voucher-to-be-removed-as-current-cause-run-out-of-entries:
+  activities: ~
+  maximumAmount: 3
+  price: 100
+  startDate: "-1 week"
+  endDate: "+3 weeks"
+  member: Member13
+  currentVoucher: true
+
+voucher-for-test-to-be-set-as-current:
+  activities: ~
+  maximumAmount: 10
+  price: 123
+  startDate: "-1 week"
+  endDate: "+3 weeks"
+  member: Member12
+  currentVoucher: false

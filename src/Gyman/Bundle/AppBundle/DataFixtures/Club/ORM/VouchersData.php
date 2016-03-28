@@ -25,7 +25,16 @@ class VouchersData extends BaseFixture
 
         /** @var Member $member */
         $member = $this->getReference($array['member']);
-        $member->addVoucher($voucher);
+        $member->vouchers()->add($voucher);
+        $voucher->setMember($member);
+        
+        if(array_key_exists("currentVoucher", $array) && $array["currentVoucher"] === true) {
+            $member->setCurrentVoucher($voucher);
+        } elseif (array_key_exists("currentVoucher", $array) && $array["currentVoucher"] === false) {
+            ;
+        } else {
+            $member->updateCurrentVoucher();
+        }
 
         $this->manager->persist($member);
 

@@ -242,16 +242,21 @@ SELECT
   m0_.id as member_id
 FROM members m0_
   INNER JOIN vouchers v1_ ON m0_.current_voucher_id = v1_.id
-  INNER JOIN entries e2_ ON v1_.id = e2_.voucher_id
+  LEFT JOIN entries e2_ ON v1_.id = e2_.voucher_id
 WHERE
   m0_.deletedAt IS NULL 
   AND v1_.deletedAt IS NULL
   AND e2_.deletedAt IS NULL
 GROUP BY current_voucher_id
-HAVING (maximum_voucher_entries IS NOT NULL AND used_entries >= maximum_voucher_entries) OR (voucher_end_date <= '%now%')
+HAVING 
+  (
+    maximum_voucher_entries IS NOT NULL
+    AND used_entries >= maximum_voucher_entries
+  )
+  OR (voucher_end_date <= '%now%')
 ;
 SQL;
-        $sql = str_replace("%now%", (new DateTime())->format("Y-m-d H:i:s"), $sql);
+        $sql = str_replace("%now%", (new DateTime("now"))->format("Y-m-d H:i:s"), $sql);
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();

@@ -77,3 +77,11 @@ services:
       - @gyman.members.repository
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\ClearExpiredCurrentVouchersCommand }
+
+  gyman.app.handler.update_current_vouchers:
+    class: Gyman\Application\Handler\UpdateCurrentVoucherHandler
+    arguments:
+      - @gyman.members.repository
+      - @gyman.vouchers.repository
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\UpdateCurrentVoucherCommand }

@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain;
 
+use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
@@ -249,11 +250,16 @@ class Voucher
      */
     public function overlaps(Voucher $voucher)
     {
-        $start = $voucher->startDate()->getTimestamp();
-        $end = $voucher->endDate()->getTimestamp();
+        if($voucher->leftEntriesAmount() === 0 || $this->leftEntriesAmount() === 0)
+        {
+            return false;
+        }
 
-        $comparisionStart = $this->startDate()->getTimestamp();
-        $comparisionEnd = $this->endDate()->getTimestamp();
+        $start = Carbon::instance($voucher->startDate());
+        $end = Carbon::instance($voucher->endDate());
+
+        $comparisionStart = Carbon::instance($this->startDate());
+        $comparisionEnd = Carbon::instance($this->endDate());
 
         if ($end < $comparisionStart || $start > $comparisionEnd) {
             return false;

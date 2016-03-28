@@ -31,7 +31,10 @@ doctrine:
 
         tenant:
           driver:   pdo_sqlite
+#          driver:   pdo_mysql
           dbname:   %database_name%_dende
+#          user:     %database_user%
+#          password: %database_password%
           path:     %kernel.cache_dir%/club.db
           memory: false
 

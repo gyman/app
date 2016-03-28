@@ -1,22 +1,25 @@
 <?php
 namespace Gyman\AppBundle\Tests\Functional\Command;
 
+use Gyman\Bundle\AppBundle\Repository\MemberRepository;
+use Gyman\Bundle\AppBundle\Repository\VoucherRepository;
 use Gyman\Component\Test\BaseFunctionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\NullOutput;
 
-class UpdateVouchersCommandTest extends BaseFunctionalTestCase
+class UpdateCurrentVoucherCommandTest extends BaseFunctionalTestCase
 {
     public function testCommand() {
-        $repository = $this->getContainer()->get("gyman.members.repository");
+        /** @var VoucherRepository $repository */
+        $repository = $this->getContainer()->get("gyman.vouchers.repository");
 
-        $this->assertCount(1, $repository->findAllByExpiredCurrentVoucher());
+        $this->assertCount(1, $repository->findAllNotSetCurrentVouchers());
         $content = $this->runTestedCommand();
-        $this->assertEmpty($content, $content);
-        $this->assertCount(0, $repository->findAllByExpiredCurrentVoucher());
+        $this->assertContains("Updated 1 members:", $content);
+        $this->assertContains("for member test12@test2.pl", $content);
 
+        $this->assertCount(0, $repository->findAllNotSetCurrentVouchers());
     }
 
     private function runTestedCommand()
@@ -27,7 +30,7 @@ class UpdateVouchersCommandTest extends BaseFunctionalTestCase
         $application->setAutoExit(false);
 
         $input = new ArrayInput(array(
-            'command' => 'vouchers:update'
+            'command' => 'gyman:vouchers:update_current'
         ));
 
         $output = new BufferedOutput();

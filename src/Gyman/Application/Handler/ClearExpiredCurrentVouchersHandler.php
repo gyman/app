@@ -8,6 +8,8 @@ use Gyman\Domain\Member;
 
 class ClearExpiredCurrentVouchersHandler
 {
+    public $lastUpdatedData;
+    
     /** @var  MemberRepository|MemberRepositoryInterface */
     private $memberRepository;
 
@@ -21,8 +23,9 @@ class ClearExpiredCurrentVouchersHandler
     }
 
     public function handle(ClearExpiredCurrentVouchersCommand $command){
-        $membersIds = $this->memberRepository->findAllByExpiredCurrentVoucher();
-        $members = $this->memberRepository->findBy(["id" => array_column($membersIds, "member_id")]);
+        $membersWithExpiredVouchers = $this->memberRepository->findAllByExpiredCurrentVoucher();
+
+        $members = $this->memberRepository->findBy(["id" => array_column($membersWithExpiredVouchers, "member_id")]);
 
         /** @var Member $member */
         foreach($members as $member) {
@@ -30,5 +33,7 @@ class ClearExpiredCurrentVouchersHandler
         }
         
         $this->memberRepository->save($members);
+
+        $this->lastUpdatedData = $membersWithExpiredVouchers;
     }
 }

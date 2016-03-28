@@ -122,7 +122,9 @@ dende_multidatabase:
     - doctrine:schema:drop
     - doctrine:fixtures:load
     - gyman:entries:close
-    - gyman:importoldrio
+    - gyman:vouchers:clear_expired
+    - gyman:vouchers:update_current
+
   fixtures:
     default:
         - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection

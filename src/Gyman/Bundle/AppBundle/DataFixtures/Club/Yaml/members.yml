@@ -173,10 +173,41 @@ Member11:
     gender:             male
     firstname:          Majk
     lastname:           Wazalsky
-    notes:              testing old voucher removal
+    notes:              testing old voucher removal due to expiration
     phone:              500666666
     zipcode:            88-888
     belt:
     barcode:            abcd12311
+    sections:
+      - section-kids-4-8
+Member12:
+    birthdate:          "1980-10-15 12:00:00"
+    deletedAt:          null
+    email:              test12@test2.pl
+    foto:               null
+    gender:             male
+    firstname:          Majk
+    lastname:           Wazalsky
+    notes:              testing update of current voucher
+    phone:              500666666
+    zipcode:            88-888
+    belt:
+    barcode:            abcd12312
+    sections:
+      - section-kids-4-8
+
+Member13:
+    birthdate:          "1980-10-15 12:00:00"
+    deletedAt:          null
+    email:              test13@test2.pl
+    foto:               null
+    gender:             male
+    firstname:          Majk
+    lastname:           Wazalsky
+    notes:              testing old voucher removal due to run out of entries
+    phone:              500666666
+    zipcode:            88-888
+    belt:
+    barcode:            abcd12313
     sections:
       - section-kids-4-8

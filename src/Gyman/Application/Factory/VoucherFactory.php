@@ -39,7 +39,7 @@ final class VoucherFactory implements VoucherFactoryInterface
                 $array['price']['currency']
             ),
             $array['maximumAmount'],
-            [],
+            $array['entries'],
             $array['member']
         );
     }

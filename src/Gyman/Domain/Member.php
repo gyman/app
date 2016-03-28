@@ -186,13 +186,9 @@ class Member
      */
     public function addVoucher(Voucher $newVoucher)
     {
-        if (!$this->vouchers instanceof ArrayCollection) {
-            $this->vouchers = new ArrayCollection();
-        }
-
         if (!$this->vouchers()->isEmpty()) {
             foreach ($this->vouchers() as $existingVoucher) {
-                if ($existingVoucher->overlaps($newVoucher)) {
+                if ($existingVoucher->overlaps($newVoucher) && $existingVoucher->leftEntriesAmount() > 0) {
                     throw new VouchersAreOverlappingException($this, $existingVoucher, $newVoucher);
                 }
             }
@@ -242,7 +238,13 @@ class Member
         }
 
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
-            throw new NoCurrentVoucherForVoucherEntryException("Cant add 'voucher' entry where there is no current voucher for member");
+            throw new NoCurrentVoucherForVoucherEntryException(
+                sprintf(
+                    "Cant add 'voucher' entry#%s where there is no current voucher for member %s",
+                    $entry->id(),
+                    $this->email()
+                )
+            );
         }
 
         if($this->checkIfAlreadyEntered($entry->occurrence()))
@@ -292,24 +294,22 @@ class Member
      */
     public function updateCurrentVoucher()
     {
-        $now = time();
+        $now = Carbon::parse("now");
 
         if ($this->hasCurrentVoucher()) {
-            $currentStart = $this->currentVoucher->startDate()->getTimestamp();
-            $currentEnd = $this->currentVoucher->endDate()->getTimestamp();
-
-            if ($currentStart <= $now && $now <= $currentEnd) {
+            $startDate = Carbon::instance($this->currentVoucher()->startDate());
+            $endDate = Carbon::instance($this->currentVoucher()->endDate());
+            if ($now->between($startDate, $endDate) || $this->currentVoucher()->leftEntriesAmount() > 0) {
                 return;
             }
         }
 
         if ($this->vouchers()->count() > 0) {
             foreach ($this->vouchers() as $voucher) {
-                $start = $voucher->startDate()->getTimestamp();
-                $end = $voucher->endDate()->getTimestamp();
-                if ($start <= $now && $now <= $end) {
+                $startDate = Carbon::instance($voucher->startDate());
+                $endDate = Carbon::instance($voucher->endDate());
+                if ($now->between($startDate, $endDate)) {
                     $this->currentVoucher = $voucher;
-
                     return;
                 }
             }
@@ -372,5 +372,13 @@ class Member
         return $this->entries->filter(function(Entry $entry){
             return $entry->isType(Entry::TYPE_CREDIT);
         });
+    }
+
+    /**
+     * @param Voucher $voucher
+     */
+    public function setCurrentVoucher(Voucher $voucher)
+    {
+        $this->currentVoucher = $voucher;
     }
 }

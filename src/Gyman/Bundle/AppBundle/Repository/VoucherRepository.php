@@ -105,4 +105,25 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
         $em->persist($voucher);
         $em->flush($voucher);
     }
+
+
+    /**
+     * @return array|Voucher[]
+     */
+    public function findAllNotSetCurrentVouchers(){
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->select('v')
+            ->addSelect("COUNT(e.id) as HIDDEN entries_count")
+            ->innerJoin("v.member", "m")
+            ->leftJoin("v.entries", "e")
+            ->where("m.currentVoucher is null")
+            ->andWhere("v.startDate <= :now AND v.endDate > :now")
+            ->groupBy("v.id")
+            ->having("(v.maximumAmount IS NOT null AND entries_count < v.maximumAmount) OR v.maximumAmount IS null")
+            ->setParameter("now", new DateTime())
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

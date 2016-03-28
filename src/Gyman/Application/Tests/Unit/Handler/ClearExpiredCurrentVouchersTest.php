@@ -2,7 +2,6 @@
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use Gyman\Application\Command\ClearExpiredCurrentVouchersCommand;
-use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Handler\ClearExpiredCurrentVouchersHandler;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Domain\Member;

@@ -63,3 +63,32 @@ Entry021:
   member:     Member02
   occurrence: event-bjj-zaawansowani-sparingi-0127
 
+#testing vouchers to be unsetted as current
+
+Entry022:
+  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+  type:       voucher
+  startDate:  -27 hours
+  endDate:    -26 hours
+  price:      ~
+  member:     Member13
+  occurrence: event-bjj-zaawansowani-sparingi-0128
+
+Entry023:
+  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+  type:       voucher
+  startDate:  -25 hours
+  endDate:    -24 hours
+  price:      ~
+  member:     Member13
+  occurrence: event-bjj-zaawansowani-sparingi-0129
+
+Entry024:
+  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+  type:       voucher
+  startDate:  -23 hours
+  endDate:    -22 hours
+  price:      ~
+  member:     Member13
+  occurrence: event-bjj-zaawansowani-sparingi-0130
+

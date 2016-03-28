@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Application\Factory;
 
+use DateTime;
 use Gyman\Domain\Entry;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry\Price;
@@ -18,7 +19,7 @@ final class EntryFactory
     public static function createFromArray($array)
     {
         $template = [
-            'startDate'            => null,
+            'startDate'            => new DateTime(),
             'endDate'              => null,
             'price'                => ['amount' => 0, 'currency' => 'PLN'],
             'type'                 => null,

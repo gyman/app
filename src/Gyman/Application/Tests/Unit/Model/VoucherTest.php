@@ -3,6 +3,7 @@ namespace Gyman\Application\Tests\Unit\Model;
 
 use Carbon\Carbon;
 use DateTime;
+use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Voucher;
@@ -30,6 +31,7 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
         $voucher = VoucherFactory::createFromArray([
             'startDate' => Carbon::parse('2015-6-1 00:00:00'),
             'endDate'   => Carbon::parse('2015-6-15 23:59:59'),
+            'maximumAmount' => 2
         ]);
 
         $this->assertEquals($voucher->overlaps($testVoucher), $overlaps);
@@ -43,10 +45,10 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
             'endDate'   => Carbon::parse('+15 days'),
         ]);
 
-        $this->assertEquals($voucher->leftDaysAmount(), 15);
-        $this->assertEquals($voucher->leftDaysAmount('now'), 15);
-        $this->assertEquals($voucher->leftDaysAmount('-1 year'), 381);
-        $this->assertEquals($voucher->leftDaysAmount('+15 days'), 0);
+        $this->assertEquals(15, $voucher->leftDaysAmount());
+        $this->assertEquals(15, $voucher->leftDaysAmount('now'));
+        $this->assertEquals(380, $voucher->leftDaysAmount('-1 year'));
+        $this->assertEquals(0, $voucher->leftDaysAmount('+15 days'));
     }
 
     public function testTotalDaysAmount()
@@ -163,6 +165,22 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
                 'testVoucher' => VoucherFactory::createFromArray([
                     'startDate' => Carbon::parse('2015-6-16 00:00:00'),
                     'endDate'   => Carbon::parse('2015-6-31 23:59:59'),
+                ]),
+                'overlaps' => false,
+            ],
+            'overlaps fully but no left entries' => [
+                'testVoucher' => VoucherFactory::createFromArray([
+                    'startDate' => Carbon::parse('2015-6-5 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-10 23:59:59'),
+                    'maximumAmount' => 2,
+                    'entries' => [
+                        EntryFactory::createFromArray([
+                            "type" => Entry::TYPE_VOUCHER,
+                        ]),
+                        EntryFactory::createFromArray([
+                            "type" => Entry::TYPE_VOUCHER,
+                        ]),
+                    ]
                 ]),
                 'overlaps' => false,
             ],
