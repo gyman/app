@@ -11,7 +11,7 @@ Gyman\Domain\Entry:
     member:
       targetEntity: Gyman\Domain\Member
       inversedBy: entries
-      cascade: ["persist"]
+      cascade: ["persist", "merge"]
       joinColumns:
         member_id:
           referencedColumnName: id

@@ -52,7 +52,7 @@ services:
   gyman.entries.close_entry:
     class: Gyman\Application\Handler\CloseEntryHandler
     arguments:
-      - @gyman.members.repository
+      - @gyman.entries.repository
       - @event_dispatcher
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CloseEntryCommand }

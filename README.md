@@ -41,3 +41,9 @@ Uruchomienie vagranta
 
 1. sudo apt-get install vagrant virtualbox install nfs-common nfs-kernel-server
 2. vagrant up
+
+Konfiguracja crontab:
+
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:clear_expired --club=rio --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=rio --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=rio

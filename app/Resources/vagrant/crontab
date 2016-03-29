@@ -1,0 +1,12 @@
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:clear_expired --club=rio --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=rio --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=rio
+
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:clear_expired --club=dende --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=dende --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=dende
+
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:clear_expired --club=extreme --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=extreme --em=tenant
+*/5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=extreme
+

@@ -270,6 +270,7 @@ SQL;
             ->innerJoin('m.lastEntry', 'e')
             ->innerJoin('e.occurrence', 'o')
             ->where('m.lastEntry IS NOT null')
+            ->andWhere('e.startDate < :date')
             ->andWhere('e.endDate IS null')
             ->andWhere('o.endDate < :date')
             ->setParameters([

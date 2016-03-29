@@ -13,11 +13,10 @@ class CloseEntriesCommandTest extends BaseFunctionalTestCase
         /** @var MemberRepository $repository */
         $repository = $this->getContainer()->get("gyman.members.repository");
 
-        $this->assertCount(2, $repository->findAllByExpiredLastEntry());
+        $this->assertCount(1, $repository->findAllByExpiredLastEntry());
         $content = $this->runTestedCommand();
-        $this->assertContains("default: Updated 2 members:", $content, $content);
+        $this->assertContains("default: Updated 1 members:", $content, $content);
         $this->assertContains("Closed last entry for member uirapuru@tlen.pl.", $content, $content);
-        $this->assertContains("Closed last entry for member test01@test.pl", $content, $content);
 
         $this->assertCount(0, $repository->findAllByExpiredLastEntry());
     }

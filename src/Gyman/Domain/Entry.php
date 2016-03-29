@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain;
 
+use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Exception\EntryClosingDateBeforeOpeningException;
@@ -144,7 +145,7 @@ class Entry
      */
     public function closeEntry(\DateTime $date)
     {
-        if ($this->startDate()->getTimestamp() > $date->getTimestamp()) {
+        if (Carbon::instance($date)->lt(Carbon::instance($this->startDate()))) {
             throw new EntryClosingDateBeforeOpeningException();
         }
 

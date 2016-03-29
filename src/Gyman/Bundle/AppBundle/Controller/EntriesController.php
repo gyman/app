@@ -58,6 +58,9 @@ class EntriesController extends Controller
     /**
      * @Route("/{id}/close", name="gyman_entry_close")
      * @ParamConverter("entry", class="Gyman:Entry")
+     * @param Request $request
+     * @param Entry $entry
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function closeAction(Request $request, Entry $entry)
     {
@@ -65,7 +68,7 @@ class EntriesController extends Controller
         try {
             $this->get('tactician.commandbus')->handle($command);
         } catch (MemberHasNoLastEntryException $e) {
-            $this->addFlash('success', 'flash.entry_closed.success');
+            $this->addFlash('warning', 'flash.entry_closed.success');
             return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
         }
 

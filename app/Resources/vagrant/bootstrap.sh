@@ -22,12 +22,7 @@ apt-get update
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password '$config_databaseMain_password
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password '$config_databaseMain_password
 
-apt-get install -y --force-yes apache2 mysql-server-5.6 php5 php-pear php5-curl php5-intl php5-mcrypt php5-mysql php5-xdebug php5-imagick mc git curl vim ruby
-
-# curl -sL https://deb.nodesource.com/setup_4.x | bash -
-apt-get install -y nodejs
-
-# sudo gem install mailcatcher
+apt-get install -y --force-yes apache2 mysql-server-5.6 php5 php-pear php5-curl php5-intl php5-mcrypt php5-mysql php5-xdebug php5-imagick mc git curl vim ruby npm nodejs
 
 if ! [ -L /var/www/gyman ]; then
   rm -rf /var/www/gyman
@@ -51,9 +46,11 @@ less /vagrant/app/Resources/vagrant/xdebug.ini >> /etc/php5/mods-available/xdebu
 less /vagrant/app/Resources/vagrant/.bash_aliases >> /home/vagrant/.bash_aliases
 
 ln -s /var/www/gyman /home/vagrant/www
+sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 su vagrant <<'EOF'
 cd /var/www/gyman
+
 wget --quiet http://getcomposer.org/composer.phar
 php composer.phar install
 
@@ -73,4 +70,11 @@ php app/console gyman:club:assign-user admin@gyman.pl dende
 php app/console gyman:club:assign-user admin@gyman.pl rio
 php app/console gyman:club:assign-user admin@gyman.pl extreme
 
+php app/console assets:install web --symlink
+./node_modules/.bin/grunt production
 EOF
+
+crontab -l > /tmp/mycron
+less /vagrant/app/Resources/vagrant/crontab >> /tmp/mycron
+crontab /tmp/mycron
+rm /tmp/mycron

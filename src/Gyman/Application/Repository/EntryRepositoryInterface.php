@@ -23,4 +23,6 @@ interface EntryRepositoryInterface extends RepositoryInterface
      * @param Entry $entry
      */
     public function insert(Entry $entry);
+
+    public function save($entry);
 }

@@ -1,13 +1,12 @@
 <?php
 namespace Gyman\Application\Handler;
 
+use DateTime;
 use Gyman\Application\Command\CloseEntryCommand;
-use Gyman\Application\Event\EntryEvent;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
 use Gyman\Application\Repository\EntryRepositoryInterface;
-use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -20,9 +19,9 @@ final class CloseEntryHandler
     const FAILURE = 'gyman.close_entry.failure';
 
     /**
-     * @var MemberRepositoryInterface
+     * @var EntryRepositoryInterface
      */
-    private $memberRepository;
+    private $entryRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -31,12 +30,12 @@ final class CloseEntryHandler
 
     /**
      * CreateMember constructor.
-     * @param MemberRepositoryInterface $repository
+     * @param EntryRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(EntryRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
-        $this->memberRepository = $repository;
+        $this->entryRepository = $repository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -47,11 +46,9 @@ final class CloseEntryHandler
      */
     public function handle(CloseEntryCommand $command, UserInterface $author = null)
     {
-        /** @var Member $member */
-        $member = $command->member;
-        $member->exitLastEntry();
-
-        $this->memberRepository->save($member);
+        $command->entry->member()->exitLastEntry();
+        $command->entry->closeEntry(new DateTime("now"));
+        $this->entryRepository->save($command->entry);
 //        $this->dispatcher->dispatch(self::SUCCESS, new EntryEvent($entry, $author));
     }
 }

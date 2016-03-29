@@ -15,6 +15,9 @@ final class CloseEntryCommand
      */
     public $member;
 
+    /** @var Entry */
+    public $entry;
+
     /**
      * @param Entry $entry
      * @return CloseEntryCommand
@@ -23,6 +26,7 @@ final class CloseEntryCommand
     {
         $command = new self();
         $command->member = $entry->member();
+        $command->entry = $entry;
 
         return $command;
     }

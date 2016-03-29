@@ -61,6 +61,12 @@ final class EntryType extends AbstractType
 
         $todayOccurrences = $this->occurrenceRepository->findByPeriod($startDate, $endDate);
 
+        $defaultOccurrences = array_filter($todayOccurrences, function(Occurrence $occurrence) {
+            return $occurrence->isOngoing();
+        });
+
+        $defaultOccurrence = count($defaultOccurrences) > 0 ? array_pop($defaultOccurrences) : null;
+
         $builder
         ->add('occurrence', 'entity', [
             'required' => false,
@@ -85,7 +91,8 @@ final class EntryType extends AbstractType
 
                 return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $section->title());
             },
-            'choices' => $todayOccurrences
+            'choices' => $todayOccurrences,
+            'data' => $defaultOccurrence
         ])
 //        ->add('startDate', 'datetime', [
 //            'widget' => 'single_text',
@@ -120,10 +127,10 @@ final class EntryType extends AbstractType
 
             if (!$data->member->hasCurrentVoucher() || $data->member->currentVoucher()->leftEntriesAmount() === 0) {
                 unset($choices[Entry::TYPE_VOUCHER]);
-                $defaultChoice = $choices[Entry::TYPE_CREDIT];
+                $defaultChoice = Entry::TYPE_CREDIT;
             } else {
                 unset($choices[Entry::TYPE_CREDIT]);
-                $defaultChoice = $choices[Entry::TYPE_VOUCHER];
+                $defaultChoice = Entry::TYPE_VOUCHER;
             }
 
             $form->add('entryType', 'choice', [
