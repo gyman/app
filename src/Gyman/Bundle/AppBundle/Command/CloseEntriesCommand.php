@@ -2,8 +2,8 @@
 namespace Gyman\Bundle\AppBundle\Command;
 
 use Carbon\Carbon;
-use DateTime;
 use Doctrine\ORM\QueryBuilder;
+use Gyman\Application\Command\CloseExpiredEntriesCommand;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -11,12 +11,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpdateEntriesCommand extends ContainerAwareCommand
+class CloseEntriesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-                ->setName('gyman:entries:close')
+                ->setName('gyman:entries:close_expired')
                 ->setDescription('Closes finished entries')
                 ->addOption(
                     'em',
@@ -30,6 +30,21 @@ class UpdateEntriesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $command = new CloseExpiredEntriesCommand();
+        $this->getContainer()->get("tactician.commandbus")->handle($command);
+        $data = $this->getContainer()->get("gyman.app.handler.close_expired_entries")->lastUpdatedData;
+
+        $output->writeln(sprintf("Updated %d members:", count($data)));
+
+        /** @var Member $member */
+        foreach($data as $member) {
+            $output->writeln(sprintf("Closed last entry for member %s.", $member->email()));
+        }
+        
+        
+        return;
+        
+        
 //        $em = $this->getContainer()->get("doctrine")->getManager($input->getOption("em"));
         $em = $this->getContainer()->get("doctrine")->getManager("tenant");
         $entryRepository = $em->getRepository('Gyman:Entry');

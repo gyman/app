@@ -85,3 +85,13 @@ services:
       - @gyman.vouchers.repository
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\UpdateCurrentVoucherCommand }
+
+
+  gyman.app.handler.close_expired_entries:
+    class: Gyman\Application\Handler\CloseExpiredEntriesHandler
+    arguments:
+      - @gyman.members.repository
+      - @event_dispatcher
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\CloseExpiredEntriesCommand }
+

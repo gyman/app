@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Repository;
 
+use Carbon\Carbon;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -181,7 +182,8 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
     }
 
     /**
-     * @param Member $member
+     * @param Member|Member[] $members
+     * @throws \Exception
      */
     public function save($members){
         $em = $this->getEntityManager();
@@ -261,5 +263,21 @@ SQL;
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function findAllByExpiredLastEntry() {
+        $query = $this->createQueryBuilder('m')
+            ->innerJoin('m.lastEntry', 'e')
+            ->innerJoin('e.occurrence', 'o')
+            ->where('m.lastEntry IS NOT null')
+            ->andWhere('e.endDate IS null')
+            ->andWhere('o.endDate < :date')
+            ->setParameters([
+                "date" => Carbon::parse("now"),
+            ])
+            ->getQuery()
+        ;
+
+        return $query->getResult();
     }
 }
