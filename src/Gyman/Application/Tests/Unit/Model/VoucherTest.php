@@ -184,6 +184,20 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
                 ]),
                 'overlaps' => false,
             ],
+            'overlaps fully but voucher closed' => [
+                'testVoucher' => VoucherFactory::createFromArray([
+                    'startDate' => Carbon::parse('2015-6-5 00:00:00'),
+                    'endDate'   => Carbon::parse('2015-6-10 23:59:59'),
+                    'maximumAmount' => 2,
+                    'entries' => [
+                        EntryFactory::createFromArray([
+                            "type" => Entry::TYPE_VOUCHER,
+                        ]),
+                    ],
+                    'closedAt' => Carbon::now()
+                ]),
+                'overlaps' => false,
+            ],
         ];
     }
 }

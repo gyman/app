@@ -67,7 +67,8 @@
         "dende/calendar-bundle": "^1.1",
         "dende/multidatabase-bundle": "1.0.0",
         "league/tactician": "^1.0",
-        "league/tactician-bundle": "^0.4.0"
+        "league/tactician-bundle": "^0.4.0",
+        "doctrine/doctrine-migrations-bundle": "^1.1"
 
     },
     "require-dev": {

@@ -14,7 +14,11 @@
                 {{  voucher.startDate|date("d.m.Y")  }}
             </td>
             <td>
-                {{  voucher.endDate|date("d.m.Y")  }}
+                <span{% if voucher.isClosed() %} style="text-decoration: line-through;"{% endif %}>{{  voucher.endDate|date("d.m.Y")  }}</span>
+
+                {% if voucher.isClosed() %}
+                    {{  voucher.closedAt|date("d.m.Y") }}
+                {% endif %}
             </td>
             <td>
                 zostało {{ voucher.leftEntriesAmount }} z {{ voucher.maximumAmount }}

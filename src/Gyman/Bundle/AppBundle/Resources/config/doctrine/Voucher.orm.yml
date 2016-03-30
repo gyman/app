@@ -36,7 +36,7 @@ Gyman\Domain\Voucher:
 
     endDate:
       type: datetime
-      nullable: true #false
+      nullable: true
 
     maximumAmount:
       type: integer
@@ -45,7 +45,7 @@ Gyman\Domain\Voucher:
     deletedAt:
       name: deleted_at
       type: datetime
-      nullable: true #false
+      nullable: true
 
     createdAt:
       name: created_at
@@ -62,3 +62,8 @@ Gyman\Domain\Voucher:
       gedmo:
         timestampable:
           on: update
+
+    closedAt:
+      name: closed_at
+      type: datetime
+      nullable: true

@@ -74,3 +74,9 @@ doctrine:
                 softdeleteable:
                     class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                     enabled: true
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Gyman\Migrations
+    table_name: migration_versions
+    name: Gyman Migrations

@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AccountBundle\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -9,6 +10,18 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class LogoutHandler
 {
     private $sessionLifetime;
+
+    /** @var  RequestStack */
+    private $requestStack;
+
+    /**
+     * LogoutHandler constructor.
+     * @param RequestStack $requestStack
+     */
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
 
     /**
      * @param mixed $sessionLifetime
@@ -20,7 +33,7 @@ class LogoutHandler
 
     public function execute(GetResponseForExceptionEvent $event)
     {
-        $request = $event->getRequest();
+        $request = $this->requestStack->getMasterRequest();
         $exception = $event->getException();
 
         if ($exception instanceof AuthenticationException || $exception instanceof AccessDeniedException) {

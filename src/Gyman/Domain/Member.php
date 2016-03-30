@@ -187,9 +187,13 @@ class Member
     public function addVoucher(Voucher $newVoucher)
     {
         if (!$this->vouchers()->isEmpty()) {
-            foreach ($this->vouchers() as $existingVoucher) {
-                if ($existingVoucher->overlaps($newVoucher) && $existingVoucher->leftEntriesAmount() > 0) {
-                    throw new VouchersAreOverlappingException($this, $existingVoucher, $newVoucher);
+            foreach ($this->vouchers() as $voucher) {
+                if (
+                    !$voucher->isClosed()
+                    && $voucher->overlaps($newVoucher)
+                    && $voucher->leftEntriesAmount() > 0
+                ) {
+                    throw new VouchersAreOverlappingException($this, $voucher, $newVoucher);
                 }
             }
         }
@@ -297,9 +301,14 @@ class Member
         $now = Carbon::parse("now");
 
         if ($this->hasCurrentVoucher()) {
-            $startDate = Carbon::instance($this->currentVoucher()->startDate());
-            $endDate = Carbon::instance($this->currentVoucher()->endDate());
-            if ($now->between($startDate, $endDate) || $this->currentVoucher()->leftEntriesAmount() > 0) {
+            $currentVoucher = $this->currentVoucher();
+            $startDate = Carbon::instance($currentVoucher->startDate());
+            $endDate = Carbon::instance($currentVoucher->endDate());
+            if (
+                $now->between($startDate, $endDate)
+                && ($currentVoucher->leftEntriesAmount() > 0 || $currentVoucher->isUnlimited())
+                && !$currentVoucher->isClosed()
+            ) {
                 return;
             }
         }
@@ -308,12 +317,17 @@ class Member
             foreach ($this->vouchers() as $voucher) {
                 $startDate = Carbon::instance($voucher->startDate());
                 $endDate = Carbon::instance($voucher->endDate());
-                if ($now->between($startDate, $endDate)) {
+                if ($now->between($startDate, $endDate)
+                    && ($voucher->leftEntriesAmount() > 0 || $voucher->isUnlimited())
+                    && !$voucher->isClosed()
+                ) {
                     $this->currentVoucher = $voucher;
                     return;
                 }
             }
         }
+
+        $this->currentVoucher = null;
     }
 
     public function updateDetails(Details $details)

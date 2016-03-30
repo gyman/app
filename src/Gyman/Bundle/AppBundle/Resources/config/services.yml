@@ -18,6 +18,30 @@ services:
     tags:
       - {name: console.command}
 
+  gyman.app.command.clear_entries:
+    class: Gyman\Bundle\AppBundle\Command\CloseEntriesCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
+
+  gyman.app.command.clear_expired_vouchers:
+    class: Gyman\Bundle\AppBundle\Command\ClearExpiredCurrentVouchersCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
+
+  gyman.app.command.update_current_voucher:
+    class: Gyman\Bundle\AppBundle\Command\UpdateCurrentVoucherCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
+
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
     arguments:

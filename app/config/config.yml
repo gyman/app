@@ -124,6 +124,12 @@ dende_multidatabase:
     - gyman:entries:close_expired
     - gyman:vouchers:clear_expired
     - gyman:vouchers:update_current
+    - doctrine:migrations:diff
+    - doctrine:migrations:execute
+    - doctrine:migrations:generate
+    - doctrine:migrations:migrate
+    - doctrine:migrations:version
+    - doctrine:migrations:status
 
   fixtures:
     default:
@@ -144,12 +150,20 @@ stof_doctrine_extensions:
 fos_js_routing:
     routes_to_expose: [.*]
     
-monolog:  
+monolog:
   handlers:
     main:
       type:  stream
       path:  %kernel.logs_dir%/%kernel.environment%.log
       level: error
+      channels: ['app']
+
+    commands:
+      type:  stream
+      path:  %kernel.logs_dir%/commands_%kernel.environment%.log
+      level: debug
+      channels: ['commands']
+
 
 jms_serializer:
   handlers:
