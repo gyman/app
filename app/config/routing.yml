@@ -1,3 +1,8 @@
+gyman_settings:
+    resource: "@GymanSettingsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 gyman_landing_page:
     resource: @GymanLandingPageBundle/Controller/
     type:     annotation

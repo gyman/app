@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -46,7 +46,7 @@
     </script>
 {% endblock javascripts %}
 
-{% block content %}
+{% block settings %}
     <div class="heading">
         <h3>{{ 'settings.header.title' }}</h3>
     </div>
@@ -112,4 +112,4 @@
     </div>
 
     {{ form_end(form) }}
-{% endblock content %}
+{% endblock settings %}

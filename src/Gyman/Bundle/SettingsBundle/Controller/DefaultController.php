@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Controller;
+namespace Gyman\Bundle\SettingsBundle\Controller;
 
 use Exception;
 use Gyman\Application\Command\UpdateSettingsCommand;
@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
  * @package Gyman\Bundle\AppBundle\Controller
  * @Route("/settings")
  */
-class SettingsController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @Route("/", name="gyman_settings")
-     * @Template("GymanAppBundle:Settings:index.html.twig")
+     * @Template("GymanSettingsBundle:Default:index.html.twig")
      */
     public function indexAction(Request $request)
     {
