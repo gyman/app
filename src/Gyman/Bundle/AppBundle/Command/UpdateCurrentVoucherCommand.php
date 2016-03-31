@@ -43,7 +43,7 @@ class UpdateCurrentVoucherCommand extends ContainerAwareCommand
         foreach($data as $member) {
             $msg = sprintf("Set current voucher #%s for member %s.", $member->currentVoucher()->id(), $member->email());
             $output->writeln($msg);
-            $this->getContainer()->get("logger")->addInfo($msg);
+            $this->logger->addInfo($msg);
         }
     }
 }

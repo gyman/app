@@ -7,7 +7,7 @@
     </h3>
     {{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}
 
-    <a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>
+    {#<a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>#}
 </div>
 
 

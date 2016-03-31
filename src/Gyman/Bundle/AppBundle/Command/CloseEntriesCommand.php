@@ -54,7 +54,7 @@ class CloseEntriesCommand extends ContainerAwareCommand
         foreach($data as $member) {
             $msg = sprintf("Closed last entry for member %s.", $member->email());
             $output->writeln($msg);
-            $this->getContainer()->get("logger")->addInfo($msg);
+            $this->logger->addInfo($msg);
         }
     }
 }

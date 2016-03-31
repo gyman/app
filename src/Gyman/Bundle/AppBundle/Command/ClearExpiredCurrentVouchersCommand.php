@@ -41,7 +41,7 @@ class ClearExpiredCurrentVouchersCommand extends ContainerAwareCommand
         foreach($data as $row) {
             $msg = sprintf("Unsetted current voucher for member %s.", $row["member_id"]);
             $output->writeln($msg);
-            $this->getContainer()->get("logger")->addInfo($msg);
+            $this->logger->addInfo($msg);
         }
     }
 
