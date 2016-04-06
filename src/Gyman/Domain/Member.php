@@ -305,7 +305,7 @@ class Member
             $startDate = Carbon::instance($currentVoucher->startDate());
             $endDate = Carbon::instance($currentVoucher->endDate());
             if (
-                $now->between($startDate, $endDate)
+                $now->between($startDate, $endDate, true)
                 && ($currentVoucher->leftEntriesAmount() > 0 || $currentVoucher->isUnlimited())
                 && !$currentVoucher->isClosed()
             ) {

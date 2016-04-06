@@ -133,27 +133,18 @@ Gyman\Domain\Voucher:
   properties:
     startDate:
       - NotNull:
-          message: Należy podać datę początkową.
+          message: "Należy podać datę początkową."
 
 Gyman\Application\Command\CreateVoucherCommand:
   constraints:
     - Gyman\Bundle\AppBundle\Validator\MaximumAmountGreaterThanCreditEntriesConstraint: ~
-
-Gyman\DomainBundle\Entity\Price:
   properties:
-    amount:
-      - Regex:
-          pattern: "/^\d+(\.\d\d){0,1}$/"
-    currency:
-      - Range:
-          min: 1
-          max: 999
-          minMessage: "Najmniejsza możliwa liczba wejść na karnet to 1"
-          maxMessage: "Maksymalna liczba wejść na karnet to 999"
+    price:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna cena to {{ compared_value }}"
+    maximumAmount:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna ilość wejść to {{ compared_value }}"
 
-Gyman\DomainBundle\Entity\Entry:
-  constraints:
-    - Callback:
-        methods: ~
-#          - { "Gyman\Bundle\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"}
-#          - { "Gyman\Bundle\EntriesBundle\Validator\PriceNotBlankIfPaidEntryTypeValidator", "isPaidAndPriceSet"}

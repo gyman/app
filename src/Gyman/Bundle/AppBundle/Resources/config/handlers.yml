@@ -4,7 +4,8 @@ services:
   gyman.vouchers.create_voucher:
     class: Gyman\Application\Handler\CreateVoucherHandler
     arguments:
-      - @gyman.vouchers.repository
+#      - @gyman.vouchers.repository
+      - @gyman.members.repository
       - @event_dispatcher
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateVoucherCommand }

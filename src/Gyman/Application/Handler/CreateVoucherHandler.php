@@ -23,7 +23,7 @@ class CreateVoucherHandler
     /**
      * @var VoucherRepositoryInterface
      */
-    private $voucherRepository;
+    private $repository;
 
     /**
      * @var EventDispatcherInterface
@@ -35,9 +35,9 @@ class CreateVoucherHandler
      * @param MemberRepositoryInterface $repository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(VoucherRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
-        $this->voucherRepository = $repository;
+        $this->repository = $repository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -68,8 +68,7 @@ class CreateVoucherHandler
             }, $creditEntries->toArray());
         }
 
-        $this->voucherRepository->save($voucher);
-
+        $this->repository->save($voucher->member());
 
 //        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
     }

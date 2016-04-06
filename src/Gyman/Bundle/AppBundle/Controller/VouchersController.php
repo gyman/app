@@ -25,6 +25,9 @@ class VouchersController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("member", class="Gyman:Member")
      * @Template("GymanAppBundle:Vouchers:new.html.twig")
+     * @param Request $request
+     * @param Member $member
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function newAction(Request $request, Member $member)
     {
@@ -68,7 +71,8 @@ class VouchersController extends Controller
 
         return [
             'form' => $form->createView(),
-            'creditEntries' => $creditEntries
+            'creditEntries' => $creditEntries,
+            'member' => $member
         ];
     }
 
@@ -93,7 +97,7 @@ class VouchersController extends Controller
     public function renderHistoryAction(Member $member)
     {
         return $this->render("@GymanApp/Vouchers/renderHistory.html.twig", [
-            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC'])
+            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC'])
         ]);
     }
 }

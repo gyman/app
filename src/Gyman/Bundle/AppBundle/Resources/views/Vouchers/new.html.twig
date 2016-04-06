@@ -1,8 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends "GymanAppBundle::layout.html.twig" %}
+{% block title %}
+Dodaj karnet użytkownikowi {{ member.details.fullName() }}
+{% endblock title %}
 
 {% block content %}
 <div class="heading">
-    <h3>Dodaj karnet</h3>
+    <h3>Dodaj karnet użytkownikowi {{ member.details.fullName() }}</h3>
 </div>
 
     <div class="row-fluid">
@@ -31,43 +34,31 @@
 
 {% endblock %}
 
-{#<div class="alert alert-info" id="ui-activitiesInfo">#}
-    {#<strong>Uwaga!</strong>#}
-    {#<a class="close" data-dismiss="alert" href="#">&times;</a>#}
-    {#Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>#}
-{#</div>#}
+{% block javascripts %}
+    {{ parent() }}
 
-{#<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_remove", {id : voucher.id})}}{% endif %}">#}
-    {#<div class="span12">#}
-        {#{{ form_row(form.startDate,{"label" : "Data rozpoczęcia", "attr" : {"placeholder" : "wybierz datę"}}) }}#}
-        {#{{ form_row(form.endDate,{"label" : "Data zakończenia", "attr" : {"placeholder" : "wybierz datę"}}) }}#}
-        {#{{ form_row(form.price,{"label" : "Cena (PLN)", "attr" : {"placeholder" : "podaj cenę"}}) }}#}
-        {#{{ form_row(form.amount,{"label" : "Ilość wejść", "attr" : {"placeholder" : "podaj liczbę"}}) }}#}
-        {#{{ form_row(form.activities,{"label" : "Grupy"}) }}#}
-    {#</div>#}
-    {#<div class="hidden">#}
-    {#{{ form_rest(form) }}#}
-    {#</div>#}
-{#</form>#}
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/jquery-ui-1.9.2.custom.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/bootstrap-datetimepicker.min.js") }}"></script>
 
-{#{% block modal %}#}
-{#<span class="hidden" id="ui-sellVoucherData">#}
-    {#<div class="modal-header">#}
-        {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
-        {#<h3>{% block title %}Nowy karnet dla {{ member.getName() }}{% endblock %}</h3>#}
-    {#</div>#}
-    {#<div class="modal-footer">#}
-        {#<a href="" class="btn btn-primary pull-right" id="saveFormInModal">{% block button %}Sprzedaj{% endblock %}</a>#}
-    {#</div>#}
-{#</span>#}
-{#{% endblock %}#}
+    <script type="text/javascript">
+        $(function(){
+            $("input[name*='startDate'], input[name*='endDate']").datetimepicker({
+                format: 'dd.mm.yyyy',
+                weekStart: 1,
+                autoclose: true,
+                startView: 2,
+                minView: 2,
+                maxView: 2,
+                clearBtn: true,
+                todayBtn: true,
+                todayHighlight: true,
+                language: "pl"
+            });
+        });
+    </script>
+{% endblock javascripts %}
 
-{#{% block javascript %}#}
-{#<script>#}
-    {#$(function() {#}
-        {#modal.setupFromNode("span#ui-sellVoucherData");#}
-        {#modal.setModalWindowClass("newVoucherModal");#}
-        {#window.newVoucherModal = new NewVoucher();#}
-    {#});#}
-{#</script>#}
-{#{% endblock javascript %}#}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
+{% endblock stylesheets %}

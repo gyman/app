@@ -216,4 +216,8 @@ class Details
     {
         return !empty($this->firstname) || !empty($this->lastname);
     }
+
+    public function fullName(){
+        return sprintf("%s %s", $this->firstname(), $this->lastname());
+    }
 }

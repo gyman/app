@@ -38,7 +38,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function new_user_buys_voucher()
     {
-        $repository = new InMemoryVoucherRepository();
+        $repository = new InMemoryMemberRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);
@@ -76,7 +76,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function user_with_credit_entries_buys_voucher()
     {
-        $repository = new InMemoryVoucherRepository();
+        $repository = new InMemoryMemberRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);

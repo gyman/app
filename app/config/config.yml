@@ -153,10 +153,20 @@ fos_js_routing:
 monolog:
   handlers:
     main:
+      type:         fingers_crossed
+      action_level: error
+      handler:      grouped_main
+
+    streamed_main:
       type:  stream
       path:  %kernel.logs_dir%/%kernel.environment%.log
       level: error
       channels: ['app']
+
+    sentry:
+      type:  raven
+      dsn:   'http://c74d588fdca1443381fc0cf36d79ccf9:ce62521bf0a54c03b7304c067e7e59bf@gyman.pl:9000/2'
+      level: error
 
     commands:
       type:  stream
@@ -164,6 +174,10 @@ monolog:
       level: debug
       channels: ['commands']
 
+    # Groups
+    grouped_main:
+      type:    group
+      members: [sentry, streamed_main]
 
 jms_serializer:
   handlers:
