@@ -4,6 +4,7 @@ namespace Gyman\Domain;
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Exception;
 use Gyman\Application\Exception\EntryClosingDateBeforeOpeningException;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\NotSupportedEntryType;
@@ -193,6 +194,14 @@ class Entry
      */
     public function payOffWithVoucher(Voucher $voucher)
     {
+        if(!$this->isType(self::TYPE_CREDIT))
+        {
+            return new Exception(sprintf(
+                "You can only pay off credit entry, %s is not allowed",
+                $this->type()
+            ));
+        }
+
         $this->type = self::TYPE_VOUCHER;
         $voucher->addEntry($this);
         $this->assignToVoucher($voucher);

@@ -39,7 +39,7 @@ Gyman\Domain\Member:
   oneToOne:
     currentVoucher:
       targetEntity: Gyman\Domain\Voucher
-      cascade: ["persist"]
+      cascade: ["all"]
       inversedBy: member
       joinColumn:
         name: current_voucher_id

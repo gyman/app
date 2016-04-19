@@ -83,7 +83,11 @@ class EntriesController extends Controller
     public function renderHistoryAction(Member $member)
     {
         return $this->render("GymanAppBundle:Entries:renderHistory.html.twig", [
-            'entries' => $this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC'])
+            'entries' => array_slice(
+                $this->get('gyman.entries.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC']),
+                0,
+                15
+            )
         ]);
     }
 

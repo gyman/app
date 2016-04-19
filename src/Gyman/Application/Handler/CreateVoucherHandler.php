@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Application\Handler;
 
+use Gyman\Application\Repository\EntryRepositoryInterface;
 use Gyman\Application\Repository\VoucherRepositoryInterface;
+use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Domain\Entry;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Command\CreateVoucherCommand;
@@ -21,23 +23,31 @@ class CreateVoucherHandler
     const FAILURE = 'gyman.voucher_created.failure';
 
     /**
-     * @var VoucherRepositoryInterface
+     * @var MemberRepositoryInterface
      */
-    private $repository;
+    private $memberRepository;
+
+    /**
+     * @var EntryRepositoryInterface
+     */
+    private $entriesRepository;
 
     /**
      * @var EventDispatcherInterface
      */
     private $dispatcher;
 
+
     /**
      * CreateMember constructor.
      * @param MemberRepositoryInterface $repository
+     * @param EntryRepositoryInterface $entriesRepository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(MemberRepositoryInterface $repository, EntryRepositoryInterface $entriesRepository, EventDispatcherInterface $dispatcher)
     {
-        $this->repository = $repository;
+        $this->memberRepository = $repository;
+        $this->entriesRepository = $entriesRepository;
         $this->dispatcher = $dispatcher;
     }
 
@@ -57,9 +67,10 @@ class CreateVoucherHandler
         $creditEntries = $voucher->member()->filterCreditEntries();
 
         if(!is_null($createVoucherCommand->maximumAmount) && $createVoucherCommand->maximumAmount < count($creditEntries)) {
-            throw new \Exception(
-                sprintf("User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries", count($creditEntries))
-            );
+            throw new \Exception(sprintf(
+                "User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries",
+                count($creditEntries)
+            ));
         }
 
         if(!$creditEntries->isEmpty()) {
@@ -68,8 +79,8 @@ class CreateVoucherHandler
             }, $creditEntries->toArray());
         }
 
-        $this->repository->save($voucher->member());
-
+        $this->memberRepository->save($voucher->member());
+        $this->entriesRepository->save($creditEntries);
 //        $this->dispatcher->dispatch(self::SUCCESS, new VoucherEvent($voucher, $author));
     }
 }

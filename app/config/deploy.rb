@@ -1,9 +1,9 @@
 set :application, "app.gyman"
 set :domain,      "gyman.pl"
-set :deploy_to,   "/home/gyman.pl/"
+set :deploy_to,   "/home/gyman/"
 set :app_path,    "app"
-set :clear_controllers, false
-set :user, "deploy"
+set :clear_controllers, true
+set :user, "gyman"
 
 set :ssh_options, {
     :forward_agent => true,

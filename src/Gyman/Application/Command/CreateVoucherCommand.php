@@ -35,6 +35,11 @@ class CreateVoucherCommand
     public $member;
 
     /**
+     * @var array
+     */
+    public $creditEntries;
+
+    /**
      * CreateVoucherCommand constructor.
      */
     public function __construct()

@@ -40,21 +40,7 @@ class VouchersController extends Controller
                 'member' => $member
         ]);
         
-        $creditEntries = $member->entries()->filter(function (Entry $entry) {
-            return $entry->isType(Entry::TYPE_CREDIT);
-        });
-
-        $creditEntriesCount = count($creditEntries);
-
-        if (!$creditEntries->isEmpty()) {
-            $this->addFlash('creditEntries', $this->get("translator")->transChoice(
-                'flash.member_has_credit_entries',
-                $creditEntriesCount,
-                [
-                    '%creditEntriesCount%' => $creditEntriesCount
-                ]
-            ));
-        }
+        $creditEntries = $member->filterCreditEntries();
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -66,6 +52,16 @@ class VouchersController extends Controller
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
                 $this->addFlash('error', 'flash.voucher_added.errors');
+            }
+        } else {
+            if (!$creditEntries->isEmpty()) {
+                $this->addFlash('creditEntries', $this->get("translator")->transChoice(
+                    'flash.member_has_credit_entries',
+                    count($creditEntries),
+                    [
+                        '%creditEntriesCount%' => count($creditEntries)
+                    ]
+                ));
             }
         }
 
