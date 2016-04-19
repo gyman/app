@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a0fa8e660ad40e2e26e4a325672e4620",
-    "content-hash": "41d8205bdfe86ec6f9356493726fe2cb",
+    "hash": "c2fd8bd0f4e85b90884997489ace4af0",
+    "content-hash": "44429cb94310e19d36062df2dc839dbd",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -217,16 +217,16 @@
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "1.1",
+            "version": "1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "90684adf792c3c59dadfdc80746610c779378356"
+                "reference": "93706e3ff94ba3b1f74c34946e566c9b696b8074"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/90684adf792c3c59dadfdc80746610c779378356",
-                "reference": "90684adf792c3c59dadfdc80746610c779378356",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/93706e3ff94ba3b1f74c34946e566c9b696b8074",
+                "reference": "93706e3ff94ba3b1f74c34946e566c9b696b8074",
                 "shasum": ""
             },
             "require": {
@@ -269,7 +269,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2016-03-02 22:55:20"
+            "time": "2016-04-19 23:19:56"
         },
         {
             "name": "dende/common-bundle",
@@ -4639,12 +4639,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
+                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
+                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
                 "shasum": ""
             },
             "require": {
@@ -4690,7 +4690,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-04-15 07:04:29"
         },
         {
             "name": "symfony/polyfill-php54",
@@ -5097,12 +5097,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "5356dbb7ee23181ddcf7a72d677ab8a4a9f2ef7b"
+                "reference": "44e3664ac920aad8284d70813d025ab27fa099e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/5356dbb7ee23181ddcf7a72d677ab8a4a9f2ef7b",
-                "reference": "5356dbb7ee23181ddcf7a72d677ab8a4a9f2ef7b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/44e3664ac920aad8284d70813d025ab27fa099e5",
+                "reference": "44e3664ac920aad8284d70813d025ab27fa099e5",
                 "shasum": ""
             },
             "require": {
@@ -5223,7 +5223,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-04-15 09:20:55"
+            "time": "2016-04-19 14:06:07"
         },
         {
             "name": "twig/extensions",
