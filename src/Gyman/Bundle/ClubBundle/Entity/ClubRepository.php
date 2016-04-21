@@ -24,4 +24,14 @@ class ClubRepository extends EntityRepository
         $em->persist($club);
         $em->flush();
     }
+
+    /**
+     * @param Club $club
+     */
+    public function save(Club $club)
+    {
+        $em = $this->getEntityManager();
+        $em->persist($club);
+        $em->flush($club);
+    }
 }

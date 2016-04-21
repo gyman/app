@@ -1,5 +1,15 @@
 services:
   gyman.landing.form.registration:
-      class: Gyman\Bundle\LandingPageBundle\Form\CreateClubType
-      tags:
-          - { name: form.type, alias: create_club }
+    class: Gyman\Bundle\LandingPageBundle\Form\CreateClubType
+    tags:
+      - { name: form.type, alias: create_club }
+
+  gyman.landing.create_club_handler:
+    class: Gyman\Bundle\LandingPageBundle\Handler\CreateClubHandler
+    arguments:
+      - "@fos_user.util.user_manipulator"
+      - "@gyman.club.factory"
+      - "@gyman.club.repository"
+      - "@doctrine.dbal.maintanance_connection"
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\CreateClubCommand }
