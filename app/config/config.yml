@@ -160,15 +160,21 @@ monolog:
 
     streamed_main:
       type:  stream
-      path:  %kernel.logs_dir%/%kernel.environment%.log
+      path:  "%kernel.logs_dir%/%kernel.environment%.log"
       level: error
       channels: ['app']
 
     commands:
       type:  stream
-      path:  %kernel.logs_dir%/commands_%kernel.environment%.log
+      path:  "%kernel.logs_dir%/commands_%kernel.environment%.log"
       level: debug
       channels: ['commands']
+
+    createNewClub:
+      type:  stream
+      path:  "%kernel.logs_dir%/create_club.log"
+      level: debug
+      channels: ['createNewClub']
 
     # Groups
     grouped_main:

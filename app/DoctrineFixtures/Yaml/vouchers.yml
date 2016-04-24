@@ -1,0 +1,8 @@
+--- 
+voucher-example:
+  activities: "activity-example"
+  maximumAmount: 10
+  price: 100
+  startDate: "today"
+  endDate: "+1 month"
+  member: member-example

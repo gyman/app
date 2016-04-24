@@ -1,9 +1,17 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use FOS\UserBundle\Model\UserInterface;
+use Gyman\Bundle\UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class DefaultController extends Controller
 {
@@ -32,5 +40,23 @@ class DefaultController extends Controller
     public function currentScheduleAction()
     {
         return [];
+    }
+
+    /**
+     * @Route("/login-post-register/{id}", name="gyman_app_login_after_registration")
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     * @ParamConverter("user", class="UserBundle:User")
+     */
+    public function loginAfterRegistrationAction(User $user, Request $request)
+    {
+        $token = new UsernamePasswordToken($user, $user->getPassword(), "main", $user->getRoles());
+        $this->get("security.token_storage")->setToken($token);
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+        return $this->redirect($this->generateUrl("gyman_settings", [], Router::ABSOLUTE_PATH));
     }
 }

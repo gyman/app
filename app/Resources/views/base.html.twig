@@ -41,7 +41,7 @@
                 <div class="container-fluid">
 
                     <a href="{{ path("gyman_app_default_index") }}" class="brand">
-                        {% if app.session.get('current_club') is not null %}
+                        {% if app.session.get('current_club') is not null and app.session.get('current_club').details.logo is not null %}
                             {% set logo = app.session.get('current_club').subdomain.name ~ '/' ~ app.session.get('current_club').details.logo %}
                             <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="applogo" />
                             <span id="appname">{{ app.session.get('current_club').name }}</span>

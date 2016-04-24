@@ -7,9 +7,12 @@ services:
   gyman.landing.create_club_handler:
     class: Gyman\Bundle\LandingPageBundle\Handler\CreateClubHandler
     arguments:
+      - "@kernel"
       - "@fos_user.util.user_manipulator"
       - "@gyman.club.factory"
       - "@gyman.club.repository"
       - "@doctrine.dbal.maintanance_connection"
+      - "@monolog.logger.createNewClub"
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\CreateClubCommand }
+      - { name: monolog.logger, channel: createNewClub }

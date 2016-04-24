@@ -32,7 +32,7 @@ class DefaultControllerTest extends BaseFunctionalTestCase
     /**
      * @test
      */
-    public function new_member_form_is_posted_and_entity_is_added()
+    public function register_form_is_posted_and_club_is_created()
     {
         $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate("gyman_landing_index"));
         $this->assertEquals(200, $this->getStatusCode());
@@ -45,7 +45,7 @@ class DefaultControllerTest extends BaseFunctionalTestCase
             'create_club[password]' => 'zaq1@WSXcde3',
             'create_club[password_repeat]'    => 'zaq1@WSXcde3',
             'create_club[club]'   => 'Capoeira Camangula',
-            'create_club[subdomain]'     => 'capoeira-camangula',
+            'create_club[subdomain]'     => 'camangula',
         ]);
 
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());

@@ -1,3 +1,11 @@
+imports:
+  - { resource: forms.yml }
+  - { resource: handlers.yml }
+  - { resource: menu.yml }
+  - { resource: repositories.yml }
+  - { resource: twig_extensions.yml }
+  - { resource: validators.yml }
+
 services:
   gyman.app.tenant_provider:
     class: Gyman\Bundle\AppBundle\Services\TenantProvider
@@ -40,7 +48,7 @@ services:
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
     arguments:
-     - @gyman.repository.section
+     - "@gyman.repository.section"
     tags:
       - {name: kernel.event_listener, method: onCalendarCreate, event: dende_calendar.calendar.after_creation}
 
@@ -97,9 +105,3 @@ services:
       calls:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
-
-#  monolog.processor.sentry_context:
-#      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
-#      arguments:  ["@security.token_storage"]
-#      tags:
-#          - { name: monolog.processor, method: processRecord, handler: sentry }

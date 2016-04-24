@@ -1,0 +1,7 @@
+entry-example:
+  type:       voucher
+  startDate:  "this week wednesday 16:00"
+  endDate:    "this week wednesday 16:45"
+  price:      ~
+  member:     member-example
+  occurrence: occurrence-example-005

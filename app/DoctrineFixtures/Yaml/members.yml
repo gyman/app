@@ -1,0 +1,16 @@
+---
+member-example:
+    birthdate:          "1984-09-27 12:00:00"
+    deletedAt:          null
+    email:              przykladowy@email.pl
+    foto:               null
+    gender:             male
+    firstname:          Jan
+    lastname:           Kowalski
+    notes:              jakaś notatka
+    phone:              604000000
+    zipcode:            88-888
+    belt:               white
+    barcode:            example-barcode
+    sections:
+      - section-example

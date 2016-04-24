@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class CalendarsData
  * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
  */
-final class CalendarsData extends BaseFixture implements ContainerAwareInterface
+class CalendarsData extends BaseFixture implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface

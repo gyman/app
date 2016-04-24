@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class EventsData
  * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
  */
-final class OccurrencesData extends BaseFixture implements ContainerAwareInterface
+class OccurrencesData extends BaseFixture implements ContainerAwareInterface
 {
     /** @var string $dir */
     protected $dir = __DIR__;

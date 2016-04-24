@@ -3,19 +3,19 @@
 namespace Gyman\Bundle\LandingPageBundle\Controller;
 
 use Gyman\Application\Command\CreateClubCommand;
+use Gyman\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="gyman_landing_index")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -28,15 +28,9 @@ class DefaultController extends Controller
                 $data = $form->getData();
                 $this->get("tactician.commandbus")->handle($data);
 
-                $user = $this->getDoctrine()->getRepository("UserBundle:User")->findOneBy([
-                    "email" => $data->email
-                ]);
-
-                $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-                $this->get("security.token_storage")->setToken($token);
-
-                $event = new InteractiveLoginEvent($request, $token);
-                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+                /** @var User $user */
+                $user = $this->getDoctrine()->getRepository("UserBundle:User")->findOneByEmail($data->email);
+                $userId = $user->id();
 
                 $this->addFlash("success", "user.created");
 
@@ -45,10 +39,11 @@ class DefaultController extends Controller
                     $request->getScheme(),
                     $data->subdomain,
                     $this->getParameter("base_url"),
-                    $this->generateUrl("gyman_settings", [], Router::ABSOLUTE_PATH)
+                    $this->generateUrl("gyman_app_login_after_registration", ["id" => $userId], Router::ABSOLUTE_PATH)
                 ));
+
             } else {
-//                $this->addFlash();
+                $this->addFlash('warning', 'user.error_creating_user');
             }
         }
 

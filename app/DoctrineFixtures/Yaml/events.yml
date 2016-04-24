@@ -1,0 +1,9 @@
+event-example:
+  id:           ~
+  calendar:     calendar-example
+  title:        "Przykładowe wydarzenie"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  duration:     45
+  startDate:    "-1 week 16:00"
+  endDate:      "+1 week 16:45"
