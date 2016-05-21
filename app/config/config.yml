@@ -94,6 +94,10 @@ swiftmailer:
 
     logging:        true
 
+    spool:
+        type: file
+        path: '%kernel.root_dir%/spool'
+
 #oneup_uploader:
 #    mappings:
 #        gallery:
