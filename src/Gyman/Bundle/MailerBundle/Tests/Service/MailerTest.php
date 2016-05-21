@@ -17,9 +17,7 @@ class MailerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->mailer = new Mailer($this->getMailerMock());
-        $this->mailer->setTemplating($this->getTemplatingMock());
-        $this->mailer->setTranslator($this->getTranslatorMock());
+        $this->mailer = new Mailer($this->getMailerMock(), $this->getTranslatorMock(), $this->getTemplatingMock());
     }
 
     /**

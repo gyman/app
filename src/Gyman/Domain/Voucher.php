@@ -225,7 +225,14 @@ class Voucher
      */
     public function leftDaysAmount($relatedTo = 'now')
     {
-        return $this->endDate->diff(new DateTime($relatedTo))->days;
+        $diffToDate = new DateTime($relatedTo);
+
+        if($diffToDate > $this->endDate) {
+            return 0;
+        }
+
+        return $this->endDate->diff($diffToDate)->days;
+
     }
 
     /**
@@ -337,6 +344,16 @@ class Voucher
      */
     public function isCurrent()
     {
-        return $this->member()->currentVoucher() === $this;
+        if(is_null($this->member()->currentVoucher())) {
+            return false;
+        }
+
+        $currentVoucher = $this->member()->currentVoucher();
+
+        if($currentVoucher->leftDaysAmount() === 0 || $currentVoucher->leftEntriesAmount() === 0) {
+            return false;
+        }
+
+        return $currentVoucher === $this;
     }
 }

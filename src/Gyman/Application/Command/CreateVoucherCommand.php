@@ -22,7 +22,7 @@ class CreateVoucherCommand
     /**
      * @var integer
      */
-    public $maximumAmount = 12;
+    public $maximumAmount = 10;
 
     /**
      * @var float

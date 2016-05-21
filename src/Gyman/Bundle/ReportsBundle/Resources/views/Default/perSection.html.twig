@@ -32,7 +32,10 @@
         <ol>
         {% for section in moneyPerSection if moneyPerSection|length > 0 %}
             <li>
-                {{ section.title }} - {{ section.sum }} PLN
+                {% if row.id is defined %}<a href="#">{% endif %}
+                    aaaa {{ row.title }}
+                    {% if row.id is defined %}</a>{% endif %}
+                - {{ row.sum }} PLN
             </li>
         {% else %}
             <li>Brak wyników - zmień zakres czasu</li>

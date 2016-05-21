@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\Router;
+use Twig_Environment;
 
 /**
  * Class SubdomainNameListener
@@ -27,14 +28,21 @@ class SubdomainNameListener
     private $container;
 
     /**
+     * @var Twig_Environment
+     */
+    private $twig;
+
+    /**
      * SubdomainNameListener constructor.
      * @param SubdomainProviderInterface $subdomainProvider
-     * @param $container
+     * @param Container $container
+     * @param Twig_Environment $twig
      */
-    public function __construct($subdomainProvider, Container $container)
+    public function __construct(SubdomainProviderInterface $subdomainProvider, Container $container, Twig_Environment $twig)
     {
         $this->subdomainProvider = $subdomainProvider;
         $this->container = $container;
+        $this->twig = $twig;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -68,5 +76,6 @@ class SubdomainNameListener
         Globals::setSubdomain($subdomainName);
 
         $this->container->get('session')->set('current_club', $club);
+        $this->twig->addGlobal('club', $club);
     }
 }

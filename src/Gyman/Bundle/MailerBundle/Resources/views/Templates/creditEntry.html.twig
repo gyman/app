@@ -1,0 +1,54 @@
+{% extends "MailerBundle::layout.html.twig" %}
+
+{% block content %}
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Odnotowano wejście na zajęcia w klubie '{{ club.name }}'.</p>
+                            <p>Nazwa zajęć to '{{ entry.occurrence.event.calendar.name }}'</p>
+                            <p>Data i godzina wejścia: '{{ entry.startDate|date('d.m.Y H:i') }}'</p>
+
+                            {% if entry.isType("voucher") %}
+                            <p>Ważność Twojego obecnego karnetu:
+                                {{ entry.voucher.startDate|date('d.m.Y') }} - {{ entry.voucher.endDate|date('d.m.Y') }}
+                                (pozostało {{ entry.voucher.leftDaysAmount()}} dni)
+                            </p>
+                                {% if not entry.voucher.isUnlimited() %}
+                                <p>
+                                    Pozostała ilość wejść: {{ entry.voucher.leftEntriesAmount() }}
+                                    (wykorzystano {{ entry.voucher.entries|length }} z {{ entry.voucher.maximumAmount() }} wejść)
+                                </p>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if entry.isType("credit") %}
+                                {% set creditEntries = entry.member.filterCreditEntries() %}
+                                <p>Nie masz karnetu, a wejście było typu "kredytowe". Oznacza to, że przy zakupie karnetu zostanie ono odjęte z nowego karnetu</p>
+                                <p>
+                                    Masz do tej pory na koncie {{ creditEntries|length }} wejść kredytowych:
+                                </p>
+
+                                <ul>
+                                {% for creditEntry in creditEntries %}
+                                    <li>{{ creditEntry.startDate|date('d.m.Y H:i') }} - {{ entry.occurrence.event.calendar.name }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            <p>
+                                Jeżeli Twoim zdaniem w powyższe dane wkradł się błąd, skontaktuj się z właścicielem klubu ({{ club.details.email_address }})
+                            </p>
+
+                            <p>
+                                -- <br/>
+                                Z poważaniem<br />
+                                Ekipa Gyman.pl
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

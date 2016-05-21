@@ -125,7 +125,7 @@ final class EntryType extends AbstractType
                 Entry::TYPE_PAID    => 'entries.form.entry_type.paid.label',
             ];
 
-            if (!$data->member->hasCurrentVoucher() || $data->member->currentVoucher()->leftEntriesAmount() === 0) {
+            if (!$data->member->hasCurrentVoucher() || !$data->member->currentVoucher()->isCurrent()) {
                 unset($choices[Entry::TYPE_VOUCHER]);
                 $defaultChoice = Entry::TYPE_CREDIT;
             } else {

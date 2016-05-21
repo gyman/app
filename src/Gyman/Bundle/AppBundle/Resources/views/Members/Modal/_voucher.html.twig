@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    {% if member.hasCurrentVoucher %}
+    {% if member.hasCurrentVoucher and member.currentVoucher().isCurrent() %}
         {% set voucher = member.currentVoucher %}
     <div class="row-fluid">
 

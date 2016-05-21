@@ -2,6 +2,7 @@ imports:
   - { resource: forms.yml }
   - { resource: handlers.yml }
   - { resource: menu.yml }
+  - { resource: listeners.yml }
   - { resource: repositories.yml }
   - { resource: twig_extensions.yml }
   - { resource: validators.yml }
@@ -61,8 +62,9 @@ services:
   gyman.app.subdomain_name_lister:
     class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
     arguments:
-      - @=service(parameter('subdomain_provider_service'))
-      - @service_container
+      - '@=service(parameter("subdomain_provider_service"))'
+      - '@service_container'
+      - '@twig'
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
@@ -83,12 +85,11 @@ services:
       class:          Gyman\Bundle\AppBundle\Services\Manager\VoucherManager
       parent:         gyman.base.entity_manager
       calls:
-           - [ setClass, [Gyman\Domain\Voucher] ]
-           - [ setEntityManager, [@doctrine.orm.tenant_entity_manager]]
+           - [ setClass, ['Gyman\Domain\Voucher'] ]
+           - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
 
-services:
-    monolog.processor.sentry_context:
-        class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
-        arguments:  ["@security.token_storage"]
-        tags:
-            - { name: monolog.processor, method: processRecord, handler: sentry }
+  monolog.processor.sentry_context:
+      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
+      arguments:  ["@security.token_storage"]
+      tags:
+          - { name: monolog.processor, method: processRecord, handler: sentry }

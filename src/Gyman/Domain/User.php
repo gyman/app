@@ -7,5 +7,7 @@ namespace Gyman\Domain;
  */
 class User implements UserInterface
 {
-
+    public function getName(){
+        
+    }
 }

@@ -6,8 +6,8 @@ parameters:
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/gymanapp/images/no-profile.gif
 
-  galleryDirectory: %kernel.root_dir%/../web/uploads/gallery/
-  galleryPath: /uploads/gallery/
+  galleryDirectory: '%kernel.root_dir%/../web/uploads/gallery/'
+  galleryPath: '/uploads/gallery/'
 
   revision_file: "%kernel.root_dir%/../REVISION"
   memcached.servers:
@@ -22,7 +22,7 @@ services:
     memcached:
         class: Memcached
         calls:
-            - [ addServers, [ %memcached.servers% ]]
+            - [ addServers, [ '%memcached.servers%' ]]
 
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
@@ -30,7 +30,7 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
             - { name: doctrine.event_subscriber, connection: tenant }
         calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
     data_fixture_loader:
         class: Gyman\Bundle\TestBundle\Services\FixtureLoader
@@ -86,14 +86,12 @@ twig:
             - ::fields.html.twig
 
 swiftmailer:
-    transport: smtp
-    host:      smtp.gmail.com
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    port:      "%mailer_port%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    port:                 465
-    encryption:           ssl
-    auth_mode:            ~
-    
+
     logging:        true
 
 #oneup_uploader:

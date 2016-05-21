@@ -58,5 +58,11 @@ class EmailAddress
         return $this->email();
     }
 
-
+    /**
+     * @return bool
+     */
+    public function isInternal()
+    {
+        return (bool) strpos($this->email, "@gyman.pl");
+    }
 }

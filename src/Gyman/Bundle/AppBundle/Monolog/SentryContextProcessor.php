@@ -21,7 +21,7 @@ class SentryContextProcessor
             $user = $token->getUser();
             if ($user instanceof UserInterface) {
                 $record['context']['user'] = array(
-                    'name' => $user->getName(),
+//                    'name' => $user->getName(),
                     'username' => $user->getUsername(),
                     'email' => $user->getEmail(),
                 );

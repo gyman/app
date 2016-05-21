@@ -41,4 +41,12 @@ class EntryEvent extends Event implements DomainEventInterface
         $this->author = $author;
         $this->exception = $exception;
     }
+
+    /**
+     * @return Entry
+     */
+    public function getEntry()
+    {
+        return $this->entry;
+    }
 }

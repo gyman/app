@@ -1,0 +1,8 @@
+---
+services:
+  app.listener.open_entry:
+    class: Gyman\Bundle\AppBundle\Listener\OpenCreditEntryListener
+    arguments:
+      - "@mailer.credit_entry"
+    tags:
+      - { name: kernel.event_listener, event: 'gyman.open_entry.success', method: "onSuccess" }
