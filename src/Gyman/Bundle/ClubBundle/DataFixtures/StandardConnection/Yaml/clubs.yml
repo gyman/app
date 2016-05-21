@@ -2,7 +2,6 @@ club-dende:
   name:       Dende
   subdomain:  dende
   sections: []
-  owners: []
   database:
     name:     gyman_dende
     user:     root
@@ -23,7 +22,6 @@ club-rio:
   name:       Rio Grappling Club
   subdomain:  rio
   sections: []
-  owners: []
   database:
     name:     gyman_rio
     user:     root
@@ -44,7 +42,6 @@ club-extreme:
   name:       Extreme Fighters
   subdomain:  extreme
   sections: []
-  owners: []
   database:
     name:     gyman_extreme
     user:     root

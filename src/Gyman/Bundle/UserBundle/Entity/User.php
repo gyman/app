@@ -11,7 +11,7 @@ use Gyman\Domain\UserInterface;
  * @ORM\Entity(repositoryClass="Gyman\Bundle\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="users")
  */
-class User extends BaseUser implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id

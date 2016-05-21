@@ -1,0 +1,21 @@
+Gyman\Bundle\ClubBundle\Entity\Involvement:
+  type:   entity
+  table:  involvement
+  repositoryClass:  Gyman\Bundle\ClubBundle\Entity\ClubRepository
+
+  id:
+    id:
+      type: guid
+      generator: { strategy: UUID }
+
+  oneToMany:
+    user:
+      targetEntity: Gyman\Bundle\ClubBundle\Entity\User
+      mappedBy: involvements
+    club:
+      targetEntity: Gyman\Bundle\ClubBundle\Entity\Club
+      mappedBy: involvements
+
+  fields:
+    roles:
+      type: json_array

@@ -21,9 +21,9 @@ class Club
     protected $name;
 
     /**
-     * @var ArrayCollection|User[]
+     * @var ArrayCollection|Involvement[]
      */
-    protected $owners;
+    public $involvements;
 
     /**
      * @var ArrayCollection|Section[]
