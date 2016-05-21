@@ -8,9 +8,11 @@
 /web/fonts/
 /app/bootstrap.php.cache
 /app/cache/*
+/app/spool/*
 /app/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
+!app/spool/.gitkeep
 !app/logs/.gitkeep
 /build/
 /vendor/
