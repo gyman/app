@@ -81,6 +81,7 @@ twig:
       sentry_url:     %sentry_url%
       gallery_dir:    %galleryPath%
       google_maps_api_key: %google_maps_api_key%
+      baseUrl: '%base_url%'
     form:
         resources:
             - ::fields.html.twig

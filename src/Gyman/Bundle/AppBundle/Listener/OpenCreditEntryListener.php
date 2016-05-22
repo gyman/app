@@ -4,6 +4,7 @@ namespace Gyman\Bundle\AppBundle\Listener;
 use Gyman\Application\Event\EntryEvent;
 use Gyman\Bundle\MailerBundle\Service\Mailer;
 use Gyman\Domain\Entry;
+use Swift_Attachment;
 
 class OpenCreditEntryListener
 {
@@ -36,6 +37,13 @@ class OpenCreditEntryListener
         $this->mailer->setParameters([
             "entry" => $entry
         ]);
+
+//        /** @var Club $club */
+//        $club = '';
+//
+//        $this->mailer->attach(
+//            Swift_Attachment::fromPath($club->de)->setDisposition('inline')
+//        );
 
         $this->mailer->setTo([(string) $email => $fullname]);
         $this->mailer->setSubject("[gyman.pl] Wejście na zajęcia!");
