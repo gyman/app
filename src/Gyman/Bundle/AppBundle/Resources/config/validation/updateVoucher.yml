@@ -1,0 +1,10 @@
+Gyman\Application\Command\UpdateVoucherCommand:
+  properties:
+    price:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna cena to {{ compared_value }}"
+    maximumAmount:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna ilość wejść to {{ compared_value }}"

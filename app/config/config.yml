@@ -166,11 +166,6 @@ monolog:
       level: error
       channels: ['app']
 
-    sentry:
-      type:  raven
-      dsn:   'http://c74d588fdca1443381fc0cf36d79ccf9:ce62521bf0a54c03b7304c067e7e59bf@gyman.pl:9000/2'
-      level: error
-
     commands:
       type:  stream
       path:  %kernel.logs_dir%/commands_%kernel.environment%.log
@@ -180,7 +175,7 @@ monolog:
     # Groups
     grouped_main:
       type:    group
-      members: [sentry, streamed_main]
+      members: [streamed_main]
 
 jms_serializer:
   handlers:
@@ -228,11 +223,34 @@ knp_time: ~
 nelmio_api_doc: ~
 
 accelerator_cache:
-    host: %base_url%
-    web_dir: %kernel.root_dir%/../web
+    host:               "%base_url%"
+    web_dir:            "%kernel.root_dir%/../web"
 
 bazinga_hateoas:
   metadata:
     cache:                file
     file_cache:
-      dir:              %kernel.cache_dir%/hateoas
+      dir:              "%kernel.cache_dir%/hateoas"
+
+liip_monitor:
+    mailer:
+        enabled:              false
+        recipient:            uirapuruadg@gmail.com
+        sender:               gyman.pl@gmail.com
+        subject:              "Health check"
+        send_on_warning:      true
+    checks:
+        php_extensions: [xdebug, imagick, intl, mcrypt, json]
+        php_version:
+          5.6.0: ">="
+        disk_usage:
+          warning:              70
+          critical:             90
+          path:                 '%kernel.cache_dir%'
+        symfony_requirements:
+            file:                 '%kernel.root_dir%/SymfonyRequirements.php'
+        doctrine_dbal:
+          - default
+#          - tenant
+        security_advisory:
+          lock_file:            '%kernel.root_dir%/../composer.lock'

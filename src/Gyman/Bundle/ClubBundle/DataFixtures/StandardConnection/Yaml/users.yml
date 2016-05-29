@@ -1,3 +1,4 @@
+---
 user-uirapuru:
   firstname: Grzegorz
   lastname: Kaszuba
@@ -6,9 +7,6 @@ user-uirapuru:
   plainPassword: uirapuru
   roles: [ROLE_SUPER_ADMIN]
   enabled: true
-  clubs:
-    - club-dende
-    - club-rio
 
 user-super-admin:
   firstname: Grzegorz
@@ -18,10 +16,6 @@ user-super-admin:
   plainPassword: superadmin
   roles: [ROLE_SUPER_ADMIN]
   enabled: true
-  clubs:
-    - club-dende
-    - club-rio
-    - club-extreme
 
 user-admin:
   firstname: Grzegorz
@@ -31,10 +25,6 @@ user-admin:
   plainPassword: admin
   roles: [ROLE_ADMIN]
   enabled: true
-  clubs:
-    - club-dende
-    - club-rio
-    - club-extreme
 
 user-user:
   firstname: Grzegorz
@@ -44,5 +34,3 @@ user-user:
   plainPassword: user
   roles: [ROLE_USER]
   enabled: true
-  clubs:
-    - club-rio

@@ -12,6 +12,7 @@ use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Application\Handler\CreateVoucherHandler;
 use Gyman\Application\Handler\OpenEntryHandler;
 use Gyman\Application\Handler\UpdateMemberHandler;
+use Gyman\Application\Repository\InMemoryEntryRepository;
 use Gyman\Application\Repository\InMemoryMemberRepository;
 use Gyman\Application\Repository\InMemoryVoucherRepository;
 use Gyman\Domain\Entry;
@@ -38,7 +39,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function new_user_buys_voucher()
     {
-        $repository = new InMemoryMemberRepository();
+        $memberRepository = new InMemoryMemberRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);
@@ -50,11 +51,13 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
         $command->price = 100.00;
         $command->maximumAmount = 10;
 
-        $handler = new CreateVoucherHandler($repository, $dispatcher);
+        $entryRepository = new InMemoryEntryRepository();
+
+        $handler = new CreateVoucherHandler($memberRepository, $entryRepository, $dispatcher);
         $handler->handle($command);
 
         $this->assertCount(1, $member->vouchers());
-        $this->assertCount(1, $repository->findAll());
+        $this->assertCount(1, $memberRepository->findAll());
         $this->assertNull($member->currentVoucher());
 
         $command = clone($command);
@@ -63,7 +66,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
         $handler->handle($command);
 
         $this->assertCount(2, $member->vouchers());
-        $this->assertCount(2, $repository->findAll());
+        $this->assertCount(1, $memberRepository->findAll());
         $this->assertInstanceOf(Voucher::class, $member->currentVoucher());
     }
 
@@ -76,7 +79,7 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function user_with_credit_entries_buys_voucher()
     {
-        $repository = new InMemoryMemberRepository();
+        $memberRepository = new InMemoryMemberRepository();
         $dispatcher = m::mock(EventDispatcher::class);
 
         $member = MemberFactory::createFromArray([]);
@@ -129,12 +132,14 @@ class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
         $command->price = 100.00;
         $command->maximumAmount = 10;
 
-        $handler = new CreateVoucherHandler($repository, $dispatcher);
+        $entryRepository = new InMemoryEntryRepository();
+
+        $handler = new CreateVoucherHandler($memberRepository, $entryRepository, $dispatcher);
         $handler->handle($command);
 
         $this->assertCount(1, $member->vouchers());
         $this->assertCount(5, $member->entries());
-        $this->assertCount(1, $repository->findAll());
+        $this->assertCount(1, $memberRepository->findAll());
         $this->assertInstanceOf(Voucher::class, $member->currentVoucher());
         $this->assertEquals(7, $member->currentVoucher()->leftEntriesAmount());
     }

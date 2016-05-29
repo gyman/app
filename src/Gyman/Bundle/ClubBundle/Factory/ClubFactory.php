@@ -22,7 +22,6 @@ class ClubFactory
             null,
             $params['name'],
             $params['sections'],
-            $params['owners'],
             new Subdomain($params['subdomain']),
             new Database(
                 $params['database']['name'],

@@ -18,6 +18,13 @@ services:
     tags:
       - { name: form.type, alias: gyman_voucher_form }
 
+  gyman.vouchers.form.voucher_update:
+    class: 'Gyman\Bundle\AppBundle\Form\UpdateVoucherType'
+    arguments:
+      - "@gyman.members.repository"
+    tags:
+      - { name: form.type, alias: gyman_voucher_update_form }
+
   gyman.members.member_form_type:
     class: Gyman\Bundle\AppBundle\Form\MemberType
     tags:

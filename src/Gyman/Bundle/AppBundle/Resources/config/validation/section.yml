@@ -1,0 +1,13 @@
+Gyman\Domain\Section:
+  constraints:
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields:
+            - title
+          message: Już istnieje sekcja o takiej nazwie!
+  properties:
+    title:
+      - NotBlank:
+          message: Pole nie może być puste!
+      - Length:
+          min: 1
+          max: 50

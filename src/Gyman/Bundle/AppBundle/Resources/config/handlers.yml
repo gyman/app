@@ -10,6 +10,14 @@ services:
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateVoucherCommand }
 
+  gyman.vouchers.update_voucher:
+    class: Gyman\Application\Handler\UpdateVoucherHandler
+    arguments:
+      - "@gyman.vouchers.repository"
+      - "@event_dispatcher"
+    tags:
+        - { name: tactician.handler, command: Gyman\Application\Command\UpdateVoucherCommand }
+
   gyman.vouchers.close_voucher:
     class: Gyman\Application\Service\CloseVoucher
     arguments:

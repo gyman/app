@@ -99,4 +99,12 @@ class Section
     {
         $this->calendar = $calendar;
     }
+
+    /**
+     * @param $members
+     */
+    public function setMembers($members)
+    {
+        $this->members = $members;
+    }
 }

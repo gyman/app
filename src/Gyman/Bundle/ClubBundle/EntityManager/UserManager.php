@@ -1,15 +1,16 @@
 <?php
-namespace Gyman\Bundle\UserBundle\Entity;
+namespace Gyman\Bundle\ClubBundle\EntityManager;
 
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
+use Gyman\Bundle\ClubBundle\Entity\User;
 
 /**
  * Class UserManager
- * @package Gyman\Bundle\UserBundle\Entity
+ * @package Gyman\Bundle\ClubBundle\Entity
  */
 final class UserManager extends BaseUserManager
 {

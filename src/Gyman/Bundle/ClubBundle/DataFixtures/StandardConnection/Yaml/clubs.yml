@@ -2,6 +2,8 @@ club-dende:
   name:       Dende
   subdomain:  dende
   sections: []
+  users:
+    user-uirapuru: [ROLE_SUPER_ADMIN]
   database:
     name:     gyman_dende
     user:     root
@@ -18,10 +20,13 @@ club-dende:
     logo: ~
     about: "Welcome to our club"
     account_number: "000000000000000000000000"
+
 club-rio:
   name:       Rio Grappling Club
   subdomain:  rio
   sections: []
+  users:
+    user-uirapuru: [ROLE_SUPER_ADMIN]
   database:
     name:     gyman_rio
     user:     root
@@ -38,9 +43,12 @@ club-rio:
     logo: ~
     about: ~
     account_number: ~
+
 club-extreme:
   name:       Extreme Fighters
   subdomain:  extreme
+  users:
+    user-uirapuru: [ROLE_SUPER_ADMIN]
   sections: []
   database:
     name:     gyman_extreme

@@ -1,0 +1,19 @@
+Gyman\Bundle\ClubBundle\Entity\Details:
+  properties:
+    opened_from:
+      - Regex:
+          pattern: /^\d{2}\:\d{2}$/
+          match:  true
+          message: Godzina otwarcia musi być w formacie XX:XX
+    opened_till:
+      - Regex:
+          pattern: /^\d{2}\:\d{2}$/
+          match:  true
+          message: Godzina zamknięcia musi być w formacie XX:XX
+    zipcode:
+      - Regex:
+          pattern: /^\d{2}\-\d{3}$/
+          match:  true
+          message: Kod pocztowy musi być w formacie XX-XXX
+    email_address:
+      - Email: ~

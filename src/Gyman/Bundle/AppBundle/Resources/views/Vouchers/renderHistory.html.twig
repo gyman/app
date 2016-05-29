@@ -2,18 +2,17 @@
     <thead>
     <tr>
         <th>{{ 'vouchers.startDate.table_header'|trans }}</th>
-        <th>{{ 'vouchers.endDate.table_header'|trans }}</th>
         <th>{{ 'vouchers.entries.table_header'|trans }}</th>
         <th>{{ 'vouchers.price.table_header'|trans }}</th>
+        <th>{{ 'vouchers.actions.table_header'|trans }}</th>
     </tr>
     </thead>
     <tbody>
     {% for voucher in vouchers %}
+    {# @var voucher \Gyman\Domain\Voucher #}
         <tr>
             <td>
                 {{  voucher.startDate|date("d.m.Y")  }}
-            </td>
-            <td>
                 <span{% if voucher.isClosed() %} style="text-decoration: line-through;"{% endif %}>{{  voucher.endDate|date("d.m.Y")  }}</span>
 
                 {% if voucher.isClosed() %}
@@ -25,6 +24,12 @@
             </td>
             <td>
                 {{  voucher.price }}
+            </td>
+            <td>
+                {% if not voucher.closed %}
+                <a href="{{ path("gyman_vouchers_close", {id : voucher.id}) }}" onClick="return confirm('{{ 'members.close_voucher.confirm_alert'|trans }}')">{{ "member.form.close_voucher"|trans }}</a> |
+                {% endif %}
+                <a href="{{ path("gyman_voucher_update", {id : voucher.id}) }}">{{ "member.form.update_voucher"|trans }}</a>
             </td>
         </tr>
     {% endfor %}

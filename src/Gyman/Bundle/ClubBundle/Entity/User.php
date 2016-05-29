@@ -26,17 +26,17 @@ class User extends BaseUser implements UserInterface
     /**
      * @var Involvement[]
      */
-    public $involvements;
+    private $involvements;
 
     /**
      * @string
      */
-    public $firstname;
+    private $firstname;
 
     /**
      * @string
      */
-    public $lastname;
+    private $lastname;
 
     /**
      * @return string
@@ -52,5 +52,36 @@ class User extends BaseUser implements UserInterface
     public function getFoto()
     {
         return '/bundles/gymanapp/images/no-profile.gif';
+    }
+
+    /**
+     * @param $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @param $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getClubs()
+    {
+        return $this->involvements->filter(function(Involvement $involvement) {
+            return $involvement->club;
+        });
     }
 }

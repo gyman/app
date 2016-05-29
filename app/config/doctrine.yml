@@ -45,7 +45,6 @@ doctrine:
                     enabled: true
             mappings:
                 StofDoctrineExtensionsBundle: ~
-                UserBundle: ~
                 ClubBundle: ~
           tenant:
             auto_mapping:     false # disabled so we can assign entities to our own connections

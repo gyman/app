@@ -7,7 +7,7 @@ use Gyman\Domain\Member;
  * Class CreateVoucherCommand
  * @package Gyman\Application\Command
  */
-class CreateVoucherCommand
+class CreateVoucherCommand implements VoucherCommandInterface
 {
     /**
      * @var \DateTime
