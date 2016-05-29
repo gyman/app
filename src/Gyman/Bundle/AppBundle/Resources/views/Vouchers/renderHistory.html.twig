@@ -1,30 +1,50 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th>{{ 'vouchers.startDate.table_header'|trans }}</th>
-        <th>{{ 'vouchers.endDate.table_header'|trans }}</th>
+        <th>{{ 'vouchers.dates.table_header'|trans }}</th>
         <th>{{ 'vouchers.entries.table_header'|trans }}</th>
         <th>{{ 'vouchers.price.table_header'|trans }}</th>
+        <th>{{ 'vouchers.actions.table_header'|trans }}</th>
     </tr>
     </thead>
     <tbody>
     {% for voucher in vouchers %}
-        <tr>
+    {# @var voucher \Gyman\Domain\Voucher #}
+        <tr{% if voucher.current %} style="background-color: #f9f2bd"{% endif %}>
             <td>
-                {{  voucher.startDate|date("d.m.Y")  }}
-            </td>
-            <td>
-                <span{% if voucher.isClosed() %} style="text-decoration: line-through;"{% endif %}>{{  voucher.endDate|date("d.m.Y")  }}</span>
+                od: <strong>{{  voucher.startDate|date("d.m.y")  }}</strong>
 
-                {% if voucher.isClosed() %}
-                    {{  voucher.closedAt|date("d.m.Y") }}
+                do: <span{% if voucher.isClosed() %} style="text-decoration: line-through;"{% endif %}>
+                    <strong>{{ voucher.endDate|date("d.m.y") }}</strong>
+                </span>
+
+                {% if voucher.closed %}
+                    <br />(zamknięty {{  voucher.closedAt|date("d.m.y") }})
+                {% endif %}
+
+                {% if voucher.endDate is not null %}
+                    <br />ważny przez <strong>{{ voucher.totalDaysAmount }}</strong> dni
                 {% endif %}
             </td>
             <td>
-                zostało {{ voucher.leftEntriesAmount }} z {{ voucher.maximumAmount }}
+                {% if voucher.unlimited %}
+                    bez limitu wejść
+                {% else %}
+                    {% if voucher.leftEntriesAmount > 0 %}
+                        zostało <strong>{{ voucher.leftEntriesAmount }}</strong> z <strong>{{ voucher.maximumAmount }} wejść</strong>
+                    {% else %}
+                        brak wolnych wejść
+                    {% endif %}
+                {% endif %}
             </td>
             <td>
                 {{  voucher.price }}
+            </td>
+            <td>
+                {% if not voucher.closed and voucher.leftDaysAmount > 0 %}
+                <a href="{{ path("gyman_vouchers_close", {id : voucher.id}) }}" onClick="return confirm('{{ 'members.close_voucher.confirm_alert'|trans }}')">{{ "member.form.close_voucher"|trans }}</a> |
+                {% endif %}
+                <a href="{{ path("gyman_voucher_update", {id : voucher.id}) }}">{{ "member.form.update_voucher"|trans }}</a>
             </td>
         </tr>
     {% endfor %}

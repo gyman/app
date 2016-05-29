@@ -45,7 +45,6 @@ doctrine:
                     enabled: true
             mappings:
                 StofDoctrineExtensionsBundle: ~
-                UserBundle: ~
                 ClubBundle: ~
           tenant:
             auto_mapping:     false # disabled so we can assign entities to our own connections
@@ -74,9 +73,3 @@ doctrine:
                 softdeleteable:
                     class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                     enabled: true
-
-doctrine_migrations:
-    dir_name: "%kernel.root_dir%/DoctrineMigrations"
-    namespace: Gyman\Migrations
-    table_name: migration_versions
-    name: Gyman Migrations

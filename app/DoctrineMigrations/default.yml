@@ -1,0 +1,5 @@
+---
+migrations_directory: "./default"
+migrations_namespace: Gyman\Migrations
+table_name: migration_versions
+name: Gyman Standard Migrations

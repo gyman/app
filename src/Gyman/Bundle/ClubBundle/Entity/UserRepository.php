@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\UserBundle\Entity;
+namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Gyman\Domain\Member\EmailAddress;

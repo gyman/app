@@ -88,8 +88,8 @@ services:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
 
-  monolog.processor.sentry_context:
-      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
-      arguments:  ["@security.token_storage"]
-      tags:
-          - { name: monolog.processor, method: processRecord, handler: sentry }
+#  monolog.processor.sentry_context:
+#      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
+#      arguments:  ["@security.token_storage"]
+#      tags:
+#          - { name: monolog.processor, method: processRecord, handler: sentry }

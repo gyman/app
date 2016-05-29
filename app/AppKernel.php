@@ -35,23 +35,20 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
-
             new League\Tactician\Bundle\TacticianBundle(),
+            new Liip\MonitorBundle\LiipMonitorBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),
             new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
-            new Gyman\Bundle\TestBundle\TestBundle(),
             new Gyman\Bundle\ChartsBundle\ChartsBundle(),
-            new Gyman\Bundle\UserBundle\UserBundle(),
             new Gyman\Bundle\ClubBundle\ClubBundle(),
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
 //            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
-
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),

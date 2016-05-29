@@ -35,3 +35,5 @@ auth.json
 .rsync_cache
 composer.phar
 composer.phar*
+/composer-setup.php
+/*.sql

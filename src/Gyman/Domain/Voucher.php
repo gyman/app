@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
+use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\ExceededMaximumAmountOfEntriesException;
 use Gyman\Application\Exception\LastEntryIsStillOpenedException;
@@ -355,5 +356,19 @@ class Voucher
         }
 
         return $currentVoucher === $this;
+    }
+
+    /**
+     * @param UpdateVoucherCommand $updateVoucherCommand
+     */
+    public function updateWithCommand(UpdateVoucherCommand $updateVoucherCommand)
+    {
+        $this->startDate = $updateVoucherCommand->startDate;
+        $this->endDate = $updateVoucherCommand->endDate;
+
+        $this->price = new Price($updateVoucherCommand->price, $this->price()->currency());
+        $this->maximumAmount = $updateVoucherCommand->maximumAmount;
+
+        $this->updatedAt = new DateTime();
     }
 }

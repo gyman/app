@@ -22,6 +22,7 @@ services:
     arguments:
       - '@gyman.vouchers.repository'
       - '@gyman.entries.repository'
+      - '@router'
     tags:
       - { name: reports.strategy, alias: "all" }
 

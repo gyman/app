@@ -35,7 +35,7 @@ final class EntriesData extends BaseFixture
             'startDate' => Carbon::parse($params['startDate']),
             'type'      => $params['type'],
             'endDate'   => is_null($params['endDate']) ? null : Carbon::parse($params['endDate']),
-            'price'     => ['amount' => $params['price'], 'currency' => 'PLN'],
+            'price'     => ['amount' => $params['price']['amount'], 'currency' => 'PLN'],
             'occurrence'=> $this->getReference($params['occurrence']),
             'member'    => $member
         ]);

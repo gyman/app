@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Application\Tests\Context;
 
-use Gyman\Domain\User;
+use Gyman\Bundle\ClubBundle\Entity\User;
 use Gyman\Domain\UserInterface;
 
 /**
@@ -21,8 +21,9 @@ trait LoggedAsAdministratorTrait
     public function iMLoggedInAsAdministrator()
     {
         $user = new User();
-        $user->id = 1;
-        $user->email = 'administrator@email.com';
+        
+        $user->setId(1);
+        $user->setEmail('administrator@email.com');
 
         $this->user = $user;
     }

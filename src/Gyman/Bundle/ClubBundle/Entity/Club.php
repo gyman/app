@@ -3,7 +3,6 @@ namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Section;
-use Gyman\Bundle\UserBundle\Entity\User;
 
 /**
  * Club
@@ -49,16 +48,15 @@ class Club
      * Club constructor.
      * @param int $id
      * @param string $name
-     * @param ArrayCollection|\Gyman\Bundle\UserBundle\Entity\User[] $owners
      * @param ArrayCollection|Section[] $sections
      * @param Subdomain $subdomain
      * @param Database $database
+     * @param Details $details
      */
-    public function __construct($id, $name, $owners, $sections, Subdomain $subdomain, Database $database, Details $details)
+    public function __construct($id, $name, $sections, Subdomain $subdomain, Database $database, Details $details)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->owners = $owners;
         $this->sections = $sections;
         $this->subdomain = $subdomain;
         $this->database = $database;
@@ -79,14 +77,6 @@ class Club
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return ArrayCollection|\Gyman\Bundle\UserBundle\Entity\User[]
-     */
-    public function getOwners()
-    {
-        return $this->owners;
     }
 
     /**

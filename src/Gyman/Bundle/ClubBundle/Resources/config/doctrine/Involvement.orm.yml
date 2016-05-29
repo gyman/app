@@ -8,13 +8,15 @@ Gyman\Bundle\ClubBundle\Entity\Involvement:
       type: guid
       generator: { strategy: UUID }
 
-  oneToMany:
+  manyToOne:
     user:
-      targetEntity: Gyman\Bundle\ClubBundle\Entity\User
-      mappedBy: involvements
+      targetEntity:   Gyman\Bundle\ClubBundle\Entity\User
+#      mappedBy:       involvements
+      inversedBy:       involvements
+
     club:
-      targetEntity: Gyman\Bundle\ClubBundle\Entity\Club
-      mappedBy: involvements
+      targetEntity:   Gyman\Bundle\ClubBundle\Entity\Club
+      mappedBy:       involvements
 
   fields:
     roles:

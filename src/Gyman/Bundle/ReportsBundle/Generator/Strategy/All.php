@@ -6,6 +6,7 @@ use Gyman\Application\Repository\EntryRepositoryInterface;
 use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Gyman\Domain\Entry;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class All
@@ -19,15 +20,20 @@ class All extends AbstractStrategy
     /** @var  EntryRepositoryInterface */
     private $entriesRepository;
 
+    /** @var  RouterInterface */
+    private $router;
+
     /**
-     * PerSection constructor.
+     * All constructor.
      * @param VoucherRepositoryInterface $vouchersRepository
      * @param EntryRepositoryInterface $entriesRepository
+     * @param RouterInterface $router
      */
-    public function __construct(VoucherRepositoryInterface $vouchersRepository, EntryRepositoryInterface $entriesRepository)
+    public function __construct(VoucherRepositoryInterface $vouchersRepository, EntryRepositoryInterface $entriesRepository, RouterInterface $router)
     {
         $this->vouchersRepository = $vouchersRepository;
         $this->entriesRepository = $entriesRepository;
+        $this->router = $router;
     }
 
     /**
@@ -45,7 +51,7 @@ class All extends AbstractStrategy
         $queryBuilderVouchers = $this->vouchersRepository->createQueryBuilder("v");
 
         $queryBuilderVouchers
-            ->select("v.price.amount as price, v.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('karnet') as type")
+            ->select("v.price.amount as price, v.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('karnet') as type, v.id as voucher_id")
             ->leftJoin("v.member", "m")
             ->leftJoin("m.sections", "s")
             ->where("v.createdAt > :startDate")
@@ -83,7 +89,17 @@ class All extends AbstractStrategy
         $process = function ($data = [], $result = []) {
             foreach ($data as $row) {
                 $cost = floatval($row["price"]);
-                $result[] = ["title" => sprintf("%s %s [%s]", $row["member_lastname"], $row["member_firstname"], $row["type"]), "sum" => $cost];
+
+//                if($row["type"] === "karnet") {
+//                    // i'm reaally sorry for this, just temporary
+//                    $row["type"] = sprintf('<a href="%s">karnet</a>', $this->router->generate("gyman_voucher_update", ["id" => $row["voucher_id"]]));
+//                }
+
+                $result[] = [
+                    "title" => sprintf("%s %s [%s]", $row["member_lastname"], $row["member_firstname"], $row["type"]),
+                    "sum" => $cost,
+                    "route" => $this->router->generate("gyman_member_edit", ["id" => $row["member_id"]])
+                ];
             }
 
             return $result;

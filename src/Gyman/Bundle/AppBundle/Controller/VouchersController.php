@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Application\Command\CloseVoucherCommand;
+use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
@@ -95,5 +96,41 @@ class VouchersController extends Controller
         return $this->render("@GymanApp/Vouchers/renderHistory.html.twig", [
             'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC'])
         ]);
+    }
+
+    /**
+     * @Route("/{id}/update", name="gyman_voucher_update")
+     * @Method({"GET", "POST"})
+     * @ParamConverter("voucher", class="Gyman:Voucher")
+     * @Template("GymanAppBundle:Vouchers:update.html.twig")
+     * @param Request $request
+     * @param Voucher $voucher
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateAction(Request $request, Voucher $voucher)
+    {
+        $command = UpdateVoucherCommand::createFromVoucher($voucher);
+
+        $form = $this->createForm('gyman_voucher_update_form', $command, [
+            'action' => $this->generateUrl('gyman_voucher_update', ['id' => $voucher->id()]),
+        ]);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $this->get("tactician.commandbus")->handle($form->getData());
+//                $this->addFlash('success', 'flash.voucher_added.success');
+
+                return $this->redirectToRoute('gyman_voucher_update', ['id' => $voucher->id()]);
+            } else {
+//                $this->addFlash('error', 'flash.voucher_added.errors');
+            }
+        }
+
+        return [
+            'form' => $form->createView(),
+            'voucher' => $voucher
+        ];
     }
 }

@@ -1,13 +1,13 @@
 fos_user:
     db_driver:              orm
     firewall_name:          main
-    user_class:             Gyman\Bundle\UserBundle\Entity\User
+    user_class:             Gyman\Bundle\ClubBundle\Entity\User
     use_listener:           true
     use_username_form_type: true
     model_manager_name:     null  # change it to the name of your entity/document manager if you don't want to use the default one.
     from_email:
         address:        office@gyman.pl
-        sender_name:    GyMan
+        sender_name:    Gyman.pl
     profile:
         form:
             type:               gyman_user_profile
@@ -44,7 +44,7 @@ fos_user:
         token_generator:        fos_user.util.token_generator.default
         user_manager:           gyman.users.user_manager
     group:
-            group_class: Gyman\Bundle\UserBundle\Entity\Group
+            group_class: Gyman\Bundle\ClubBundle\Entity\Group
 #    group:
 #        group_class:    ~ # Required when using groups
 #        group_manager:  fos_user.group_manager.default

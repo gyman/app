@@ -1,0 +1,20 @@
+Gyman\Domain\Voucher:
+  constraints: ~
+#    - Gyman\Bundle\AppBundle\Validator\VoucherDateConstraint:
+  properties:
+    startDate:
+      - NotNull:
+          message: "Należy podać datę początkową."
+
+Gyman\Application\Command\CreateVoucherCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\MaximumAmountGreaterThanCreditEntriesConstraint: ~
+  properties:
+    price:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna cena to {{ compared_value }}"
+    maximumAmount:
+      - GreaterThanOrEqual:
+          value: 0
+          message: "Minimalna ilość wejść to {{ compared_value }}"

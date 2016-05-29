@@ -2,6 +2,8 @@
 namespace Gyman\Application\Repository;
 
 use Gyman\Domain\Entry;
+use \Exception;
+use Traversable;
 
 /**
  * Class InMemoryEntryRepository
@@ -44,5 +46,21 @@ class InMemoryEntryRepository implements EntryRepositoryInterface
     public function insert(Entry $entry)
     {
         $this->entries[] = $entry;
+    }
+
+    public function save($entry)
+    {
+        if($entry instanceof Entry) {
+                $this->insert($entry);
+            return;
+        } elseif(is_array($entry) || $entry instanceof Traversable) {
+            /** @var Entry $entry */
+            foreach($entry as $entryElement) {
+                $this->insert($entryElement);
+            }
+            return;
+        }
+
+        throw new Exception("Uknown type");
     }
 }

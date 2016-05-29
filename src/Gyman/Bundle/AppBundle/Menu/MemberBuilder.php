@@ -92,9 +92,9 @@ class MemberBuilder
             )->setExtra('translation_domain', 'GymanAppBundle');
 
             $menu->addChild(
-                'member.modal.tab.history_label',
+                'member.modal.tab.entries_label',
                 [
-                    'uri'            => '#historyPane',
+                    'uri'            => '#entriesPane',
                     'extras'         => ['icon' => 'icomoon-icon-users'],
                     'linkAttributes' => [
                         'class'       => '',
