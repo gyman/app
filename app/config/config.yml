@@ -228,7 +228,7 @@ liip_monitor:
         subject:              "Health check"
         send_on_warning:      true
     checks:
-        php_extensions: [xdebug, imagick, intl, mcrypt, json]
+        php_extensions: [imagick, intl, mcrypt, json]
         php_version:
           5.6.0: ">="
 #        disk_usage:
