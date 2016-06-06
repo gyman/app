@@ -33,7 +33,6 @@ class AppKernel extends Kernel
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
