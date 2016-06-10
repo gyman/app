@@ -26,7 +26,11 @@ class OpenCreditEntryListener
     public function onSuccess(EntryEvent $event)
     {
         $entry = $event->getEntry();
-        
+
+        if(!$entry->isType(Entry::TYPE_CREDIT)) {
+            return;
+        }
+
         $email = $entry->member()->email();
         $fullname = $entry->member()->details()->fullName();
 

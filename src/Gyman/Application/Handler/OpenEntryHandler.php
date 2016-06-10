@@ -7,7 +7,6 @@ use Gyman\Application\Event\EntryEvent;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
-use Gyman\Application\Repository\EntryRepositoryInterface;
 use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
