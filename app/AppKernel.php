@@ -32,7 +32,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+//            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),

@@ -24,4 +24,13 @@ class DefaultController extends Controller
             "csrf_token" => $csrfToken
         ];
     }
+
+    /**
+     * @Route("/current-schedule")
+     * @Template("GymanAppBundle:Default:currentSchedule.html.twig")
+     */
+    public function currentScheduleAction()
+    {
+        return [];
+    }
 }

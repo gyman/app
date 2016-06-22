@@ -1,0 +1,19 @@
+Gyman\Domain\Calendar\Event\Occurrence:
+  type: entity
+  table: occurrences
+  repositoryClass:
+
+  entityListeners:
+    Gyman\Bundle\AppBundle\Listener\OccurrenceListener:
+      postLoad: [postLoadHandler]
+
+  fields:
+    instructorId:
+      type: string
+      nullable: true
+      column: instructor_id
+
+  oneToMany:
+    entries:
+      targetEntity: Gyman\Domain\Entry
+      mappedBy: occurrence

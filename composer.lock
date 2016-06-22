@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a33bc1cae411135d5138f3c59f15edee",
-    "content-hash": "fd5b394ab33ad53d077530c0c03f0950",
+    "hash": "4d06791e65f8b1c39ec9b4096e41480a",
+    "content-hash": "2aea0274ff3fc6b05f7cd0198bcb3c6a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3887,64 +3887,6 @@
             "time": "2015-05-28 14:22:40"
         },
         {
-            "name": "smart-core/accelerator-cache-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Smart-Core/AcceleratorCacheBundle.git",
-                "reference": "83f2e34be2d521cca5bd72ac31be1df01233750a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Smart-Core/AcceleratorCacheBundle/zipball/83f2e34be2d521cca5bd72ac31be1df01233750a",
-                "reference": "83f2e34be2d521cca5bd72ac31be1df01233750a",
-                "shasum": ""
-            },
-            "require": {
-                "sensio/distribution-bundle": ">=2.1",
-                "symfony/framework-bundle": ">=2.1"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*@dev",
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.3",
-                "symfony/console": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SmartCore\\Bundle\\AcceleratorCacheBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thibault Duplessis",
-                    "homepage": "https://github.com/ornicar"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle/contributors"
-                }
-            ],
-            "description": "Provides a command line task to clear PHP Accelerators cache from the console",
-            "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle",
-            "keywords": [
-                "Opcache",
-                "apc",
-                "task",
-                "wincache"
-            ],
-            "time": "2015-02-17 12:15:39"
-        },
-        {
             "name": "sonata-project/admin-bundle",
             "version": "2.3.7",
             "source": {
@@ -5109,6 +5051,60 @@
             "time": "2016-05-18 14:26:46"
         },
         {
+            "name": "symfony/proxy-manager-bridge",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/proxy-manager-bridge.git",
+                "reference": "38c2253211dba80e4c1daeca3f92bcd64303fb29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/38c2253211dba80e4c1daeca3f92bcd64303fb29",
+                "reference": "38c2253211dba80e4c1daeca3f92bcd64303fb29",
+                "shasum": ""
+            },
+            "require": {
+                "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
+                "php": ">=5.5.9",
+                "symfony/dependency-injection": "~2.8|~3.0"
+            },
+            "require-dev": {
+                "symfony/config": "~2.8|~3.0"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\ProxyManager\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ProxyManager Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2016-05-13 18:13:23"
+        },
+        {
             "name": "symfony/security-acl",
             "version": "dev-master",
             "source": {
@@ -5228,16 +5224,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "2.8.x-dev",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "5a560f1d12a7ccf55f078542657cd3251f9d0913"
+                "reference": "663b2d6202c3149515b39cfe50a174a130acb8e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/5a560f1d12a7ccf55f078542657cd3251f9d0913",
-                "reference": "5a560f1d12a7ccf55f078542657cd3251f9d0913",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/663b2d6202c3149515b39cfe50a174a130acb8e2",
+                "reference": "663b2d6202c3149515b39cfe50a174a130acb8e2",
                 "shasum": ""
             },
             "require": {
@@ -5358,7 +5354,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-06-03 11:06:57"
+            "time": "2016-06-06 16:05:37"
         },
         {
             "name": "twig/extensions",
@@ -7487,6 +7483,64 @@
             "time": "2016-05-25 05:33:27"
         },
         {
+            "name": "smart-core/accelerator-cache-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Smart-Core/AcceleratorCacheBundle.git",
+                "reference": "83f2e34be2d521cca5bd72ac31be1df01233750a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Smart-Core/AcceleratorCacheBundle/zipball/83f2e34be2d521cca5bd72ac31be1df01233750a",
+                "reference": "83f2e34be2d521cca5bd72ac31be1df01233750a",
+                "shasum": ""
+            },
+            "require": {
+                "sensio/distribution-bundle": ">=2.1",
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "matthiasnoback/symfony-dependency-injection-test": "^0.7.3",
+                "symfony/console": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SmartCore\\Bundle\\AcceleratorCacheBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "homepage": "https://github.com/ornicar"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle/contributors"
+                }
+            ],
+            "description": "Provides a command line task to clear PHP Accelerators cache from the console",
+            "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle",
+            "keywords": [
+                "Opcache",
+                "apc",
+                "task",
+                "wincache"
+            ],
+            "time": "2015-02-17 12:15:39"
+        },
+        {
             "name": "squizlabs/php_codesniffer",
             "version": "dev-master",
             "source": {
@@ -7618,7 +7672,6 @@
         "twig/extensions": 20,
         "gyman/supr": 20,
         "nelmio/api-doc-bundle": 20,
-        "smart-core/accelerator-cache-bundle": 20,
         "nesbot/carbon": 20,
         "dende/common-bundle": 20,
         "dende/calendar": 20,

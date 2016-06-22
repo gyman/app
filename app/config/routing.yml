@@ -50,3 +50,24 @@ dende_calendar:
   type: annotation
   resource: @DendeCalendarBundle/Controller/DefaultController.php
   prefix: calendar
+
+rest_default:
+  type:     'rest'
+  resource: '@GymanAppBundle/Controller/Rest/DefaultController.php'
+  prefix:   'api'
+  defaults:
+    _format: 'json'
+
+rest_member:
+  type:     'rest'
+  resource: '@GymanAppBundle/Controller/Rest/MemberController.php'
+  prefix:   'api'
+  defaults:
+    _format: 'json'
+
+rest_entry:
+  type:     'rest'
+  resource: '@GymanAppBundle/Controller/Rest/EntryController.php'
+  prefix:   'api'
+  defaults:
+    _format: 'json'

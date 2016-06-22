@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Gyman.pl{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/vendors.min.css" />
+        <link rel="stylesheet" href="/css/project.min.css" />
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+</head>
+
+    <body class="{% block body_class %}{% endblock %}">
+
+    {% if app.user is not null %}
+        {{ include("navigation.html.twig") }}
+    {% endif %}
+
+    <div id="header">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+
+                    <a href="{{ path("gyman_app_default_index") }}" class="brand">
+                        {% if club is not null %}
+                            {% set logo = club.subdomain.name ~ '/' ~ club.details.logo %}
+                            <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="applogo" />
+                            <span id="appname">{{ club.name }}</span>
+                        {% else %}
+                            <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" id="applogo" />
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <!-- /navbar-inner -->
+        </div>
+    </div>
+    <!-- end header -->
+
+    <div id="wrapper">
+        <div id="content" class="clearfix">
+
+            <div class="contentwrapper">
+                <div class="contentwrapper">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End contentwrapper -->
+
+        </div>
+        <!-- End #content -->
+    </div>
+    <!-- end wrapper -->
+
+    <script type="text/javascript" src="/js/vendors.min.js"></script>
+    <script type="text/javascript" src="/js/project.min.js"></script>
+
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
+    {% set club = club %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/bootstrap.min.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/lang/" ~ lang ~ ".js") }}'></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var dende_calendar_lang = '{{ lang }}';
+            var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
+            var minTime = '{{ club.details.opened_from }}:00';
+            var maxTime = '{{ club.details.opened_till }}:00';
+
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaWeek',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                minTime: minTime || "08:00:00",
+                maxTime: maxTime || "16:00:00",
+                timeZone: dende_calendar_tz,
+                slotLabelFormat: 'H:00',
+                snapDuration: '00:15:00',
+                selectable: false,
+                editable: false,
+                droppable: false,
+                lang: dende_calendar_lang,
+//                events: Routing.generate('dende_calendar_default_getevents'),
+                events: {{ render(controller("DendeCalendarBundle:Default:getEvents")) }},
+                contentHeight: "auto",
+                height: "auto",
+                columnFormat: 'dddd',
+                header: {
+                    left:   '',
+                    center: '',
+                    right:  ''
+                }
+            })
+        });
+    </script>
+    </body>
+</html>

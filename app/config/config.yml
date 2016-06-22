@@ -95,7 +95,12 @@ swiftmailer:
 #                class: Gyman\Bundle\AppBundle\Controller\UploadController
 #                name:  MyFancyCustomUploader
                 
-gyman_app: ~
+gyman_app:
+  schedule_generator:
+    phantom_path:           '%kernel.root_dir%/../node_modules/.bin/phantomjs'
+    rasterize_script_path:  '%kernel.root_dir%/../node_modules/phantomjs/lib/phantom/examples/rasterize.js'
+    destination_directory:  '%kernel.root_dir%/../web/schedules/'
+    filename:               'schedule.png'
 
 dende_calendar:
   model_manager_name:   tenant
@@ -174,15 +179,15 @@ jms_serializer:
     cache: true
     auto_detection: false
     directories:
-      app:
-        namespace_prefix: Gyman\Domain\Entity
-        path:             @GymanAppBundle/Resources/config/serializer/app
+#      app:
+#        namespace_prefix: 'Gyman\Domain\Entity'
+#        path:             '@GymanAppBundle/Resources/config/serializer/app'
       domain:
-        namespace_prefix: Gyman\Domain\Model
-        path:             @GymanAppBundle/Resources/config/serializer/domain
+        namespace_prefix: 'Gyman\Domain'
+        path:             '@GymanAppBundle/Resources/config/serializer'
       calendar:
-        namespace_prefix: Dende\Calendar\Domain
-        path:             @GymanAppBundle/Resources/config/serializer/calendar
+        namespace_prefix: 'Dende\Calendar\Domain'
+        path:             '@GymanAppBundle/Resources/config/serializer/calendar'
 
 fos_rest:
   param_fetcher_listener: true
@@ -207,8 +212,6 @@ sensio_framework_extra:
     psr_message: { enabled: false }
 
 knp_time: ~
-
-nelmio_api_doc: ~
 
 bazinga_hateoas:
   metadata:

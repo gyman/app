@@ -1,5 +1,35 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function(){
+
+            var store = new JSData.DS();
+
+            store.registerAdapter('http', new DSHttpAdapter({
+                basePath: "/app_dev.php/api"
+            }), { default: true });
+
+            var Member = store.defineResource({name: 'member'});
+            var Entry = store.defineResource({name: 'entry'});
+
+            $(document).on("enteredMembersBarcode", function(event, data){
+                Member
+                    .find(data.code)
+                    .then(function (_member) {
+                        Entry.create({
+                            test: "abc",
+                            blabla: "foobar"
+                        });
+//                        window.location.reload(true);
+                    })
+            });
+        });
+    </script>
+{% endblock javascripts %}
+
 {% block content %}
 <div class="heading">
     <h3>

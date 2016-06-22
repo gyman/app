@@ -1,8 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Twig;
 
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Gyman\Application\Repository\EntryRepositoryInterface;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 
 /**
@@ -11,11 +10,6 @@ use Gyman\Domain\Entry;
  */
 class EntriesExtension extends \Twig_Extension
 {
-    /**
-     * @var EntryRepositoryInterface
-     */
-    private $entryRepository;
-
     /**
      * @return array
      */
@@ -33,7 +27,7 @@ class EntriesExtension extends \Twig_Extension
      */
     public function entriesCount(Occurrence $occurrence)
     {
-        return count($this->entryRepository->findByOccurrence($occurrence));
+        return $occurrence->entries()->count();
     }
 
     /**
@@ -42,7 +36,7 @@ class EntriesExtension extends \Twig_Extension
      */
     public function getEntries(Occurrence $occurrence)
     {
-        return $this->entryRepository->findByOccurrence($occurrence);
+        return $occurrence->entries();
     }
 
     /**
@@ -51,13 +45,5 @@ class EntriesExtension extends \Twig_Extension
     public function getName()
     {
         return 'entries_extension';
-    }
-
-    /**
-     * @param EntryRepositoryInterface $repository
-     */
-    public function setEntryRepository(EntryRepositoryInterface $repository)
-    {
-        $this->entryRepository = $repository;
     }
 }

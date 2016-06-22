@@ -4,16 +4,12 @@ services:
   gyman.twig.voucher_extension:
       class: Gyman\Bundle\AppBundle\Twig\VoucherExtension
       calls:
-        - [setTranslator, [@translator]]
+        - [setTranslator, ['@translator']]
       tags:
         - { name: twig.extension }
 
 
   gyman.app.twig.entries_extension:
-    class: Gyman\Bundle\AppBundle\Twig\EntriesExtension
-#    arguments:
-#      - @gyman.entries.repository
-    calls:
-      - [setEntryRepository, [@gyman.entries.repository]]
+    class: 'Gyman\Bundle\AppBundle\Twig\EntriesExtension'
     tags:
       - { name: twig.extension }

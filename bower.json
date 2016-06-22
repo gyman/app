@@ -43,9 +43,11 @@
     "webcam": "~1.0.0",
     "datatables-plugins": "*",
     "typeahead.js": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "js-data": "~2.9.0",
+    "js-data-http": "~2.2.2"
   },
   "resolutions": {
-     "jquery": "~1.11.0"
+    "jquery": "~1.11.0"
   }
 }

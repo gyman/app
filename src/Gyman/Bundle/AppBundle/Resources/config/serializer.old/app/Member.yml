@@ -1,0 +1,6 @@
+Gyman\Domain\Metmber:
+  exclusion_policy: all
+  properties:
+    email:
+      exclude: true
+      expose: true

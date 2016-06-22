@@ -41,7 +41,6 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
      * @param Barcode $barcode
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @return Member
-     * @internal param Barcode $barcode
      */
     public function findOneByBarcode(Barcode $barcode)
     {

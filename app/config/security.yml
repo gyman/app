@@ -5,6 +5,8 @@ security:
     role_hierarchy:
         ROLE_MEMBER:      ~
 
+        ROLE_INSTRUCTOR:  ~
+
         ROLE_USER:        ~
         ROLE_OWNER:       ROLE_USER
         ROLE_MANAGER:     ROLE_OWNER

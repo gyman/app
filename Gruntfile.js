@@ -80,14 +80,17 @@ module.exports = function (grunt) {
         //'bower_components/jquery-file-upload/js/jquery.fileupload.js',
         //'bower_components/webcam/jquery.webcam.js',
         'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
-        'src/Gyman/Bundle/AppBundle/Resources/public/js/photobooth_min.js'
+        'src/Gyman/Bundle/AppBundle/Resources/public/js/photobooth_min.js',
+
+        'bower_components/js-data/dist/js-data.min.js',
+        'bower_components/js-data-http/dist/js-data-http.js'
     ];
 
     var coffeeFiles = [
         'src/Gyman/Bundle/AppBundle/Resources/coffee/spinner.coffee',
         //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
         //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/ModalContainer.coffee',
-        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/keyboardTyping.coffee',
+        'src/Gyman/Bundle/AppBundle/Resources/coffee/keyboardTyping.coffee',
         //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/SwitchClub.coffee', @todo: re-add
 
         //'web/bundles/lists/coffee/reloadAjax.coffee',

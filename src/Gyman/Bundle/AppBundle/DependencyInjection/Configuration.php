@@ -21,17 +21,17 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('galleryDir')
-            ->defaultValue('/uploads/gallery/')
-            ->end()
-
-            ->scalarNode('noImage')
-            ->defaultValue('null')
-            ->end()
-
-            ->scalarNode('galleryPath')
-            ->defaultValue('null')
-            ->end()
+                ->arrayNode('schedule_generator')
+                    ->children()
+                        ->scalarNode('phantom_path')->cannotBeEmpty()->end()
+                        ->scalarNode('rasterize_script_path')->cannotBeEmpty()->end()
+                        ->scalarNode('destination_directory')->cannotBeEmpty()->end()
+                        ->scalarNode('filename')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+                ->scalarNode('galleryDir')->defaultValue('/uploads/gallery/')->end()
+                ->scalarNode('noImage')->defaultValue('null')->end()
+                ->scalarNode('galleryPath')->defaultValue('null')->end()
             ->end();
 
         return $treeBuilder;
