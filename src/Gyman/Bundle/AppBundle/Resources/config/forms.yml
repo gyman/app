@@ -42,3 +42,10 @@ services:
       - @gyman.repository.section
     tags:
       - { name: form.type, alias: gyman_entry_form }
+
+# REST FORMS
+
+  gyman.rest.entries.entry_form_type:
+    class: Gyman\Bundle\AppBundle\Form\Rest\EntryType
+    tags:
+      - { name: form.type, alias: gyman_entry_form_rest }

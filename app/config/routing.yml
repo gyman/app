@@ -71,3 +71,10 @@ rest_entry:
   prefix:   'api'
   defaults:
     _format: 'json'
+
+rest_voucher:
+  type:     'rest'
+  resource: '@GymanAppBundle/Controller/Rest/VoucherController.php'
+  prefix:   'api'
+  defaults:
+    _format: 'json'

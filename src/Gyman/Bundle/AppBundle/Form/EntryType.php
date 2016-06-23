@@ -4,8 +4,8 @@ namespace Gyman\Bundle\AppBundle\Form;
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
-use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Section;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Application\Command\OpenEntryCommand;
@@ -73,7 +73,7 @@ final class EntryType extends AbstractType
             'expanded' => true,
             "multiple" => false,
             'label' => 'entries.form.occurrence.label',
-            'class' => 'Calendar:Calendar\Event\Occurrence',
+            'class' => 'Gyman\Domain\Calendar\Event\Occurrence',
             'property' => function (Occurrence $occurrence) use ($sectionRepository) {
                 $start = $occurrence->startDate()->format("H:i");
                 $stop = $occurrence->endDate()->format("H:i");

@@ -44,7 +44,8 @@ final class OpenEntryCommand
     public $occurrence;
 
     /**
-     * CreateVoucherCommand constructor.
+     * OpenEntryCommand constructor.
+     * @param Member $member
      */
     public function __construct(Member $member)
     {

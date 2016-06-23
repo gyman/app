@@ -1,0 +1,41 @@
+---
+Gyman\Domain\Voucher:
+  exclusion_policy: ALL
+
+  virtual_properties:
+    leftEntriesAmount:
+        serialized_name: left_amount
+        type: integer
+#    usedEntriesAmount:
+#        serialized_name: used_amount
+#        type: integer
+    leftDaysAmount:
+        serialized_name: left_days
+        type: integer
+#    passedDaysAmount:
+#        serialized_name: passed_days
+#        type: integer
+    isCurrent:
+        serialized_name: is_current
+        type: boolean
+    isClosed:
+        serialized_name: is_closed
+        type: boolean
+    isUnlimited:
+        serialized_name: is_unlimited
+        type: boolean
+
+  properties:
+    id:
+      expose: true
+#    startDate:
+#      expose: true
+#    endDate:
+#      expose: true
+#    createdAt:
+#      expose: true
+#    closedAt:
+#      expose: true
+#    maximumAmount:
+#      expose: true
+

@@ -8,5 +8,5 @@ Gyman\Domain\Member:
       expose: true
     details:
       expose: true
-    details.genders:
-      expose: false
+    currentVoucher:
+      expose: true

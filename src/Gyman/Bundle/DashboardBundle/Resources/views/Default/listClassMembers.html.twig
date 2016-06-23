@@ -1,11 +1,13 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
+{# @var occurrence Gyman\Domain\Calendar\Event\Occurrence occurrence #}
+
 {% block javascripts %}
     {{ parent() }}
 
     <script>
         $(function(){
-
+            var occurrenceId = '{{ occurrence.id }}';
             var store = new JSData.DS();
 
             store.registerAdapter('http', new DSHttpAdapter({
@@ -19,11 +21,31 @@
                 Member
                     .find(data.code)
                     .then(function (_member) {
+                        var currentVoucher = _member.current_voucher;
+
+                        var entryType; // allowed entryTypes from this page: voucher, credit
+
+                        if(
+                                _.isUndefined(currentVoucher)
+                                || currentVoucher.is_closed
+                                || currentVoucher.left_amount < 1
+                                || currentVoucher.left_days == 0
+                        ) {
+                            entryType = 'credit';
+                        } else {
+                            entryType = 'voucher';
+                        }
+
                         Entry.create({
-                            test: "abc",
-                            blabla: "foobar"
+                            member: _member.id,
+                            occurrence: occurrenceId,
+                            entryType: entryType,
+                            price: 0
+                        }, {
+                            afterCreate: function () {
+                                window.location.reload();
+                            }
                         });
-//                        window.location.reload(true);
                     })
             });
         });
