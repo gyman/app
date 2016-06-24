@@ -42,6 +42,8 @@ module.exports = function (grunt) {
         'bower_components/jquery/dist/jquery.js',
         'bower_components/jquery-ui/ui/jquery-ui.js',
         'bower_components/jquery-migrate/jquery-migrate.min.js',
+        'bower_components/js-data/dist/js-data.js',
+        'bower_components/js-data-http/dist/js-data-http.js',
 
         'bower_components/underscore/underscore.js',
 
@@ -81,9 +83,6 @@ module.exports = function (grunt) {
         //'bower_components/webcam/jquery.webcam.js',
         'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
         'src/Gyman/Bundle/AppBundle/Resources/public/js/photobooth_min.js',
-
-        'bower_components/js-data/dist/js-data.min.js',
-        'bower_components/js-data-http/dist/js-data-http.js'
     ];
 
     var coffeeFiles = [
@@ -299,7 +298,7 @@ module.exports = function (grunt) {
         "development",
         "cssmin:production-vendors",
         "cssmin:production-project",
-        "uglify:production",
+        // "uglify:production",
         "clean:dev-assets"
     ]);
 

@@ -11,7 +11,11 @@
             var store = new JSData.DS();
 
             store.registerAdapter('http', new DSHttpAdapter({
-                basePath: "/app_dev.php/api"
+            {% if app.environment == 'prod' %}
+                basePath: "/api",
+            {% else %}
+                basePath: "/app_dev.php/api",
+            {% endif %}
             }), { default: true });
 
             var Member = store.defineResource({name: 'member'});
