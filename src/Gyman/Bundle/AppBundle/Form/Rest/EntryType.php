@@ -2,9 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Form\Rest;
 
 use Dende\Calendar\Domain\Calendar;
-use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
-use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

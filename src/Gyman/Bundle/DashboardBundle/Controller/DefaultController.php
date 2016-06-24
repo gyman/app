@@ -71,37 +71,37 @@ class DefaultController extends Controller
      */
     public function listClassMembersAction(Occurrence $occurrence)
     {
-//        $memberRepository = $this->get("gyman.members.repository");
-//
-//        $criteria = Criteria::create()
-//            ->where(Criteria::expr()->neq("currentVoucher", null))
-//            ->orderBy([
-//                "currentVoucher" => "DESC",
-//                "details.lastname" => "ASC",
-//                "details.firstname" => "ASC"
-//            ])
-//        ;
+        $memberRepository = $this->get("gyman.members.repository");
 
-//        $allMembers = $memberRepository->matching($criteria)->toArray();
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->neq("currentVoucher", null))
+            ->orderBy([
+                "currentVoucher" => "DESC",
+                "details.lastname" => "ASC",
+                "details.firstname" => "ASC"
+            ])
+        ;
+
+        $allMembers = $memberRepository->matching($criteria)->toArray();
 
         $entries = $occurrence->entries();
 
-//        $usedMembersIds = array_map(function (Entry $entry) {
-//            return $entry->member()->id();
-//        }, $entries->toArray());
+        $usedMembersIds = array_map(function (Entry $entry) {
+            return $entry->member()->id();
+        }, $entries->toArray());
 
-//        if (count($entries) > 0) {
-//            $members = array_filter($allMembers, function (Member $member) use ($usedMembersIds) {
-//                return !in_array($member->id(), $usedMembersIds) && (is_null($member->lastEntry()) || !is_null($member->lastEntry()->endDate()));
-//            });
-//        } else {
-//            $members = $allMembers;
-//        }
+        if (count($entries) > 0) {
+            $members = array_filter($allMembers, function (Member $member) use ($usedMembersIds) {
+                return !in_array($member->id(), $usedMembersIds) && (is_null($member->lastEntry()) || !is_null($member->lastEntry()->endDate()));
+            });
+        } else {
+            $members = $allMembers;
+        }
 
         return [
             "entries"   =>  $entries,
             "occurrence" => $occurrence,
-            "allMembers" => [],
+            "allMembers" => $members,
         ];
     }
 

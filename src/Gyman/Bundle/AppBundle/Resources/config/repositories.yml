@@ -43,9 +43,7 @@ services:
       - 'Gyman\Bundle\ClubBundle\Entity\User'
 
   gyman.occurrence.repository:
-    parent:           "dende_calendar.occurrences_repository"
     class:            'Gyman\Bundle\AppBundle\Repository\OccurrenceRepository'
-    factory_service:  'doctrine.orm.tenant_entity_manager'
-    factory_method:   'getRepository'
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
     arguments:
       - 'Gyman\Domain\Calendar\Event\Occurrence'

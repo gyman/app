@@ -38,8 +38,8 @@ services:
   gyman.entries.entry_form_type:
     class: Gyman\Bundle\AppBundle\Form\EntryType
     arguments:
-      - @gyman.occurrence.repository
-      - @gyman.repository.section
+      - '@gyman.occurrence.repository'
+      - '@gyman.repository.section'
     tags:
       - { name: form.type, alias: gyman_entry_form }
 
