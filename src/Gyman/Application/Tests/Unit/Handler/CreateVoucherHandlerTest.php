@@ -3,23 +3,17 @@ namespace Gyman\Application\Tests\Unit\Handler;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Command\CreateVoucherCommand;
 use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Factory\MemberFactory;
-use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Application\Handler\CreateVoucherHandler;
-use Gyman\Application\Handler\OpenEntryHandler;
-use Gyman\Application\Handler\UpdateMemberHandler;
 use Gyman\Application\Repository\InMemoryEntryRepository;
 use Gyman\Application\Repository\InMemoryMemberRepository;
-use Gyman\Application\Repository\InMemoryVoucherRepository;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Voucher;
 use Mockery as m;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
 {

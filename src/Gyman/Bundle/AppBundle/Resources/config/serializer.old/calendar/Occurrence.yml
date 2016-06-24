@@ -1,2 +1,2 @@
-Dende\Calendar\Domain\Calendar\Event\Occurrence:
+Gyman\Domain\Calendar\Event\Occurrence:
   exclusion_policy: all

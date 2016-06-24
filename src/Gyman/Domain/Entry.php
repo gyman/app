@@ -3,7 +3,7 @@ namespace Gyman\Domain;
 
 use Carbon\Carbon;
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Exception;
 use Gyman\Application\Exception\EntryClosingDateBeforeOpeningException;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;

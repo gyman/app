@@ -31,7 +31,7 @@ Gyman\Domain\Entry:
           onUpdate: RESTRICT
 
     occurrence:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
+      targetEntity: Gyman\Domain\Calendar\Event\Occurrence
       inversedBy: occurrence
       nullable: true
       orphanRemoval: false

@@ -3,7 +3,7 @@ namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Component\Test\BaseFunctionalTestCase;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;

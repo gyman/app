@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Exception\MemberHasNoLastEntryException;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CloseEntryCommand;
@@ -93,7 +93,7 @@ class EntriesController extends Controller
 
     /**
      * @Route("/quick-entry/occurrence/{occurrence}/member/{member}", name="gyman_entry_create_for_member")
-     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence")
      * @ParamConverter("member", class="Gyman:Member")
      * @param Member $member
      * @param Occurrence $occurrence
@@ -117,7 +117,7 @@ class EntriesController extends Controller
 
     /**
      * @Route("/quick-remove/occurrence/{occurrence}/member/{member}", name="gyman_entry_remove_from_occurrence")
-     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence")
      * @ParamConverter("member", class="Gyman:Member")
      * @param Member $member
      * @param Occurrence $occurrence
@@ -133,7 +133,7 @@ class EntriesController extends Controller
 
     /**
      * @Route("/quick-close/activity/{occurrence}", name="gyman_entries_close_for_occurrence")
-     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence")
      * @param Occurrence $occurrence
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

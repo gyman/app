@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Section;
 use Gyman\Domain\SectionRepository;
 use Gyman\Bundle\ReportsBundle\Form\DateFilter;
