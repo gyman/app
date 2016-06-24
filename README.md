@@ -51,4 +51,4 @@ Konfiguracja crontab:
 Migracje
 
 php app/console doctrine:migrations:diff --em=tenant --configuration ./app/DoctrineMigrations/tenant.yml -n --club=rio
-php app/console doctrine:migrations:diff --em=tenant --configuration ./app/DoctrineMigrations/tenant.yml -n --club=rio
+php app/console doctrine:migrations:diff --em=default --configuration ./app/DoctrineMigrations/tenant.yml -n
