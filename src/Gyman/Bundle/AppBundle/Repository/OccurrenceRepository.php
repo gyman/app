@@ -6,5 +6,5 @@ use Doctrine\ORM\Mapping;
 
 class OccurrenceRepository extends BaseOccurrenceRepository
 {
-    
+
 }

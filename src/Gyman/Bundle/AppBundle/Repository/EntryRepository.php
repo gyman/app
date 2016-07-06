@@ -44,7 +44,7 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
             return;
         }
 
-        throw new \Exception("Argument is unknown type! Should be Member class or collection/array of Member class!");
+        throw new \Exception("Argument is unknown type! Should be Entry class or collection/array of Entry class!");
     }
 
     /**
