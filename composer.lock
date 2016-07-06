@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38f66984f3f0627ea189cc222b3349c9",
-    "content-hash": "a4a0093086ccca1e062326342600fe97",
+    "hash": "ac8262bc958fae9a2f02f25c69958297",
+    "content-hash": "6cc6a7bae66a46b7632c6044c72f8243",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -178,12 +178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "7ffb11a17eca2ccbbcd1f3d78aa0defe028c14b6"
+                "reference": "912c20d7ad34dbad3670a9a5c2ca408c8b189e21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/7ffb11a17eca2ccbbcd1f3d78aa0defe028c14b6",
-                "reference": "7ffb11a17eca2ccbbcd1f3d78aa0defe028c14b6",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/912c20d7ad34dbad3670a9a5c2ca408c8b189e21",
+                "reference": "912c20d7ad34dbad3670a9a5c2ca408c8b189e21",
                 "shasum": ""
             },
             "require": {
@@ -213,20 +213,20 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2016-06-24 14:20:36"
+            "time": "2016-07-06 01:06:26"
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "1.3",
+            "version": "1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "7173ef9cdd99f26a2561386d3787f8757945d521"
+                "reference": "0dd90ca02beb7d7e4c68db4db5f2bf0e2d095498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/7173ef9cdd99f26a2561386d3787f8757945d521",
-                "reference": "7173ef9cdd99f26a2561386d3787f8757945d521",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/0dd90ca02beb7d7e4c68db4db5f2bf0e2d095498",
+                "reference": "0dd90ca02beb7d7e4c68db4db5f2bf0e2d095498",
                 "shasum": ""
             },
             "require": {
@@ -269,7 +269,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2016-06-24 13:09:27"
+            "time": "2016-07-06 01:45:30"
         },
         {
             "name": "dende/common-bundle",
@@ -723,16 +723,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.3",
+            "version": "2.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648"
+                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2fbcea96eae34a53183377cdbb0b9bec33974648",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9e1300bffb9cae048705bb4ed39c19f33e6896d6",
+                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6",
                 "shasum": ""
             },
             "require": {
@@ -790,20 +790,20 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-12-25 16:28:24"
+            "time": "2016-01-23 14:30:23"
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b"
+                "reference": "87f0554b3152ae9dc7136a635807117c3a29ae1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b",
-                "reference": "c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/87f0554b3152ae9dc7136a635807117c3a29ae1d",
+                "reference": "87f0554b3152ae9dc7136a635807117c3a29ae1d",
                 "shasum": ""
             },
             "require": {
@@ -819,13 +819,15 @@
                 "doctrine/orm": "~2.3",
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/property-info": "~2.8|~3.0",
                 "symfony/validator": "~2.2|~3.0",
                 "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
-                "symfony/web-profiler-bundle": "to use the data collector"
+                "symfony/web-profiler-bundle": "To use the data collector."
             },
             "type": "symfony-bundle",
             "extra": {
@@ -868,7 +870,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2015-11-16 17:11:46"
+            "time": "2016-06-26 20:09:10"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1257,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "70026a6fe5265a4e6691638f4aed349a5214153e"
+                "reference": "5df0c51e5071fd39a4f7e32e8958eaedfe193606"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/70026a6fe5265a4e6691638f4aed349a5214153e",
-                "reference": "70026a6fe5265a4e6691638f4aed349a5214153e",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/5df0c51e5071fd39a4f7e32e8958eaedfe193606",
+                "reference": "5df0c51e5071fd39a4f7e32e8958eaedfe193606",
                 "shasum": ""
             },
             "require": {
@@ -1323,20 +1325,20 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-07-02 15:20:39"
+            "time": "2016-07-05 23:50:37"
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.3",
+            "version": "2.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "d9fc5388f1aa1751a0e148e76b4569bd207338e9"
+                "reference": "aa5820309e80e746411100f073b8bf0a0a684082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d9fc5388f1aa1751a0e148e76b4569bd207338e9",
-                "reference": "d9fc5388f1aa1751a0e148e76b4569bd207338e9",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/aa5820309e80e746411100f073b8bf0a0a684082",
+                "reference": "aa5820309e80e746411100f073b8bf0a0a684082",
                 "shasum": ""
             },
             "require": {
@@ -1351,7 +1353,6 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "dev-master",
                 "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
@@ -1400,7 +1401,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-12-25 15:50:05"
+            "time": "2016-06-19 10:48:28"
         },
         {
             "name": "fabpot/php-cs-fixer",
@@ -1408,12 +1409,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "e50d3896d4819f7f65400860e2f3a23344df9740"
+                "reference": "cb718cc3cdc646f6099e2eac3c7bd9f20019bdda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e50d3896d4819f7f65400860e2f3a23344df9740",
-                "reference": "e50d3896d4819f7f65400860e2f3a23344df9740",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/cb718cc3cdc646f6099e2eac3c7bd9f20019bdda",
+                "reference": "cb718cc3cdc646f6099e2eac3c7bd9f20019bdda",
                 "shasum": ""
             },
             "require": {
@@ -1465,7 +1466,7 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "abandoned": "friendsofphp/php-cs-fixer",
-            "time": "2016-07-02 11:40:59"
+            "time": "2016-07-05 19:38:07"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1512,7 +1513,7 @@
                     "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -1531,12 +1532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "c1b87d933dfc9b59fc603f8e44f8064e4530a2b1"
+                "reference": "ac299810b6989e8aa977d870d3454c977303f163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/c1b87d933dfc9b59fc603f8e44f8064e4530a2b1",
-                "reference": "c1b87d933dfc9b59fc603f8e44f8064e4530a2b1",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/ac299810b6989e8aa977d870d3454c977303f163",
+                "reference": "ac299810b6989e8aa977d870d3454c977303f163",
                 "shasum": ""
             },
             "require": {
@@ -1611,7 +1612,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2016-06-19 14:22:34"
+            "time": "2016-07-05 15:23:13"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2386,7 +2387,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -4251,12 +4252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "9d8571b039091a6c9d3ffc4ef050b1d14597bedf"
+                "reference": "ec905b6977a4a712e644f63b36e3a08b3c49daa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/9d8571b039091a6c9d3ffc4ef050b1d14597bedf",
-                "reference": "9d8571b039091a6c9d3ffc4ef050b1d14597bedf",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/ec905b6977a4a712e644f63b36e3a08b3c49daa4",
+                "reference": "ec905b6977a4a712e644f63b36e3a08b3c49daa4",
                 "shasum": ""
             },
             "require": {
@@ -4308,7 +4309,7 @@
                 "export",
                 "xls"
             ],
-            "time": "2016-06-25 02:20:07"
+            "time": "2016-07-05 12:35:35"
         },
         {
             "name": "stephpy/timeline",
@@ -5181,12 +5182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "fe17083cf95a07715a006f253dafe19b4863936a"
+                "reference": "5053ae21409c5924243f90821da3677c4658ce99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/fe17083cf95a07715a006f253dafe19b4863936a",
-                "reference": "fe17083cf95a07715a006f253dafe19b4863936a",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/5053ae21409c5924243f90821da3677c4658ce99",
+                "reference": "5053ae21409c5924243f90821da3677c4658ce99",
                 "shasum": ""
             },
             "require": {
@@ -5307,7 +5308,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-07-01 15:02:03"
+            "time": "2016-07-05 11:05:26"
         },
         {
             "name": "twig/extensions",
@@ -7541,12 +7542,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "5af4388ad24f8f1c24148502344a915c6acdb9bc"
+                "reference": "19ee67081a15ede42ae080d555d5e953316fcc26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5af4388ad24f8f1c24148502344a915c6acdb9bc",
-                "reference": "5af4388ad24f8f1c24148502344a915c6acdb9bc",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/19ee67081a15ede42ae080d555d5e953316fcc26",
+                "reference": "19ee67081a15ede42ae080d555d5e953316fcc26",
                 "shasum": ""
             },
             "require": {
@@ -7611,7 +7612,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-07-01 03:39:01"
+            "time": "2016-07-05 01:38:25"
         },
         {
             "name": "theseer/fdomdocument",
