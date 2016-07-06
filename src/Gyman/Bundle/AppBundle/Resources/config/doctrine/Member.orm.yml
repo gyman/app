@@ -2,6 +2,16 @@ Gyman\Domain\Member:
   type:   entity
   table:  members
   repositoryClass:  Gyman\Bundle\AppBundle\Repository\MemberRepository
+
+  indexes:
+    index_members_barcode:
+      columns:
+        - barcode
+    index_members_name:
+      columns:
+        - lastname
+        - firstname
+
   embedded:
     email:
       class: Gyman\Domain\Member\EmailAddress

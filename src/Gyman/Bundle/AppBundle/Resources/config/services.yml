@@ -1,12 +1,3 @@
-imports:
-  - { resource: forms.yml }
-  - { resource: handlers.yml }
-  - { resource: menu.yml }
-  - { resource: listeners.yml }
-  - { resource: repositories.yml }
-  - { resource: twig_extensions.yml }
-  - { resource: validators.yml }
-
 services:
   gyman.app.tenant_provider:
     class: Gyman\Bundle\AppBundle\Services\TenantProvider

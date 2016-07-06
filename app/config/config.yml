@@ -103,8 +103,10 @@ gyman_app:
     filename:               'schedule.png'
 
 dende_calendar:
-  model_manager_name:   tenant
-  backend_type:         ORM
+  model_manager_name:                   'tenant'
+  backend_type:                         'ORM'
+  occurrence_repository_service_name:   'gyman.occurrence.repository'
+  occurrence_factory_service_name:      'gyman.occurrence.factory'
 
 dende_multidatabase:
   provider:                 gyman.app.tenant_provider

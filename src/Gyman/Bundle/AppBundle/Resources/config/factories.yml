@@ -1,0 +1,4 @@
+services:
+  gyman.occurrence.factory:
+    class:  'Gyman\Bundle\AppBundle\Factory\OccurrenceFactory'
+    parent: 'dende_calendar.factory.occurrence'
