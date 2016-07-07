@@ -178,12 +178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "912c20d7ad34dbad3670a9a5c2ca408c8b189e21"
+                "reference": "ab70989a19eb443098d261c795a640c7d47634be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/912c20d7ad34dbad3670a9a5c2ca408c8b189e21",
-                "reference": "912c20d7ad34dbad3670a9a5c2ca408c8b189e21",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/ab70989a19eb443098d261c795a640c7d47634be",
+                "reference": "ab70989a19eb443098d261c795a640c7d47634be",
                 "shasum": ""
             },
             "require": {
@@ -213,7 +213,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2016-07-06 01:06:26"
+            "time": "2016-07-07 01:21:10"
         },
         {
             "name": "dende/calendar-bundle",
