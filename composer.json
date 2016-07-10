@@ -74,7 +74,6 @@
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",
-        "squizlabs/php_codesniffer": "2.*",
         "behat/behat": "3.0.*",
         "phpunit/phpunit": "*",
         "fabpot/php-cs-fixer": "2.0.*@dev",

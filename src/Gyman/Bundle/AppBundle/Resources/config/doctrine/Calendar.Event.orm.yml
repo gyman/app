@@ -1,0 +1,7 @@
+Gyman\Domain\Calendar\Event:
+  type: entity
+  repositoryClass: Gyman\Bundle\AppBundle\Repository\EventRepository
+
+  associationOverride:
+    occurrences:
+      targetEntity: Gyman\Domain\Calendar\Event\Occurrence

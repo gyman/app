@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ac8262bc958fae9a2f02f25c69958297",
-    "content-hash": "6cc6a7bae66a46b7632c6044c72f8243",
+    "hash": "9e6d3c9630c582e8d887b344db375892",
+    "content-hash": "68e6e80a2844eaa5ac33c463b386a8b6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -727,12 +727,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6"
+                "reference": "e05f26d87d4132c73365a48c696b9ff9f823237e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9e1300bffb9cae048705bb4ed39c19f33e6896d6",
-                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e05f26d87d4132c73365a48c696b9ff9f823237e",
+                "reference": "e05f26d87d4132c73365a48c696b9ff9f823237e",
                 "shasum": ""
             },
             "require": {
@@ -790,7 +790,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-01-23 14:30:23"
+            "time": "2016-07-07 07:42:05"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1259,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "5df0c51e5071fd39a4f7e32e8958eaedfe193606"
+                "reference": "3c5cdb143d5e00b3429c0676224b495e83cbdadf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/5df0c51e5071fd39a4f7e32e8958eaedfe193606",
-                "reference": "5df0c51e5071fd39a4f7e32e8958eaedfe193606",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/3c5cdb143d5e00b3429c0676224b495e83cbdadf",
+                "reference": "3c5cdb143d5e00b3429c0676224b495e83cbdadf",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-07-05 23:50:37"
+            "time": "2016-07-07 11:56:49"
         },
         {
             "name": "doctrine/orm",
@@ -1409,12 +1409,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "cb718cc3cdc646f6099e2eac3c7bd9f20019bdda"
+                "reference": "a677379fa386238ca311a5dae3fd94c0d3e35187"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/cb718cc3cdc646f6099e2eac3c7bd9f20019bdda",
-                "reference": "cb718cc3cdc646f6099e2eac3c7bd9f20019bdda",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/a677379fa386238ca311a5dae3fd94c0d3e35187",
+                "reference": "a677379fa386238ca311a5dae3fd94c0d3e35187",
                 "shasum": ""
             },
             "require": {
@@ -1466,7 +1466,7 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "abandoned": "friendsofphp/php-cs-fixer",
-            "time": "2016-07-05 19:38:07"
+            "time": "2016-07-08 22:03:35"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1532,12 +1532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "ac299810b6989e8aa977d870d3454c977303f163"
+                "reference": "e34a26ce039ad0938bc5469347a01d74a48d3c19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/ac299810b6989e8aa977d870d3454c977303f163",
-                "reference": "ac299810b6989e8aa977d870d3454c977303f163",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/e34a26ce039ad0938bc5469347a01d74a48d3c19",
+                "reference": "e34a26ce039ad0938bc5469347a01d74a48d3c19",
                 "shasum": ""
             },
             "require": {
@@ -1612,7 +1612,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2016-07-05 15:23:13"
+            "time": "2016-07-06 16:23:57"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1689,12 +1689,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "5ee093a4387b60411fe121ff8e1415bfe683e5db"
+                "reference": "8f172af78138ee3ea12e87be431dec3da0c2f4a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/5ee093a4387b60411fe121ff8e1415bfe683e5db",
-                "reference": "5ee093a4387b60411fe121ff8e1415bfe683e5db",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/8f172af78138ee3ea12e87be431dec3da0c2f4a9",
+                "reference": "8f172af78138ee3ea12e87be431dec3da0c2f4a9",
                 "shasum": ""
             },
             "require": {
@@ -1760,7 +1760,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2016-06-10 18:43:11"
+            "time": "2016-07-08 05:48:13"
         },
         {
             "name": "gyman/supr",
@@ -4049,12 +4049,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/cache.git",
-                "reference": "b558998e4d596f7fee5b77629fee91822347f12f"
+                "reference": "b6788b711728a92701865eaec7cfbbcc0f817bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/cache/zipball/b558998e4d596f7fee5b77629fee91822347f12f",
-                "reference": "b558998e4d596f7fee5b77629fee91822347f12f",
+                "url": "https://api.github.com/repos/sonata-project/cache/zipball/b6788b711728a92701865eaec7cfbbcc0f817bfe",
+                "reference": "b6788b711728a92701865eaec7cfbbcc0f817bfe",
                 "shasum": ""
             },
             "require-dev": {
@@ -4082,7 +4082,6 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Sonata\\Cache\\Tests\\": "test/",
                     "Sonata\\Cache\\": "src/"
                 }
             },
@@ -4105,7 +4104,7 @@
                 "mongodb",
                 "redis"
             ],
-            "time": "2016-06-27 07:48:23"
+            "time": "2016-07-08 14:27:51"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -4501,12 +4500,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "7c0abd960cc60ff9870863886e6ce626c2e93bad"
+                "reference": "1ffdfdbbfb2b4dc133507b5a03989408d298779e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7c0abd960cc60ff9870863886e6ce626c2e93bad",
-                "reference": "7c0abd960cc60ff9870863886e6ce626c2e93bad",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/1ffdfdbbfb2b4dc133507b5a03989408d298779e",
+                "reference": "1ffdfdbbfb2b4dc133507b5a03989408d298779e",
                 "shasum": ""
             },
             "require": {
@@ -4546,7 +4545,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-06-30 14:03:38"
+            "time": "2016-07-08 11:52:16"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -5182,12 +5181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "5053ae21409c5924243f90821da3677c4658ce99"
+                "reference": "0bac08aad1b6d3c6ecb4317b3967cd0df14ccf63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/5053ae21409c5924243f90821da3677c4658ce99",
-                "reference": "5053ae21409c5924243f90821da3677c4658ce99",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/0bac08aad1b6d3c6ecb4317b3967cd0df14ccf63",
+                "reference": "0bac08aad1b6d3c6ecb4317b3967cd0df14ccf63",
                 "shasum": ""
             },
             "require": {
@@ -5308,7 +5307,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-07-05 11:05:26"
+            "time": "2016-07-08 09:55:24"
         },
         {
             "name": "twig/extensions",
@@ -5489,23 +5488,24 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "target-dir": "Bazinga/Bundle/HateoasBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5"
+                "reference": "7c73a949c72dc6bc7363f76c11e70e655b19d94b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5",
-                "reference": "a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/7c73a949c72dc6bc7363f76c11e70e655b19d94b",
+                "reference": "7c73a949c72dc6bc7363f76c11e70e655b19d94b",
                 "shasum": ""
             },
             "require": {
                 "jms/serializer-bundle": "~1.0",
+                "php": ">5.4",
                 "symfony/framework-bundle": "~2.2 || ~3.0",
-                "willdurand/hateoas": "~2.9"
+                "willdurand/hateoas": "^2.10.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.5",
@@ -5538,7 +5538,7 @@
                 "HATEOAS",
                 "rest"
             ],
-            "time": "2016-02-22 13:12:41"
+            "time": "2016-05-31 13:55:14"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -6158,12 +6158,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90"
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/ec1ca8266d9f8220cb0f90bbb84735137d180c90",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/ee06e7b564ea4dc9b90605d894c2626f87df334d",
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d",
                 "shasum": ""
             },
             "require": {
@@ -6215,7 +6215,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-06-02 10:51:58"
+            "time": "2016-07-06 09:05:19"
         },
         {
             "name": "myclabs/deep-copy",
@@ -7535,84 +7535,6 @@
             ],
             "description": "Database of known security vulnerabilities in various PHP projects and libraries",
             "time": "2016-05-25 05:33:27"
-        },
-        {
-            "name": "squizlabs/php_codesniffer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "19ee67081a15ede42ae080d555d5e953316fcc26"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/19ee67081a15ede42ae080d555d5e953316fcc26",
-                "reference": "19ee67081a15ede42ae080d555d5e953316fcc26",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.1.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "bin": [
-                "scripts/phpcs",
-                "scripts/phpcbf"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "CodeSniffer.php",
-                    "CodeSniffer/CLI.php",
-                    "CodeSniffer/Exception.php",
-                    "CodeSniffer/File.php",
-                    "CodeSniffer/Fixer.php",
-                    "CodeSniffer/Report.php",
-                    "CodeSniffer/Reporting.php",
-                    "CodeSniffer/Sniff.php",
-                    "CodeSniffer/Tokens.php",
-                    "CodeSniffer/Reports/",
-                    "CodeSniffer/Tokenizers/",
-                    "CodeSniffer/DocGenerators/",
-                    "CodeSniffer/Standards/AbstractPatternSniff.php",
-                    "CodeSniffer/Standards/AbstractScopeSniff.php",
-                    "CodeSniffer/Standards/AbstractVariableSniff.php",
-                    "CodeSniffer/Standards/IncorrectPatternException.php",
-                    "CodeSniffer/Standards/Generic/Sniffs/",
-                    "CodeSniffer/Standards/MySource/Sniffs/",
-                    "CodeSniffer/Standards/PEAR/Sniffs/",
-                    "CodeSniffer/Standards/PSR1/Sniffs/",
-                    "CodeSniffer/Standards/PSR2/Sniffs/",
-                    "CodeSniffer/Standards/Squiz/Sniffs/",
-                    "CodeSniffer/Standards/Zend/Sniffs/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Sherwood",
-                    "role": "lead"
-                }
-            ],
-            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "http://www.squizlabs.com/php-codesniffer",
-            "keywords": [
-                "phpcs",
-                "standards"
-            ],
-            "time": "2016-07-05 01:38:25"
         },
         {
             "name": "theseer/fdomdocument",

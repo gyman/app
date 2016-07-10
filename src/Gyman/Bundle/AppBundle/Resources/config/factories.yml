@@ -2,3 +2,7 @@ services:
   gyman.occurrence.factory:
     class:  'Gyman\Bundle\AppBundle\Factory\OccurrenceFactory'
     parent: 'dende_calendar.factory.occurrence'
+
+  gyman.event.factory:
+    class:  'Gyman\Bundle\AppBundle\Factory\EventFactory'
+    parent: 'dende_calendar.factory.event'

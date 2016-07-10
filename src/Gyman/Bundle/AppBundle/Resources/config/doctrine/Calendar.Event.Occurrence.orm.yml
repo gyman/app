@@ -7,6 +7,10 @@ Gyman\Domain\Calendar\Event\Occurrence:
     Gyman\Bundle\AppBundle\Listener\OccurrenceListener:
       postLoad: [postLoadHandler]
 
+  associationOverride:
+    event:
+      targetEntity: Gyman\Domain\Calendar\Event
+
   oneToMany:
     entries:
       targetEntity: Gyman\Domain\Entry
