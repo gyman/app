@@ -24,7 +24,11 @@ abstract class BaseFunctionalTestCase extends BaseTest
     public function setUp()
     {
         parent::setUp();
+        $this->loadTestFixtures();
+    }
 
+    protected function loadTestFixtures()
+    {
         $this->fixtures = $this->loadFixtures([
             UsersData::class,
             ClubsData::class,

@@ -15,7 +15,7 @@ use Gyman\Domain\Calendar\Event;
  * Class EventFactory
  * @package Gyman\Bundle\AppBundle\Factory
  */
-class EventFactory extends BaseEventFactory implements EventFactoryInterface
+class EventFactory extends BaseEventFactory
 {
 
     /**

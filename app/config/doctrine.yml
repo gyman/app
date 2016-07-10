@@ -30,6 +30,9 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
 
+        resolve_target_entities:
+            Dende\Calendar\Domain\Calendar\Event: Gyman\Domain\Calendar\Event
+
         entity_managers:
           default:
             auto_mapping: false # disabled so we can assign entities to our own connections

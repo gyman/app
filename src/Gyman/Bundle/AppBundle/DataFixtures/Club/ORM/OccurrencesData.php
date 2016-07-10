@@ -41,7 +41,7 @@ final class OccurrencesData extends BaseFixture implements ContainerAwareInterfa
     {
         $event = $this->getReference($params["event"]);
 
-        $occurrence = $this->getContainer()->get('dende_calendar.factory.occurrence')->createFromArray([
+        $occurrence = $this->getContainer()->get('gyman.occurrence.factory')->createFromArray([
             'startDate' => new DateTime($params["startDate"]),
             'duration'  => new Duration($params["minutes"]),
             'event'     => $event,

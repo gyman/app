@@ -48,7 +48,7 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
         $command->title = $params["title"];
         $command->type = $params["type"];
 
-        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromCommand($command);
+        $event = $this->getContainer()->get('gyman.event.factory')->createFromCommand($command);
 
         return $event;
     }
