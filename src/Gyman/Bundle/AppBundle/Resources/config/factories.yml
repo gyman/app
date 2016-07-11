@@ -6,3 +6,7 @@ services:
   gyman.event.factory:
     class:  'Gyman\Bundle\AppBundle\Factory\EventFactory'
     parent: 'dende_calendar.factory.event'
+
+  gyman.calendar.factory:
+    class:  'Gyman\Bundle\AppBundle\Factory\CalendarFactory'
+    parent: 'dende_calendar.factory.calendar'

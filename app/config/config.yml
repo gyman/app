@@ -105,6 +105,8 @@ gyman_app:
 dende_calendar:
   model_manager_name:                   'tenant'
   backend_type:                         'ORM'
+  calendar_repository_service_name:     'gyman.calendar.repository'
+  calendar_factory_service_name:        'gyman.calendar.factory'
   event_repository_service_name:        'gyman.event.repository'
   event_factory_service_name:           'gyman.event.factory'
   occurrence_repository_service_name:   'gyman.occurrence.repository'
@@ -113,13 +115,13 @@ dende_calendar:
     event:
       entity:                             Dende\Calendar\Domain\Calendar\Event
       map:
-        bundle:   Dende\Calendar\Domain\Calendar\Event
-        app:      Gyman\Domain\Calendar\Event
+        bundle:                           Dende\Calendar\Domain\Calendar\Event
+        app:                              Gyman\Domain\Calendar\Event
     calendar:
       entity:                             Dende\Calendar\Domain\Calendar
       map:
-        bundle:   Dende\Calendar\Domain\Calendar
-        app:      Gyman\Domain\Calendar
+        bundle:                           Dende\Calendar\Domain\Calendar
+        app:                              Gyman\Domain\Calendar
 
 dende_multidatabase:
   provider:                 gyman.app.tenant_provider

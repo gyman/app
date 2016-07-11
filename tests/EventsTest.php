@@ -14,27 +14,44 @@ class EventsTest  extends BaseFunctionalTestCase
 {
     protected function loadTestFixtures()
     {
-        $this->tenantFixtures = $this->loadFixtures([
-            CalendarsData::class,
-            EventsData::class,
-            OccurrencesData::class,
-        ], 'tenant')->getReferenceRepository();
+
     }
 
     /**
      * @test
      */
-    public function aaa()
+    public function test_classes()
     {
-//        $appRepository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository(
-//            Gyman\Domain\Calendar\Event::class
-//        );
-//
-//        $bundleRepository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository(
-//            Dende\Calendar\Domain\Calendar\Event::class
-//        );
-//
-//        $this->assertEquals(get_class($appRepository), \Gyman\Bundle\AppBundle\Repository\EventRepository::class);
-//        $this->assertEquals(get_class($bundleRepository), \Dende\CalendarBundle\Repository\ORM\EventRepository::class);
+        $em = $this->container->get('doctrine.orm.tenant_entity_manager');
+
+        $this->assertEquals(\Gyman\Bundle\AppBundle\Repository\CalendarRepository::class, get_class($em->getRepository(
+            Gyman\Domain\Calendar::class
+        )));
+
+        $this->assertEquals(\Gyman\Bundle\AppBundle\Repository\EventRepository::class, get_class($em->getRepository(
+            Gyman\Domain\Calendar\Event::class
+        )));
+
+        $this->assertEquals(\Gyman\Bundle\AppBundle\Repository\OccurrenceRepository::class, get_class($em->getRepository(
+            Gyman\Domain\Calendar\Event\Occurrence::class
+        )));
+    }
+
+    /**
+     * @test
+     */
+    public function test_adding_calendar_to_db() {
+        $em = $this->container->get('doctrine.orm.tenant_entity_manager');
+        $newCalendar = $this->container->get("gyman.calendar.factory")->createFromArray([]);
+
+        $em->persist($newCalendar);
+        $em->flush($newCalendar);
+
+        $id = $newCalendar->id();
+
+        $addedCalendar = $em->getRepository(\Gyman\Domain\Calendar::class)->findOneById($id);
+
+        $this->assertEquals($newCalendar, $addedCalendar);
+        $this->assertEquals(\Gyman\Domain\Calendar::class, get_class($addedCalendar));
     }
 }

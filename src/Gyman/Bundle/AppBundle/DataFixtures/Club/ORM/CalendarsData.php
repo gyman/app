@@ -43,7 +43,7 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        $calendar = $this->container->get("dende_calendar.factory.calendar")->createFromArray([
+        $calendar = $this->container->get("gyman.calendar.factory")->createFromArray([
             "title" => $params["name"]
         ]);
 

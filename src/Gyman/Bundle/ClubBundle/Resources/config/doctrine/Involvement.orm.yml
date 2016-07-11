@@ -16,7 +16,7 @@ Gyman\Bundle\ClubBundle\Entity\Involvement:
 
     club:
       targetEntity:   Gyman\Bundle\ClubBundle\Entity\Club
-      mappedBy:       involvements
+      inversedBy:       involvements
 
   fields:
     roles:

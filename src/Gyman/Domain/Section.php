@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Domain;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Domain\Calendar;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

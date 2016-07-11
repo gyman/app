@@ -5,3 +5,5 @@ Gyman\Domain\Calendar\Event:
   associationOverride:
     occurrences:
       targetEntity: Gyman\Domain\Calendar\Event\Occurrence
+    calendar:
+      targetEntity: Gyman\Domain\Calendar
