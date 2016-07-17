@@ -63,7 +63,7 @@
         "braincrafted/bootstrap-bundle": "1.4.2",
 
         "dende/common-bundle": "dev-master",
-        "dende/calendar": "dev-master",
+        "dende/calendar": "1.6",
         "dende/calendar-bundle": "1.6",
         "dende/multidatabase-bundle": "1.0.0",
         "league/tactician": "^1.0",
