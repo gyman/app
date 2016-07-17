@@ -3,7 +3,6 @@ namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
 use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
-use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Doctrine\Common\Collections\ArrayCollection;

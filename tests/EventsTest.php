@@ -1,4 +1,8 @@
 <?php
+use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
+use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\CalendarsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\EventsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\OccurrencesData;
@@ -53,5 +57,31 @@ class EventsTest  extends BaseFunctionalTestCase
 
         $this->assertEquals($newCalendar, $addedCalendar);
         $this->assertEquals(\Gyman\Domain\Calendar::class, get_class($addedCalendar));
+    }
+
+    public function test_adding_whole_root_to_db()
+    {
+        $em = $this->container->get('doctrine.orm.tenant_entity_manager');
+        $newCalendar = $this->container->get("gyman.calendar.factory")->createFromArray([]);
+
+        $em->persist($newCalendar);
+
+        $event = $this->container->get("gyman.event.factory")->createFromArray([
+            'title'                  => '',
+            'repetitions'            => new Repetitions([1]),
+            'type'                   => new EventType(EventType::TYPE_WEEKLY),
+            'occurrences'            => new ArrayCollection(),
+            'calendar'               => $newCalendar,
+            'duration'               => new Duration(45),
+            'startDate'              => new DateTime('now'),
+            'endDate'                => new DateTime('+1 year'),
+        ]);
+
+        $em->persist($event);
+
+        $occurrences = $this->container->get("gyman.occurrence.factory")->generateCollectionFromEvent($event);
+
+        $this->container->get("gyman.occurrence.repository")->insertCollection($occurrences);
+        $em->flush();
     }
 }
