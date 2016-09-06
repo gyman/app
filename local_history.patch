@@ -1,0 +1,396 @@
+Index: vendor/dende/calendar-bundle/Listener/DoctrineEventListener.php
+===================================================================
+--- vendor/dende/calendar-bundle/Listener/DoctrineEventListener.php	(revision )
++++ vendor/dende/calendar-bundle/Listener/DoctrineEventListener.php	(revision )
+@@ -1,44 +0,0 @@
+-<?php
+-namespace Dende\CalendarBundle\Listener;
+-
+-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+-use Doctrine\Common\Annotations\AnnotationReader;
+-
+-class DoctrineEventListener
+-{
+-    /**
+-     * @var array
+-     */
+-    protected $mapping;
+-
+-    public function __construct(array $mapping)
+-    {
+-        $this->mapping = $mapping;
+-    }
+-
+-    public function loadClassMetadata(LoadClassMetadataEventArgs $event)
+-    {
+-        $metadata = $event->getClassMetadata();
+-        $class = $metadata->getReflectionClass();
+-
+-        if ($class === null) {
+-            $class = new \ReflectionClass($metadata->getName());
+-        }
+-
+-        foreach ($this->mapping as $entityName => $map) {
+-            if ($class->getName() == $map['entity']) {
+-                $reader = new AnnotationReader;
+-                $discriminatorMap = array();
+-
+-                if (null !== $discriminatorMapAnnotation = $reader->getClassAnnotation($class, 'Doctrine\ORM\Mapping\DiscriminatorMap')) {
+-                    $discriminatorMap = $discriminatorMapAnnotation->value;
+-                }
+-
+-                $discriminatorMap = array_merge($discriminatorMap, $map['map']);
+-                $discriminatorMap = array_merge($discriminatorMap, array($entityName => $map['entity']));
+-
+-                $metadata->setDiscriminatorMap($discriminatorMap);
+-            }
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/Form/Type/CreateEventType.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Form/Type/CreateEventType.php	(revision )
++++ vendor/dende/calendar-bundle/Form/Type/CreateEventType.php	(revision )
+@@ -24,8 +24,7 @@
+                 "class" => "Calendar:Calendar",
+                 "choice_label" => "name",
+                 "em" => $options["model_manager_name"],
+-                "label" => "dende_calendar.form.calendar.label",
+-                'placeholder'=> "dende_calendar.form.calendar.placeholder"
++                "label" => "dende_calendar.form.calendar.label"
+             ])
+             ->add("new_calendar_name", "text", [
+                 "mapped" => false,
+Index: vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.orm.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.orm.yml	(revision )
++++ vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.orm.yml	(revision )
+@@ -1,12 +1,5 @@
+ Dende\Calendar\Domain\Calendar:
+   type: entity
+-  inheritanceType: SINGLE_TABLE
+-  discriminatorColumn:
+-    name: discriminator
+-    type: string
+-  discriminatorMap:
+-    bundle: Dende\Calendar\Domain\Calendar
+-
+   table: calendars
+   repositoryClass: Dende\CalendarBundle\Repository\ORM\CalendarRepository
+ 
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.Event.orm.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.Event.orm.yml	(revision )
++++ vendor/dende/calendar-bundle/Resources/config/doctrine/Calendar.Event.orm.yml	(revision )
+@@ -1,11 +1,5 @@
+ Dende\Calendar\Domain\Calendar\Event:
+   type: entity
+-  inheritanceType: SINGLE_TABLE
+-  discriminatorColumn:
+-    name: discriminator
+-    type: string
+-  discriminatorMap:
+-    bundle: Dende\Calendar\Domain\Calendar\Event
+   table: events
+   repositoryClass: Dende\CalendarBundle\Repository\ORM\EventRepository
+ 
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/Resources/config/services.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Resources/config/services.yml	(revision )
++++ vendor/dende/calendar-bundle/Resources/config/services.yml	(revision )
+@@ -14,7 +14,7 @@
+     factory_service: doctrine
+     factory_method: getManager
+     arguments:
+-     - '%dende_calendar.model_manager_name%'
++     - %dende_calendar.model_manager_name%
+ 
+   dende_calendar.viewmodel_entity_manager:
+     class: %doctrine.orm.entity_manager.class%
+@@ -48,21 +48,20 @@
+   dende_calendar.occurrences_provider:
+     class: Dende\CalendarBundle\Service\OccurrencesProvider
+     arguments:
+-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
++      - @dende_calendar.occurrences_repository
+       - @router.default
+       - 'dende_calendar_default_updateevent'
+ 
+   dende_calendar.id_generator:
+     class: %dende_calendar.id_generator.class%
+-    arguments:
+-      - "@dende_calendar.entity_manager"
++    arguments: [@dende_calendar.entity_manager]
+ 
+   dende_calendar.new_calendar_creation:
+-    class: 'Dende\Calendar\Application\Handler\CreateCalendarHandler'
++    class: Dende\Calendar\Application\Handler\CreateCalendarHandler
+     arguments:
+-      - "@=service(parameter('dende_calendar.calendar_factory_service_name'))"
+-      - "@=service(parameter('dende_calendar.calendar_repository_service_name'))"
+-      - "@event_dispatcher"
++      - @dende_calendar.factory.calendar
++      - @dende_calendar.calendar_repository
++      - @event_dispatcher
+ 
+ #forms
+ 
+@@ -81,39 +80,40 @@
+   dende_calendar.handler.create_event:
+     class: Dende\Calendar\Application\Handler\CreateEventHandler
+     arguments:
+-      - @=service(parameter('dende_calendar.event_repository_service_name'))
++      - @dende_calendar.event_repository
+       - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+-      - @=service(parameter('dende_calendar.event_factory_service_name'))
++      - @dende_calendar.factory.event
+       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+ 
+   dende_calendar.handler.remove_event:
+     class: Dende\Calendar\Application\Handler\RemoveEventHandler
+     arguments:
+-      - @=service(parameter('dende_calendar.event_repository_service_name'))
+-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
++      - @dende_calendar.event_repository
++      - @dende_calendar.occurrences_repository
+ 
+   dende_calendar.handler.remove_occurrence:
+     class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
+     arguments:
+       - @dende_calendar.handler.remove_event
+-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
++      - @dende_calendar.event_repository
+ 
+   dende_calendar.handler.update_event:
+     class: Dende\Calendar\Application\Handler\UpdateEventHandler
++    calls: # move to compiler pass
++#      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
++      - [addStrategy, ['overwrite', '@dende_calendar.update_strategy.overwrite']]
+     arguments:
+-      - @=service(parameter('dende_calendar.event_repository_service_name'))
+-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+-      - @=service(parameter('dende_calendar.event_factory_service_name'))
+-      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
++      - @dende_calendar.event_repository
++      - @dende_calendar.occurrences_repository
++      - @dende_calendar.factory.event
++      - @dende_calendar.factory.occurrence
+ 
+-# update strategies
++  dende_calendar.update_strategy.single: # move to compiler pass
++    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
++    tags:
++      - {name: dende_calendar.update_strategy }
+ 
+-#  dende_calendar.update_strategy.single:
+-#    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
+-#    tags:
+-#      - {name: dende_calendar.update_strategy }
+-
+-  dende_calendar.update_strategy.overwrite:
++  dende_calendar.update_strategy.overwrite: # move to compiler pass
+     class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
+     tags:
+       - {name: dende_calendar.update_strategy }
+@@ -146,11 +146,3 @@
+     class: Dende\CalendarBundle\Validator\SelectWeekdayForSerialValidator
+     tags:
+       - { name: validator.constraint_validator, alias: validator.weekday_for_serial_validator}
+-
+-# listeners
+-
+-  dende_calendar.listener.doctrine_event_listener:
+-    class: Dende\CalendarBundle\Listener\DoctrineEventListener
+-    arguments: ['%dende_calendar.mapping%']
+-    tags:
+-      - { name: doctrine.event_listener, event: loadClassMetadata, em: '%dende_calendar.model_manager_name%' }
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/Resources/translations/messages.pl.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Resources/translations/messages.pl.yml	(revision )
++++ vendor/dende/calendar-bundle/Resources/translations/messages.pl.yml	(revision )
+@@ -13,7 +13,6 @@
+   form:
+     calendar:
+       label:                        "Nazwa kalendarza"
+-      placeholder:                  "wybierz kalendarz"
+     new_calendar_name:
+       label:                        "Nazwa kalendarza do utworzenia"
+     type:
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/Controller/DefaultController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/Controller/DefaultController.php	(revision )
++++ vendor/dende/calendar-bundle/Controller/DefaultController.php	(revision )
+@@ -73,8 +73,8 @@
+         if ($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
+             $command->startDate = Carbon::createFromFormat("YmdHi", $request->get('startDate'));
+             $command->endDate = Carbon::createFromFormat("YmdHi", $request->get('endDate'));
++
+             $command->duration = $command->startDate->diffInMinutes($command->endDate);
+-            $command->endDate->addYear();
+             $command->repetitionDays = [
+                 $command->startDate->dayOfWeek
+             ];
+@@ -85,7 +85,6 @@
+         ]);
+ 
+         if ($request->isMethod("POST")) {
+-            
+             $form->handleRequest($request);
+ 
+             if ($form->isValid()) {
+Index: vendor/dende/calendar-bundle/composer.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/composer.json	(revision )
++++ vendor/dende/calendar-bundle/composer.json	(revision )
+@@ -6,7 +6,7 @@
+         "doctrine/orm": "^2.5",
+         "doctrine/data-fixtures": "*",
+         "doctrine/doctrine-fixtures-bundle": "*",
+-        "dende/calendar" : "dev-master",
++        "dende/calendar" : "1.6",
+         "symfony/http-kernel" : "^2.7.5",
+         "jms/serializer-bundle": "^1.0",
+         "friendsofsymfony/jsrouting-bundle": "^1.5",
+Index: vendor/dende/calendar-bundle/DependencyInjection/CompilerPass/UpdateStrategiesPass.php
+===================================================================
+--- vendor/dende/calendar-bundle/DependencyInjection/CompilerPass/UpdateStrategiesPass.php	(revision )
++++ vendor/dende/calendar-bundle/DependencyInjection/CompilerPass/UpdateStrategiesPass.php	(revision )
+@@ -1,38 +0,0 @@
+-<?php
+-namespace Dende\CalendarBundle\DependencyInjection\CompilerPass;
+-
+-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+-use Symfony\Component\DependencyInjection\ContainerBuilder;
+-use Symfony\Component\DependencyInjection\Definition;
+-use Symfony\Component\DependencyInjection\Reference;
+-
+-/**
+- * Class UpdateStrategiesPass
+- * @package Dende\CalendarBundle\DependencyInjection\CompilerPass
+- */
+-class UpdateStrategiesPass implements CompilerPassInterface
+-{
+-    /**
+-     * @param ContainerBuilder $container
+-     */
+-    public function process(ContainerBuilder $container)
+-    {
+-        if (!$container->has('dende_calendar.handler.update_event')) {
+-            return;
+-        }
+-
+-        $definition = $container->findDefinition('dende_calendar.handler.update_event');
+-
+-        $taggedServices = $container->findTaggedServiceIds('dende_calendar.update_strategy');
+-
+-        foreach ($taggedServices as $id => $tags) {
+-            /** @var Definition $taggedDefinition */
+-            $taggedDefinition = $container->findDefinition($id);
+-
+-            $class = array_values(explode('\\', $taggedDefinition->getClass()));
+-            $name = strtolower(end($class));
+-
+-            $definition->addMethodCall('addStrategy', [$name, new Reference($id)]);
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: vendor/dende/calendar-bundle/DependencyInjection/Configuration.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/DependencyInjection/Configuration.php	(revision )
++++ vendor/dende/calendar-bundle/DependencyInjection/Configuration.php	(revision )
+@@ -23,23 +23,8 @@
+             ->children()
+                 ->scalarNode('model_manager_name')->defaultValue('default')->end()
+                 ->scalarNode('backend_type')->defaultValue('ORM')->end()
+-                ->scalarNode('calendar_repository_service_name')->defaultValue('dende_calendar.calendar_repository')->end()
+-                ->scalarNode('calendar_factory_service_name')->defaultValue('dende_calendar.factory.calendar')->end()
+-                ->scalarNode('event_repository_service_name')->defaultValue('dende_calendar.events_repository')->end()
+-                ->scalarNode('event_factory_service_name')->defaultValue('dende_calendar.factory.event')->end()
+                 ->scalarNode('occurrence_repository_service_name')->defaultValue('dende_calendar.occurrences_repository')->end()
+                 ->scalarNode('occurrence_factory_service_name')->defaultValue('dende_calendar.factory.occurrence')->end()
+-
+-                ->arrayNode('mapping')->useAttributeAsKey('name')->prototype('array')
+-                    ->children()
+-                        ->scalarNode('entity')->isRequired()->end()
+-                        ->arrayNode('map')->useAttributeAsKey('name')
+-                            ->prototype('scalar')->end()
+-                        ->end()
+-                        ->end()
+-                        ->end()
+-                    ->defaultValue([])
+-                ->end()
+             ->end()
+         ;
+ 
+Index: vendor/dende/calendar-bundle/DependencyInjection/DendeCalendarExtension.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/DependencyInjection/DendeCalendarExtension.php	(revision )
++++ vendor/dende/calendar-bundle/DependencyInjection/DendeCalendarExtension.php	(revision )
+@@ -58,10 +58,6 @@
+             $config["occurrence_factory_service_name"]
+         );
+ 
+-        $container->setParameter(
+-            'dende_calendar.mapping', $config['mapping']
+-        );
+-
+         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+         $loader->load('services.yml');
+     }
+Index: vendor/dende/calendar-bundle/DendeCalendarBundle.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/dende/calendar-bundle/DendeCalendarBundle.php	(revision )
++++ vendor/dende/calendar-bundle/DendeCalendarBundle.php	(revision )
+@@ -1,7 +1,6 @@
+ <?php
+ namespace Dende\CalendarBundle;
+ 
+-use Dende\CalendarBundle\DependencyInjection\CompilerPass\UpdateStrategiesPass;
+ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+ use Symfony\Component\DependencyInjection\ContainerBuilder;
+ use Symfony\Component\HttpKernel\Bundle\Bundle;
+@@ -32,8 +31,6 @@
+             );
+ 
+             $container->addCompilerPass($registerMappingCompilerPass);
+-
+-            $container->addCompilerPass(new UpdateStrategiesPass());
+         }
+     }
+ }

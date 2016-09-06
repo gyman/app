@@ -47,7 +47,6 @@ class AppKernel extends Kernel
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
-//            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),

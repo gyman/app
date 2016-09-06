@@ -134,6 +134,7 @@ dende_multidatabase:
     - doctrine:schema:create
     - doctrine:schema:drop
     - doctrine:fixtures:load
+    - gyman:calendar:import
     - gyman:entries:close_expired
     - gyman:vouchers:clear_expired
     - gyman:vouchers:update_current

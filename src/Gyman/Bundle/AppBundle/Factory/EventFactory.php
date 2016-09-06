@@ -22,7 +22,7 @@ class EventFactory extends BaseEventFactory
      * @param $params
      * @return Event
      */
-    public function createFromArray($array)
+    public function createFromArray(array $array = [])
     {
         $template = [
             'id'                     => $this->idGenerator->generateId(),

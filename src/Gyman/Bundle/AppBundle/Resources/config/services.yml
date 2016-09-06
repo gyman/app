@@ -4,6 +4,7 @@ services:
     arguments:
       - @=service(parameter('subdomain_provider_service'))
       - @gyman.club.repository
+      - %database_host%
 
   gyman.app.command.dump_hosts:
     class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
