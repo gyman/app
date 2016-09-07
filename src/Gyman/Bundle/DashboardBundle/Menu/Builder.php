@@ -40,43 +40,6 @@ class Builder
 
         $menu->setChildrenAttributes(['id' => 'dashboardActionMenu']);
 
-//        $menu->addChild(
-//            'dashboard.actions.sell',
-//            [
-//                'route' => 'gyman_member_new',
-//                "extras" => ["icon" => 'icomoon-icon-users'],
-//                'linkAttributes' => [
-//                    "class" => 'btn btn-block btn-large disabled openUrlInModal btn-primary',
-//                    "id" => "actionSell"
-//                ]
-//            ]
-//        )->setExtra('translation_domain', 'DashboardBundle');
-
-//        $menu->addChild(
-//            'dashboard.actions.new_entry',
-//            [
-//                'route'          => 'gyman_member_new',
-//                'extras'         => ['icon' => 'icomoon-icon-users'],
-//                'linkAttributes' => [
-//                    'class' => 'btn btn-block btn-large btn-primary',
-//                    'id'    => 'actionEntry',
-//                ],
-//            ]
-//        )->setExtra('translation_domain', 'DashboardBundle');
-
-//        $menu->addChild(
-//            'dashboard.actions.new_voucher_sale',
-//            [
-//                'route'          => 'gyman_voucher_new',
-//                'route_parameters' => ['id' => $member->id()],
-//                'extras'         => ['icon' => 'icomoon-icon-users'],
-//                'linkAttributes' => [
-//                    'class' => 'btn btn-block btn-large btn-primary',
-//                    'id'    => 'actionVoucher',
-//                ],
-//            ]
-//        )->setExtra('translation_domain', 'DashboardBundle');
-
         $menu->addChild(
             'dashboard.actions.new_member',
             [
@@ -88,18 +51,6 @@ class Builder
                 ],
             ]
         )->setExtra('translation_domain', 'DashboardBundle');
-
-//        $menu->addChild(
-//            'dashboard.actions.calendar',
-//            array(
-//                'route' => 'dende_calendar_default_index',
-//                "extras" => array("icon" => 'icomoon-icon-users'),
-//                'linkAttributes' => array(
-//                    "class" => 'btn btn-block btn-large btn-primary',
-//                    "id" => "actionCalendar"
-//                )
-//            )
-//        )->setExtra('translation_domain', 'DashboardBundle');
 
         $menu->addChild(
             'dashboard.actions.reports',

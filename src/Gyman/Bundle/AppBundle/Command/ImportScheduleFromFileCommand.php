@@ -77,9 +77,12 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
                 $eventStart = Carbon::parse($startDate)->setTimeFromTimeString($startHour);
                 $eventEnd = Carbon::parse($endDate)->setTimeFromTimeString($endHour);
 
-                $eventDuration = $eventStart->diff(
+                $diff = $eventStart->diff(
                     Carbon::parse($startDate)->setTimeFromTimeString($endHour)
-                )->i;
+                );
+
+                $eventDuration = $diff->h * 60;
+                $eventDuration+= $diff->i;
 
                 $section = $sections[$sectionTitle];
                 $calendar = $section->calendar();
