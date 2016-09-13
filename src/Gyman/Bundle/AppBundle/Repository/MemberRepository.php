@@ -280,4 +280,14 @@ SQL;
 
         return $query->getResult();
     }
+
+    public function getAllNamesForAutocompletion() {
+        $query = $this->createQueryBuilder('m')
+            ->select('m.details.firstname', 'm.details.lastname', 'm.id')
+            ->where('m.deletedAt IS null')
+            ->getQuery()
+        ;
+
+        return $query->getArrayResult();
+    }
 }
