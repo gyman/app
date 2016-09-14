@@ -27,6 +27,7 @@ class OpenEntryHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandle()
     {
+        $factoryMock = m::mock('alias:Gyman\Application\Factory\EntryFactory');
         /** @var Entry $entryMock */
         $entryMock = m::mock(Entry::class);
 
@@ -53,7 +54,6 @@ class OpenEntryHandlerTest extends \PHPUnit_Framework_TestCase
 
         $command = new OpenEntryCommand($memberMock);
 
-        $factoryMock = m::mock('alias:Gyman\Application\Factory\EntryFactory');
         $factoryMock->shouldReceive("createFromOpenEntryCommand")->times(1)->with($command)->andReturn($entryMock);
 
         $handler->handle($command);

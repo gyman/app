@@ -154,7 +154,6 @@ class OpenEntryCommand extends ContainerAwareCommand
             $output->writeln("<error>Entry not added due to --dry option</error>");
         }
 
-
         $output->writeln(sprintf("Member:     %s", $member->details()->fullName()));
         $output->writeln(sprintf("Entry date: %s", $entranceDateString));
         $output->writeln(sprintf("Type:       %s", $type));
