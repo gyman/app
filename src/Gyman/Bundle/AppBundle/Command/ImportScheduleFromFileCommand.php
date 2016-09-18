@@ -64,6 +64,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             $value = Yaml::parse(file_get_contents($file));
         } catch (ParseException $e) {
             printf("Unable to parse the YAML string: %s", $e->getMessage());
+            exit;
         }
 
         return [$value["schedule"], $value["start"], $value["end"]];

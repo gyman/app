@@ -3,6 +3,11 @@ Gyman\Domain\Calendar:
   table: calendars
   repositoryClass: Gyman\Bundle\AppBundle\Repository\CalendarRepository
 
+  oneToOne:
+    section:
+      targetEntity: Gyman\Domain\Section
+      mappedBy:   calendar
+
   associationOverride:
     events:
       targetEntity: Gyman\Domain\Calendar\Event
