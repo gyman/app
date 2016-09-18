@@ -4,7 +4,7 @@ namespace Gyman\Bundle\AppBundle\Factory;
 use DateTime;
 use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
 use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar\Event\Occurrence;
 

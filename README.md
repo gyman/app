@@ -48,7 +48,12 @@ Konfiguracja crontab:
 */5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=rio --em=tenant
 */5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=rio
 
-Migracje
+### Migracje
 
-php app/console doctrine:migrations:diff --em=tenant --configuration ./app/DoctrineMigrations/tenant.yml -n --club=rio
-php app/console doctrine:migrations:diff --em=default --configuration ./app/DoctrineMigrations/default.yml -n
+## standard connection:
+
+`php app/console doctrine:migrations:diff --em=default --configuration ./app/DoctrineMigrations/default.yml -n`
+
+## tenant connection:
+
+`php app/console doctrine:migrations:diff --em=tenant --configuration ./app/DoctrineMigrations/tenant.yml -n --club=rio`

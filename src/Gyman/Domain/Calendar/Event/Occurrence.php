@@ -3,7 +3,7 @@ namespace Gyman\Domain\Calendar\Event;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\ClubBundle\Entity\User;
 use Gyman\Domain\Entry;
