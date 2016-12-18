@@ -12,7 +12,7 @@ use Gyman\Bundle\ClubBundle\Entity\User;
  * Class UserManager
  * @package Gyman\Bundle\ClubBundle\Entity
  */
-final class UserManager extends BaseUserManager
+class UserManager extends BaseUserManager
 {
     /**
      * @var SubdomainProvider

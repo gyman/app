@@ -58,6 +58,7 @@
 
         "dende/common-bundle": "dev-master",
         "dende/calendar-bundle": "^1.7",
+        "dende/calendar": "^1.8",
         "dende/multidatabase-bundle": "1.0.0",
         "league/tactician": "^1.0",
         "league/tactician-bundle": "^0.4.0",
@@ -69,7 +70,6 @@
         "sensiolabs/security-checker": "2.0.*@dev",
         "behat/behat": "3.0.*",
         "phpunit/phpunit": "*",
-        "fabpot/php-cs-fixer": "2.0.*@dev",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "~2",
         "mayflower/php-codebrowser": "~1",

@@ -111,6 +111,7 @@ dende_calendar:
   event_factory_service_name:           'gyman.event.factory'
   occurrence_repository_service_name:   'gyman.occurrence.repository'
   occurrence_factory_service_name:      'gyman.occurrence.factory'
+  occurrence_class:                     Gyman\Domain\Calendar\Event\Occurrence
   mapping:
     event:
       entity:                             Dende\Calendar\Domain\Calendar\Event

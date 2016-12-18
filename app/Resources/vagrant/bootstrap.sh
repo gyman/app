@@ -40,6 +40,10 @@ ln -s /etc/nginx/sites-available/page.conf /etc/nginx/sites-enabled/page.conf
 sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.0/fpm/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.0/cli/php.ini
 
+sudo sed -i 's/bind-address\t\t= 127.0.0.1/bind-address\t\t= 0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo service mysql restart
+mysql -u root -proot -e "use mysql; update user set host='%' where user='root' and host='127.0.0.1'; grant all privileges on *.* to 'root'@'%' with grant option; flush privileges;"
+
 less /vagrant/app/Resources/vagrant/xdebug.ini >> /etc/php/7.0/mods-available/xdebug.ini
 less /vagrant/app/Resources/vagrant/mailcatcher.conf >> /etc/init/mailcatcher.conf
 
@@ -55,29 +59,32 @@ mysql -h 127.0.0.1 -u root -proot  -t -e "CREATE DATABASE IF NOT EXISTS gyman_ex
 
 less /vagrant/app/Resources/vagrant/.bash_aliases >> /home/vagrant/.bash_aliases
 
-ln -s /var/www/gyman /home/vagrant/www
+#ln -s /var/www/gyman /home/vagrant/www
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 su vagrant <<'EOF'
-cd /var/www/gyman
+cd /vagrant
+#
+#wget --quiet http://getcomposer.org/composer.phar
+#php composer.phar install
+#
+#php app/console doctrine:schema:create
+#php app/console doctrine:fixtures:load -n
+#
+#php app/console doctrine:schema:create --club=rio --em=tenant
+#php app/console doctrine:schema:create --club=extreme --em=tenant
+#php app/console doctrine:schema:create --club=dende --em=tenant
+#
+#php app/console doctrine:fixtures:load -n --club=rio --em=tenant
+#php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
+#php app/console doctrine:fixtures:load -n --club=dende --em=tenant
+#
+#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
+#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
+#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
 
-wget --quiet http://getcomposer.org/composer.phar
-php composer.phar install
-
-php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load -n
-
-php app/console doctrine:schema:create --club=rio --em=tenant
-php app/console doctrine:schema:create --club=extreme --em=tenant
-php app/console doctrine:schema:create --club=dende --em=tenant
-
-php app/console doctrine:fixtures:load -n --club=rio --em=tenant
-php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
-php app/console doctrine:fixtures:load -n --club=dende --em=tenant
-
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
+npm install
+./node_modules/.bin/bower install
 
 php app/console assets:install web --symlink
 ./node_modules/.bin/grunt production

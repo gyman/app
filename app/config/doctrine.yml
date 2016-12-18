@@ -32,6 +32,7 @@ doctrine:
 
         resolve_target_entities:
             Dende\Calendar\Domain\Calendar\Event: Gyman\Domain\Calendar\Event
+            Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: Gyman\Domain\Calendar\Event\Occurrence
 
         entity_managers:
           default:
