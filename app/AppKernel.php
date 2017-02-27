@@ -39,7 +39,7 @@ class AppKernel extends Kernel
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),
-            new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
+//            new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
             new Gyman\Bundle\ChartsBundle\ChartsBundle(),

@@ -2,11 +2,8 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
-use Dende\Calendar\Application\Command\CreateEventCommand;
-use Dende\Calendar\Application\Factory\EventFactory;
-use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -43,7 +40,7 @@ final class OccurrencesData extends BaseFixture implements ContainerAwareInterfa
 
         $occurrence = $this->getContainer()->get('gyman.occurrence.factory')->createFromArray([
             'startDate' => new DateTime($params["startDate"]),
-            'duration'  => new Duration($params["minutes"]),
+            'duration'  => new OccurrenceDuration($params["minutes"]),
             'event'     => $event,
         ]);
 
