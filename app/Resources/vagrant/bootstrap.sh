@@ -40,48 +40,57 @@ ln -s /etc/nginx/sites-available/page.conf /etc/nginx/sites-enabled/page.conf
 sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.0/fpm/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.0/cli/php.ini
 
-sudo sed -i 's/bind-address\t\t= 127.0.0.1/bind-address\t\t= 0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
-sudo service mysql restart
-mysql -u root -proot -e "use mysql; update user set host='%' where user='root' and host='127.0.0.1'; grant all privileges on *.* to 'root'@'%' with grant option; flush privileges;"
+sed -i 's/bind-address\t\t= 127.0.0.1/bind-address\t\t= 0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+service mysql restart
 
-less /vagrant/app/Resources/vagrant/xdebug.ini >> /etc/php/7.0/mods-available/xdebug.ini
-less /vagrant/app/Resources/vagrant/mailcatcher.conf >> /etc/init/mailcatcher.conf
+echo '127.0.0.1    gyman.vagrant' >> /etc/hosts
+
+less /vagrant/app/Resources/vagrant/xdebug.ini > /etc/php/7.0/mods-available/xdebug.ini
+less /vagrant/app/Resources/vagrant/mailcatcher.conf > /etc/init/mailcatcher.conf
 
 mailcatcher --http-ip=0.0.0.0
 
 service nginx restart
 service php7.0-fpm restart
 
-mysql -h 127.0.0.1 -u root -proot  -t -e "CREATE DATABASE IF NOT EXISTS $config_databaseMain_name; GRANT ALL ON $config_databaseMain_name.* to '$config_databaseMain_user'@'127.0.0.1' identified by '$config_databaseMain_password'; GRANT ALL ON $config_databaseMain_name.* to '$config_databaseMain_user'@'$config_server_ip' identified by '$config_databaseMain_password';"
-mysql -h 127.0.0.1 -u root -proot  -t -e "CREATE DATABASE IF NOT EXISTS gyman_rio;"
-mysql -h 127.0.0.1 -u root -proot  -t -e "CREATE DATABASE IF NOT EXISTS gyman_dende;"
-mysql -h 127.0.0.1 -u root -proot  -t -e "CREATE DATABASE IF NOT EXISTS gyman_extreme;"
+mysql -h gyman.vagrant -u root -proot -t <<'EOF'
+GRANT ALL ON *.* to 'root'@'%' identified by 'root';
+CREATE DATABASE IF NOT EXISTS gyman;
+CREATE DATABASE IF NOT EXISTS gyman_rio;
+CREATE DATABASE IF NOT EXISTS gyman_dende;
+CREATE DATABASE IF NOT EXISTS gyman_extreme;
+FLUSH PRIVILEGES;
+EOF
 
 less /vagrant/app/Resources/vagrant/.bash_aliases >> /home/vagrant/.bash_aliases
 
-#ln -s /var/www/gyman /home/vagrant/www
 sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/bin/composer
 
 su vagrant <<'EOF'
 cd /vagrant
-#
-#wget --quiet http://getcomposer.org/composer.phar
-#php composer.phar install
-#
-#php app/console doctrine:schema:create
-#php app/console doctrine:fixtures:load -n
-#
-#php app/console doctrine:schema:create --club=rio --em=tenant
-#php app/console doctrine:schema:create --club=extreme --em=tenant
-#php app/console doctrine:schema:create --club=dende --em=tenant
-#
-#php app/console doctrine:fixtures:load -n --club=rio --em=tenant
-#php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
-#php app/console doctrine:fixtures:load -n --club=dende --em=tenant
-#
-#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
-#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
-#php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
+exit
+composer install --prefer-source --no-interaction
+
+php app/console doctrine:schema:create
+php app/console doctrine:fixtures:load -n
+
+php app/console doctrine:schema:create --club=rio --em=tenant
+php app/console doctrine:schema:create --club=extreme --em=tenant
+php app/console doctrine:schema:create --club=dende --em=tenant
+
+php app/console doctrine:fixtures:load -n --club=rio --em=tenant
+php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
+php app/console doctrine:fixtures:load -n --club=dende --em=tenant
+
+php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
+php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
+php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
 
 npm install
 ./node_modules/.bin/bower install
@@ -89,10 +98,8 @@ npm install
 php app/console assets:install web --symlink
 ./node_modules/.bin/grunt production
 
-#crontab -l > /tmp/mycron
 less /vagrant/app/Resources/vagrant/crontab >> /tmp/mycron
 crontab /tmp/mycron
 rm /tmp/mycron
-
 EOF
 

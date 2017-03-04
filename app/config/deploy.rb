@@ -24,8 +24,6 @@ set :branch do
   tag
 end
 
-
-
 set :deploy_via,   :remote_cache
 # set :deploy_via, :rsync_with_remote_cache
 set :copy_via, :scp

@@ -79,25 +79,44 @@
         "liip/functional-test-bundle": "^1.3@dev"
     },
     "scripts": {
+        "symfony-scripts" : [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
         "post-install-cmd": [
-          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "@symfony-scripts"
         ],
         "post-update-cmd": [
-          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "@symfony-scripts"
+        ],
+        "reload-fixtures": [
+            "php app/console doctrine:database:drop --force --if-exists --env=dev",
+            "php app/console doctrine:database:create --env=dev --if-not-exists",
+            "php app/console doctrine:migrations:migrate -n --env=dev --quiet",
+            "php app/console doctrine:fixtures:load --append -n --env=dev -vvv"
+        ],
+        "reload-fixtures-test": [
+            "php app/console doctrine:database:drop --force --if-exists --env=test",
+            "php app/console doctrine:database:create --env=test --if-not-exists",
+            "php app/console doctrine:migrations:migrate -n --env=test --quiet",
+            "php app/console doctrine:fixtures:load --append -n --env=test -vvv"
+        ],
+        "tests": [
+            "@reload-fixtures-test",
+            "php bin/phpunit -c app/phpunit.xml"
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "preferred-install": "dist",
+        "platform": {
+            "php": "7.0"
+        }
     },
     "minimum-stability": "dev",
     "extra": {
