@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 class ClubRepository extends EntityRepository
 {
     /**
-     * @param Subdomain $subdomain
+     * @param string $subdomain
      * @return null|Club
      */
     public function findOneBySubdomain($subdomain)

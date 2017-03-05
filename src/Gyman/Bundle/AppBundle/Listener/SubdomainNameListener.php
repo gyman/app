@@ -1,8 +1,11 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Listener;
 
+use Dende\MultitenancyBundle\Manager\TenantManager;
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
+use Gyman\Bundle\AppBundle\Services\TenantProvider;
+use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,9 +26,14 @@ class SubdomainNameListener
     private $subdomainProvider;
 
     /**
-     * @var Container
+     * @var TenantManager
      */
-    private $container;
+    private $tenantManager;
+
+    /**
+     * @var TenantProvider
+     */
+    private $tenantProvider;
 
     /**
      * @var Twig_Environment
@@ -33,15 +41,23 @@ class SubdomainNameListener
     private $twig;
 
     /**
+     * @var ClubRepository
+     */
+    private $clubRepository;
+
+    /**
      * SubdomainNameListener constructor.
      * @param SubdomainProviderInterface $subdomainProvider
-     * @param Container $container
+     * @param TenantManager $tenantManager
+     * @param TenantProvider $tenantProvider
      * @param Twig_Environment $twig
      */
-    public function __construct(SubdomainProviderInterface $subdomainProvider, Container $container, Twig_Environment $twig)
+    public function __construct(SubdomainProviderInterface $subdomainProvider, TenantManager $tenantManager, TenantProvider $tenantProvider, ClubRepository $clubRepository, Twig_Environment $twig)
     {
         $this->subdomainProvider = $subdomainProvider;
-        $this->container = $container;
+        $this->tenantManager = $tenantManager;
+        $this->tenantProvider = $tenantProvider;
+        $this->clubRepository = $clubRepository;
         $this->twig = $twig;
     }
 
@@ -53,9 +69,11 @@ class SubdomainNameListener
 
         $subdomainName = $this->subdomainProvider->getSubdomain();
 
-        $club = $this->container->get('doctrine.orm.default_entity_manager')
-            ->getRepository('ClubBundle:Club')
-            ->findOneBySubdomain($subdomainName);
+        $this->tenantManager->switchConnection('tenant', $subdomainName);
+
+
+        $club = $this->clubRepository->findOneBySubdomain($subdomainName);
+        /*
 
         if(strlen($subdomainName) > 0 && is_null($club)) {
             $schemaAndHost = strtr($event->getRequest()->getSchemeAndHttpHost(), [$subdomainName."." => ""]);
@@ -76,6 +94,7 @@ class SubdomainNameListener
         Globals::setSubdomain($subdomainName);
 
         $this->container->get('session')->set('current_club', $club);
+        */
         $this->twig->addGlobal('club', $club);
     }
 }

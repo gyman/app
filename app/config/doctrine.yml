@@ -23,7 +23,7 @@ doctrine:
           user:     ~
           password: ~
           charset:  UTF8
-          wrapper_class: Dende\MultidatabaseBundle\Connection\ConnectionWrapper
+          wrapper_class: Dende\MultitenancyBundle\Connection\Wrapper
           mapping_types:
               enum: string
     orm:
@@ -36,7 +36,7 @@ doctrine:
 
         entity_managers:
           default:
-            auto_mapping: false # disabled so we can assign entities to our own connections
+            auto_mapping:     false # disabled so we can assign entities to our own connections
             connection:       default
             dql:
                 string_functions:

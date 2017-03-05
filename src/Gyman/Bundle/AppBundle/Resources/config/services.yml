@@ -5,6 +5,8 @@ services:
       - @=service(parameter('subdomain_provider_service'))
       - @gyman.club.repository
       - %database_host%
+    tags:
+      - {name: tenant_provider, connection_name: tenant}
 
   gyman.app.command.dump_hosts:
     class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
@@ -45,8 +47,8 @@ services:
   gyman.app.subdomain_provider:
     class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
     arguments:
-      - @request_stack
-      - %base_url%
+      - '@request_stack'
+      - '%base_url%'
 
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
@@ -55,10 +57,12 @@ services:
     class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
     arguments:
       - '@=service(parameter("subdomain_provider_service"))'
-      - '@service_container'
+      - '@dende_multitenancy.tenant_manager'
+      - '@gyman.app.tenant_provider'
+      - '@gyman.club.repository'
       - '@twig'
     tags:
-      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
 
   gyman.default.request.arraycollection_converter:
     class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter

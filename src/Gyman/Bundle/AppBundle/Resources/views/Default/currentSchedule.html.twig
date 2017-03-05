@@ -66,7 +66,6 @@
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
     {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
-    {% set club = club %}
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
@@ -81,15 +80,16 @@
 
             var dende_calendar_lang = '{{ lang }}';
             var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
-            var minTime = '{{ club.details.opened_from }}:00';
-            var maxTime = '{{ club.details.opened_till }}:00';
+
+            var minTime = '{% if club.details.opened_from is not null %}{{ club.details.opened_from }}:00{% else %}08:00{% endif %}';
+            var maxTime = '{% if club.details.opened_till is not null %}{{ club.details.opened_till }}:00{% else %}22:00{% endif %}';
 
             $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',
                 allDaySlot: false,
                 slotDuration: '00:30:00',
-                minTime: minTime || "08:00:00",
-                maxTime: maxTime || "16:00:00",
+                minTime: minTime,
+                maxTime: maxTime,
                 timeZone: dende_calendar_tz,
                 slotLabelFormat: 'H:00',
                 snapDuration: '00:15:00',

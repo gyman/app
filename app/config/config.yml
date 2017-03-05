@@ -124,35 +124,13 @@ dende_calendar:
         bundle:                           Dende\Calendar\Domain\Calendar
         app:                              Gyman\Domain\Calendar
 
-#dende_multidatabase:
-#  provider:                 gyman.app.tenant_provider
-#  connection:               doctrine.dbal.tenant_connection
-#  entity_manager:           doctrine.orm.tenant_entity_manager
-#  parameter_name:           club
-#  parameter_description:    Club subdomain's name
-#  commands:
-#    - doctrine:schema:update
-#    - doctrine:schema:create
-#    - doctrine:schema:drop
-#    - doctrine:fixtures:load
-#    - gyman:calendar:import
-#    - gyman:calendar:truncate_calendars
-#    - gyman:entries:close_expired
-#    - gyman:entries:open
-#    - gyman:vouchers:clear_expired
-#    - gyman:vouchers:update_current
-#    - doctrine:migrations:diff
-#    - doctrine:migrations:execute
-#    - doctrine:migrations:generate
-#    - doctrine:migrations:migrate
-#    - doctrine:migrations:version
-#    - doctrine:migrations:status
-#
-#  fixtures:
-#    default:
-#        - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
-#    tenant:
-#        - src/Gyman/Bundle/AppBundle/DataFixtures/Club
+dende_multitenancy:
+  patched_commands:
+    - "doctrine:*"
+  connections:
+    tenant:
+      command_parameter_name:         club
+      command_parameter_description:  Provide club name for tenant connection
 
 stof_doctrine_extensions:
     default_locale: pl_PL

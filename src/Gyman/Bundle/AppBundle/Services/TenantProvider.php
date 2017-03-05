@@ -1,10 +1,9 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
 
-use Dende\MultidatabaseBundle\DTO\Tenant;
-use Dende\MultidatabaseBundle\Services\TenantProviderInterface;
+use Dende\MultitenancyBundle\DTO\Tenant;
+use Dende\MultitenancyBundle\Provider\TenantProviderInterface;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
-use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 
 /**
  * Class TenantProvider
@@ -27,6 +26,11 @@ class TenantProvider implements TenantProviderInterface
     private $subdomainProvider;
 
     /**
+     * @var string
+     */
+    private $tenantId;
+
+    /**
      * TenantProvider constructor.
      * @param SubdomainProviderInterface $subdomainProvider
      * @param ClubRepository $clubRepository
@@ -39,28 +43,34 @@ class TenantProvider implements TenantProviderInterface
     }
 
     /**
-     * @return Tenant
+     * @return Tenant|null
      */
     public function getTenant($subdomain = null)
     {
-        if (is_null($subdomain)) {
-            $subdomain = $this->subdomainProvider->getSubdomain();
+        if ($subdomain === null && $this->tenantId === null) {
+            $this->tenantId = $this->subdomainProvider->getSubdomain();
         }
 
-        $club = $this->clubRepository->findOneBySubdomain($subdomain);
+        $club = $this->clubRepository->findOneBySubdomain($this->tenantId);
 
         if(is_null($club))
         {
             return;
         }
 
-        $tenant = new Tenant(
-            $this->host,
-            $club->getDatabase()->getName(),
-            $club->getDatabase()->getUsername(),
-            $club->getDatabase()->getPassword()
-        );
+        return Tenant::fromArray([
+            'dbname' => $club->getDatabase()->getName(),
+            'username' => $club->getDatabase()->getUsername(),
+            'password' => $club->getDatabase()->getPassword(),
+            'host' => $this->host,
+            'path' => null,
+        ]);
+    }
 
-        return $tenant;
+    /**
+     * @param $id
+     */
+    public function setTenantId($id) {
+        $this->tenantId = $id;
     }
 }

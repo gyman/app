@@ -4,11 +4,11 @@
     {{ "title.welcome.main_page"|trans }}
 {% endblock title %}
 
-
 {% block javascripts %}
     {{ parent() }}
+    {# @var club \Gyman\Bundle\ClubBundle\Entity\Club #}
+
     {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
-    {% set club = app.session.get('current_club') %}
 
     <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
     <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
@@ -25,8 +25,8 @@
                 defaultView: 'agendaWeek',
                 allDaySlot: false,
                 slotDuration: '00:30:00',
-                minTime: '{{ club.details.opened_from }}:00',
-                maxTime: '{{ club.details.opened_till }}:00',
+                minTime: '{% if club.details.opened_from is not null %}{{ club.details.opened_from }}:00{% else %}08:00{% endif %}',
+                maxTime: '{% if club.details.opened_till is not null %}{{ club.details.opened_till }}:00{% else %}22:00{% endif %}',
                 timeZone: dende_calendar_tz,
                 slotLabelFormat: 'H:00',
                 selectable: false,
@@ -52,6 +52,7 @@
 {% block content %}
 <div class="contentwrapper" style="margin-top: 20px">
 
+
     {#<div class="heading">#}
 
         {#<h3>Dodaj użytkownika</h3>#}
@@ -70,10 +71,7 @@
 
         {% endif %}
     </div>
-
-
 </div>
-
 
 {% endblock content %}
 
