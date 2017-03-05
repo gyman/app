@@ -32,6 +32,9 @@ services:
         calls:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
+sentry:
+    dsn: "http://9fca9298eb9a4b3a8140e0f694b2c10e:327633aac7dd4668a217e9802b973f01@sentry.dev.gyman.pl/3"
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }

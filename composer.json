@@ -64,7 +64,8 @@
         "league/tactician-bundle": "^0.4.0",
         "doctrine/doctrine-migrations-bundle": "^1.1",
         "liip/monitor-bundle": "^2.3",
-        "dende/multitenancybundle": "dev-master"
+        "dende/multitenancybundle": "dev-master",
+        "sentry/sentry-symfony": "^0.7.1"
 
     },
     "require-dev": {

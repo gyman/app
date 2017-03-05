@@ -12,7 +12,7 @@ schedule:
     Junior 8-14:
       start:  17:00
       end:    18:00
-    MMA - z:
+    MMA:
       start:  18:00
       end:    19:30
     BJJ - s+z:
@@ -26,7 +26,7 @@ schedule:
     PRV:
       start:  09:00
       end:    10:00
-    Boks:
+    Boks kobiet:
       start:  17:00
       end:    18:30
     Grupa początkująca:
@@ -49,7 +49,7 @@ schedule:
     Junior 8-14:
       start:  17:00
       end:    18:00
-    MMA - z:
+    MMA:
       start:  18:00
       end:    19:30
     BJJ - s+z:
@@ -63,7 +63,7 @@ schedule:
     PRV:
       start:  09:00
       end:    10:00
-    Boks:
+    Boks kobiet:
       start:  17:00
       end:    18:30
     Grupa początkująca:
@@ -80,14 +80,11 @@ schedule:
     PRV:
       start:  09:00
       end:    10:00
-    Drill:
+    MMA:
       start:  17:00
-      end:    18:00
-    MMA Start:
-      start:  18:00
-      end:    19:30
+      end:    18:30
     BJJ - s+z:
-      start:  19:30
+      start:  18:30
       end:    20:30
 
   saturday:
