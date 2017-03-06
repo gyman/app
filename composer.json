@@ -59,14 +59,12 @@
         "dende/common-bundle": "dev-master",
         "dende/calendar-bundle": "^1.7",
         "dende/calendar": "^1.8",
-        "dende/multidatabase-bundle": "1.0.0",
         "league/tactician": "^1.0",
         "league/tactician-bundle": "^0.4.0",
         "doctrine/doctrine-migrations-bundle": "^1.1",
         "liip/monitor-bundle": "^2.3",
-        "dende/multitenancybundle": "dev-master",
+        "dende/multitenancybundle": "^1",
         "sentry/sentry-symfony": "^0.7.1"
-
     },
     "require-dev": {
         "sensiolabs/security-checker": "2.0.*@dev",

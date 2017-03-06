@@ -130,6 +130,9 @@ dende_calendar:
 dende_multitenancy:
   patched_commands:
     - "doctrine:*"
+    - "gyman:entries:close_expired"
+    - "gyman:vouchers:update_current"
+
   connections:
     tenant:
       command_parameter_name:         club
