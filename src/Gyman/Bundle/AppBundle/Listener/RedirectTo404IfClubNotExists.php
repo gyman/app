@@ -26,6 +26,11 @@ class RedirectTo404IfClubNotExists
     {
         /** @var TenantNotFoundException $exception */
         $exception = $event->getException();
+
+        if(!$exception instanceof TenantNotFoundException){
+            return;
+        }
+
         $subdomainName = $exception->getTenantId();
 
         $schemaAndHost = strtr($event->getRequest()->getSchemeAndHttpHost(), [$subdomainName . "." => ""]);
