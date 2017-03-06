@@ -53,16 +53,30 @@ services:
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
 
-  gyman.app.subdomain_name_lister:
+  gyman.app.subdomain_name_listener:
     class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
     arguments:
       - '@=service(parameter("subdomain_provider_service"))'
       - '@dende_multitenancy.tenant_manager'
-      - '@gyman.app.tenant_provider'
-      - '@gyman.club.repository'
-      - '@twig'
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
+
+  gyman.app.listener.redirect_to_404:
+    class: Gyman\Bundle\AppBundle\Listener\RedirectTo404IfClubNotExists
+    arguments:
+      - '@router'
+    tags:
+      - {name: kernel.event_listener, event: kernel.exception, method: onException }
+
+  gyman.app.listener.setup_club_paths:
+    class: Gyman\Bundle\AppBundle\Listener\SetupPathsForClub
+    arguments:
+      - '@gyman.club.repository'
+      - '@session'
+      - '@twig'
+      - { no_image: %no_image%, gallerydirectory: %gallerydirectory%, gallerypath: %gallerypath% }
+    tags:
+      - {name: kernel.event_listener, event: multitenancy.post_switch_connection, method: onKernelRequest }
 
   gyman.default.request.arraycollection_converter:
     class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
