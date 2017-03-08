@@ -3,7 +3,7 @@
 namespace Gyman\Bundle\LandingPageBundle\Controller;
 
 use Gyman\Application\Command\CreateClubCommand;
-use Gyman\Bundle\UserBundle\Entity\User;
+use Gyman\Bundle\ClubBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
