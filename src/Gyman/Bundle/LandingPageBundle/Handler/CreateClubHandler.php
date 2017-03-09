@@ -2,7 +2,9 @@
 namespace Gyman\Bundle\LandingPageBundle\Handler;
 
 use Doctrine\DBAL\Connection;
+use Exception;
 use FOS\UserBundle\Util\UserManipulator;
+use Gyman\Bundle\LandingPageBundle\Exception\CantRegisterNewClub;
 use Gyman\Application\Command\CreateClubCommand;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Factory\ClubFactory;
@@ -56,50 +58,65 @@ class CreateClubHandler
      * @throws \Exception
      */
     public function handle(CreateClubCommand $command){
-        $user = $this->manipulator->create(
-            $command->username,
-            $command->password,
-            $command->email,
-            true,
-            false
-        );
+        
+        $this->connection->beginTransaction();
+        
+        try {
+            $user = $this->manipulator->create(
+                $command->getUsername(),
+                $command->getPassword(),
+                $command->getEmail(),
+                true,
+                false
+            );
 
-        $this->manipulator->addRole($command->username, "ROLE_ADMIN");
+            $this->manipulator->addRole($command->getUsername(), "ROLE_ADMIN");
 
-        $dbName = sprintf("gyman_%s", $command->subdomain);
-        $dbPassword = substr(str_shuffle("abcdefghijklmnoprstuwqxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789!.,;#()[]_!.,;#()[]_"), 0, 16);
+            $dbName = sprintf("gyman_%s", $command->getSubdomain());
+            $dbPassword = substr(str_shuffle("abcdefghijklmnoprstuwqxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789!.,;#()[]_!.,;#()[]_"), 0, 16);
 
-        $club = $this->factory->createFromArray([
-            "name" => $command->club,
-            "sections" => [],
-            "owners" => [$user],
-            "subdomain" => $command->subdomain,
-            "database" => [
-                "name" => $dbName,
-                "user" => $dbName,
-                "password" => $dbPassword
-            ],
-            "details" => [
-                'address' => null,
-                'zipcode' => null,
-                'city' => null,
-                'country' => "Polska",
-                'phone_number' => null,
-                'email_address' => $command->email,
-                'opened_from' => "11:00",
-                'opened_till' => "18:00",
-                'logo' => null,
-                'about' => null,
-                'account_number' => null,
-            ]
-        ]);
+            $club = $this->factory->createFromArray([
+                "name" => $command->getClub(),
+                "sections" => [],
+                "owners" => [$user],
+                "subdomain" => $command->getSubdomain(),
+                "database" => [
+                    "name" => $dbName,
+                    "user" => $dbName,
+                    "password" => $dbPassword
+                ],
+                "details" => [
+                    'address' => null,
+                    'zipcode' => null,
+                    'city' => null,
+                    'country' => "Polska",
+                    'phone_number' => null,
+                    'email_address' => $command->getEmail(),
+                    'opened_from' => "11:00",
+                    'opened_till' => "18:00",
+                    'logo' => null,
+                    'about' => null,
+                    'account_number' => null,
+                ]
+            ]);
 
-        $this->clubRepository->save($club);
-        $this->connection->getSchemaManager()->createDatabase($dbName);
-        $this->bindUserToDatabase($dbName, $dbName, $dbPassword);
+            $this->clubRepository->save($club);
+            $this->connection->getSchemaManager()->createDatabase($dbName);
+            $this->bindUserToDatabase($dbName, $dbName, $dbPassword);
 
-        $this->createSchema($command->subdomain);
-        $this->loadFixtures($command->subdomain);
+            $this->createSchema($command->getSubdomain());
+            $this->loadFixtures($command->getSubdomain());
+
+        } catch (Exception $e) {
+            $this->connection->rollback();
+            $this->dropDb($command->getClub());
+            $this->logger->error(sprintf('Error while registering a new club: %s.', $e->getMessage()));
+            
+            throw new CantRegisterNewClub($e);
+        }
+
+        $this->connection->commit();
+        
     }
 
     /**
@@ -119,42 +136,51 @@ class CreateClubHandler
         $statement->execute();
     }
 
+    private function dropDb($club)
+    {
+        $this->runCommand([
+            'command' => 'doctrine:database:drop',
+            '--no-interaction' => true,
+            '--club' => $club,
+            '--no-ansi' => true,
+            '--force' => true,
+            '--env' => 'prod',
+            '--no-debug' => true,
+            '--if-exists' => true,
+        ]);
+    }
+
     private function createSchema($club)
     {
-        $application = new Application($this->kernel);
-        $application->setAutoExit(false);
-
-        $input = new ArrayInput([
+        $this->runCommand([
             'command' => 'doctrine:schema:create',
             '--no-interaction' => true,
             '--club' => $club,
-            '--em' => 'tenant',
             '--no-ansi' => true,
             '--env' => 'prod',
             '--no-debug' => true,
         ]);
-
-        $output = new BufferedOutput();
-        $application->run($input, $output);
-
-        $this->logger->notice($output->fetch());
     }
 
     private function loadFixtures($club)
     {
-        $application = new Application($this->kernel);
-        $application->setAutoExit(false);
-
-        $input = new ArrayInput([
+        $this->runCommand([
             'command' => 'doctrine:fixtures:load',
             '--no-interaction' => true,
             '--club' => $club,
-            '--em' => 'tenant',
             '--no-ansi' => true,
             '--env' => 'prod',
             '--no-debug' => true,
             '--fixtures' => '../app/DoctrineFixtures/ORM/'
         ]);
+    }
+
+    private function runCommand(array $params = [])
+    {
+        $application = new Application($this->kernel);
+        $application->setAutoExit(false);
+
+        $input = new ArrayInput($params);
 
         $output = new BufferedOutput();
         $application->run($input, $output);
