@@ -2,7 +2,7 @@
 
 LOCAL_DIR='/var/www/app.gyman' REMOTE_DIR='/var/www/gyman' PHP_EXE='php'
 
-# Passwordless connection alias
+# Passwordless maintenanceConnection alias
 REMOTE=root@gyman.pl
 # Here you should specify the user and group under which your webserver is running Usually it is www-data for both
 REMOTE_USER=root[:group]

@@ -23,8 +23,6 @@
         "doctrine/dbal": "2.5.*",
         "doctrine/common": "2.6.1",
         "doctrine/doctrine-bundle": "1.6.*",
-
-        "doctrine/data-fixtures": "1.1.1",
         "doctrine/doctrine-fixtures-bundle": "2.3.0",
 
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
@@ -76,7 +74,11 @@
         "sensiolabs/security-advisories": "dev-master",
         "mockery/mockery" : "*",
         "behat/symfony2-extension": "^2.0@dev",
-        "liip/functional-test-bundle": "^1.3@dev"
+        "liip/functional-test-bundle": "^1.3@dev",
+        "hautelook/alice-bundle": "^2.0@beta",
+        "nelmio/alice": "^3.0@beta",
+        "theofidry/alice-data-fixtures": "^1.0@beta",
+        "doctrine/data-fixtures": "^1.2"
     },
     "scripts": {
        "symfony-scripts" : [
@@ -97,13 +99,13 @@
         "reload-fixtures": [
             "php app/console doctrine:database:drop --force --if-exists --env=dev",
             "php app/console doctrine:database:create --env=dev --if-not-exists",
-            "php app/console doctrine:migrations:migrate -n --env=dev --quiet",
-            "php app/console doctrine:fixtures:load --append -n --env=dev -vvv"
+            "php app/console doctrine:schema:create --env=dev",
+            "php app/console doctrine:fixtures:load --append -n --env=dev -vvv --fixtures src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection/ORM"
         ],
         "reload-fixtures-test": [
             "php app/console doctrine:database:drop --force --if-exists --env=test",
             "php app/console doctrine:database:create --env=test --if-not-exists",
-            "php app/console doctrine:migrations:migrate -n --env=test --quiet",
+            "php app/console doctrine:schema:create --env=test",
             "php app/console doctrine:fixtures:load --append -n --env=test -vvv"
         ],
         "tests": [

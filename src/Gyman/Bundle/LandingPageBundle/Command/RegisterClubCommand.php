@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Validator\ConstraintViolation;
 
 class RegisterClubCommand extends ContainerAwareCommand
 {
@@ -33,6 +34,16 @@ class RegisterClubCommand extends ContainerAwareCommand
 
         $errors = $this->getContainer()->get('validator')->validate($command, ['command']);
 
+        if(0 < $errors->count()) {
+            $msg = 'Encountered some errors:' . PHP_EOL;
+            /** @var ConstraintViolation $error */
+            foreach($errors as $error) {
+                $msg.=$error->getMessage() . PHP_EOL;
+            }
+
+            throw new Exception($msg);
+        }
+
         $this->getContainer()->get("tactician.commandbus")->handle($command);
 
 
@@ -47,7 +58,7 @@ class RegisterClubCommand extends ContainerAwareCommand
 //            $email = uniqid('random_', true) . '_' . $email;
 //        }
 //
-//        $customer = $this->getContainer()->get('iron.core.factory.customer')->createFromArray([
+//        $customer = $this->getContainer()->get('iron.core.clubFactory.customer')->createFromArray([
 //            'email' => $email,
 //            'host' => $host->getAaaUrl(),
 //            'bo' => 'portal',

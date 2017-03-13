@@ -24,7 +24,6 @@ services:
     tags:
         - { name: validator.constraint_validator, alias: UniqueMemberBarcodeValidator }
 
-
   gyman.entries.price_set_for_paid_entry.validator:
     class: Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntryValidator
     tags:
@@ -39,3 +38,10 @@ services:
     class: Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrenceValidator
     tags:
         - { name: validator.constraint_validator, alias: CantEnterPastOccurrenceValidator }
+
+  gyman.club.unique_subdomain.validator:
+    class: Gyman\Bundle\AppBundle\Validator\UniqueClubSubdomainValidator
+    arguments:
+      - "@gyman.club.repository"
+    tags:
+        - { name: validator.constraint_validator, alias: UniqueClubSubdomainValidator }

@@ -21,3 +21,6 @@ parameters:
     sqlite_database_user:     admin
     sqlite_database_password: admin
     google_maps_api_key: ~
+
+    maintanance_database_user: root
+    maintanance_database_password: root

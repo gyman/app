@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class CreateVoucherHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tears down the fixture, for example, close a network connection.
+     * Tears down the fixture, for example, close a network maintenanceConnection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
