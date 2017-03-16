@@ -9,7 +9,8 @@
         },
         "psr-4": {
             "": "src/",
-            "SymfonyStandard\\": "app/" 
+            "App\\": "app/",
+            "Tests\\" : "tests/"
         }
     },
     "require": {
@@ -49,7 +50,6 @@
         "twig/extensions": "1.2.*@dev",
         
         "gyman/supr": "dev-master",
-        "nelmio/api-doc-bundle": "~2.7@dev",
         "imagine/imagine": "0.6.*",
         "nesbot/carbon": "dev-master",
         "braincrafted/bootstrap-bundle": "1.4.2",
@@ -75,9 +75,8 @@
         "mockery/mockery" : "*",
         "behat/symfony2-extension": "^2.0@dev",
         "liip/functional-test-bundle": "^1.3@dev",
-        "hautelook/alice-bundle": "^2.0@beta",
-        "nelmio/alice": "^3.0@beta",
-        "theofidry/alice-data-fixtures": "^1.0@beta",
+        "hautelook/alice-bundle": "1.x-dev",
+        "nelmio/alice": "2.x-dev",
         "doctrine/data-fixtures": "^1.2"
     },
     "scripts": {
@@ -100,7 +99,7 @@
             "php app/console doctrine:database:drop --force --if-exists --env=dev",
             "php app/console doctrine:database:create --env=dev --if-not-exists",
             "php app/console doctrine:schema:create --env=dev",
-            "php app/console doctrine:fixtures:load --append -n --env=dev -vvv --fixtures src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection/ORM"
+            "php app/console doctrine:fixtures:load --append -n --env=dev -vvv --fixtures ./src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection/ORM"
         ],
         "reload-fixtures-test": [
             "php app/console doctrine:database:drop --force --if-exists --env=test",

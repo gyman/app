@@ -6,7 +6,6 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Member;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,7 +21,7 @@ class EntryController extends FOSRestController
      * @return View view instance
      *
      * @View()
-     * @ApiDoc()
+     * ApiDoc()
 
      */
 

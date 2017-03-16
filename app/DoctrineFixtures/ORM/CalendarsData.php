@@ -1,5 +1,5 @@
 <?php
-namespace App\DoctrineFixtures\Club\ORM;
+namespace App\DoctrineFixtures\ORM;
 
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\CalendarsData as BaseFixture;
 

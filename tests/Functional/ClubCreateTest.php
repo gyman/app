@@ -2,17 +2,10 @@
 namespace Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Request;
+use Tests\FunctionalTestCase;
 
 class ClubCreateTest extends FunctionalTestCase
 {
-
-    public function setUp()
-    {
-        $this->loadFixtureFiles([
-            "app/DoctrineFixtures/Yaml/calendars.yml"
-        ], "tenant");
-    }
-
     /**
      * @test
      */
@@ -22,15 +15,32 @@ class ClubCreateTest extends FunctionalTestCase
             'host' => 'gyman.vagrant'
         ]);
 
+        $client->followRedirects();
+
+        $client->setServerParameters([
+            'HTTP_HOST' => 'gyman.vagrant',
+            'HOST'      => 'gyman.vagrant',
+        ]);
+
+        $this->client = $client;
+
         $crawler = $client->request(Request::METHOD_GET, '/');
 
-        $form = $crawler->selectButton("Submit")->form();
-
-        die(var_dump($form->filter("input")->count()));
-
-        $form = $crawler->filter("form[name=create_club]")->form();
+        $this->assertResponseCode();
 
 
-        $this->assertEquals(7, $form->filter("input")->count());
+        $form = $crawler->selectButton("Submit")->form([
+            "create_club[username]" => "username",
+            "create_club[email]" => "some@email.pl",
+            "create_club[password]" => "password",
+            "create_club[password_repeat]" => "password",
+            "create_club[club]" => "club",
+            "create_club[subdomain]" => "test",
+        ]);
+
+        $crawler = $client->submit($form);
+
+        die(var_dump($crawler->html()));
+        $this->assertFormHasNoErrors('create_club');
     }
 }
