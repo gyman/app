@@ -44,11 +44,10 @@ class SetupPathsForClub
      * @param Twig_Environment $twig
      * @param array|\string[] $parameters
      */
-    public function __construct(ClubRepository $clubRepository, SessionInterface $session, Twig_Environment $twig, $parameters = [])
+    public function __construct(ClubRepository $clubRepository, Twig_Environment $twig, $parameters = [])
     {
         $this->clubRepository = $clubRepository;
         $this->parameters = $parameters;
-        $this->session = $session;
         $this->twig = $twig;
     }
 
@@ -66,7 +65,6 @@ class SetupPathsForClub
         Globals::setGalleryPath($this->parameters['gallerypath'] . $subdomainName . DIRECTORY_SEPARATOR);
         Globals::setSubdomain($subdomainName);
 
-        $this->session->set('current_club', $club);
         $this->twig->addGlobal('club', $club);
     }
 }

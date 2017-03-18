@@ -43,7 +43,8 @@ imports:
 
 framework:
     ide: "phpstorm://%%f:%%l"
-    translator:      { fallback: %locale% }
+    translator:
+      fallback: %locale%
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -61,8 +62,8 @@ framework:
         gc_maxlifetime: 1800
         handler_id:  ~
 
-    fragments:       ~
-    http_method_override: true
+#    fragments:       ~
+#    http_method_override: true
 
 # Twig Configuration
 twig:
@@ -132,6 +133,7 @@ dende_multitenancy:
     - "doctrine:*"
     - "gyman:entries:close_expired"
     - "gyman:vouchers:update_current"
+    - "gyman:calendar:*"
 
   connections:
     tenant:

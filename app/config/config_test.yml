@@ -12,6 +12,9 @@ framework:
     profiler:
         collect: true
         only_exceptions: false
+    form:            true
+    csrf_protection: true
+    validation: { enable_annotations: true }
 
 web_profiler:
     toolbar: false
@@ -31,7 +34,6 @@ doctrine:
 
         tenant:
           driver:   pdo_sqlite
-#          driver:   pdo_mysql
           dbname:   %database_name%_dende
           user:     %database_user%
           password: %database_password%

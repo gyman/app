@@ -23,6 +23,19 @@ class FunctionalTestCase extends WebTestCase
 
     public function setUp()
     {
+        $client = $this->makeClient(false, [
+            'host' => 'gyman.vagrant'
+        ]);
+
+        $client->followRedirects();
+
+        $client->setServerParameters([
+            'HTTP_HOST' => 'gyman.vagrant',
+            'HOST'      => 'gyman.vagrant',
+        ]);
+
+        $this->client = $client;
+
         $this->tenantFixtures = $this->loadFixtures([
             UsersData::class,
             ClubsData::class
