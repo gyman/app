@@ -1,8 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
-use FOS\UserBundle\Model\UserInterface;
-use Gyman\Bundle\UserBundle\Entity\User;
+use Gyman\Bundle\ClubBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -47,7 +46,7 @@ class DefaultController extends Controller
      * @param Request $request
      * @param User $user
      * @return Response
-     * @ParamConverter("user", class="UserBundle:User")
+     * @ParamConverter("user", class="ClubBundle:User")
      */
     public function loginAfterRegistrationAction(User $user, Request $request)
     {

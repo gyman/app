@@ -4,6 +4,11 @@ namespace Gyman\Bundle\ClubBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Gyman\Domain\Member\EmailAddress;
 
+/**
+ * Class UserRepository
+ * @package Gyman\Bundle\ClubBundle\Entity
+ * @method findOneByUsername(string $username)
+ */
 class UserRepository extends EntityRepository
 {
     /**

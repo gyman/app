@@ -29,8 +29,8 @@ class DefaultController extends Controller
                 $this->get("tactician.commandbus")->handle($data);
 
                 /** @var User $user */
-                $user = $this->getDoctrine()->getRepository("UserBundle:User")->findOneByEmail($data->email);
-                $userId = $user->id();
+                $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($data->email);
+                $userId = $user->getId();
 
                 $this->addFlash("success", "user.created");
 
