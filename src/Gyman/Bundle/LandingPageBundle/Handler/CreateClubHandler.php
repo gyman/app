@@ -213,6 +213,7 @@ class CreateClubHandler
             '--no-interaction' => true,
             '--club' => $club,
             '--em' => 'tenant',
+            '--quiet' => false,
             '--fixtures' => $this->kernel->getContainer()->getParameter('kernel.root_dir') . '/DoctrineFixtures/ORM',
         ]);
 

@@ -29,12 +29,12 @@ class User extends BaseUser implements UserInterface
     private $involvements;
 
     /**
-     * @string
+     * @var string
      */
     private $firstname;
 
     /**
-     * @string
+     * @var string
      */
     private $lastname;
 
@@ -83,5 +83,29 @@ class User extends BaseUser implements UserInterface
         return $this->involvements->filter(function(Involvement $involvement) {
             return $involvement->club;
         });
+    }
+
+    /**
+     * @return Involvement[]
+     */
+    public function getInvolvements(): array
+    {
+        return $this->involvements;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
     }
 }

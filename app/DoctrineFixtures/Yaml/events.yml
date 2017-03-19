@@ -1,4 +1,5 @@
-false, event-example:
+---
+event-example:
   id:           ~
   calendar:     calendar-example
   title:        "Przykładowe wydarzenie"

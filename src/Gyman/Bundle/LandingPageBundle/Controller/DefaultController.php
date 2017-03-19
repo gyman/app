@@ -25,11 +25,11 @@ class DefaultController extends Controller
         if($request->isMethod("POST")) {
             $form->handleRequest($request);
             if($form->isValid()) {
-                $data = $form->getData();
-                $this->get("tactician.commandbus")->handle($data);
+                $command = $form->getData();
+                $this->get("tactician.commandbus")->handle($command);
 
                 /** @var User $user */
-                $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($data->email);
+                $user = $this->getDoctrine()->getRepository(User::class)->findOneByUsername($command->username);
                 $userId = $user->getId();
 
                 $this->addFlash("success", "user.created");
@@ -37,7 +37,7 @@ class DefaultController extends Controller
                 return $this->redirect(sprintf(
                     "%s://%s.%s%s",
                     $request->getScheme(),
-                    $data->subdomain,
+                    $command->subdomain,
                     $this->getParameter("base_url"),
                     $this->generateUrl("gyman_app_login_after_registration", ["id" => $userId], Router::ABSOLUTE_PATH)
                 ));
