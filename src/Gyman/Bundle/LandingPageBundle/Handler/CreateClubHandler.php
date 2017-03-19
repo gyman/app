@@ -212,7 +212,8 @@ class CreateClubHandler
             'command' => 'doctrine:fixtures:load',
             '--no-interaction' => true,
             '--club' => $club,
-            '--fixtures' => '/home/uirapuru/Projects/gyman/app/DoctrineFixtures/ORM/',
+            '--em' => 'tenant',
+            '--fixtures' => $this->kernel->getContainer()->getParameter('kernel.root_dir') . '/DoctrineFixtures/ORM',
         ]);
 
         $this->logger->notice('Fixtures loaded', ['name' => $this->createDbName($club)]);
