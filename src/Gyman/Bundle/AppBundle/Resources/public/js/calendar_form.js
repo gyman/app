@@ -3,7 +3,7 @@ $(document).ready(function() {
     var TYPE_WEEKLY = "weekly";
 
     var $calendarNameElement = $("select#create_event_calendar, select#update_event_calendar");
-    var $newCalendarNameElement = $("input#create_event_new_calendar_name, input#update_event_new_calendar_name");
+    var $newCalendarNameElement = $("input#create_event_newCalendarName, input#update_event_newCalendarName");
 
     var $eventTypeElement = $("select#create_event_type, select#update_event_type");
     var $repetitionCheckboxes = $("label[for^='create_event_repetitionDays_'], label[for^='update_event_repetitionDays_']").parents('div.control-group');

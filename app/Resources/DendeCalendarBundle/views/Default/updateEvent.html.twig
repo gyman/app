@@ -31,8 +31,12 @@
     {% include "::_flash.html.twig" %}
     {{ form_start(form, {attr: {class: "form form-horizontal"}}) }}
 
+    {% if form.method is defined %}
+        {{ form_row(form.method) }}
+    {% endif %}
+
     {{ form_row(form.calendar) }}
-    {{ form_row(form.new_calendar_name) }}
+    {{ form_row(form.newCalendarName) }}
     {{ form_row(form.type) }}
     {{ form_row(form.startDate) }}
     {{ form_row(form.endDate) }}
@@ -48,7 +52,7 @@
                     {#{{ form_row(form.delete_occurrence, {attr: {class: 'btn btn-link pull-right'}}) }}#}
                 {% endif %}
 
-                {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
+                <button type="submit" class="btn btn-primary">Submit</button>
 
                 <a href='{{ path('dende_calendar_default_index') }}'>{{ 'dende_calendar.link.back_to_calendar'|trans }}</a>
             </div>
