@@ -2,18 +2,32 @@
     "name": "gyman/app",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Gyman Application",
+    "authors": [
+        {
+            "name": "Grzegorz Kaszuba",
+            "email": "uirapuruadg@gmail.com"
+        }
+    ],
     "autoload": {
-        "psr-0": {
-            "": "src/"
-        },
         "psr-4": {
             "": "src/",
-            "SymfonyStandard\\": "app/" 
-        }
+            "SymfonyStandard\\": "app/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
+        "files": [
+        ]
     },
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.0",
 
         "symfony/symfony": "^2.8",
         "symfony/swiftmailer-bundle": "2.3.*",
@@ -29,7 +43,7 @@
 
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
 
-        "sensio/distribution-bundle": "3.0.*",
+        "sensio/distribution-bundle": "^5",
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "2.5.*",
 
@@ -67,7 +81,7 @@
         "sentry/sentry-symfony": "^0.7.1"
     },
     "require-dev": {
-        "sensiolabs/security-checker": "2.0.*@dev",
+        "sensiolabs/security-checker": "4.0.4",
         "behat/behat": "3.0.*",
         "phpunit/phpunit": "*",
         "phpmd/phpmd": "2.*",
@@ -76,17 +90,17 @@
         "sensiolabs/security-advisories": "dev-master",
         "mockery/mockery" : "*",
         "behat/symfony2-extension": "^2.0@dev",
-        "liip/functional-test-bundle": "^1.3@dev"
+        "liip/functional-test-bundle": "^1.3@dev",
+        "deployer/deployer" : "^5"
     },
     "scripts": {
        "symfony-scripts" : [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+           "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
@@ -117,10 +131,12 @@
         "preferred-install": "dist",
         "platform": {
           "php": "7.0"
-        }
+        },
+        "sort-packages": true
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
