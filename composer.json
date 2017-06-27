@@ -35,7 +35,7 @@
 
         "doctrine/orm": "2.5.*",
         "doctrine/dbal": "2.5.*",
-        "doctrine/doctrine-bundle": "^1.7",
+        "doctrine/doctrine-bundle": "^1.6",
 
         "doctrine/data-fixtures": "1.1.1",
         "doctrine/doctrine-fixtures-bundle": "2.3.0",
@@ -129,7 +129,7 @@
         "bin-dir": "bin",
         "preferred-install": "dist",
         "platform": {
-          "php": "7.1"
+          "php": "7.0"
         },
         "sort-packages": true
     },
