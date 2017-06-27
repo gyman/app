@@ -1,6 +1,5 @@
 gyman.pl:
   stage: production
-  roles: app
   deploy_path: /home/gyman_test
   user: gyman
   forwardAgent: true

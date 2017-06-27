@@ -19,6 +19,7 @@ add('writable_dirs', [
     "app/cache",
     "app/logs",
 ]);
+set('writable_mode', "chmod");
 set('allow_anonymous_stats', false);
 //set('branch', function() {
 //
