@@ -15,6 +15,9 @@ parameters:
 
   subdomain_provider_service: gyman.app.subdomain_provider
 
+  resolved_occurrence_class: 'Gyman\Domain\Calendar\Event\Occurrence'
+  dende_calendar.occurrences_repository.class:  'Gyman\Bundle\AppBundle\Repository\OccurrenceRepository'
+
 services:
     fos_user.doctrine_registry:
         alias: doctrine
