@@ -222,12 +222,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "e793eb4dd16b0061f75087284e9df11f3570447d"
+                "reference": "6550ffc6abf4527c9e19ae96246944eb1b722530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/e793eb4dd16b0061f75087284e9df11f3570447d",
-                "reference": "e793eb4dd16b0061f75087284e9df11f3570447d",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/6550ffc6abf4527c9e19ae96246944eb1b722530",
+                "reference": "6550ffc6abf4527c9e19ae96246944eb1b722530",
                 "shasum": ""
             },
             "require": {
@@ -271,7 +271,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2017-06-27T01:31:39+00:00"
+            "time": "2017-06-30T11:55:12+00:00"
         },
         {
             "name": "dende/common-bundle",
@@ -342,16 +342,16 @@
         },
         {
             "name": "dende/multitenancybundle",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/MultitenancyBundle.git",
-                "reference": "413a3672de3678e08c3ce94d5fc6fce07f1ab487"
+                "reference": "6323ca4684a0b9ee99c3c64e5e5e7faf8d355b18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/MultitenancyBundle/zipball/413a3672de3678e08c3ce94d5fc6fce07f1ab487",
-                "reference": "413a3672de3678e08c3ce94d5fc6fce07f1ab487",
+                "url": "https://api.github.com/repos/UirapuruDende/MultitenancyBundle/zipball/6323ca4684a0b9ee99c3c64e5e5e7faf8d355b18",
+                "reference": "6323ca4684a0b9ee99c3c64e5e5e7faf8d355b18",
                 "shasum": ""
             },
             "require": {
@@ -389,20 +389,20 @@
                 }
             ],
             "description": "Multitenancy Bundle",
-            "time": "2017-03-06T00:26:40+00:00"
+            "time": "2017-06-30T12:03:07+00:00"
         },
         {
             "name": "doctrine/annotations",
-            "version": "dev-master",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "7c830a576f9471f71096d200d633b6400513ccfb"
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/7c830a576f9471f71096d200d633b6400513ccfb",
-                "reference": "7c830a576f9471f71096d200d633b6400513ccfb",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-05-25T15:48:57+00:00"
+            "time": "2017-02-24T16:22:25+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -732,12 +732,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "757a0072e63b98cdf687ccb4638e87f6d322fc13"
+                "reference": "994f3b0002496cc380c9755869c87ff526d7f451"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/757a0072e63b98cdf687ccb4638e87f6d322fc13",
-                "reference": "757a0072e63b98cdf687ccb4638e87f6d322fc13",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/994f3b0002496cc380c9755869c87ff526d7f451",
+                "reference": "994f3b0002496cc380c9755869c87ff526d7f451",
                 "shasum": ""
             },
             "require": {
@@ -795,7 +795,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-06-15T21:40:54+00:00"
+            "time": "2017-06-29T17:43:50+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -6688,12 +6688,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "5cbf2424850cc702617646fca5a2ae2c77bf6f6e"
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5cbf2424850cc702617646fca5a2ae2c77bf6f6e",
-                "reference": "5cbf2424850cc702617646fca5a2ae2c77bf6f6e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
                 "shasum": ""
             },
             "require": {
@@ -6739,7 +6739,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-04-01T10:07:28+00:00"
+            "time": "2017-06-30T08:15:21+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -7474,16 +7474,16 @@
         },
         {
             "name": "theseer/fdomdocument",
-            "version": "1.6.5",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/fDOMDocument.git",
-                "reference": "8dcfd392135a5bd938c3c83ea71419501ad9855d"
+                "reference": "6e8203e40a32a9c770bcb62fe37e68b948da6dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/8dcfd392135a5bd938c3c83ea71419501ad9855d",
-                "reference": "8dcfd392135a5bd938c3c83ea71419501ad9855d",
+                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/6e8203e40a32a9c770bcb62fe37e68b948da6dca",
+                "reference": "6e8203e40a32a9c770bcb62fe37e68b948da6dca",
                 "shasum": ""
             },
             "require": {
@@ -7510,7 +7510,7 @@
             ],
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
-            "time": "2017-04-21T14:50:31+00:00"
+            "time": "2017-06-30T11:53:12+00:00"
         },
         {
             "name": "theseer/tokenizer",
