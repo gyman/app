@@ -13,8 +13,13 @@ class Calendar extends BaseCalendar
     /**
      * @return Section
      */
-    public function section()
+    public function section() : Section
     {
         return $this->section;
+    }
+
+    public function updateTitle(string $title)
+    {
+        $this->title = $title;
     }
 }

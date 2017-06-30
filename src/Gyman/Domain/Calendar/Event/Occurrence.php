@@ -6,7 +6,10 @@ use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
 use Dende\Calendar\Domain\Calendar\EventInterface;
 use Dende\Calendar\Domain\IdInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\Calendar\Event\Occurrence\Note;
+use Gyman\Domain\Calendar\Event\Occurrence\Subject;
 use Gyman\Domain\Entry;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
 
@@ -22,17 +25,17 @@ class Occurrence extends BaseOccurrence
     protected $instructor;
 
     /**
-     * @var string
+     * @var integer
      */
     protected $instructorId;
 
     /**
-     * @var string
+     * @var Subject
      */
     protected $subject;
 
     /**
-     * @var string
+     * @var Note
      */
     protected $note;
 
@@ -41,13 +44,13 @@ class Occurrence extends BaseOccurrence
      */
     protected $entries;
 
-    public function __construct(IdInterface $occurrenceId, EventInterface $event, DateTime $startDate = null, OccurrenceDuration $duration = null, User $instructor = null, $subject = '', $note = '', ArrayCollection $entries = null)
+    public function __construct(IdInterface $occurrenceId, EventInterface $event, DateTime $startDate = null, OccurrenceDuration $duration = null, User $instructor = null, Subject $subject = null, Note $note = null, ArrayCollection $entries = null)
     {
         parent::__construct($occurrenceId, $event, $startDate, $duration);
 
         $this->instructor = $instructor;
-        $this->subject = $subject;
-        $this->note = $note;
+        $this->subject = $subject ?: new Subject();
+        $this->note = $note ?: new Note();
         $this->entries = $entries;
     }
 
@@ -92,9 +95,9 @@ class Occurrence extends BaseOccurrence
     }
 
     /**
-     * @return ArrayCollection|\Gyman\Domain\Entry[]
+     * @return Collection|Entry[]
      */
-    public function entries()
+    public function entries() : Collection
     {
         return $this->entries;
     }

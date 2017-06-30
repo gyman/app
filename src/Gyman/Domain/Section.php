@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Domain;
 
-use Gyman\Domain\Calendar;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class Section
@@ -47,7 +47,7 @@ class Section
     /**
      * @return string
      */
-    public function title()
+    public function title() : string
     {
         return $this->title;
     }
@@ -55,7 +55,7 @@ class Section
     /**
      * @return Calendar
      */
-    public function calendar()
+    public function calendar() : Calendar
     {
         return $this->calendar;
     }
@@ -63,7 +63,7 @@ class Section
     /**
      * @return string
      */
-    public function id()
+    public function id() : string
     {
         return $this->id;
     }
@@ -79,7 +79,7 @@ class Section
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -87,7 +87,7 @@ class Section
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -101,9 +101,9 @@ class Section
     }
 
     /**
-     * @param $members
+     * @param Member[]|Collection $members
      */
-    public function setMembers($members)
+    public function setMembers(Collection $members)
     {
         $this->members = $members;
     }

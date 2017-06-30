@@ -18,13 +18,13 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
     public function createFromArray(array $array = []) : OccurrenceInterface
     {
         $template = [
-            'occurrenceId' => OccurrenceId::create(),
-            'event'        => null,
-            'startDate'    => new DateTime(),
-            'duration'     => null,
+            'occurrenceId'   => OccurrenceId::create(),
+            'event'          => null,
+            'startDate'      => new DateTime(),
+            'duration'       => null,
             'instructor'     => null,
-            'subject'        => '',
-            'note'           => '',
+            'subject'        => null,
+            'note'           => null,
             'entries'        => new ArrayCollection()
         ];
 

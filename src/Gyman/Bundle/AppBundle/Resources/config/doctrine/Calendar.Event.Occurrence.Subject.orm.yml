@@ -1,0 +1,6 @@
+Gyman\Domain\Calendar\Event\Occurrence\Subject:
+  type:   embeddable
+  fields:
+    content:
+      type: text
+      nullable: true

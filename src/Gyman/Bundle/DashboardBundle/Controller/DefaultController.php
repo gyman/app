@@ -64,7 +64,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/activity/{id}", name="dashboard_list_class_members")
-     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      * @Template("DashboardBundle:Default:listClassMembers.html.twig")
      * @param Occurrence $occurrence
      * @return array

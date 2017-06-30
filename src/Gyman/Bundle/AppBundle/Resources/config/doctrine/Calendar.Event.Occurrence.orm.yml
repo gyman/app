@@ -22,8 +22,16 @@ Gyman\Domain\Calendar\Event\Occurrence:
       targetEntity: Gyman\Domain\Entry
       mappedBy: occurrence
 
+  embedded:
+    subject:
+      class: Gyman\Domain\Calendar\Event\Occurrence\Subject
+      columnPrefix: subject_
+    note:
+      class: Gyman\Domain\Calendar\Event\Occurrence\Note
+      columnPrefix: note_
+
   fields:
     instructorId:
-      type: string
+      type: integer
       nullable: true
       column: instructor_id
