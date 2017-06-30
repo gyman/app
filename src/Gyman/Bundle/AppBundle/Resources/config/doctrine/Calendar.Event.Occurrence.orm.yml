@@ -9,7 +9,13 @@ Gyman\Domain\Calendar\Event\Occurrence:
 
   associationOverride:
     event:
-      targetEntity: Gyman\Domain\Calendar\Event
+      targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
+      inversedBy: occurrences
+      cascade: [all]
+      joinColumns:
+        EventId:
+          name: event_id
+          referencedColumnName: id
 
   oneToMany:
     entries:

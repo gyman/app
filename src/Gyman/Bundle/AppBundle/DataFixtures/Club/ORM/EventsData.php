@@ -2,12 +2,13 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
-use Dende\Calendar\Application\Command\CreateEventCommand;
-use Dende\Calendar\Application\Factory\EventFactory;
-use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
-use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Dende\Calendar\Domain\Calendar\Event\EventId;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
+use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\Factory\OccurrenceFactory;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -39,16 +40,20 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        $command = new CreateEventCommand();
-        $command->calendar = $this->getReference($params["calendar"]);
-        $command->duration = $params["duration"];
-        $command->startDate = new DateTime($params["startDate"]);
-        $command->endDate = new DateTime($params["endDate"]);
-        $command->repetitionDays = $params["repetitions"];
-        $command->title = $params["title"];
-        $command->type = $params["type"];
+        Event::setFactoryClass(OccurrenceFactory::class);
 
-        $event = $this->getContainer()->get('gyman.event.factory')->createFromCommand($command);
+        $array = [
+            'eventId'     => EventId::create(Uuid::fromString($params['eventId'])),
+            'calendar'    => $this->getReference($params['calendar']),
+            'startDate'   => new DateTime($params['startDate']),
+            'endDate'     => new DateTime($params['endDate']),
+            'repetitions' => new Repetitions($params['repetitions']),
+            'title'       => $params['title'],
+            'type'        => new EventType($params['type']),
+        ];
+
+        /** @var Event $event */
+        $event = $this->getContainer()->get('gyman.event.factory')->createFromArray($array);
 
         return $event;
     }

@@ -8,6 +8,7 @@ club-dende:
     name:     gyman_dende
     user:     root
     password: root
+    host:     localhost
   details:
     address: Poranna 41/10
     zipcode: 53-026
@@ -31,6 +32,7 @@ club-rio:
     name:     gyman_rio
     user:     root
     password: root
+    host:     localhost
   details:
     address: ~
     zipcode: ~
@@ -54,6 +56,7 @@ club-extreme:
     name:     gyman_extreme
     user:     root
     password: root
+    host:     localhost
   details:
     address: ~
     zipcode: ~

@@ -57,7 +57,12 @@ class SetupPathsForClub
      */
     public function onKernelRequest(PostSwitchConnection $event)
     {
+        if(!$this->session->isStarted()) {
+            return;
+        }
+
         $subdomainName = $event->getTenantId();
+
 
         $club = $this->clubRepository->findOneBySubdomain($subdomainName);
 

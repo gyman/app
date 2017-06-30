@@ -2,14 +2,13 @@
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
-use Dende\Calendar\Application\Factory\EventFactoryInterface;
 use Dende\Calendar\Application\Factory\EventFactory as BaseEventFactory;
-use Dende\Calendar\Domain\Calendar;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event as BaseEvent;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class EventFactory
@@ -19,19 +18,18 @@ class EventFactory extends BaseEventFactory
 {
 
     /**
-     * @param $params
-     * @return Event
+     * @param array $array
+     * @return BaseEvent|Event
      */
-    public function createFromArray(array $array = [])
+    public static function createFromArray(array $array = []) : BaseEvent
     {
         $template = [
-            'id'                     => $this->idGenerator->generateId(),
+            'eventId'                => EventId::create(Uuid::fromString($array['eventId'])),
             'title'                  => '',
-            'repetitions'            => new Repetitions([]),
+            'repetitions'            => new Repetitions(),
             'type'                   => new EventType(),
-            'occurrences'            => new ArrayCollection(),
-            'calendar'               => new Calendar(null, ''),
-            'duration'               => new Duration(0),
+            'occurrences'            => null,
+            'calendar'               => null,
             'startDate'              => new DateTime('now'),
             'endDate'                => new DateTime('now'),
         ];
@@ -39,14 +37,14 @@ class EventFactory extends BaseEventFactory
         $array = array_merge($template, $array);
 
         return new Event(
-            $array['id'],
+            $array['eventId'],
             $array['calendar'],
             $array['type'],
             $array['startDate'],
             $array['endDate'],
             $array['title'],
             $array['repetitions'],
-            $array['duration']
+            $array['occurrences']
         );
     }
 }

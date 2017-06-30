@@ -2,8 +2,9 @@
 namespace Gyman\Domain\Calendar\Event;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
+use Dende\Calendar\Domain\Calendar\EventInterface;
+use Dende\Calendar\Domain\IdInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Bundle\ClubBundle\Entity\User;
 use Gyman\Domain\Entry;
@@ -40,9 +41,14 @@ class Occurrence extends BaseOccurrence
      */
     protected $entries;
 
-    public function __construct($id, DateTime $startDate, OccurrenceDuration $duration, Event $event, User $instructor = null, $subject = '', $note = '', ArrayCollection $entries = null)
+    public function __construct(IdInterface $occurrenceId, EventInterface $event, DateTime $startDate = null, OccurrenceDuration $duration = null, User $instructor = null, $subject = '', $note = '', ArrayCollection $entries = null)
     {
-        parent::__construct($id, $startDate, $duration, $event);
+        parent::__construct($occurrenceId, $event, $startDate, $duration);
+
+        $this->instructor = $instructor;
+        $this->subject = $subject;
+        $this->note = $note;
+        $this->entries = $entries;
     }
 
     /**

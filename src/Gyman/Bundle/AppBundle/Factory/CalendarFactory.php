@@ -2,6 +2,9 @@
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use Dende\Calendar\Application\Factory\CalendarFactory as BaseCalendarFactory;
+use Dende\Calendar\Domain\Calendar as BaseCalendar;
+use Dende\Calendar\Domain\Calendar\CalendarId;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar;
 
 /**
@@ -14,18 +17,20 @@ class CalendarFactory extends BaseCalendarFactory
      * @param $params
      * @return Calendar
      */
-    public function createFromArray($array)
+    public function createFromArray(array $array = []) : BaseCalendar
     {
         $template = [
-            'id'                     => $this->idGenerator->generateId(),
-            'title'                  => '',
+            'calendarId' => CalendarId::create(),
+            'title'      => '',
+            'events'     => [],
         ];
 
         $array = array_merge($template, $array);
 
         return new Calendar(
-            $array['id'],
-            $array['title']
+            $array['calendarId'],
+            $array['title'],
+            new ArrayCollection($array['events'])
         );
     }
 }

@@ -110,8 +110,20 @@
         "reload-fixtures": [
             "php app/console doctrine:database:drop --force --if-exists --env=dev",
             "php app/console doctrine:database:create --env=dev --if-not-exists",
-            "php app/console doctrine:migrations:migrate -n --env=dev --quiet",
             "php app/console doctrine:fixtures:load --append -n --env=dev -vvv"
+        ],
+        "sf" : ["php app/console"],
+        "prepare-default" : [
+            "php app/console doctrine:database:drop --if-exists --no-interaction --force --quiet",
+            "php app/console doctrine:database:create --env=dev --if-not-exists --no-interaction --quiet",
+            "php app/console doctrine:schema:create --no-interaction --quiet --env=dev",
+            "php app/console doctrine:fixtures:load --append -n --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection"
+        ],
+        "prepare-tenant": [
+            "php app/console doctrine:database:drop --club=rio --if-exists --no-interaction --force --quiet",
+            "php app/console doctrine:database:create --club=rio --if-not-exists --no-interaction --quiet",
+            "php app/console doctrine:schema:create --no-interaction --quiet --env=dev --club=rio",
+            "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=rio"
         ],
         "reload-fixtures-test": [
             "php app/console doctrine:database:drop --force --if-exists --env=test",

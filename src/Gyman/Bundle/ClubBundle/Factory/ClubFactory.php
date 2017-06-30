@@ -26,7 +26,8 @@ class ClubFactory
             new Database(
                 $params['database']['name'],
                 $params['database']['user'],
-                $params['database']['password']
+                $params['database']['password'],
+                $params['database']['host']
             ),
             new Details(
                 $params['details']['address'],

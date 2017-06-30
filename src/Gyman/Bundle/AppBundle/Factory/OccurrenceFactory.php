@@ -4,8 +4,8 @@ namespace Gyman\Bundle\AppBundle\Factory;
 use DateTime;
 use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
 use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar\Event\Occurrence;
 
@@ -15,13 +15,13 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
      * @param array $array
      * @return Occurrence
      */
-    public function createFromArray($array = [])
+    public function createFromArray(array $array = []) : OccurrenceInterface
     {
         $template = [
-            'id'             => $this->idGenerator->generateId(),
-            'startDate'      => new DateTime('now'),
-            'duration'       => new OccurrenceDuration(90),
-            'event'          => null,
+            'occurrenceId' => OccurrenceId::create(),
+            'event'        => null,
+            'startDate'    => new DateTime(),
+            'duration'     => null,
             'instructor'     => null,
             'subject'        => '',
             'note'           => '',
@@ -31,10 +31,10 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
         $array = array_merge($template, $array);
 
         return new Occurrence(
-            $array['id'],
+            $array['occurrenceId'],
+            $array['event'],
             $array['startDate'],
             $array['duration'],
-            $array['event'],
             $array['instructor'],
             $array['subject'],
             $array['note'],
