@@ -4,17 +4,26 @@ services:
   gyman.vouchers.create_voucher:
     class: Gyman\Application\Handler\CreateVoucherHandler
     arguments:
-      - @gyman.vouchers.repository
-      - @event_dispatcher
+      - "@gyman.members.repository"
+      - "@gyman.entries.repository"
+      - "@event_dispatcher"
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateVoucherCommand }
+
+  gyman.vouchers.update_voucher:
+    class: Gyman\Application\Handler\UpdateVoucherHandler
+    arguments:
+      - "@gyman.vouchers.repository"
+      - "@event_dispatcher"
+    tags:
+        - { name: tactician.handler, command: Gyman\Application\Command\UpdateVoucherCommand }
 
   gyman.vouchers.close_voucher:
     class: Gyman\Application\Service\CloseVoucher
     arguments:
-      - @gyman.vouchers.repository
-      - @gyman.members.repository
-      - @event_dispatcher
+      - "@gyman.vouchers.repository"
+      - "@gyman.members.repository"
+      - "@event_dispatcher"
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CloseVoucherCommand }
 

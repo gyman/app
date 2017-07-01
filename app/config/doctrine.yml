@@ -23,16 +23,20 @@ doctrine:
           user:     ~
           password: ~
           charset:  UTF8
-          wrapper_class: Dende\MultidatabaseBundle\Connection\ConnectionWrapper
+          wrapper_class: Dende\MultitenancyBundle\Connection\Wrapper
           mapping_types:
               enum: string
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
 
+        resolve_target_entities:
+            Dende\Calendar\Domain\Calendar\EventInterface: Gyman\Domain\Calendar\Event
+            Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: Gyman\Domain\Calendar\Event\Occurrence
+
         entity_managers:
           default:
-            auto_mapping: false # disabled so we can assign entities to our own connections
+            auto_mapping:     false # disabled so we can assign entities to our own connections
             connection:       default
             dql:
                 string_functions:
@@ -45,7 +49,6 @@ doctrine:
                     enabled: true
             mappings:
                 StofDoctrineExtensionsBundle: ~
-                UserBundle: ~
                 ClubBundle: ~
           tenant:
             auto_mapping:     false # disabled so we can assign entities to our own connections

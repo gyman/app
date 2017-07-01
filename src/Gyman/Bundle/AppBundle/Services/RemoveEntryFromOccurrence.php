@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
 
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 use Gyman\Bundle\AppBundle\Repository\EntryRepository;
 use Gyman\Domain\Member;

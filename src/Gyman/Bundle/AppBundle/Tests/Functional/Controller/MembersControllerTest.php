@@ -55,13 +55,13 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $form = $crawler->filter('form[name="gyman_member_form"]')->first();
 
-        $this->assertCount(27, $form->filter('input, textarea, button, select'));
+        $this->assertCount(25, $form->filter('input, textarea, button, select'));
 
         $this->assertCount(1, $form->filter('textarea'));
         $this->assertCount(2, $form->filter('select'));
         $this->assertCount(1, $form->filter('button'));
-        $this->assertCount(23, $form->filter('input'));
-        $this->assertCount(9, $form->filter('input[type=text]'));
+        $this->assertCount(21, $form->filter('input'));
+        $this->assertCount(7, $form->filter('input[type=text]'));
         $this->assertCount(0, $form->filter('input[type=number]'));
         $this->assertCount(10, $form->filter('input[type=checkbox]'));
         $this->assertCount(3, $form->filter('input[type=hidden]'));

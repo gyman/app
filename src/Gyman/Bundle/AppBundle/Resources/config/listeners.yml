@@ -1,0 +1,15 @@
+---
+services:
+  app.listener.open_entry:
+    class: 'Gyman\Bundle\AppBundle\Listener\OpenCreditEntryListener'
+    arguments:
+      - "@mailer.credit_entry"
+    tags:
+      - { name: kernel.event_listener, event: 'gyman.open_entry.success', method: "onSuccess" }
+
+  app.listener.occurence_entity:
+    class: 'Gyman\Bundle\AppBundle\Listener\OccurrenceListener'
+    arguments:
+      - "@service_container"
+    tags:
+      - { name: doctrine.orm.entity_listener, entity_manager: tenant, event: postLoad, method: postLoadHandler }

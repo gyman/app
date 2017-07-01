@@ -2,24 +2,30 @@
 namespace Gyman\Bundle\MailerBundle\Service;
 
 use Swift_Mailer;
+use Swift_Message;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Class Mailer
+ * @package Gyman\Bundle\MailerBundle\Service
+ * @method void setSubject(string $subject)
+ * @method void setTo(array $emails)
+ */
 class Mailer
 {
-    // <editor-fold defaultstate="collapsed" desc="fields">
     /**
-     * @var SwiftMailer
+     * @var Swift_Mailer
      */
     private $mailer;
 
     /**
-     * @var TwigEngine
+     * @var EngineInterface
      */
     private $templating;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     private $translator;
 
@@ -33,128 +39,67 @@ class Mailer
      */
     private $parameters = [];
 
+    /** @var Swift_Message */
+    private $message;
+
     /**
-     * @return Swift_Message
+     * @param array $parameters
      */
-    private $message;// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="setters & getters">
-
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    public function getParameters()
-    {
-        return $this->parameters;
-    }
-
-    public function setParameters($parameters)
+    public function setParameters($parameters = [])
     {
         $this->parameters = $parameters;
-
-        return $this;
     }
 
+    /**
+     * @param string $template
+     */
     public function setTemplate($template)
     {
         $this->template = $template;
-
-        return $this;
     }
-
-    public function getMailer()
-    {
-        return $this->mailer;
-    }
-
-    public function getTemplating()
-    {
-        return $this->templating;
-    }
-
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    public function setMailer(Swift_Mailer $mailer)
-    {
-        $this->mailer = $mailer;
-
-        return $this;
-    }
-
-    public function setTemplating(EngineInterface $templating)
-    {
-        $this->templating = $templating;
-
-        return $this;
-    }
-
-    public function setTranslator(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-
-        return $this;
-    }// </editor-fold>
 
     public function sendMail()
     {
         $this->updateSubject();
         $this->updateBody();
 
-        $this->getMailer()->send(
-            $this->getMessage()
-        );
+        $this->mailer->send($this->message);
     }
 
     private function updateBody()
     {
-        $this->getMessage()->setBody(
-            $this->getTemplating()->render(
-                $this->getTemplate(),
-                $this->getParameters()
+        $this->message->setBody(
+            $this->templating->render(
+                $this->template,
+                $this->parameters
             )
         );
     }
 
     private function updateSubject()
     {
-        $this->getMessage()->setSubject(
-            $this->getTranslator()->trans(
-                $this->getMessage()->getSubject()
+        $this->message->setSubject(
+            $this->translator->trans(
+                $this->message->getSubject()
             )
         );
     }
 
-    public function __construct(Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $mailer, TranslatorInterface $translator, EngineInterface $templating)
     {
-        $this->setMailer($mailer);
-        $this->setMessage(
-            $mailer->createMessage()
-        );
-        $this->getMessage()->setContentType('text/html');
+        $this->mailer = $mailer;
+        $this->translator = $translator;
+        $this->templating = $templating;
+
+        $this->message = $mailer->createMessage();
+        $this->message->setContentType('text/html');
     }
 
     public function __call($method, $arguments)
     {
-        if (strstr($method, 'set') && method_exists($this->getMessage(), $method)) {
+        if (strstr($method, 'set') && method_exists($this->message, $method)) {
             return call_user_func_array(
-                [$this->getMessage(),$method],
+                [$this->message,$method],
                 $arguments
             );
         }

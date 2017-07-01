@@ -1,0 +1,12 @@
+---
+Gyman\Domain\Member\Details:
+  exclusion_policy: ALL
+  properties:
+    genders:
+      expose: false
+    firstname:
+      expose: true
+    lastname:
+      expose: true
+    foto:
+      expose: true

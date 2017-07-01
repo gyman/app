@@ -18,13 +18,10 @@ Gyman\Bundle\ClubBundle\Entity\Club:
       type: integer
       generator: { strategy: AUTO }
 
-  manyToMany:
-#    sections:
-#      targetEntity: Gyman\Bundle\SectionBundle\Entity\Section
-#      mappedBy: members
-    owners:
-      targetEntity: Gyman\Bundle\UserBundle\Entity\User
-      mappedBy: clubs
+  oneToMany:
+    involvements:
+      targetEntity: Gyman\Bundle\ClubBundle\Entity\Involvement
+      mappedBy: club
 
   fields:
     name:

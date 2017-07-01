@@ -31,53 +31,7 @@ class DefaultBuilder
         }
     }
 
-    public function profile(RequestStack $request)
-    {
-        $menu = $this->factory->createItem('root');
-
-        if (!$this->context->isGranted('ROLE_USER')) {
-            return $menu;
-        }
-
-        $menu->setChildrenAttribute('class', 'span6');
-
-        $menu->addChild(
-            'navigation.dashboard',
-            [
-                'route'          => '_dashboard_index',
-                'extras'         => ['icon' => 'fa-user'],
-                'linkAttributes' => [
-                    'class' => 'btn btn-block',
-                ],
-            ]
-        )->setExtra('translation_domain', 'DefaultBundle');
-
-        $menu->addChild(
-            'navigation.edit_profile',
-            [
-                'route'          => 'profile_edit',
-                'extras'         => ['icon' => 'fa-user'],
-                'linkAttributes' => [
-                    'class' => 'btn btn-block',
-                ],
-            ]
-        )->setExtra('translation_domain', 'DefaultBundle');
-
-        $menu->addChild(
-            'navigation.logout',
-            [
-                'route'          => 'fos_user_security_logout',
-                'extras'         => ['icon' => 'fa-plus'],
-                'linkAttributes' => [
-                    'class' => 'btn btn-block',
-                ],
-            ]
-        )->setExtra('translation_domain', 'DefaultBundle');
-
-        return $menu;
-    }
-
-    public function main(RequestStack $request)
+    public function main()
     {
         $menu = $this->factory->createItem('root');
 
@@ -87,95 +41,41 @@ class DefaultBuilder
 
         $menu->setChildrenAttribute('class', 'bigBtnIcon');
 
-        $menu->addChild('navigation.menu.dashboard', [
-            'route'          => '_dashboard_index',
+        $menu->addChild('Sekcje', [
+            'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
                 'aria-describedby' => 'qtip-21',
             ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
-//        $menu->addChild('navigation.menu.members', [
-//            'route'          => '_list_members',
-//            'extras'         => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class'            => 'tipB',
-//                'aria-describedby' => 'qtip-21',
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
-
-//        $menu->addChild('navigation.menu.schedule', [
-//            'route'          => '_schedule_calendar',
-//            'extras'         => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class'            => 'tipB',
-//                'aria-describedby' => 'qtip-21',
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
-
-//        $menu->addChild('navigation.menu.vouchers', [
-//            'route'          => '_vouchers_list',
-//            'extras'         => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class'            => 'tipB',
-//                'aria-describedby' => 'qtip-21',
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
-
-//        $menu->addChild('navigation.menu.entries', [
-//            'route'          => '_list_entries',
-//            'extras'         => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class'            => 'tipB',
-//                'aria-describedby' => 'qtip-21',
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
-
-        $menu->addChild('navigation.menu.analytics', [
-            'uri'            => '/',
+        $menu->addChild('Informacje o klubie', [
+            'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
                 'aria-describedby' => 'qtip-21',
             ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
-        $menu->addChild('navigation.menu.employees', [
-            'uri'            => '/',
+        $menu->addChild('Użytkownicy', [
+            'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
                 'aria-describedby' => 'qtip-21',
             ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
-        $menu->addChild('navigation.menu.clubs_and_sections', [
-            'uri'            => '/',
+        $menu->addChild('Grafik zajęć', [
+            'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
                 'aria-describedby' => 'qtip-21',
             ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
-
-        $menu->addChild('navigation.menu.payments', [
-            'uri'            => '/',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
-
-        $menu->addChild('navigation.menu.dontknow', [
-            'uri'            => '/',
-            'extras'         => ['icon' => 'fa-user'],
-            'linkAttributes' => [
-                'class'            => 'tipB',
-                'aria-describedby' => 'qtip-21',
-            ],
-        ])->setExtra('translation_domain', 'DefaultBundle');
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
         return $menu;
     }

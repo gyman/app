@@ -98,6 +98,8 @@ entries.type.free: "darmowe"
 entries.type.paid: "płatne"
 
 vouchers:
+    dates:
+        table_header: Daty ważności
     startDate:
         table_header: Ważny od
     endDate:
@@ -130,3 +132,7 @@ member_search_form.starred.null: wszyscy
 member_search_form.starred.true: tylko oznaczeni gwiazdką
 member_search_form.belt: Kolor pasa
 member_search_form.belt.none: wybierz
+
+member.form.update_voucher: edytuj
+vouchers.actions.table_header: Akcja
+update.voucher: zapisz

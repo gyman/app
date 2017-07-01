@@ -6,14 +6,17 @@ parameters:
   session_lifetime: 86400 # 24 hours
   no_image: /bundles/gymanapp/images/no-profile.gif
 
-  galleryDirectory: %kernel.root_dir%/../web/uploads/gallery/
-  galleryPath: /uploads/gallery/
+  galleryDirectory: '%kernel.root_dir%/../web/uploads/gallery/'
+  galleryPath: '/uploads/gallery/'
 
   revision_file: "%kernel.root_dir%/../REVISION"
   memcached.servers:
     - { host: 127.0.0.1, port: 11211 }
 
   subdomain_provider_service: gyman.app.subdomain_provider
+
+  resolved_occurrence_class: 'Gyman\Domain\Calendar\Event\Occurrence'
+  dende_calendar.occurrences_repository.class:  'Gyman\Bundle\AppBundle\Repository\OccurrenceRepository'
 
 services:
     fos_user.doctrine_registry:
@@ -22,7 +25,7 @@ services:
     memcached:
         class: Memcached
         calls:
-            - [ addServers, [ %memcached.servers% ]]
+            - [ addServers, [ '%memcached.servers%' ]]
 
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
@@ -30,19 +33,10 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
             - { name: doctrine.event_subscriber, connection: tenant }
         calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
-    data_fixture_loader:
-        class: Gyman\Bundle\TestBundle\Services\FixtureLoader
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - '@symfony.data_fixtures.loader'
-
-    symfony.data_fixtures.loader:
-        public: false
-        class: Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader
-        arguments:
-            - '@service_container'
+sentry:
+    dsn: "http://9fca9298eb9a4b3a8140e0f694b2c10e:327633aac7dd4668a217e9802b973f01@sentry.dev.gyman.pl/3"
 
 imports:
     - { resource: parameters.yml }
@@ -81,20 +75,23 @@ twig:
       sentry_url:     %sentry_url%
       gallery_dir:    %galleryPath%
       google_maps_api_key: %google_maps_api_key%
+      baseUrl: '%base_url%'
     form:
         resources:
             - ::fields.html.twig
 
 swiftmailer:
-    transport: smtp
-    host:      smtp.gmail.com
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    port:      "%mailer_port%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    port:                 465
-    encryption:           ssl
-    auth_mode:            ~
-    
+
     logging:        true
+
+    spool:
+        type: file
+        path: '%kernel.root_dir%/spool'
 
 #oneup_uploader:
 #    mappings:
@@ -104,32 +101,45 @@ swiftmailer:
 #                class: Gyman\Bundle\AppBundle\Controller\UploadController
 #                name:  MyFancyCustomUploader
                 
-gyman_app: ~
+gyman_app:
+  schedule_generator:
+    phantom_path:           '%kernel.root_dir%/../node_modules/.bin/phantomjs'
+    rasterize_script_path:  '%kernel.root_dir%/../node_modules/phantomjs/lib/phantom/examples/rasterize.js'
+    destination_directory:  '%kernel.root_dir%/../web/schedules/'
+    filename:               'schedule.png'
 
 dende_calendar:
-  model_manager_name:   tenant
-  backend_type:         ORM
+  model_manager_name:                   'tenant'
+  backend_type:                         'ORM'
+  calendar_repository_service_name:     'gyman.calendar.repository'
+  calendar_factory_service_name:        'gyman.calendar.factory'
+  event_repository_service_name:        'gyman.event.repository'
+  event_factory_service_name:           'gyman.event.factory'
+  occurrence_repository_service_name:   'gyman.occurrence.repository'
+  occurrence_factory_service_name:      'gyman.occurrence.factory'
+  occurrence_class:                     Gyman\Domain\Calendar\Event\Occurrence
+  mapping:
+    event:
+      entity:                             Dende\Calendar\Domain\Calendar\Event
+      map:
+        bundle:                           Dende\Calendar\Domain\Calendar\Event
+        app:                              Gyman\Domain\Calendar\Event
+    calendar:
+      entity:                             Dende\Calendar\Domain\Calendar
+      map:
+        bundle:                           Dende\Calendar\Domain\Calendar
+        app:                              Gyman\Domain\Calendar
 
-dende_multidatabase:
-  provider:                 gyman.app.tenant_provider
-  connection:               doctrine.dbal.tenant_connection
-  entity_manager:           doctrine.orm.tenant_entity_manager
-  parameter_name:           club
-  parameter_description:    Club subdomain's name
-  commands:
-    - doctrine:schema:update
-    - doctrine:schema:create
-    - doctrine:schema:drop
-    - doctrine:fixtures:load
-    - gyman:entries:close_expired
-    - gyman:vouchers:clear_expired
-    - gyman:vouchers:update_current
+dende_multitenancy:
+  patched_commands:
+    - "doctrine:*"
+    - "gyman:entries:close_expired"
+    - "gyman:vouchers:update_current"
 
-  fixtures:
-    default:
-        - src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
+  connections:
     tenant:
-        - src/Gyman/Bundle/AppBundle/DataFixtures/Club
+      command_parameter_name:         club
+      command_parameter_description:  Provide club name for tenant connection
 
 stof_doctrine_extensions:
     default_locale: pl_PL
@@ -144,12 +154,29 @@ stof_doctrine_extensions:
 fos_js_routing:
     routes_to_expose: [.*]
     
-monolog:  
+monolog:
   handlers:
     main:
+      type:         fingers_crossed
+      action_level: error
+      handler:      grouped_main
+
+    streamed_main:
       type:  stream
       path:  %kernel.logs_dir%/%kernel.environment%.log
       level: error
+      channels: ['app']
+
+    commands:
+      type:  stream
+      path:  %kernel.logs_dir%/commands_%kernel.environment%.log
+      level: debug
+      channels: ['commands']
+
+    # Groups
+    grouped_main:
+      type:    group
+      members: [streamed_main]
 
 jms_serializer:
   handlers:
@@ -160,15 +187,15 @@ jms_serializer:
     cache: true
     auto_detection: false
     directories:
-      app:
-        namespace_prefix: Gyman\Domain\Entity
-        path:             @GymanAppBundle/Resources/config/serializer/app
+#      app:
+#        namespace_prefix: 'Gyman\Domain\Entity'
+#        path:             '@GymanAppBundle/Resources/config/serializer/app'
       domain:
-        namespace_prefix: Gyman\Domain\Model
-        path:             @GymanAppBundle/Resources/config/serializer/domain
+        namespace_prefix: 'Gyman\Domain'
+        path:             '@GymanAppBundle/Resources/config/serializer'
       calendar:
-        namespace_prefix: Dende\Calendar\Domain
-        path:             @GymanAppBundle/Resources/config/serializer/calendar
+        namespace_prefix: 'Dende\Calendar\Domain'
+        path:             '@GymanAppBundle/Resources/config/serializer/calendar'
 
 fos_rest:
   param_fetcher_listener: true
@@ -194,14 +221,31 @@ sensio_framework_extra:
 
 knp_time: ~
 
-nelmio_api_doc: ~
-
-accelerator_cache:
-    host: %base_url%
-    web_dir: %kernel.root_dir%/../web
-
 bazinga_hateoas:
   metadata:
     cache:                file
     file_cache:
-      dir:              %kernel.cache_dir%/hateoas
+      dir:              "%kernel.cache_dir%/hateoas"
+
+liip_monitor:
+    mailer:
+        enabled:              false
+        recipient:            uirapuruadg@gmail.com
+        sender:               gyman.pl@gmail.com
+        subject:              "Health check"
+        send_on_warning:      true
+    checks:
+        php_extensions: [imagick, intl, mcrypt, json]
+        php_version:
+          5.6.0: ">="
+#        disk_usage:
+#          warning:              70
+#          critical:             90
+#          path:                 '%kernel.cache_dir%'
+        symfony_requirements:
+            file:                 '%kernel.root_dir%/SymfonyRequirements.php'
+        doctrine_dbal:
+          - default
+#          - tenant
+        security_advisory:
+          lock_file:            '%kernel.root_dir%/../composer.lock'

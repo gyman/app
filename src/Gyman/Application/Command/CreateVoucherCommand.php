@@ -7,7 +7,7 @@ use Gyman\Domain\Member;
  * Class CreateVoucherCommand
  * @package Gyman\Application\Command
  */
-class CreateVoucherCommand
+class CreateVoucherCommand implements VoucherCommandInterface
 {
     /**
      * @var \DateTime
@@ -22,7 +22,7 @@ class CreateVoucherCommand
     /**
      * @var integer
      */
-    public $maximumAmount = 12;
+    public $maximumAmount = 10;
 
     /**
      * @var float
@@ -33,6 +33,11 @@ class CreateVoucherCommand
      * @var Member
      */
     public $member;
+
+    /**
+     * @var array
+     */
+    public $creditEntries;
 
     /**
      * CreateVoucherCommand constructor.

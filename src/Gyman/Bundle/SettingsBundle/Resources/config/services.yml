@@ -1,11 +1,11 @@
 services:
   gyman.settings.menu_builder:
-      class: Gyman\Bundle\SettingsBundle\Menu\DefaultBuilder
-      arguments: [@knp_menu.factory, @security.context]
+      class: 'Gyman\Bundle\SettingsBundle\Menu\DefaultBuilder'
+      arguments: ["@knp_menu.factory", "@security.context"]
 
   gyman.settings.menu.main:
-      class:            Knp\Menu\MenuItem
-      factory:          [@gyman.settings.menu_builder, main]
-      arguments:        ["@request_stack"]
+      class:            'Knp\Menu\MenuItem'
+      factory:          ["@gyman.settings.menu_builder", "main"]
+      # arguments:        ["@request_stack"]
       tags:
           - { name: knp_menu.menu, alias: main }

@@ -1,5 +1,0 @@
-Gyman\Domain\Member\Details\Barcode:
-  exclusion_policy: all
-  properties:
-    barcode:
-      expose: true

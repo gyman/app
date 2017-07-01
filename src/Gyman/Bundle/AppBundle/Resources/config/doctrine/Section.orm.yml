@@ -10,7 +10,8 @@ Gyman\Domain\Section:
 
   oneToOne:
     calendar:
-      targetEntity: Dende\Calendar\Domain\Calendar
+      targetEntity: Gyman\Domain\Calendar
+      inversedBy: section
       cascade: ["all"]
       joinColumn:
         onDelete: CASCADE

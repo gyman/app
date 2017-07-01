@@ -1,0 +1,14 @@
+Gyman\Application\Command\OpenEntryCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntry: ~
+    - Gyman\Bundle\AppBundle\Validator\OnlyEnterOnce: ~
+#    - Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrence: ~
+  properties:
+    price:
+      - Range:
+          min: 0
+          minMessage: Cena nie może być mniejsza niż 0 PLN.
+    startDate:
+      - Gyman\Bundle\AppBundle\Validator\DateRangeConstraint:
+          min: "today 00:00:00"
+          max: "today 23:59:59"

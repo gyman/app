@@ -3,7 +3,11 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+$loader = require __DIR__.'/../app/autoload.php';
+if (PHP_VERSION_ID < 70000) {
+    include_once __DIR__.'/../app/bootstrap.php.cache';
+}
+
 Debug::enable();
 
 require_once __DIR__.'/../app/AppKernel.php';

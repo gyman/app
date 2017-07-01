@@ -55,7 +55,10 @@ class CloseVoucher
         $member = $command->voucher->member();
 
         $voucher->close($command->closingDate);
-        $member->unsetCurrentVoucher();
+
+        if($voucher->isCurrent()) {
+            $member->unsetCurrentVoucher();
+        }
 
         $this->voucherRepository->save($voucher);
         $this->memberRepository->save($member);

@@ -1,94 +1,123 @@
 # MEMBER 00
-
+---
 Entry001:
   type:       credit
   startDate:  -2 hours
   endDate:    -1 hour
-  price:      ~
+  price:
+    amount:   ~
+    currency: ~
   member:     Member00
-  occurrence: event-bjj-sredniozaawansowani-0099
-
-Entry002:
-  voucher:    Voucher00
-  type:       voucher
-  startDate:  now
+  occurrence: 'event-boks-kobiety#1'
+#Entry001:
+#  type:       credit
+#  startDate:  -2 hours
+#  endDate:    -1 hour
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member00
+#  occurrence: event-bjj-sredniozaawansowani-0099
+#
+#Entry002:
+#  voucher:    Voucher00
+#  type:       voucher
+#  startDate:  now
+##  endDate:    +1 hour 30 minutes
+#  endDate:    ~
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member00
+#  occurrence: event-bjj-zaawansowani-0098
+#
+## MEMBER 01
+#
+#Entry011:
+#  type:       credit
+#  startDate:  -12 hours
+#  endDate:    -11 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member01
+#  occurrence: event-bjj-sredniozaawansowani-0099
+#
+#Entry012:
+#  type:       credit
+#  startDate:  -2 hours
+#  endDate:    -1 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member01
+#  occurrence: event-bjj-sredniozaawansowani-0100
+#
+#Entry013:
+#  type:       free
+#  startDate:  now
 #  endDate:    +1 hour 30 minutes
-  endDate:    ~
-  price:      ~
-  member:     Member00
-  occurrence: event-bjj-zaawansowani-0098
-
-# MEMBER 01
-
-Entry011:
-  type:       credit
-  startDate:  -12 hours
-  endDate:    -11 hours
-  price:      ~
-  member:     Member01
-  occurrence: event-bjj-sredniozaawansowani-0099
-
-Entry012:
-  type:       credit
-  startDate:  -2 hours
-  endDate:    -1 hours
-  price:      ~
-  member:     Member01
-  occurrence: event-bjj-sredniozaawansowani-0100
-
-Entry013:
-  type:       free
-  startDate:  now
-  endDate:    +1 hour 30 minutes
-  price:      ~
-  member:     Member01
-  occurrence: event-bjj-zaawansowani-0098
-
-Entry014:
-  type:       paid
-  startDate:  +90 minutes
-  endDate:    ~
-  price:      15 PLN
-  member:     Member01
-  occurrence: event-bjj-sredniozaawansowani-0098
-
-# MEMBER 02
-
-Entry021:
-  voucher:    Voucher00
-  type:       voucher
-  startDate:  -27 hours
-  endDate:    -26 hours
-  price:      ~
-  member:     Member02
-  occurrence: event-bjj-zaawansowani-sparingi-0127
-
-#testing vouchers to be unsetted as current
-
-Entry022:
-  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
-  type:       voucher
-  startDate:  -27 hours
-  endDate:    -26 hours
-  price:      ~
-  member:     Member13
-  occurrence: event-bjj-zaawansowani-sparingi-0128
-
-Entry023:
-  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
-  type:       voucher
-  startDate:  -25 hours
-  endDate:    -24 hours
-  price:      ~
-  member:     Member13
-  occurrence: event-bjj-zaawansowani-sparingi-0129
-
-Entry024:
-  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
-  type:       voucher
-  startDate:  -23 hours
-  endDate:    -22 hours
-  price:      ~
-  member:     Member13
-  occurrence: event-bjj-zaawansowani-sparingi-0130
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member01
+#  occurrence: event-bjj-zaawansowani-0098
+#
+#Entry014:
+#  type:       paid
+#  startDate:  +90 minutes
+#  endDate:    ~
+#  price:
+#    amount:   15
+#    currency: PLN
+#  member:     Member01
+#  occurrence: event-bjj-sredniozaawansowani-0098
+#
+## MEMBER 02
+#
+#Entry021:
+#  voucher:    Voucher00
+#  type:       voucher
+#  startDate:  -27 hours
+#  endDate:    -26 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member02
+#  occurrence: event-bjj-zaawansowani-sparingi-0127
+#
+##testing vouchers to be unsetted as current
+#
+#Entry022:
+#  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+#  type:       voucher
+#  startDate:  -27 hours
+#  endDate:    -26 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member13
+#  occurrence: event-bjj-zaawansowani-sparingi-0128
+#
+#Entry023:
+#  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+#  type:       voucher
+#  startDate:  -25 hours
+#  endDate:    -24 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member13
+#  occurrence: event-bjj-zaawansowani-sparingi-0129
+#
+#Entry024:
+#  voucher:    voucher-to-be-removed-as-current-cause-run-out-of-entries
+#  type:       voucher
+#  startDate:  -23 hours
+#  endDate:    -22 hours
+#  price:
+#    amount:   ~
+#    currency: ~
+#  member:     Member13
+#  occurrence: event-bjj-zaawansowani-sparingi-0130
 

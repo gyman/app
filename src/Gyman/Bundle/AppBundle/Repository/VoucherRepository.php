@@ -72,6 +72,7 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
         $query->where('v.member = :member');
         $query->andWhere('v.startDate <= :moment');
         $query->andWhere('v.endDate >= :moment');
+        $query->andWhere('v.closedAt IS null');
         $query->setParameters([
             'moment' => $date,
             'member' => $member,
@@ -87,6 +88,7 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
         $query->andWhere('v.startDate is null OR v.startDate < :moment');
         $query->andWhere('v.endDate is null OR v.endDate > :moment');
         $query->andWhere('v.amountLeft > 0 OR v.amountLeft is null');
+        $query->andWhere('v.closedAt IS null');
         $query->setParameters([
             'moment' => new DateTime(),
             'member' => $member,
@@ -117,8 +119,9 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
             ->addSelect("COUNT(e.id) as HIDDEN entries_count")
             ->innerJoin("v.member", "m")
             ->leftJoin("v.entries", "e")
-            ->where("m.currentVoucher is null")
+            ->where("m.currentVoucher IS null")
             ->andWhere("v.startDate <= :now AND v.endDate > :now")
+            ->andWhere("v.closedAt IS NULL")
             ->groupBy("v.id")
             ->having("(v.maximumAmount IS NOT null AND entries_count < v.maximumAmount) OR v.maximumAmount IS null")
             ->setParameter("now", new DateTime())

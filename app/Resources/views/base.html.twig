@@ -21,7 +21,7 @@
         {%  endif %}
     {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 </head>
 
 {% block overraid_body %}
@@ -41,10 +41,13 @@
                 <div class="container-fluid">
 
                     <a href="{{ path("gyman_app_default_index") }}" class="brand">
-                        {% set logo = app.session.get('current_club').subdomain.name ~ '/' ~ app.session.get('current_club').details.logo %}
-                        <img src="{% if logo is not null %}{{ asset('uploads/gallery/' ~ logo) }}{% else %}{{ asset('bundles/gymanapp/images/gyman_logo.png') }}{% endif %}"
-                        id="applogo" />
-                        <span id="appname">{{ app.session.get('current_club').name }}</span>
+                        {% if app.session.get('current_club') is not null %}
+                            {% set logo = app.session.get('current_club').subdomain.name ~ '/' ~ app.session.get('current_club').details.logo %}
+                            <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="applogo" />
+                            <span id="appname">{{ app.session.get('current_club').name }}</span>
+                        {% else %}
+                            <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" id="applogo" />
+                        {% endif %}
                     </a>
 
                     {% if app.user is not null %}
@@ -137,13 +140,13 @@
     <!-- end wrapper -->
 
     {% block javascripts %}
-        {% if app.environment == "prod" %}
-            <script type="text/javascript" src="/js/vendors.min.js"></script>
-            <script type="text/javascript" src="/js/project.min.js"></script>
-        {% else %}
+        {#{% if app.environment == "prod" %}#}
+            {#<script type="text/javascript" src="/js/vendors.min.js"></script>#}
+            {#<script type="text/javascript" src="/js/project.min.js"></script>#}
+        {#{% else %}#}
             <script type="text/javascript" src="/js/vendors.js"></script>
             <script type="text/javascript" src="/js/project.js"></script>
-        {% endif %}
+        {#{% endif %}#}
 
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 

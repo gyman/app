@@ -1,22 +1,41 @@
-imports:
-  - { resource: forms.yml }
-  - { resource: handlers.yml }
-  - { resource: menu.yml }
-  - { resource: repositories.yml }
-  - { resource: twig_extensions.yml }
-  - { resource: validators.yml }
-
 services:
   gyman.app.tenant_provider:
     class: Gyman\Bundle\AppBundle\Services\TenantProvider
     arguments:
       - @=service(parameter('subdomain_provider_service'))
       - @gyman.club.repository
+      - %database_host%
+    tags:
+      - {name: tenant_provider, connection_name: tenant}
 
   gyman.app.command.dump_hosts:
     class: Gyman\Bundle\AppBundle\Command\DumpHostsCommand
     tags:
       - {name: console.command}
+
+  gyman.app.command.clear_entries:
+    class: Gyman\Bundle\AppBundle\Command\CloseEntriesCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
+
+  gyman.app.command.clear_expired_vouchers:
+    class: Gyman\Bundle\AppBundle\Command\ClearExpiredCurrentVouchersCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
+
+  gyman.app.command.update_current_voucher:
+    class: Gyman\Bundle\AppBundle\Command\UpdateCurrentVoucherCommand
+    calls:
+      - [setLogger, ['@monolog.logger.commands']]
+    tags:
+      - {name: console.command}
+      - {name: monolog.logger, channel: commands }
 
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
@@ -28,19 +47,36 @@ services:
   gyman.app.subdomain_provider:
     class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
     arguments:
-      - @request_stack
-      - %base_url%
+      - '@request_stack'
+      - '%base_url%'
 
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
 
-  gyman.app.subdomain_name_lister:
+  gyman.app.subdomain_name_listener:
     class: Gyman\Bundle\AppBundle\Listener\SubdomainNameListener
     arguments:
-      - @=service(parameter('subdomain_provider_service'))
-      - @service_container
+      - '@=service(parameter("subdomain_provider_service"))'
+      - '@dende_multitenancy.tenant_manager'
     tags:
-      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
+
+  gyman.app.listener.redirect_to_404:
+    class: Gyman\Bundle\AppBundle\Listener\RedirectTo404IfClubNotExists
+    arguments:
+      - '@router'
+    tags:
+      - {name: kernel.event_listener, event: kernel.exception, method: onException }
+
+  gyman.app.listener.setup_club_paths:
+    class: Gyman\Bundle\AppBundle\Listener\SetupPathsForClub
+    arguments:
+      - '@gyman.club.repository'
+      - '@session'
+      - '@twig'
+      - { no_image: %no_image%, gallerydirectory: %gallerydirectory%, gallerypath: %gallerypath% }
+    tags:
+      - {name: kernel.event_listener, event: multitenancy.post_switch_connection, method: onKernelRequest }
 
   gyman.default.request.arraycollection_converter:
     class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
@@ -59,5 +95,11 @@ services:
       class:          Gyman\Bundle\AppBundle\Services\Manager\VoucherManager
       parent:         gyman.base.entity_manager
       calls:
-           - [ setClass, [Gyman\Domain\Voucher] ]
-           - [ setEntityManager, [@doctrine.orm.tenant_entity_manager]]
+           - [ setClass, ['Gyman\Domain\Voucher'] ]
+           - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
+
+#  monolog.processor.sentry_context:
+#      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
+#      arguments:  ["@security.token_storage"]
+#      tags:
+#          - { name: monolog.processor, method: processRecord, handler: sentry }

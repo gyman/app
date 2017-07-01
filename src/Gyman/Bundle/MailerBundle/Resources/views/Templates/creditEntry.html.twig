@@ -1,0 +1,77 @@
+{# @var club \Gyman\Bundle\ClubBundle\Entity\Club #}
+{# @var entry \Gyman\Domain\Entry #}
+{# @var lastVoucher \Gyman\Domain\Voucher #}
+
+{% extends "MailerBundle::layout.html.twig" %}
+
+{% block content %}
+        <div>
+            {#<img src="{{  }}" style="float:right" />#}
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Witam,</p>
+
+                            <p>To jest automatyczny komunikat ze strony http://{{ club.subdomain.name }}.{{ baseUrl }}</p>
+
+                            <p>Odnotowano wejście na zajęcia w klubie '{{ club.name }}' ({{ club.details.city }}).</p>
+                            <p>Nazwa zajęć to '{{ entry.occurrence.event.calendar.name }}'</p>
+                            <p>Data i godzina wejścia: '{{ entry.startDate|date('d.m.Y H:i') }}'</p>
+
+                            {% if entry.isType("voucher") %}
+                            <p>Ważność Twojego obecnego karnetu:
+                                {{ entry.voucher.startDate|date('d.m.Y') }} - {{ entry.voucher.endDate|date('d.m.Y') }}
+                                (pozostało {{ entry.voucher.leftDaysAmount()}} dni)
+                            </p>
+                                {% if not entry.voucher.isUnlimited() %}
+                                <p>
+                                    Pozostała ilość wejść: {{ entry.voucher.leftEntriesAmount() }}
+                                    (wykorzystano {{ entry.voucher.entries|length }} z {{ entry.voucher.maximumAmount() }} wejść)
+                                </p>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if entry.isType("credit") %}
+                                {% set creditEntries = entry.member.filterCreditEntries() %}
+                                {% set lastVoucher = entry.member.vouchers.last %}
+
+                                {% if lastVoucher is not null %}
+                                    <p>Twój karnet skończył się {{ lastVoucher.endDate|date("m.d.Y") }} </p>
+                                {% endif %}
+
+                                <p> {# todo: take title and receiver from settings #}
+                                    Prosimy o pilne opłacenie składki członkowskiej:<br />
+                                    Odbiorca: Stowarzyszenie "Rio Grappling Club"<br />
+                                    Tytuł: składka członkowska "<< miesiąc >>" (np. maj)<br />
+                                    Numer konta: {{ club.details.account_number }}<br />
+                                </p>
+
+                                <p>Nie masz obecnie karnetu, a wejście było typu "kredytowe". Oznacza to,
+                                    że przy zakupie karnetu zostanie ono odjęte z puli wejść.</p>
+
+                                <p>Masz do tej pory na koncie {{ creditEntries|length }} wejść kredytowych:</p>
+
+                                <ul>
+                                {% for creditEntry in creditEntries %}
+                                    <li>{{ creditEntry.startDate|date('d.m.Y H:i') }} - {{ entry.occurrence.event.calendar.name }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            <p>
+                                Jeżeli Twoim zdaniem w powyższe dane wkradł się błąd,
+                                skontaktuj się z właścicielem klubu ({{ club.details.email_address }})
+                            </p>
+
+                            <p>
+                                -- <br/>
+                                Z poważaniem<br />
+                                Ekipa Gyman.pl
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

@@ -11,7 +11,7 @@ use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\OccurrencesData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\SectionsData;
 use Gyman\Bundle\AppBundle\DataFixtures\Club\ORM\VouchersData;
 use Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM\ClubsData;
-use Gyman\Bundle\TestBundle\DataFixtures\StandardConnection\ORM\UsersData;
+use Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM\UsersData;
 
 abstract class BaseFunctionalTestCase extends BaseTest
 {
@@ -24,7 +24,11 @@ abstract class BaseFunctionalTestCase extends BaseTest
     public function setUp()
     {
         parent::setUp();
+        $this->loadTestFixtures();
+    }
 
+    protected function loadTestFixtures()
+    {
         $this->fixtures = $this->loadFixtures([
             UsersData::class,
             ClubsData::class,

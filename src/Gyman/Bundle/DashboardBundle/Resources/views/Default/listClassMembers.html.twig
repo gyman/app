@@ -1,5 +1,61 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
+{# @var occurrence Gyman\Domain\Calendar\Event\Occurrence occurrence #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function(){
+            var occurrenceId = '{{ occurrence.id }}';
+            var store = new JSData.DS();
+
+            store.registerAdapter('http', new DSHttpAdapter({
+            {% if app.environment == 'prod' %}
+                basePath: "/api",
+            {% else %}
+                basePath: "/app_dev.php/api",
+            {% endif %}
+            }), { default: true });
+
+            var Member = store.defineResource({name: 'member'});
+            var Entry = store.defineResource({name: 'entry'});
+
+            $(document).on("enteredMembersBarcode", function(event, data){
+                Member
+                    .find(data.code)
+                    .then(function (_member) {
+                        var currentVoucher = _member.current_voucher;
+
+                        var entryType; // allowed entryTypes from this page: voucher, credit
+
+                        if(
+                                _.isUndefined(currentVoucher)
+                                || currentVoucher.is_closed
+                                || currentVoucher.left_amount < 1
+                                || currentVoucher.left_days == 0
+                        ) {
+                            entryType = 'credit';
+                        } else {
+                            entryType = 'voucher';
+                        }
+
+                        Entry.create({
+                            member: _member.id,
+                            occurrence: occurrenceId,
+                            entryType: entryType,
+                            price: 0
+                        }, {
+                            afterCreate: function () {
+                                window.location.reload();
+                            }
+                        });
+                    })
+            });
+        });
+    </script>
+{% endblock javascripts %}
+
 {% block content %}
 <div class="heading">
     <h3>
@@ -7,7 +63,7 @@
     </h3>
     {{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}
 
-    <a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>
+    {#<a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>#}
 </div>
 
 

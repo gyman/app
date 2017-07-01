@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Gyman\Bundle\UserBundle\Entity\User;
+use Gyman\Bundle\ClubBundle\Entity\User;
 use Gyman\Application\Command\SearchMemberCommand;
 use Gyman\Domain\Member;
 use Gyman\Domain\Member\Details\Barcode;
@@ -41,7 +41,6 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
      * @param Barcode $barcode
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @return Member
-     * @internal param Barcode $barcode
      */
     public function findOneByBarcode(Barcode $barcode)
     {
@@ -280,5 +279,15 @@ SQL;
         ;
 
         return $query->getResult();
+    }
+
+    public function getAllNamesForAutocompletion() {
+        $query = $this->createQueryBuilder('m')
+            ->select('m.details.firstname', 'm.details.lastname', 'm.id')
+            ->where('m.deletedAt IS null')
+            ->getQuery()
+        ;
+
+        return $query->getArrayResult();
     }
 }

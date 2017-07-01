@@ -1,9 +1,9 @@
 set :application, "app.gyman"
 set :domain,      "gyman.pl"
-set :deploy_to,   "/home/gyman.pl/"
+set :deploy_to,   "/home/gyman/"
 set :app_path,    "app"
-set :clear_controllers, false
-set :user, "deploy"
+set :clear_controllers, true
+set :user, "gyman"
 
 set :ssh_options, {
     :forward_agent => true,
@@ -14,7 +14,16 @@ default_run_options[:pty] = true
 
 set :repository,  "git@github.com:gyman/app.git"
 set :scm,         :git
-set :branch, 	   "develop"
+# set :branch, 	   "develop"
+
+set :branch do
+  default_tag = `git tag`.split("\n").last
+
+  tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
+  tag = default_tag if tag.empty?
+  tag
+end
+
 set :deploy_via,   :remote_cache
 # set :deploy_via, :rsync_with_remote_cache
 set :copy_via, :scp

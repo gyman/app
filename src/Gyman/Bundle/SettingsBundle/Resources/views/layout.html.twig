@@ -1,13 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock stylesheets %}
-
-{% block javascripts %}
-    {{ parent() }}
-{% endblock javascripts %}
-
 {% block content %}
     <div class="heading">
         <h3>{{ 'settings.header.title' }}</h3>
@@ -21,9 +13,15 @@
 
     <div class="row-fluid">
         <div class="span4">
-            left
+            {{ knp_menu_render('main', {
+                'template': 'GymanSettingsBundle:Menu:main.html.twig',
+                'currentAsLink' : true,
+                'depth' : 2,
+                'currentClass' : 'active'
+            }) }}
         </div>
         <div class="span8">
+            {% block settings_page %}{% endblock settings_page %}
         </div>
     </div>
 

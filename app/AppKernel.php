@@ -1,7 +1,7 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -26,35 +26,33 @@ class AppKernel extends Kernel
 
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
+//            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
-
             new League\Tactician\Bundle\TacticianBundle(),
+            new Liip\MonitorBundle\LiipMonitorBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),
-            new Dende\MultidatabaseBundle\DendeMultidatabaseBundle(),
+            new Dende\MultitenancyBundle\DendeMultitenancyBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
-            new Gyman\Bundle\TestBundle\TestBundle(),
             new Gyman\Bundle\ChartsBundle\ChartsBundle(),
-            new Gyman\Bundle\UserBundle\UserBundle(),
             new Gyman\Bundle\ClubBundle\ClubBundle(),
             new Gyman\Bundle\AccountBundle\AccountBundle(),
             new Gyman\Bundle\MailerBundle\MailerBundle(),
             new Gyman\Bundle\BaseBundle\BaseBundle(),
-//            new Gyman\Bundle\TimelineBundle\TimelineBundle(),
-
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),
             new Gyman\Bundle\SettingsBundle\GymanSettingsBundle(),
+
+	        new Sentry\SentryBundle\SentryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

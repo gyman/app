@@ -3,18 +3,23 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 
 use Carbon\Carbon;
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\Criteria;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\SearchMemberCommand;
-use Ob\HighchartsBundle\Highcharts\Highchart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class DefaultController
+ * @package Gyman\Bundle\DashboardBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -58,8 +63,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/dashboard/activity/{id}", name="dashboard_list_class_members")
-     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * @Route("/activity/{id}", name="dashboard_list_class_members")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      * @Template("DashboardBundle:Default:listClassMembers.html.twig")
      * @param Occurrence $occurrence
      * @return array
@@ -79,11 +84,11 @@ class DefaultController extends Controller
 
         $allMembers = $memberRepository->matching($criteria)->toArray();
 
-        $entries = $this->get('gyman.entries.repository')->findByOccurrence($occurrence);
+        $entries = $occurrence->entries();
 
         $usedMembersIds = array_map(function (Entry $entry) {
             return $entry->member()->id();
-        }, $entries);
+        }, $entries->toArray());
 
         if (count($entries) > 0) {
             $members = array_filter($allMembers, function (Member $member) use ($usedMembersIds) {
@@ -102,7 +107,7 @@ class DefaultController extends Controller
 
     /**
      * @param $date
-     * @return \Dende\Calendar\Domain\Calendar\Event\Occurrence[]
+     * @return Occurrence[]|ArrayCollection
      */
     private function getOccurrencesForDay($date)
     {
@@ -112,8 +117,11 @@ class DefaultController extends Controller
         /** @var Carbon $endDate */
         $endDate = Carbon::instance($date)->setTime(0, 0, 0)->addDays(1);
 
+        /** @var OccurrenceRepository $repository */
+        $repository = $this->get('doctrine.orm.tenant_entity_manager')->getRepository(Occurrence::class);
+
         /** @var Occurrence[] $occurrences */
-        $occurrences = $this->get('dende_calendar.occurrences_repository')->findByPeriod($startDate, $endDate);
+        $occurrences = $repository->findByPeriod($startDate, $endDate);
 
         return $occurrences;
     }

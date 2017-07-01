@@ -8,9 +8,11 @@
 /web/fonts/
 /app/bootstrap.php.cache
 /app/cache/*
+/app/spool/*
 /app/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
+!app/spool/.gitkeep
 !app/logs/.gitkeep
 /build/
 /vendor/
@@ -33,3 +35,7 @@ auth.json
 .rsync_cache
 composer.phar
 composer.phar*
+/composer-setup.php
+/*.sql
+/web/schedules/
+!/web/schedules/.gitkeep

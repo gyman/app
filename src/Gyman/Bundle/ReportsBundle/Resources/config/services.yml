@@ -8,35 +8,37 @@ services:
   gyman.reports.filter_date:
     class: Gyman\Bundle\ReportsBundle\Form\Type\DateFilterType
     calls:
-      - [setAvailableStrategies, [%available_reporting_strategies%]]
+      - [setAvailableStrategies, ['%available_reporting_strategies%']]
     tags:
       - {name: form.type, alias: reports_date_filter }
 
   gyman.reports.generator:
     arguments:
-      - @router
+      - '@router'
     class: Gyman\Bundle\ReportsBundle\Generator\ReportsGenerator
 
   gyman.reports.strategy.all:
     class: Gyman\Bundle\ReportsBundle\Generator\Strategy\All
     arguments:
-      - @gyman.vouchers.repository
-      - @gyman.entries.repository
+      - '@gyman.vouchers.repository'
+      - '@gyman.entries.repository'
+      - '@router'
     tags:
       - { name: reports.strategy, alias: "all" }
 
   gyman.reports.strategy.per_member:
     class: Gyman\Bundle\ReportsBundle\Generator\Strategy\PerMember
     arguments:
-      - @gyman.vouchers.repository
-      - @gyman.entries.repository
+      - '@gyman.vouchers.repository'
+      - '@gyman.entries.repository'
+      - '@router'
     tags:
       - { name: reports.strategy, alias: "per-member" }
 
   gyman.reports.strategy.per_section:
     class: Gyman\Bundle\ReportsBundle\Generator\Strategy\PerSection
     arguments:
-      - @gyman.vouchers.repository
-      - @gyman.entries.repository
+      - '@gyman.vouchers.repository'
+      - '@gyman.entries.repository'
     tags:
       - { name: reports.strategy, alias: "per-section" }

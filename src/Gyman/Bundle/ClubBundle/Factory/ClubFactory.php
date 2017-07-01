@@ -22,12 +22,12 @@ class ClubFactory
             null,
             $params['name'],
             $params['sections'],
-            $params['owners'],
             new Subdomain($params['subdomain']),
             new Database(
                 $params['database']['name'],
                 $params['database']['user'],
-                $params['database']['password']
+                $params['database']['password'],
+                $params['database']['host']
             ),
             new Details(
                 $params['details']['address'],

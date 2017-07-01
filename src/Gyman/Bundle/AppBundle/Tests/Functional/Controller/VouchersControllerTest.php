@@ -115,4 +115,47 @@ class VouchersControllerTest extends BaseFunctionalTestCase
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
         $this->assertNull($member->currentVoucher());
     }
+
+    /**
+     * @test
+     */
+    public function voucher_is_updated_correctly()
+    {
+        /** @var Member $member */
+        $member = $this->container->get('gyman.members.repository')->findOneBy(['details.firstname' => 'Sylwia', 'details.lastname' => 'Grzeszczak']);
+        $voucher = $member->currentVoucher();
+
+        $this->assertInstanceOf(Member::class, $member);
+        $this->assertInstanceOf(Voucher::class, $voucher);
+
+        $crawler = $this->client->request('GET', sprintf("/vouchers/%s/update", $voucher->id()));
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $this->assertEquals(
+            $this->container->get('router')->generate('gyman_voucher_update', ['id' => $voucher->id()]),
+            $this->client->getRequest()->getRequestUri()
+        );
+
+        $form = $crawler->filter('form[name="gyman_voucher_update_form"]')->first()->form();
+
+        $start = (new DateTime('10.11.2015 00:00:00'))->format('d.m.Y');
+        $end = (new DateTime('10.12.2015 23:59:59'))->format('d.m.Y');
+
+        $form->setValues([
+            'gyman_voucher_update_form[startDate]'       => $start,
+            'gyman_voucher_update_form[endDate]'         => $end,
+            'gyman_voucher_update_form[price]'           => '989',
+            'gyman_voucher_update_form[maximumAmount]'   => '98',
+        ]);
+
+        $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($voucher);
+
+        $this->assertEquals(989, $voucher->price()->amount());
+        $this->assertEquals(98, $voucher->maximumAmount());
+        $this->assertEquals($start, $voucher->startDate()->format("d.m.Y"));
+        $this->assertEquals($end, $voucher->endDate()->format("d.m.Y"));
+    }
 }

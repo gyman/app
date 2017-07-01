@@ -5,7 +5,6 @@
             <th>{{ 'entry.event.table_header'|trans }}</th>
             <th>{{ 'entry.startDate.table_header'|trans }}</th>
             <th>{{ 'entry.endDate.table_header'|trans }}</th>
-            <th>{{ 'entry.price.table_header'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +12,15 @@
         <tr>
             <td>
                 {{ ("entries.type." ~ entry.type)|trans }}
+
+                {% if(entry.isType('voucher')) %}
+                    ({{ entry.voucher.startDate|date("m.d") }} - {{ entry.voucher.endDate|date("m.d") }})
+                {% endif %}
+
+                {% if(entry.isType('paid')) %}
+                    ({{ entry.price.amount  ~ ' ' ~ entry.price.currency }})
+                {% endif %}
+
             </td>
             <td>
                 {% if entry.occurrence is not null %}
@@ -27,11 +35,6 @@
                     {{  entry.endDate|date("d.m.Y H:i:s")  }}
                 {% else %}
                     <a href="{{ path("gyman_entry_close", {id: entry.id()}) }}">{{ 'member.form.close_entry'|trans }}</a>
-                {% endif %}
-            </td>
-            <td>
-                {% if entry.price is not null %}
-                    {{  entry.price  }}
                 {% endif %}
             </td>
         </tr>

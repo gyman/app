@@ -1,0 +1,37 @@
+Gyman\Domain\Calendar\Event\Occurrence:
+  type: entity
+  table: occurrences
+  repositoryClass: Gyman\Bundle\AppBundle\Repository\OccurrenceRepository
+
+  entityListeners:
+    Gyman\Bundle\AppBundle\Listener\OccurrenceListener:
+      postLoad: [postLoadHandler]
+
+  associationOverride:
+    event:
+      targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
+      inversedBy: occurrences
+      cascade: [all]
+      joinColumns:
+        EventId:
+          name: event_id
+          referencedColumnName: id
+
+  oneToMany:
+    entries:
+      targetEntity: Gyman\Domain\Entry
+      mappedBy: occurrence
+
+  embedded:
+    subject:
+      class: Gyman\Domain\Calendar\Event\Occurrence\Subject
+      columnPrefix: subject_
+    note:
+      class: Gyman\Domain\Calendar\Event\Occurrence\Note
+      columnPrefix: note_
+
+  fields:
+    instructorId:
+      type: integer
+      nullable: true
+      column: instructor_id

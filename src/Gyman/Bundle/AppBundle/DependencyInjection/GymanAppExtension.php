@@ -21,7 +21,17 @@ class GymanAppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter("gyman_app.config", $config);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('factories.yml');
+        $loader->load('forms.yml');
+        $loader->load('handlers.yml');
+        $loader->load('menu.yml');
+        $loader->load('listeners.yml');
+        $loader->load('repositories.yml');
+        $loader->load('twig_extensions.yml');
+        $loader->load('validators.yml');
     }
 }

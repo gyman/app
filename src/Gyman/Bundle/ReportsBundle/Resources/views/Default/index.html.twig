@@ -34,7 +34,10 @@
         <ol>
             {% for row in rows if rows|length > 0 %}
                 <li>
-                    {{ row.title }} - {{ row.sum }} PLN
+                    {% if row.route is defined %}<a href="{{ row.route }}">{% endif %}
+                    {{ row.title }}
+                    {% if row.route is defined %}</a>{% endif %}
+                    - {{ row.sum }} PLN
                 </li>
             {% else %}
                 <li>Brak wyników - zmień zakres czasu</li>

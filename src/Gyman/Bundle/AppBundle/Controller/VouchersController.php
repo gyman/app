@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Application\Command\CloseVoucherCommand;
+use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
@@ -25,6 +26,9 @@ class VouchersController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("member", class="Gyman:Member")
      * @Template("GymanAppBundle:Vouchers:new.html.twig")
+     * @param Request $request
+     * @param Member $member
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function newAction(Request $request, Member $member)
     {
@@ -37,21 +41,7 @@ class VouchersController extends Controller
                 'member' => $member
         ]);
         
-        $creditEntries = $member->entries()->filter(function (Entry $entry) {
-            return $entry->isType(Entry::TYPE_CREDIT);
-        });
-
-        $creditEntriesCount = count($creditEntries);
-
-        if (!$creditEntries->isEmpty()) {
-            $this->addFlash('creditEntries', $this->get("translator")->transChoice(
-                'flash.member_has_credit_entries',
-                $creditEntriesCount,
-                [
-                    '%creditEntriesCount%' => $creditEntriesCount
-                ]
-            ));
-        }
+        $creditEntries = $member->filterCreditEntries();
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -64,11 +54,22 @@ class VouchersController extends Controller
             } else {
                 $this->addFlash('error', 'flash.voucher_added.errors');
             }
+        } else {
+            if (!$creditEntries->isEmpty()) {
+                $this->addFlash('creditEntries', $this->get("translator")->transChoice(
+                    'flash.member_has_credit_entries',
+                    count($creditEntries),
+                    [
+                        '%creditEntriesCount%' => count($creditEntries)
+                    ]
+                ));
+            }
         }
 
         return [
             'form' => $form->createView(),
-            'creditEntries' => $creditEntries
+            'creditEntries' => $creditEntries,
+            'member' => $member
         ];
     }
 
@@ -93,7 +94,43 @@ class VouchersController extends Controller
     public function renderHistoryAction(Member $member)
     {
         return $this->render("@GymanApp/Vouchers/renderHistory.html.twig", [
-            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC'])
+            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC'])
         ]);
+    }
+
+    /**
+     * @Route("/{id}/update", name="gyman_voucher_update")
+     * @Method({"GET", "POST"})
+     * @ParamConverter("voucher", class="Gyman:Voucher")
+     * @Template("GymanAppBundle:Vouchers:update.html.twig")
+     * @param Request $request
+     * @param Voucher $voucher
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateAction(Request $request, Voucher $voucher)
+    {
+        $command = UpdateVoucherCommand::createFromVoucher($voucher);
+
+        $form = $this->createForm('gyman_voucher_update_form', $command, [
+            'action' => $this->generateUrl('gyman_voucher_update', ['id' => $voucher->id()]),
+        ]);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $this->get("tactician.commandbus")->handle($form->getData());
+//                $this->addFlash('success', 'flash.voucher_added.success');
+
+                return $this->redirectToRoute('gyman_voucher_update', ['id' => $voucher->id()]);
+            } else {
+//                $this->addFlash('error', 'flash.voucher_added.errors');
+            }
+        }
+
+        return [
+            'form' => $form->createView(),
+            'voucher' => $voucher
+        ];
     }
 }

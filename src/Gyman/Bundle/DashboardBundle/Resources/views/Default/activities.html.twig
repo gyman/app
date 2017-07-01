@@ -8,6 +8,7 @@
 
     <ul>
         {% for occurrence in occurrences if occurrences|length > 0 %}
+            {# @var occurrence \Gyman\Domain\Calendar\Event\Occurrence #}
             <li class="clearfix{% if occurrence.isOngoing() %} ongoingEvent{% elseif occurrence.isPast() %} passedEvent{% endif %}">
                 <span class="number">{{ occurrence.startDate|date("H:i") }} - {{ occurrence.endDate|date("H:i") }}</span>
                 <span class="txt">{{ occurrence.event.title }}</span>
@@ -16,7 +17,7 @@
 
                 {#{% if occurrence.isPast(true) %}<span class="label" style="margin-left: 10px; margin-top: 7px;">zakonczone</span>{% endif %}#}
 
-                <a class="btn btn-warning" href="{{ path('dashboard_list_class_members', {id: occurrence.id}) }}">{{ entries_count(occurrence) }} osób</a>
+                <a class="btn btn-warning" href="{{ path('dashboard_list_class_members', {id: occurrence.id}) }}">{{ occurrence.entries.count }} osób</a>
 
             </li>
         {% else %}

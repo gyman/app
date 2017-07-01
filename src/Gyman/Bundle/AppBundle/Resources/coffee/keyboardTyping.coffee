@@ -10,21 +10,16 @@ $ ->
   ,1000)
 
   ticksToCleanup = 1
-  
-  $(document).on "keyup", (e) -> 
+
+  $(document).on "keyup", (e) ->
     return null if keyboardCache != null && keyboardCache.length > 50
     return null if not $(e.target).is bodyEl
-      
+
     code = e.which
     character = String.fromCharCode code
- 
-    if code == 13 && keyboardCache != null
-      searchUrlTemplate = $("span#applicationData").attr "data-quicksearch-member-url"
-      searchUrl = searchUrlTemplate.replace "__BARCODE__", keyboardCache
 
-      window.modal.showFromUrl searchUrl
-        
-      keyboardCache = null
+    if code == 13 && keyboardCache != null
+      $(document).trigger 'enteredMembersBarcode', [code: keyboardCache]
       return
     else if code == 13
       keyboardCache = null

@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Domain\Calendar;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
@@ -67,7 +67,7 @@ class SettingsUpdateHandler
                 $section->setCalendar(new Calendar(null, $section->title()));
                 $this->sectionRepository->insert($section);
             } else {
-                $section->calendar()->updateName($section->title());
+                $section->calendar()->updateTitle($section->title());
                 $this->sectionRepository->update($section);
             }
         }

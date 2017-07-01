@@ -21,12 +21,13 @@ final class VoucherFactory implements VoucherFactoryInterface
     public static function createFromArray($array = [])
     {
         $template = [
-            'startDate'           => Carbon::now(),
-            'endDate'             => Carbon::parse('+1 month'),
-            'price'               => null,
-            'maximumAmount'       => null,
-            'entries'             => new ArrayCollection(),
-            'member'              => null,
+            'startDate'     => Carbon::now(),
+            'endDate'       => Carbon::parse('+1 month'),
+            'price'         => null,
+            'maximumAmount' => null,
+            'entries'       => new ArrayCollection(),
+            'member'        => null,
+            'closedAt'      => null
         ];
 
         $array = array_merge($template, $array);
@@ -40,7 +41,8 @@ final class VoucherFactory implements VoucherFactoryInterface
             ),
             $array['maximumAmount'],
             $array['entries'],
-            $array['member']
+            $array['member'],
+            $array['closedAt']
         );
     }
 

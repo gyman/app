@@ -1,16 +1,22 @@
 services:
   gyman.club.club_manager:
-    class: Gyman\Bundle\ClubBundle\EntityManager\ClubManager
-    parent: gyman.base.entity_manager
+    class:          'Gyman\Bundle\ClubBundle\EntityManager\ClubManager'
+    parent:         'gyman.base.entity_manager'
 
   gyman.club.repository:
-      class:  "Gyman\Bundle\ClubBundle\Entity\ClubRepository"
-      factory_method: getRepository
-      factory_service: doctrine.orm.default_entity_manager
-      arguments: ["Gyman\Bundle\ClubBundle\Entity\Club"]
+      class:        'Gyman\Bundle\ClubBundle\Entity\ClubRepository'
+      factory:      ["@doctrine.orm.default_entity_manager", 'getRepository']
+      arguments:    ['Gyman\Bundle\ClubBundle\Entity\Club']
 
   gyman.club.provider:
-    class: Gyman\Bundle\ClubBundle\Services\ClubProvider
+    class:          'Gyman\Bundle\ClubBundle\Services\ClubProvider'
     arguments:
-      - @=service(parameter('subdomain_provider_service'))
-      - @gyman.club.repository
+      - '@=service(parameter("subdomain_provider_service"))'
+      - '@gyman.club.repository'
+
+  gyman.users.user_manager:
+    class:          'Gyman\Bundle\ClubBundle\EntityManager\UserManager'
+    parent:         'fos_user.user_manager.default'
+    calls:
+      - ['setSubdomainProvider', ['@=service(parameter("subdomain_provider_service"))']]
+      - ['setClubRepository', ['@gyman.club.repository']]

@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Application\Repository\EntryRepositoryInterface;
 use Gyman\Domain\Entry;
+use Traversable;
 
 /**
  * EntryRepository
@@ -23,10 +24,27 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
         $em->flush();
     }
 
-    public function save($entry)
+    public function save($entries)
     {
-        $this->getEntityManager()->persist($entry);
-        $this->getEntityManager()->flush($entry);
+        $em = $this->getEntityManager();
+
+        if($entries instanceof Entry) {
+            $em->persist($entries);
+            $em->flush($entries);
+
+            return;
+        } elseif(is_array($entries) || $entries instanceof Traversable) {
+            /** @var Entry $entry */
+            foreach($entries as $entry) {
+                $em->persist($entry);
+            }
+
+            $em->flush();
+
+            return;
+        }
+
+        throw new \Exception("Argument is unknown type! Should be Entry class or collection/array of Entry class!");
     }
 
     /**

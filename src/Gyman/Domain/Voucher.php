@@ -4,6 +4,8 @@ namespace Gyman\Domain;
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Exception;
+use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\ExceededMaximumAmountOfEntriesException;
 use Gyman\Application\Exception\LastEntryIsStillOpenedException;
@@ -67,6 +69,10 @@ class Voucher
      */
     protected $deletedAt;
 
+    /**
+     * @var Datetime $deletedAt
+     */
+    protected $closedAt;
 
     /**
      * Voucher constructor.
@@ -76,9 +82,10 @@ class Voucher
      * @param int $maximumAmount
      * @param array $entries
      * @param null $member
+     * @param DateTime $closedAt
      * @throws VoucherClosingDateBeforeOpeningException
      */
-    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null)
+    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null, DateTime $closedAt = null)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
@@ -95,17 +102,22 @@ class Voucher
         }
 
         $this->entries = $entries;
+        $this->closedAt = $closedAt;
     }
 
     /**
      * @param Entry $entry
      * @throws EntryMustBeVoucherTypeException
      * @throws ExceededMaximumAmountOfEntriesException
-     * @throws LastEntryIsStillOpenedException
+     * @throws Exception
      * @throws UnsupportedEntryTypeException
      */
     public function addEntry(Entry $entry)
     {
+        if($this->isClosed()) {
+            throw new Exception("Can't add entry to closed voucher!");
+        }
+
         if (!$entry->isType(Entry::TYPE_VOUCHER)) {
             throw new EntryMustBeVoucherTypeException();
         }
@@ -132,12 +144,8 @@ class Voucher
      * @param DateTime $date
      * @throws VoucherClosingDateBeforeOpeningException
      */
-    public function close(DateTime $date)
+    public function close(DateTime $date = null)
     {
-        if ($this->startDate()->getTimestamp() > $date->getTimestamp()) {
-            throw new VoucherClosingDateBeforeOpeningException($this->startDate(), $this->endDate());
-        }
-
         /** @var Entry $lastEntry */
         $lastEntry = $this->lastEntry();
 
@@ -145,9 +153,11 @@ class Voucher
             $lastEntry->closeEntry(new DateTime("now"));
         }
 
-        $this->member()->unsetCurrentVoucher();
+        if($this->isCurrent()) {
+            $this->member()->unsetCurrentVoucher();
+        }
 
-//        $this->endDate = $date;
+        $this->closedAt = is_null($date) ? new DateTime("now") : $date;
     }
 
     /**
@@ -216,7 +226,14 @@ class Voucher
      */
     public function leftDaysAmount($relatedTo = 'now')
     {
-        return $this->endDate->diff(new DateTime($relatedTo))->days;
+        $diffToDate = new DateTime($relatedTo);
+
+        if($diffToDate > $this->endDate) {
+            return 0;
+        }
+
+        return $this->endDate->diff($diffToDate)->days;
+
     }
 
     /**
@@ -250,6 +267,10 @@ class Voucher
      */
     public function overlaps(Voucher $voucher)
     {
+        if($voucher->isClosed() || $this->isClosed()) {
+            return false;
+        }
+
         if($voucher->leftEntriesAmount() === 0 || $this->leftEntriesAmount() === 0)
         {
             return false;
@@ -301,5 +322,53 @@ class Voucher
     public function createdAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isClosed()
+    {
+        return !is_null($this->closedAt());
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function closedAt()
+    {
+        return $this->closedAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCurrent()
+    {
+        if(is_null($this->member()->currentVoucher())) {
+            return false;
+        }
+
+        $currentVoucher = $this->member()->currentVoucher();
+
+        if($currentVoucher->leftDaysAmount() === 0 || $currentVoucher->leftEntriesAmount() === 0) {
+            return false;
+        }
+
+        return $currentVoucher === $this;
+    }
+
+    /**
+     * @param UpdateVoucherCommand $updateVoucherCommand
+     */
+    public function updateWithCommand(UpdateVoucherCommand $updateVoucherCommand)
+    {
+        $this->startDate = $updateVoucherCommand->startDate;
+        $this->endDate = $updateVoucherCommand->endDate;
+
+        $this->price = new Price($updateVoucherCommand->price, $this->price()->currency());
+        $this->maximumAmount = $updateVoucherCommand->maximumAmount;
+
+        $this->updatedAt = new DateTime();
     }
 }

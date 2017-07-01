@@ -1,5 +1,0 @@
-Gyman\Domain\Voucher:
-  exclusion_policy: all
-  properties:
-    id:
-      exclude: false

@@ -14,3 +14,7 @@ Gyman\Bundle\ClubBundle\Entity\Database:
       type: string
       nullable: false
       length: 256
+    host:
+      type: string
+      nullable: false
+      length: 256

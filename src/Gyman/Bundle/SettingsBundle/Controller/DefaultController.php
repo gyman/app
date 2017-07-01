@@ -58,4 +58,15 @@ class DefaultController extends Controller
             "form" => $form->createView()
         ];
     }
+
+    /**
+     * @Route("/sections", name="gyman_settings_sections")
+     * @Template("GymanSettingsBundle:Default:sections.html.twig")
+     */
+    public function sectionsAction(Request $request)
+    {
+        return [
+            "sections" => $this->get('gyman.repository.section')->findAll()
+        ];
+    }
 }
