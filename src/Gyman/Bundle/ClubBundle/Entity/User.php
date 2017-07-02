@@ -29,14 +29,24 @@ class User extends BaseUser implements UserInterface
     private $involvements;
 
     /**
-     * @string
+     * @var string
      */
     private $firstname;
 
     /**
-     * @string
+     * @var string
      */
     private $lastname;
+
+    public function firstname() : string
+    {
+        return $this->firstname;
+    }
+
+    public function lastname() : string
+    {
+        return $this->lastname;
+    }
 
     /**
      * @return string
