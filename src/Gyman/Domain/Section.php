@@ -50,12 +50,18 @@ class Section
      */
     protected $createdAt;
 
-    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null)
+    /**
+     * @var int
+     */
+    protected $orderNumber;
+
+    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null, int $orderNumber = 999)
     {
         $this->sectionId = $id ?: SectionId::create();
         $this->title = $title;
         $this->calendar = $calendar ?: new Calendar(null, $title);
         $this->members = $members ?: new ArrayCollection();
+        $this->orderNumber = $orderNumber;
     }
 
     /**

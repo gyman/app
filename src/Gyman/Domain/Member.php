@@ -20,9 +20,14 @@ use Gyman\Domain\Member\EmailAddress;
 class Member
 {
     /**
-     * @var string
+     * @var integer
      */
     protected $id;
+
+    /**
+     * @var MemberId
+     */
+    protected $memberId;
 
     /**
      * @var EmailAddress
