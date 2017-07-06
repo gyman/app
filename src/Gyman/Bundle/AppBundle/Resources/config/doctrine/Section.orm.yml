@@ -5,8 +5,13 @@ Gyman\Domain\Section:
 
   id:
     id:
-      type: guid
-      generator: { strategy: UUID }
+      type: integer
+      generator: { strategy: auto }
+
+  embedded:
+    sectionId:
+      class: Gyman\Domain\Section\SectionId
+      columnPrefix: section_
 
   oneToOne:
     calendar:
@@ -25,5 +30,31 @@ Gyman\Domain\Section:
     title:
       type: string
       nullable: false
-      unique: true
+      unique: false
       length: 60
+
+    deletedAt:
+      type: datetime
+      nullable: true
+      column: deleted_at
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update
+
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false

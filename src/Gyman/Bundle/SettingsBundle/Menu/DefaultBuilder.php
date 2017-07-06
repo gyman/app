@@ -51,7 +51,7 @@ class DefaultBuilder
         ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
         $menu->addChild('Informacje o klubie', [
-            'route'          => 'gyman_settings_sections',
+            'route'          => 'gyman_settings_details',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
@@ -69,6 +69,15 @@ class DefaultBuilder
         ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
         $menu->addChild('Grafik zajęć', [
+            'route'          => 'gyman_settings_sections',
+            'extras'         => ['icon' => 'fa-user'],
+            'linkAttributes' => [
+                'class'            => 'tipB',
+                'aria-describedby' => 'qtip-21',
+            ],
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
+
+        $menu->addChild('Rodzaje karnetów', [
             'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [

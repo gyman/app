@@ -39,9 +39,12 @@ class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, Co
 
         foreach ($value as $key => $params) {
             $object = $this->insert($params);
+        die(var_dump(get_class($object)));
             $this->addReference($key, $object);
             $this->manager->persist($object);
         }
+
+
 
         $this->manager->flush();
     }

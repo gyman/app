@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Form\CollectionType;
+namespace Gyman\Bundle\SettingsBundle\Form\CollectionType;
 
 use Gyman\Domain\Section;
 use Symfony\Component\Form\AbstractType;

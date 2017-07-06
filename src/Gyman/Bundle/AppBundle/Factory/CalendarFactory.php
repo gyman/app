@@ -13,10 +13,7 @@ use Gyman\Domain\Calendar;
  */
 class CalendarFactory extends BaseCalendarFactory
 {
-    /**
-     * @param $params
-     * @return Calendar
-     */
+    
     public function createFromArray(array $array = []) : BaseCalendar
     {
         $template = [

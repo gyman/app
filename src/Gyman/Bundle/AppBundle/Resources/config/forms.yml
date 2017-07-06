@@ -1,16 +1,5 @@
 ---
 services:
-
-  gyman.app.club_settings_type:
-    class: Gyman\Bundle\AppBundle\Form\SettingsType
-    tags:
-      - { name: form.type, alias: club_settings }
-
-  gyman.app.club_details_type:
-    class: Gyman\Bundle\AppBundle\Form\ClubDetailsType
-    tags:
-      - { name: form.type, alias: club_details }
-
   gyman.vouchers.form.voucher:
     class: Gyman\Bundle\AppBundle\Form\VoucherType
     arguments:

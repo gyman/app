@@ -81,7 +81,7 @@ Gyman\Domain\Member:
     deletedAt:
       name: deleted_at
       type: datetime
-      nullable: true #false
+      nullable: true
 
     createdAt:
       name: created_at

@@ -1,19 +1,24 @@
 <?php
 namespace Gyman\Domain;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gyman\Domain\Section\SectionId;
+use Ramsey\Uuid\Uuid;
 
-/**
- * Class Section
- * @package Gyman\Domain
- */
 class Section
 {
     /**
-     * @var string
+     * Doctrine id
+     * @var int
      */
     protected $id;
+
+    /**
+     * @var SectionId
+     */
+    protected $sectionId;
 
     /**
      * @var string
@@ -31,17 +36,26 @@ class Section
     protected $members;
 
     /**
-     * Section constructor.
-     * @param string $id
-     * @param string $title
-     * @param Calendar $calendar
+     * @var DateTime
      */
-    public function __construct($id = null, $title = '', Calendar $calendar = null)
+    protected $deletedAt;
+
+    /**
+     * @var DateTime
+     */
+    protected $updatedAt;
+
+    /**
+     * @var DateTime
+     */
+    protected $createdAt;
+
+    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null)
     {
-        $this->id = $id;
+        $this->sectionId = $id ?: SectionId::create();
         $this->title = $title;
-        $this->calendar = $calendar;
-        $this->members = new ArrayCollection();
+        $this->calendar = $calendar ?: new Calendar(null, $title);
+        $this->members = $members ?: new ArrayCollection();
     }
 
     /**
@@ -60,51 +74,32 @@ class Section
         return $this->calendar;
     }
 
-    /**
-     * @return string
-     */
-    public function id() : string
+    public function id() : SectionId
     {
-        return $this->id;
+        return $this->sectionId;
     }
 
-    /**
-     * @param Member $member
-     */
     public function addMember(Member $member)
     {
         $this->members->add($member);
     }
 
-    /**
-     * @param string $id
-     */
-    public function setId(string $id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * @param Calendar $calendar
-     */
-    public function setCalendar(Calendar $calendar)
+    public function members() : Collection
     {
-        $this->calendar = $calendar;
+        return $this->members;
     }
 
     /**
-     * @param Member[]|Collection $members
+     * Unfortunately, needed by symfony form
+     * @todo please remove if possible
+     * @param string $id
      */
-    public function setMembers(Collection $members)
-    {
-        $this->members = $members;
+    public function setId(string $id = null){
+        $this->sectionId = $id ? SectionId::create(Uuid::fromString($id)) : SectionId::create();
     }
 }

@@ -1,7 +1,6 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Form;
+namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
-use Gyman\Bundle\AppBundle\Form\CollectionType\SectionType;
 use Gyman\Application\Command\UpdateSettingsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,19 +37,19 @@ final class SettingsType extends AbstractType
 //            ->add('invite_email', 'text')
 //            ->add('account_number', 'text')
 //            ->add('invite_user', 'submit')
-            ->add('sections', 'collection', [
-                'type' => new SectionType(),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'label' => false,
-                'cascade_validation' => true,
-            ])
+//            ->add('sections', 'collection', [
+//                'type' => new SectionType(),
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'label' => false,
+//                'cascade_validation' => true,
+//            ])
 //            ->add('voucher_types', 'collection', [
 //                ''
 //            ])
-            ->add('add_section', 'button', [
-                'label' => 'add section'
-            ])
+//            ->add('add_section', 'button', [
+//                'label' => 'add section'
+//            ])
             ->add('submit', 'submit', [
                 'label' => 'update settings'
             ])

@@ -1,0 +1,8 @@
+---
+Gyman\Domain\Section\SectionId:
+  type:   embeddable
+
+  fields:
+    id:
+      type: string
+      unique: true

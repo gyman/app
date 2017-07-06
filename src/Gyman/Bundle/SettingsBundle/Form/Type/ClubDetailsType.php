@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Form;
+namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Gyman\Bundle\ClubBundle\Entity\Details;
 use Symfony\Component\Form\AbstractType;
