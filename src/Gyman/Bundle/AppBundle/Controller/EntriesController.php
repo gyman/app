@@ -112,7 +112,7 @@ class EntriesController extends Controller
         $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
         $this->addFlash('success', 'User added to occurrence');
 
-        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
+        return $this->redirectToRoute("gyman_dashboard_listClassMembers", ["id" => $occurrence->id()]);
     }
 
     /**
@@ -128,7 +128,7 @@ class EntriesController extends Controller
         $this->get("gyman.app.remove_entry_from_occurrence")->remove($member, $occurrence);
         $this->addFlash('success', 'User removed from occurrence');
 
-        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
+        return $this->redirectToRoute("gyman_dashboard_listClassMembers", ["id" => $occurrence->id()]);
     }
 
     /**
@@ -149,6 +149,6 @@ class EntriesController extends Controller
 
         $this->addFlash('success', 'All entries closed.');
 
-        return $this->redirectToRoute("dashboard_list_class_members", ["id" => $occurrence->id()]);
+        return $this->redirectToRoute("gyman_dashboard_listClassMembers", ["id" => $occurrence->id()]);
     }
 }

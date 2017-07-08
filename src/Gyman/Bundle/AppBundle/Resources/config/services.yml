@@ -61,6 +61,11 @@ services:
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
 
+  gyman.app.member_user_provider:
+    class: Gyman\Bundle\AppBundle\Security\User\MemberUserProvider
+    arguments:
+      - "@gyman.members.repository"
+
   gyman.app.listener.redirect_to_404:
     class: Gyman\Bundle\AppBundle\Listener\RedirectTo404IfClubNotExists
     arguments:

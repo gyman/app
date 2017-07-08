@@ -43,7 +43,7 @@ class DefaultBuilder
         $menu->addChild(
             'navigation.dashboard',
             [
-                'route'          => '_dashboard_index',
+                'route'          => 'gyman_dashboard_index',
                 'extras'         => ['icon' => 'fa-user'],
                 'linkAttributes' => [
                     'class' => 'btn btn-block',
@@ -87,7 +87,7 @@ class DefaultBuilder
         $menu->setChildrenAttribute('class', 'bigBtnIcon');
 
         $menu->addChild('navigation.menu.dashboard', [
-            'route'          => '_dashboard_index',
+            'route'          => 'gyman_dashboard_index',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',

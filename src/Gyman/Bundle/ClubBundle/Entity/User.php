@@ -2,7 +2,6 @@
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Gyman\Domain\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 

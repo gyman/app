@@ -44,7 +44,7 @@ fos_user:
         token_generator:        fos_user.util.token_generator.default
         user_manager:           gyman.users.user_manager
     group:
-            group_class: Gyman\Bundle\ClubBundle\Entity\Group
+        group_class: Gyman\Bundle\ClubBundle\Entity\Group
 #    group:
 #        group_class:    ~ # Required when using groups
 #        group_manager:  fos_user.group_manager.default

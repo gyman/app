@@ -23,11 +23,15 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="_dashboard_index")
+     * @Route("/", name="gyman_dashboard_index")
      * @Template("DashboardBundle:Default:index.html.twig")
      */
     public function indexAction()
     {
+        if (!$this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('gyman_dashboard_member_index');
+        }
+
 //        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
 
 //        $occurrences = $this->get('schedule')->getOccurrencesForDashboard(new DateTime());
@@ -52,7 +56,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/dashboard/activities/{date}", name="_dashboard_getActivities")
+     * @Route("/dashboard/activities/{date}", name="gyman_dashboard_getActivities")
      */
     public function getActivitiesAction(DateTime $date)
     {
@@ -63,7 +67,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/activity/{id}", name="dashboard_list_class_members")
+     * @Route("/activity/{id}", name="gyman_dashboard_listClassMembers")
      * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      * @Template("DashboardBundle:Default:listClassMembers.html.twig")
      * @param Occurrence $occurrence

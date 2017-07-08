@@ -329,7 +329,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $member = $this->container->get('gyman.members.repository')->findOneBy($findBy);
         $this->assertInstanceOf(Member::class, $member);
 
-        $crawler = $this->client->request('GET', $this->container->get('router')->generate('_dashboard_index'));
+        $crawler = $this->client->request('GET', $this->container->get('router')->generate('gyman_dashboard_index'));
         $this->assertEquals(200, $this->getStatusCode());
 
         $form = $crawler->filter('form[name="gyman_member_search_form"]')->first()->form();

@@ -6,7 +6,6 @@ use DateTime;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
-use Gyman\Application\Exception\LastEntryIsStillOpenedException;
 use Gyman\Application\Exception\MemberHasNoLastEntryException;
 use Gyman\Application\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Application\Exception\VouchersAreOverlappingException;
@@ -83,6 +82,16 @@ class Member
      * @var Datetime $deletedAt
      */
     private $deletedAt;
+
+    /**
+     * @var string
+     */
+    private $password;
+
+    /**
+     * @var string
+     */
+    private $salt;
 
     /**
      * @return bool
@@ -399,5 +408,15 @@ class Member
     public function setCurrentVoucher(Voucher $voucher)
     {
         $this->currentVoucher = $voucher;
+    }
+
+    public function password() : string
+    {
+        return $this->password;
+    }
+
+    public function salt()
+    {
+        return $this->salt;
     }
 }

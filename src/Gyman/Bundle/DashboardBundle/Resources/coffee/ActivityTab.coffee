@@ -33,7 +33,7 @@ class window.ActivityTab
     date = moment(@$tab.data "date").format("YYYY-MM-DD")
     
     $.ajax
-      url: Routing.generate('_dashboard_getActivities', {date: date})
+      url: Routing.generate('gyman_dashboard_getActivities', {date: date})
       success: (response) =>
         @$tab.replaceWith response
         @setupTab()
