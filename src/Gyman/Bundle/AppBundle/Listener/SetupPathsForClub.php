@@ -63,7 +63,6 @@ class SetupPathsForClub
 
         $subdomainName = $event->getTenantId();
 
-
         $club = $this->clubRepository->findOneBySubdomain($subdomainName);
 
         Globals::setNoImage($this->parameters['no_image']);

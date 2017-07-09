@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class VouchersController
@@ -78,7 +79,7 @@ class EntriesController extends Controller
 
     /**
      * @param Member $member
-     * @return array
+     * @return Response
      */
     public function renderHistoryAction(Member $member)
     {
@@ -93,7 +94,7 @@ class EntriesController extends Controller
 
     /**
      * @Route("/quick-entry/occurrence/{occurrence}/member/{member}", name="gyman_entry_create_for_member")
-     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence")
+     * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      * @ParamConverter("member", class="Gyman:Member")
      * @param Member $member
      * @param Occurrence $occurrence
@@ -102,7 +103,7 @@ class EntriesController extends Controller
     public function quickCreateEntryAction(Member $member, Occurrence $occurrence)
     {
         $command =  new OpenEntryCommand($member);
-        $command->startDate = new \DateTime();
+        $command->startDate = new DateTime();
         $command->entryType = is_null($member->currentVoucher()) ? Entry::TYPE_CREDIT : Entry::TYPE_VOUCHER;
         $command->occurrence = $occurrence;
         $command->voucher = $member->currentVoucher();

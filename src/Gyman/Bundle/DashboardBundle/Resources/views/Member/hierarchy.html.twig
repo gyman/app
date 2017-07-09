@@ -1,8 +1,0 @@
-<div class="reminder" id="hierarchyTab">
-    <h4>{{ 'dashboard.your_clubs.caption'|trans }}</h4>
-    <ul>
-        {% for club in app.user.clubs %}
-            <li><strong>{{ club.name }}</strong> ({% for section in club.sections %}{{ section.name ~ (loop.last ? "" : ", ") }}{% endfor %})</li>
-        {% endfor %}
-    </ul>
-</div>

@@ -2,7 +2,8 @@ module.exports = function (grunt) {
     var cssVendors = [
         "build/assets/css/bootstrap.css", // bootstrap 2.3.2 files compiled from less
         'bower_components/font-awesome/css/font-awesome.css',
-        'bower_components/fullcalendar/dist/fullcalendar.css',
+        // 'bower_components/fullcalendar/dist/fullcalendar.css',
+        'vendor/dende/calendar-bundle/Resources/public/css/fullcalendar.css',
         'bower_components/jquery.uniform/themes/default/css/uniform.default.css',
 
         'bower_components/select2/select2.css',
@@ -33,7 +34,6 @@ module.exports = function (grunt) {
         "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
         "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
         "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
-        "src/Gyman/Bundle/ScheduleBundle/Resources/public/less/schedule.less",
         "src/Gyman/Bundle/EntriesBundle/Resources/public/less/*.less",
         "src/Gyman/Bundle/TimelineBundle/Resources/less/timeline.less"
     ];

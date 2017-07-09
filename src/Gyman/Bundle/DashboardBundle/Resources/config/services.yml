@@ -10,3 +10,6 @@ services:
         scope:            request
         tags:
             - { name: knp_menu.menu, alias: actions }
+
+    gyman.dashboard.members_query:
+      class: 'Gyman\Bundle\DashboardBundle\Service\MembersCalendarQuery'
