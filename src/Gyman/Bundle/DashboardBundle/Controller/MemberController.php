@@ -1,6 +1,9 @@
 <?php
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
+use Gyman\Domain\Entry;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,6 +23,17 @@ class MemberController extends Controller
     {
         $this->denyAccessUnlessGranted("ROLE_MEMBER");
 
-        return [];
+        /** @var Member $member */
+        $member = $this->getUser()->member();
+        /** @var Voucher $currentVoucher */
+        $currentVoucher = $member->currentVoucher();
+        /** @var Entry $lastEntry */
+        $lastEntry = $member->lastEntry();
+
+        return [
+            "member" => $member,
+            "currentVoucher" => $currentVoucher,
+            "lastEntry" => $lastEntry
+        ];
     }
 }

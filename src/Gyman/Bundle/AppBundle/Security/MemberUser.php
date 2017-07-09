@@ -2,22 +2,34 @@
 
 namespace Gyman\Bundle\AppBundle\Security;
 
+use Gyman\Domain\Member;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
 class MemberUser implements UserInterface, EquatableInterface
 {
+    /** @var string */
     private $username;
+
+    /** @var string */
     private $password;
+
+    /** @var string */
     private $salt;
+
+    /** @var array */
     private $roles;
 
-    public function __construct(string $username, string $password, string $salt, array $roles)
+    /** @var Member */
+    private $member;
+
+    public function __construct(string $username, string $password, string $salt, array $roles, Member $member)
     {
         $this->username = $username;
         $this->password = $password;
         $this->salt = $salt;
         $this->roles = $roles;
+        $this->member = $member;
     }
 
     public function getRoles()
@@ -42,6 +54,7 @@ class MemberUser implements UserInterface, EquatableInterface
 
     public function eraseCredentials()
     {
+
     }
 
     public function isEqualTo(UserInterface $user)
@@ -63,5 +76,13 @@ class MemberUser implements UserInterface, EquatableInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return Member
+     */
+    public function member(): Member
+    {
+        return $this->member;
     }
 }

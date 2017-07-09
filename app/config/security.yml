@@ -43,6 +43,9 @@ security:
         - { path: ^/calendar/, role: ROLE_USER }
         - { path: ^/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/resetting, role: ROLE_SUPER_ADMIN }
-        - { path: ^/dashboard/, role: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
+        - { path: ^/dashboard/member, role: ROLE_MEMBER }
+        - { path: ^/dashboard, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/profile, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/settings, role: ROLE_ADMIN }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -38,7 +38,7 @@ class MemberUserProvider implements UserProviderInterface
         $salt = $member->salt();
         $roles = ["ROLE_MEMBER"];
 
-        return new MemberUser($username, $password, $salt, $roles);
+        return new MemberUser($username, $password, $salt, $roles, $member);
     }
 
     public function refreshUser(UserInterface $user)

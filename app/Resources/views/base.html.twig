@@ -57,12 +57,14 @@
                                 {#{{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}#}
                             {#</li>#}
 
+                            {% if is_granted("ROLE_USER") %}
                             <li>
                                 <a href="{{ path('gyman_members_search_form') }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'search'|trans }}</span>
                                 </a>
                             </li>
+                            {% endif %}
 
                             <li>
                                 <a href="{{ path('gyman_dashboard_index') }}">
@@ -71,12 +73,14 @@
                                 </a>
                             </li>
 
+                            {% if is_granted("ROLE_USER") %}
                             <li>
                                 <a href="{{ path("gyman_settings") }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'open_settings'|trans }}</span>
                                 </a>
                             </li>
+                            {% endif %}
 
                             <li>
                                 <a href="{{ path("fos_user_profile_show") }}">
