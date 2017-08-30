@@ -2,80 +2,27 @@
 
 namespace Gyman\Bundle\AppBundle\Security;
 
+use FOS\UserBundle\Model\User;
 use Gyman\Domain\Member;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 
-class MemberUser implements UserInterface, EquatableInterface
+class MemberUser extends User
 {
-    /** @var string */
-    private $username;
-
-    /** @var string */
-    private $password;
-
-    /** @var string */
-    private $salt;
-
-    /** @var array */
-    private $roles;
-
     /** @var Member */
     private $member;
 
-    public function __construct(string $username, string $password, string $salt, array $roles, Member $member)
+    /** @var string */
+    private $token;
+
+    /**
+     * User constructor.
+     * @param Member $member
+     */
+    public function __construct(Member $member)
     {
-        $this->username = $username;
-        $this->password = $password;
-        $this->salt = $salt;
-        $this->roles = $roles;
         $this->member = $member;
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function eraseCredentials()
-    {
-
-    }
-
-    public function isEqualTo(UserInterface $user)
-    {
-        if (!$user instanceof MemberUser) {
-            return false;
-        }
-
-        if ($this->password !== $user->getPassword()) {
-            return false;
-        }
-
-        if ($this->salt !== $user->getSalt()) {
-            return false;
-        }
-
-        if ($this->username !== $user->getUsername()) {
-            return false;
-        }
-
-        return true;
+        $this->username = $member->email()->email();
+        $this->enabled = false;
+        $this->roles = ['ROLE_MEMBER'];
     }
 
     /**
@@ -84,5 +31,10 @@ class MemberUser implements UserInterface, EquatableInterface
     public function member(): Member
     {
         return $this->member;
+    }
+
+    public function setToken(string $token)
+    {
+        $this->token = $token;
     }
 }

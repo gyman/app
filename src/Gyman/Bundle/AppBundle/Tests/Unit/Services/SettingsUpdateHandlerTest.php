@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\AppBundle\Tests\Unit\Services;
+namespace Gyman\Bundle\AppBundle\Tests\Unit\Services;
 
 use Dende\Calendar\Domain\Calendar;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
@@ -14,7 +14,7 @@ use Mockery as m;
 
 /**
  * Class SettingsUpdateHandlerTest
- * @package Gyman\AppBundle\Tests\Unit\Services
+ * @package Gyman\Bundle\AppBundle\Tests\Unit\Services
  */
 class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
 {

@@ -103,6 +103,11 @@ services:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
 
+  gyman.app.member_invitation_sender:
+      class: Gyman\Bundle\AppBundle\Services\MemberInvitationSender
+      arguments:
+        - "@mailer.member_invitation"
+
 #  monolog.processor.sentry_context:
 #      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
 #      arguments:  ["@security.token_storage"]

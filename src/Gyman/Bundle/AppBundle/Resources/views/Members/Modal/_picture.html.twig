@@ -7,13 +7,7 @@
 
 <div class="tab-content">
     <div id="filePane" class="tab-pane fade in active">
-        {% if member is defined %}
-            {% set foto = member.details.foto.fotoWithPath %}
-        {% else %}
-            {% set foto = '/bundles/gymanapp/images/no-profile.gif' %}
-        {% endif %}
-
-        <img src="{{ foto }}" class="thumbnail" id="memberFoto"/>
+        <img src="{{ member.details.foto.fotoWithPath|default(asset("/bundles/gymanapp/images/no-profile.gif")) }}" class="thumbnail" id="memberFoto"/>
 
         {{ form_widget(form.uploadFile) }}
 

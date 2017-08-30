@@ -12,7 +12,6 @@ Gyman\Bundle\ClubBundle\Entity\User:
     involvements:
       targetEntity: Gyman\Bundle\ClubBundle\Entity\Involvement
       mappedBy: user
-#      inversedBy: user
 
   fields:
     firstname:

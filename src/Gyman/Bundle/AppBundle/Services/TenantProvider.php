@@ -7,7 +7,7 @@ use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 
 /**
  * Class TenantProvider
- * @package Gyman\AppBundle\Services
+ * @package Gyman\Bundle\AppBundle\Services
  */
 class TenantProvider implements TenantProviderInterface
 {

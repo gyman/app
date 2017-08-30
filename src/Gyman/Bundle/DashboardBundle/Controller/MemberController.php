@@ -3,7 +3,6 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 
 use Carbon\Carbon;
 use Gyman\Domain\Entry;
-use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

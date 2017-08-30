@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\AppBundle\Services;
+namespace Gyman\Bundle\AppBundle\Services;
 
 use Gyman\Bundle\ScheduleBundle\Entity as Entity;
 use Gyman\Bundle\ScheduleBundle\Entity\OccurrenceRepository;

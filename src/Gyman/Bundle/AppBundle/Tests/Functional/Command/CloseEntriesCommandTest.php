@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\AppBundle\Tests\Functional\Command;
+namespace Gyman\Bundle\AppBundle\Tests\Functional\Command;
 
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Component\Test\BaseFunctionalTestCase;

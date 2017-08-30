@@ -67,12 +67,6 @@ Gyman\Domain\Member:
         nullable: true
 
   fields:
-    password:
-      type: string
-      nullable: true
-    salt:
-      type: string
-      nullable: true
     nameSlug:
       name: name_slug
       type: string

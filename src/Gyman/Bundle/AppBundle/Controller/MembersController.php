@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use Gyman\Application\Command\CreateUserForMemberCommand;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Command\SearchMemberCommand;
@@ -11,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -145,10 +147,35 @@ class MembersController extends Controller
 //            return $member->email();
 //        }, $result);
 
-
         $serializer = $this->get("jms_serializer");
         $data = $serializer->serialize($result[0], "json");
 
         return new Response($data);
+    }
+
+    /**
+     * @Route("/{id}/sendInvitation", name="gyman_member_sendInvitation")
+     * @ParamConverter("member", class="Gyman:Member")
+     * @param Member $member
+     * @return RedirectResponse
+     */
+    public function sendInvitationAction(Member $member) {
+        if($member->email()->email() === null) {
+            $this->addFlash('error', "Użytkownik nie ma przypisanego adresu email!");
+            return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
+        }
+
+        $token = hash('sha512', $member->email()->email() . microtime());
+        $this->get("tactician.commandbus")->handle(new CreateUserForMemberCommand($member, $token));
+        $this->get('gyman.app.member_invitation_sender')->sendInvitation($member, $token);
+        return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
+    }
+
+    /**
+     * @Route("/register/{token}", name="gyman_member_register")
+     * @ParamConverter("member", class="Gyman:Member", options={"repository_method" = "findOneByInvitationToken"})
+     */
+    public function registerAction(Member $member){
+        // @todo
     }
 }

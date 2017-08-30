@@ -7,7 +7,7 @@ use Gyman\Domain\Section;
 
 /**
  * Class CreateSectionForCalendarListener
- * @package Gyman\AppBundle\Listener
+ * @package Gyman\Bundle\AppBundle\Listener
  * @todo move all logic to new service
  */
 class CreateSectionForCalendarListener

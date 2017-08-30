@@ -7,6 +7,8 @@ parameters:
 
     credited_entry.template:            "MailerBundle:Templates:creditEntry.html.twig"
 
+    member_invitation.template:         "MailerBundle:Templates:memberInvitation.html.twig"
+
     gyman_from:
       gyman.pl@gmail.com: "Gyman.pl website"
 
@@ -40,3 +42,11 @@ services:
       calls:
           - [ setFrom, ['%gyman_from%']]
           - [ setTemplate, ['%credited_entry.template%']]
+
+
+    mailer.member_invitation:
+      parent:     'mailer.abstract'
+      class:      Gyman\Bundle\MailerBundle\Service\Mailer
+      calls:
+          - [ setFrom, ['%gyman_from%']]
+          - [ setTemplate, ['%member_invitation.template%']]

@@ -13,7 +13,7 @@ class MemberUserProvider implements UserProviderInterface
     /**
      * @var MemberRepositoryInterface
      */
-    private $memberRepository;
+    private $memberUserRepository;
 
     /**
      * MemberUserProvider constructor.
@@ -21,12 +21,12 @@ class MemberUserProvider implements UserProviderInterface
      */
     public function __construct(MemberRepositoryInterface $memberRepository)
     {
-        $this->memberRepository = $memberRepository;
+        $this->memberUserRepository = $memberRepository;
     }
 
     public function loadUserByUsername($username)
     {
-        $member = $this->memberRepository->findOneByEmailAddress(new EmailAddress($username));
+        $member = $this->memberUserRepository->findOneByEmailAddress(new EmailAddress($username));
 
         if($member === null) {
             throw new UsernameNotFoundException(

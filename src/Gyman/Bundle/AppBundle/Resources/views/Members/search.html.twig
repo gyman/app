@@ -17,7 +17,7 @@
                     <div class="thumbnail" style="height: 280px; width: 120px;">
                         <strong>{{ member.details.firstname }} {{ member.details.lastname }}</strong>
                         <a href="{{ path('gyman_member_edit', {id : member.id}) }}">
-                            <img src="{{ member.details.foto.fotoWithPath }}" style="max-height: 200px" />
+                            <img src="{{ member.details.foto.fotoWithPath|default(asset("/bundles/gymanapp/images/no-profile.gif")) }}" style="max-height: 200px" />
                         </a>
                         <div class="caption">
 

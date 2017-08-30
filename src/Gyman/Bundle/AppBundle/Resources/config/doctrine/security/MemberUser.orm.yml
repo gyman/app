@@ -1,0 +1,27 @@
+Gyman\Bundle\AppBundle\Security\MemberUser:
+  type:   entity
+  table:  users
+  repositoryClass:  Gyman\Bundle\AppBundle\Repository\UserRepository
+
+  id:
+    id:
+      type: integer
+      generator: { strategy: auto }
+
+  oneToOne:
+    member:
+      targetEntity: Gyman\Domain\Member
+
+  fields:
+    username:
+      type: string
+      nullable: false
+    password:
+      type: string
+      nullable: true
+    salt:
+      type: string
+      nullable: true
+    token:
+      type: string
+      nullable: true

@@ -45,6 +45,14 @@ services:
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateMemberCommand }
 
+  gyman.members.create_user_for_member:
+    class: Gyman\Application\Handler\CreateUserForMemberHandler
+    arguments:
+      - '@gyman.member_user.repository'
+      - '@event_dispatcher'
+    tags:
+        - { name: tactician.handler, command: Gyman\Application\Command\CreateUserForMemberCommand }
+
   gyman.app.remove_entry_from_occurrence: # todo: change to command/handler
     class: Gyman\Bundle\AppBundle\Services\RemoveEntryFromOccurrence
     arguments:
