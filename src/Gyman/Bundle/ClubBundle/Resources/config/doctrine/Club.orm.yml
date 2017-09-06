@@ -18,11 +18,6 @@ Gyman\Bundle\ClubBundle\Entity\Club:
       type: integer
       generator: { strategy: AUTO }
 
-  oneToMany:
-    involvements:
-      targetEntity: Gyman\Bundle\ClubBundle\Entity\Involvement
-      mappedBy: club
-
   fields:
     name:
       type: string

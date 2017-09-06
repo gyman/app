@@ -1,10 +1,10 @@
 fos_user:
     db_driver:              orm
     firewall_name:          main
-    user_class:             Gyman\Bundle\ClubBundle\Entity\User
+    user_class:             Gyman\Domain\User
     use_listener:           true
     use_username_form_type: true
-    model_manager_name:     null  # change it to the name of your entity/document manager if you don't want to use the default one.
+    model_manager_name:     tenant
     from_email:
         address:        office@gyman.pl
         sender_name:    Gyman.pl

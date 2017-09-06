@@ -20,11 +20,6 @@ class Club
     protected $name;
 
     /**
-     * @var ArrayCollection|Involvement[]
-     */
-    public $involvements;
-
-    /**
      * @var ArrayCollection|Section[]
      */
     protected $sections;

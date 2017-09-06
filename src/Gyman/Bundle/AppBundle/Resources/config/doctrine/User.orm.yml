@@ -1,4 +1,4 @@
-Gyman\Bundle\AppBundle\Security\MemberUser:
+Gyman\Domain\User:
   type:   entity
   table:  users
   repositoryClass:  Gyman\Bundle\AppBundle\Repository\UserRepository
@@ -13,15 +13,12 @@ Gyman\Bundle\AppBundle\Security\MemberUser:
       targetEntity: Gyman\Domain\Member
 
   fields:
-    username:
+    firstname:
       type: string
-      nullable: false
-    password:
-      type: string
+      length: 255
       nullable: true
-    salt:
+
+    lastname:
       type: string
-      nullable: true
-    token:
-      type: string
+      length: 255
       nullable: true

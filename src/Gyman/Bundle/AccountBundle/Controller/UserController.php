@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AccountBundle\Controller;
 
 use Gyman\Bundle\AccountBundle\Form\Type\UserType;
-use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

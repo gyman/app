@@ -6,7 +6,7 @@ use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
-use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\User;
 
 /**
  * Class UserManager

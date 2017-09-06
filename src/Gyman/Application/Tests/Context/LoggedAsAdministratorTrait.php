@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Application\Tests\Context;
 
-use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
 
 /**

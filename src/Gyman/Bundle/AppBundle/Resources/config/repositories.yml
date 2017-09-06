@@ -37,10 +37,10 @@ services:
       - 'Gyman\Domain\Entry'
 
   gyman.user.repository:
-    class:            Gyman\Bundle\ClubBundle\Entity\UserRepository
+    class:            Gyman\Bundle\AppBundle\Repository\UserRepository
     factory:          ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments:
-      - 'Gyman\Bundle\ClubBundle\Entity\User'
+      - 'Gyman\Domain\User'
 
   gyman.occurrence.repository:
     class:            'Gyman\Bundle\AppBundle\Repository\OccurrenceRepository'

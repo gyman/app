@@ -64,17 +64,10 @@ doctrine:
               GymanAppBundle:
                 type:       yml
                 mapping:    true
-                dir:        Resources/config/doctrine/domain
+                dir:        Resources/config/doctrine
                 prefix:     Gyman\Domain
                 alias:      Gyman
                 is_bundle:  true
-              GymanAppBundleMemberUser:
-                type:       yml
-                mapping:    true
-                dir:        '%kernel.root_dir%/../src/Gyman/Bundle/AppBundle/Resources/config/doctrine/security'
-                prefix:     Gyman\Bundle\AppBundle\Security
-                alias:      Security
-                is_bundle:  false
             dql:
                 string_functions:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction

@@ -7,7 +7,7 @@ use Dende\Calendar\Domain\Calendar\EventInterface;
 use Dende\Calendar\Domain\IdInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\User;
 use Gyman\Domain\Calendar\Event\Occurrence\Note;
 use Gyman\Domain\Calendar\Event\Occurrence\Subject;
 use Gyman\Domain\Entry;

@@ -1,32 +1,13 @@
 <?php
-namespace Gyman\Bundle\ClubBundle\Entity;
+namespace Gyman\Domain;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Class User
- * @package Gyman\Bundle\ClubBundle\Entity
  */
 class User extends BaseUser implements UserInterface
 {
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->involvements = new ArrayCollection();
-    }
-
-    /**
-     * @var Involvement[]
-     */
-    private $involvements;
-
     /**
      * @var string
      */
@@ -36,6 +17,9 @@ class User extends BaseUser implements UserInterface
      * @var string
      */
     private $lastname;
+
+    /** @var Member */
+    private $member;
 
     public function firstname() : string
     {
@@ -85,12 +69,5 @@ class User extends BaseUser implements UserInterface
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    public function getClubs()
-    {
-        return $this->involvements->filter(function(Involvement $involvement) {
-            return $involvement->club;
-        });
     }
 }

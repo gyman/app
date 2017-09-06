@@ -1,9 +1,9 @@
 <?php
-namespace Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM;
+namespace Gyman\Bundle\AppBundle\DataFixtures\StandardConnection\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\ClubBundle\Entity\User;
+use Gyman\Domain\User;
 
 class UsersData extends BaseFixture
 {
