@@ -38,7 +38,7 @@ services:
 
   gyman.user.repository:
     class:            Gyman\Bundle\AppBundle\Repository\UserRepository
-    factory:          ['@doctrine.orm.default_entity_manager', 'getRepository']
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
     arguments:
       - 'Gyman\Domain\User'
 
@@ -59,9 +59,3 @@ services:
     factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
     arguments:
       - 'Gyman\Domain\Calendar'
-
-  gyman.member_user.repository:
-    class:            'Gyman\Bundle\AppBundle\Repository\UserRepository'
-    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
-    arguments:
-      - 'Gyman\Bundle\AppBundle\Security\MemberUser'

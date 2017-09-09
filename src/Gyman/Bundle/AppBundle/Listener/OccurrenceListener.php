@@ -35,6 +35,7 @@ class OccurrenceListener
         }
 
         $user = $userRepository->find($occurrence->instructorId());
+
         $occurrence->setInstructor($user);
     }
 }

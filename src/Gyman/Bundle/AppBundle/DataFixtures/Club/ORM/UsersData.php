@@ -1,7 +1,6 @@
 <?php
-namespace Gyman\Bundle\AppBundle\DataFixtures\StandardConnection\ORM;
+namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\User;
 
@@ -26,16 +25,5 @@ class UsersData extends BaseFixture
         $user->setEnabled($params['enabled']);
 
         return $user;
-    }
-
-    private function getClubs($clubs)
-    {
-        $references = [];
-
-        foreach ($clubs as $club) {
-            $references[] = $this->getReference($club);
-        }
-
-        return new ArrayCollection($references);
     }
 }

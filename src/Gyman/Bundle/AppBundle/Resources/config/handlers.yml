@@ -48,7 +48,7 @@ services:
   gyman.members.create_user_for_member:
     class: Gyman\Application\Handler\CreateUserForMemberHandler
     arguments:
-      - '@gyman.member_user.repository'
+      - '@gyman.user.repository'
       - '@event_dispatcher'
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateUserForMemberCommand }

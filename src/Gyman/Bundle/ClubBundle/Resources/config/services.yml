@@ -15,7 +15,7 @@ services:
       - '@gyman.club.repository'
 
   gyman.users.user_manager:
-    class:          'Gyman\Bundle\ClubBundle\EntityManager\UserManager'
+    class:          'Gyman\Bundle\AppBundle\EntityManager\UserManager'
     parent:         'fos_user.user_manager.default'
     calls:
       - ['setSubdomainProvider', ['@=service(parameter("subdomain_provider_service"))']]

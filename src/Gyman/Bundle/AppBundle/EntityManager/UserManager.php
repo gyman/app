@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\ClubBundle\EntityManager;
+namespace Gyman\Bundle\AppBundle\EntityManager;
 
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;

@@ -17,15 +17,6 @@ class ClubsData extends BaseFixture
     public function insert($params)
     {
         $club = ClubFactory::createFromArray($params);
-
-        foreach($params["users"] as $userReference => $roles) {
-            $involvement = new Involvement();
-            $involvement->club = $club;
-            $involvement->user = $this->getReference($userReference);
-            $involvement->roles = $roles;
-            $this->manager->persist($involvement);
-        }
-
         return $club;
     }
 }
