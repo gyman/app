@@ -168,6 +168,7 @@ class MembersController extends Controller
         $token = hash('sha512', $member->email()->email() . microtime());
         $this->get("tactician.commandbus")->handle(new CreateUserForMemberCommand($member, $token));
         $this->get('gyman.app.member_invitation_sender')->sendInvitation($member, $token);
+        $this->addFlash('success', sprintf('Zaproszenie wysłano na adres %s', $member->email()->email()));
         return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
     }
 

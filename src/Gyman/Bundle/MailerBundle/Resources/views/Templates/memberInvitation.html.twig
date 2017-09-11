@@ -5,6 +5,7 @@
 {% extends "MailerBundle::layout.html.twig" %}
 
 {% block content %}
+    {{ dump() }}
         <div>
             <table>
                 <tbody>
@@ -15,7 +16,21 @@
                             <p>To jest automatyczny komunikat ze strony http://{{ club.subdomain.name }}.{{ baseUrl }}</p>
 
                             <p>Administrator wysłał Ci zaproszenie do rejestracji konta, aby to zrobić wejdź na poniższy adres<br />
-                                {{ path('gyman_member_register', [token: token]) }}
+                                <a href="http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}">http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}</a>
+                            </p>
+
+                            <p>
+                                Jeżeli nie widzisz powyższego linku, przekopiuj adres do paska przeglądarki i odwiedź stronę:<br />
+                                http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}
+                            </p>
+
+                            <p>
+                                W razie dalszych kłopotów poproś administratora o ponowne wysłanie zaproszenia.
+                            </p>
+
+                            <p>
+                                Rejestracja konta umożliwi Ci dostęp do historii Twoich wejść oraz planów zajęć
+                                i innych rzeczy udostępnionych przez administratora.
                             </p>
                         </td>
                     </tr>

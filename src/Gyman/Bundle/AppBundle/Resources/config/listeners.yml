@@ -13,3 +13,10 @@ services:
       - "@service_container"
     tags:
       - { name: doctrine.orm.entity_listener, entity_manager: tenant, event: postLoad, method: postLoadHandler }
+
+  app.listener.user_for_member_created:
+    class: Gyman\Bundle\AppBundle\Listener\UserCreatedForMemberListener
+    arguments:
+      - '@mailer.member_invitation'
+    tags:
+      - { name: kernel.event_listener, event: 'gyman.member_for_user_created', method: 'onUserCreate' }

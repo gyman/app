@@ -21,6 +21,9 @@ class User extends BaseUser implements UserInterface
     /** @var Member */
     private $member;
 
+    /** @var string */
+    private $invitationToken;
+
     public function firstname() : string
     {
         return $this->firstname;
@@ -69,5 +72,25 @@ class User extends BaseUser implements UserInterface
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function setInvitationToken(string $token)
+    {
+        $this->invitationToken = $token;
+    }
+
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
+    }
+
+    public function invitationToken() : string
+    {
+        return $this->invitationToken;
+    }
+
+    public function member() : Member
+    {
+        return $this->member;
     }
 }

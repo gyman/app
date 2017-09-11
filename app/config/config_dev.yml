@@ -21,3 +21,6 @@ monolog:
 jms_serializer:
   metadata:
     cache: false
+
+swiftmailer:
+    spool: { type: memory }

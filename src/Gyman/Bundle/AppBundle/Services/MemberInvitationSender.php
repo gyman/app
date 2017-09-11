@@ -5,8 +5,10 @@ use Gyman\Domain\Member;
 
 class MemberInvitationSender
 {
+    protected $mailer;
+
     public function sendInvitation(Member $member, $token)
     {
-
+        $this->mailer;
     }
 }

@@ -49,6 +49,8 @@ services:
     class: Gyman\Application\Handler\CreateUserForMemberHandler
     arguments:
       - '@gyman.user.repository'
+      - '@fos_user.util.user_manipulator'
+      - '@fos_user.user_manager'
       - '@event_dispatcher'
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateUserForMemberCommand }

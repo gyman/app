@@ -1,36 +1,57 @@
 <?php
 namespace Gyman\Application\Handler;
 
+use FOS\UserBundle\Util\UserManipulator;
 use Gyman\Application\Command\CreateUserForMemberCommand;
-use Gyman\Application\Factory\UserFactory;
+use Gyman\Application\Event\UserForMemberCreated;
+use Gyman\Bundle\AppBundle\EntityManager\UserManager;
 use Gyman\Bundle\AppBundle\Repository\UserRepository;
-use Gyman\Bundle\AppBundle\Security\MemberUser;
+use Gyman\Domain\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateUserForMemberHandler
 {
     /** @var  UserRepository */
-    private $memberUserRepository;
+    private $userRepository;
 
-    /**
-     * CreateUserForMemberHandler constructor.
-     * @param UserRepository $memberUserRepository
-     */
-    public function __construct(UserRepository $memberUserRepository)
+    /** @var  UserManipulator */
+    private $userManipulator;
+
+    /** @var  UserManager */
+    private $userManager;
+
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
+    public function __construct(UserRepository $userRepository, UserManipulator $userManipulator, UserManager $userManager, EventDispatcherInterface $eventDispatcher)
     {
-        $this->memberUserRepository = $memberUserRepository;
+        $this->userRepository = $userRepository;
+        $this->userManipulator = $userManipulator;
+        $this->userManager = $userManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function handle(CreateUserForMemberCommand $command)
     {
-        /** @var MemberUser $user */
-        $user = $this->memberUserRepository->findOneBy(['username' => $command->member()->email()->email()]);
+        /** @var User $user */
+        $user = $this->userRepository->findOneBy(['username' => $command->member()->email()->email()]);
 
         if($user === null) {
-            $user = UserFactory::create($command->member(), null, time(), $command->token());
-            $this->memberUserRepository->insert($user);
-        } else {
-            $user->setToken($command->token());
-            $this->memberUserRepository->update($user);
+            $user = $this->userManipulator->create(
+                $command->member()->email()->email(),
+                (string) microtime(),
+                $command->member()->email()->email(),
+                true,
+                false
+            );
+            
+            $user->setRoles(["ROLE_MEMBER"]);
         }
+
+        $user->setInvitationToken($command->token());
+        $user->setMember($command->member());
+        $this->userManager->updateUser($user);
+
+        $this->eventDispatcher->dispatch(UserForMemberCreated::$name, new UserForMemberCreated($user));
     }
 }

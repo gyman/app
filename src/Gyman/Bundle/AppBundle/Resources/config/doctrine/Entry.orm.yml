@@ -32,7 +32,7 @@ Gyman\Domain\Entry:
 
     occurrence:
       targetEntity: Gyman\Domain\Calendar\Event\Occurrence
-      inversedBy: occurrence
+      inversedBy: entries
       nullable: true
       orphanRemoval: false
       cascade: ["persist"]

@@ -22,3 +22,8 @@ Gyman\Domain\User:
       type: string
       length: 255
       nullable: true
+
+    invitationToken:
+      type: string
+      length: 255
+      nullable: true

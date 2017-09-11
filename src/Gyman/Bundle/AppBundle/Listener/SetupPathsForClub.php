@@ -57,20 +57,20 @@ class SetupPathsForClub
      */
     public function onKernelRequest(PostSwitchConnection $event)
     {
-        if(!$this->session->isStarted()) {
-            return;
-        }
+//        if(!$this->session->isStarted()) {
+//            return;
+//        }
 
         $subdomainName = $event->getTenantId();
 
         $club = $this->clubRepository->findOneBySubdomain($subdomainName);
 
-        Globals::setNoImage($this->parameters['no_image']);
-        Globals::setGalleryDir($this->parameters['gallerydirectory'] . $subdomainName . DIRECTORY_SEPARATOR);
-        Globals::setGalleryPath($this->parameters['gallerypath'] . $subdomainName . DIRECTORY_SEPARATOR);
-        Globals::setSubdomain($subdomainName);
+//        Globals::setNoImage($this->parameters['no_image']);
+//        Globals::setGalleryDir($this->parameters['gallerydirectory'] . $subdomainName . DIRECTORY_SEPARATOR);
+//        Globals::setGalleryPath($this->parameters['gallerypath'] . $subdomainName . DIRECTORY_SEPARATOR);
+//        Globals::setSubdomain($subdomainName);
 
-        $this->session->set('current_club', $club);
+//        $this->session->set('current_club', $club);
         $this->twig->addGlobal('club', $club);
     }
 }
