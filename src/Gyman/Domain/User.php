@@ -2,11 +2,11 @@
 namespace Gyman\Domain;
 
 use FOS\UserBundle\Model\User as BaseUser;
-
+use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 /**
  * Class User
  */
-class User extends BaseUser implements UserInterface
+class User extends BaseUser implements UserInterface, SecurityUserInterface
 {
     /**
      * @var string
@@ -74,7 +74,7 @@ class User extends BaseUser implements UserInterface
         $this->id = $id;
     }
 
-    public function setInvitationToken(string $token)
+    public function setInvitationToken($token)
     {
         $this->invitationToken = $token;
     }

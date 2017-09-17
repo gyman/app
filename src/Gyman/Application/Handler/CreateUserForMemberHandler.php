@@ -39,19 +39,21 @@ class CreateUserForMemberHandler
         if($user === null) {
             $user = $this->userManipulator->create(
                 $command->member()->email()->email(),
-                (string) microtime(),
+                $command->currentPassword(),
                 $command->member()->email()->email(),
                 true,
                 false
             );
             
             $user->setRoles(["ROLE_MEMBER"]);
+        } else {
+            $user->setPassword($command->currentPassword());
         }
 
         $user->setInvitationToken($command->token());
         $user->setMember($command->member());
         $this->userManager->updateUser($user);
 
-        $this->eventDispatcher->dispatch(UserForMemberCreated::$name, new UserForMemberCreated($user));
+        $this->eventDispatcher->dispatch(UserForMemberCreated::$name, new UserForMemberCreated($user, $command->currentPassword()));
     }
 }

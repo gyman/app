@@ -1,12 +1,15 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use DateTime;
 use Gyman\Application\Command\CreateUserForMemberCommand;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Command\SearchMemberCommand;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Domain\Member\EmailAddress;
+use Gyman\Domain\User;
+use Gyman\Domain\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class MembersController
@@ -165,18 +169,33 @@ class MembersController extends Controller
             return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
         }
 
+        $currentPassword = substr(str_shuffle('abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ1234567890-_/!@#$%^&&**()'), 0, 12);
         $token = hash('sha512', $member->email()->email() . microtime());
-        $this->get("tactician.commandbus")->handle(new CreateUserForMemberCommand($member, $token));
-        $this->get('gyman.app.member_invitation_sender')->sendInvitation($member, $token);
+
+        $this->get("tactician.commandbus")->handle(new CreateUserForMemberCommand($member, $token, $currentPassword));
+
         $this->addFlash('success', sprintf('Zaproszenie wysłano na adres %s', $member->email()->email()));
+
         return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
     }
 
     /**
-     * @Route("/register/{token}", name="gyman_member_register")
-     * @ParamConverter("member", class="Gyman:Member", options={"repository_method" = "findOneByInvitationToken"})
+     * @param $user User
+     * @Route("/register/{user}", name="gyman_member_register")
+     * @ParamConverter("user", class="Gyman:User", options={"repository_method" = "findOneByInvitationToken"})
      */
-    public function registerAction(Member $member){
-        // @todo
+    public function registerAction(UserInterface $user){
+        die(var_dump($user->getPlainPassword()));
+
+
+        $em = $this->getDoctrine()->getManager('tenant');
+        $this->get('security.token_storage')->setToken(new UsernamePasswordToken($user, $user->getPlainPassword(), 'fos_userbundle', $user->getRoles()));
+
+        $user->setPasswordRequestedAt(new DateTime("now"));
+
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('fos_user_change_password');
     }
 }

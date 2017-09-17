@@ -14,17 +14,26 @@ class UserForMemberCreated extends Event
 
     static $name = 'gyman.member_for_user_created';
 
+    /** @var string */
+    private $currentPassword;
+
     /**
      * UserForMemberCreated constructor.
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(User $user, string $currentPassword)
     {
         $this->user = $user;
+        $this->currentPassword = $currentPassword;
     }
 
     public function user() : User
     {
         return $this->user;
+    }
+
+    public function currentPassword(): string
+    {
+        return $this->currentPassword;
     }
 }

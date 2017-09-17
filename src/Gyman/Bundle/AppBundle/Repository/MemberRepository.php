@@ -37,6 +37,17 @@ class MemberRepository extends EntityRepository implements MemberRepositoryInter
         return $query->getOneOrNullResult();
     }
 
+    public function findOneByInvitationToken(string $token)
+    {
+        $qb = $this->createQueryBuilder('m');
+
+        $query = $qb->where('m.to = :token')
+            ->setParameter('token', $token)
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     /**
      * @param Barcode $barcode
      * @throws \Doctrine\ORM\NonUniqueResultException

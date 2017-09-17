@@ -16,12 +16,16 @@
                             <p>To jest automatyczny komunikat ze strony http://{{ club.subdomain.name }}.{{ baseUrl }}</p>
 
                             <p>Administrator wysłał Ci zaproszenie do rejestracji konta, aby to zrobić wejdź na poniższy adres<br />
-                                <a href="http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}">http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}</a>
+                                <a href="http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}">http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}</a>
                             </p>
 
                             <p>
                                 Jeżeli nie widzisz powyższego linku, przekopiuj adres do paska przeglądarki i odwiedź stronę:<br />
-                                http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'token': token}) }}
+                                http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}
+                            </p>
+
+                            <p>
+                                Zostaniesz poproszony/a o wybranie hasła. Twoje obecne hasło to: <strong>{{ currentPassword }}</strong>
                             </p>
 
                             <p>

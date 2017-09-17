@@ -23,11 +23,12 @@ class UserCreatedForMemberListener
         $user = $event->user();
 
         $this->mailer->setParameters([
-            "token" => $user->invitationToken()
+            "token" => $user->invitationToken(),
+            "currentPassword" => $event->currentPassword()
         ]);
 
         $this->mailer->setTo([$user->getEmail() => $user->member()->details()->fullName()]);
-        $this->mailer->setSubject("Zaproszenie do rejestracji konta.");
+        $this->mailer->setSubject("[gyman.pl] Zaproszenie do rejestracji konta.");
 
         $this->mailer->sendMail();
     }

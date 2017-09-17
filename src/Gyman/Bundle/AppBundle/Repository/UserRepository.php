@@ -4,6 +4,7 @@ namespace Gyman\Bundle\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
+use Gyman\Domain\UserInterface;
 
 class UserRepository extends EntityRepository
 {
@@ -18,6 +19,17 @@ class UserRepository extends EntityRepository
 
         $query = $qb->where('u.email = :emailAddress')
             ->setParameter('emailAddress', $emailAddress->email())
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findOneByInvitationToken(string $token) : UserInterface
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $query = $qb->where('u.invitationToken = :invitationToken')
+            ->setParameter('invitationToken', $token)
             ->getQuery();
 
         return $query->getOneOrNullResult();
