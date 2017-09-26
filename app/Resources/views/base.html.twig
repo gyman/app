@@ -57,7 +57,7 @@
                                 {#{{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}#}
                             {#</li>#}
 
-                            {% if is_granted("ROLE_USER") %}
+                            {% if is_granted("ROLE_MODERATOR") %}
                             <li>
                                 <a href="{{ path('gyman_members_search_form') }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
@@ -73,7 +73,7 @@
                                 </a>
                             </li>
 
-                            {% if is_granted("ROLE_USER") %}
+                            {% if is_granted("ROLE_MODERATOR") %}
                             <li>
                                 <a href="{{ path("gyman_settings") }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>

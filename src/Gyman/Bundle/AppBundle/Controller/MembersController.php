@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\EmailValidator;
 
 /**
  * Class MembersController
@@ -169,6 +171,10 @@ class MembersController extends Controller
             return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
         }
 
+        $validator = new EmailValidator();
+        $constraint = new Email();
+        $validator->validate($member->email()->email(), $constraint);
+
         $currentPassword = substr(str_shuffle('abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ1234567890-_/!@#$%^&&**()'), 0, 12);
         $token = hash('sha512', $member->email()->email() . microtime());
 
@@ -185,11 +191,8 @@ class MembersController extends Controller
      * @ParamConverter("user", class="Gyman:User", options={"repository_method" = "findOneByInvitationToken"})
      */
     public function registerAction(UserInterface $user){
-        die(var_dump($user->getPlainPassword()));
-
-
         $em = $this->getDoctrine()->getManager('tenant');
-        $this->get('security.token_storage')->setToken(new UsernamePasswordToken($user, $user->getPlainPassword(), 'fos_userbundle', $user->getRoles()));
+        $this->get('security.token_storage')->setToken(new UsernamePasswordToken($user, $user->getPassword(), 'fos_userbundle', $user->getRoles()));
 
         $user->setPasswordRequestedAt(new DateTime("now"));
 

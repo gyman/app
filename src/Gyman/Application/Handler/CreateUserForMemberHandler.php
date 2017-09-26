@@ -47,7 +47,7 @@ class CreateUserForMemberHandler
             
             $user->setRoles(["ROLE_MEMBER"]);
         } else {
-            $user->setPassword($command->currentPassword());
+            $user->setPlainPassword($command->currentPassword());
         }
 
         $user->setInvitationToken($command->token());

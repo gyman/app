@@ -5,7 +5,6 @@
 {% extends "MailerBundle::layout.html.twig" %}
 
 {% block content %}
-    {{ dump() }}
         <div>
             <table>
                 <tbody>
@@ -25,7 +24,7 @@
                             </p>
 
                             <p>
-                                Zostaniesz poproszony/a o wybranie hasła. Twoje obecne hasło to: <strong>{{ currentPassword }}</strong>
+                                Zostaniesz poproszony/a o wybranie nowego hasła. Twoje obecne hasło to: <strong>{{ currentPassword }}</strong>, podaj je w polu "Stare hasło"
                             </p>
 
                             <p>

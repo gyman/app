@@ -3,14 +3,14 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_MEMBER:      ~
-
-        ROLE_INSTRUCTOR:  ~
-
         ROLE_USER:        ~
-        ROLE_OWNER:       ROLE_USER
-        ROLE_MANAGER:     ROLE_OWNER
-        ROLE_ADMIN:       ROLE_MANAGER
+
+        ROLE_MEMBER:      ROLE_USER
+
+        ROLE_INSTRUCTOR:  ROLE_USER
+
+        ROLE_MODERATOR:   ROLE_MODERATOR
+        ROLE_ADMIN:       ROLE_STAFF
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -34,11 +34,11 @@ security:
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/calendar/events, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/calendar/, role: ROLE_USER }
+        - { path: ^/calendar/, role: ROLE_MODERATOR }
         - { path: ^/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/resetting, role: ROLE_SUPER_ADMIN }
         - { path: ^/dashboard/member, role: ROLE_MEMBER }
-        - { path: ^/dashboard, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/dashboard, role: ROLE_USER }
         - { path: ^/profile, roles: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/admin, role: ROLE_SUPER_ADMIN }
         - { path: ^/settings, role: ROLE_ADMIN }

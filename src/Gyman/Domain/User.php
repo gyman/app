@@ -24,12 +24,12 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     /** @var string */
     private $invitationToken;
 
-    public function firstname() : string
+    public function firstname()
     {
         return $this->firstname;
     }
 
-    public function lastname() : string
+    public function lastname()
     {
         return $this->lastname;
     }

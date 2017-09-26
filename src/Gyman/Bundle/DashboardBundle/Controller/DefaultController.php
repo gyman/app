@@ -28,7 +28,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        if (!$this->isGranted('ROLE_USER')) {
+        if (!$this->isGranted('ROLE_MODERATOR')) {
             return $this->redirectToRoute('gyman_dashboard_member_index');
         }
 
