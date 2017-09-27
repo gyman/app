@@ -27,60 +27,50 @@
         ]
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
 
-        "symfony/symfony": "^2.8",
-        "symfony/swiftmailer-bundle": "2.3.*",
-        "symfony/monolog-bundle": "2.7.*",
+        "symfony/symfony": "^3.3",
+        "symfony/swiftmailer-bundle": "^3",
+        "symfony/monolog-bundle": "^3.1",
 
-        "doctrine/orm": "2.5.*",
-        "doctrine/dbal": "2.5.*",
-        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5",
+        "doctrine/dbal": "^2.6",
+        "doctrine/doctrine-bundle": "^1.7",
 
         "doctrine/data-fixtures": "1.1.1",
         "doctrine/doctrine-fixtures-bundle": "2.3.0",
-
-        "stof/doctrine-extensions-bundle": "1.2.*@dev",
+        "doctrine/doctrine-migrations-bundle": "^1.1",
 
         "sensio/distribution-bundle": "^5",
         "sensio/framework-extra-bundle": "~3.0",
-        "sensio/generator-bundle": "2.5.*",
+        "sensio/generator-bundle": "^3.1",
 
-        "friendsofsymfony/user-bundle": "~2.0@dev",
-        "friendsofsymfony/jsrouting-bundle": "1.5.*",
-        "friendsofsymfony/rest-bundle": "^2.0",
+        "friendsofsymfony/user-bundle": "^2.0",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
 
-        "knplabs/knp-menu-bundle": "~1",
-        "knplabs/knp-menu": "~1",
-        "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-time-bundle": "1.3",
-
-        "incenteev/composer-parameter-handler": "2.1.*",
-        "oneup/uploader-bundle": "1.3.*",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "oneup/uploader-bundle": "^1.8",
         "jms/serializer-bundle": "^1.0",
         "ob/highcharts-bundle": "1.*",
         "phing/phing": "*",
-        "willdurand/hateoas-bundle": "@stable",
-        "twig/extensions": "1.2.*@dev",
-        
+        "twig/extensions": "^1.5",
+
+        "knplabs/knp-menu-bundle" : "^2.1",
+
         "gyman/supr": "dev-master",
-        "nelmio/api-doc-bundle": "~2.7@dev",
         "imagine/imagine": "0.6.*",
         "nesbot/carbon": "dev-master",
         "braincrafted/bootstrap-bundle": "1.4.2",
 
         "dende/common-bundle": "dev-master",
         "dende/calendar-bundle": "dev-feature/calendar21",
-        "league/tactician": "^1.0",
-        "league/tactician-bundle": "^0.4.0",
-        "doctrine/doctrine-migrations-bundle": "^1.1",
+        "league/tactician-bundle": "^1",
         "liip/monitor-bundle": "^2.3",
-        "dende/multitenancybundle": "^1",
+        "dende/multitenancybundle": "1.1",
         "sentry/sentry-symfony": "^0.7.1"
     },
     "require-dev": {
-        "sensiolabs/security-checker": "4.0.4",
-        "behat/behat": "3.0.*",
+        "sensiolabs/security-checker": "^4.1",
         "phpunit/phpunit": "*",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "~2",
