@@ -140,7 +140,7 @@
         "bin-dir": "bin",
         "preferred-install": "dist",
         "platform": {
-          "php": "7.0"
+          "php": "7.1"
         },
         "sort-packages": true
     },
