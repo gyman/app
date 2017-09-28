@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba72fbffbb239f4b2fb4020da35fe533",
+    "content-hash": "c0528d7756f1bf685bc081219ef20e35",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -2167,6 +2167,71 @@
             "time": "2017-09-05T12:05:33+00:00"
         },
         {
+            "name": "knplabs/knp-time-bundle",
+            "version": "dev-master",
+            "target-dir": "Knp/Bundle/TimeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpTimeBundle.git",
+                "reference": "fd113f053de7341e3e5ca6e8a2fefed001c130ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/fd113f053de7341e3e5ca6e8a2fefed001c130ed",
+                "reference": "fd113f053de7341e3e5ca6e8a2fefed001c130ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/templating": "~2.3|~3.0",
+                "symfony/translation": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.0"
+            },
+            "suggest": {
+                "symfony/twig-bundle": "to use the Twig time_diff function"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\TimeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/KnpTimeBundle/contributors"
+                }
+            ],
+            "description": "Knplabs time bundle makes your dates look sensible and descriptive",
+            "homepage": "http://github.com/KnpLabs/KnpTimeBundle",
+            "keywords": [
+                "bundle",
+                "date",
+                "descriptive time",
+                "knp",
+                "knplabs",
+                "time"
+            ],
+            "time": "2017-08-14T20:04:54+00:00"
+        },
+        {
             "name": "league/tactician",
             "version": "v1.0.2",
             "source": {
@@ -2803,16 +2868,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.10",
+            "version": "v2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5da4d3c796c275c55f057af5a643ae297d96b4d8",
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8",
                 "shasum": ""
             },
             "require": {
@@ -2847,7 +2912,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-13T16:27:32+00:00"
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "phing/phing",
@@ -3589,12 +3654,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "b4bc04bfe41d5b14d0694748422b8c1a51159d4b"
+                "reference": "501ebd9f8327f92693383acaf4ea8c9778053c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/b4bc04bfe41d5b14d0694748422b8c1a51159d4b",
-                "reference": "b4bc04bfe41d5b14d0694748422b8c1a51159d4b",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/501ebd9f8327f92693383acaf4ea8c9778053c66",
+                "reference": "501ebd9f8327f92693383acaf4ea8c9778053c66",
                 "shasum": ""
             },
             "require": {
@@ -3646,7 +3711,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-09-15T07:22:42+00:00"
+            "time": "2017-09-27T23:24:57+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -4160,26 +4225,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "d31de92759321649aec6670ca4e19179b0ec3af4"
+                "reference": "339d2cb0437612d5e02925e1a5edd3059a7d8bcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/d31de92759321649aec6670ca4e19179b0ec3af4",
-                "reference": "d31de92759321649aec6670ca4e19179b0ec3af4",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/339d2cb0437612d5e02925e1a5edd3059a7d8bcc",
+                "reference": "339d2cb0437612d5e02925e1a5edd3059a7d8bcc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
                 "swiftmailer/swiftmailer": "^6.0.1",
-                "symfony/config": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.7|~3.0",
-                "symfony/http-kernel": "~2.7|~3.0"
+                "symfony/config": "~2.8|~3.0|~4.0",
+                "symfony/dependency-injection": "~2.7|~3.4|~4.0",
+                "symfony/http-kernel": "~2.7|~3.0|~4.0"
             },
             "require-dev": {
-                "symfony/console": "~2.7|~3.0",
-                "symfony/framework-bundle": "~2.7|~3.0",
-                "symfony/phpunit-bridge": "~3.3@dev",
-                "symfony/yaml": "~2.7|~3.0"
+                "symfony/console": "~2.7|~3.4|~4.0",
+                "symfony/framework-bundle": "~2.7|~3.0|~4.0",
+                "symfony/phpunit-bridge": "~3.3|~4.0",
+                "symfony/yaml": "~2.7|~3.0|~4.0"
             },
             "suggest": {
                 "psr/log": "Allows logging"
@@ -4187,7 +4252,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -4211,7 +4276,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2017-09-10T19:31:30+00:00"
+            "time": "2017-09-27T19:18:18+00:00"
         },
         {
             "name": "symfony/symfony",
@@ -4219,12 +4284,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "65872e8c3ab55cffa55411c38a0e49373403816b"
+                "reference": "d7885ec3b26b67609009fcf9023e48eeed6559f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/65872e8c3ab55cffa55411c38a0e49373403816b",
-                "reference": "65872e8c3ab55cffa55411c38a0e49373403816b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/d7885ec3b26b67609009fcf9023e48eeed6559f5",
+                "reference": "d7885ec3b26b67609009fcf9023e48eeed6559f5",
                 "shasum": ""
             },
             "require": {
@@ -4364,7 +4429,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-09-27T14:20:06+00:00"
+            "time": "2017-09-27T21:49:24+00:00"
         },
         {
             "name": "twig/extensions",
@@ -4428,12 +4493,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "103cae817d68b56ddcb50c051a6ed7980d746409"
+                "reference": "d8d888e2ae694c8057d6b0201b7b8f6f07d430cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/103cae817d68b56ddcb50c051a6ed7980d746409",
-                "reference": "103cae817d68b56ddcb50c051a6ed7980d746409",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d8d888e2ae694c8057d6b0201b7b8f6f07d430cc",
+                "reference": "d8d888e2ae694c8057d6b0201b7b8f6f07d430cc",
                 "shasum": ""
             },
             "require": {
@@ -4486,7 +4551,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-08-19T17:43:10+00:00"
+            "time": "2017-09-27T18:11:00+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

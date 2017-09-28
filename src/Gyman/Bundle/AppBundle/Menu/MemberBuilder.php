@@ -5,6 +5,7 @@ use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class MemberBuilder
@@ -15,9 +16,9 @@ class MemberBuilder
     private $factory;
 
     /**
-     * @var SecurityContext
+     * @var AuthorizationCheckerInterface
      */
-    private $context;
+    private $authorizationChecker;
 
     /**
      * @var Member
@@ -35,14 +36,10 @@ class MemberBuilder
     /**
      * @param FactoryInterface $factory
      */
-    public function __construct(FactoryInterface $factory, SecurityContext $context)
+    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $checker)
     {
         $this->factory = $factory;
-        $this->context = $context;
-
-        if ($context->getToken()) {
-            $this->user = $context->getToken()->getUser();
-        }
+        $this->authorizationChecker = $checker;
     }
 
     public function tabs(Request $request)
@@ -51,17 +48,11 @@ class MemberBuilder
 
         /**
          * @var Member $member
+         * @todo - pobieranie membera z repo, nie z requesta!
          */
         $member = $request->get('member');
 
-        if ($member) {
-            /**
-             * @var Voucher $voucher
-             */
-            $voucher = $member->currentVoucher();
-        }
-
-        if (!$this->context->isGranted('ROLE_USER')) {
+        if (!$this->authorizationChecker->isGranted('ROLE_MODERATOR')) {
             return $menu;
         }
 
@@ -129,7 +120,7 @@ class MemberBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted('ROLE_USER')) {
+        if (!$this->authorizationChecker->isGranted('ROLE_USER')) {
             return $menu;
         }
 

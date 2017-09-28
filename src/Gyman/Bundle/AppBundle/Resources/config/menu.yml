@@ -1,13 +1,13 @@
 services:
     gyman.default.menu_builder:
         class: Gyman\Bundle\AppBundle\Menu\DefaultBuilder
-        arguments: [@knp_menu.factory, @security.context]
+        arguments: ['@knp_menu.factory', '@security.authorization_checker']
 
     gyman.default.menu.main:
         class:            Knp\Menu\MenuItem
         factory_service:  gyman.default.menu_builder
         factory_method:   main
-        arguments:        ["@request"]
+        arguments:        ["@request_stack"]
         scope:            request
         tags:
             - { name: knp_menu.menu, alias: main }
@@ -16,25 +16,25 @@ services:
         class: Knp\Menu\MenuItem
         factory_service: gyman.default.menu_builder
         factory_method: profile
-        arguments: ["@request"]
+        arguments: ["@request_stack"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: profile }
 
     gyman.members.menu_builder:
       class: Gyman\Bundle\AppBundle\Menu\MemberBuilder
-      arguments: [@knp_menu.factory, @security.context]
+      arguments: ['@knp_menu.factory', '@security.authorization_checker']
 
     gyman.landing.menu_builder:
       class: Gyman\Bundle\AppBundle\Menu\LandingBuilder
-      arguments: [@knp_menu.factory]
+      arguments: ['@knp_menu.factory']
 
     gyman.members.menu.tabs:
       class:            Knp\Menu\MenuItem
       factory_service:  gyman.members.menu_builder
       factory_method:   tabs
       scope:            request
-      arguments:        [@request]
+      arguments:        ['@request_stack']
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
 
@@ -43,7 +43,7 @@ services:
       factory_service:  gyman.landing.menu_builder
       factory_method:   tabs
       scope:            request
-      arguments:        [@request]
+      arguments:        ['@request_stack']
       tags:
           - { name: knp_menu.menu, alias: gyman.landing.menu.tabs }
 
@@ -59,7 +59,7 @@ services:
 #        abstract: true
 #        class: Knp\Menu\MenuItem
 #        factory_service: gyman.default.menu_builder
-#        arguments: ["@request"]
+#        arguments: ["@request_stack"]
 #        scope: request
 #
 #    gyman.default.menu.profile:

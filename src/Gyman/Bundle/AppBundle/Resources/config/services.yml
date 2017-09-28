@@ -2,8 +2,8 @@ services:
   gyman.app.tenant_provider:
     class: Gyman\Bundle\AppBundle\Services\TenantProvider
     arguments:
-      - @=service(parameter('subdomain_provider_service'))
-      - @gyman.club.repository
+      - "@=service(parameter('subdomain_provider_service'))"
+      - '@gyman.club.repository'
       - %database_host%
     tags:
       - {name: tenant_provider, connection_name: tenant}
@@ -40,7 +40,7 @@ services:
   gyman.listener.create_section_for_calendar:
     class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
     arguments:
-     - @gyman.repository.section
+     - '@gyman.repository.section'
     tags:
       - {name: kernel.event_listener, method: onCalendarCreate, event: dende_calendar.calendar.after_creation}
 
@@ -81,7 +81,7 @@ services:
   gyman.default.request.arraycollection_converter:
     class: Gyman\Bundle\AppBundle\Request\ArrayCollectionConverter
     calls:
-      - [setEntityManager, [@doctrine.orm.tenant_entity_manager]]
+      - [setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
     tags:
       - { name: request.param_converter}
 

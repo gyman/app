@@ -31,17 +31,17 @@ services:
     class: Gyman\Application\Handler\UploadMemberFotoHandler
     arguments:
       - %galleryDirectory%
-      - @=service(parameter('subdomain_provider_service'))
+      - "@=service(parameter('subdomain_provider_service'))"
 
   gyman.members.update_member:
     class: Gyman\Application\Handler\UpdateMemberHandler
-    arguments: [@gyman.members.repository, @gyman.members.upload_member_foto_handler, @event_dispatcher]
+    arguments: ['@gyman.members.repository', '@gyman.members.upload_member_foto_handler', '@event_dispatcher']
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\UpdateMemberCommand }
 
   gyman.members.create_member:
     class: Gyman\Application\Handler\CreateMemberHandler
-    arguments: [@gyman.members.repository, @gyman.members.upload_member_foto_handler, @event_dispatcher]
+    arguments: ['@gyman.members.repository', '@gyman.members.upload_member_foto_handler', '@event_dispatcher']
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CreateMemberCommand }
 
@@ -58,50 +58,50 @@ services:
   gyman.app.remove_entry_from_occurrence: # todo: change to command/handler
     class: Gyman\Bundle\AppBundle\Services\RemoveEntryFromOccurrence
     arguments:
-      - @gyman.entries.repository
+      - '@gyman.entries.repository'
 
   gyman.entries.open_entry:
     class: Gyman\Application\Handler\OpenEntryHandler
     arguments:
-      - @gyman.members.repository
-      - @event_dispatcher
+      - '@gyman.members.repository'
+      - '@event_dispatcher'
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\OpenEntryCommand }
 
   gyman.entries.close_entry:
     class: Gyman\Application\Handler\CloseEntryHandler
     arguments:
-      - @gyman.entries.repository
-      - @event_dispatcher
+      - '@gyman.entries.repository'
+      - '@event_dispatcher'
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\CloseEntryCommand }
 
   gyman.members.upload_club_logo_handler:
     class: Gyman\Application\Handler\UploadClubLogoHandler
     arguments:
-      - %galleryDirectory%
-      - @=service(parameter('subdomain_provider_service'))
+      - '%galleryDirectory%'
+      - "@=service(parameter('subdomain_provider_service'))"
 
   gyman.app.handler.settings_update:
     class: Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler
     arguments:
-      - @gyman.repository.section
-      - @gyman.club.repository
-      - @=service('gyman.club.provider').getCurrentClub()
-      - @gyman.members.upload_club_logo_handler
+      - '@gyman.repository.section'
+      - '@gyman.club.repository'
+      - "@=service('gyman.club.provider').getCurrentClub()"
+      - '@gyman.members.upload_club_logo_handler'
 
   gyman.app.handler.clear_expired_current_vouchers:
     class: Gyman\Application\Handler\ClearExpiredCurrentVouchersHandler
     arguments:
-      - @gyman.members.repository
+      - '@gyman.members.repository'
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\ClearExpiredCurrentVouchersCommand }
 
   gyman.app.handler.update_current_vouchers:
     class: Gyman\Application\Handler\UpdateCurrentVoucherHandler
     arguments:
-      - @gyman.members.repository
-      - @gyman.vouchers.repository
+      - '@gyman.members.repository'
+      - '@gyman.vouchers.repository'
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\UpdateCurrentVoucherCommand }
 
@@ -109,8 +109,8 @@ services:
   gyman.app.handler.close_expired_entries:
     class: Gyman\Application\Handler\CloseExpiredEntriesHandler
     arguments:
-      - @gyman.members.repository
-      - @event_dispatcher
+      - '@gyman.members.repository'
+      - '@event_dispatcher'
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\CloseExpiredEntriesCommand }
 

@@ -3,7 +3,10 @@ namespace Gyman\Bundle\AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class DefaultBuilder
 {
@@ -13,28 +16,24 @@ class DefaultBuilder
     private $factory;
 
     /**
-     * @var SecurityContext
+     * @var AuthorizationCheckerInterface
      */
-    private $context;
+    private $authorizationChecker;
 
     /**
      * @param FactoryInterface $factory
      */
-    public function __construct(FactoryInterface $factory, SecurityContext $context)
+    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $checker)
     {
         $this->factory = $factory;
-        $this->context = $context;
-
-        if ($context->getToken()) {
-            $this->user = $context->getToken()->getUser();
-        }
+        $this->authorizationChecker = $checker;
     }
 
     public function profile(Request $request)
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted('ROLE_USER')) {
+        if (!$this->authorizationChecker->isGranted('ROLE_MODERATOR')) {
             return $menu;
         }
 
@@ -80,7 +79,7 @@ class DefaultBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted('ROLE_ADMIN')) {
+        if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             return $menu;
         }
 

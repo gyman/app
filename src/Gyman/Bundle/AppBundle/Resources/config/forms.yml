@@ -3,7 +3,7 @@ services:
   gyman.vouchers.form.voucher:
     class: Gyman\Bundle\AppBundle\Form\VoucherType
     arguments:
-      - @gyman.members.repository
+      - '@gyman.members.repository'
     tags:
       - { name: form.type, alias: gyman_voucher_form }
 

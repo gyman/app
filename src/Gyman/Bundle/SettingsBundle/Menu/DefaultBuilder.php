@@ -4,6 +4,7 @@ namespace Gyman\Bundle\SettingsBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultBuilder
@@ -14,28 +15,21 @@ class DefaultBuilder
     private $factory;
 
     /**
-     * @var SecurityContext
+     * @var AuthorizationCheckerInterface
      */
-    private $context;
+    private $checker;
 
-    /**
-     * @param FactoryInterface $factory
-     */
-    public function __construct(FactoryInterface $factory, SecurityContext $context)
+    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->factory = $factory;
-        $this->context = $context;
-
-        if ($context->getToken()) {
-            $this->user = $context->getToken()->getUser();
-        }
+        $this->checker = $authorizationChecker;
     }
 
     public function main()
     {
         $menu = $this->factory->createItem('root');
 
-        if (!$this->context->isGranted('ROLE_ADMIN')) {
+        if (!$this->checker->isGranted('ROLE_ADMIN')) {
             return $menu;
         }
 

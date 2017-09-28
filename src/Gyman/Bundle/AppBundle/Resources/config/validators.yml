@@ -14,16 +14,15 @@ services:
 
   gyman.members.unique_member_email.validator:
     class: Gyman\Bundle\AppBundle\Validator\UniqueMemberEmailValidator
-    arguments: [@gyman.members.repository]
+    arguments: ['@gyman.members.repository']
     tags:
         - { name: validator.constraint_validator, alias: UniqueMemberEmailValidator }
 
   gyman.members.unique_member_barcode.validator:
     class: Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcodeValidator
-    arguments: [@gyman.members.repository]
+    arguments: ['@gyman.members.repository']
     tags:
         - { name: validator.constraint_validator, alias: UniqueMemberBarcodeValidator }
-
 
   gyman.entries.price_set_for_paid_entry.validator:
     class: Gyman\Bundle\AppBundle\Validator\PriceSetForPaidEntryValidator

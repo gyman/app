@@ -56,7 +56,7 @@
         "twig/extensions": "^1.5",
 
         "knplabs/knp-menu-bundle" : "^2.1",
-
+        "knplabs/knp-time-bundle" : "*",
         "gyman/supr": "dev-master",
         "imagine/imagine": "0.6.*",
         "nesbot/carbon": "dev-master",

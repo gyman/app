@@ -43,18 +43,12 @@ doctrine:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
                 datetime_functions:
                     dayname: Gyman\Bundle\AppBundle\DQL\Dayname
-            filters:
-                softdeleteable:
-                    class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                    enabled: true
             mappings:
-                StofDoctrineExtensionsBundle: ~
                 ClubBundle: ~
           tenant:
             auto_mapping:     false # disabled so we can assign entities to our own connections
             connection:       tenant
             mappings:
-              StofDoctrineExtensionsBundle: ~
               DendeCalendarBundle:
                 mapping:    true
                 dir:        Resources/config/doctrine
@@ -73,7 +67,3 @@ doctrine:
                     multi_concat: Spy\TimelineBundle\Driver\Doctrine\AST\Functions\MultiConcatFunction
                 datetime_functions:
                     dayname: Gyman\Bundle\AppBundle\DQL\Dayname
-            filters:
-                softdeleteable:
-                    class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                    enabled: true
