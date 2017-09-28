@@ -143,10 +143,6 @@ php app/console doctrine:fixtures:load --env=dev --no-interaction --quiet --fixt
 php app/console doctrine:schema:create --club=dende
 php app/console doctrine:fixtures:load --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=dende
 
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
-
 #npm install
 #./node_modules/.bin/bower install
 

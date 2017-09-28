@@ -37,8 +37,8 @@
         "doctrine/dbal": "^2.6",
         "doctrine/doctrine-bundle": "^1.7",
 
-        "doctrine/data-fixtures": "1.1.1",
-        "doctrine/doctrine-fixtures-bundle": "2.3.0",
+        "doctrine/data-fixtures": "^1.2",
+        "doctrine/doctrine-fixtures-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^1.1",
 
         "sensio/distribution-bundle": "^5",
@@ -63,7 +63,7 @@
         "braincrafted/bootstrap-bundle": "1.4.2",
 
         "dende/common-bundle": "dev-master",
-        "dende/calendar-bundle": "dev-feature/calendar21",
+        "dende/calendar-bundle": "1.8.2",
         "league/tactician-bundle": "^1",
         "liip/monitor-bundle": "^2.3",
         "dende/multitenancybundle": "1.1",

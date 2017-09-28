@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0528d7756f1bf685bc081219ef20e35",
+    "content-hash": "b6e4be48ee065fbe3b0eae2f46364744",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -173,16 +173,16 @@
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "dev-feature/calendar21",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "251db7c89af1837f4a4ba0fbc9b68918897146ec"
+                "reference": "4686ea5acda5969a65a4ae91470b426207e0ceff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/251db7c89af1837f4a4ba0fbc9b68918897146ec",
-                "reference": "251db7c89af1837f4a4ba0fbc9b68918897146ec",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/4686ea5acda5969a65a4ae91470b426207e0ceff",
+                "reference": "4686ea5acda5969a65a4ae91470b426207e0ceff",
                 "shasum": ""
             },
             "require": {
@@ -219,7 +219,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2017-09-27T14:23:07+00:00"
+            "time": "2017-09-28T07:59:40+00:00"
         },
         {
             "name": "dende/common-bundle",
@@ -632,29 +632,29 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
+                "reference": "758c2c0062d3b72d265149455432b57ee046100e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/758c2c0062d3b72d265149455432b57ee046100e",
+                "reference": "758c2c0062d3b72d265149455432b57ee046100e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "php": ">=5.3.2"
-            },
-            "conflict": {
-                "doctrine/orm": "< 2.4"
+                "php": "^7.1"
             },
             "require-dev": {
-                "doctrine/orm": "~2.4"
+                "doctrine/dbal": "^2.5.4",
+                "doctrine/orm": "^2.5.4",
+                "phpunit/phpunit": "^6.3"
             },
             "suggest": {
+                "alcaeus/mongo-php-adapter": "For using MongoDB ODM with PHP 7",
                 "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
                 "doctrine/orm": "For loading ORM fixtures",
                 "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
@@ -662,12 +662,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\DataFixtures": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -685,7 +685,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-03-30T12:14:13+00:00"
+            "time": "2017-09-11T06:19:02+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -931,28 +931,28 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "2.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029"
+                "reference": "7bb198c044b798b54e6be37c7929339aa645c3bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/0f1a2f91b349e10f5c343f75ab71d23aace5b029",
-                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/7bb198c044b798b54e6be37c7929339aa645c3bf",
+                "reference": "7bb198c044b798b54e6be37c7929339aa645c3bf",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "~1.0",
                 "doctrine/doctrine-bundle": "~1.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.3|~3.0"
+                "symfony/doctrine-bridge": "~2.7|~3.0|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -984,7 +984,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2015-11-04T21:23:23+00:00"
+            "time": "2017-09-10T23:22:01+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -1895,12 +1895,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "98d1e74b4e6be513afa5ce9e7fe3e07c4d537795"
+                "reference": "f4683f41ebf21e60667447bb49939bee35807c3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/98d1e74b4e6be513afa5ce9e7fe3e07c4d537795",
-                "reference": "98d1e74b4e6be513afa5ce9e7fe3e07c4d537795",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f4683f41ebf21e60667447bb49939bee35807c3c",
+                "reference": "f4683f41ebf21e60667447bb49939bee35807c3c",
                 "shasum": ""
             },
             "require": {
@@ -1939,7 +1939,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -1970,7 +1970,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-09-26T08:35:10+00:00"
+            "time": "2017-09-28T15:17:28+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -4284,12 +4284,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "d7885ec3b26b67609009fcf9023e48eeed6559f5"
+                "reference": "648a8953dd20bf7f90428f50f1a0cb5b29eb6adc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/d7885ec3b26b67609009fcf9023e48eeed6559f5",
-                "reference": "d7885ec3b26b67609009fcf9023e48eeed6559f5",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/648a8953dd20bf7f90428f50f1a0cb5b29eb6adc",
+                "reference": "648a8953dd20bf7f90428f50f1a0cb5b29eb6adc",
                 "shasum": ""
             },
             "require": {
@@ -4429,7 +4429,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-09-27T21:49:24+00:00"
+            "time": "2017-09-28T15:24:12+00:00"
         },
         {
             "name": "twig/extensions",
@@ -6157,12 +6157,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f29411235cb3b9e157501de8228fd3a56a5ba864"
+                "reference": "489c3ac972fb915f3b05731f2ac904ff408e7a49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f29411235cb3b9e157501de8228fd3a56a5ba864",
-                "reference": "f29411235cb3b9e157501de8228fd3a56a5ba864",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/489c3ac972fb915f3b05731f2ac904ff408e7a49",
+                "reference": "489c3ac972fb915f3b05731f2ac904ff408e7a49",
                 "shasum": ""
             },
             "require": {
@@ -6233,7 +6233,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-09-25T07:50:58+00:00"
+            "time": "2017-09-28T11:11:47+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -7163,7 +7163,6 @@
         "gyman/supr": 20,
         "nesbot/carbon": 20,
         "dende/common-bundle": 20,
-        "dende/calendar-bundle": 20,
         "sensiolabs/security-advisories": 20,
         "behat/symfony2-extension": 20,
         "liip/functional-test-bundle": 20
