@@ -7,10 +7,10 @@
 /web/images/
 /web/fonts/
 /app/bootstrap.php.cache
-/app/cache/*
+/var/cache/*
 /app/spool/*
 /app/config/parameters.yml
-/app/logs/*
+/var/logs/*
 !app/cache/.gitkeep
 !app/spool/.gitkeep
 !app/logs/.gitkeep
@@ -39,3 +39,4 @@ composer.phar*
 /*.sql
 /web/schedules/
 !/web/schedules/.gitkeep
+npm-debug.log

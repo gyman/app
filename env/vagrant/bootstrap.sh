@@ -110,6 +110,8 @@ mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "FLUSH 
 service mysql restart
 pkill -f mysqld
 
+sudo update-rc.d mysql defaults
+
 echo '127.0.0.1    gyman.vagrant' >> /etc/hosts
 
 sed -i 's/bind_ip = 127.0.0.1/#bind_ip = 127.0.0.1/g' /etc/mongodb.conf
@@ -129,26 +131,27 @@ su vagrant <<'EOF'
 cd /vagrant
 composer install --prefer-source --no-interaction
 
-php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load -n
+php app/console doctrine:schema:create --no-interaction --quiet --env=dev
+php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection
 
-php app/console doctrine:schema:create --club=rio --em=tenant
-php app/console doctrine:schema:create --club=extreme --em=tenant
-php app/console doctrine:schema:create --club=dende --em=tenant
+php app/console doctrine:schema:create --club=rio
+php app/console doctrine:fixtures:load --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=rio
 
-php app/console doctrine:fixtures:load -n --club=rio --em=tenant
-php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
-php app/console doctrine:fixtures:load -n --club=dende --em=tenant
+php app/console doctrine:schema:create --club=extreme
+php app/console doctrine:fixtures:load --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=extreme
+
+php app/console doctrine:schema:create --club=dende
+php app/console doctrine:fixtures:load --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=dende
 
 php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
 php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
 php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
 
-npm install
-./node_modules/.bin/bower install
+#npm install
+#./node_modules/.bin/bower install
 
 php app/console assets:install web --symlink
-./node_modules/.bin/grunt production
+#./node_modules/.bin/grunt production
 
 less /vagrant/env/vagrant/crontab >> /tmp/mycron
 crontab /tmp/mycron
