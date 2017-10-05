@@ -5,19 +5,13 @@ services:
 
     gyman.default.menu.main:
         class:            Knp\Menu\MenuItem
-        factory_service:  gyman.default.menu_builder
-        factory_method:   main
-        arguments:        ["@request_stack"]
-        scope:            request
+        factory:          ['@gyman.default.menu_builder', 'main']
         tags:
             - { name: knp_menu.menu, alias: main }
 
     gyman.default.menu.profile:
-        class: Knp\Menu\MenuItem
-        factory_service: gyman.default.menu_builder
-        factory_method: profile
-        arguments: ["@request_stack"]
-        scope: request
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'profile']
         tags:
             - { name: knp_menu.menu, alias: profile }
 
@@ -31,27 +25,20 @@ services:
 
     gyman.members.menu.tabs:
       class:            Knp\Menu\MenuItem
-      factory_service:  gyman.members.menu_builder
-      factory_method:   tabs
-      scope:            request
+      factory:          ['@gyman.members.menu_builder', 'tabs']
       arguments:        ['@request_stack']
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
 
     gyman.landing.menu.tabs:
       class:            Knp\Menu\MenuItem
-      factory_service:  gyman.landing.menu_builder
-      factory_method:   tabs
-      scope:            request
-      arguments:        ['@request_stack']
+      factory:          ['@gyman.landing.menu_builder', 'tabs']
       tags:
           - { name: knp_menu.menu, alias: gyman.landing.menu.tabs }
 
     gyman.members.menu.tabs_picture:
       class:            Knp\Menu\MenuItem
-      factory_service:  gyman.members.menu_builder
-      factory_method:   picture
-      scope:            request
+      factory:          ['@gyman.members.menu_builder', 'picture']
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
 

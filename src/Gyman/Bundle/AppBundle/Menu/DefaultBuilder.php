@@ -29,7 +29,7 @@ class DefaultBuilder
         $this->authorizationChecker = $checker;
     }
 
-    public function profile(Request $request)
+    public function profile()
     {
         $menu = $this->factory->createItem('root');
 
@@ -75,7 +75,7 @@ class DefaultBuilder
         return $menu;
     }
 
-    public function main(Request $request)
+    public function main()
     {
         $menu = $this->factory->createItem('root');
 

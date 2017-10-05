@@ -5,6 +5,7 @@ use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -42,8 +43,9 @@ class MemberBuilder
         $this->authorizationChecker = $checker;
     }
 
-    public function tabs(Request $request)
+    public function tabs(RequestStack $requestStack)
     {
+        $request = $requestStack->getMasterRequest();
         $menu = $this->factory->createItem('root');
 
         /**

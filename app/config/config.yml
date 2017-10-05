@@ -124,6 +124,7 @@ dende_calendar:
 dende_multitenancy:
   patched_commands:
     - "doctrine:*"
+    - "fos:*"
     - "gyman:entries:close_expired"
     - "gyman:vouchers:update_current"
 

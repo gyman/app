@@ -5,6 +5,7 @@ use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class LandingBuilder
@@ -22,7 +23,7 @@ class LandingBuilder
         $this->factory = $factory;
     }
 
-    public function tabs(Request $request)
+    public function tabs()
     {
         $menu = $this->factory->createItem('root');
 
