@@ -5,13 +5,11 @@ Gyman\Domain\Section:
 
   id:
     id:
-      type: integer
-      generator: { strategy: auto }
-
-  embedded:
-    sectionId:
-      class: Gyman\Domain\Section\SectionId
-      columnPrefix: section_
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   oneToOne:
     calendar:

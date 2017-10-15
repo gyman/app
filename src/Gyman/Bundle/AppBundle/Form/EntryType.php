@@ -11,6 +11,8 @@ use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -102,7 +104,7 @@ final class EntryType extends AbstractType
 //            ],
 //            'label' => 'entries.form.start_date.label',
 //        ])
-        ->add('price', 'integer', [
+        ->add('price', IntegerType::class, [
             'label' => 'entries.form.price.label',
             "attr" => [
                 "min" => 0,
@@ -133,7 +135,7 @@ final class EntryType extends AbstractType
                 $defaultChoice = Entry::TYPE_VOUCHER;
             }
 
-            $form->add('entryType', 'choice', [
+            $form->add('entryType', ChoiceType::class, [
                 'choices'  => $choices,
                 'data'     => $defaultChoice,
                 'expanded' => true,

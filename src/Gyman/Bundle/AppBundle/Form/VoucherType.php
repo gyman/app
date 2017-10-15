@@ -6,6 +6,10 @@ use Gyman\Bundle\AppBundle\Form\DataTransformer\MemberToIdTransformer;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\VoucherDateTransformer;
 use Gyman\Application\Command\CreateVoucherCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -30,13 +34,13 @@ class VoucherType extends AbstractType
     {
         $builder
         ->add(
-            $builder->create('startDate', 'date', [
+            $builder->create('startDate', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
             ])->addModelTransformer(new VoucherDateTransformer('start'))
         )
             ->add(
-                $builder->create('endDate', 'date', [
+                $builder->create('endDate', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 ])->addModelTransformer(new VoucherDateTransformer('end'))
@@ -47,17 +51,17 @@ class VoucherType extends AbstractType
             ]
         ])
         ->add(
-            $builder->create('member', 'hidden', [
+            $builder->create('member', HiddenType::class, [
                 "data_class" => null,
                 "data" => $options["member"]
             ])->addViewTransformer(new MemberToIdTransformer($this->memberRepository))
         )
-        ->add('maximumAmount', 'integer', [
+        ->add('maximumAmount', IntegerType::class, [
             "attr" => [
                 "min" => 0
             ]
         ])
-        ->add('add.voucher', 'submit', [
+        ->add('add.voucher', SubmitType::class, [
             'attr' => [
                 'class' => 'btn btn-large btn-action',
             ],

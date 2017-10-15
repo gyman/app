@@ -1,4 +1,4 @@
-<?php
+<?php'gyman_voucher_form'
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;

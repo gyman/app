@@ -3,6 +3,8 @@ namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
 use Gyman\Application\Command\CreateUserForMemberCommand;
+use Gyman\Bundle\AppBundle\Form\MemberType;
+use Gyman\Bundle\AppBundle\Form\SearchType;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Command\SearchMemberCommand;
@@ -38,7 +40,7 @@ class MembersController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
 
-        $form = $this->createForm('gyman_member_form', $command);
+        $form = $this->createForm(MemberType::class, $command);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -71,7 +73,7 @@ class MembersController extends Controller
         $command = new CreateMemberCommand();
 
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-        $form = $this->createForm('gyman_member_form', $command, [
+        $form = $this->createForm(MemberType::class, $command, [
             'data_class' => CreateMemberCommand::class,
         ]);
 
@@ -103,7 +105,7 @@ class MembersController extends Controller
      */
     public function searchFormAction(Request $request)
     {
-        $form = $this->createForm('gyman_member_search_form', new SearchMemberCommand(), [
+        $form = $this->createForm(SearchType::class, new SearchMemberCommand(), [
             "action" => $this->generateUrl("gyman_members_search"),
         ]);
 
@@ -119,7 +121,7 @@ class MembersController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $form = $this->createForm('gyman_member_search_form', new SearchMemberCommand());
+        $form = $this->createForm(SearchType::class, new SearchMemberCommand());
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -4,6 +4,7 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Bundle\AppBundle\Form\SearchType;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\Criteria;
@@ -41,7 +42,7 @@ class DefaultController extends Controller
 
         $date = new DateTime();
 
-        $searchForm = $this->createForm('gyman_member_search_form', new SearchMemberCommand(), [
+        $searchForm = $this->createForm(SearchType::class, new SearchMemberCommand(), [
             "action" => $this->generateUrl("gyman_members_search")
         ]);
 

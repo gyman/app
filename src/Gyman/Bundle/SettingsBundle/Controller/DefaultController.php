@@ -4,6 +4,8 @@ namespace Gyman\Bundle\SettingsBundle\Controller;
 use Exception;
 use Gyman\Application\Command\UpdateSectionsCommand;
 use Gyman\Application\Command\UpdateSettingsCommand;
+use Gyman\Bundle\SettingsBundle\Form\Type\SectionsType;
+use Gyman\Bundle\SettingsBundle\Form\Type\SettingsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,7 +73,7 @@ class DefaultController extends Controller
         $command = new UpdateSectionsCommand();
         $command->sections = $this->get('gyman.repository.section')->findAll();
 
-        $form = $this->createForm('club_sections', $command);
+        $form = $this->createForm(SectionsType::class, $command);
 
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
@@ -115,7 +117,7 @@ class DefaultController extends Controller
         $command->details = $club->details();
         $command->name = $club->getName();
 
-        $form = $this->createForm('club_settings', $command);
+        $form = $this->createForm(SettingsType::class, $command);
 
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);

@@ -10,15 +10,9 @@ use Ramsey\Uuid\Uuid;
 class Section
 {
     /**
-     * Doctrine id
-     * @var int
+     * @var Uuid
      */
     protected $id;
-
-    /**
-     * @var SectionId
-     */
-    protected $sectionId;
 
     /**
      * @var string

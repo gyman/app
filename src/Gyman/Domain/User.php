@@ -2,12 +2,18 @@
 namespace Gyman\Domain;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 /**
  * Class User
  */
 class User extends BaseUser implements UserInterface, SecurityUserInterface
 {
+    /**
+     * @var Uuid
+     */
+    protected $id;
+
     /**
      * @var string
      */

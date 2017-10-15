@@ -5,8 +5,11 @@ Gyman\Domain\User:
 
   id:
     id:
-      type: integer
-      generator: { strategy: auto }
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   oneToOne:
     member:

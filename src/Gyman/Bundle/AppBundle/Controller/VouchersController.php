@@ -3,6 +3,8 @@ namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Application\Command\CloseVoucherCommand;
 use Gyman\Application\Command\UpdateVoucherCommand;
+use Gyman\Bundle\AppBundle\Form\UpdateVoucherType;
+use Gyman\Bundle\AppBundle\Form\VoucherType;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
@@ -35,7 +37,7 @@ class VouchersController extends Controller
         $command = new CreateVoucherCommand();
         $command->member = $member;
 
-        $form = $this->createForm('gyman_voucher_form', $command, [
+        $form = $this->createForm(VoucherType::class, $command, [
                 'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
                 'memberId' => $member->id(),
                 'member' => $member
@@ -111,7 +113,7 @@ class VouchersController extends Controller
     {
         $command = UpdateVoucherCommand::createFromVoucher($voucher);
 
-        $form = $this->createForm('gyman_voucher_update_form', $command, [
+        $form = $this->createForm(UpdateVoucherType::class, $command, [
             'action' => $this->generateUrl('gyman_voucher_update', ['id' => $voucher->id()]),
         ]);
 
