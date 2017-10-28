@@ -18,7 +18,7 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
     public function createFromArray(array $array = []) : OccurrenceInterface
     {
         $template = [
-            'occurrenceId'   => OccurrenceId::create(),
+            'id'   => OccurrenceId::create(),
             'event'          => null,
             'startDate'      => new DateTime(),
             'duration'       => null,
@@ -31,7 +31,7 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
         $array = array_merge($template, $array);
 
         return new Occurrence(
-            $array['occurrenceId'],
+            $array['id'],
             $array['event'],
             $array['startDate'],
             $array['duration'],
