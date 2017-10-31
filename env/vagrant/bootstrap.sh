@@ -36,6 +36,11 @@ apt-get install -y python-software-properties
 add-apt-repository -y ppa:ondrej/php
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 add-apt-repository 'deb [arch=amd64,i386] http://mariadb.kisiek.net/repo/10.2/ubuntu zesty main'
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+apt remove cmdtest
+
 apt-get update
 apt-get upgrade
 apt-get install -y --force-yes php7.1 php7.1-cli php-pear php-fpm nginx git \
@@ -43,7 +48,7 @@ apt-get install -y --force-yes php7.1 php7.1-cli php-pear php-fpm nginx git \
     php-xdebug php7.1-intl build-essential software-properties-common libsqlite3-dev \
     php7.1-xml php7.1-curl php7.1-cli php7.1-common php7.1-bcmath php7.1-mysql php7.1-mbstring \
     php7.1-json php7.1-mcrypt php7.1-sqlite3 php7.1-xsl php-mongodb php-imagick \
-    mongodb tcl ruby-dev npm nodejs
+    mongodb tcl ruby-dev npm nodejs yarn
 
 gem install mailcatcher
 echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
@@ -51,27 +56,6 @@ update-rc.d cron defaults
 echo "sendmail_path = /usr/bin/env $(which catchmail) -f 'www-data@localhost'" >> /etc/php/7.1/mods-available/mailcatcher.ini
 phpenmod mailcatcher
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
-
-#redis
-
-cd /tmp
-curl -O http://download.redis.io/redis-stable.tar.gz
-tar xzvf redis-stable.tar.gz
-cd redis-stable
-make
-make test
-make install
-mkdir /etc/redis
-mkdir /var/lib/redis
-cp /tmp/redis-stable/redis.conf /etc/redis
-sed -i 's/supervised no/supervised systemd/g' /etc/redis/redis.conf
-sed -i 's/dir .\//dir \/var\/lib\/redis/g' /etc/redis/redis.conf
-sed -i 's/bind 127.0.0.1/# bind 127.0.0.1/g' /etc/redis/redis.conf
-sed -i 's/protected-mode yes/protected-mode no/g' /etc/redis/redis.conf
-cp /vagrant/env/vagrant/redis.service /etc/systemd/system/redis.service
-systemctl start redis
-systemctl status redis
-systemctl enable redis
 
 #nginx
 rm /etc/nginx/sites-enabled/default
@@ -129,23 +113,11 @@ su vagrant <<'EOF'
 cd /vagrant
 composer install --prefer-source --no-interaction
 
-php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load -n
+composer prepare-default
+composer prepare-tenant
 
-php app/console doctrine:schema:create --club=rio --em=tenant
-php app/console doctrine:schema:create --club=extreme --em=tenant
-php app/console doctrine:schema:create --club=dende --em=tenant
-
-php app/console doctrine:fixtures:load -n --club=rio --em=tenant
-php app/console doctrine:fixtures:load -n --club=extreme --em=tenant
-php app/console doctrine:fixtures:load -n --club=dende --em=tenant
-
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com dende
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com rio
-php app/console gyman:club:assign-user uirapuruadg+admin@gmail.com extreme
-
-npm install
-./node_modules/.bin/bower install
+# npm install
+# ./node_modules/.bin/bower install
 
 php app/console assets:install web --symlink
 ./node_modules/.bin/grunt production
