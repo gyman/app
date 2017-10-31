@@ -29,16 +29,16 @@ final class SearchType extends AbstractType
                 'label' => 'member_search_form.query',
                 'required' => false
             ])
-            ->add('section', EntityType::class, [
-                'label' => 'member_search_form.section',
-                'expanded' => true,
-                'multiple' => false,
-                'choice_attr' => 'title',
-                'choice_name' => 'title',
-                'class' => Section::class,
-                'empty_data' => 'member_search_form.section.none',
-                'required' => false,
-            ])
+//            ->add('section', EntityType::class, [
+//                'label' => 'member_search_form.section',
+//                'expanded' => true,
+//                'multiple' => false,
+//                'choice_name' => 'title',
+//                'choice_value' => 'id',
+//                'class' => Section::class,
+//                'empty_data' => 'member_search_form.section.none',
+//                'required' => false,
+//            ])
             ->add('belt', ChoiceType::class, [
                 'label' => 'member_search_form.belt',
                 'expanded' => true,

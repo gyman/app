@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gyman\Domain\Section\SectionId;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class Section
 {
@@ -74,9 +75,9 @@ class Section
         return $this->calendar;
     }
 
-    public function id() : SectionId
+    public function id() : UuidInterface
     {
-        return $this->sectionId;
+        return $this->id;
     }
 
     public function addMember(Member $member)
