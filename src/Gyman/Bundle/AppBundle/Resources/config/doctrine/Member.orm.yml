@@ -53,7 +53,6 @@ Gyman\Domain\Member:
     currentVoucher:
       targetEntity: Gyman\Domain\Voucher
       cascade: ["all"]
-      inversedBy: member
       joinColumn:
         name: current_voucher_id
         referencedColumnName: id

@@ -106,6 +106,9 @@ class Entry
         $this->type = $type;
         $this->occurrence = $occurrence;
         $this->member = $member;
+
+        $this->createdAt = new DateTime("now");
+        $this->updatedAt = new DateTime("now");
     }
 
     /**

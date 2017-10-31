@@ -16,7 +16,7 @@ final class EntryFactory
      * @param $params
      * @return Entry
      */
-    public static function createFromArray($array)
+    public static function createFromArray($array) : Entry
     {
         $template = [
             'startDate'            => new DateTime(),
