@@ -1,13 +1,4 @@
 ---
-user-uirapuru:
-  firstname: Grzegorz
-  lastname: Kaszuba
-  username: uirapuru
-  email: uirapuruadg+timesheet@gmail.com
-  plainPassword: uirapuru
-  roles: [ROLE_SUPER_ADMIN]
-  enabled: true
-
 user-super-admin:
   firstname: Grzegorz
   lastname: Kaszuba
@@ -26,11 +17,30 @@ user-admin:
   roles: [ROLE_ADMIN]
   enabled: true
 
-user-user:
+user-moderator:
   firstname: Grzegorz
   lastname: Kaszuba
-  username: user
-  email: uirapuruadg+user@gmail.com
-  plainPassword: user
-  roles: [ROLE_USER]
+  username: moderator
+  email: uirapuruadg+moderator@gmail.com
+  plainPassword: moderator
+  roles: [ROLE_MODERATOR]
+  enabled: true
+
+user-instructor:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: usinstructorer
+  email: uirapuruadg+instructor@gmail.com
+  plainPassword: instructor
+  roles: [ROLE_INSTRUCTOR]
+  enabled: true
+
+user-member:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  member: Member00
+  username: member
+  email: uirapuruadg+member@gmail.com
+  plainPassword: member
+  roles: [ROLE_MEMBER]
   enabled: true

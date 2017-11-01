@@ -118,11 +118,11 @@ composer install --prefer-source --no-interaction
 composer prepare-default
 composer prepare-tenant
 
-# npm install
-# ./node_modules/.bin/bower install
+yarn install
+./node_modules/.bin/bower install
 
 php app/console assets:install web --symlink
-./node_modules/.bin/grunt production
+./node_modules/.bin/grunt development
 
 less /vagrant/env/vagrant/crontab >> /tmp/mycron
 crontab /tmp/mycron

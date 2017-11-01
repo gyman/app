@@ -10,7 +10,7 @@ class UsersData extends BaseFixture
 
     public function getOrder()
     {
-        return -10;
+        return 20;
     }
 
     public function insert($params)
@@ -23,6 +23,10 @@ class UsersData extends BaseFixture
         $user->setRoles($params['roles']);
         $user->setPlainPassword($params['plainPassword']);
         $user->setEnabled($params['enabled']);
+
+        if(array_key_exists("member", $params) && null !== $params["member"]) {
+            $user->setMember($this->getReference($params["member"]));
+        }
 
         return $user;
     }

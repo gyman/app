@@ -41,9 +41,9 @@ class MemberController extends Controller
     }
 
     /**
-     * @Route("/calendar", name="gyman_dashboard_member_calendar")
+     * @Route("/calendar", name="gyman_dashboard_member_calendar", options={"expose"=true})
      */
-    public function getCalendar(Request $request){
+    public function getCalendarAction(Request $request){
         $start = Carbon::parse($request->get('start', 'this week'));
         $end = Carbon::parse($request->get('end', 'next week'));
 

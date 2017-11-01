@@ -1,7 +1,10 @@
-<?php'gyman_voucher_form'
+<?php
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -13,16 +16,16 @@ class UserType extends BaseType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('firstname', null, [
+        $builder->add('firstname', TextType::class, [
             'label'          => 'form.label.firstname',
             'error_bubbling' => true,
         ]);
-        $builder->add('lastname', null, [
+        $builder->add('lastname', TextType::class, [
             'label'          => 'form.label.lastname',
             'error_bubbling' => true,
         ]);
-        $builder->add('plainPassword', 'repeated', [
-                'type'            => 'password',
+        $builder->add('plainPassword', RepeatedType::class, [
+                'type'            => PasswordType::class,
                 'error_bubbling'  => true,
                 'required'        => false,
                 'options'         => ['translation_domain' => 'FOSUserBundle'],

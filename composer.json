@@ -84,7 +84,8 @@
            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "@install-assets"
         ],
         "post-update-cmd": [
             "@symfony-scripts"
@@ -117,6 +118,15 @@
         "tests": [
             "@reload-fixtures-test",
             "php bin/phpunit -c app/phpunit.xml"
+        ],
+        "install-assets" : [
+            "yarn install",
+            "./node_modules/.bin/bower install"
+        ],
+        "dump-assets" : [
+            "php app/console assets:install web --relative --symlink",
+            "php app/console fos:js-routing:dump",
+            "./node_modules/.bin/grunt development"
         ]
     },
     "minimum-stability": "dev",

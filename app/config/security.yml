@@ -9,8 +9,8 @@ security:
 
         ROLE_INSTRUCTOR:  ROLE_USER
 
-        ROLE_MODERATOR:   ROLE_MODERATOR
-        ROLE_ADMIN:       ROLE_STAFF
+        ROLE_MODERATOR:   ROLE_USER
+        ROLE_ADMIN:       ROLE_MODERATOR
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -38,7 +38,7 @@ security:
         - { path: ^/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/resetting, role: ROLE_SUPER_ADMIN }
         - { path: ^/dashboard/member, role: ROLE_MEMBER }
-        - { path: ^/dashboard, role: ROLE_USER }
+        - { path: ^/dashboard, roles: [ROLE_MODERATOR, ROLE_MEMBER] }
         - { path: ^/profile, roles: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/admin, role: ROLE_SUPER_ADMIN }
         - { path: ^/settings, role: ROLE_ADMIN }
