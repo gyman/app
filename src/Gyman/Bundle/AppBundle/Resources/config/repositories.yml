@@ -25,6 +25,7 @@ services:
     arguments:
       - 'Gyman\Domain\Member'
 
+
   gyman.entries.repository:
     class:            Gyman\Bundle\AppBundle\Repository\EntryRepository
     factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']

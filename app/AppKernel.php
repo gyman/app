@@ -1,5 +1,6 @@
 <?php
 
+use Gyman\Bundle\AppBundle\Globals;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 

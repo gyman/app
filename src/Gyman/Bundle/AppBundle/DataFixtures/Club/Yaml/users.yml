@@ -29,7 +29,7 @@ user-moderator:
 user-instructor:
   firstname: Grzegorz
   lastname: Kaszuba
-  username: usinstructorer
+  username: instructor
   email: uirapuruadg+instructor@gmail.com
   plainPassword: instructor
   roles: [ROLE_INSTRUCTOR]

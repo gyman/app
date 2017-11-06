@@ -21,7 +21,6 @@
 {% block content %}
     <div class="container">
 
-
         {{ form_start(form,{action : path("fos_user_profile_edit")}) }}
         <div class="my-account margin-top">
 
@@ -119,6 +118,7 @@
             <div class="row">
                 <div class="col-sm-6 col-md-6">
 
+        {{ form_rest(form) }}
                 </div>
             </div>
             <div class="buttons-box clearfix">
@@ -126,7 +126,6 @@
                 <span class="required"><b>*</b> {{ "profile.dashboard.form.required"|trans }}</span>
             </div>
         </div>
-        {{ form_rest(form) }}
         {{ form_end(form) }}
 
     </div>

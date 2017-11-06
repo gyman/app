@@ -1,6 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle;
 
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
+
 /**
  * Class Globals
  *
@@ -26,12 +28,20 @@ final class Globals
     protected static $galleryPath;
 
     /**
-     * @var string
+     * @var Subdomain
      */
     protected static $subdomain;
 
+    /**
+     * @var string
+     */
     protected static $galleryDir = '/uploads/gallery/';
-    protected static $noImage;
+
+    /**
+     * @var string
+     */
+    protected static $noImage = '/bundles/gymanapp/images/no-profile.gif';
+
     protected static $compareChoices = [
         'eq'         => 'równy',
         'lt'         => 'wcześniej niż',
@@ -111,7 +121,7 @@ final class Globals
      * @param  string $string
      * @return string
      */
-    public static function applyGalleryPath($string)
+    public static function applyGalleryPath(string $string) : string
     {
         if (self::checkIfImageExists($string)) {
             return self::getGalleryPath() . $string;
@@ -178,18 +188,12 @@ final class Globals
         return 'PLN';
     }
 
-    /**
-     * @param $subdomain
-     */
-    public static function setSubdomain($subdomain)
+    public static function setSubdomain(Subdomain $subdomain) : void
     {
         self::$subdomain = $subdomain;
     }
 
-    /**
-     * @return string
-     */
-    public static function getSubdomain()
+    public static function getSubdomain() : Subdomain
     {
         return self::$subdomain;
     }

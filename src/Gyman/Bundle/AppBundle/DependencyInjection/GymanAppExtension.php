@@ -33,5 +33,6 @@ class GymanAppExtension extends Extension
         $loader->load('repositories.yml');
         $loader->load('twig_extensions.yml');
         $loader->load('validators.yml');
+        $loader->load('queries.yml');
     }
 }

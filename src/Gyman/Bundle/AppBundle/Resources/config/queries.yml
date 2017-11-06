@@ -1,0 +1,7 @@
+---
+services:
+
+  gyman.members.query:
+    class:          Gyman\Application\Query\MemberQuery
+    arguments:
+      - "@=service('doctrine.orm.tenant_entity_manager').getConnection()"

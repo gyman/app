@@ -50,6 +50,13 @@ services:
       - '@request_stack'
       - '%base_url%'
 
+  gyman.app.globals_factory:
+    class: Gyman\Bundle\AppBundle\GlobalsFactory
+    arguments:
+      - '@gyman.app.subdomain_provider'
+    calls:
+      - [setUp, []]
+
   gyman.app.test_subdomain_provider:
       class: Gyman\Bundle\AppBundle\Services\TestSubdomainProvider
 

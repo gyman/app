@@ -24,11 +24,6 @@ class Member
     protected $id;
 
     /**
-     * @var MemberId
-     */
-    protected $memberId;
-
-    /**
      * @var EmailAddress
      */
     protected $email;

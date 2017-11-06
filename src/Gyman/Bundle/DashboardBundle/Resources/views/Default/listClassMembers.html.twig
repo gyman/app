@@ -2,66 +2,12 @@
 
 {# @var occurrence Gyman\Domain\Calendar\Event\Occurrence occurrence #}
 
-{% block javascripts %}
-    {{ parent() }}
-
-    <script>
-        $(function(){
-            var occurrenceId = '{{ occurrence.id }}';
-            var store = new JSData.DS();
-
-            store.registerAdapter('http', new DSHttpAdapter({
-            {% if app.environment == 'prod' %}
-                basePath: "/api",
-            {% else %}
-                basePath: "/app_dev.php/api",
-            {% endif %}
-            }), { default: true });
-
-            var Member = store.defineResource({name: 'member'});
-            var Entry = store.defineResource({name: 'entry'});
-
-            $(document).on("enteredMembersBarcode", function(event, data){
-                Member
-                    .find(data.code)
-                    .then(function (_member) {
-                        var currentVoucher = _member.current_voucher;
-
-                        var entryType; // allowed entryTypes from this page: voucher, credit
-
-                        if(
-                                _.isUndefined(currentVoucher)
-                                || currentVoucher.is_closed
-                                || currentVoucher.left_amount < 1
-                                || currentVoucher.left_days == 0
-                        ) {
-                            entryType = 'credit';
-                        } else {
-                            entryType = 'voucher';
-                        }
-
-                        Entry.create({
-                            member: _member.id,
-                            occurrence: occurrenceId,
-                            entryType: entryType,
-                            price: 0
-                        }, {
-                            afterCreate: function () {
-                                window.location.reload();
-                            }
-                        });
-                    })
-            });
-        });
-    </script>
-{% endblock javascripts %}
-
 {% block content %}
 <div class="heading">
     <h3>
         {{ occurrence.event.title }}
+        <small>{{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}</small>
     </h3>
-    {{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}
 
     {#<a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>#}
 </div>
@@ -70,63 +16,51 @@
 {{ include("_flash.html.twig") }}
 
 <div class="row-fluid">
-    <div class="span10">
-        <ul class="thumbnails">
-            {% for entry in entries %}
-                <li style="text-align: center">
-                    <div class="thumbnail" style="height: 280px; width: 120px;">
-                        <strong>{{ entry.member.details.firstname }} {{ entry.member.details.lastname }}</strong>
-                        <a href="{{ path("gyman_member_edit", {id: entry.member.id()}) }}">
-                            <img src="{{ entry.member.details.foto.fotoWithPath() }}" style="max-height: 200px" />
-                        </a>
-                        <div class="caption">
-                            <p>
-                                <span class="badge">{{ entry.type }}</span>
-                                {% if entry.member.currentVoucher is not null %}
-                                <span class="badge badge-warning">
-                                        {{ entry.member.currentVoucher.startDate|date("d.m") }}
-                                        -
-                                        {{ entry.member.currentVoucher.endDate|date("d.m") }}
-                                </span>
-                                {% endif %}
-                                <span class="badge badge-success">{% if entry.isOpened() %}otwarte{% else %}zamknięte{% endif %}</span>
-                            </p>
-                            <p>
-                                <a onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: entry.member.id}) }}">
-                                    usuń
-                                </a>
-                            </p>
+    <div class="span3 offset3">
+        <ul class="media-list" style="height: 90%; overflow-y: scroll; overflow-x: hidden">
+            {%  for member in allMembers %}
+                <li class="media">
+                    <a class="pull-left" href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}">
+                        <img class="pull-left media-object thumbnail" src="{{ asset(member.foto.fotoWithPath) }}" style="max-width: 30px; margin-right: 10px"/>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                {{ member.firstname }} {{ member.lastname }}
+                            </h4>
+                            karnet:
+                            {% if member.currentVoucherId is not null %}
+                                ok
+                            {% else %}
+                                brak
+                            {% endif %}
                         </div>
-                    </div>
+                    </a>
                 </li>
             {% endfor %}
         </ul>
     </div>
 
-    <div class="span2">
-        <ul class="media-list">
-            {%  for member in allMembers %}
-            <li class="media">
-                <a class="pull-left" href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}">
-                    <img class="media-object thumbnail" src="{{ asset(member.details.foto.fotoWithPath) }}" style="max-width: 30px"/>
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <a href="{{ path("gyman_member_edit", {id: member.id()}) }}">
-                            {{ member.details.firstname }} {{ member.details.lastname }}
-                        </a>
-                    </h4>
-                    karnet:
-                    {% if member.currentVoucher is not null %}
-                        {{ member.currentVoucher.startDate|date("d.m") }} - {{ member.currentVoucher.endDate|date("d.m") }}
-                    {% else %}
-                        brak
-                    {% endif %}
-
-                </div>
-            </li>
+    <div class="span3 offset1">
+        <ul class="media-list" style="height: 90%; overflow-y: scroll; overflow-x: hidden">
+            {% for member in membersThatEntered %}
+                <li class="media">
+                    <a class="pull-left" onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: member.id}) }}">
+                        <img class="pull-left media-object thumbnail" src="{{ asset(member.foto.fotoWithPath()) }}" style="max-width: 30px; margin-right: 10px"/>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                {{ member.firstname }} {{ member.lastname }}
+                            </h4>
+                            karnet:
+                            {% if member.currentVoucherId is not null %}
+                                ok
+                            {% else %}
+                                brak
+                            {% endif %}
+                        </div>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
+        <h3>Weszło: {{ membersThatEntered|length }}</h3>
     </div>
 </div>
 

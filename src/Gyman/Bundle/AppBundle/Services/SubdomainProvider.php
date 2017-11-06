@@ -3,6 +3,7 @@ namespace Gyman\Bundle\AppBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class SubdomainProvider
@@ -35,24 +36,24 @@ final class SubdomainProvider implements SubdomainProviderInterface
     /**
      * @return string|null
      */
-    public function getSubdomain()
+    public function getSubdomain() : ?string
     {
         $request = $this->requestStack->getCurrentRequest();
 
         if ($request === null) {
-            return;
+            return null;
         }
 
         $currentHost = $request->getHttpHost();
 
         if ($currentHost === 'localhost') {
-            return;
+            return null;
         }
 
         $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
         if($subdomain === $currentHost) {
-            return;
+            return null;
         }
 
         return $subdomain;

@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\Criteria;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\SearchMemberCommand;
+use Gyman\Domain\MemberView;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -76,36 +77,23 @@ class DefaultController extends Controller
      */
     public function listClassMembersAction(Occurrence $occurrence)
     {
-        $memberRepository = $this->get("gyman.members.repository");
+        $memberQuery = $this->get("gyman.members.query");
 
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->neq("currentVoucher", null))
-            ->orderBy([
-                "currentVoucher" => "DESC",
-                "details.lastname" => "ASC",
-                "details.firstname" => "ASC"
-            ])
-        ;
+        $allMembers = $memberQuery->findAll();
 
-        $allMembers = $memberRepository->matching($criteria)->toArray();
+        $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 
-        $entries = $occurrence->entries();
-
-        $usedMembersIds = array_map(function (Entry $entry) {
-            return $entry->member()->id();
-        }, $entries->toArray());
-
-        if (count($entries) > 0) {
-            $members = array_filter($allMembers, function (Member $member) use ($usedMembersIds) {
-                return !in_array($member->id(), $usedMembersIds) && (is_null($member->lastEntry()) || !is_null($member->lastEntry()->endDate()));
+        if (count($membersThatEntered) > 0) {
+            $members = array_filter($allMembers, function (MemberView $member) use ($membersThatEntered) {
+                return !in_array($member, $membersThatEntered);
             });
         } else {
             $members = $allMembers;
         }
 
         return [
-            "entries"   =>  $entries,
             "occurrence" => $occurrence,
+            "membersThatEntered"   =>  $membersThatEntered,
             "allMembers" => $members,
         ];
     }
