@@ -76,6 +76,8 @@ final class MemberType extends AbstractType
                 'required' => true,
                 'multiple' => true,
                 'expanded' => true,
+                'choice_label' => 'title',
+                'choice_value' => 'id',
             ])
         ;
     }

@@ -29,16 +29,16 @@ final class SearchType extends AbstractType
                 'label' => 'member_search_form.query',
                 'required' => false
             ])
-//            ->add('section', EntityType::class, [
-//                'label' => 'member_search_form.section',
-//                'expanded' => true,
-//                'multiple' => false,
-//                'choice_name' => 'title',
-//                'choice_value' => 'id',
-//                'class' => Section::class,
-//                'empty_data' => 'member_search_form.section.none',
-//                'required' => false,
-//            ])
+            ->add('section', EntityType::class, [
+                'label' => 'member_search_form.section',
+                'expanded' => true,
+                'multiple' => false,
+                'choice_label' => 'title',
+                'choice_value' => 'id',
+                'class' => Section::class,
+                'empty_data' => 'member_search_form.section.none',
+                'required' => false,
+            ])
             ->add('belt', ChoiceType::class, [
                 'label' => 'member_search_form.belt',
                 'expanded' => true,
@@ -54,8 +54,8 @@ final class SearchType extends AbstractType
                 'multiple' => false,
                 'empty_data' => 'member_search_form.has_voucher.null',
                 'choices' => [
-                    true => 'member_search_form.has_voucher.true',
-                    false => 'member_search_form.has_voucher.false',
+                    'member_search_form.has_voucher.true' => true,
+                    'member_search_form.has_voucher.false' => false,
                 ],
             ])
             ->add('hasOpenedEntry', ChoiceType::class, [
@@ -65,8 +65,8 @@ final class SearchType extends AbstractType
                 'multiple' => false,
                 'empty_data' => 'member_search_form.has_opened_entry.null',
                 'choices' => [
-                    true => 'member_search_form.has_opened_entry.true',
-                    false => 'member_search_form.has_opened_entry.false',
+                    'member_search_form.has_opened_entry.true' => true,
+                    'member_search_form.has_opened_entry.false' => false,
                 ],
             ])
             ->add('starred', ChoiceType::class, [
@@ -76,11 +76,8 @@ final class SearchType extends AbstractType
                 'multiple' => false,
                 'empty_data' => 'member_search_form.starred.null',
                 'choices' => [
-                    true => 'member_search_form.starred.true',
+                    'member_search_form.starred.true' => true,
                 ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'member_search_form.submit',
             ])
         ;
     }
