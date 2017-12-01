@@ -31,7 +31,7 @@
         "braincrafted/bootstrap-bundle": "1.4.2",
         "dende/calendar-bundle": "^1",
         "dende/common-bundle": "dev-master",
-        "dende/multitenancybundle": "1.1",
+        "dende/multitenancybundle": "1.1.2",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/dbal": "^2.6",
         "doctrine/doctrine-bundle": "^1.7",
