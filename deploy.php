@@ -40,10 +40,8 @@ desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
     // The user must have rights for restart service
     // /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
-    run('sudo systemctl restart php7.0-fpm.service');
+    run('sudo systemctl restart php7.2-fpm.service');
 });
-
-
 
 task('assets', function () {
     upload("web/bundles", "web/bundles");
