@@ -16,8 +16,8 @@ add('shared_dirs', [
     "app/spool"
 ]);
 add('writable_dirs', [
-    "app/cache",
-    "app/logs",
+    "var/cache",
+    "var/logs",
 ]);
 set('writable_mode', "chmod");
 set('allow_anonymous_stats', false);
@@ -44,11 +44,11 @@ task('php-fpm:restart', function () {
 });
 
 task('assets', function () {
-    upload("web/bundles", "web/bundles");
-    upload("web/css", "web/css");
-    upload("web/fonts", "web/fonts");
-    upload("web/images", "web/images");
-    upload("web/js", "web/js");
+    upload("web/bundles", "{{release_path}}/web/bundles");
+    upload("web/css", "{{release_path}}/web/css");
+    upload("web/fonts", "{{release_path}}/web/fonts");
+    upload("web/images", "{{release_path}}/web/images");
+    upload("web/js", "{{release_path}}/web/js");
 })->desc('Upload assets from local machine');
 
 
