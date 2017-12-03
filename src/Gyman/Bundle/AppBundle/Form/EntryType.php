@@ -10,9 +10,11 @@ use Gyman\Domain\Section;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -71,13 +73,13 @@ final class EntryType extends AbstractType
         $defaultOccurrence = count($defaultOccurrences) > 0 ? array_pop($defaultOccurrences) : null;
 
         $builder
-        ->add('occurrence', 'entity', [
+        ->add('occurrence', EntityType::class, [
             'required' => false,
             'expanded' => true,
             "multiple" => false,
             'label' => 'entries.form.occurrence.label',
             'class' => 'Gyman\Domain\Calendar\Event\Occurrence',
-            'property' => function (Occurrence $occurrence) use ($sectionRepository) {
+            'choice_label' => function (Occurrence $occurrence) use ($sectionRepository) {
                 $start = $occurrence->startDate()->format("H:i");
                 $stop = $occurrence->endDate()->format("H:i");
                 $activity = $occurrence->event()->title();
@@ -112,7 +114,7 @@ final class EntryType extends AbstractType
                 "step" => 5,
             ]
         ])
-        ->add('submit', 'submit', [
+        ->add('submit', SubmitType::class, [
             'label' => 'entries.form.open_entry.label',
         ]);
 

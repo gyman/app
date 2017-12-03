@@ -58,7 +58,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/dashboard/activities/{date}", name="gyman_dashboard_getActivities")
+     * @Route("/dashboard/activities/{date}", name="gyman_dashboard_getActivities", options={"expose"=true})
      */
     public function getActivitiesAction(DateTime $date)
     {
