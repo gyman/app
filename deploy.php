@@ -44,7 +44,7 @@ task('php-fpm:restart', function () {
 });
 
 task('assets', function () {
-    upload("web/bundles", "{{release_path}}/web");
+//    upload("web/bundles", "{{release_path}}/web");
     upload("web/css", "{{release_path}}/web");
     upload("web/fonts", "{{release_path}}/web");
     upload("web/images", "{{release_path}}/web");

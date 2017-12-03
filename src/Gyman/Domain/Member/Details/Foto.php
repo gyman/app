@@ -2,6 +2,7 @@
 namespace Gyman\Domain\Member\Details;
 
 use Gyman\Bundle\AppBundle\Globals;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class Foto

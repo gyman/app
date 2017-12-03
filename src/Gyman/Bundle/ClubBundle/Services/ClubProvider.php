@@ -12,43 +12,29 @@ use Gyman\Bundle\ClubBundle\Entity\Subdomain;
  */
 class ClubProvider
 {
-    /**
-     * @var SubdomainProviderInterface
-     */
+    /** @var SubdomainProviderInterface */
     private $subdomainProvider;
 
-    /**
-     * @var ClubRepository
-     */
+    /** @var ClubRepository */
     private $clubRepository;
 
-    /**
-     * ClubProvider constructor.
-     * @param SubdomainProviderInterface $subdomainProvider
-     * @param ClubRepository $clubRepository
-     */
-    public function __construct($subdomainProvider, ClubRepository $clubRepository)
+    /** @var Club */
+    private $club;
+
+    public function __construct(SubdomainProviderInterface $subdomainProvider, ClubRepository $clubRepository)
     {
         $this->subdomainProvider = $subdomainProvider;
         $this->clubRepository = $clubRepository;
     }
 
-    /**
-     * @return Club|null
-     */
-    public function getCurrentClub()
+    public function club() : ?Club
     {
-        return $this->getClub(
-            $this->subdomainProvider->getSubdomain()
-        );
-    }
+        if($this->club === null) {
+            $this->club = $this->clubRepository->findOneBySubdomain(
+                $this->subdomainProvider->getSubdomain()
+            );
+        }
 
-    /**
-     * @param string $subdomainName
-     * @return Club|null
-     */
-    public function getClub($subdomainName)
-    {
-        return $this->clubRepository->findOneBySubdomain($subdomainName);
+        return $this->club;
     }
 }

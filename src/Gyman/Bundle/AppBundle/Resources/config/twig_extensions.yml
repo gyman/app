@@ -8,8 +8,16 @@ services:
       tags:
         - { name: twig.extension }
 
-
   gyman.app.twig.entries_extension:
     class: 'Gyman\Bundle\AppBundle\Twig\EntriesExtension'
+    tags:
+      - { name: twig.extension }
+
+  gyman.app.twig.avatar:
+    class: 'Gyman\Twig\Extension\Avatar'
+    arguments:
+      - '@=service("gyman.club.provider").club()'
+      - '%galleryDirectory%'
+      - '%galleryPath%'
     tags:
       - { name: twig.extension }
