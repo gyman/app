@@ -26,7 +26,7 @@ class DefaultController extends Controller
     {
         return $this->redirectToRoute("gyman_settings_details");
 
-//        $club = $this->get("gyman.club.provider")->getCurrentClub();
+//        $club = $this->get("gyman.club.provider")->club();
 //
 //        if (is_null($club)) {
 //            throw new Exception('No club found in database!');
@@ -100,7 +100,7 @@ class DefaultController extends Controller
      */
     public function detailsAction(Request $request)
     {
-        $club = $this->get("gyman.club.provider")->getCurrentClub();
+        $club = $this->get("gyman.club.provider")->club();
 
         if (is_null($club)) {
             throw new Exception('No club found in database!');

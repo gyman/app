@@ -20,7 +20,7 @@ class DefaultController extends Controller
         }
 
         return [
-            "club" => $this->get('gyman.club.provider')->getCurrentClub(),
+            "club" => $this->get('gyman.club.provider')->club(),
             "csrf_token" => $csrfToken
         ];
     }

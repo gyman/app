@@ -87,7 +87,7 @@ services:
     arguments:
       - '@gyman.repository.section'
       - '@gyman.club.repository'
-      - "@=service('gyman.club.provider').getCurrentClub()"
+      - "@=service('gyman.club.provider').club()"
       - '@gyman.members.upload_club_logo_handler'
 
   gyman.app.handler.clear_expired_current_vouchers:
