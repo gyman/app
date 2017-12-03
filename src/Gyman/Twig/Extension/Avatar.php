@@ -24,7 +24,7 @@ class Avatar extends Twig_Extension
      * @param Club $club
      * @param string $uploadDirectory
      */
-    public function __construct(Club $club, string $uploadDirectory, string $uploadPath)
+    public function __construct(Club $club = null, string $uploadDirectory, string $uploadPath)
     {
         $this->club = $club;
         $this->uploadDirectory = $uploadDirectory;
@@ -43,6 +43,10 @@ class Avatar extends Twig_Extension
 
     public function getAvatarUrl(Member $member): string
     {
+        if($this->club === null) {
+            return self::NO_PROFILE;
+        }
+
         $dir = rtrim($this->uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $path = rtrim($this->uploadPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
