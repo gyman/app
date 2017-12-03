@@ -44,11 +44,11 @@ task('php-fpm:restart', function () {
 });
 
 task('assets', function () {
-    upload("web/bundles", "{{release_path}}/web/bundles");
-    upload("web/css", "{{release_path}}/web/css");
-    upload("web/fonts", "{{release_path}}/web/fonts");
-    upload("web/images", "{{release_path}}/web/images");
-    upload("web/js", "{{release_path}}/web/js");
+    upload("web/bundles", "{{release_path}}/web");
+    upload("web/css", "{{release_path}}/web");
+    upload("web/fonts", "{{release_path}}/web");
+    upload("web/images", "{{release_path}}/web");
+    upload("web/js", "{{release_path}}/web");
 })->desc('Upload assets from local machine');
 
 

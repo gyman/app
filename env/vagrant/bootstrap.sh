@@ -43,17 +43,17 @@ apt remove cmdtest
 
 apt-get update
 apt-get upgrade
-apt-get install -y --force-yes php7.1 php7.1-cli php-pear php-fpm nginx git \
-    curl vim mysql-server mysql-client php7.1-sqlite \
-    php-xdebug php7.1-intl build-essential software-properties-common libsqlite3-dev \
-    php7.1-xml php7.1-curl php7.1-cli php7.1-common php7.1-bcmath php7.1-mysql php7.1-mbstring \
-    php7.1-json php7.1-mcrypt php7.1-sqlite3 php7.1-xsl php-mongodb php-imagick \
-    mongodb tcl ruby-dev npm nodejs yarn
+apt-get install -y --force-yes php7.2 php7.2-cli php-pear php-fpm nginx git \
+    curl vim mysql-server mysql-client php7.2-sqlite php7.2-apcu \
+    php-xdebug php7.2-intl build-essential software-properties-common libsqlite3-dev \
+    php7.2-xml php7.2-curl php7.2-cli php7.2-common php7.2-bcmath php7.2-mysql php7.2-mbstring \
+    php7.2-json php7.2-sqlite3 php7.2-xsl php7.2-imagick php7.2-apcu\
+    tcl ruby-dev npm nodejs yarn
 
 gem install mailcatcher
 echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
 update-rc.d cron defaults
-echo "sendmail_path = /usr/bin/env $(which catchmail) -f 'www-data@localhost'" >> /etc/php/7.1/mods-available/mailcatcher.ini
+echo "sendmail_path = /usr/bin/env $(which catchmail) -f 'www-data@localhost'" >> /etc/php/7.2/mods-available/mailcatcher.ini
 phpenmod mailcatcher
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
 
@@ -62,23 +62,23 @@ rm /etc/nginx/sites-enabled/default
 cp /vagrant/env/vagrant/nginx_server.conf /etc/nginx/sites-available/page.conf
 ln -s /etc/nginx/sites-available/page.conf /etc/nginx/sites-enabled/page.conf
 
-sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.1/fpm/php.ini
-sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.1/cli/php.ini
+sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.2/cli/php.ini
 
-sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.1/fpm/php.ini
-sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.1/cli/php.ini
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.2/cli/php.ini
 
-sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.1/fpm/php.ini
-sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.1/cli/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.2/cli/php.ini
 
-sed -i 's/www-data/vagrant/g' /etc/php/7.1/fpm/pool.d/www.conf
+sed -i 's/www-data/vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
 sed -i 's/www-data/vagrant/g' /etc/nginx/nginx.conf
 
-less /vagrant/env/vagrant/xdebug.ini > /etc/php/7.1/mods-available/xdebug.ini
-service php7.1-fpm restart
+less /vagrant/env/vagrant/xdebug.ini > /etc/php/7.2/mods-available/xdebug.ini
+service php7.2-fpm restart
 service nginx restart
 
-chown vagrant:vagrant /var/run/php/php7.1-fpm.sock
+chown vagrant:vagrant /var/run/php/php7.2-fpm.sock
 chown vagrant:vagrant /var/log/nginx
 
 echo 'KexAlgorithms +diffie-hellman-group1-sha1' >> /etc/ssh/sshd_config
