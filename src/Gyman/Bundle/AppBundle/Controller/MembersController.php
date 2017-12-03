@@ -124,7 +124,7 @@ class MembersController extends Controller
         $form = $this->createForm(SearchType::class, new SearchMemberCommand());
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+//        if ($form->isValid()) {
 
             /** @var Member[] $result */
             $result = $this->get('gyman.members.repository')->search($form->getData());
@@ -138,7 +138,7 @@ class MembersController extends Controller
             return [
                 'members' => $result
             ];
-        }
+//        }
     }
 
     /**

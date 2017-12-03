@@ -3,6 +3,7 @@ namespace Gyman\Twig\Extension;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Domain\Member;
+use Gyman\Domain\MemberView;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -41,7 +42,11 @@ class Avatar extends Twig_Extension
         ];
     }
 
-    public function getAvatarUrl(Member $member): string
+    /**
+     * @param Member|MemberView $member
+     * @return string
+     */
+    public function getAvatarUrl($member): string
     {
         if($this->club === null) {
             return self::NO_PROFILE;
@@ -50,7 +55,15 @@ class Avatar extends Twig_Extension
         $dir = rtrim($this->uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $path = rtrim($this->uploadPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->details()->foto()->foto();
+        switch(get_class($member)) {
+            case Member::class:
+                $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->details()->foto()->foto();
+                break;
+            case MemberView::class:
+                $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->foto()->foto();
+                break;
+        }
+
 
         if(is_file($dir . $file) && file_exists($dir . $file)) {
             return $path . $file;

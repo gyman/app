@@ -19,7 +19,7 @@ class Foto
      * Foto constructor.
      * @param string $foto
      */
-    public function __construct($foto = null)
+    public function __construct(string $foto = null)
     {
         $this->foto = $foto;
     }
@@ -27,13 +27,8 @@ class Foto
     /**
      * @return string
      */
-    public function foto() : string
+    public function foto() : ?string
     {
-        return $this->foto ?: Globals::getNoImage();
-    }
-
-    public function fotoWithPath() : string
-    {
-        return $this->foto ? Globals::applyGalleryPath($this->foto) : Globals::getNoImage();
+        return $this->foto;
     }
 }

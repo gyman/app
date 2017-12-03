@@ -21,7 +21,7 @@
             {%  for member in allMembers %}
                 <li class="media">
                     <a class="pull-left" href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}">
-                        <img class="pull-left media-object thumbnail" src="{{ asset(member.foto.fotoWithPath) }}" style="max-width: 30px; margin-right: 10px"/>
+                        <img class="pull-left media-object thumbnail" src="{{ avatar(member) }}" style="max-width: 30px; margin-right: 10px"/>
                         <div class="media-body">
                             <h4 class="media-heading">
                                 {{ member.firstname }} {{ member.lastname }}
@@ -44,7 +44,7 @@
             {% for member in membersThatEntered %}
                 <li class="media">
                     <a class="pull-left" onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: member.id}) }}">
-                        <img class="pull-left media-object thumbnail" src="{{ asset(member.foto.fotoWithPath()) }}" style="max-width: 30px; margin-right: 10px"/>
+                        <img class="pull-left media-object thumbnail" src="{{ avatar(member) }}" style="max-width: 30px; margin-right: 10px"/>
                         <div class="media-body">
                             <h4 class="media-heading">
                                 {{ member.firstname }} {{ member.lastname }}

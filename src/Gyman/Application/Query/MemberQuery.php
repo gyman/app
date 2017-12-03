@@ -51,6 +51,24 @@ class MemberQuery
         }, $result);
     }
 
+    public function findWithVoucher() : array
+    {
+        $result = $this->connection->fetchAll(sprintf(
+            'SELECT m.id, m.firstname, m.lastname, m.foto, m.last_entry_id, m.current_voucher_id FROM %s m WHERE deletedAt IS NULL AND current_voucher_id IS NOT NULL ORDER BY m.lastname ASC',
+            Table::MEMBER));
+
+        return array_map(function(array $member){
+            return new MemberView(
+                $member['id'],
+                $member['lastname'],
+                $member['firstname'],
+                $member['foto'],
+                $member['last_entry_id'],
+                $member['current_voucher_id']
+            );
+        }, $result);
+    }
+
     public function findMembersThatEntered(Occurrence $occurrence) : array
     {
         $result = $this->connection->fetchAll('

@@ -79,7 +79,7 @@ class DefaultController extends Controller
     {
         $memberQuery = $this->get("gyman.members.query");
 
-        $allMembers = $memberQuery->findAll();
+        $allMembers = $memberQuery->findWithVoucher();
 
         $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 

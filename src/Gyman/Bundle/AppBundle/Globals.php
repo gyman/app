@@ -10,6 +10,9 @@ use Symfony\Component\VarDumper\VarDumper;
  * OK, I know. This one earned me a huge kick in the balls. But hey, life is not perfect. Neither this code is ;)
  *
  * @package Gyman\Bundle\AppBundle
+ * @deprecated
+ *
+ * @todo: remove as quick as possible
  */
 final class Globals
 {
