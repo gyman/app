@@ -5,6 +5,7 @@ use Gyman\Application\Command\UpdateSectionsCommand;
 use Gyman\Bundle\SettingsBundle\Form\CollectionType\SectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -36,7 +37,7 @@ final class SectionsType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class'      => UpdateSectionsCommand::class,

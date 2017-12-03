@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VoucherType extends AbstractType
 {
@@ -45,7 +45,7 @@ class VoucherType extends AbstractType
                 'format' => 'dd.MM.yyyy',
                 ])->addModelTransformer(new VoucherDateTransformer('end'))
             )
-        ->add('price', 'integer', [
+        ->add('price', IntegerType::class, [
             "attr" => [
                 "min" => 0
             ]
@@ -69,9 +69,9 @@ class VoucherType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class'      => CreateVoucherCommand::class,

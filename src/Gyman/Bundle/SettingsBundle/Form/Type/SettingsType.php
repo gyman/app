@@ -4,6 +4,7 @@ namespace Gyman\Bundle\SettingsBundle\Form\Type;
 use Gyman\Application\Command\UpdateSettingsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -59,7 +60,7 @@ final class SettingsType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class'      => UpdateSettingsCommand::class,
