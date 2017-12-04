@@ -52,6 +52,7 @@ flash.member_added.success: "Dodaliśmy do bazy dane nowego uczestnika!"
 flash.member_added.errors: "Przy zapisie danych uczestnika coś poszło nie tak :(Prosimy, przejrzyj karty formularza i popraw błędy oznaczone na czerwono."
 
 flash.member_search.more_results_than_one_please_specify_query_more: "Dla zapytania, które podaleś przy wyszukiwaniu znaleziono więcej uczestników. Postaraj się być bardziej precyzyjnym przy następnym wyszukiwaniu!"
+flash.entry_closed.success: "Wejście zamknięto."
 
 voucher.entries.open: "open"
 

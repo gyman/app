@@ -259,7 +259,7 @@ WHERE
   m0_.deletedAt IS NULL 
   AND v1_.deletedAt IS NULL
   AND e2_.deletedAt IS NULL
-GROUP BY current_voucher_id
+GROUP BY current_voucher_id, member_id
 HAVING 
   (
     maximum_voucher_entries IS NOT NULL
