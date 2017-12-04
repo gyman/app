@@ -87,14 +87,7 @@ final class EntryType extends AbstractType
                 /** @var Calendar $calendar */
                 $calendar = $occurrence->event()->calendar();
 
-                /** @var Section $section */
-                $section = $sectionRepository->findOneByCalendar($calendar);
-
-                if (is_null($section)) {
-                    return;
-                }
-
-                return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $section->title());
+                return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $calendar->title());
             },
             'choices' => $todayOccurrences,
             'data' => $defaultOccurrence
@@ -139,7 +132,7 @@ final class EntryType extends AbstractType
             }
 
             $form->add('entryType', ChoiceType::class, [
-                'choices'  => $choices,
+                'choices'  => array_flip($choices),
                 'data'     => $defaultChoice,
                 'expanded' => true,
                 'label'    => 'entries.form.entry_type.label',
@@ -156,7 +149,7 @@ final class EntryType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
