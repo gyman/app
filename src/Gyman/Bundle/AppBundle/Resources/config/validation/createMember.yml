@@ -1,9 +1,9 @@
-Gyman\Application\Command\UpdateMemberCommand:
-#  constraints:
-#    - Gyman\Bundle\AppBundle\Validator\UniqueMemberEmail:
-#        message: member.type.email.already_registered
-#    - Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcode:
-#        message: member.type.barcode.already_registered
+Gyman\Application\Command\CreateMemberCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\UniqueMemberEmail:
+        message: member.type.email.already_registered
+    - Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcode:
+        message: member.type.barcode.already_registered
 
   properties:
     uploadFile:

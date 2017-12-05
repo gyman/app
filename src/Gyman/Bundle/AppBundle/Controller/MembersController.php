@@ -59,8 +59,8 @@ class MembersController extends Controller
 
         return $response->setContent(
             $this->renderView('GymanAppBundle:Members:edit.html.twig', [
-                    'form'     => $form->createView(),
-                    'member'   => $member,
+                'form'     => $form->createView(),
+                'member'   => $member,
             ])
         );
     }

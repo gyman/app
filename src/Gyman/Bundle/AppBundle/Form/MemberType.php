@@ -19,16 +19,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Class MemberType
- * @package Gyman\Bundle\AppBundle
- */
 final class MemberType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -83,9 +75,6 @@ final class MemberType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -94,10 +83,7 @@ final class MemberType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return 'gyman_member_form';
     }
