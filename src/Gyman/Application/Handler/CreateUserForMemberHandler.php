@@ -34,7 +34,7 @@ class CreateUserForMemberHandler
     public function handle(CreateUserForMemberCommand $command)
     {
         /** @var User $user */
-        $user = $this->userRepository->findOneBy(['username' => $command->member()->email()->email()]);
+        $user = $this->userRepository->findOneBy(['member_id' => $command->member()->id()->toString()]);
 
         if($user === null) {
             $user = $this->userManipulator->create(

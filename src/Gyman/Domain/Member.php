@@ -11,6 +11,7 @@ use Gyman\Application\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Application\Exception\VouchersAreOverlappingException;
 use Gyman\Domain\Member\Details;
 use Gyman\Domain\Member\EmailAddress;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class Member
@@ -19,7 +20,7 @@ use Gyman\Domain\Member\EmailAddress;
 class Member
 {
     /**
-     * @var integer
+     * @var UuidInterface
      */
     protected $id;
 
@@ -91,63 +92,42 @@ class Member
     /**
      * @return bool
      */
-    public function hasOpenedEntry()
+    public function hasOpenedEntry() : bool
     {
         return !is_null($this->lastEntry()) && $this->lastEntry()->isOpened();
     }
 
-    /**
-     * @return bool
-     */
-    public function isMale()
+    public function isMale() : bool
     {
         return $this->details()->gender() == Details::GENDER_MALE;
     }
 
-    /**
-     * @return EmailAddress
-     */
-    public function email()
+    public function email() : EmailAddress
     {
         return $this->email;
     }
 
-    /**
-     * @return Details
-     */
-    public function details()
+    public function details() : Details
     {
         return $this->details;
     }
 
-    /**
-     * @return ArrayCollection|Voucher[]
-     */
-    public function vouchers()
+    public function vouchers() : ArrayCollection
     {
         return $this->vouchers;
     }
 
-    /**
-     * @return Entry
-     */
-    public function lastEntry()
+    public function lastEntry() : ?Entry
     {
         return $this->lastEntry;
     }
 
-    /**
-     * @return ArrayCollection|Entry[]
-     */
-    public function entries()
+    public function entries() : ArrayCollection
     {
         return $this->entries;
     }
 
-    /**
-     * @return ArrayCollection|Section[]
-     */
-    public function sections()
+    public function sections() : ArrayCollection
     {
         return $this->sections;
     }
@@ -181,10 +161,7 @@ class Member
         $this->lastEntry = $lastEntry;
     }
 
-    /**
-     * @return string
-     */
-    public function id()
+    public function id() : UuidInterface
     {
         return $this->id;
     }
@@ -213,18 +190,12 @@ class Member
         $newVoucher->setMember($this);
     }
 
-    /**
-     * @return Voucher
-     */
-    public function currentVoucher()
+    public function currentVoucher() : ?Voucher
     {
         return $this->currentVoucher;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasCurrentVoucher()
+    public function hasCurrentVoucher() : bool
     {
         $currentVoucher = $this->currentVoucher();
 
@@ -232,7 +203,6 @@ class Member
     }
 
     /**
-     * @param Entry $entry
      * @throws Exception
      * @throws MemberHasNoLastEntryException
      * @throws NoCurrentVoucherForVoucherEntryException
@@ -247,7 +217,6 @@ class Member
 
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
             $this->exitLastEntry();
-//            throw new LastEntryIsStillOpenedException($entry, $this->lastEntry());
         }
 
         if (!$this->hasCurrentVoucher() && $entry->isType(Entry::TYPE_VOUCHER)) {
@@ -285,6 +254,9 @@ class Member
         $entry->assignToMember($this);
     }
 
+    /**
+     * @throws \Gyman\Application\Exception\EntryClosingDateBeforeOpeningException
+     */
     public function exitLastEntry()
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
@@ -294,10 +266,7 @@ class Member
         $this->lastEntry = null;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLastEntry()
+    public function hasLastEntry() : bool
     {
         return $this->lastEntry !== null;
     }
