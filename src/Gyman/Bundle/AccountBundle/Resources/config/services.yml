@@ -24,7 +24,6 @@ services:
 
     account_bundle.profile.edit_type:
         class: Gyman\Bundle\AccountBundle\Form\Type\UserType
-        arguments: ['%fos_user.model.user.class%']
         tags:
             - {name: form.type, alias: gyman_user_profile }
 

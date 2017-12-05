@@ -2,28 +2,20 @@
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use Gyman\Domain\User;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends BaseType
 {
-    private $class = 'Gyman\Bundle\AccountBundle\Entity\User';
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('firstname', TextType::class, [
-            'label'          => 'form.label.firstname',
-            'error_bubbling' => true,
-        ]);
-        $builder->add('lastname', TextType::class, [
-            'label'          => 'form.label.lastname',
-            'error_bubbling' => true,
-        ]);
         $builder->add('plainPassword', RepeatedType::class, [
                 'type'            => PasswordType::class,
                 'error_bubbling'  => true,
@@ -37,25 +29,20 @@ class UserType extends BaseType
         $builder->remove('current_password');
         $builder->get('username')->setDisabled(true);
         $builder->get('email')->setDisabled(true);
-
-//        $builder->add('invoiceData', new InvoiceDataType());
+        // todo: $builder->add('invoiceData', new InvoiceDataType());
     }
 
-    public function __construct($class)
+    public function __construct()
     {
-        $this->class = $class;
 
-        return parent::__construct($this->class);
+        return parent::__construct(User::class);
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'cascade_validation' => true,
-            'data_class'         => $this->class,
+            'data_class'         => User::class,
             'error_bubbling'     => true,
         ]);
     }

@@ -35,6 +35,7 @@ class MemberController extends Controller
 
         return [
             "member" => $member,
+            "entries" => $this->get("gyman.entries.query")->findLastByMember($member, 30),
             "currentVoucher" => $currentVoucher,
             "lastEntry" => $lastEntry
         ];

@@ -15,8 +15,6 @@ fos_user:
             validation_groups:  [Profile, Default]
     change_password:
         form:
-            type:               fos_user_change_password
-            name:               fos_user_change_password_form
             validation_groups:  [ChangePassword, Default]
     registration:
         confirmation:
@@ -26,7 +24,7 @@ fos_user:
             enabled:    false
             template:   MailerBundle:Templates:registerConfirmation.html.twig
         form:
-            type:               dende_user_registration
+            type:               Gyman\Bundle\AccountBundle\Form\Type\RegisterType
             name:               dende_registration_form
             validation_groups:  [Registration, Default]
     resetting:
@@ -34,8 +32,6 @@ fos_user:
         email:
             template:   MailerBundle:Templates:resetting.html.twig
         form:
-            type:               fos_user_resetting
-            name:               fos_user_resetting_form
             validation_groups:  [ResetPassword, Default]
     service:
         mailer:                 fos_user.mailer.twig_swift

@@ -10,6 +10,7 @@ use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\NotSupportedEntryType;
 use Gyman\Application\Exception\UnsupportedEntryTypeException;
 use Gyman\Domain\Entry\Price;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class Entry
@@ -30,7 +31,7 @@ class Entry
     ];
 
     /**
-     * @var integer
+     * @var UuidInterface
      */
     protected $id;
 
@@ -40,12 +41,12 @@ class Entry
     protected $member;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $startDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $endDate;
 
@@ -55,6 +56,7 @@ class Entry
     protected $price;
 
     /**
+     * @todo change into Entry/Type value object
      * @var string
      */
     protected $type;
@@ -86,15 +88,15 @@ class Entry
 
     /**
      * Entry constructor.
-     * @param \DateTime $startDate
+     * @param DateTime $startDate
      * @param string $type
-     * @param \DateTime $endDate |null
+     * @param DateTime $endDate |null
      * @param Price $price |null
      * @param Occurrence $occurrence
      * @param Member $member
      * @throws NotSupportedEntryType
      */
-    public function __construct(\DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null, Member $member = null)
+    public function __construct(DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null, Member $member = null)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType($type, self::$availableTypes);
@@ -111,43 +113,30 @@ class Entry
         $this->updatedAt = new DateTime("now");
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function startDate()
+    public function startDate() : DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function endDate()
+    public function endDate() : ?DateTime
     {
         return $this->endDate;
     }
 
-    /**
-     * @return Price
-     */
-    public function price()
+    public function price() : ?Price
     {
         return $this->price;
     }
 
-    /**
-     * @return string
-     */
-    public function type()
+    public function type() : string
     {
         return $this->type;
     }
 
     /**
-     * @param \DateTime $date
      * @throws EntryClosingDateBeforeOpeningException
      */
-    public function closeEntry(\DateTime $date)
+    public function closeEntry(DateTime $date) : void
     {
         if (Carbon::instance($date)->lt(Carbon::instance($this->startDate()))) {
             throw new EntryClosingDateBeforeOpeningException();
@@ -156,22 +145,18 @@ class Entry
         $this->endDate = $date;
     }
 
-    /**
-     * @return bool
-     */
-    public function isOpened()
+    public function isOpened() : bool
     {
         return is_null($this->endDate);
     }
 
     /**
-     * @param $type
      * @throws UnsupportedEntryTypeException
-     * @return bool
      */
-    public function isType($type)
+    public function isType($type) : bool
     {
         if (!in_array($type, self::$availableTypes)) {
+            // todo: remove, should throw false if not supported string
             throw new UnsupportedEntryTypeException(
                 sprintf('Unsupported entry type: %s', $type)
             );
@@ -180,10 +165,7 @@ class Entry
         return $this->type() === $type;
     }
 
-    /**
-     * @param Voucher $voucher
-     */
-    public function assignToVoucher(Voucher $voucher)
+    public function assignToVoucher(Voucher $voucher) : void
     {
         if (!$this->isType(self::TYPE_VOUCHER)) {
             throw new EntryMustBeVoucherTypeException("If you want to add entry to voucher it must be a 'voucher' type entry");
@@ -192,14 +174,11 @@ class Entry
         $this->voucher = $voucher;
     }
 
-    /**
-     * @param Voucher $voucher
-     */
-    public function payOffWithVoucher(Voucher $voucher)
+    public function payOffWithVoucher(Voucher $voucher) : void
     {
         if(!$this->isType(self::TYPE_CREDIT))
         {
-            return new Exception(sprintf(
+            throw new Exception(sprintf(
                 "You can only pay off credit entry, %s is not allowed",
                 $this->type()
             ));
@@ -210,42 +189,27 @@ class Entry
         $this->assignToVoucher($voucher);
     }
 
-    /**
-     * @return Voucher
-     */
-    public function voucher()
+    public function voucher() : ?Voucher
     {
         return $this->voucher;
     }
 
-    /**
-     * @return Member
-     */
-    public function member()
+    public function member() : Member
     {
         return $this->member;
     }
 
-    /**
-     * @return string
-     */
-    public function id()
+    public function id() : UuidInterface
     {
         return $this->id;
     }
 
-    /**
-     * @param Member $member
-     */
-    public function assignToMember(Member $member)
+    public function assignToMember(Member $member) : void
     {
         $this->member = $member;
     }
 
-    /**
-     * @return Occurrence
-     */
-    public function occurrence()
+    public function occurrence() : Occurrence
     {
         return $this->occurrence;
     }

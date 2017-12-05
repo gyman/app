@@ -5,7 +5,7 @@
 {% extends "MailerBundle::layout.html.twig" %}
 
 {% block content %}
-        <div>
+    <div xmlns="http://www.w3.org/1999/html">
             <table>
                 <tbody>
                     <tr>
@@ -24,7 +24,9 @@
                             </p>
 
                             <p>
-                                Zostaniesz poproszony/a o wybranie nowego hasła. Twoje obecne hasło to: <strong>{{ currentPassword }}</strong>, podaj je w polu "Stare hasło"
+                                Zostaniesz poproszony/a o wybranie nowego hasła. Twoje obecne hasło to: <br />
+                                <strong>{{ currentPassword }}</strong><br />
+                                podaj je w polu "Stare hasło"
                             </p>
 
                             <p>

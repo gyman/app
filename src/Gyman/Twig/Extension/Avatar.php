@@ -55,21 +55,20 @@ class Avatar extends Twig_Extension
         $dir = rtrim($this->uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $path = rtrim($this->uploadPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        switch(get_class($member)) {
-            case Member::class:
+        switch(true) {
+            case $member instanceof Member:
                 $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->details()->foto()->foto();
                 break;
-            case MemberView::class:
+            case $member instanceof MemberView:
                 $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->foto()->foto();
                 break;
         }
-
 
         if(is_file($dir . $file) && file_exists($dir . $file)) {
             return $path . $file;
         }
 
-        return self::NO_PROFILE;
+        return $file;
     }
 
     /**

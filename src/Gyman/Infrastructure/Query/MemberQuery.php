@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Application\Query;
+namespace Gyman\Infrastructure\Query;
 
 use Doctrine\DBAL\Connection;
 use Gyman\Domain\Calendar\Event\Occurrence;
@@ -8,7 +8,7 @@ use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\MemberView;
 use Gyman\Infrastructure\Table;
 
-class MemberQuery
+class MemberQuery implements MemberQueryInterface
 {
     /**
      * @var Connection
@@ -22,15 +22,6 @@ class MemberQuery
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-    }
-
-    public function findByEmail(EmailAddress $email) : MemberView
-    {
-        $result = $this->connection->fetchAssoc(
-            'SELECT m.id, m.firstname, m.lastname, m.foto, m.barcode FROM ' . Table::MEMBER . ' m WHERE m.email = ' . $email->email()
-        );
-
-        return new MemberView();
     }
 
     public function findAll() : array

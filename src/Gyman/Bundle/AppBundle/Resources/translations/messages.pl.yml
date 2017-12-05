@@ -138,3 +138,6 @@ member_search_form.belt.none: wybierz
 member.form.update_voucher: edytuj
 vouchers.actions.table_header: Akcja
 update.voucher: zapisz
+
+form.label.firstname: Imię
+form.label.lastname: Nazwisko

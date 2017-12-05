@@ -2,6 +2,11 @@
 services:
 
   gyman.members.query:
-    class:          Gyman\Application\Query\MemberQuery
+    class:          Gyman\Infrastructure\Query\MemberQuery
+    arguments:
+      - "@=service('doctrine.orm.tenant_entity_manager').getConnection()"
+
+  gyman.entries.query:
+    class:          Gyman\Infrastructure\Query\EntryQuery
     arguments:
       - "@=service('doctrine.orm.tenant_entity_manager').getConnection()"

@@ -3,6 +3,7 @@ namespace Gyman\Domain;
 
 use Carbon\Carbon;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
@@ -112,7 +113,7 @@ class Member
         return $this->details;
     }
 
-    public function vouchers() : ArrayCollection
+    public function vouchers() : Collection
     {
         return $this->vouchers;
     }
@@ -122,12 +123,12 @@ class Member
         return $this->lastEntry;
     }
 
-    public function entries() : ArrayCollection
+    public function entries() : Collection
     {
         return $this->entries;
     }
 
-    public function sections() : ArrayCollection
+    public function sections() : Collection
     {
         return $this->sections;
     }

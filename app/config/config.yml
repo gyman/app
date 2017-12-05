@@ -28,7 +28,7 @@ services:
             - [ addServers, [ '%memcached.servers%' ]]
 
 sentry:
-    dsn: "http://9fca9298eb9a4b3a8140e0f694b2c10e:327633aac7dd4668a217e9802b973f01@sentry.dev.gyman.pl/3"
+    dsn: %sentry_url%
 
 imports:
     - { resource: parameters.yml }
@@ -61,29 +61,29 @@ framework:
     http_method_override: true
 
 # Twig Configuration
-twig: ~
-#  form_themes:
-#    - ::fields.html.twig
-#  debug:            %kernel.debug%
-#  strict_variables: false # %kernel.debug%
-#  globals:
-#    sentry_url:     %sentry_url%
-#    gallery_dir:    %galleryPath%
-#    google_maps_api_key: %google_maps_api_key%
-#    baseUrl: '%base_url%'
+twig:
+  form_themes:
+    - ::fields.html.twig
+  debug:                  %kernel.debug%
+  strict_variables:       false # %kernel.debug%
+  globals:
+    sentry_url:           %sentry_url%
+    gallery_dir:          %galleryPath%
+    google_maps_api_key:  %google_maps_api_key%
+    baseUrl:              %base_url%
 
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    port:      "%mailer_port%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport:            "%mailer_transport%"
+    host:                 "%mailer_host%"
+    port:                 "%mailer_port%"
+    username:             "%mailer_user%"
+    password:             "%mailer_password%"
 
-    logging:        true
+    logging:              true
 
     spool:
-        type: file
-        path: '%kernel.root_dir%/spool'
+        type:             file
+        path:             '%kernel.root_dir%/spool'
 
 #oneup_uploader:
 #    mappings:

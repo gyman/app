@@ -41,27 +41,28 @@
     </div><!-- End .heading-->
 
     <div class="row-fluid">
-        <div class="span12">
+        <div class="span6">
             <div id='calendar'></div>
+        </div>
+        <div class="span6">
+            {% if member.hasCurrentVoucher %}
+                Karnet ważny od {{ currentVoucher.startDate|date("d.m.Y") }} do {{ currentVoucher.endDate|date("d.m.Y") }} (pozostało {{ currentVoucher.leftDaysAmount }} dni do końca)<br />
+                Liczba pozostałych wejść: {{ currentVoucher.leftEntriesAmount }}
+            {% else %}
+                Brak aktualnego karnetu.
+            {% endif %}
+            <br />
+            Ostatnie wejście: {{ lastEntry.startDate|date("d.m.Y H:i") }}
+            na zajęcia '{{ lastEntry.occurrence.event.title }}'
+            <br />
+            Historia wejść:
+            <ul>
+                {% for entry in entries %}
+                    <li>{{ entry.startDate|date("d.m.Y H:i") }}: {{ entry.event.title }} ({{ entry.type }})</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
-    <div class="form-row row-fluid">
-        {% if member.hasCurrentVoucher %}
-            Karnet ważny od {{ currentVoucher.startDate|date("d.m.Y") }} do {{ currentVoucher.endDate|date("d.m.Y") }} (pozostało {{ currentVoucher.leftDaysAmount }} dni do końca)<br />
-            Liczba pozostałych wejść: {{ currentVoucher.leftEntriesAmount }}
-        {% else %}
-            Brak aktualnego karnetu.
-        {% endif %}
-        <br />
-        Ostatnie wejście: {{ lastEntry.startDate|date("d.m.Y H:i") }}
-        na zajęcia '{{ lastEntry.occurrence.event.title }}'
-        <br />
-        Historia wejść:
-        <ul>
-            {% for entry in member.entries %}
-                <li>{{ entry.startDate|date("d.m.Y H:i") }}: {{ entry.occurrence.event.title }} ({{ lastEntry.type }})</li>
-            {% endfor %}
-        </ul>
-    </div>
+
 {% endblock body %}
