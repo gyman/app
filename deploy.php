@@ -6,7 +6,7 @@ require 'recipe/symfony3.php';
 // Configuration
 
 set('repository', 'git@github.com:gyman/app.git');
-set('git_tty', true); // [Optional] Allocate tty for git on first deployment
+set('git_tty', false); // [Optional] Allocate tty for git on first deployment
 add('shared_files', [
     "app/config/parameters.yml"
 ]);
