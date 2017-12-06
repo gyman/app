@@ -209,7 +209,7 @@ class Entry
         $this->member = $member;
     }
 
-    public function occurrence() : Occurrence
+    public function occurrence() : ?Occurrence
     {
         return $this->occurrence;
     }
