@@ -2,6 +2,15 @@ Gyman\Domain\Entry:
   type:   entity
   table:  entries
   repositoryClass:  Gyman\Bundle\AppBundle\Repository\EntryRepository
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
   embedded:
     price:
       class: Gyman\Domain\Entry\Price
@@ -43,14 +52,6 @@ Gyman\Domain\Entry:
           onDelete: SET NULL
           onUpdate: RESTRICT
 
-  id:
-    id:
-      type: uuid
-        generator:
-            strategy: CUSTOM
-        customIdGenerator:
-            class: Ramsey\Uuid\Doctrine\UuidGenerator
-
   gedmo:
     soft_deleteable:
       field_name: deletedAt
@@ -63,7 +64,7 @@ Gyman\Domain\Entry:
 
     endDate:
       type: datetime
-      nullable: true #false
+      nullable: true
 
     type:
       type: string

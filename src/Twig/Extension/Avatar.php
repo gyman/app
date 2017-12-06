@@ -48,27 +48,29 @@ class Avatar extends Twig_Extension
      */
     public function getAvatarUrl($member): string
     {
-        if($this->club === null) {
-            return self::NO_PROFILE;
-        }
-
         $dir = rtrim($this->uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $path = rtrim($this->uploadPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
         switch(true) {
             case $member instanceof Member:
-                $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->details()->foto()->foto();
+                $foto = $member->details()->foto()->foto();
                 break;
             case $member instanceof MemberView:
-                $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $member->foto()->foto();
+                $foto = $member->foto()->foto();
                 break;
         }
+
+        if($this->club === null || $foto === null) {
+            return self::NO_PROFILE;
+        }
+
+        $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $foto;
 
         if(is_file($dir . $file) && file_exists($dir . $file)) {
             return $path . $file;
         }
 
-        return $file;
+        return self::NO_PROFILE;
     }
 
     /**
