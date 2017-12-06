@@ -1,7 +1,7 @@
 <?php
 namespace Deployer;
 
-require 'recipe/symfony.php';
+require 'recipe/symfony3.php';
 
 // Configuration
 
@@ -11,7 +11,6 @@ add('shared_files', [
     "app/config/parameters.yml"
 ]);
 add('shared_dirs', [
-    "app/logs",
     "web/uploads",
     "app/spool"
 ]);
