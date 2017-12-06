@@ -58,7 +58,7 @@
             Historia wejść:
             <ul>
                 {% for entry in entries %}
-                    <li>{{ entry.startDate|date("d.m.Y H:i") }}: {{ entry.event.title }} ({{ entry.type }})</li>
+                    <li>{{ entry.startDate|date("d.m.Y H:i") }}: {{ entry.event.title }} [{{ entry.section.title }}] ({{ entry.type }})</li>
                 {% endfor %}
             </ul>
         </div>

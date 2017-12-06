@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyman\Infrastructure\Query;
+namespace Gyman\Application\Query;
 
 use Gyman\Domain\Calendar\Event\Occurrence;
 

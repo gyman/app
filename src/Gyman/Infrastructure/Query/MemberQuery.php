@@ -2,9 +2,8 @@
 namespace Gyman\Infrastructure\Query;
 
 use Doctrine\DBAL\Connection;
+use Gyman\Application\Query\MemberQueryInterface;
 use Gyman\Domain\Calendar\Event\Occurrence;
-use Gyman\Domain\Member;
-use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\MemberView;
 use Gyman\Infrastructure\Table;
 

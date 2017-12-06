@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
+use Gyman\Model\View\EntryView;
+use Gyman\Model\View\EventView;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,9 +49,11 @@ class MemberController extends Controller
     public function getCalendarAction(Request $request){
         $start = Carbon::parse($request->get('start', 'this week'));
         $end = Carbon::parse($request->get('end', 'next week'));
+//        $events = $this->get('gyman.dashboard.members_query')->get($this->getUser()->member(), $start, $end);
+        $entries = $this->get('gyman.entries.query')->findByDates($this->getUser()->member(), $start, $end);
 
-        $events = $this->get('gyman.dashboard.members_query')->get($this->getUser()->member(), $start, $end);
-
-        return new JsonResponse($events);
+        return new JsonResponse(array_map(function(EntryView $entry) : array {
+            return $entry->toArray();
+        }, $entries->toArray()));
     }
 }

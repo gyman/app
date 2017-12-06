@@ -12,6 +12,9 @@ use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -41,14 +44,14 @@ final class DateFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('strategy', 'choice', [
+            ->add('strategy', ChoiceType::class, [
                 'choices' => $this->availableStrategies,
                 'attr'   => [
                     "class" => "span4"
                 ],
                 'label' => 'Rodzaj raportu',
             ])
-            ->add('startDate', 'datetime', [
+            ->add('startDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
@@ -56,7 +59,7 @@ final class DateFilterType extends AbstractType
                 ],
                 'label' => 'Początek',
             ])
-            ->add('endDate', 'datetime', [
+            ->add('endDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'dd.MM.yyyy',
                 'attr'   => [
@@ -64,13 +67,13 @@ final class DateFilterType extends AbstractType
                 ],
                 'label' => 'Koniec',
             ])
-            ->add('submit', 'submit', [
+            ->add('submit', SubmitType::class, [
                 'label' => 'ustaw',
             ]);
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
