@@ -11,12 +11,16 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/",
+            "Gyman\\": "src/",
+            "Tests\\": "tests/",
             "SymfonyStandard\\": "app/"
         },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"
+        ],
+        "files": [
+          "src/functions.php"
         ]
     },
     "autoload-dev": {
@@ -24,6 +28,7 @@
             "Tests\\": "tests/"
         },
         "files": [
+          "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
     "require": {
@@ -48,6 +53,7 @@
         "knplabs/knp-time-bundle": "*",
         "league/tactician-bundle": "^1",
         "liip/monitor-bundle": "^2.3",
+        "moneyphp/money": "^3.0@dev",
         "nesbot/carbon": "dev-master",
         "ob/highcharts-bundle": "1.*",
         "oneup/uploader-bundle": "^1.8",
@@ -99,14 +105,14 @@
             "php app/console doctrine:database:drop --if-exists --no-interaction --force --quiet",
             "php app/console doctrine:database:create --env=dev --if-not-exists --no-interaction --quiet",
             "php app/console doctrine:schema:create --no-interaction --quiet --env=dev",
-            "php app/console doctrine:fixtures:load --append -n --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection"
+            "php app/console doctrine:fixtures:load --append -n --env=dev --no-interaction --quiet --fixtures=src/Bundle/ClubBundle/DataFixtures/StandardConnection"
         ],
         "prepare-tenant": [
             "php app/console doctrine:database:drop --club=rio --if-exists --no-interaction --force --quiet",
             "php app/console doctrine:database:create --club=rio --if-not-exists --no-interaction --quiet",
             "php app/console doctrine:schema:create --no-interaction --quiet --env=dev --club=rio",
             "php app/console doctrine:migrations:migrate --env=dev --no-interaction --quiet --configuration=app/DoctrineMigrations/tenant.yml --club=rio",
-            "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=rio"
+            "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Bundle/AppBundle/DataFixtures/Club --club=rio"
         ],
         "reload-fixtures-test": [
             "php app/console doctrine:database:drop --force --if-exists --env=test",
@@ -145,13 +151,11 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.8-dev"
         }
     }
 }

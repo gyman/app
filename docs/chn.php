@@ -28,7 +28,7 @@
 //    minutes: 45
 //EOF;
 
-$file = file_get_contents('src/Gyman/Bundle/AppBundle/DataFixtures/Club/Yaml/occurrences.yml');
+$file = file_get_contents('src/Bundle/AppBundle/DataFixtures/Club/Yaml/occurrences.yml');
 
 $result = [];
 

@@ -45,8 +45,11 @@ Gyman\Domain\Entry:
 
   id:
     id:
-      type: guid
-      generator: { strategy: UUID }
+      type: uuid
+        generator:
+            strategy: CUSTOM
+        customIdGenerator:
+            class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   gedmo:
     soft_deleteable:

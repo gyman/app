@@ -40,3 +40,5 @@ composer.phar*
 /web/schedules/
 !/web/schedules/.gitkeep
 npm-debug.log
+var/cache
+var/logs

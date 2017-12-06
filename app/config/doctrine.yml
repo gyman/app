@@ -2,6 +2,8 @@ doctrine:
     dbal:
       types:
         uuid:  Ramsey\Uuid\Doctrine\UuidType
+#        carbon: Wallet\Infrastructure\AppBundle\Type\CarbonType
+#        money:  Wallet\Infrastructure\AppBundle\Type\MoneyType
       default_connection: default
       connections:
         default:

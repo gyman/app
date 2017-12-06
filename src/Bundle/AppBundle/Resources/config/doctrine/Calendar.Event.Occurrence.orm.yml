@@ -3,6 +3,14 @@ Gyman\Domain\Calendar\Event\Occurrence:
   table: occurrences
   repositoryClass: Gyman\Bundle\AppBundle\Repository\OccurrenceRepository
 
+  id:
+    id:
+      type: uuid
+        generator:
+          strategy: CUSTOM
+        customIdGenerator:
+          class: Ramsey\Uuid\Doctrine\UuidGenerator
+
   entityListeners:
     Gyman\Bundle\AppBundle\Listener\OccurrenceListener:
       postLoad: [postLoadHandler]
