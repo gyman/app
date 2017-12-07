@@ -28,15 +28,15 @@ class CloseEntriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-                ->setName('gyman:entries:close_expired')
-                ->setDescription('Closes finished entries')
-                ->addOption(
-                    'em',
-                    null,
-                    InputOption::VALUE_REQUIRED,
-                    'Entity manager name'
-                )
-                ->addOption("dry")
+            ->setName('gyman:entries:close_expired')
+            ->setDescription('Closes finished entries')
+            ->addOption(
+                'em',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Entity manager name'
+            )
+            ->addOption("dry")
         ;
     }
 

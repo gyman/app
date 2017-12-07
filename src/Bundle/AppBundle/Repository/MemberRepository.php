@@ -282,7 +282,7 @@ SQL;
             ->where('m.lastEntry IS NOT null')
             ->andWhere('e.startDate < :date')
             ->andWhere('e.endDate IS null')
-            ->andWhere('o.endDate < :date')
+            ->andWhere('o.occurrenceData.endDate < :date')
             ->setParameters([
                 "date" => Carbon::parse("now"),
             ])

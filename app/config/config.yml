@@ -129,7 +129,7 @@ dende_multitenancy:
     - "doctrine:*"
     - "fos:*"
     - "gyman:entries:close_expired"
-    - "gyman:vouchers:update_current"
+    - "gyman:vouchers:*"
 
   connections:
     tenant:
