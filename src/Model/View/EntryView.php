@@ -15,7 +15,7 @@ class EntryView
     /** @var DateTime */
     protected $startDate;
 
-    /** @var DateTime */
+    /** @var DateTime|null */
     protected $endDate;
 
     /** @var EventView */
@@ -40,7 +40,7 @@ class EntryView
      * @param Type $type
      * @param Price|null $price
      */
-    public function __construct(UuidInterface $id, DateTime $startDate, DateTime $endDate, EventView $event, SectionView $section, Type $type, ?Price $price)
+    public function __construct(UuidInterface $id, DateTime $startDate, DateTime $endDate = null, EventView $event, SectionView $section, Type $type, ?Price $price)
     {
         $this->id = $id;
         $this->startDate = $startDate;
@@ -61,7 +61,7 @@ class EntryView
         return $this->startDate;
     }
 
-    public function endDate(): DateTime
+    public function endDate(): ?DateTime
     {
         return $this->endDate;
     }

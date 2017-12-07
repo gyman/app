@@ -59,3 +59,8 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 //before('deploy:symlink', 'database:migrate');
+
+task('release_name', function(){
+    cd('{{deploy_path}}');
+    writeln(run("tail -n 1 .dep/releases"));
+});
