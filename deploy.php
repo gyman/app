@@ -1,17 +1,16 @@
 <?php
 namespace Deployer;
 
-require 'recipe/symfony.php';
+require 'recipe/symfony3.php';
 
 // Configuration
 
 set('repository', 'git@github.com:gyman/app.git');
-set('git_tty', true); // [Optional] Allocate tty for git on first deployment
+set('git_tty', false); // [Optional] Allocate tty for git on first deployment
 add('shared_files', [
     "app/config/parameters.yml"
 ]);
 add('shared_dirs', [
-    "app/logs",
     "web/uploads",
     "app/spool"
 ]);
@@ -60,3 +59,8 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 //before('deploy:symlink', 'database:migrate');
+
+task('release_name', function(){
+    cd('{{deploy_path}}');
+    writeln(run("tail -n 1 .dep/releases"));
+});

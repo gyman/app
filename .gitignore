@@ -42,3 +42,4 @@ composer.phar*
 npm-debug.log
 var/cache
 var/logs
+yarn-error.log

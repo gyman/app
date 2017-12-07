@@ -57,7 +57,6 @@
         "nesbot/carbon": "dev-master",
         "ob/highcharts-bundle": "1.*",
         "oneup/uploader-bundle": "^1.8",
-        "phing/phing": "*",
         "ramsey/uuid-doctrine": "dev-master",
         "sensio/distribution-bundle": "^5",
         "sensio/framework-extra-bundle": "~3.0",
@@ -70,7 +69,7 @@
     },
     "require-dev": {
         "sensiolabs/security-checker": "^4.1",
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "6",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "~2",
         "mayflower/php-codebrowser": "~1",
@@ -81,13 +80,13 @@
         "deployer/deployer" : "^5"
     },
     "scripts": {
-       "symfony-scripts" : [
-           "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
