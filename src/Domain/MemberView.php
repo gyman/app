@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Domain;
 
+use DateTime;
 use Gyman\Domain\Member\Details\Foto;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -25,7 +26,13 @@ class MemberView
     /** @var UuidInterface */
     protected $currentVoucherId;
 
-    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null)
+    /** @var DateTime */ // @todo zamienić z poniższym na value object
+    protected $voucherEndDate;
+
+    /** @var int */
+    protected $voucherLeftAmount;
+
+    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null, DateTime $voucherEndDate = null, int $voucherLeftAmount = null)
     {
         $this->id = Uuid::fromString($id);
         $this->firstname = $firstname;
@@ -33,6 +40,8 @@ class MemberView
         $this->foto = new Foto($foto);
         $this->lastEntryId = $lastEntryId ? Uuid::fromString($lastEntryId) : null;
         $this->currentVoucherId = $currentVoucherId ? Uuid::fromString($currentVoucherId) : null;
+        $this->voucherEndDate = $voucherEndDate;
+        $this->voucherLeftAmount = $voucherLeftAmount;
     }
 
     public function id(): UuidInterface
@@ -63,5 +72,15 @@ class MemberView
     public function currentVoucherId(): ?UuidInterface
     {
         return $this->currentVoucherId;
+    }
+
+    public function voucherEndDate(): DateTime
+    {
+        return $this->voucherEndDate;
+    }
+
+    public function voucherLeftAmount(): int
+    {
+        return $this->voucherLeftAmount;
     }
 }

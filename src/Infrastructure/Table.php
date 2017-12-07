@@ -8,4 +8,5 @@ class Table
     const SECTION = "sections";
     const EVENT = "events";
     const OCCURRENCE = "occurrences";
+    const VOUCHER = "vouchers";
 }

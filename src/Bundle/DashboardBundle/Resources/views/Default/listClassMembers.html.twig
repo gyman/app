@@ -16,24 +16,30 @@
 {{ include("_flash.html.twig") }}
 
 <div class="row-fluid">
-    <div class="span3 offset3">
-        <ul class="media-list" style="height: 90%; overflow-y: scroll; overflow-x: hidden">
+    <div class="span5 offset1">
+        <label for="listFilter">
+            Szukaj:
+            <input type="text" name="listFilter"/>
+        </label>
+        <ul class="media-list" style="max-height:800px%; overflow-y: scroll; overflow-x: hidden">
             {%  for member in allMembers %}
                 <li class="media">
-                    <a class="pull-left" href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}">
-                        <img class="pull-left media-object thumbnail" src="{{ avatar(member) }}" style="max-width: 30px; margin-right: 10px"/>
-                        <div class="media-body">
+                    <a class="pull-left" href="{{ path("gyman_member_edit", {id: member.id}) }}">
+                        <img class="pull-left media-object thumbnail" src="{{ avatar(member) }}" style="max-width: 60px; margin-right: 10px"/>
+                        <div class="media-body" data-barcode="{{ member.barcode }}">
                             <h4 class="media-heading">
                                 {{ member.firstname }} {{ member.lastname }}
                             </h4>
                             karnet:
                             {% if member.currentVoucherId is not null %}
-                                ok
+                                ważny do <span class="label">{{ member.voucherEndDate|date("Y.m.d") }}</span><br />
+                                pozostało {{ member.voucherLeftAmount }} wejść
                             {% else %}
                                 brak
                             {% endif %}
                         </div>
                     </a>
+                    <a href="{{ path("gyman_entry_create_for_member", {occurrence: occurrence.id, member: member.id}) }}" class="pull-right btn">Dodaj</a>
                 </li>
             {% endfor %}
         </ul>
@@ -65,53 +71,3 @@
 </div>
 
 {% endblock content %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script>
-        $(function(){
-            var occurrenceId = '{{ occurrence.id }}';
-            var store = new JSData.DS();
-            store.registerAdapter('http', new DSHttpAdapter({
-                {% if app.environment == 'prod' %}
-                basePath: "/api",
-                {% else %}
-                basePath: "/app_dev.php/api",
-                {% endif %}
-            }), { default: true });
-            var Member = store.defineResource({name: 'member'});
-            var Entry = store.defineResource({name: 'entry'});
-            $(document).on("enteredMembersBarcode", function(event, data){
-                alert("test");
-
-                Member
-                    .find(data.code)
-                    .then(function (_member) {
-                        var currentVoucher = _member.current_voucher;
-                        var entryType; // allowed entryTypes from this page: voucher, credit
-                        if(
-                            _.isUndefined(currentVoucher)
-                            || currentVoucher.is_closed
-                            || currentVoucher.left_amount < 1
-                            || currentVoucher.left_days == 0
-                        ) {
-                            entryType = 'credit';
-                        } else {
-                            entryType = 'voucher';
-                        }
-                        Entry.create({
-                            member: _member.id,
-                            occurrence: occurrenceId,
-                            entryType: entryType,
-                            price: 0
-                        }, {
-                            afterCreate: function () {
-                                window.location.reload();
-                            }
-                        });
-                    })
-            });
-        });
-    </script>
-{% endblock javascripts %}
