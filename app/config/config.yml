@@ -1,3 +1,9 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: fos_user.yml }
+    - { resource: doctrine.yml }
+
 parameters:
   date_format: "Y.m.d"
   time_format: "H:i:s"
@@ -29,12 +35,8 @@ services:
 
 sentry:
     dsn: %sentry_url%
+#    release: %sentry.release% @todo turn on
 
-imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: fos_user.yml }
-    - { resource: doctrine.yml }
 
 framework:
     ide: "phpstorm://%%f:%%l"
