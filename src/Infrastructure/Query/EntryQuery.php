@@ -71,6 +71,7 @@ SQL
             return new EntryView(
                 Uuid::fromString($entry['entry_id']),
                 new DateTime($entry['start_date']),
+                new DateTime($entry['end_date']),
                 new EventView(Uuid::fromString($entry['event_id']), $entry['event_title']),
                 new SectionView(Uuid::fromString($entry['section_id']), $entry['section_title']),
                 new Type($entry['entry_type']),
