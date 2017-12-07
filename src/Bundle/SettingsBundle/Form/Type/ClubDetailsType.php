@@ -3,6 +3,8 @@ namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Gyman\Bundle\ClubBundle\Entity\Details;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,21 +22,21 @@ final class ClubDetailsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('address', 'text')
-            ->add('zipcode', 'text')
-            ->add('city', 'text')
-            ->add('country', 'text')
-            ->add('phone_number', 'text')
-            ->add('email_address', 'text')
-            ->add('opened_from', 'text')
-            ->add('opened_till', 'text')
-            ->add('about', 'textarea')
-            ->add('account_number', 'text')
+            ->add('address', TextType::class)
+            ->add('zipcode', TextType::class)
+            ->add('city', TextType::class)
+            ->add('country', TextType::class)
+            ->add('phone_number', TextType::class)
+            ->add('email_address', TextType::class)
+            ->add('opened_from', TextType::class)
+            ->add('opened_till', TextType::class)
+            ->add('about', TextareaType::class)
+            ->add('account_number', TextType::class)
         ;
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
