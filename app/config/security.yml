@@ -35,6 +35,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/calendar/events, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/calendar/, role: ROLE_MODERATOR }
+        - { path: ^/members/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/members, role: ROLE_MODERATOR }
         - { path: ^/vouchers, role: ROLE_MODERATOR }
         - { path: ^/entries, role: ROLE_MODERATOR }
