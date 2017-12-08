@@ -15,13 +15,13 @@
 
     <testsuites>
         <testsuite name="functional">
-            <directory>../src/Gyman/*/*/Tests/Functional/**</directory>
+            <directory>../src/*/*/Tests/Functional/**</directory>
         </testsuite>
         <testsuite name="unit">
-            <directory>../src/Gyman/Application/Tests/Unit/**</directory>
+            <directory>../src/Application/Tests/Unit/**</directory>
         </testsuite>
         <testsuite name="integration">
-            <directory>../src/Gyman/*/*/Tests/Integration/**</directory>
+            <directory>../src/*/*/Tests/Integration/**</directory>
         </testsuite>
     </testsuites>
 

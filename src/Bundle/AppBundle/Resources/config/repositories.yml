@@ -1,0 +1,57 @@
+---
+services:
+
+  gyman.repository.section:
+    class:            Gyman\Bundle\AppBundle\Repository\SectionRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Section'
+
+  gyman.vouchers.repository.entry:
+    class:            Gyman\Bundle\AppBundle\Repository\EntryRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Entry'
+
+  gyman.vouchers.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\VoucherRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Voucher'
+
+  gyman.members.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\MemberRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Member'
+
+
+  gyman.entries.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\EntryRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Entry'
+
+  gyman.user.repository:
+    class:            Gyman\Bundle\AppBundle\Repository\UserRepository
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\User'
+
+  gyman.occurrence.repository:
+    class:            'Gyman\Bundle\AppBundle\Repository\OccurrenceRepository'
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Calendar\Event\Occurrence'
+
+  gyman.event.repository:
+    class:            'Gyman\Bundle\AppBundle\Repository\EventRepository'
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Calendar\Event'
+
+  gyman.calendar.repository:
+    class:            'Gyman\Bundle\AppBundle\Repository\EventRepository'
+    factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
+    arguments:
+      - 'Gyman\Domain\Calendar'

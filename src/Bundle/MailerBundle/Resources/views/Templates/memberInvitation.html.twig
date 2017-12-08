@@ -1,0 +1,45 @@
+{# @var club \Gyman\Bundle\ClubBundle\Entity\Club #}
+{# @var entry \Gyman\Domain\Entry #}
+{# @var lastVoucher \Gyman\Domain\Voucher #}
+
+{% extends "MailerBundle::layout.html.twig" %}
+
+{% block content %}
+    <div xmlns="http://www.w3.org/1999/html">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Witam,</p>
+
+                            <p>To jest automatyczny komunikat ze strony http://{{ club.subdomain.name }}.{{ baseUrl }}</p>
+
+                            <p>Administrator wysłał Ci zaproszenie do rejestracji konta, aby to zrobić wejdź na poniższy adres<br />
+                                <a href="http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}">http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}</a>
+                            </p>
+
+                            <p>
+                                Jeżeli nie widzisz powyższego linku, przekopiuj adres do paska przeglądarki i odwiedź stronę:<br />
+                                http://{{ club.subdomain.name }}.{{ baseUrl }}{{ path('gyman_member_register', {'user': token}) }}
+                            </p>
+
+                            <p>
+                                Zostaniesz poproszony/a o wybranie nowego hasła. Twoje obecne hasło to: <br />
+                                <strong>{{ currentPassword }}</strong><br />
+                                podaj je w polu "Stare hasło"
+                            </p>
+
+                            <p>
+                                W razie dalszych kłopotów poproś administratora o ponowne wysłanie zaproszenia.
+                            </p>
+
+                            <p>
+                                Rejestracja konta umożliwi Ci dostęp do historii Twoich wejść oraz planów zajęć
+                                i innych rzeczy udostępnionych przez administratora.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

@@ -1,3 +1,9 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: fos_user.yml }
+    - { resource: doctrine.yml }
+
 parameters:
   date_format: "Y.m.d"
   time_format: "H:i:s"
@@ -27,22 +33,10 @@ services:
         calls:
             - [ addServers, [ '%memcached.servers%' ]]
 
-    gedmo.listener.softdeleteable:
-        class: Gedmo\SoftDeleteable\SoftDeleteableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-            - { name: doctrine.event_subscriber, connection: tenant }
-        calls:
-            - [ setAnnotationReader, [ '@annotation_reader' ] ]
-
 sentry:
-    dsn: "http://9fca9298eb9a4b3a8140e0f694b2c10e:327633aac7dd4668a217e9802b973f01@sentry.dev.gyman.pl/3"
+    dsn: %sentry_url%
+    release: %sentry_revision%
 
-imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: fos_user.yml }
-    - { resource: doctrine.yml }
 
 framework:
     ide: "phpstorm://%%f:%%l"
@@ -70,29 +64,28 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
-    strict_variables: false # %kernel.debug%
-    globals:
-      sentry_url:     %sentry_url%
-      gallery_dir:    %galleryPath%
-      google_maps_api_key: %google_maps_api_key%
-      baseUrl: '%base_url%'
-    form:
-        resources:
-            - ::fields.html.twig
+#  form_themes:
+#    - ::fields.html.twig
+  debug:                  %kernel.debug%
+  strict_variables:       false # %kernel.debug%
+  globals:
+    sentry_url:           %sentry_url%
+    gallery_dir:          %galleryPath%
+    google_maps_api_key:  %google_maps_api_key%
+    baseUrl:              %base_url%
 
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    port:      "%mailer_port%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport:            "%mailer_transport%"
+    host:                 "%mailer_host%"
+    port:                 "%mailer_port%"
+    username:             "%mailer_user%"
+    password:             "%mailer_password%"
 
-    logging:        true
+    logging:              true
 
     spool:
-        type: file
-        path: '%kernel.root_dir%/spool'
+        type:             file
+        path:             '%kernel.root_dir%/spool'
 
 #oneup_uploader:
 #    mappings:
@@ -134,26 +127,17 @@ dende_calendar:
 dende_multitenancy:
   patched_commands:
     - "doctrine:*"
+    - "fos:*"
     - "gyman:entries:close_expired"
-    - "gyman:vouchers:update_current"
+    - "gyman:vouchers:*"
 
   connections:
     tenant:
       command_parameter_name:         club
       command_parameter_description:  Provide club name for tenant connection
 
-stof_doctrine_extensions:
-    default_locale: pl_PL
-    orm:
-        default:
-            timestampable: true
-            sluggable: true
-        tenant:
-            timestampable: true
-            sluggable: true
-
-fos_js_routing:
-    routes_to_expose: [.*]
+#fos_js_routing:
+#    routes_to_expose: [.*]
     
 monolog:
   handlers:
@@ -179,38 +163,24 @@ monolog:
       type:    group
       members: [streamed_main]
 
-jms_serializer:
-  handlers:
-    datetime:
-      default_format: "Y-m-d H:i:s"
-      default_timezone: "Europe/Warsaw"
-  metadata:
-    cache: true
-    auto_detection: false
-    directories:
-#      app:
-#        namespace_prefix: 'Gyman\Domain\Entity'
-#        path:             '@GymanAppBundle/Resources/config/serializer/app'
-      domain:
-        namespace_prefix: 'Gyman\Domain'
-        path:             '@GymanAppBundle/Resources/config/serializer'
-      calendar:
-        namespace_prefix: 'Dende\Calendar\Domain'
-        path:             '@GymanAppBundle/Resources/config/serializer/calendar'
-
-fos_rest:
-  param_fetcher_listener: true
-  body_listener:
-    decoders:
-      json: fos_rest.decoder.jsontoform
-  format_listener: true
-  view:
-    view_response_listener: force
-    serialize_null: true
-    failed_validation: 422
-  routing_loader:
-      default_format: json
-      include_format: false
+#jms_serializer:
+#  handlers:
+#    datetime:
+#      default_format: "Y-m-d H:i:s"
+#      default_timezone: "Europe/Warsaw"
+#  metadata:
+#    cache: true
+#    auto_detection: false
+#    directories:
+##      app:
+##        namespace_prefix: 'Gyman\Domain\Entity'
+##        path:             '@GymanAppBundle/Resources/config/serializer/app'
+#      domain:
+#        namespace_prefix: 'Gyman\Domain'
+#        path:             '@GymanAppBundle/Resources/config/serializer'
+#      calendar:
+#        namespace_prefix: 'Dende\Calendar\Domain'
+#        path:             '@GymanAppBundle/Resources/config/serializer/calendar'
 
 sensio_framework_extra:
     router:      { annotations: true }
@@ -220,33 +190,27 @@ sensio_framework_extra:
     security:    { annotations: true }
     psr_message: { enabled: false }
 
-knp_time: ~
+#knp_time: ~
 
-bazinga_hateoas:
-  metadata:
-    cache:                file
-    file_cache:
-      dir:              "%kernel.cache_dir%/hateoas"
-
-liip_monitor:
-    mailer:
-        enabled:              false
-        recipient:            uirapuruadg@gmail.com
-        sender:               gyman.pl@gmail.com
-        subject:              "Health check"
-        send_on_warning:      true
-    checks:
-        php_extensions: [imagick, intl, mcrypt, json]
-        php_version:
-          5.6.0: ">="
-#        disk_usage:
-#          warning:              70
-#          critical:             90
-#          path:                 '%kernel.cache_dir%'
-        symfony_requirements:
-            file:                 '%kernel.root_dir%/SymfonyRequirements.php'
-        doctrine_dbal:
-          - default
-#          - tenant
-        security_advisory:
-          lock_file:            '%kernel.root_dir%/../composer.lock'
+#liip_monitor:
+#    mailer:
+#        enabled:              false
+#        recipient:            uirapuruadg@gmail.com
+#        sender:               gyman.pl@gmail.com
+#        subject:              "Health check"
+#        send_on_warning:      true
+#    checks:
+#        php_extensions: [imagick, intl, mcrypt, json]
+#        php_version:
+#          5.6.0: ">="
+##        disk_usage:
+##          warning:              70
+##          critical:             90
+##          path:                 '%kernel.cache_dir%'
+#        symfony_requirements:
+#            file:                 '%kernel.root_dir%/SymfonyRequirements.php'
+#        doctrine_dbal:
+#          - default
+##          - tenant
+#        security_advisory:
+#          lock_file:            '%kernel.root_dir%/../composer.lock'

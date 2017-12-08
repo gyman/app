@@ -10,3 +10,5 @@
 */5 * * * * php /home/vagrant/www/app/console gyman:vouchers:update_current --club=extreme
 */5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=extreme
 
+*/5 * * * * php /home/vagrant/www/app/console gyman:entries:close_expired --club=extreme
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="gyman" default="prepare">
-    <import file="${project.basedir}/app/Resources/phing/properties.xml"/>
-    <import file="${project.basedir}/app/Resources/phing/database.xml"/>
-    <import file="${project.basedir}/app/Resources/phing/tests.xml"/>
+    <import file="/env/phing/properties.xml"/>
+    <import file="/env/phing/database.xml"/>
+    <import file="/env/phing/tests.xml"/>
 
     <target name="composer:download">
         <exec executable="sh" passthru="true" checkreturn="true">

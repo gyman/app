@@ -2,7 +2,6 @@
   "name": "gyman",
   "version": "0.2.0",
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.16.0",
     "bower": "~1.3.11",
     "clean-css": "~2.2.15",
     "grunt": "~0.4.5",

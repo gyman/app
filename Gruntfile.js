@@ -12,38 +12,38 @@ module.exports = function (grunt) {
         'bower_components/DataTables/media/css/jquery.dataTables.css',
         'bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css',
 
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery-ui-timepicker-addon.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.autocomplete.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.combobox.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.core.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.dialog.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.progressbar.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.resizable.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.slider.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.spinner.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.theme.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.ui.tooltip.css',
-        'src/Gyman/Bundle/LayoutBundle/Resources/css/jquery.pnotify.default.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery-ui-timepicker-addon.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.autocomplete.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.combobox.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.core.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.dialog.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.progressbar.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.resizable.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.slider.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.spinner.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.theme.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.ui.tooltip.css',
+        'src/Bundle/LayoutBundle/Resources/css/jquery.pnotify.default.css',
     ];
 
     var lessFiles = [
         "bower_components/bootstrap/less/bootstrap.less",
         "bower_components/bootstrap/less/responsive.less",
         "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
-        "src/Gyman/Bundle/DashboardBundle/Resources/less/dashboard.less",
-        "src/Gyman/Bundle/ListsBundle/Resources/less/*.less",
-        "src/Gyman/Bundle/DefaultBundle/Resources/less/main.less",
-        "src/Gyman/Bundle/FiltersBundle/Resources/less/filters.less",
-        "src/Gyman/Bundle/EntriesBundle/Resources/public/less/*.less",
-        "src/Gyman/Bundle/TimelineBundle/Resources/less/timeline.less"
+        "src/Bundle/DashboardBundle/Resources/less/dashboard.less",
+        "src/Bundle/ListsBundle/Resources/less/*.less",
+        "src/Bundle/DefaultBundle/Resources/less/main.less",
+        "src/Bundle/FiltersBundle/Resources/less/filters.less",
+        "src/Bundle/EntriesBundle/Resources/public/less/*.less",
+        "src/Bundle/TimelineBundle/Resources/less/timeline.less"
     ];
 
     var mainLibraries = [
         'bower_components/jquery/dist/jquery.js',
         'bower_components/jquery-ui/ui/jquery-ui.js',
         'bower_components/jquery-migrate/jquery-migrate.min.js',
-        'bower_components/js-data/dist/js-data.js',
-        'bower_components/js-data-http/dist/js-data-http.js',
+        // 'bower_components/js-data/dist/js-data.js',
+        // 'bower_components/js-data-http/dist/js-data-http.js',
 
         'bower_components/underscore/underscore.js',
 
@@ -67,65 +67,65 @@ module.exports = function (grunt) {
         "bower_components/select2/select2.js",
         //"bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
         //"bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.pl.js",
-        "bower_components/DataTables/media/js/jquery.dataTables.js",
-        "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
+        // "bower_components/DataTables/media/js/jquery.dataTables.js",
+        // "bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.js",
         "bower_components/modernizr/modernizr.js",
         "bower_components/blockui/jquery.blockUI.js",
         "bower_components/pnotify/pnotify.core.js",
         "bower_components/jquery.uniform/jquery.uniform.js",
         "bower_components/jquery.knob/js/jquery.knob.js",
         "bower_components/qTip/jquery.qtip.js",
-        "bower_components/highcharts/highcharts.js",
+        // "bower_components/highcharts/highcharts.js",
         //"bower_components/highcharts/modules/exporting.js",
         //'bower_components/fullcalendar/dist/fullcalendar.js',
         //'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
         //'bower_components/jquery-file-upload/js/jquery.fileupload.js',
         //'bower_components/webcam/jquery.webcam.js',
         'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
-        'src/Gyman/Bundle/AppBundle/Resources/public/js/photobooth_min.js',
+        'src/Bundle/AppBundle/Resources/public/js/photobooth_min.js',
     ];
 
     var coffeeFiles = [
-        'src/Gyman/Bundle/AppBundle/Resources/coffee/spinner.coffee',
-        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
-        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/ModalContainer.coffee',
-        'src/Gyman/Bundle/AppBundle/Resources/coffee/keyboardTyping.coffee',
-        //'src/Gyman/Bundle/DefaultBundle/Resources/coffee/SwitchClub.coffee', @todo: re-add
+        'src/Bundle/AppBundle/Resources/coffee/spinner.coffee',
+        //'src/Bundle/DefaultBundle/Resources/coffee/AbstractModal.coffee',
+        //'src/Bundle/DefaultBundle/Resources/coffee/ModalContainer.coffee',
+        'src/Bundle/AppBundle/Resources/coffee/keyboardTyping.coffee',
+        //'src/Bundle/DefaultBundle/Resources/coffee/SwitchClub.coffee', @todo: re-add
 
         //'web/bundles/lists/coffee/reloadAjax.coffee',
 
-        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
-        //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
-        //"src/Gyman/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
-        ////"src/Gyman/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
-        "src/Gyman/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
+        "src/Bundle/DashboardBundle/Resources/coffee/ActivityTab.coffee",
+        //"src/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
+        //"src/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
+        ////"src/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
+        "src/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
 
-        //"src/Gyman/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
-        "src/Gyman/Bundle/AppBundle/Resources/coffee/WebCamPlugin.coffee",
-        "src/Gyman/Bundle/AppBundle/Resources/coffee/OnlyOneActivityPlugin.coffee",
-        //"src/Gyman/Bundle/AppBundle/Resources/coffee/Filter.coffee",
+        //"src/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
+        "src/Bundle/AppBundle/Resources/coffee/WebCamPlugin.coffee",
+        "src/Bundle/AppBundle/Resources/coffee/OnlyOneActivityPlugin.coffee",
+        //"src/Bundle/AppBundle/Resources/coffee/Filter.coffee",
 
-        //"src/Gyman/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
-        //"src/Gyman/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
-        //"src/Gyman/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
-        //"src/Gyman/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
+        //"src/Bundle/ListsBundle/Resources/coffee/reloadAjax.coffee",
+        //"src/Bundle/ListsBundle/Resources/coffee/members.list.coffee",
+        //"src/Bundle/ListsBundle/Resources/coffee/entries.list.coffee",
+        //"src/Bundle/ListsBundle/Resources/coffee/vouchers.list.coffee",
 
-        //"src/Gyman/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
-        //"src/Gyman/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
+        //"src/Bundle/FiltersBundle/Resources/coffee/NewFilterModal.coffee",
+        //"src/Bundle/FiltersBundle/Resources/coffee/tabs.coffee",
 
-        //"src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
-        //"src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
-        //"src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
-        //"src/Gyman/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
+        //"src/Bundle/ScheduleBundle/Resources/coffee/schedule-calendar.coffee",
+        //"src/Bundle/ScheduleBundle/Resources/coffee/schedule.showEvent.coffee",
+        //"src/Bundle/ScheduleBundle/Resources/coffee/schedule.newEvent.coffee",
+        //"src/Bundle/ScheduleBundle/Resources/coffee/schedule.editEvent.coffee",
 
-        //"src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.modal.class.coffee",
-        //"src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.closeEntry.coffee",
-        //"src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.newEntry.coffee",
-        //"src/Gyman/Bundle/EntriesBundle/Resources/coffee/entries.editEntry.coffee",
+        //"src/Bundle/EntriesBundle/Resources/coffee/entries.modal.class.coffee",
+        //"src/Bundle/EntriesBundle/Resources/coffee/entries.closeEntry.coffee",
+        //"src/Bundle/EntriesBundle/Resources/coffee/entries.newEntry.coffee",
+        //"src/Bundle/EntriesBundle/Resources/coffee/entries.editEntry.coffee",
 
-        //"src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.closeVoucher.coffee",
-        //"src/Gyman/Bundle/AppBundle/Resources/coffee/vouchers.newVoucher.coffee"
-        'src/Gyman/Bundle/AppBundle/Resources/coffee/main.coffee'
+        //"src/Bundle/AppBundle/Resources/coffee/vouchers.closeVoucher.coffee",
+        //"src/Bundle/AppBundle/Resources/coffee/vouchers.newVoucher.coffee"
+        'src/Bundle/AppBundle/Resources/coffee/main.coffee'
     ];
 
     grunt.initConfig({

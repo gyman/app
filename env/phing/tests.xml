@@ -1,0 +1,67 @@
+<project name="gyman.tests" default="">
+    <target name="phplint">
+        <exec command="${php_bin} -l ${php-file}" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="test-phplint" description="linting phpfiles">
+        <foreach param="fname" absparam="php-file" target="phplint">
+            <fileset dir="${project.basedir}">
+                <include name="app/**/*.php" />
+                <include name="src/**/*.php" />
+                <exclude name="app/cache/**/*.php" />
+            </fileset>
+        </foreach>
+    </target>
+
+    <target name="test-twiglint">
+        <exec command="${php_bin} ${symfony_console} twig:lint app/Resources" checkreturn="true" passthru="true" />
+        <exec command="${php_bin} ${symfony_console} twig:lint src" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="test-phpunit">
+        <phingcall target="reset-db">
+            <property name="env" value="test" />
+            <property name="club" value="test" />
+        </phingcall>
+        <echo>Running phpunit tests</echo>
+        <exec command="bin/phpunit -c app --testsuite=all" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="test-security">
+        <exec command="bin/security-checker security:check --quiet" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="test">
+        <phingcall target="test-phplint" />
+        <phingcall target="test-twiglint" />
+        <phingcall target="test-security" />
+        <phingcall target="phpcs" />
+        <phingcall target="phpcsfixer-dry" />
+        <phingcall target="phpmd" />
+        <phingcall target="test-phpunit" />
+    </target>
+
+    <target name="phpcs" description="php code sniffer">
+        <exec command="bin/phpcs --standard=app/phpcs.xml --extensions=php src/Bundle" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="phpcsfixer-dry" description="php code fixer">
+        <exec command="bin/php-cs-fixer fix --dry-run --config-file=.php_cs" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="phpcsfixer" description="php code fixer">
+        <exec command="bin/php-cs-fixer fix --config-file=.php_cs" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="phpcbf" description="php code beautifier and fixer">
+        <exec command="bin/phpcbf -p --encoding=utf8 --standard=app/phpcs.xml --extensions=php src/Bundle" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="phpmd" description="php mess detector">
+        <exec command="bin/phpmd src/ text app/phpmd.xml" checkreturn="true" passthru="true" />
+    </target>
+
+    <target name="behat-ddd" description="behat ddd tests">
+        <exec command="./bin/behat -c src/Domain/behat.yml" checkreturn="true" passthru="true" />
+    </target>
+</project>

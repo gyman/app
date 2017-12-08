@@ -3,8 +3,8 @@ server:
   ip:         10.10.10.150
   ssh_port:   22152
   mysql_port: 13306
-  memory:     1024
-  cpu:        1
+  memory:     4096
+  cpu:        2
 
 databaseMain:
   name:       gyman

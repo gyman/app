@@ -1,0 +1,53 @@
+Gyman\Application\Command\CreateMemberCommand:
+  constraints:
+    - Gyman\Bundle\AppBundle\Validator\UniqueMemberEmail:
+        message: member.type.email.already_registered
+    - Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcode:
+        message: member.type.barcode.already_registered
+
+  properties:
+    uploadFile:
+      - Image: ~
+    email:
+      - NotBlank:
+          message: Pole nie może być puste!
+      - Email:
+          message: Adres '{{ value }}' nie jest poprawny.
+          checkMX: true
+
+    barcode:
+      - NotBlank:
+          message: Pole nie może być puste!
+    firstname:
+      - NotBlank:
+          message: Pole nie może być puste!
+    lastname:
+      - NotBlank:
+          message: Pole nie może być puste!
+    birthdate:
+      - NotBlank:
+          message: Pole nie może być puste!
+      - Date:
+          message: Data musi być w formacie DD.MM.RR
+      - Gyman\Bundle\AppBundle\Validator\DateRangeConstraint:
+          min: 100 years ago
+          max: today
+    phone: ~
+    notes: ~
+    zipcode:
+      - Length:
+          max: 6
+          min: 6
+          minMessage: Kod pocztowy musi zawierać 6 znaków
+          maxMessage: Kod pocztowy musi zawierać 6 znaków
+      - Regex:
+          pattern: /^\d{2}\-\d{3}$/
+          match:  true
+          message: Kod pocztowy musi być w formacie XX-XXX
+    gender: ~
+    belt: ~
+    starred: ~
+    sections:
+      - Count:
+          max: 1
+          maxMessage: Uczestnik może należeć tylko do 1 sekcji

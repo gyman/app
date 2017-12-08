@@ -4,13 +4,13 @@ gyman_settings:
     prefix:   /
 
 gyman_landing_page:
-    resource: @GymanLandingPageBundle/Controller/
+    resource: "@GymanLandingPageBundle/Controller/"
     type:     annotation
     prefix:   /
     host:     %base_url%
 
 gyman_app:
-    resource: @GymanAppBundle/Controller/
+    resource: "@GymanAppBundle/Controller/"
     type:     annotation
     prefix:   /
 
@@ -29,11 +29,6 @@ dashboard:
     type:     annotation
     prefix:   /dashboard
 
-clubs:
-    resource: "@ClubBundle/Controller/"
-    type:     annotation
-    prefix:   /clubs
-
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
@@ -44,42 +39,15 @@ fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
 
-dende_calendar_rest:
-  type: rest
-  resource: @DendeCalendarBundle/Controller/RestController.php
-  prefix: api/calendar
-  defaults:
-    _format: json
+#@todo: fix
+#dende_calendar_rest:
+#  type: rest
+#  resource: "@DendeCalendarBundle/Controller/RestController.php"
+#  prefix: api/calendar
+#  defaults:
+#    _format: json
 
 dende_calendar:
   type: annotation
-  resource: @DendeCalendarBundle/Controller/DefaultController.php
+  resource: "@DendeCalendarBundle/Controller/DefaultController.php"
   prefix: calendar
-
-rest_default:
-  type:     'rest'
-  resource: '@GymanAppBundle/Controller/Rest/DefaultController.php'
-  prefix:   'api'
-  defaults:
-    _format: 'json'
-
-rest_member:
-  type:     'rest'
-  resource: '@GymanAppBundle/Controller/Rest/MemberController.php'
-  prefix:   'api'
-  defaults:
-    _format: 'json'
-
-rest_entry:
-  type:     'rest'
-  resource: '@GymanAppBundle/Controller/Rest/EntryController.php'
-  prefix:   'api'
-  defaults:
-    _format: 'json'
-
-rest_voucher:
-  type:     'rest'
-  resource: '@GymanAppBundle/Controller/Rest/VoucherController.php'
-  prefix:   'api'
-  defaults:
-    _format: 'json'

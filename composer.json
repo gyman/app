@@ -11,12 +11,16 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/",
+            "Gyman\\": "src/",
+            "Tests\\": "tests/",
             "SymfonyStandard\\": "app/"
         },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"
+        ],
+        "files": [
+          "src/functions.php"
         ]
     },
     "autoload-dev": {
@@ -24,64 +28,49 @@
             "Tests\\": "tests/"
         },
         "files": [
+          "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
     "require": {
-        "php": ">=7.0",
-
-        "symfony/symfony": "^2.8",
-        "symfony/swiftmailer-bundle": "2.3.*",
-        "symfony/monolog-bundle": "2.7.*",
-
-        "doctrine/orm": "2.5.*",
-        "doctrine/dbal": "2.5.*",
-        "doctrine/doctrine-bundle": "^1.6",
-
-        "doctrine/data-fixtures": "1.1.1",
-        "doctrine/doctrine-fixtures-bundle": "2.3.0",
-
-        "stof/doctrine-extensions-bundle": "1.2.*@dev",
-
+        "php": ">=7.1",
+        "braincrafted/bootstrap-bundle": "1.4.2",
+        "dende/calendar-bundle": "^1",
+        "dende/common-bundle": "dev-master",
+        "dende/multitenancybundle": "1.1.2",
+        "doctrine/data-fixtures": "^1.2",
+        "doctrine/dbal": "^2.6",
+        "doctrine/doctrine-bundle": "^1.7",
+        "doctrine/doctrine-fixtures-bundle": "^2.4",
+        "doctrine/doctrine-migrations-bundle": "^1.1",
+        "doctrine/orm": "^2.5",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "friendsofsymfony/user-bundle": "^2.0",
+        "gyman/supr": "dev-master",
+        "imagine/imagine": "0.6.*",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "javiereguiluz/easyadmin-bundle": "^1.16@dev",
+        "jms/serializer-bundle": "^1.0",
+        "knplabs/knp-menu-bundle": "^2.1",
+        "knplabs/knp-time-bundle": "*",
+        "league/tactician-bundle": "^1",
+        "liip/monitor-bundle": "^2.3",
+        "moneyphp/money": "^3.0@dev",
+        "nesbot/carbon": "dev-master",
+        "ob/highcharts-bundle": "1.*",
+        "oneup/uploader-bundle": "^1.8",
+        "ramsey/uuid-doctrine": "dev-master",
         "sensio/distribution-bundle": "^5",
         "sensio/framework-extra-bundle": "~3.0",
-        "sensio/generator-bundle": "2.5.*",
-
-        "friendsofsymfony/user-bundle": "~2.0@dev",
-        "friendsofsymfony/jsrouting-bundle": "1.5.*",
-        "friendsofsymfony/rest-bundle": "^2.0",
-
-        "knplabs/knp-menu-bundle": "~1",
-        "knplabs/knp-menu": "~1",
-        "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-time-bundle": "1.3",
-
-        "incenteev/composer-parameter-handler": "2.1.*",
-        "oneup/uploader-bundle": "1.3.*",
-        "jms/serializer-bundle": "^1.0",
-        "ob/highcharts-bundle": "1.*",
-        "phing/phing": "*",
-        "willdurand/hateoas-bundle": "@stable",
-        "twig/extensions": "1.2.*@dev",
-        
-        "gyman/supr": "dev-master",
-        "nelmio/api-doc-bundle": "~2.7@dev",
-        "imagine/imagine": "0.6.*",
-        "nesbot/carbon": "dev-master",
-        "braincrafted/bootstrap-bundle": "1.4.2",
-
-        "dende/common-bundle": "dev-master",
-        "dende/calendar-bundle": "dev-feature/calendar21",
-        "league/tactician": "^1.0",
-        "league/tactician-bundle": "^0.4.0",
-        "doctrine/doctrine-migrations-bundle": "^1.1",
-        "liip/monitor-bundle": "^2.3",
-        "dende/multitenancybundle": "^1",
-        "sentry/sentry-symfony": "^0.7.1"
+        "sensio/generator-bundle": "^3.1",
+        "sentry/sentry-symfony": "^0.7.1",
+        "symfony/monolog-bundle": "^3.1",
+        "symfony/swiftmailer-bundle": "^3",
+        "symfony/symfony": "^3.3",
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
-        "sensiolabs/security-checker": "4.0.4",
-        "behat/behat": "3.0.*",
-        "phpunit/phpunit": "*",
+        "sensiolabs/security-checker": "^4.1",
+        "phpunit/phpunit": "6",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "~2",
         "mayflower/php-codebrowser": "~1",
@@ -92,13 +81,13 @@
         "deployer/deployer" : "^5"
     },
     "scripts": {
-       "symfony-scripts" : [
-           "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-           "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
@@ -116,13 +105,14 @@
             "php app/console doctrine:database:drop --if-exists --no-interaction --force --quiet",
             "php app/console doctrine:database:create --env=dev --if-not-exists --no-interaction --quiet",
             "php app/console doctrine:schema:create --no-interaction --quiet --env=dev",
-            "php app/console doctrine:fixtures:load --append -n --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/ClubBundle/DataFixtures/StandardConnection"
+            "php app/console doctrine:fixtures:load --append -n --env=dev --no-interaction --quiet --fixtures=src/Bundle/ClubBundle/DataFixtures/StandardConnection"
         ],
         "prepare-tenant": [
             "php app/console doctrine:database:drop --club=rio --if-exists --no-interaction --force --quiet",
             "php app/console doctrine:database:create --club=rio --if-not-exists --no-interaction --quiet",
             "php app/console doctrine:schema:create --no-interaction --quiet --env=dev --club=rio",
-            "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Gyman/Bundle/AppBundle/DataFixtures/Club --club=rio"
+            "php app/console doctrine:migrations:migrate --env=dev --no-interaction --quiet --configuration=app/DoctrineMigrations/tenant.yml --club=rio",
+            "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Bundle/AppBundle/DataFixtures/Club --club=rio"
         ],
         "reload-fixtures-test": [
             "php app/console doctrine:database:drop --force --if-exists --env=test",
@@ -133,6 +123,20 @@
         "tests": [
             "@reload-fixtures-test",
             "php bin/phpunit -c app/phpunit.xml"
+        ],
+        "install-assets" : [
+            "yarn install",
+            "./node_modules/.bin/bower install"
+        ],
+        "dump-assets" : [
+            "php app/console assets:install web --relative --symlink",
+            "php app/console fos:js-routing:dump",
+            "./node_modules/.bin/grunt development"
+        ],
+        "dump-assets-prod" : [
+            "php app/console assets:install web --relative --symlink",
+            "php app/console fos:js-routing:dump",
+            "./node_modules/.bin/grunt production"
         ]
     },
     "minimum-stability": "dev",
@@ -147,13 +151,11 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.8-dev"
         }
     }
 }
