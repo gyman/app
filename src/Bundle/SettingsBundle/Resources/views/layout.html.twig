@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="heading">
+        <h3>{{ 'settings.header.title' }}</h3>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            {% include "::_flash.html.twig" %}
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span4">
+            {{ knp_menu_render('main', {
+                'template': 'GymanSettingsBundle:Menu:main.html.twig',
+                'currentAsLink' : true,
+                'depth' : 2,
+                'currentClass' : 'active'
+            }) }}
+        </div>
+        <div class="span8">
+            {% block settings_page %}{% endblock settings_page %}
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
+
+{% block settings_page %}
+    {{ form_start(form) }}
+    <fieldset>
+        <legend>Sections</legend>
+        {{ form_row(form.sections) }}
+
+        <div class="form-actions">
+            {{ form_widget(form.add_section) }}
+            <button type="submit">{{ 'Wyślij'|trans }}</button>
+        </div>
+    </fieldset>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock settings_page %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        div#club_sections_sections > div.control-group > label.control-label {
+            display: none;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var $form = $("form[name='club_sections']");
+        var collectionHolderSelector = 'div#club_sections_sections';
+
+        var removeEventName = 'click.removeSection';
+        var removeButtonClass = 'a.remove-collection-entry';
+        var removeButtonHandler = function(e) {
+            if(confirm('{{ 'remove_collection_element_confirmation'|trans }}')) {
+                $("#" + $(e.target).data('entry-id')).remove();
+            }
+        };
+
+        var addEventName = 'click.addSection';
+        var addButtonId = '#club_sections_add_section';
+        var addHandler = function(e) {
+            console.log("test");
+            $collectionHolder = $(collectionHolderSelector);
+            var prototype = $collectionHolder.data('prototype');
+            var index = $collectionHolder.data('index');
+            var newForm = prototype.replace(/__name__label__/g, index);
+            newForm = newForm.replace(/__name__/g, index);
+            $collectionHolder.data('index', index + 1);
+            $collectionHolder.append(newForm);
+        };
+
+        jQuery(document).ready(function() {
+            $collectionHolder = $(collectionHolderSelector);
+            $collectionHolder.data('index', $collectionHolder.find(':input:text').length);
+
+            $form.on(addEventName, addButtonId, addHandler);
+            $collectionHolder.on(removeEventName, removeButtonClass, removeButtonHandler);
+        });
+    </script>
+{% endblock javascripts %}

@@ -20,6 +20,9 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: ERROR
 
-jms_serializer:
-  metadata:
-    cache: false
+#jms_serializer:
+#  metadata:
+#    cache: false
+
+swiftmailer:
+    spool: { type: memory }

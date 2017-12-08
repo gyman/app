@@ -1,0 +1,100 @@
+event-kids-4-8:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000001
+  calendar:     kids-4-8
+  title:        "Kids 4-8"
+  repetitions:  [1, 3]
+  type:         weekly
+  duration:     45
+  startDate:    "2015-06-01 16:15:00"
+  endDate:      "2018-06-01 17:00:00"
+event-junior-8-14:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000002
+  calendar:     junior-8-14
+  title:        "Junior 8-14"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  duration:     60
+  startDate:    "2015-06-01 17:00:00"
+  endDate:      "2018-06-01 18:00:00"
+event-mma:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000003
+  calendar:     mma
+  title:        "MMA"
+  repetitions:  [1, 3]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 18:00:00"
+  endDate:      "2018-06-01 19:30:00"
+event-bjj-poczatkujacy:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000004
+  calendar:     bjj-poczatkujacy
+  title:        "BJJ - początkujący"
+  repetitions:  [2, 4]
+  type:         weekly
+  duration:     60
+  startDate:    "2015-06-01 18:30:00"
+  endDate:      "2018-06-01 19:30:00"
+event-bjj-sredniozaawansowani:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000005
+  calendar:     bjj-sredniozaawansowani
+  title:        "BJJ - średniozaawansowani"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 19:30:00"
+  endDate:      "2018-06-01 21:00:00"
+event-bjj-zaawansowani:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000006
+  calendar:     bjj-zaawansowani
+  title:        "BJJ - zaawansowani"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 19:30:00"
+  endDate:      "2018-06-01 21:00:00"
+event-bjj-zaawansowani-sparingi:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000007
+  calendar:     bjj-zaawansowani
+  title:        "BJJ - zaawansowani SPARING"
+  repetitions:  [1, 2, 3, 4]
+  type:         weekly
+  duration:     60
+  startDate:    "2015-06-01 21:00:00"
+  endDate:      "2018-06-01 22:00:00"
+event-bjj-zaawansowani-wolna-mata:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000008
+  calendar:     bjj-zaawansowani
+  title:        "BJJ - SPARING"
+  repetitions:  [6]
+  type:         weekly
+  duration:     120
+  startDate:    "2015-06-01 12:00:00"
+  endDate:      "2018-06-01 14:00:00"
+event-boks-kobiety:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000009
+  calendar:     boks-kobiety
+  title:        "BOKS Kobiety"
+  repetitions:  [2, 4]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 17:00:00"
+  endDate:      "2018-06-01 18:30:00"
+event-zapasy:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000010
+  calendar:     zapasy
+  title:        "Zapasy"
+  repetitions:  [5]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 18:00:00"
+  endDate:      "2018-06-01 19:30:00"
+event-nogi:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000011
+  calendar:     nogi
+  title:        "NoGi"
+  repetitions:  [2, 4]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-06-01 19:30:00"
+  endDate:      "2018-06-01 21:00:00"
+

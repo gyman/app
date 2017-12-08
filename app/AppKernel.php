@@ -1,7 +1,8 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
+use Gyman\Bundle\AppBundle\Globals;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -17,23 +18,16 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
-
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
+
+//            new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-//            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
 
@@ -50,6 +44,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\AppBundle\GymanAppBundle(),
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),
+            new Gyman\Bundle\SettingsBundle\GymanSettingsBundle(),
 
 	        new Sentry\SentryBundle\SentryBundle(),
         );
@@ -76,4 +71,16 @@ class AppKernel extends Kernel
         $logger = $this->container->get('logger');
         \Monolog\ErrorHandler::register($logger);
     }
+
+    public function getCacheDir()
+    {
+        return $this->rootDir.'/../var/cache/'.$this->environment;
+    }
+
+    public function getLogDir()
+    {
+        return $this->rootDir.'/../var/logs';
+    }
+
+
 }

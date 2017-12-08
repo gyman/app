@@ -48,6 +48,7 @@
                         {% else %}
                             <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" id="applogo" />
                         {% endif %}
+                        <span id="appname">{{ club.name }}</span>
                     </a>
 
                     {% if app.user is not null %}
@@ -57,26 +58,30 @@
                                 {#{{ render(controller("GymanMultiDatabaseBundle:Default:switchClub")) }}#}
                             {#</li>#}
 
+                            {% if is_granted("ROLE_MODERATOR") %}
                             <li>
                                 <a href="{{ path('gyman_members_search_form') }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'search'|trans }}</span>
                                 </a>
                             </li>
+                            {% endif %}
 
                             <li>
-                                <a href="{{ path('_dashboard_index') }}">
+                                <a href="{{ path('gyman_dashboard_index') }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'dashboard'|trans }}</span>
                                 </a>
                             </li>
 
+                            {% if is_granted("ROLE_MODERATOR") %}
                             <li>
                                 <a href="{{ path("gyman_settings") }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'open_settings'|trans }}</span>
                                 </a>
                             </li>
+                            {% endif %}
 
                             <li>
                                 <a href="{{ path("fos_user_profile_show") }}">
@@ -92,7 +97,7 @@
                             {# todo: przywrócić!!!
                             {% if is_granted("ROLE_ADMIN") %}
                             <li>
-                                <a href="{{ path("_dashboard_index") }}">
+                                <a href="{{ path("gyman_dashboard_index") }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
                                     <span class="txt"> {{ 'dashboard_button'|trans }}</span>
                                 </a>
@@ -147,7 +152,7 @@
             <script type="text/javascript" src="/js/vendors.js"></script>
             <script type="text/javascript" src="/js/project.js"></script>
         {#{% endif %}#}
-
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
         {% if app.session.flashbag.has('notice') %}

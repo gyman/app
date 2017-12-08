@@ -1,0 +1,60 @@
+services:
+    gyman.default.menu_builder:
+        class: Gyman\Bundle\AppBundle\Menu\DefaultBuilder
+        arguments: ['@knp_menu.factory', '@security.authorization_checker']
+
+    gyman.default.menu.main:
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'main']
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
+    gyman.default.menu.profile:
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'profile']
+        tags:
+            - { name: knp_menu.menu, alias: profile }
+
+    gyman.members.menu_builder:
+      class: Gyman\Bundle\AppBundle\Menu\MemberBuilder
+      arguments: ['@knp_menu.factory', '@security.authorization_checker']
+
+    gyman.landing.menu_builder:
+      class: Gyman\Bundle\AppBundle\Menu\LandingBuilder
+      arguments: ['@knp_menu.factory']
+
+    gyman.members.menu.tabs:
+      class:            Knp\Menu\MenuItem
+      factory:          ['@gyman.members.menu_builder', 'tabs']
+      arguments:        ['@request_stack']
+      tags:
+          - { name: knp_menu.menu, alias: gyman.members.menu.tabs }
+
+    gyman.landing.menu.tabs:
+      class:            Knp\Menu\MenuItem
+      factory:          ['@gyman.landing.menu_builder', 'tabs']
+      tags:
+          - { name: knp_menu.menu, alias: gyman.landing.menu.tabs }
+
+    gyman.members.menu.tabs_picture:
+      class:            Knp\Menu\MenuItem
+      factory:          ['@gyman.members.menu_builder', 'picture']
+      tags:
+          - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
+
+#    gyman.default.menu_abstract:
+#        abstract: true
+#        class: Knp\Menu\MenuItem
+#        factory_service: gyman.default.menu_builder
+#        arguments: ["@request_stack"]
+#        scope: request
+#
+#    gyman.default.menu.profile:
+#        parent: gyman.default.menu_abstract
+#        tags:
+#            - { name: knp_menu.menu, alias: main }
+#
+#    gyman.default.menu.profile:
+#        parent: gyman.default.menu_abstract
+#        tags:
+#            - { name: knp_menu.menu, alias: main }

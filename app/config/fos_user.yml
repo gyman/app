@@ -1,22 +1,20 @@
 fos_user:
     db_driver:              orm
     firewall_name:          main
-    user_class:             Gyman\Bundle\ClubBundle\Entity\User
+    user_class:             Gyman\Domain\User
     use_listener:           true
     use_username_form_type: true
-    model_manager_name:     null  # change it to the name of your entity/document manager if you don't want to use the default one.
+    model_manager_name:     tenant
     from_email:
         address:        office@gyman.pl
         sender_name:    Gyman.pl
     profile:
         form:
-            type:               gyman_user_profile
+            type:               Gyman\Bundle\AccountBundle\Form\Type\UserType
             name:               fos_user_profile_form
             validation_groups:  [Profile, Default]
     change_password:
         form:
-            type:               fos_user_change_password
-            name:               fos_user_change_password_form
             validation_groups:  [ChangePassword, Default]
     registration:
         confirmation:
@@ -26,7 +24,7 @@ fos_user:
             enabled:    false
             template:   MailerBundle:Templates:registerConfirmation.html.twig
         form:
-            type:               dende_user_registration
+            type:               Gyman\Bundle\AccountBundle\Form\Type\RegisterType
             name:               dende_registration_form
             validation_groups:  [Registration, Default]
     resetting:
@@ -34,8 +32,6 @@ fos_user:
         email:
             template:   MailerBundle:Templates:resetting.html.twig
         form:
-            type:               fos_user_resetting
-            name:               fos_user_resetting_form
             validation_groups:  [ResetPassword, Default]
     service:
         mailer:                 fos_user.mailer.twig_swift
@@ -44,7 +40,7 @@ fos_user:
         token_generator:        fos_user.util.token_generator.default
         user_manager:           gyman.users.user_manager
     group:
-            group_class: Gyman\Bundle\ClubBundle\Entity\Group
+        group_class: Gyman\Bundle\ClubBundle\Entity\Group
 #    group:
 #        group_class:    ~ # Required when using groups
 #        group_manager:  fos_user.group_manager.default

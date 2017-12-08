@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+
+parse_yaml() {
+   local prefix=$2
+   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+   sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
+        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+   awk -F$fs '{
+      indent = length($1)/2;
+      vname[indent] = $2;
+      for (i in vname) {if (i > indent) {delete vname[i]}}
+      if (length($3) > 0) {
+         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+      }
+   }'
+}
+
+sed -i 's/SendEnv LANG/# SendEnv LANG/g' /etc/ssh/ssh_config
+
+mkdir -p /var/www
+chown -R vagrant:vagrant /var/www
+
+ln -fs /vagrant /var/www/gyman
+
+eval $(parse_yaml /vagrant/env/vagrant/vagrant.yml "config_");
+
+export DEBIAN_FRONTEND="noninteractive"
+debconf-set-selections <<< "mysql-server mysql-server/root_password password $config_databaseMain_password"
+debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $config_databaseMain_password"
+
+locale-gen en_US en_US.UTF-8 hu_HU hu_HU.UTF-8
+dpkg-reconfigure locales
+
+apt-get install -y python-software-properties
+add-apt-repository -y ppa:ondrej/php
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+add-apt-repository 'deb [arch=amd64,i386] http://mariadb.kisiek.net/repo/10.2/ubuntu zesty main'
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+apt remove cmdtest
+
+apt-get update
+apt-get upgrade
+apt-get install -y --force-yes php7.2 php7.2-cli php-pear php-fpm nginx git \
+    curl vim mysql-server mysql-client php7.2-sqlite php7.2-apcu \
+    php-xdebug php7.2-intl build-essential software-properties-common libsqlite3-dev \
+    php7.2-xml php7.2-curl php7.2-cli php7.2-common php7.2-bcmath php7.2-mysql php7.2-mbstring \
+    php7.2-json php7.2-sqlite3 php7.2-xsl php7.2-imagick php7.2-apcu\
+    tcl ruby-dev npm nodejs yarn
+
+gem install mailcatcher
+echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
+update-rc.d cron defaults
+echo "sendmail_path = /usr/bin/env $(which catchmail) -f 'www-data@localhost'" >> /etc/php/7.2/mods-available/mailcatcher.ini
+phpenmod mailcatcher
+/usr/bin/env $(which mailcatcher) --ip=0.0.0.0
+
+#nginx
+rm /etc/nginx/sites-enabled/default
+cp /vagrant/env/vagrant/nginx_server.conf /etc/nginx/sites-available/page.conf
+ln -s /etc/nginx/sites-available/page.conf /etc/nginx/sites-enabled/page.conf
+
+sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/;date.timezone =/date.timezone = Europe\/Warsaw/g' /etc/php/7.2/cli/php.ini
+
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' /etc/php/7.2/cli/php.ini
+
+sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.2/fpm/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 25M/g' /etc/php/7.2/cli/php.ini
+
+sed -i 's/www-data/vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+sed -i 's/www-data/vagrant/g' /etc/nginx/nginx.conf
+
+less /vagrant/env/vagrant/xdebug.ini > /etc/php/7.2/mods-available/xdebug.ini
+service php7.2-fpm restart
+service nginx restart
+
+chown vagrant:vagrant /var/run/php/php7.2-fpm.sock
+chown vagrant:vagrant /var/log/nginx
+
+echo 'KexAlgorithms +diffie-hellman-group1-sha1' >> /etc/ssh/sshd_config
+service ssh restart
+
+sed -i 's/bind-address\t\t= 127.0.0.1/bind-address\t\t= 0.0.0.0/g' /etc/mysql/my.cnf
+
+mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "CREATE DATABASE IF NOT EXISTS $config_databaseMain_name;"
+mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "GRANT ALL ON *.* to '$config_databaseMain_user'@'%' identified by '$config_databaseMain_password' WITH GRANT OPTION;"
+mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "GRANT ALL ON *.* to '$config_databaseMain_user'@'localhost' identified by '$config_databaseMain_password' WITH GRANT OPTION;"
+mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "CREATE DATABASE IF NOT EXISTS gyman_rio; CREATE DATABASE IF NOT EXISTS gyman_dende; CREATE DATABASE IF NOT EXISTS gyman_extreme;"
+mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "FLUSH PRIVILEGES;"
+service mysql restart
+pkill -f mysqld
+
+sudo update-rc.d mysql defaults
+
+echo '127.0.0.1    gyman.vagrant' >> /etc/hosts
+
+sed -i 's/bind_ip = 127.0.0.1/#bind_ip = 127.0.0.1/g' /etc/mongodb.conf
+service mongodb restart
+
+less /vagrant/env/vagrant/.bash_aliases >> /home/vagrant/.bash_aliases
+
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/bin/composer
+chmod +x /usr/bin/composer
+
+su vagrant <<'EOF'
+cd /vagrant
+composer install --prefer-source --no-interaction
+
+composer prepare-default
+composer prepare-tenant
+
+yarn install
+./node_modules/.bin/bower install
+
+php app/console assets:install web --symlink
+./node_modules/.bin/grunt development
+
+less /vagrant/env/vagrant/crontab >> /tmp/mycron
+crontab /tmp/mycron
+rm /tmp/mycron
+EOF
