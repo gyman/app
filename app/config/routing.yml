@@ -24,11 +24,6 @@ dashboard:
     type:     annotation
     prefix:   /dashboard
 
-clubs:
-    resource: "@ClubBundle/Controller/"
-    type:     annotation
-    prefix:   /clubs
-
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
