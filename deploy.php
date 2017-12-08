@@ -51,6 +51,7 @@ task('assets', function () {
 
 
 after('deploy:symlink', 'php-fpm:restart');
+after('deploy:symlink', 'releasename');
 before('deploy:symlink', 'assets');
 
 // [Optional] if deploy fails automatically unlock.
@@ -60,8 +61,8 @@ after('deploy:failed', 'deploy:unlock');
 
 //before('deploy:symlink', 'database:migrate');
 
-task('release_name', function(){
+task('releasename', function(){
     cd('{{deploy_path}}');
     $release = run("tail -n 1 .dep/releases")->toString();
-    run("sed -i -- 's/sentry_revision:.*/sentry_revision: $release/g' app/config/parameters.yml");
+    run("sed -i -- 's/sentry_revision:.*/sentry_revision: $release/g' shared/app/config/parameters.yml");
 });
