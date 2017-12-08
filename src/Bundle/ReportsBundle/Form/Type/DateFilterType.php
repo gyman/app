@@ -45,7 +45,7 @@ final class DateFilterType extends AbstractType
     {
         $builder
             ->add('strategy', ChoiceType::class, [
-                'choices' => $this->availableStrategies,
+                'choices' => array_flip($this->availableStrategies),
                 'attr'   => [
                     "class" => "span4"
                 ],
