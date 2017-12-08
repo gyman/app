@@ -62,5 +62,6 @@ after('deploy:failed', 'deploy:unlock');
 
 task('release_name', function(){
     cd('{{deploy_path}}');
-    writeln(run("tail -n 1 .dep/releases"));
+    $release = run("tail -n 1 .dep/releases")->toString();
+    run("sed -i -- 's/sentry_revision:.*/sentry_revision: $release/g' app/config/parameters.yml");
 });

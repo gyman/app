@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: fos_user.yml }
     - { resource: doctrine.yml }
+    - { resource: sentry_revision.yml }
 
 parameters:
   date_format: "Y.m.d"
@@ -35,7 +36,7 @@ services:
 
 sentry:
     dsn: %sentry_url%
-#    release: %sentry.release% @todo turn on
+    release: %sentry_revision%
 
 
 framework:

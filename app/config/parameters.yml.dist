@@ -17,6 +17,7 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     sentry_url:             http://0@sentry
+    sentry_revision:        ~
     base_url:               localhost
     sqlite_database_user:     admin
     sqlite_database_password: admin
