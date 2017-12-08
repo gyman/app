@@ -79,7 +79,20 @@ class DefaultController extends Controller
     {
         $memberQuery = $this->get("gyman.members.query");
 
-        $allMembers = $memberQuery->findWithVoucher();
+        $allMembers = $memberQuery->findAll();
+
+        usort($allMembers, function(MemberView $a, MemberView $b) {
+            if ($a->currentVoucherId() !== null) {
+                return 1;
+            }
+
+            if ($b->currentVoucherId() !== null) {
+                return -1;
+            }
+
+            return 0;
+
+        });
 
         $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 
