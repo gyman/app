@@ -170,16 +170,16 @@
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "1.8.6",
+            "version": "1.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "ae070e9577537e8af38900395b6b264249c1b4ec"
+                "reference": "86a417103d17d05087630222fcd316203ace2c39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/ae070e9577537e8af38900395b6b264249c1b4ec",
-                "reference": "ae070e9577537e8af38900395b6b264249c1b4ec",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/86a417103d17d05087630222fcd316203ace2c39",
+                "reference": "86a417103d17d05087630222fcd316203ace2c39",
                 "shasum": ""
             },
             "require": {
@@ -195,7 +195,7 @@
                 "ramsey/uuid-doctrine": "dev-master",
                 "sensio/framework-extra-bundle": "~3.0",
                 "symfony/http-kernel": "^2|^3",
-                "symfony/symfony": "^3.3"
+                "symfony/symfony": "^3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "2.0.*@dev",
@@ -217,7 +217,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2017-12-03T14:23:08+00:00"
+            "time": "2017-12-09T08:41:06+00:00"
         },
         {
             "name": "dende/common-bundle",
