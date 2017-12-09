@@ -1,6 +1,5 @@
 ---
 services:
-
   gyman.vouchers.create_voucher:
     class: Gyman\Application\Handler\CreateVoucherHandler
     arguments:

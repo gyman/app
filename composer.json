@@ -77,10 +77,8 @@
         "sensiolabs/security-advisories": "dev-master",
         "mockery/mockery" : "*",
         "behat/symfony2-extension": "^2.0@dev",
-        "liip/functional-test-bundle": "^1.3@dev",
-        "hautelook/alice-bundle": "1.x-dev",
         "nelmio/alice": "2.x-dev",
-        "doctrine/data-fixtures": "^1.2"
+        "doctrine/data-fixtures": "^1.2",
         "liip/functional-test-bundle": "^1.3@dev",
         "deployer/deployer" : "^5"
     },

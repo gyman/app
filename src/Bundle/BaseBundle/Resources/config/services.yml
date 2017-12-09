@@ -1,5 +1,4 @@
 services:
-
   gyman.base.entity_manager:
     class: Gyman\Bundle\BaseBundle\EntityManager\BaseManager
     abstract: true

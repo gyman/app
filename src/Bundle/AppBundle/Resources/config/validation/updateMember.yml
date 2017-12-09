@@ -4,7 +4,6 @@ Gyman\Application\Command\UpdateMemberCommand:
 #        message: member.type.email.already_registered
 #    - Gyman\Bundle\AppBundle\Validator\UniqueMemberBarcode:
 #        message: member.type.barcode.already_registered
-
   properties:
     uploadFile:
       - Image: ~

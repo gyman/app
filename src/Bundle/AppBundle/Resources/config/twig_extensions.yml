@@ -1,6 +1,5 @@
 ---
 services:
-
   gyman.twig.voucher_extension:
       class: Gyman\Bundle\AppBundle\Twig\VoucherExtension
       calls:

@@ -1,6 +1,5 @@
 ---
 services:
-
   gyman.repository.section:
     class:            Gyman\Bundle\AppBundle\Repository\SectionRepository
     factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
