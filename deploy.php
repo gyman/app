@@ -23,7 +23,7 @@ set('allow_anonymous_stats', false);
 //set('branch', function() {
 //
 //});
-set('branch', 'feature/calendar21');
+set('branch', 'master');
 
 // Hosts
 
