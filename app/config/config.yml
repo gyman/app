@@ -63,8 +63,8 @@ framework:
 
 # Twig Configuration
 twig:
-#  form_themes:
-#    - ::fields.html.twig
+  form_themes:
+    - ::fields.html.twig
   debug:                  %kernel.debug%
   strict_variables:       false # %kernel.debug%
   globals:

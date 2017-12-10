@@ -23,8 +23,9 @@ services:
 
   gyman.app.command.clear_entries:
     class: Gyman\Bundle\AppBundle\Command\CloseEntriesCommand
-    calls:
-      - [setLogger, ['@monolog.logger.commands']]
+    arguments:
+      - '@monolog.logger.commands'
+      - '@event_dispatcher'
     tags:
       - {name: console.command}
       - {name: monolog.logger, channel: commands }

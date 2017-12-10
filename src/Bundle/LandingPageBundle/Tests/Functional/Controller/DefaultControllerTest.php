@@ -36,7 +36,7 @@ class DefaultControllerTest extends BaseFunctionalTestCase
     {
         $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate("gyman_landing_index"));
         $this->assertEquals(200, $this->getStatusCode());
-
+https://www.wykop.pl/
         $form = $crawler->filter('form[name="create_club"]')->first()->form();
 
         $form->setValues([
