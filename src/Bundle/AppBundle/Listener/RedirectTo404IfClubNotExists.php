@@ -33,6 +33,10 @@ class RedirectTo404IfClubNotExists
 
         $subdomainName = $exception->getTenantId();
 
+        if($subdomainName === null) {
+            return;
+        }
+
         $schemaAndHost = strtr($event->getRequest()->getSchemeAndHttpHost(), [$subdomainName . "." => ""]);
 
         $path = $this->router->generate(
@@ -41,7 +45,8 @@ class RedirectTo404IfClubNotExists
             Router::ABSOLUTE_PATH
         );
 
-        $event->setResponse(new RedirectResponse($schemaAndHost . $path));
-        return;
+        $url = $schemaAndHost . $path;
+
+        $event->setResponse(new RedirectResponse($url));
     }
 }

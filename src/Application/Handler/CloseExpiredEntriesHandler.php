@@ -15,6 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class CloseEntryHandler
  * @package Gyman\Domain
+ * @todo remove
  */
 final class CloseExpiredEntriesHandler
 {

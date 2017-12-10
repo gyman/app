@@ -20,3 +20,6 @@ services:
     calls:
       - ['setSubdomainProvider', ['@=service(parameter("subdomain_provider_service"))']]
       - ['setClubRepository', ['@gyman.club.repository']]
+
+  gyman.club.factory:
+    class: Gyman\Bundle\ClubBundle\Factory\ClubFactory

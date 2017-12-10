@@ -34,11 +34,16 @@ class SubdomainNameListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMasterRequest()) { // @todo: get sure if it's needed
             return;
         }
 
         $subdomainName = $this->subdomainProvider->getSubdomain();
+
+        if($subdomainName === null) {
+            return;
+        }
+
         $this->tenantManager->switchConnection('tenant', $subdomainName);
     }
 }

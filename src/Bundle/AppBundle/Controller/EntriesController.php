@@ -112,7 +112,7 @@ class EntriesController extends Controller
         $command->price = null;
 
         $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
-        $this->addFlash('success', 'User added to occurrence');
+        $this->addFlash('success', 'flash.entry_opened.success');
 
         return $this->redirectToRoute("gyman_dashboard_listClassMembers", ["id" => $occurrence->id()]);
     }

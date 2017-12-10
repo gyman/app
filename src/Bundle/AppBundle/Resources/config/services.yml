@@ -1,3 +1,11 @@
+imports:
+  - { resource: forms.yml }
+  - { resource: handlers.yml }
+  - { resource: menu.yml }
+  - { resource: repositories.yml }
+  - { resource: twig_extensions.yml }
+  - { resource: validators.yml }
+
 services:
   gyman.app.tenant_provider:
     class: Gyman\Bundle\AppBundle\Services\TenantProvider
@@ -15,8 +23,9 @@ services:
 
   gyman.app.command.clear_entries:
     class: Gyman\Bundle\AppBundle\Command\CloseEntriesCommand
-    calls:
-      - [setLogger, ['@monolog.logger.commands']]
+    arguments:
+      - '@monolog.logger.commands'
+      - '@event_dispatcher'
     tags:
       - {name: console.command}
       - {name: monolog.logger, channel: commands }
@@ -79,9 +88,8 @@ services:
     class: Gyman\Bundle\AppBundle\Listener\SetupPathsForClub
     arguments:
       - '@gyman.club.repository'
-      - '@session'
       - '@twig'
-      - { no_image: %no_image%, gallerydirectory: %gallerydirectory%, gallerypath: %gallerypath% }
+      - { no_image: %no_image%, gallerydirectory: %gallerydirectory%, gallerypath: %gallerypath%, env: %kernel.environment% }
     tags:
       - {name: kernel.event_listener, event: multitenancy.post_switch_connection, method: onKernelRequest }
 
@@ -104,9 +112,3 @@ services:
       calls:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
-
-#  monolog.processor.sentry_context:
-#      class: Gyman\Bundle\AppBundle\Monolog\SentryContextProcessor
-#      arguments:  ["@security.token_storage"]
-#      tags:
-#          - { name: monolog.processor, method: processRecord, handler: sentry }

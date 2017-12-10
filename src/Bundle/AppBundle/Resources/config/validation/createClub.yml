@@ -1,0 +1,15 @@
+---
+Gyman\Application\Command\CreateClubCommand:
+  properties:
+    username:
+      - NotNull: {groups: ['form', 'command']}
+    email:
+      - NotNull: {groups: ['command']}
+      - Email: {groups: ['command']}
+    password:
+      - NotNull: {groups: ['command']}
+    club:
+      - NotNull: {groups: ['form']}
+    subdomain:
+      - NotNull: {groups: ['form', 'command']}
+      - Gyman\Bundle\AppBundle\Validator\UniqueClubSubdomain: {groups: ['form', 'command']}

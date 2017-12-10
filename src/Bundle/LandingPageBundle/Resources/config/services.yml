@@ -1,4 +1,20 @@
 services:
-#    gyman_landing_page.example:
-#        class: Gyman\Bundle\LandingPageBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+  gyman.landing.form.registration:
+    class: Gyman\Bundle\LandingPageBundle\Form\CreateClubType
+    tags:
+      - { name: form.type, alias: create_club }
+
+  gyman.landing.create_club_handler:
+    class: Gyman\Bundle\LandingPageBundle\Handler\CreateClubHandler
+    arguments:
+      - "@kernel"
+      - "@fos_user.util.user_manipulator"
+      - "@gyman.club.factory"
+      - "@gyman.user.repository"
+      - "@gyman.club.repository"
+      - "@doctrine.dbal.default_connection"
+      - "@doctrine.dbal.maintanance_connection"
+      - "@monolog.logger.createNewClub"
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\CreateClubCommand }
+      - { name: monolog.logger, channel: createNewClub }

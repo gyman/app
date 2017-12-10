@@ -1245,7 +1245,7 @@ $baseUrl ='/'.$seg.$baseUrl;
 } while ($last > $index && (false !== $pos = strpos($path, $baseUrl)) && 0 != $pos);
 }
 $requestUri = $this->getRequestUri();
-if ($requestUri !==''&& $requestUri[0] !=='/') {
+if (''!== $requestUri &&'/'!== $requestUri[0]) {
 $requestUri ='/'.$requestUri;
 }
 if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, $baseUrl)) {
@@ -1292,7 +1292,7 @@ return'/';
 if (false !== $pos = strpos($requestUri,'?')) {
 $requestUri = substr($requestUri, 0, $pos);
 }
-if ($requestUri !==''&& $requestUri[0] !=='/') {
+if (''!== $requestUri &&'/'!== $requestUri[0]) {
 $requestUri ='/'.$requestUri;
 }
 if (null === ($baseUrl = $this->getBaseUrl())) {

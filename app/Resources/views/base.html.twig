@@ -43,7 +43,8 @@
                     <a href="{{ path("gyman_app_default_index") }}" class="brand">
                         {% if club.details.logo is not null %}
                             {% set logo = club.subdomain.name ~ '/' ~ club.details.logo %}
-                            <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="{{ club.name }}" />
+                            <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="applogo" />
+                            <span id="appname">{{ club.name }}</span>
                         {% else %}
                             <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" id="applogo" />
                         {% endif %}

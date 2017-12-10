@@ -38,3 +38,10 @@ services:
     class: Gyman\Bundle\AppBundle\Validator\CantEnterPastOccurrenceValidator
     tags:
         - { name: validator.constraint_validator, alias: CantEnterPastOccurrenceValidator }
+
+  gyman.club.unique_subdomain.validator:
+    class: Gyman\Bundle\AppBundle\Validator\UniqueClubSubdomainValidator
+    arguments:
+      - "@gyman.club.repository"
+    tags:
+        - { name: validator.constraint_validator, alias: UniqueClubSubdomainValidator }

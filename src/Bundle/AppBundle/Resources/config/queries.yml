@@ -1,6 +1,5 @@
 ---
 services:
-
   gyman.members.query:
     class:          Gyman\Infrastructure\Query\MemberQuery
     arguments:

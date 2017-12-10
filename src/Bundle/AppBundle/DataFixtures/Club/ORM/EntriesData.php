@@ -11,7 +11,7 @@ use Dende\Calendar\Domain\Calendar\EventInterface;
  * Class EntriesData
  * @package Gyman\Bundle\AppBundle\DataFixtures\Club\ORM
  */
-final class EntriesData extends BaseFixture
+class EntriesData extends BaseFixture
 {
     protected $dir = __DIR__;
 

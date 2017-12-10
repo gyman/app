@@ -6,6 +6,11 @@ use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
 
+/**
+ * Class UserRepository
+ * @package Gyman\Bundle\ClubBundle\Entity
+ * @method findOneByUsername(string $username)
+ */
 class UserRepository extends EntityRepository
 {
     /**
