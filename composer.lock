@@ -170,16 +170,16 @@
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "1.8.10",
+            "version": "1.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "86a417103d17d05087630222fcd316203ace2c39"
+                "reference": "ddb3467dc1a457053fa851cb1496ded6cdfe982c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/86a417103d17d05087630222fcd316203ace2c39",
-                "reference": "86a417103d17d05087630222fcd316203ace2c39",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/ddb3467dc1a457053fa851cb1496ded6cdfe982c",
+                "reference": "ddb3467dc1a457053fa851cb1496ded6cdfe982c",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2017-12-09T08:41:06+00:00"
+            "time": "2017-12-09T08:44:06+00:00"
         },
         {
             "name": "dende/common-bundle",
@@ -343,12 +343,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5"
+                "reference": "1a7b9bead3e91799478d185cd0ce7be5fc5e1806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
-                "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/1a7b9bead3e91799478d185cd0ce7be5fc5e1806",
+                "reference": "1a7b9bead3e91799478d185cd0ce7be5fc5e1806",
                 "shasum": ""
             },
             "require": {
@@ -362,7 +362,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -403,7 +403,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-12-06T07:11:42+00:00"
+            "time": "2017-12-10T09:20:11+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -691,12 +691,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "6565790f7275683c8178da2d5b9193224aa15696"
+                "reference": "73b2ad52389072ced2ecb85131ab5e22c7d88e07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6565790f7275683c8178da2d5b9193224aa15696",
-                "reference": "6565790f7275683c8178da2d5b9193224aa15696",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/73b2ad52389072ced2ecb85131ab5e22c7d88e07",
+                "reference": "73b2ad52389072ced2ecb85131ab5e22c7d88e07",
                 "shasum": ""
             },
             "require": {
@@ -759,7 +759,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-12-08T17:17:41+00:00"
+            "time": "2017-12-09T13:31:31+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1231,12 +1231,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "9ebd7a391de26fed507ec192184d660386e3728c"
+                "reference": "488fb6994839eb1e10b823532888ea0ff9d19846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/9ebd7a391de26fed507ec192184d660386e3728c",
-                "reference": "9ebd7a391de26fed507ec192184d660386e3728c",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/488fb6994839eb1e10b823532888ea0ff9d19846",
+                "reference": "488fb6994839eb1e10b823532888ea0ff9d19846",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1295,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2017-12-07T19:21:35+00:00"
+            "time": "2017-12-09T22:45:46+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -3603,12 +3603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "21063bd7166614e96e4a30fd12ca4b230ad36820"
+                "reference": "21d679130b53850f8bb03870b6df7c4ec4653160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/21063bd7166614e96e4a30fd12ca4b230ad36820",
-                "reference": "21063bd7166614e96e4a30fd12ca4b230ad36820",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/21d679130b53850f8bb03870b6df7c4ec4653160",
+                "reference": "21d679130b53850f8bb03870b6df7c4ec4653160",
                 "shasum": ""
             },
             "require": {
@@ -3677,7 +3677,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2017-12-01T17:02:13+00:00"
+            "time": "2017-12-10T17:04:55+00:00"
         },
         {
             "name": "ramsey/uuid-doctrine",
