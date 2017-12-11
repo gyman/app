@@ -44,7 +44,6 @@
                         {% if club.details.logo is not null %}
                             {% set logo = club.subdomain.name ~ '/' ~ club.details.logo %}
                             <img src="{{ asset('uploads/gallery/' ~ logo) }}" id="applogo" />
-                            <span id="appname">{{ club.name }}</span>
                         {% else %}
                             <img src="{{ asset('bundles/gymanapp/images/gyman_logo.png') }}" id="applogo" />
                         {% endif %}
@@ -86,7 +85,9 @@
                             <li>
                                 <a href="{{ path("fos_user_profile_show") }}">
                                     <span class="icon16 icomoon-icon-equalizer-2"></span>
-                                    <span class="txt"> {{ 'layout.logged_in_as'|trans({'%username%' : app.user.username}) }}</span>
+                                    <span class="txt">
+                                        {{ 'layout.logged_in_as'|trans({'%username%' : app.user.username}) }}
+                                    </span>
                                 </a>
                             </li>
 

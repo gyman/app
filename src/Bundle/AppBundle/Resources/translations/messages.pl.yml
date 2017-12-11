@@ -57,8 +57,6 @@ flash.entry_opened.success: "Otwarto wejście na zajęcia."
 flash.entry_opened.errors: "Wystąpił błąd. Nie można otworzyć wejścia."
 flash.entry_closed.success: "Wejście zamknięto."
 
-
-
 voucher.entries.open: "open"
 
 navigation:
@@ -119,8 +117,6 @@ flash:
       {1} Uczestnik wszedł 1 raz na zajęcia wykorzystując kredyt!<br /> Poniższe wejście zostanie przypisane do karnetu i odliczone od pozostałych wejść.
       |]1,Inf[ Uczestnik wszedł %creditEntriesCount% razy na zajęcia wykorzystując kredyt!<br /> Poniższe wejścia zostaną przypisane do nowego karnetu i odliczone od pozostałych wejść.
 
-
-
 member_search_form.query: Imię, nazwisko lub numer karnetu
 member_search_form.submit: Szukaj
 member_search_form.section: Uczestnik należy do sekcji
@@ -145,3 +141,7 @@ update.voucher: zapisz
 
 form.label.firstname: Imię
 form.label.lastname: Nazwisko
+
+occurrence.form.instructor.label: Trener
+occurrence.form.subject.label: Temat
+occurrence.form.note.label: Opis

@@ -14,7 +14,7 @@ class Note
         $this->content = $content;
     }
 
-    public function content(): string
+    public function content(): ?string
     {
         return $this->content;
     }

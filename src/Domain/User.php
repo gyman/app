@@ -3,6 +3,7 @@ namespace Gyman\Domain;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 /**
  * Class User
@@ -43,9 +44,15 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     /**
      * @return string
      */
-    public function getFullname()
+    public function getFullname() : ?string
     {
-        return $this->firstname . ' ' . $this->lastname;
+        $name = $this->firstname . ' ' . $this->lastname;
+
+        if(trim($name) === '') {
+            return null;
+        }
+
+        return $name;
     }
 
     /**
@@ -98,5 +105,10 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     public function member() : Member
     {
         return $this->member;
+    }
+
+    public function id() : UuidInterface
+    {
+        return $this->id;
     }
 }

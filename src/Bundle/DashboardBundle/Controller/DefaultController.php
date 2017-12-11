@@ -4,7 +4,9 @@ namespace Gyman\Bundle\DashboardBundle\Controller;
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Application\Command\UpdateOccurrenceDetailsCommand;
 use Gyman\Bundle\AppBundle\Form\SearchType;
+use Gyman\Bundle\AppBundle\Form\UpdateOccurrenceDetailsType;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\Criteria;
@@ -12,6 +14,7 @@ use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\SearchMemberCommand;
 use Gyman\Domain\MemberView;
+use Gyman\Domain\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -104,10 +107,27 @@ class DefaultController extends Controller
             $members = $allMembers;
         }
 
+        $instructors = $this->get('gyman.user.repository')->getInstructors();
+
+        $instructors = array_combine(array_map(function(User $instructor) : string {
+            $name = $instructor->getFullname();
+            return $name !== null ? $name : $instructor->getUsername();
+        }, $instructors), array_map(function(User $instructor) : string {
+            return $instructor->id()->toString();
+        }, $instructors));
+
+        $form = $this->createForm(UpdateOccurrenceDetailsType::class, new UpdateOccurrenceDetailsCommand(
+            $occurrence->id(),
+            $occurrence->instructor() ==! null ? $occurrence->instructor()->id() : null,
+            $occurrence->subject(),
+            $occurrence->note()
+        ), ["instructors" => $instructors]);
+
         return [
             "occurrence" => $occurrence,
             "membersThatEntered"   =>  $membersThatEntered,
             "allMembers" => $members,
+            "form" => $form->createView()
         ];
     }
 

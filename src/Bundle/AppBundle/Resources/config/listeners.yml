@@ -7,13 +7,6 @@ services:
     tags:
       - { name: kernel.event_listener, event: 'gyman.open_entry.success', method: "onSuccess" }
 
-  app.listener.occurence_entity:
-    class: 'Gyman\Bundle\AppBundle\Listener\OccurrenceListener'
-    arguments:
-      - "@service_container"
-    tags:
-      - { name: doctrine.orm.entity_listener, entity_manager: tenant, event: postLoad, method: postLoadHandler }
-
   app.listener.user_for_member_created:
     class: Gyman\Bundle\AppBundle\Listener\UserCreatedForMemberListener
     arguments:

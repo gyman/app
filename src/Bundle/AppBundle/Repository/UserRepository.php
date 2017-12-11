@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
@@ -13,11 +14,6 @@ use Gyman\Domain\UserInterface;
  */
 class UserRepository extends EntityRepository
 {
-    /**
-     * @param EmailAddress $emailAddress
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @return User|null
-     */
     public function findOneByEmailAddress(EmailAddress $emailAddress)
     {
         $qb = $this->createQueryBuilder('u');
@@ -40,21 +36,8 @@ class UserRepository extends EntityRepository
         return $query->getOneOrNullResult();
     }
 
-    /**
-     * @param $roles
-     * @return mixed
-     */
-    public function getAdministrators()
-    {
-        $query = $this->getByRolesQueryBuilder(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
 
-        return $query->getResult();
-    }
-
-    /**
-     * @return \Doctrine\ORM\Query
-     */
-    public function getByRolesQueryBuilder(array $roles)
+    public function getByRolesQueryBuilder(array $roles) : Query
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -73,8 +56,27 @@ class UserRepository extends EntityRepository
         $this->_em->persist($user);
         $this->_em->flush($user);
     }
+
     public function update(User $user)
     {
         $this->_em->flush($user);
+    }
+
+    /**
+     * @return array|User[]
+     */
+    public function getInstructors() : array
+    {
+        return $this->getByRolesQueryBuilder(['ROLE_INSTRUCTOR'])->getResult();
+    }
+
+    /**
+     * @return array|User[]
+     */
+    public function getAdministrators() : array
+    {
+        $query = $this->getByRolesQueryBuilder(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
+
+        return $query->getResult();
     }
 }

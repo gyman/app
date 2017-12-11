@@ -3,10 +3,6 @@ Gyman\Domain\Calendar\Event\Occurrence:
   table: occurrences
   repositoryClass: Gyman\Bundle\AppBundle\Repository\OccurrenceRepository
 
-  entityListeners:
-    Gyman\Bundle\AppBundle\Listener\OccurrenceListener:
-      postLoad: [postLoadHandler]
-
   associationOverride:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
@@ -22,6 +18,11 @@ Gyman\Domain\Calendar\Event\Occurrence:
       targetEntity: Gyman\Domain\Entry
       mappedBy: occurrence
 
+  manyToOne:
+    instructor:
+      targetEntity: Gyman\Domain\User
+      nullable: true
+
   embedded:
     subject:
       class: Gyman\Domain\Calendar\Event\Occurrence\Subject
@@ -29,9 +30,3 @@ Gyman\Domain\Calendar\Event\Occurrence:
     note:
       class: Gyman\Domain\Calendar\Event\Occurrence\Note
       columnPrefix: note_
-
-  fields:
-    instructorId:
-      type: integer
-      nullable: true
-      column: instructor_id

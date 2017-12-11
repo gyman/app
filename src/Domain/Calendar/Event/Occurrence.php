@@ -25,11 +25,6 @@ class Occurrence extends BaseOccurrence
     protected $instructor;
 
     /**
-     * @var integer
-     */
-    protected $instructorId;
-
-    /**
      * @var Subject
      */
     protected $subject;
@@ -54,44 +49,24 @@ class Occurrence extends BaseOccurrence
         $this->entries = $entries;
     }
 
-    /**
-     * @return mixed
-     */
-    public function instructor()
+    public function instructor() : ?User
     {
         return $this->instructor;
     }
 
-    /**
-     * @return mixed
-     */
-    public function subject()
+    public function subject() : Subject
     {
         return $this->subject;
     }
 
-    /**
-     * @return mixed
-     */
-    public function note()
+    public function note() : Note
     {
         return $this->note;
     }
 
-    /**
-     * @param User $user
-     */
-    public function setInstructor(User $user)
+    public function setInstructor(User $user) : void
     {
         $this->instructor = $user;
-    }
-
-    /**
-     * @return string
-     */
-    public function instructorId()
-    {
-        return $this->instructorId;
     }
 
     /**
