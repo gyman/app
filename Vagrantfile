@@ -6,7 +6,7 @@ settings = YAML.load_file 'env/vagrant/vagrant.yml'
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "bento/ubuntu-17.04"
+  config.vm.box = "uirapuru/ubuntu64"
   config.vm.provision :shell, path: "env/vagrant/bootstrap.sh"
   config.vm.network "private_network", ip: settings['server']['ip']
   config.vm.network :forwarded_port, guest: 22, host: settings['server']['ssh_port'], id: "ssh", auto_correct: true
