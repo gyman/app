@@ -9,13 +9,11 @@ Gyman\Domain\Voucher:
 
   id:
     id:
-      type: guid
-      generator: { strategy: UUID }
-
-  gedmo:
-    soft_deleteable:
-      field_name: deletedAt
-      time_aware: false
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   manyToOne:
     member:
@@ -50,10 +48,7 @@ Gyman\Domain\Voucher:
     createdAt:
       name: created_at
       type: datetime
-      nullable: true
-      gedmo:
-        timestampable:
-          on: create
+      nullable: false
 
     updatedAt:
       name: updated_at

@@ -4,28 +4,25 @@ namespace Gyman\Domain;
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Exception;
 use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\ExceededMaximumAmountOfEntriesException;
-use Gyman\Application\Exception\LastEntryIsStillOpenedException;
 use Gyman\Application\Exception\UnsupportedEntryTypeException;
 use Gyman\Application\Exception\VoucherClosingDateBeforeOpeningException;
 use Gyman\Domain\Voucher\Price;
+use Ramsey\Uuid\UuidInterface;
 
-/**
- * Class Voucher
- * @package Gyman\Domain
- */
 class Voucher
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $startDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $endDate;
 
@@ -40,7 +37,7 @@ class Voucher
     protected $price;
 
     /**
-     * @var integer
+     * @var UuidInterface
      */
     protected $id;
 
@@ -76,8 +73,8 @@ class Voucher
 
     /**
      * Voucher constructor.
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param Price $price
      * @param int $maximumAmount
      * @param array $entries
@@ -85,7 +82,7 @@ class Voucher
      * @param DateTime $closedAt
      * @throws VoucherClosingDateBeforeOpeningException
      */
-    public function __construct(\DateTime $startDate, \DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null, DateTime $closedAt = null)
+    public function __construct(DateTime $startDate, DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null, DateTime $closedAt = null)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
@@ -103,16 +100,17 @@ class Voucher
 
         $this->entries = $entries;
         $this->closedAt = $closedAt;
+
+        $this->createdAt = new DateTime("now");
     }
 
     /**
-     * @param Entry $entry
      * @throws EntryMustBeVoucherTypeException
      * @throws ExceededMaximumAmountOfEntriesException
      * @throws Exception
      * @throws UnsupportedEntryTypeException
      */
-    public function addEntry(Entry $entry)
+    public function addEntry(Entry $entry) : void
     {
         if($this->isClosed()) {
             throw new Exception("Can't add entry to closed voucher!");
@@ -130,21 +128,14 @@ class Voucher
         $entry->assignToVoucher($this);
     }
 
-    /**
-     * @return Entry|null
-     */
-    public function lastEntry()
+    public function lastEntry() : ?Entry
     {
         if ($this->entries->count() > 0) {
             return $this->entries->last();
         }
     }
 
-    /**
-     * @param DateTime $date
-     * @throws VoucherClosingDateBeforeOpeningException
-     */
-    public function close(DateTime $date = null)
+    public function close(DateTime $date = null) : void
     {
         /** @var Entry $lastEntry */
         $lastEntry = $this->lastEntry();
@@ -160,34 +151,22 @@ class Voucher
         $this->closedAt = is_null($date) ? new DateTime("now") : $date;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function startDate()
+    public function startDate() : DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function endDate()
+    public function endDate() : ?DateTime
     {
         return $this->endDate;
     }
 
-    /**
-     * @return int
-     */
-    public function maximumAmount()
+    public function maximumAmount() : ?int
     {
         return $this->maximumAmount;
     }
 
-    /**
-     * @return Price
-     */
-    public function price()
+    public function price() : Price
     {
         return $this->price;
     }
@@ -195,36 +174,26 @@ class Voucher
     /**
      * @return ArrayCollection|Entry[]
      */
-    public function entries()
+    public function entries() : ?Collection
     {
         return $this->entries;
     }
 
-    /**
-     * @return int|null
-     */
-    public function leftEntriesAmount()
+    public function leftEntriesAmount() : ?int
     {
         if ($this->isUnlimited()) {
-            return;
+            return null;
         }
 
         return $this->maximumAmount() - $this->entries()->count();
     }
 
-    /**
-     * @return int
-     */
-    public function usedEntriesAmount()
+    public function usedEntriesAmount() : int
     {
         return $this->entries()->count();
     }
 
-    /**
-     * @param string $relatedTo
-     * @return int
-     */
-    public function leftDaysAmount($relatedTo = 'now')
+    public function leftDaysAmount($relatedTo = 'now') : int
     {
         $diffToDate = new DateTime($relatedTo);
 
@@ -236,36 +205,22 @@ class Voucher
 
     }
 
-    /**
-     * @return int
-     */
-    public function totalDaysAmount()
+    public function totalDaysAmount() : int
     {
         return $this->endDate()->diff($this->startDate())->days;
     }
 
-    /**
-     * @param string $relatedTo
-     * @return int
-     */
-    public function passedDaysAmount($relatedTo = 'now')
+    public function passedDaysAmount($relatedTo = 'now') : int
     {
         return $this->totalDaysAmount() - $this->leftDaysAmount($relatedTo);
     }
 
-    /***
-     * @return bool
-     */
-    public function isUnlimited()
+    public function isUnlimited() : bool
     {
         return $this->maximumAmount === null;
     }
 
-    /**
-     * @param Voucher $voucher
-     * @return bool
-     */
-    public function overlaps(Voucher $voucher)
+    public function overlaps(Voucher $voucher) : bool
     {
         if($voucher->isClosed() || $this->isClosed()) {
             return false;
@@ -289,25 +244,22 @@ class Voucher
         return true;
     }
 
-    /**
-     * @return Member
-     */
-    public function member()
+    public function member() : Member
     {
         return $this->member;
     }
 
-    public function setMember(Member $member)
+    public function setMember(Member $member) : void
     {
         $this->member = $member;
     }
 
-    public function id()
+    public function id() : UuidInterface
     {
         return $this->id;
     }
 
-    public function removeEntry(Entry $entry)
+    public function removeEntry(Entry $entry) : void
     {
 //        if(!is_null($this->lastEntry()) && $this->lastEntry()->id() === $entry->id()) {
 //            $this->lastEntry = null;
@@ -316,34 +268,22 @@ class Voucher
         $this->entries->removeElement($entry);
     }
 
-    /**
-     * @return DateTime
-     */
-    public function createdAt()
+    public function createdAt() : DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return bool
-     */
-    public function isClosed()
+    public function isClosed() : bool
     {
         return !is_null($this->closedAt());
     }
 
-    /**
-     * @return DateTime
-     */
-    public function closedAt()
+    public function closedAt() : ?DateTime
     {
         return $this->closedAt;
     }
 
-    /**
-     * @return bool
-     */
-    public function isCurrent()
+    public function isCurrent() : bool
     {
         if(is_null($this->member()->currentVoucher())) {
             return false;
@@ -358,10 +298,7 @@ class Voucher
         return $currentVoucher === $this;
     }
 
-    /**
-     * @param UpdateVoucherCommand $updateVoucherCommand
-     */
-    public function updateWithCommand(UpdateVoucherCommand $updateVoucherCommand)
+    public function updateWithCommand(UpdateVoucherCommand $updateVoucherCommand) : void
     {
         $this->startDate = $updateVoucherCommand->startDate;
         $this->endDate = $updateVoucherCommand->endDate;
