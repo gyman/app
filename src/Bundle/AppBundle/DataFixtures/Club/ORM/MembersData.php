@@ -1,20 +1,19 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Application\Factory\MemberFactory;
+use Gyman\Domain\Member;
 
 class MembersData extends BaseFixture
 {
-    protected $dir = __DIR__;
-
-    public function getOrder()
+    public function getOrder() : int
     {
         return 10;
     }
 
-    public function insert($params)
+    public function insert(array $params = []) : Member
     {
         $factoryParams = $params;
         $factoryParams['sections'] = new ArrayCollection();
@@ -28,9 +27,6 @@ class MembersData extends BaseFixture
         foreach ($params["sections"] as $sectionName) {
             $member->sections()->add($this->getReference($sectionName));
         }
-
-        $this->manager->persist($member);
-        $this->manager->flush();
 
         return $member;
     }

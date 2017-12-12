@@ -1,19 +1,17 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\User;
 
 class UsersData extends BaseFixture
 {
-    protected $dir = __DIR__;
-
-    public function getOrder()
+    public function getOrder() : int
     {
         return 20;
     }
 
-    public function insert($params)
+    public function insert(array $params = []) : User
     {
         $user = new User();
         $user->setUsername($params['username']);

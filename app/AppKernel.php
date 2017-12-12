@@ -31,7 +31,6 @@ class AppKernel extends Kernel
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
 
-            new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),
             new Dende\MultitenancyBundle\DendeMultitenancyBundle(),
 

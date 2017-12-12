@@ -17,7 +17,6 @@ occurrence-example-003:
   endDate: "last week friday 16:45"
   modified: 0
   minutes: 45
-
 occurrence-example-004:
   event: event-example
   startDate: "this week monday 16:00"

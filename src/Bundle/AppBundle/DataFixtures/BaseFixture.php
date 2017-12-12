@@ -1,43 +1,41 @@
 <?php
-namespace Gyman\Bundle\TestBundle\DataFixtures;
+namespace Gyman\Bundle\AppBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use ReflectionClass;
 use Symfony\Component\Yaml\Yaml;
 
-class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+/**
+ * Class BaseFixture.
+ */
+abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInterface
 {
-    protected $container;
     protected $manager;
+    protected $fixtureFile;
 
-    protected $dir = __DIR__;
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     *
-     * @api
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @throws \Exception
-     */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager) : void
     {
         $this->manager = $manager;
         $file = $this->translateClassToFilename($this);
-        $value = Yaml::parse(file_get_contents($this->dir . '/../Yaml/' . $file));
 
-        foreach ($value as $key => $params) {
+        $class_info = new ReflectionClass($this);
+        $dir = dirname($class_info->getFileName());
+
+        $filename = $dir . '/../Yaml/' . $file;
+
+        if(!is_file($filename) || !is_readable($filename)) {
+            return;
+        }
+
+        $items = Yaml::parse(file_get_contents($filename));
+
+        if(count($items) === 0) {
+            return;
+        }
+
+        foreach ($items as $key => $params) {
             $object = $this->insert($params);
             $this->addReference($key, $object);
             $this->manager->persist($object);
@@ -46,30 +44,29 @@ class BaseFixture extends AbstractFixture implements OrderedFixtureInterface, Co
         $this->manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder() : int
     {
         return 1;
     }
 
-    /**
-     * @param $params
-     * @throws \Exception
-     */
-    public function insert($params)
-    {
-        throw new \Exception('Must implement this method!');
-    }
+    abstract public function insert(array $params = []);
 
-    /**
-     * @param $object
-     * @return string
-     */
-    public function translateClassToFilename($object)
+    public function translateClassToFilename($object) : string
     {
         $classnameArray = explode('\\', get_class($object));
         $class = array_pop($classnameArray);
         $filename = strtolower(substr($class, 0, strpos($class, 'Data'))) . '.yml';
 
         return $filename;
+    }
+
+    protected function getArrayOfReferences(array $array) : array
+    {
+        $result = [];
+        foreach ($array as $reference) {
+            $result[] = $this->getReference($reference);
+        }
+
+        return $result;
     }
 }

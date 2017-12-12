@@ -16,8 +16,6 @@ parse_yaml() {
    }'
 }
 
-ln -fs /vagrant /var/www/gyman
-
 eval $(parse_yaml /vagrant/env/vagrant/vagrant.yml "config_");
 
 mysql -u $config_databaseMain_user -p$config_databaseMain_password -t -e "CREATE DATABASE IF NOT EXISTS $config_databaseMain_name;"

@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Dende\Calendar\Domain\Calendar;
-use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -23,7 +23,7 @@ class CalendarsData extends BaseFixture implements ContainerAwareInterface
     /**
      * @return int
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return -100;
     }
@@ -40,7 +40,7 @@ class CalendarsData extends BaseFixture implements ContainerAwareInterface
      * @param $params
      * @return Calendar
      */
-    public function insert($params)
+    public function insert(array $params = [])
     {
         $calendar = $this->container->get("gyman.calendar.factory")->createFromArray([
             "title" => $params["name"]

@@ -35,7 +35,6 @@
         "php": ">=7.1",
         "braincrafted/bootstrap-bundle": "1.4.2",
         "dende/calendar-bundle": "^1",
-        "dende/common-bundle": "dev-master",
         "dende/multitenancybundle": "1.1.2",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/dbal": "^2.6",
@@ -113,7 +112,7 @@
             "php app/console doctrine:database:drop --club=rio --if-exists --no-interaction --force --quiet",
             "php app/console doctrine:database:create --club=rio --if-not-exists --no-interaction --quiet",
             "php app/console doctrine:schema:create --no-interaction --quiet --env=dev --club=rio",
-            "php app/console doctrine:migrations:migrate --env=dev --no-interaction --quiet --configuration=app/DoctrineMigrations/tenant.yml --club=rio",
+            "# php app/console doctrine:migrations:migrate --env=dev --no-interaction --quiet --configuration=app/DoctrineMigrations/tenant.yml --club=rio",
             "php app/console doctrine:fixtures:load --append --env=dev --no-interaction --quiet --fixtures=src/Bundle/AppBundle/DataFixtures/Club --club=rio"
         ],
         "reload-fixtures-test": [

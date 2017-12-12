@@ -6,21 +6,14 @@ use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Bundle\AppBundle\Factory\OccurrenceFactory;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class EventsData
- * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
- */
 class EventsData extends BaseFixture implements ContainerAwareInterface
 {
-    /** @var string $dir */
-    protected $dir = __DIR__;
-
     /**
      * @var ContainerInterface
      */
@@ -29,16 +22,12 @@ class EventsData extends BaseFixture implements ContainerAwareInterface
     /**
      * @return int
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 10;
     }
 
-    /**
-     * @param $params
-     * @return Event
-     */
-    public function insert($params)
+    public function insert(array $params = []) : Event
     {
         Event::setFactoryClass(OccurrenceFactory::class);
 
@@ -58,22 +47,12 @@ class EventsData extends BaseFixture implements ContainerAwareInterface
         return $event;
     }
 
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     *
-     * @api
-     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
-    /**
-     * @return ContainerInterface
-     */
-    public function getContainer()
+    public function getContainer() : ContainerInterface
     {
         return $this->container;
     }

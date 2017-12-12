@@ -1,22 +1,21 @@
 <?php
 namespace Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM;
 
-use Dende\CommonBundle\DataFixtures\BaseFixture;
-use Gyman\Bundle\ClubBundle\Entity\Involvement;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Factory\ClubFactory;
 
 class ClubsData extends BaseFixture
 {
     protected $dir = __DIR__;
 
-    public function getOrder()
+    public function getOrder() : int
     {
         return -1;
     }
 
-    public function insert($params)
+    public function insert(array $params = []) : Club
     {
-        $club = ClubFactory::createFromArray($params);
-        return $club;
+        return ClubFactory::createFromArray($params);
     }
 }

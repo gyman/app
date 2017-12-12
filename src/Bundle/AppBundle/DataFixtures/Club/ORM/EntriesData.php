@@ -2,32 +2,19 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Carbon\Carbon;
-use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Member;
 use Gyman\Application\Factory\EntryFactory;
 use Dende\Calendar\Domain\Calendar\EventInterface;
 
-/**
- * Class EntriesData
- * @package Gyman\Bundle\AppBundle\DataFixtures\Club\ORM
- */
 class EntriesData extends BaseFixture
 {
-    protected $dir = __DIR__;
-
-    /**
-     * @return int
-     */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 30;
     }
 
-    /**
-     * @param $params
-     * @return \Gyman\Domain\Entry
-     */
-    public function insert($params)
+    public function insert(array $params = [])
     {
         /** @var Member $member */
         $member = $this->getReference($params['member']);
