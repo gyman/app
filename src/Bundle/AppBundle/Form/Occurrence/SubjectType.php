@@ -21,6 +21,7 @@ final class SubjectType extends AbstractType
         ->add('content', TextType::class, [
             'required' => false,
             'label' => 'occurrence.form.subject.label',
+            'disabled' => true
         ]);
     }
 

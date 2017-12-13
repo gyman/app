@@ -19,6 +19,7 @@ final class NoteType extends AbstractType
         ->add('content', TextareaType::class, [
             'required' => false,
             'label' => 'occurrence.form.note.label',
+            'disabled' => true
         ]);
     }
 
