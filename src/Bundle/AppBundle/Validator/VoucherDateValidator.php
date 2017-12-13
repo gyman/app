@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Gyman\Bundle\AppBundle\Services\Manager\VoucherManager;
+use Gyman\Domain\Voucher;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -20,6 +21,7 @@ class VoucherDateValidator extends ConstraintValidator
 
     public function validate($createVoucherCommand, Constraint $constraint)
     {
+        /** @var Voucher|null $currentVoucher */
         $currentVoucher = $createVoucherCommand->getMember()->getCurrentVoucher();
 
         if ($currentVoucher == $createVoucherCommand) {
@@ -31,12 +33,16 @@ class VoucherDateValidator extends ConstraintValidator
 
             if ($currentEndDate) {
                 $properDate = $currentEndDate->format('d.m.Y');
-                $this->context->addViolationAt('startDate', 'Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na ' . $properDate);
+                $this->context->buildViolation('Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na ' . $properDate)
+                    ->atPath('startDate')
+                    ->addViolation();
             }
         }
 
         if ($createVoucherCommand->getEndDate() != null && $createVoucherCommand->getStartDate() > $createVoucherCommand->getEndDate()) {
-            $this->context->addViolationAt('endDate', 'Data końcowa musi być po dacie początkowej!');
+            $this->context->buildViolation('Data końcowa musi być po dacie początkowej!')
+                ->atPath('endDate')
+                ->addViolation();
         }
     }
 }

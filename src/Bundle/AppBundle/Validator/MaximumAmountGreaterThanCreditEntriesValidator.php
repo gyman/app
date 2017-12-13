@@ -21,12 +21,14 @@ class MaximumAmountGreaterThanCreditEntriesValidator extends ConstraintValidator
 
         $creditEntriesCount = $creditEntries->count();
 
-        if ($createVoucherCommand->maximumAmount <= $creditEntriesCount) {
-            $this->context->addViolationAt('maximumAmount', sprintf(
+        if ($creditEntriesCount > 0 && $createVoucherCommand->maximumAmount <= $creditEntriesCount) {
+            $this->context->buildViolation(sprintf(
                 'Użytkownik posiada %d wejścia kredytowe, które automatycznie zostaną odjęte z karnetu. Musisz ustawić przynajmniej %d wejścia',
                 $creditEntriesCount,
                 $creditEntriesCount + 1
-            ));
+            ))
+            ->atPath('maximumAmount')
+            ->addViolation();
         }
     }
 }
