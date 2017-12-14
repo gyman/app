@@ -63,3 +63,4 @@ final class OpenEntryCommand
         $this->startDate = new \DateTime('now');
     }
 }
+

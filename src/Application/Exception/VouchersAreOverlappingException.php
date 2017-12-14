@@ -34,10 +34,10 @@ class VouchersAreOverlappingException extends \Exception
     public function __construct(Member $member, Voucher $existing, Voucher $new)
     {
         $this->message = sprintf(
-            'Trying to add voucher [%s to %s] for user %d/%s where he has already voucher [%s to %s]',
+            'Trying to add voucher [%s to %s] for user %s/%s where he has already voucher [%s to %s]',
             $existing->startDate()->format('Y-m-d H:i:s'),
             $existing->endDate()->format('Y-m-d H:i:s'),
-            $member->id(),
+            $member->id()->toString(),
             $member->email()->email(),
             $new->startDate()->format('Y-m-d H:i:s'),
             $new->endDate()->format('Y-m-d H:i:s')

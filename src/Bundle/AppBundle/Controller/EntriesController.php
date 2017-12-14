@@ -42,14 +42,31 @@ class EntriesController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
+            /** @var OpenEntryCommand $command */
+            $command = $form->getData();
+
             if ($form->isValid()) {
-                /** @var OpenEntryCommand $command */
-                $command = $form->getData();
                 $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
                 $this->addFlash('success', 'flash.entry_opened.success');
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {
+                $errorsArray = [];
+
+                foreach($form->getErrors(true, true) as $error) {
+                    $errorsArray[] = $error->serialize();
+                }
+
+                $commandArray = [
+                    "startDate" => $command->startDate->format("Y-m-d H:i:s"),
+                    "entryType" => $command->entryType,
+                    "price" => $command->price,
+                    "member" => $member->id()->toString(),
+                    "voucher" => $command->entryType === Entry::TYPE_VOUCHER ? $command->voucher->id()->toString() : "",
+                    "occurrence" => $command->occurrence->id()->toString(),
+                ];
+
+                $this->get('logger')->error('Create entry form validation error.', ["command" => $commandArray, "error" => $errorsArray]);
                 $this->addFlash('error', 'flash.entry_opened.errors');
             }
         }
