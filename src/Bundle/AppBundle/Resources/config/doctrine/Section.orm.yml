@@ -1,0 +1,67 @@
+Gyman\Domain\Section:
+  type:   entity
+  table:  sections
+  repositoryClass: Gyman\Bundle\AppBundle\Repository\SectionRepository
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
+  oneToOne:
+    calendar:
+      targetEntity: Gyman\Domain\Calendar
+      inversedBy: section
+      cascade: ["all"]
+      joinColumn:
+        onDelete: CASCADE
+
+  manyToMany:
+    members:
+      targetEntity: Gyman\Domain\Member
+      mappedBy: sections
+
+  manyToOne:
+    instructor:
+      targetEntity: Gyman\Domain\User
+      mappedBy:     sections
+
+  fields:
+    title:
+      type: string
+      nullable: false
+      unique: false
+      length: 60
+
+    deletedAt:
+      type: datetime
+      nullable: true
+      column: deleted_at
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: create
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update
+    orderNumber:
+      name: order_number
+      type: integer
+      nullable: false
+      signed: false
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false

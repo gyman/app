@@ -54,6 +54,7 @@ class SettingsUpdateHandler
      */
     public function handle(UpdateSettingsCommand $command)
     {
+        /*
         $existingSections = $this->sectionRepository->findAll();
 
         foreach ($existingSections as $existing) {
@@ -71,7 +72,7 @@ class SettingsUpdateHandler
                 $this->sectionRepository->update($section);
             }
         }
-
+        */
         $this->uploadHandler->handle($command);
 
         $this->club->setDetails($command->details);

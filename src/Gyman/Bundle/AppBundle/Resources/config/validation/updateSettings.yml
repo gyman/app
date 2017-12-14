@@ -4,11 +4,9 @@ Gyman\Application\Command\UpdateSettingsCommand:
       - Valid: ~
     sections:
       - Valid: ~
-      - Count:
+      - Count: # @todo zamienić na validator ignorujący skasowane sekcje w kolekcji
           min: 1
           minMessage: Musi istnieć przynajmniej 1 sekcja!
-          max: 10
-          maxMessage: Nie może istnieć więcej niż 10 sekcji!
     name:
       - NotBlank:
           message: Pole nie może być puste!

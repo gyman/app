@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
+            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
 
             new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),

@@ -1,0 +1,37 @@
+Gyman\Domain\User:
+  type:   entity
+  table:  users
+  repositoryClass:  Gyman\Bundle\AppBundle\Repository\UserRepository
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
+  oneToOne:
+    member:
+      targetEntity: Gyman\Domain\Member
+
+  oneToMany:
+    sections:
+      targetEntity: Gyman\Domain\Section
+      invertedBy:   instructor
+
+  fields:
+    firstname:
+      type: string
+      length: 255
+      nullable: true
+
+    lastname:
+      type: string
+      length: 255
+      nullable: true
+
+    invitationToken:
+      type: string
+      length: 255
+      nullable: true

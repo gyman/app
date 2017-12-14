@@ -12,7 +12,7 @@
     </div>
 
     <div class="row-fluid">
-        <div class="span4">
+        <div class="span2">
             {{ knp_menu_render('main', {
                 'template': 'GymanSettingsBundle:Menu:main.html.twig',
                 'currentAsLink' : true,
@@ -20,7 +20,7 @@
                 'currentClass' : 'active'
             }) }}
         </div>
-        <div class="span8">
+        <div class="span10">
             {% block settings_page %}{% endblock settings_page %}
         </div>
     </div>

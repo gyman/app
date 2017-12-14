@@ -1,5 +1,5 @@
 <?php
-namespace Gyman\Bundle\AppBundle\Validator;
+namespace Gyman\Bundle\AppBundle\Validator;.pl/members/cc085cda-df3a-11e5-8039-1c6f658c64a2/update
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Entry;

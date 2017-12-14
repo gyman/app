@@ -136,3 +136,13 @@ member_search_form.belt.none: wybierz
 member.form.update_voucher: edytuj
 vouchers.actions.table_header: Akcja
 update.voucher: zapisz
+
+form.label.firstname: Imię
+form.label.lastname: Nazwisko
+
+occurrence.form.instructor.label: Trener
+occurrence.form.subject.label: Temat
+occurrence.form.note.label: Opis
+
+settings.header.title: Ustawienia
+flash.settings_updated.success: Zapisano zmiany ustawień.
