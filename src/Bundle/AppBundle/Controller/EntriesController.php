@@ -70,7 +70,7 @@ class EntriesController extends Controller
         try {
             $this->get('tactician.commandbus')->handle($command);
         } catch (MemberHasNoLastEntryException $e) {
-            $this->addFlash('warning', 'flash.entry_closed.success');
+            $this->addFlash('error', 'flash.entry_closed.success');
             return $this->redirectToRoute('gyman_member_edit', ['id' => $entry->member()->id()]);
         }
 
