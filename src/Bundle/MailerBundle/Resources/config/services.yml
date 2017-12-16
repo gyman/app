@@ -1,0 +1,52 @@
+parameters:
+    contact.template:   "MailerBundle:Templates:contactMail.html.twig"
+    contact.subject:    "mailing.contact.subject"
+
+    registration_successful.template:   "MailerBundle:Templates:registeredSuccess.html.twig"
+    registration_successful.subject:    "mailing.registration_successful.subject"
+
+    credited_entry.template:            "MailerBundle:Templates:creditEntry.html.twig"
+
+    member_invitation.template:         "MailerBundle:Templates:memberInvitation.html.twig"
+
+    gyman_from:
+      gyman.pl@gmail.com: "Gyman.pl website"
+
+services:
+    mailer.abstract:
+      class: Gyman\Bundle\MailerBundle\Service\Mailer
+      abstract: true
+      arguments:
+        - '@mailer'
+        - '@translator'
+        - '@templating'
+
+    mailer.contact:
+      parent:     'mailer.abstract'
+      class:  Gyman\Bundle\MailerBundle\Service\Mailer
+      calls:
+          - [ setSubject,['%contact.subject%']]
+          - [ setTemplate,['%contact.template%']]
+          - [ setTo,['some@email.com']]
+
+    mailer.registration_successful:
+      parent:     'mailer.abstract'
+      class:  Gyman\Bundle\MailerBundle\Service\Mailer
+      calls:
+          - [ setSubject, ['%registration_successful.subject%']]
+          - [ setTemplate,['%registration_successful.template%']]
+
+    mailer.credit_entry:
+      parent:     'mailer.abstract'
+      class:      Gyman\Bundle\MailerBundle\Service\Mailer
+      calls:
+          - [ setFrom, ['%gyman_from%']]
+          - [ setTemplate, ['%credited_entry.template%']]
+
+
+    mailer.member_invitation:
+      parent:     'mailer.abstract'
+      class:      Gyman\Bundle\MailerBundle\Service\Mailer
+      calls:
+          - [ setFrom, ['%gyman_from%']]
+          - [ setTemplate, ['%member_invitation.template%']]

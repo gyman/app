@@ -1,0 +1,8 @@
+{% block _club_sections_sections_entry_title_widget %}
+    {{ form_widget(form) }}
+    &nbsp;
+    <a href="#" class="remove-collection-entry" data-entry-id="{{ form.parent.vars.id }}">[{{ 'remove_collection_element'|trans }}]</a>
+{% endblock  %}
+
+
+

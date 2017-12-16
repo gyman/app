@@ -1,0 +1,13 @@
+services:
+    gyman.dashboard.menu_builder:
+        class: Gyman\Bundle\DashboardBundle\Menu\Builder
+        arguments: ['@knp_menu.factory', '@security.authorization_checker']
+
+    gyman.dashboard.menu.main:
+        class:            Knp\Menu\MenuItem
+        factory:  ["@gyman.dashboard.menu_builder", "actions"]
+        tags:
+            - { name: knp_menu.menu, alias: actions }
+
+    gyman.dashboard.members_query:
+      class: 'Gyman\Bundle\DashboardBundle\Service\MembersCalendarQuery'

@@ -5,7 +5,9 @@ framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
         strict_requirements: true
-    profiler: { only_exceptions: false }
+    profiler:
+      only_exceptions: false
+
 
 web_profiler:
     toolbar: %debug_toolbar%
@@ -18,6 +20,9 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: ERROR
 
-jms_serializer:
-  metadata:
-    cache: false
+#jms_serializer:
+#  metadata:
+#    cache: false
+
+swiftmailer:
+    spool: { type: memory }

@@ -1,0 +1,46 @@
+---
+user-super-admin:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: superadmin
+  email: uirapuruadg+superadmin@gmail.com
+  plainPassword: superadmin
+  roles: [ROLE_SUPER_ADMIN]
+  enabled: true
+
+user-admin:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: admin
+  email: uirapuruadg+admin@gmail.com
+  plainPassword: admin
+  roles: [ROLE_ADMIN]
+  enabled: true
+
+user-moderator:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: moderator
+  email: uirapuruadg+moderator@gmail.com
+  plainPassword: moderator
+  roles: [ROLE_MODERATOR]
+  enabled: true
+
+user-instructor:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  username: instructor
+  email: uirapuruadg+instructor@gmail.com
+  plainPassword: instructor
+  roles: [ROLE_INSTRUCTOR]
+  enabled: true
+
+user-member:
+  firstname: Grzegorz
+  lastname: Kaszuba
+  member: Member00
+  username: member
+  email: uirapuruadg+member@gmail.com
+  plainPassword: member
+  roles: [ROLE_MEMBER]
+  enabled: true

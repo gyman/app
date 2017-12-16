@@ -1,5 +1,6 @@
 <?php
 
+use Gyman\Bundle\AppBundle\Globals;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -17,28 +18,20 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
-
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
+//            new JMS\SerializerBundle\JMSSerializerBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-//            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
 
-            new Dende\CommonBundle\DendeCommonBundle(),
             new Dende\CalendarBundle\DendeCalendarBundle(),
             new Dende\MultitenancyBundle\DendeMultitenancyBundle(),
 
@@ -78,4 +71,16 @@ class AppKernel extends Kernel
         $logger = $this->container->get('logger');
         \Monolog\ErrorHandler::register($logger);
     }
+
+    public function getCacheDir()
+    {
+        return $this->rootDir.'/../var/cache/'.$this->environment;
+    }
+
+    public function getLogDir()
+    {
+        return $this->rootDir.'/../var/logs';
+    }
+
+
 }

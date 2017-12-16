@@ -1,0 +1,56 @@
+---
+occurrence-example-001:
+  event: event-example
+  startDate: "last week monday 16:00"
+  endDate: "last week monday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-002:
+  event: event-example
+  startDate: "last week wednesday 16:00"
+  endDate: "last week wednesday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-003:
+  event: event-example
+  startDate: "last week friday 16:00"
+  endDate: "last week friday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-004:
+  event: event-example
+  startDate: "this week monday 16:00"
+  endDate: "this week monday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-005:
+  event: event-example
+  startDate: "this week wednesday 16:00"
+  endDate: "this week wednesday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-006:
+  event: event-example
+  startDate: "this week friday 16:00"
+  endDate: "this week friday 16:45"
+  modified: 0
+  minutes: 45
+
+occurrence-example-007:
+  event: event-example
+  startDate: "next week monday 16:00"
+  endDate: "next week monday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-008:
+  event: event-example
+  startDate: "next week wednesday 16:00"
+  endDate: "next week wednesday 16:45"
+  modified: 0
+  minutes: 45
+occurrence-example-009:
+  event: event-example
+  startDate: "next week friday 16:00"
+  endDate: "next week friday 16:45"
+  modified: 0
+  minutes: 45

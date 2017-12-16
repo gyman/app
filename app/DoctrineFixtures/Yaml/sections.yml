@@ -1,0 +1,6 @@
+--- 
+section-example:
+  title: "Przykładowa sekcja"
+  calendar: calendar-example
+  members:
+    - member-example

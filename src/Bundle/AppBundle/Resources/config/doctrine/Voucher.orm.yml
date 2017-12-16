@@ -1,0 +1,64 @@
+Gyman\Domain\Voucher:
+  type:   entity
+  table:  vouchers
+  repositoryClass:  Gyman\Bundle\AppBundle\Repository\VoucherRepository
+  embedded:
+    price:
+      class: Gyman\Domain\Voucher\Price
+      columnPrefix: price_
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
+  manyToOne:
+    member:
+      targetEntity: Gyman\Domain\Member
+      inversedBy: vouchers
+      cascade: ["persist"]
+
+  oneToMany:
+    entries:
+      targetEntity: Gyman\Domain\Entry
+      mappedBy: voucher
+      cascade: ["persist"]
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: true #false
+
+    endDate:
+      type: datetime
+      nullable: true
+
+    maximumAmount:
+      type: integer
+      nullable: true
+
+    deletedAt:
+      name: deleted_at
+      type: datetime
+      nullable: true
+
+    createdAt:
+      name: created_at
+      type: datetime
+      nullable: false
+
+    updatedAt:
+      name: updated_at
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update
+
+    closedAt:
+      name: closed_at
+      type: datetime
+      nullable: true

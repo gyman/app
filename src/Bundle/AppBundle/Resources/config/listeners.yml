@@ -1,0 +1,15 @@
+---
+services:
+  app.listener.open_entry:
+    class: 'Gyman\Bundle\AppBundle\Listener\OpenCreditEntryListener'
+    arguments:
+      - "@mailer.credit_entry"
+    tags:
+      - { name: kernel.event_listener, event: 'gyman.open_entry.success', method: "onSuccess" }
+
+  app.listener.user_for_member_created:
+    class: Gyman\Bundle\AppBundle\Listener\UserCreatedForMemberListener
+    arguments:
+      - '@mailer.member_invitation'
+    tags:
+      - { name: kernel.event_listener, event: 'gyman.member_for_user_created', method: 'onUserCreate' }
