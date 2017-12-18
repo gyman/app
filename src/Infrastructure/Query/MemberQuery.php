@@ -41,11 +41,11 @@ SELECT DISTINCT m.id,
   (v.maximumAmount - COUNT(e.id)) as voucher_left_amount,
   m.barcode
 FROM
-  $memberTable m, $voucherTable v, $entriesTable e
+  $memberTable m
+LEFT JOIN $voucherTable v ON m.current_voucher_id = v.id
+LEFT JOIN $entriesTable e ON m.current_voucher_id = e.voucher_id
 WHERE
   m.deletedAt IS NULL
-  AND m.current_voucher_id = v.id
-  AND e.voucher_id = m.current_voucher_id
 GROUP BY m.id, e.id, v.id
 ORDER BY
   m.last_entry_id ASC, m.current_voucher_id DESC, m.lastname ASC
