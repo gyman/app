@@ -85,18 +85,7 @@ class DefaultController extends Controller
 
         $allMembers = $memberQuery->findAll();
 
-        usort($allMembers, function(MemberView $a, MemberView $b) {
-            if ($a->currentVoucherId() !== null) {
-                return 1;
-            }
-
-            if ($b->currentVoucherId() !== null) {
-                return -1;
-            }
-
-            return 0;
-
-        });
+        usort($allMembers, '\Gyman\sortMemberViewsByCurrentVoucher');
 
         $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 

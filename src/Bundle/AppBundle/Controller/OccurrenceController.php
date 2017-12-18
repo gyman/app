@@ -18,7 +18,7 @@ class OccurrenceController extends Controller
      * @Route("/activity/{id}", name="gyman_dashboard_updateOccurrenceDetails")
      * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      */
-    public function updateOccurrenceDetailsAction(Occurrence $occurrence, string $route = null) : Response
+    public function updateOccurrenceDetailsAction(Occurrence $occurrence, array $route = null) : Response
     {
         $request = $this->get("request_stack")->getCurrentRequest();
 
@@ -31,17 +31,24 @@ class OccurrenceController extends Controller
             return $instructor->id()->toString();
         }, $instructors));
 
-        $form = $this->createForm(UpdateOccurrenceDetailsType::class, new UpdateOccurrenceDetailsCommand(
+        $command = new UpdateOccurrenceDetailsCommand(
             $occurrence->id(),
             $occurrence->instructor() ==! null ? $occurrence->instructor()->id() : null,
             $occurrence->subject(),
             $occurrence->note()
-        ), ["instructors" => $instructors, "action" => $this->generateUrl("gyman_dashboard_updateOccurrenceDetails", [
-            'id' => $occurrence->id()->toString()
-        ]), "method" => Request::METHOD_POST]);
+        );
+
+        $options = [
+            "instructors" => $instructors,
+            "action" => $this->generateUrl("gyman_dashboard_updateOccurrenceDetails", ['id' => $occurrence->id()->toString()]),
+            "method" => Request::METHOD_POST,
+            "occurrenceId" => $occurrence->id(),
+            "callback" => base64_encode(serialize($route))
+        ];
+
+        $form = $this->createForm(UpdateOccurrenceDetailsType::class, $command, $options);
 
         if($request->isMethod(Request::METHOD_POST)) {
-
             $form->handleRequest($request);
 
             if($form->isValid()) {
@@ -51,9 +58,11 @@ class OccurrenceController extends Controller
                 $this->addFlash('error', 'flash.occurrence_updated.error');
             }
 
-            return $this->redirectToRoute($route ?: 'gyman_dashboard_updateOccurrenceDetails', [
-                'id' => $occurrence->id()->toString()
-            ]);
+            if(null === $route) {
+                $route = unserialize(base64_decode($form["callback"]->getData()));
+            }
+
+            return $this->redirectToRoute(...$route);
         }
 
         return $this->render('@GymanApp/Occurrence/updateOccurrenceDetailsAction.html.twig', [

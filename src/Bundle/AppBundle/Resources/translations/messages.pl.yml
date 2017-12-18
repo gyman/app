@@ -145,3 +145,6 @@ form.label.lastname: Nazwisko
 occurrence.form.instructor.label: Trener
 occurrence.form.subject.label: Temat
 occurrence.form.note.label: Opis
+
+flash.occurrence_updated.success: "Zaktualizowano opis zajęć"
+flash.occurrence_updated.error: "Błąd przy zapisie zmian"

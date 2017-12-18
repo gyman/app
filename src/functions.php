@@ -6,6 +6,7 @@ use DateTime;
 use DateTimeImmutable;
 use Exception;
 use function foo\func;
+use Gyman\Domain\MemberView;
 use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
@@ -34,4 +35,17 @@ function money2string(Money $money) : string {
 function string2money(string $moneyString) : Money {
     list($currency, $amount) = explode("|", $moneyString);
     return new Money($amount, new Currency($currency));
+}
+
+function sortMemberViewsByCurrentVoucher(MemberView $a, MemberView $b) : int
+{
+    if ($a->currentVoucherId() !== null) {
+        return 1;
+    }
+
+    if ($b->currentVoucherId() !== null) {
+        return -1;
+    }
+
+    return 0;
 }

@@ -38,7 +38,8 @@ SELECT DISTINCT m.id,
   m.last_entry_id,
   m.current_voucher_id,
   v.endDate as voucher_end_date,
-  (v.maximumAmount - COUNT(e.id)) as voucher_left_amount
+  (v.maximumAmount - COUNT(e.id)) as voucher_left_amount,
+  m.barcode
 FROM
   $memberTable m, $voucherTable v, $entriesTable e
 WHERE
@@ -60,7 +61,8 @@ SQL
                 $member['last_entry_id'],
                 $member['current_voucher_id'],
                 $member['voucher_end_date']? new DateTime($member['voucher_end_date']) : null,
-                $member['voucher_left_amount']
+                $member['voucher_left_amount'],
+                $member['barcode']
             );
         }, $result);
     }
@@ -91,12 +93,13 @@ SELECT m.id,
  m.lastname,
  m.foto,
  m.last_entry_id,
- m.current_voucher_id 
+ m.current_voucher_id,
+ m.barcode 
 FROM members as m, entries as e
 WHERE m.deletedAt IS NULL
 AND m.id = e.member_id
 AND e.occurrence_id = :occurrence_id
-ORDER BY m.lastname ASC', [
+ORDER BY e.startDate ASC', [
     ":occurrence_id" => $occurrence->id()->toString()
         ]);
         
@@ -107,7 +110,10 @@ ORDER BY m.lastname ASC', [
                 $member['firstname'],
                 $member['foto'],
                 $member['last_entry_id'],
-                $member['current_voucher_id']
+                $member['current_voucher_id'],
+                null, // $member['left_amount'],
+                null, // $member['left_amount'],
+                $member['barcode']
             );
         }, $result);
     }

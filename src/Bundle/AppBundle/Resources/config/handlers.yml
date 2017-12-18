@@ -113,3 +113,12 @@ services:
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\CloseExpiredEntriesCommand }
 
+  gyman.app.handler.update_occurrence_details:
+    class: Gyman\Application\Handler\UpdateOccurrenceDetailsHandler
+    arguments:
+      - '@gyman.occurrence.repository'
+      - '@gyman.user.repository'
+      - '@event_dispatcher'
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\UpdateOccurrenceDetailsCommand }
+
