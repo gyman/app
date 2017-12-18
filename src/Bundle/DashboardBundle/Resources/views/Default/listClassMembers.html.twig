@@ -8,25 +8,11 @@
         {{ occurrence.event.title }}
         <small>{{ occurrence.startDate|date("y.m.d H:i") }} - {{ occurrence.endDate|date("H:i") }}</small>
     </h3>
-
-    {#<a href="{{ path("gyman_entries_close_for_occurrence", {'occurrence': occurrence.id}) }}" onclick="return confirm('Czy zamknąć wejścia wszystkim uczestnikom tych zajęć?');" class="btn btn-warning pull-right">Zamknij wszystkie wejścia</a>#}
 </div>
-
 
 {{ include("_flash.html.twig") }}
 
-<div class="row-fluid">
-    {{ form_start(form, {attr: {class: "form-horizontal"}}) }}
-    <div class="span3 offset1">
-        {{ form_row(form.instructor_id) }}
-        {{ form_row(form.subject) }}
-    </div>
-    <div class="span7 offset1">
-        {{ form_row(form.note) }}
-        {#<button type="submit">Zapisz</button>#}
-    </div>
-    {{ form_end(form) }}
-</div>
+{{ render(controller("GymanAppBundle:Occurrence:updateOccurrenceDetails", {'occurrence': occurrence})) }}
 
 <div class="row-fluid"><div class="span12"><hr /></div></div>
 

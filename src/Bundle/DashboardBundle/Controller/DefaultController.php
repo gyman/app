@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -107,27 +108,10 @@ class DefaultController extends Controller
             $members = $allMembers;
         }
 
-        $instructors = $this->get('gyman.user.repository')->getInstructors();
-
-        $instructors = array_combine(array_map(function(User $instructor) : string {
-            $name = $instructor->getFullname();
-            return $name !== null ? $name : $instructor->getUsername();
-        }, $instructors), array_map(function(User $instructor) : string {
-            return $instructor->id()->toString();
-        }, $instructors));
-
-        $form = $this->createForm(UpdateOccurrenceDetailsType::class, new UpdateOccurrenceDetailsCommand(
-            $occurrence->id(),
-            $occurrence->instructor() ==! null ? $occurrence->instructor()->id() : null,
-            $occurrence->subject(),
-            $occurrence->note()
-        ), ["instructors" => $instructors]);
-
         return [
             "occurrence" => $occurrence,
             "membersThatEntered"   =>  $membersThatEntered,
-            "allMembers" => $members,
-            "form" => $form->createView()
+            "allMembers" => $members
         ];
     }
 
