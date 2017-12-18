@@ -8,7 +8,7 @@ Gyman\Application\Command\OpenEntryCommand:
       - Range:
           min: 0
           minMessage: Cena nie może być mniejsza niż 0 PLN.
-    startDate:
-      - Gyman\Bundle\AppBundle\Validator\DateRangeConstraint:
-          min: "today 00:00:00"
-          max: "today 23:59:59"
+#    startDate:
+#      - Gyman\Bundle\AppBundle\Validator\DateRangeConstraint:
+#          min: "today 00:00:00"
+#          max: "today 23:59:59"
