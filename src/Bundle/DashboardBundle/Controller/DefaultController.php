@@ -85,22 +85,22 @@ class DefaultController extends Controller
 
         $allMembers = $memberQuery->findAll();
 
-        usort($allMembers, '\Gyman\sortMemberViewsByCurrentVoucher');
+//        usort($allMembers, '\Gyman\sortMemberViewsByCurrentVoucher');
 
         $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 
-        if (count($membersThatEntered) > 0) {
-            $members = array_filter($allMembers, function (MemberView $member) use ($membersThatEntered) {
-                return !in_array($member, $membersThatEntered);
-            });
-        } else {
-            $members = $allMembers;
-        }
+//        if (count($membersThatEntered) > 0) {
+//            $members = array_filter($allMembers, function (MemberView $member) use ($membersThatEntered) {
+//                return !in_array($member, $membersThatEntered);
+//            });
+//        } else {
+//            $members = $allMembers;
+//        }
 
         return [
             "occurrence" => $occurrence,
             "membersThatEntered"   =>  $membersThatEntered,
-            "allMembers" => $members
+            "allMembers" => $allMembers
         ];
     }
 

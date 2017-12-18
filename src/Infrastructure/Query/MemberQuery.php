@@ -46,6 +46,8 @@ LEFT JOIN $voucherTable v ON m.current_voucher_id = v.id
 LEFT JOIN $entriesTable e ON m.current_voucher_id = e.voucher_id
 WHERE
   m.deletedAt IS NULL
+  AND m.current_voucher_id IS NOT NULL
+  AND m.last_entry_id IS NULL
 GROUP BY m.id, e.id, v.id
 ORDER BY
   m.last_entry_id ASC, m.current_voucher_id DESC, m.lastname ASC
