@@ -50,13 +50,17 @@ class Section
      */
     protected $orderNumber;
 
-    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null, int $orderNumber = 999)
+    /** @var User */
+    protected $instructor;
+
+    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null, int $orderNumber = 999, ?User $instructor)
     {
         $this->sectionId = $id ?: SectionId::create();
         $this->title = $title;
         $this->calendar = $calendar ?: new Calendar(null, $title);
         $this->members = $members ?: new ArrayCollection();
         $this->orderNumber = $orderNumber;
+        $this->instructor = $instructor;
     }
 
     /**
@@ -102,5 +106,15 @@ class Section
      */
     public function setId(string $id = null){
         $this->sectionId = $id ? SectionId::create(Uuid::fromString($id)) : SectionId::create();
+    }
+
+    public function setInstructor(User $instructor) : void
+    {
+        $this->instructor = $instructor;
+    }
+
+    public function instructor(): ?User
+    {
+        return $this->instructor;
     }
 }

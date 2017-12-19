@@ -22,14 +22,7 @@ class OccurrenceController extends Controller
     {
         $request = $this->get("request_stack")->getCurrentRequest();
 
-        $instructors = $this->get('gyman.user.repository')->getInstructors();
-
-        $instructors = array_combine(array_map(function(User $instructor) : string {
-            $name = $instructor->getFullname();
-            return $name !== null ? $name : $instructor->getUsername();
-        }, $instructors), array_map(function(User $instructor) : string {
-            return $instructor->id()->toString();
-        }, $instructors));
+        $instructors = $this->get("gyman.user.repository")->getInstructorsChoiceArray();
 
         $command = new UpdateOccurrenceDetailsCommand(
             $occurrence->id(),

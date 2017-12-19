@@ -1,0 +1,25 @@
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
+{# @var section \Gyman\Domain\Section #}
+{% block settings_page %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nazwa</th><th>Instruktor</th><th>Uczestnicy</th><th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for section in sections if sections|length > 0 %}
+                <tr>
+                    <td>{{ section.title }}</td>
+                    <td>{{ section.instructor is not null ? section.instructor.fullname : '' }}</td>
+                    <td>{{ section.members|length }}</td>
+                    <td>
+                        <a href="{{ url("gyman_settings_sections_edit", {id: section.id.toString}) }}">Edit</a>
+                        | <a href="#">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock settings_page %}
+

@@ -85,4 +85,18 @@ class UserRepository extends EntityRepository
     {
         return $this->findOneBy(["id" => $instructorId->toString()]);
     }
+
+    public function getInstructorsChoiceArray() : array
+    {
+        $instructors = $this->getInstructors();
+
+        $instructors = array_combine(array_map(function(User $instructor) : string {
+            $name = $instructor->getFullname();
+            return $name !== null ? $name : $instructor->getUsername();
+        }, $instructors), array_map(function(User $instructor) : string {
+            return $instructor->id()->toString();
+        }, $instructors));
+
+        return $instructors;
+    }
 }
