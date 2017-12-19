@@ -55,7 +55,7 @@ class DefaultController extends Controller
 //
 //                return $this->redirectToRoute('gyman_settings');
 //            } else {
-//                $this->addFlash('warning', 'flash.settings_updated.error');
+//                $this->addFlash('error', 'flash.settings_updated.error');
 //            }
 //        }
 //
@@ -85,7 +85,7 @@ class DefaultController extends Controller
 
                 return $this->redirectToRoute('gyman_settings_sections');
             } else {
-                $this->addFlash('warning', 'flash.sections_updated.error');
+                $this->addFlash('error', 'flash.sections_updated.error');
             }
         }
 
@@ -129,7 +129,7 @@ class DefaultController extends Controller
 
                 return $this->redirectToRoute('gyman_settings');
             } else {
-                $this->addFlash('warning', 'flash.settings_updated.error');
+                $this->addFlash('error', 'flash.settings_updated.error');
             }
         }
 

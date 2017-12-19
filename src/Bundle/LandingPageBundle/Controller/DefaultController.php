@@ -43,7 +43,7 @@ class DefaultController extends Controller
                 ));
 
             } else {
-                $this->addFlash('warning', 'user.error_creating_user');
+                $this->addFlash('error', 'user.error_creating_user');
             }
         }
 

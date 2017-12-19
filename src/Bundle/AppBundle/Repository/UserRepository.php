@@ -6,6 +6,7 @@ use Doctrine\ORM\Query;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class UserRepository
@@ -78,5 +79,10 @@ class UserRepository extends EntityRepository
         $query = $this->getByRolesQueryBuilder(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
 
         return $query->getResult();
+    }
+
+    public function findOneById(UuidInterface $instructorId) : ?User
+    {
+        return $this->findOneBy(["id" => $instructorId->toString()]);
     }
 }

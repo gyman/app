@@ -12,6 +12,7 @@ use Gyman\Application\Exception\ExceededMaximumAmountOfEntriesException;
 use Gyman\Application\Exception\UnsupportedEntryTypeException;
 use Gyman\Application\Exception\VoucherClosingDateBeforeOpeningException;
 use Gyman\Domain\Voucher\Price;
+use function is_array;
 use Ramsey\Uuid\UuidInterface;
 
 class Voucher
@@ -47,7 +48,7 @@ class Voucher
     protected $member;
 
     /**
-     * @var Entry[]
+     * @var Collection|Entry[]
      */
     protected $entries;
 
@@ -82,7 +83,7 @@ class Voucher
      * @param DateTime $closedAt
      * @throws VoucherClosingDateBeforeOpeningException
      */
-    public function __construct(DateTime $startDate, DateTime $endDate, Price $price, $maximumAmount = 0, $entries = [], $member = null, DateTime $closedAt = null)
+    public function __construct(DateTime $startDate, ?DateTime $endDate, ?Price $price, int $maximumAmount = 0, ?Collection $entries, Member $member = null, ?DateTime $closedAt)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {
             throw new VoucherClosingDateBeforeOpeningException($startDate, $endDate);
@@ -124,15 +125,17 @@ class Voucher
             throw new ExceededMaximumAmountOfEntriesException();
         }
 
-        $this->entries->add($entry);
+        $this->entries()->add($entry);
         $entry->assignToVoucher($this);
     }
 
     public function lastEntry() : ?Entry
     {
-        if ($this->entries->count() > 0) {
-            return $this->entries->last();
+        if ($this->entries()->count() === 0) {
+            return null;
         }
+
+        return $this->entries()->last();
     }
 
     public function close(DateTime $date = null) : void
@@ -261,11 +264,7 @@ class Voucher
 
     public function removeEntry(Entry $entry) : void
     {
-//        if(!is_null($this->lastEntry()) && $this->lastEntry()->id() === $entry->id()) {
-//            $this->lastEntry = null;
-//        }
-
-        $this->entries->removeElement($entry);
+        $this->entries()->removeElement($entry);
     }
 
     public function createdAt() : DateTime

@@ -32,7 +32,10 @@ class MemberView
     /** @var int */
     protected $voucherLeftAmount;
 
-    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null, DateTime $voucherEndDate = null, int $voucherLeftAmount = null)
+    /** @var string */
+    protected $barcode;
+
+    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null, DateTime $voucherEndDate = null, int $voucherLeftAmount = null, ?string $barcode)
     {
         $this->id = Uuid::fromString($id);
         $this->firstname = $firstname;
@@ -42,6 +45,7 @@ class MemberView
         $this->currentVoucherId = $currentVoucherId ? Uuid::fromString($currentVoucherId) : null;
         $this->voucherEndDate = $voucherEndDate;
         $this->voucherLeftAmount = $voucherLeftAmount;
+        $this->barcode = $barcode;
     }
 
     public function id(): UuidInterface
@@ -82,5 +86,10 @@ class MemberView
     public function voucherLeftAmount(): int
     {
         return $this->voucherLeftAmount;
+    }
+
+    public function barcode() : ?string
+    {
+        return $this->barcode;
     }
 }

@@ -64,7 +64,7 @@ class Occurrence extends BaseOccurrence
         return $this->note;
     }
 
-    public function setInstructor(User $user) : void
+    public function assignInstructor(User $user) : void
     {
         $this->instructor = $user;
     }
@@ -75,5 +75,15 @@ class Occurrence extends BaseOccurrence
     public function entries() : Collection
     {
         return $this->entries;
+    }
+
+    public function updateSubject(Subject $subject) : void
+    {
+        $this->subject = $subject;
+    }
+
+    public function updateNote(Note $note) : void
+    {
+        $this->note = $note;
     }
 }

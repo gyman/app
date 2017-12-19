@@ -18,7 +18,7 @@ Gyman\Domain\User:
   oneToMany:
     sections:
       targetEntity: Gyman\Domain\Section
-      invertedBy:   instructor
+      mappedBy:   instructor
 
   fields:
     firstname:
