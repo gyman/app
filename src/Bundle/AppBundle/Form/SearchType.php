@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
+use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Section;
@@ -8,21 +9,11 @@ use Gyman\Application\Command\SearchMemberCommand;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Class MemberType
- * @package Gyman\Bundle\AppBundle
- */
 final class SearchType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,6 +21,7 @@ final class SearchType extends AbstractType
                 'label' => 'member_search_form.query',
                 'required' => false
             ])
+            // @todo replace with plain array
             ->add('section', EntityType::class, [
                 'label' => 'member_search_form.section',
                 'expanded' => true,
@@ -39,6 +31,11 @@ final class SearchType extends AbstractType
                 'class' => Section::class,
                 'empty_data' => 'member_search_form.section.none',
                 'required' => false,
+                'query_builder' => function(SectionRepository $repository) {
+                    return $repository->createQueryBuilder('s')
+                        ->orderBy("s.createdAt", 'ASC')
+                        ->where('s.deletedAt IS null');
+                }
             ])
             ->add('belt', ChoiceType::class, [
                 'label' => 'member_search_form.belt',
@@ -83,9 +80,6 @@ final class SearchType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -94,9 +88,6 @@ final class SearchType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return 'gyman_member_search_form';

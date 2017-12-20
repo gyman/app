@@ -18,18 +18,3 @@ services:
     class: 'Gyman\Bundle\SettingsBundle\Form\Type\ClubDetailsType'
     tags:
       - { name: form.type, alias: club_details }
-
-  gyman.settings.sections_handler:
-    class: 'Gyman\Application\Handler\UpdateSectionsHandler'
-    arguments:
-      - '@gyman.repository.section'
-    tags:
-      - { name: tactician.handler, command: 'Gyman\Application\Command\UpdateSectionsCommand'}
-
-
-  gyman.settings.update_section_handler:
-    class: 'Gyman\Application\Handler\UpdateSectionHandler'
-    arguments:
-      - '@gyman.repository.section'
-    tags:
-      - { name: tactician.handler, command: 'Gyman\Application\Command\UpdateSectionCommand'}

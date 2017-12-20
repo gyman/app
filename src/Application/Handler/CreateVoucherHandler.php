@@ -9,14 +9,9 @@ use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Command\CreateVoucherCommand;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
-use Gyman\Domain\Voucher;
 use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * Class CreateVoucherHandler
- * @package Gyman\Domain
- */
 class CreateVoucherHandler
 {
     const SUCCESS = 'gyman.voucher_created.success';

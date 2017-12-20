@@ -1,11 +1,12 @@
 <?php
 namespace Gyman\Application\Handler;
 
-use Doctrine\Common\Collections\Collection;
-use Gyman\Application\Command\UpdateSectionsCommand;
-use Gyman\Domain\Calendar;
+use Gyman\Application\Command\UpdateSectionCommand;
+use Gyman\Bundle\AppBundle\Repository\CalendarRepository;
+use Gyman\Bundle\AppBundle\Repository\UserRepository;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
+use Gyman\Domain\User;
 
 class UpdateSectionHandler
 {
@@ -14,32 +15,47 @@ class UpdateSectionHandler
      */
     private $sectionRepository;
 
-    public function __construct(SectionRepository $sectionRepository)
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * @var CalendarRepository
+     */
+    private $calendarRepository;
+
+    /**
+     * UpdateSectionHandler constructor.
+     * @param SectionRepository $sectionRepository
+     * @param UserRepository $userRepository
+     * @param CalendarRepository $calendarRepository
+     */
+    public function __construct(SectionRepository $sectionRepository, UserRepository $userRepository, CalendarRepository $calendarRepository)
     {
         $this->sectionRepository = $sectionRepository;
+        $this->userRepository = $userRepository;
+        $this->calendarRepository = $calendarRepository;
     }
 
     public function handle(UpdateSectionCommand $command)
     {
         /** @var Section $section */
-        $section = $this->sectionRepository->findOneBy(["id" => $command->sectionId]);
+        $section = $this->sectionRepository->findOneBy(["id" => $command->sectionId()->toString()]);
 
-//        $section->setTitle();
-//        $section->setInstructor();
-
-        $section->calendar()->updateTitle($section->title());
-        $this->sectionRepository->insert($section);
-    }
-
-    private function inArray(Section $existing, array $sections) : bool
-    {
-        /** @var Section $section */
-        foreach($sections as $section) {
-            if($section->id()->equals($existing->id())) {
-                return true;
-            }
+        if($command->instructorId() !== null) {
+            /** @var User $instructor */
+            $instructor = $this->userRepository->findOneBy(["id" => $command->instructorId()->toString()]);
+        } else {
+            $instructor = null;
         }
 
-        return false;
+        $section->setInstructor($instructor);
+
+        $section->setTitle($command->title());
+        $section->calendar()->updateTitle($section->title());
+
+        $this->sectionRepository->insert($section);
+        $this->calendarRepository->insert($section->calendar());
     }
 }

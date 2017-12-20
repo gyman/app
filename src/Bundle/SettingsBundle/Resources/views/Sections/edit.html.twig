@@ -1,6 +1,36 @@
 {% extends 'GymanSettingsBundle::layout.html.twig' %}
 {# @var section \Gyman\Domain\Section #}
+{# @var member \Gyman\Domain\Member #}
 {% block settings_page %}
-    {{ form(form) }}
+    <div class="row-fluid">
+
+        <div class="span6">
+            {{ form_start(form) }}
+            {{ form_row(form.instructorId) }}
+            {{ form_row(form.title) }}
+
+            <div class="form-actions">
+                <button>Zapisz</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        <div class="span5 offset1">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Imię i nazwisko uczestnika</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for member in section.members if section.members|length > 0%}
+                    <tr>
+                        <td>{{ loop.index }}. <a href="{{ path("gyman_member_edit", {"id" : member.id}) }}">{{ member.details.fullName }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock settings_page %}
 

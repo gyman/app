@@ -46,13 +46,6 @@ services:
       - {name: console.command}
       - {name: monolog.logger, channel: commands }
 
-  gyman.listener.create_section_for_calendar:
-    class: Gyman\Bundle\AppBundle\Listener\CreateSectionForCalendarListener
-    arguments:
-     - '@gyman.repository.section'
-    tags:
-      - {name: kernel.event_listener, method: onCalendarCreate, event: dende_calendar.calendar.after_creation}
-
   gyman.app.subdomain_provider:
     class: Gyman\Bundle\AppBundle\Services\SubdomainProvider
     arguments:

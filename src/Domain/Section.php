@@ -53,27 +53,23 @@ class Section
     /** @var User */
     protected $instructor;
 
-    public function __construct(SectionId $id = null, string $title = '', Calendar $calendar = null, Collection $members = null, int $orderNumber = 999, ?User $instructor)
+    public function __construct(SectionId $id = null, string $title = '', ?Calendar $calendar = null, Collection $members = null, int $orderNumber = 999, ?User $instructor)
     {
         $this->sectionId = $id ?: SectionId::create();
         $this->title = $title;
-        $this->calendar = $calendar ?: new Calendar(null, $title);
+        $this->calendar = $calendar ?: new Calendar(null, $title, null, null);
         $this->members = $members ?: new ArrayCollection();
         $this->orderNumber = $orderNumber;
         $this->instructor = $instructor;
+
+        $this->createdAt = new DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function title() : string
     {
         return $this->title;
     }
 
-    /**
-     * @return Calendar
-     */
     public function calendar() : Calendar
     {
         return $this->calendar;
@@ -99,16 +95,7 @@ class Section
         return $this->members;
     }
 
-    /**
-     * Unfortunately, needed by symfony form
-     * @todo please remove if possible
-     * @param string $id
-     */
-    public function setId(string $id = null){
-        $this->sectionId = $id ? SectionId::create(Uuid::fromString($id)) : SectionId::create();
-    }
-
-    public function setInstructor(User $instructor) : void
+    public function setInstructor(?User $instructor) : void
     {
         $this->instructor = $instructor;
     }
@@ -116,5 +103,15 @@ class Section
     public function instructor(): ?User
     {
         return $this->instructor;
+    }
+
+    public function setCalendar(Calendar $calendar): void
+    {
+        $this->calendar = $calendar;
+    }
+
+    public function setDeletedAt(?DateTime $dateTime) : void
+    {
+        $this->deletedAt = $dateTime;
     }
 }

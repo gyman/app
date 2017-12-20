@@ -50,7 +50,7 @@ services:
       - 'Gyman\Domain\Calendar\Event'
 
   gyman.calendar.repository:
-    class:            'Gyman\Bundle\AppBundle\Repository\EventRepository'
+    class:            'Gyman\Bundle\AppBundle\Repository\CalendarRepository'
     factory:          ['@doctrine.orm.tenant_entity_manager', 'getRepository']
     arguments:
       - 'Gyman\Domain\Calendar'

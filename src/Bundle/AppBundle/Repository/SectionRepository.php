@@ -1,6 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Repository;
 
+use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -41,5 +43,21 @@ class SectionRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->persist($section);
         $em->flush($section);
+    }
+
+    public function delete(Section $section)
+    {
+        $em = $this->getEntityManager();
+        $section->setDeletedAt(new DateTime("now"));
+        $em->flush($section);
+    }
+
+    public function findAll() : array
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->where("s.deletedAt is null");
+        $qb->orderBy("s.createdAt", "ASC");
+
+        return $qb->getQuery()->execute();
     }
 }

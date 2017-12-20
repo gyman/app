@@ -1,24 +1,32 @@
 <?php
 namespace Gyman\Domain;
 
+use DateTime;
 use Dende\Calendar\Domain\Calendar as BaseCalendar;
 
 class Calendar extends BaseCalendar
 {
-    /**
-     * @var Section
-     */
+    /** @var Section */
     protected $section;
 
-    /**
-     * @return Section
-     */
-    public function section() : Section
+    public function __construct($calendarId = null, string $title = '', $events = null, ?Section $section)
+    {
+        parent::__construct($calendarId, $title, $events);
+
+        if($section !== null) {
+            $this->section = $section;
+            $this->section->setCalendar($this);
+        }
+
+        $this->createdAt = new DateTime();
+    }
+
+    public function section() : ?Section
     {
         return $this->section;
     }
 
-    public function updateTitle(string $title)
+    public function updateTitle(string $title) : void
     {
         $this->title = $title;
     }

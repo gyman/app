@@ -104,7 +104,6 @@ services:
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\UpdateCurrentVoucherCommand }
 
-
   gyman.app.handler.close_expired_entries:
     class: Gyman\Application\Handler\CloseExpiredEntriesHandler
     arguments:
@@ -122,3 +121,29 @@ services:
     tags:
       - { name: tactician.handler, command: Gyman\Application\Command\UpdateOccurrenceDetailsCommand }
 
+  gyman.app.handler.create_section:
+    class: Gyman\Application\Handler\CreateSectionHandler
+    arguments:
+      - '@gyman.repository.section'
+      - '@event_dispatcher'
+    tags:
+      - { name: tactician.handler, command: Gyman\Application\Command\CreateSectionCommand }
+
+
+
+  gyman.settings.update_section_handler:
+    class: 'Gyman\Application\Handler\UpdateSectionHandler'
+    arguments:
+      - '@gyman.repository.section'
+      - '@gyman.user.repository'
+      - '@gyman.calendar.repository'
+    tags:
+      - { name: tactician.handler, command: 'Gyman\Application\Command\UpdateSectionCommand'}
+
+  gyman.settings.delete_section_handler:
+    class: 'Gyman\Application\Handler\DeleteSectionHandler'
+    arguments:
+      - '@gyman.repository.section'
+      - '@gyman.calendar.repository'
+    tags:
+      - { name: tactician.handler, command: 'Gyman\Application\Command\DeleteSectionCommand'}
