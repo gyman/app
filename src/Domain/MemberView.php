@@ -27,6 +27,9 @@ class MemberView
     protected $currentVoucherId;
 
     /** @var DateTime */ // @todo zamienić z poniższym na value object
+    protected $voucherStartDate;
+
+    /** @var DateTime */ // @todo zamienić z poniższym na value object
     protected $voucherEndDate;
 
     /** @var int */
@@ -35,7 +38,7 @@ class MemberView
     /** @var string */
     protected $barcode;
 
-    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null, DateTime $voucherEndDate = null, int $voucherLeftAmount = null, ?string $barcode)
+    public function __construct(string $id, $firstname, $lastname, string $foto = null, string $lastEntryId = null, string $currentVoucherId = null, DateTime $voucherStartDate = null, DateTime $voucherEndDate = null, int $voucherLeftAmount = null, ?string $barcode)
     {
         $this->id = Uuid::fromString($id);
         $this->firstname = $firstname;
@@ -43,6 +46,7 @@ class MemberView
         $this->foto = new Foto($foto);
         $this->lastEntryId = $lastEntryId ? Uuid::fromString($lastEntryId) : null;
         $this->currentVoucherId = $currentVoucherId ? Uuid::fromString($currentVoucherId) : null;
+        $this->voucherStartDate = $voucherStartDate;
         $this->voucherEndDate = $voucherEndDate;
         $this->voucherLeftAmount = $voucherLeftAmount;
         $this->barcode = $barcode;
@@ -78,12 +82,17 @@ class MemberView
         return $this->currentVoucherId;
     }
 
-    public function voucherEndDate(): DateTime
+    public function voucherEndDate(): ?DateTime
     {
         return $this->voucherEndDate;
     }
 
-    public function voucherLeftAmount(): int
+    public function voucherStartDate(): ?DateTime
+    {
+        return $this->voucherStartDate;
+    }
+
+    public function voucherLeftAmount(): ?int
     {
         return $this->voucherLeftAmount;
     }

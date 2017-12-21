@@ -1,7 +1,7 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
 {# @var occurrence Gyman\Domain\Calendar\Event\Occurrence occurrence #}
-
+{# @var member \Gyman\Domain\MemberView #}
 {% block content %}
 <div class="heading">
     <h3>
@@ -53,30 +53,29 @@
         <ul class="thumbnails">
             {% for member in membersThatEntered if membersThatEntered|length > 0 %}
                 <li style="text-align: center">
-                    <div class="thumbnail" style="height: 280px; width: 120px;">
+                    <div class="thumbnail" style="height: 220px; width: 120px; position: relative">
                         <strong>{{ member.firstname }} {{ member.lastname }}</strong>
                         <a href="{{ path('gyman_member_edit', {id : member.id}) }}">
                             <img src="{{ avatar(member) }}" style="max-height: 200px" />
                         </a>
-                        <div class="caption">
+                        <div>
                             <p>
-                                <a onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: member.id}) }}" class="pull-right btn">Usuń</a>
-                                {#{% if member.currentVoucher is not null %}#}
-                                {#<span class="badge badge-warning">#}
-                                {#{{ member.currentVoucher.startDate|date("d.m") }}#}
-                                {#-#}
-                                {#{{ member.currentVoucher.endDate|date("d.m") }}#}
-                                {#</span>#}
-                                {#{% endif %}#}
-                                {#<span class="badge badge-success">#}
-                                {#{% if member.lastEntry is not null and member.lastEntry.isOpened() %}#}
-                                {#otwarte#}
-                                {#{% else %}#}
-                                {#zamknięte#}
-                                {#{% endif %}#}
-                                {#</span>#}
+                                {% if member.voucherStartDate is not null %}
+                                <span class="badge badge-warning">
+                                {{ member.voucherStartDate|date("d.m") }}
+                                -
+                                {{ member.voucherEndDate|date("d.m") }}
+                                </span>
+                                {% endif %}
+                                {% if member.voucherLeftAmount is not null %}
+                                <span class="badge badge-alert">
+                                zostało {{ member.voucherLeftAmount }} wejść
+                                </span>
+                                {% endif %}
+
                             </p>
                         </div>
+                        <a style="position: absolute; right: 5px; bottom: 5px" onClick="return confirm('Jesteś pewien?');" href="{{ path("gyman_entry_remove_from_occurrence", {occurrence: occurrence.id, member: member.id}) }}" class="btn">Usuń</a>
                     </div>
                 </li>
             {% else %}

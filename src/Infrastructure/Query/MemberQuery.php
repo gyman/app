@@ -37,6 +37,7 @@ SELECT DISTINCT m.id,
   m.foto,
   m.last_entry_id,
   m.current_voucher_id,
+  v.startDate as voucher_start_date,
   v.endDate as voucher_end_date,
   (v.maximumAmount - COUNT(e.id)) as voucher_left_amount,
   m.barcode
@@ -62,6 +63,7 @@ SQL
                 $member['foto'],
                 $member['last_entry_id'],
                 $member['current_voucher_id'],
+                $member['voucher_start_date']? new DateTime($member['voucher_start_date']) : null,
                 $member['voucher_end_date']? new DateTime($member['voucher_end_date']) : null,
                 $member['voucher_left_amount'],
                 $member['barcode']
@@ -89,21 +91,35 @@ SQL
 
     public function findMembersThatEntered(Occurrence $occurrence) : array
     {
-        $result = $this->connection->fetchAll('
-SELECT m.id,
- m.firstname,
- m.lastname,
- m.foto,
- m.last_entry_id,
- m.current_voucher_id,
- m.barcode 
-FROM members as m, entries as e
-WHERE m.deletedAt IS NULL
-AND m.id = e.member_id
-AND e.occurrence_id = :occurrence_id
-ORDER BY e.startDate ASC', [
-    ":occurrence_id" => $occurrence->id()->toString()
-        ]);
+        $memberTable = Table::MEMBER;
+        $voucherTable = Table::VOUCHER;
+        $entriesTable = Table::ENTRY;
+
+        $result = $this->connection->fetchAll(<<<SQL
+SELECT 
+    m.id,
+    m.firstname,
+    m.lastname,
+    m.foto,
+    m.last_entry_id,
+    m.current_voucher_id,
+    m.current_voucher_id,
+    v.startDate as voucher_start_date,
+    v.endDate as voucher_end_date,
+    (v.maximumAmount - COUNT(e.id)) as voucher_left_amount,
+    m.barcode
+FROM
+  $memberTable m
+  LEFT JOIN $voucherTable v ON m.current_voucher_id = v.id
+  LEFT JOIN $entriesTable e ON m.id = e.member_id
+WHERE
+  m.deletedAt IS NULL
+  AND e.occurrence_id = :occurrence_id
+GROUP BY m.id, e.id
+ORDER BY 
+  e.startDate ASC
+SQL
+, [":occurrence_id" => $occurrence->id()->toString()]);
         
         return array_map(function(array $member){
             return new MemberView(
@@ -113,8 +129,9 @@ ORDER BY e.startDate ASC', [
                 $member['foto'],
                 $member['last_entry_id'],
                 $member['current_voucher_id'],
-                null, // $member['left_amount'],
-                null, // $member['left_amount'],
+                $member['voucher_start_date']? new DateTime($member['voucher_start_date']) : null,
+                $member['voucher_end_date']? new DateTime($member['voucher_end_date']) : null,
+                $member['voucher_left_amount'],
                 $member['barcode']
             );
         }, $result);
