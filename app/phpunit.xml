@@ -23,6 +23,13 @@
         <testsuite name="integration">
             <directory>../src/Gyman/*/*/Tests/Integration/**</directory>
         </testsuite>
+        <testsuite name="calendar">
+            <directory>../vendor/dende/calendar/Tests/Integration/**</directory>
+            <directory>../vendor/dende/calendar/Tests/Unit/**</directory>
+            <directory>../vendor/dende/calendar-bundle/Tests/Unit/**</directory>
+            <directory>../vendor/dende/calendar-bundle/Tests/Functional/**</directory>
+        </testsuite>
+
     </testsuites>
 
     <php>

@@ -7,7 +7,6 @@ $(document).ready(function() {
 
     var $eventTypeElement = $("select#create_event_type, select#update_event_type");
     var $repetitionCheckboxes = $("label[for^='create_event_repetitionDays_'], label[for^='update_event_repetitionDays_']").parents('div.control-group');
-    var $endDateElement = $("label[for='create_event_endDate'], label[for='update_event_endDate'], input#create_event_endDate, input#update_event_endDate").parents('div.control-group');
 
     var typeChangeEventName = "change.calendar_event_type";
     var calendarNameChangeEventName = "change.calendar_name";
@@ -33,11 +32,8 @@ $(document).ready(function() {
 
         if(value === TYPE_SINGLE) {
             $repetitionCheckboxes.hide();
-            $endDateElement.hide();
-        } else if (value === TYPE_WEEKLY)
-        {
+        } else if (value === TYPE_WEEKLY) {
             $repetitionCheckboxes.show();
-            $endDateElement.show();
         }
 
         event.preventDefault();
