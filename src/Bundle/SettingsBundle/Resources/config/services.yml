@@ -18,3 +18,40 @@ services:
     class: 'Gyman\Bundle\SettingsBundle\Form\Type\ClubDetailsType'
     tags:
       - { name: form.type, alias: club_details }
+
+  account_bundle.registration.form.type:
+    class: Gyman\Bundle\SettingsBundle\Form\Type\RegisterType
+    arguments: [%fos_user.model.user.class%]
+    tags:
+        - { name: form.type, alias: dende_user_registration }
+
+  account_bundle.registered_user_subscriber:
+    class: Gyman\Bundle\SettingsBundle\Subscriber\RegisteredUserSubscriber
+    calls:
+        - [setRouter,["@router"]]
+        - [setSession,["@session"]]
+        - [setMailer,["@mailer.registration_successful"]]
+    tags:
+        - { name: kernel.event_subscriber }
+
+  account_bundle.updated_profile_subscriber:
+    class: Gyman\Bundle\SettingsBundle\Subscriber\UpdatedProfileSubscriber
+    calls:
+        - [setRouter,["@router"]]
+        - [setSession,["@session"]]
+    tags:
+        - { name: kernel.event_subscriber }
+
+  account_bundle.profile.edit_type:
+    class: Gyman\Bundle\SettingsBundle\Form\Type\UserType
+    tags:
+        - {name: form.type, alias: gyman_user_profile }
+
+  gyman.account.logout_handler:
+    class: Gyman\Bundle\SettingsBundle\Security\LogoutHandler
+    arguments:
+      - '@request_stack'
+    calls:
+      - [setSessionLifetime,['%session_lifetime%']]
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: execute, priority: 1000 }

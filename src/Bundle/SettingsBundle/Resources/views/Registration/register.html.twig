@@ -1,0 +1,46 @@
+{% extends "SettingsBundle::loginLayout.html.twig" %}
+
+{% block body %}
+<form class="form-content register-form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <h3 class="title">{{ "account.register.header_link_register"|trans }}
+        <small>{{ "account.register.header_or"|trans }}
+            <a href="{{ path('fos_user_security_login') }}" class="sign-in">{{ "account.register.header_link_login"|trans }}</a>
+        </small>
+    </h3>
+
+    <p>{{ "account.register.caption"|trans }}</p>
+
+    {% if form.vars.errors|length %}
+    <div class="alert alert-danger fade in ">
+        <i class="fa fa-envelope alert-icon"></i>
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        {# todo: translate caption and errors #}
+        <strong>Wystąpiły błędy!</strong>
+        <ul>
+            {% for error in form.vars.errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <label>{{ "account.register.label.username"|trans }}: <span class="required">*</span></label>
+    {{ form_widget(form.username, {'attr':{'class':'form-control' }}) }}
+
+    <label>{{ "account.register.label.password"|trans }}: <span class="required">*</span></label>
+    {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control' }}) }}
+
+    <label>{{ "account.register.label.password_repeat"|trans }}: <span class="required">*</span></label>
+    {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control' }}) }}
+
+    <label>{{ "account.register.label.email"|trans }}: <span class="required">*</span></label>
+    {{ form_widget(form.email, {'attr':{'class':'form-control' }}) }}
+
+    <div class="buttons-box clearfix">
+      <button type="submit" class="btn btn-default">{{ "account.register.label.submit"|trans }}</button>
+      <span class="required"><b>*</b> {{ "account.register.required_info"|trans }}</span>
+    </div>
+
+    {{ form_rest(form) }}
+</form>
+{% endblock body %}

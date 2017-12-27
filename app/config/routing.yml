@@ -19,11 +19,6 @@ gyman_reports:
     type:     annotation
     prefix:   /reports
 
-account:
-    resource: "@AccountBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation

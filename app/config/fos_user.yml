@@ -10,7 +10,7 @@ fos_user:
         sender_name:    Gyman.pl
     profile:
         form:
-            type:               Gyman\Bundle\AccountBundle\Form\Type\UserType
+            type:               Gyman\Bundle\SettingsBundle\Form\Type\UserType
             name:               fos_user_profile_form
             validation_groups:  [Profile, Default]
     change_password:
@@ -24,7 +24,7 @@ fos_user:
             enabled:    false
             template:   MailerBundle:Templates:registerConfirmation.html.twig
         form:
-            type:               Gyman\Bundle\AccountBundle\Form\Type\RegisterType
+            type:               Gyman\Bundle\SettingsBundle\Form\Type\RegisterType
             name:               dende_registration_form
             validation_groups:  [Registration, Default]
     resetting:

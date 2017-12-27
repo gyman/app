@@ -1,3 +1,124 @@
 settings:
   header:
     title:  Ustawienia
+
+account.register.header_link_register: Rejestracja
+account.register.header_or: czy
+account.register.header_link_login: 'logowanie?'
+account.register.caption: 'Zarejestruj konto, jeśli go jeszcze nie posiadasz, w przeciwnym razie - zaloguj się'
+account.register.label.username: 'Nazwa użytkownika'
+account.register.label.password: Hasło
+account.register.label.password_repeat: 'Powtórz hasło'
+account.register.label.email: 'Adres e-mail'
+account.register.label.submit: 'Zarejestruj nowe konto'
+account.register.required_info: 'pole jest wymagane'
+
+account.login.header_link_login: Logowanie
+account.login.header_or: czy
+account.login.header_link_register: 'rejestracja?'
+account.login.caption: 'Zaloguj się, jeśli posiadasz już konto, w przeciwnym razie - zarejestruj się'
+account.login.label.username: 'Nazwa użytkownika'
+account.login.label.password: Hasło
+account.login.label.submit: 'Zaloguj się'
+account.login.required_info: 'pole jest wymagane'
+account.login.remember_me: 'Zapamiętaj mnie'
+profile.title.your_profile: 'Twoje konto'
+profile.title.invoices: Faktury
+profile.title.orders: 'Kupione subskrypcje'
+profile_menu.caption: 'Moje konto'
+profile_menu.label.dashboard: Profil
+profile_menu.label.orders: 'Kupione subskrypcje'
+profile_menu.label.account: Konto
+profile_menu.label.invoice_data: Faktury
+profile_menu.label.buy_subscription: 'Przedłuż abonament'
+profile.dashboard.caption.account: 'Informacje o koncie'
+profile.dashboard.caption.password: 'Zmiana hasła'
+profile.dashboard.form.label.button_save: Zapisz
+profile.dashboard.form.required: 'Pole wymagane'
+account.title.caption: 'Dane Twojego konta'
+invoices.title.caption: 'Wystawione faktury'
+orders.title.caption: 'Kupione subskrypcje'
+orders.table.headers.startDate: Rozpoczęcia
+orders.table.headers.endDate: Zakończenie
+orders.table.headers.status: Status
+orders.table.headers.actions: Akcje
+orders.table.actions.reorder: Przedłuż
+orders.table.actions.invoice: Faktura
+orders.table.footer.total_elements: 'w sumie: count elementów'
+user.form.password: 'Nowe hasło'
+user.form.password_confirmation: 'Powtórz nowe hasło'
+user.profile.notice.success: 'Wszystko w porządku!'
+user.notice.profile_registered_succesfuly: 'Rejestracja się powiodła!'
+account.login.password_recovery: 'Przypomnij hasło'
+account.reset.header: 'Przypominanie hasła'
+account.reset.caption: 'Jeżeli nie pamiętasz swojego hasła, żaden problem! Mamy nadzieję, że pamiętasz choć nazwę swojego użytkownika lub adres email, na który zostało założone konto ;)'
+'Bad credentials': 'Nieprawidłowa nazwa użytkownika lub hasło'
+group.edit.submit: 'Edytuj grupę'
+group.show.name: 'Nazwa grupy'
+group.new.submit: 'Utwórz grupę'
+group.flash.updated: 'Grupa została zaktualizowana'
+group.flash.created: 'Grupa została utworzona'
+group.flash.deleted: 'Grupa została usunięta'
+security.login.username: 'Nazwa użytkownika:'
+security.login.password: 'Hasło:'
+security.login.remember_me: 'Nie wylogowuj mnie'
+security.login.submit: Zaloguj
+profile.show.username: 'Nazwa użytkownika'
+profile.show.email: E-mail
+profile.edit.submit: 'Edytuj użytkownika'
+profile.flash.updated: 'Zapisano zmiany w profilu'
+change_password.submit: 'Zmień hasło'
+change_password.flash.success: 'Hasło zostało zmienione'
+registration.check_email: 'Na adres %email% wysłano wiadomość e-mail. Zawiera ona link, na który należy kliknąć, aby aktywować konto.'
+registration.confirmed: 'Gratulacje %username%, potwierdziłeś konto.'
+registration.submit: Zarejestruj
+registration.flash.user_created: 'Stworzono użytkownika'
+registration.email.subject: 'Witaj %username%!'
+registration.email.message: "Cześć %username%!\n\nAby potwierdzić swoje konto - proszę przejść do %confirmationUrl%\n\nPozdrawiamy,\nZespół.\n"
+resetting.password_already_requested: 'W przeciągu ostatnich 24 godzin nastąpiła już próba odzyskania hasła.'
+resetting.check_email: 'Na adres %email% wysłano wiadomość e-mail. Zawiera ona link w którego należy kliknąć aby zresetować hasło.'
+resetting.request.invalid_username: 'Nazwa użytkownika lub e-mail "%username%" nie istnieje.'
+resetting.request.username: 'Nazwa użytkownika lub e-mail:'
+resetting.request.submit: 'Resetuj hasło'
+resetting.reset.submit: 'Zmień hasło'
+resetting.flash.success: 'Hasło zostało zresetowane'
+resetting.email.subject: 'Witaj %username%!'
+resetting.email.message: "Cześć %username%!\n\nAby zresetować hasło - proszę przejść do %confirmationUrl%\n\nPozdrawiamy,\nZespół.\n"
+layout.logout: Wyloguj
+layout.login: Zaloguj
+layout.register: Zarejestruj
+layout.logged_in_as: 'Zalogowano jako %username%'
+form.group_name: 'Nazwa grupy:'
+form.username: 'Nazwa użytkownika:'
+form.email: 'E-mail:'
+form.current_password: 'Obecne hasło:'
+form.password: 'Hasło:'
+form.password_confirmation: 'Powtórz hasło:'
+form.new_password: 'Nowe hasło:'
+form.new_password_confirmation: 'Powtórz hasło:'
+user.profile.there_were_errors: 'Wystąpiły błędy'
+account.login.there_were_errors: 'Wystąpiły błędy'
+account.reset.enter_new: 'Podaj nowe hasło (i postaraj się je zapamiętać ;))'
+account.reset.required_info: 'pole jest wymagane'
+user.form.new_password: 'Nowe hasło'
+user.form.new_password_confirmation: 'Powtórz nowe hasło'
+user.notice.profile_updated_succesfuly: "Profil został zaktualizowany"
+
+user.user.form.invoice.companyName: "Nazwa firmy"
+user.user.form.invoice.nip: "NIP"
+user.user.form.invoice.street: "Ulica"
+user.user.form.invoice.zipcode: "Kod pocztowy"
+user.user.form.invoice.city: "Miasto"
+user.user.form.invoice.country: "Kraj"
+
+entry:
+    type:
+        table_header: Typ
+    event:
+        table_header: Zajęcia
+    price:
+        table_header: Cena
+    startDate:
+        table_header: Wejście
+    endDate:
+        table_header: Wyjście
