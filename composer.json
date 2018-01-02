@@ -79,7 +79,8 @@
         "nelmio/alice": "2.x-dev",
         "doctrine/data-fixtures": "^1.2",
         "liip/functional-test-bundle": "^1.3@dev",
-        "deployer/deployer" : "^5"
+        "deployer/deployer" : "^5",
+	"friendsofphp/php-cs-fixer": "^2.3"
     },
     "scripts": {
        "symfony-scripts" : [
