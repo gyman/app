@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\DashboardBundle\Service;
 
 use DateTime;
@@ -9,22 +12,22 @@ use Gyman\Domain\Voucher;
 
 class MembersCalendarQuery
 {
-    public function get(Member $member, DateTime $start, DateTime $end) : array
+    public function get(Member $member, DateTime $start, DateTime $end): array
     {
-        $vouchers = $member->vouchers()->map(function(Voucher $voucher) {
+        $vouchers = $member->vouchers()->map(function (Voucher $voucher) {
             return $this->convertVoucher($voucher);
         });
 
-        $entries = $member->entries()->filter(function(Entry $entry) use ($start, $end){
+        $entries = $member->entries()->filter(function (Entry $entry) use ($start, $end) {
             return $entry->startDate() >= $start && $entry->endDate() <= $end;
-        })->map(function(Entry $entry){
+        })->map(function (Entry $entry) {
             return $this->convertOccurrence($entry->occurrence());
         });
 
         return array_merge($entries->toArray(), $vouchers->toArray());
     }
 
-    private function convertVoucher(Voucher $voucher) : array
+    private function convertVoucher(Voucher $voucher): array
     {
         $options = [
             'title'           => sprintf('Karnet %s-%s', $voucher->startDate()->format('d.m'), $voucher->endDate()->format('d.m')),
@@ -33,13 +36,13 @@ class MembersCalendarQuery
             'backgroundColor' => '#ddddff',
             'textColor'       => 'black',
             'editable'        => false,
-            'allDay'          => true
+            'allDay'          => true,
         ];
 
         return $options;
     }
 
-    private function convertOccurrence(OccurrenceInterface $occurrence) : array
+    private function convertOccurrence(OccurrenceInterface $occurrence): array
     {
         $options = [
             'title'           => $occurrence->event()->title(),
@@ -47,7 +50,7 @@ class MembersCalendarQuery
             'end'             => $occurrence->endDate()->format('Y-m-d H:i:s'),
             'backgroundColor' => '#ffdddd',
             'textColor'       => 'black',
-            'editable'        => false
+            'editable'        => false,
         ];
 
         return $options;

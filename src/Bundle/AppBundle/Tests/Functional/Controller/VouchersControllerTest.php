@@ -1,13 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use DateTime;
+use Gyman\Component\Test\BaseFunctionalTestCase;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
-use Gyman\Component\Test\BaseFunctionalTestCase;
 
 /**
- * Class VouchersControllerTest
+ * Class VouchersControllerTest.
+ *
+ * @coversNothing
  */
 class VouchersControllerTest extends BaseFunctionalTestCase
 {
@@ -128,7 +133,7 @@ class VouchersControllerTest extends BaseFunctionalTestCase
         $this->assertInstanceOf(Member::class, $member);
         $this->assertInstanceOf(Voucher::class, $voucher);
 
-        $crawler = $this->client->request('GET', sprintf("/vouchers/%s/update", $voucher->id()));
+        $crawler = $this->client->request('GET', sprintf('/vouchers/%s/update', $voucher->id()));
         $this->assertEquals(200, $this->getStatusCode());
 
         $this->assertEquals(
@@ -155,7 +160,7 @@ class VouchersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(989, $voucher->price()->amount());
         $this->assertEquals(98, $voucher->maximumAmount());
-        $this->assertEquals($start, $voucher->startDate()->format("d.m.Y"));
-        $this->assertEquals($end, $voucher->endDate()->format("d.m.Y"));
+        $this->assertEquals($start, $voucher->startDate()->format('d.m.Y'));
+        $this->assertEquals($end, $voucher->endDate()->format('d.m.Y'));
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form\DataTransformer;
 
 use DateTime;
@@ -7,8 +10,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 class DateToStringTransformer implements DataTransformerInterface
 {
     /**
+     * @param string $string
      *
-     * @param  string   $string
      * @return DateTime | null
      */
     public function transform($string)
@@ -19,8 +22,8 @@ class DateToStringTransformer implements DataTransformerInterface
     }
 
     /**
+     * @param DateTime $date
      *
-     * @param  DateTime $date
      * @return string
      */
     public function reverseTransform($date)

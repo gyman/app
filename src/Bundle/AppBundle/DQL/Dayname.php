@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * DaynameFunction ::= "DAYNAME" "(" ArithmeticPrimary ")"
+ * DaynameFunction ::= "DAYNAME" "(" ArithmeticPrimary ")".
  */
 class Dayname extends FunctionNode
 {

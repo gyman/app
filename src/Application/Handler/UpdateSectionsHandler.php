@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
 use Doctrine\Common\Collections\Collection;
 use Gyman\Application\Command\UpdateSectionsCommand;
-use Gyman\Domain\Calendar;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
 
@@ -38,11 +40,11 @@ class UpdateSectionsHandler
         }
     }
 
-    private function inArray(Section $existing, array $sections) : bool
+    private function inArray(Section $existing, array $sections): bool
     {
         /** @var Section $section */
-        foreach($sections as $section) {
-            if($section->id()->equals($existing->id())) {
+        foreach ($sections as $section) {
+            if ($section->id()->equals($existing->id())) {
                 return true;
             }
         }

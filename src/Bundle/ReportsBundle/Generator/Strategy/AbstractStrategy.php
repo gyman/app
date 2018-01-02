@@ -1,7 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ReportsBundle\Generator\Strategy;
 
-use Doctrine\ORM\EntityRepository;
 use Gyman\Bundle\ReportsBundle\Form\DateFilter;
 use Gyman\Bundle\ReportsBundle\Generator\StrategyInterface;
 

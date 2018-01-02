@@ -1,17 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Service;
 
 use Gyman\Application\Command\CloseVoucherCommand;
 use Gyman\Application\Event\VoucherEvent;
-use Gyman\Domain\UserInterface;
-use Gyman\Domain\Voucher;
 use Gyman\Application\Repository\MemberRepositoryInterface;
 use Gyman\Application\Repository\VoucherRepositoryInterface;
+use Gyman\Domain\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class CloseVoucher
- * @package Gyman\Domain
+ * Class CloseVoucher.
  */
 class CloseVoucher
 {
@@ -23,7 +24,7 @@ class CloseVoucher
      */
     private $voucherRepository;
 
-    /** @var  MemberRepositoryInterface */
+    /** @var MemberRepositoryInterface */
     private $memberRepository;
 
     /**
@@ -33,9 +34,10 @@ class CloseVoucher
 
     /**
      * CloseVoucher constructor.
+     *
      * @param VoucherRepositoryInterface $voucherRepository
-     * @param MemberRepositoryInterface $memberRepository
-     * @param EventDispatcherInterface $dispatcher
+     * @param MemberRepositoryInterface  $memberRepository
+     * @param EventDispatcherInterface   $dispatcher
      */
     public function __construct(VoucherRepositoryInterface $voucherRepository, MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {
@@ -46,7 +48,8 @@ class CloseVoucher
 
     /**
      * @param CloseVoucherCommand $command
-     * @param UserInterface|null $user
+     * @param UserInterface|null  $user
+     *
      * @throws \Gyman\Application\Exception\VoucherClosingDateBeforeOpeningException
      */
     public function handle(CloseVoucherCommand $command, UserInterface $user = null)
@@ -56,7 +59,7 @@ class CloseVoucher
 
         $voucher->close($command->closingDate);
 
-        if($voucher->isCurrent()) {
+        if ($voucher->isCurrent()) {
             $member->unsetCurrentVoucher();
         }
 

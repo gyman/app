@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use Gyman\Domain\Member;
@@ -16,6 +19,7 @@ class CreateUserForMemberCommand
 
     /**
      * CreateUserForMemberCommand constructor.
+     *
      * @param Member $member
      * @param string $token
      * @param string $currentPassword
@@ -35,7 +39,7 @@ class CreateUserForMemberCommand
         return $this->member;
     }
 
-    public function token() : string
+    public function token(): string
     {
         return $this->token;
     }

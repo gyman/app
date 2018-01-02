@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Event;
 
 use Ramsey\Uuid\UuidInterface;

@@ -1,8 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
 use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
+/**
+ * @coversNothing
+ */
 class ProfileControllerTest extends BaseTest
 {
     public function testOrdersPage()
@@ -27,6 +33,7 @@ class ProfileControllerTest extends BaseTest
 
     /**
      * @dataProvider testUpdateProfileDataProvider
+     *
      * @param type $firstname
      * @param type $lastname
      * @param type $newPass

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\EntityManager;
 
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
@@ -9,8 +12,7 @@ use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Gyman\Domain\User;
 
 /**
- * Class UserManager
- * @package Gyman\Bundle\ClubBundle\Entity
+ * Class UserManager.
  */
 class UserManager extends BaseUserManager
 {
@@ -23,6 +25,22 @@ class UserManager extends BaseUserManager
      * @var ClubRepository
      */
     private $clubRepository;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __findUserBy(array $criteria)
+    {
+        $subdomainName = $this->subdomainProvider->getSubdomain();
+
+        /** @var Club $club */
+        $club = $this->clubRepository->findOneBySubdomain(new Subdomain($subdomainName));
+
+        /** @var User $user */
+        $user = parent::findUserBy($criteria);
+
+        return $club->getOwners()->contains($user) ? $user : null;
+    }
 
     /**
      * @param ClubRepository $clubRepository
@@ -38,21 +56,5 @@ class UserManager extends BaseUserManager
     public function setSubdomainProvider($subdomainProvider)
     {
         $this->subdomainProvider = $subdomainProvider;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __findUserBy(array $criteria)
-    {
-        $subdomainName = $this->subdomainProvider->getSubdomain();
-
-        /** @var Club $club */
-        $club = $this->clubRepository->findOneBySubdomain(new Subdomain($subdomainName));
-
-        /** @var User $user */
-        $user = parent::findUserBy($criteria);
-
-        return $club->getOwners()->contains($user) ? $user : null;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain;
 
 use DateTime;
@@ -62,7 +65,7 @@ class Section
     /**
      * @return string
      */
-    public function title() : string
+    public function title(): string
     {
         return $this->title;
     }
@@ -70,12 +73,12 @@ class Section
     /**
      * @return Calendar
      */
-    public function calendar() : Calendar
+    public function calendar(): Calendar
     {
         return $this->calendar;
     }
 
-    public function id() : UuidInterface
+    public function id(): UuidInterface
     {
         return $this->id;
     }
@@ -90,17 +93,20 @@ class Section
         $this->title = $title;
     }
 
-    public function members() : Collection
+    public function members(): Collection
     {
         return $this->members;
     }
 
     /**
-     * Unfortunately, needed by symfony form
+     * Unfortunately, needed by symfony form.
+     *
      * @todo please remove if possible
+     *
      * @param string $id
      */
-    public function setId(string $id = null){
+    public function setId(string $id = null)
+    {
         $this->sectionId = $id ? SectionId::create(Uuid::fromString($id)) : SectionId::create();
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
 use FOS\UserBundle\Util\UserManipulator;
@@ -11,13 +14,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateUserForMemberHandler
 {
-    /** @var  UserRepository */
+    /** @var UserRepository */
     private $userRepository;
 
-    /** @var  UserManipulator */
+    /** @var UserManipulator */
     private $userManipulator;
 
-    /** @var  UserManager */
+    /** @var UserManager */
     private $userManager;
 
     /** @var EventDispatcherInterface */
@@ -36,7 +39,7 @@ class CreateUserForMemberHandler
         /** @var User $user */
         $user = $this->userRepository->findOneBy(['member' => $command->member()]);
 
-        if($user === null) {
+        if (null === $user) {
             $user = $this->userManipulator->create(
                 $command->member()->email()->email(),
                 $command->currentPassword(),
@@ -44,8 +47,8 @@ class CreateUserForMemberHandler
                 true,
                 false
             );
-            
-            $user->setRoles(["ROLE_MEMBER"]);
+
+            $user->setRoles(['ROLE_MEMBER']);
         } else {
             $user->setPlainPassword($command->currentPassword());
         }

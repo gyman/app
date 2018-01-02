@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Query;
 
 use DateTime;
@@ -7,7 +10,7 @@ use Gyman\Domain\Member;
 
 interface EntryQueryInterface
 {
-    public function findLastByMember(Member $member, int $limit) : Collection;
+    public function findLastByMember(Member $member, int $limit): Collection;
 
     public function findByDates(Member $member, DateTime $startDate, DateTime $endDate): Collection;
 }

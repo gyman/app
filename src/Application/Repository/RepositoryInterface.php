@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
 /**
- * Interface RepositoryInterface
- * @package Gyman\Domain
+ * Interface RepositoryInterface.
  */
 interface RepositoryInterface
 {

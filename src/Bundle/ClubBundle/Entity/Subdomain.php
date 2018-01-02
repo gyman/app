@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 /**
- * Class Subdomain
- * @package Gyman\Bundle\ClubBundle
+ * Class Subdomain.
  */
 final class Subdomain
 {
@@ -14,6 +16,7 @@ final class Subdomain
 
     /**
      * Subdomain constructor.
+     *
      * @param $name
      */
     public function __construct($name)

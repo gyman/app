@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Member\Details;
 
 class Belt
@@ -24,6 +27,7 @@ class Belt
 
     /**
      * Belt constructor.
+     *
      * @param string $color
      */
     public function __construct($color)

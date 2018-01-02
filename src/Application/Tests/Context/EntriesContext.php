@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Context;
 
 use Behat\Behat\Context\Context;
@@ -9,20 +12,20 @@ use Gyman\Application\Exception\ExceededMaximumAmountOfEntriesException;
 use Gyman\Application\Exception\LastEntryIsStillOpenedException;
 use Gyman\Application\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Application\Factory\VoucherFactory;
-use Gyman\Domain\Entry;
-use Gyman\Domain\Member;
-use Gyman\Domain\Price;
 use Gyman\Application\Repository\InMemoryDomainEventRepository;
 use Gyman\Application\Repository\InMemoryEntryRepository;
 use Gyman\Application\Repository\InMemoryMemberRepository;
 use Gyman\Application\Service\OpenEntry;
 use Gyman\Application\Service\SellVoucher;
+use Gyman\Domain\Entry;
+use Gyman\Domain\Member;
+use Gyman\Domain\Price;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class EntriesContext
- * @package Gyman\Domain
+ * Class EntriesContext.
+ *
  * @property Member $member
  */
 class EntriesContext implements Context
@@ -58,6 +61,7 @@ class EntriesContext implements Context
 
     /**
      * @BeforeScenario
+     *
      * @param BeforeScenarioScope $scope
      */
     public function prepareUseCases(BeforeScenarioScope $scope)
@@ -80,7 +84,7 @@ class EntriesContext implements Context
     {
         $this->lastNotification = $event->getName();
 
-        if ($event->getName() === SellVoucher::SUCCESS) {
+        if (SellVoucher::SUCCESS === $event->getName()) {
             $this->domainEventRepository->insert($event);
         }
     }
@@ -90,17 +94,19 @@ class EntriesContext implements Context
      */
     public function memberHasNoLastEntry()
     {
-        if (!is_null($this->member->lastEntry())) {
+        if (null !== $this->member->lastEntry()) {
             throw new Exception("Member's last entry is set!");
         }
     }
 
     /**
      * @Given /^he has (\d+) entries$/
+     *
+     * @param mixed $arg1
      */
     public function heHasEntries($arg1)
     {
-        if (count($this->member->entries()) != $arg1) {
+        if (count($this->member->entries()) !== $arg1) {
             throw new Exception(sprintf(
                 'Expected amount of entries %d, actually %d',
                 $arg1,
@@ -111,6 +117,9 @@ class EntriesContext implements Context
 
     /**
      * @Given /^I add \'([^\']*)\' entry for him$/
+     *
+     * @param mixed      $type
+     * @param null|mixed $price
      */
     public function iAddEntryForHim($type, $price = null)
     {
@@ -131,10 +140,12 @@ class EntriesContext implements Context
 
     /**
      * @Then /^he should have (\d+) entry$/
+     *
+     * @param mixed $count
      */
     public function heShouldHaveEntry($count)
     {
-        if ($this->member->entries()->count() != $count) {
+        if ($this->member->entries()->count() !== $count) {
             throw new Exception(sprintf(
                 'Expected amount of member entries: %d, actually: %d',
                 $count,
@@ -158,7 +169,7 @@ class EntriesContext implements Context
      */
     public function iShouldBeNotifiedAboutTheMemberEntrySuccess()
     {
-        if ($this->lastNotification !== OpenEntry::SUCCESS) {
+        if (OpenEntry::SUCCESS !== $this->lastNotification) {
             throw new Exception('No success event thrown');
         }
     }
@@ -175,6 +186,8 @@ class EntriesContext implements Context
 
     /**
      * @Given /^his current voucher has (\d+) entries left$/
+     *
+     * @param mixed $count
      */
     public function hisCurrentVoucherHasEntriesLeft($count)
     {
@@ -184,7 +197,7 @@ class EntriesContext implements Context
 
         $freeEntries = $this->member->currentVoucher()->leftEntriesAmount();
 
-        if ($freeEntries != $count) {
+        if ($freeEntries !== $count) {
             throw new Exception(sprintf(
                 'Expected amount of voucher entries: %d, actually: %d',
                 $count,
@@ -196,6 +209,8 @@ class EntriesContext implements Context
     /**
      * @Given /^current voucher is added$/
      * @Given /^current voucher is added with (\d+) entries$/
+     *
+     * @param mixed $amount
      */
     public function currentVoucherIsAdded($amount = 10)
     {
@@ -212,6 +227,9 @@ class EntriesContext implements Context
 
     /**
      * @Given /^I add \'([^\']*)\' entry for him for \'([^\']*)\'$/
+     *
+     * @param mixed $type
+     * @param mixed $price
      */
     public function iAddEntryForHimFor($type, $price)
     {
@@ -233,7 +251,7 @@ class EntriesContext implements Context
     {
         $free = $this->member->currentVoucher()->leftEntriesAmount();
 
-        if ($free !== null) {
+        if (null !== $free) {
             throw new Exception(sprintf(
                 'Expected unlimited free amount, got %s free entries',
                 $free
@@ -246,7 +264,7 @@ class EntriesContext implements Context
      */
     public function iShouldBeNotifiedAboutTheMemberEntryError()
     {
-        if ($this->lastNotification !== OpenEntry::FAILURE) {
+        if (OpenEntry::FAILURE !== $this->lastNotification) {
             throw new Exception('No failuire event thrown');
         }
     }

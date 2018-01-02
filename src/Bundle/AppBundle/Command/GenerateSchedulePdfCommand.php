@@ -1,7 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Command;
 
-use Gyman\Application\Command\ClearExpiredCurrentVouchersCommand as Command;
 use Mockery\CountValidator\Exception;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -12,7 +14,7 @@ use Symfony\Component\Process\Process;
 
 class GenerateSchedulePdfCommand extends ContainerAwareCommand
 {
-    /** @var  Logger */
+    /** @var Logger */
     private $logger;
 
     /**
@@ -36,27 +38,27 @@ class GenerateSchedulePdfCommand extends ContainerAwareCommand
     {
         $config = $this->getContainer()->getParameter('gyman_app.config');
 
-        $clubRepository = $this->getContainer()->get("gyman.club.repository");
+        $clubRepository = $this->getContainer()->get('gyman.club.repository');
 
-        $club = $clubRepository->findOneBySubdomain($input->getOption("club"));
+        $club = $clubRepository->findOneBySubdomain($input->getOption('club'));
 
-        if(!$club) {
-            throw new Exception("Club not found!");
+        if (!$club) {
+            throw new Exception('Club not found!');
         }
 
         $directory = $path = implode(DIRECTORY_SEPARATOR, [
-                $config["schedule_generator"]["destination_directory"],
+                $config['schedule_generator']['destination_directory'],
                 $club->getSubdomain()->getName(),
             ]
         );
 
-        if(!file_exists($directory) || !is_dir($directory)) {
+        if (!file_exists($directory) || !is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
 
         $path = implode(DIRECTORY_SEPARATOR, [
                 realpath($directory),
-                $config["schedule_generator"]["filename"]
+                $config['schedule_generator']['filename'],
             ]
         );
 
@@ -64,8 +66,8 @@ class GenerateSchedulePdfCommand extends ContainerAwareCommand
 
         $command = sprintf(
             '%s %s %s %s 1200px*800px 1',
-            realpath($config["schedule_generator"]["phantom_path"]),
-            realpath($config["schedule_generator"]["rasterize_script_path"]),
+            realpath($config['schedule_generator']['phantom_path']),
+            realpath($config['schedule_generator']['rasterize_script_path']),
             $url,
             $path
         );

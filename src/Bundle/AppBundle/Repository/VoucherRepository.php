@@ -1,18 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Repository;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
-use Gyman\Application\Repository\VoucherRepositoryInterface;
 
 class VoucherRepository extends EntityRepository implements VoucherRepositoryInterface
 {
     /**
      * @param Voucher $voucher
+     *
      * @return mixed
      */
     public function remove($voucher)
@@ -22,7 +26,6 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
 
     /**
      * @param Voucher $voucher
-     * @return null
      */
     public function insert($voucher)
     {
@@ -37,7 +40,8 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
     }
 
     /**
-     * Get all Vouchers query
+     * Get all Vouchers query.
+     *
      * @return Doctrine\ORM\QueryBuilder
      */
     public function getQuery()
@@ -61,9 +65,9 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
     }
 
     /**
+     * @param \DateTime $date
+     * @param Member    $member
      *
-     * @param  \DateTime                                 $date
-     * @param  Member $member
      * @return type
      */
     public function getVoucherActiveForDate(\DateTime $date, Member $member)
@@ -99,7 +103,6 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
 
     /**
      * @param Voucher $voucher
-     * @return null
      */
     public function save(Voucher $voucher)
     {
@@ -108,23 +111,23 @@ class VoucherRepository extends EntityRepository implements VoucherRepositoryInt
         $em->flush($voucher);
     }
 
-
     /**
      * @return array|Voucher[]
      */
-    public function findAllNotSetCurrentVouchers(){
+    public function findAllNotSetCurrentVouchers()
+    {
         $qb = $this->createQueryBuilder('v');
 
         $qb->select('v')
-            ->addSelect("COUNT(e.id) as HIDDEN entries_count")
-            ->innerJoin("v.member", "m")
-            ->leftJoin("v.entries", "e")
-            ->where("m.currentVoucher IS null")
-            ->andWhere("v.startDate <= :now AND v.endDate > :now")
-            ->andWhere("v.closedAt IS NULL")
-            ->groupBy("v.id")
-            ->having("(v.maximumAmount IS NOT null AND entries_count < v.maximumAmount) OR v.maximumAmount IS null")
-            ->setParameter("now", new DateTime())
+            ->addSelect('COUNT(e.id) as HIDDEN entries_count')
+            ->innerJoin('v.member', 'm')
+            ->leftJoin('v.entries', 'e')
+            ->where('m.currentVoucher IS null')
+            ->andWhere('v.startDate <= :now AND v.endDate > :now')
+            ->andWhere('v.closedAt IS NULL')
+            ->groupBy('v.id')
+            ->having('(v.maximumAmount IS NOT null AND entries_count < v.maximumAmount) OR v.maximumAmount IS null')
+            ->setParameter('now', new DateTime())
         ;
 
         return $qb->getQuery()->getResult();

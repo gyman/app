@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\BaseBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -8,32 +11,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class BaseApiController extends FOSRestController
 {
-    /**
-     * @param  string $route
-     * @param  array  $parameters
-     * @return string
-     */
-    protected function generateAbsoluteUrl($route, $parameters = [])
-    {
-        return $this->generateUrl($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
-    /**
-     * @param  mixed $data
-     * @param  int   $statusCode
-     * @return View
-     */
-    protected function createView($data, $statusCode)
-    {
-        $view = View::create();
-        $view->setData($data);
-        $view->setStatusCode($statusCode);
-        $view->setFormat('json');
-        $view->setSerializationContext(SerializationContext::create()->setSerializeNull(true));
-
-        return $view;
-    }
-
     /**
      * Returns a NotFoundHttpException.
      *
@@ -49,5 +26,33 @@ class BaseApiController extends FOSRestController
     public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
     {
         return $this->createView([], 404);
+    }
+
+    /**
+     * @param string $route
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    protected function generateAbsoluteUrl($route, $parameters = [])
+    {
+        return $this->generateUrl($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    /**
+     * @param mixed $data
+     * @param int   $statusCode
+     *
+     * @return View
+     */
+    protected function createView($data, $statusCode)
+    {
+        $view = View::create();
+        $view->setData($data);
+        $view->setStatusCode($statusCode);
+        $view->setFormat('json');
+        $view->setSerializationContext(SerializationContext::create()->setSerializeNull(true));
+
+        return $view;
     }
 }

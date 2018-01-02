@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\MultitenancyBundle\Manager\TenantManager;
@@ -6,8 +9,7 @@ use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * Class SubdomainNameListener
- * @package Gyman\Bundle\AppBundle\Listener
+ * Class SubdomainNameListener.
  */
 class SubdomainNameListener
 {
@@ -23,8 +25,9 @@ class SubdomainNameListener
 
     /**
      * SubdomainNameListener constructor.
+     *
      * @param SubdomainProviderInterface $subdomainProvider
-     * @param TenantManager $tenantManager
+     * @param TenantManager              $tenantManager
      */
     public function __construct(SubdomainProviderInterface $subdomainProvider, TenantManager $tenantManager)
     {
@@ -40,7 +43,7 @@ class SubdomainNameListener
 
         $subdomainName = $this->subdomainProvider->getSubdomain();
 
-        if($subdomainName === null) {
+        if (null === $subdomainName) {
             return;
         }
 

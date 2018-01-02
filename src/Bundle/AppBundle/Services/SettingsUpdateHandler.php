@@ -1,16 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Services;
 
-use Gyman\Domain\Calendar;
+use Gyman\Application\Command\UpdateSettingsCommand;
+use Gyman\Application\Handler\UploadClubLogoHandler;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
-use Gyman\Application\Command\UpdateSettingsCommand;
-use Gyman\Application\Handler\UploadClubLogoHandler;
+use Gyman\Domain\Calendar;
 
 /**
- * Class SettingsUpdateHandler
- * @package Gyman\Bundle\AppBundle\Services
+ * Class SettingsUpdateHandler.
  */
 class SettingsUpdateHandler
 {
@@ -36,9 +38,10 @@ class SettingsUpdateHandler
 
     /**
      * SettingsUpdateHandler constructor.
-     * @param SectionRepository $sectionRepository
-     * @param ClubRepository $clubRepository
-     * @param Club $currentClub
+     *
+     * @param SectionRepository     $sectionRepository
+     * @param ClubRepository        $clubRepository
+     * @param Club                  $currentClub
      * @param UploadClubLogoHandler $uploadHandler
      */
     public function __construct(SectionRepository $sectionRepository, ClubRepository $clubRepository, Club $currentClub, UploadClubLogoHandler $uploadHandler)
@@ -57,13 +60,13 @@ class SettingsUpdateHandler
         $existingSections = $this->sectionRepository->findAll();
 
         foreach ($existingSections as $existing) {
-            if (!in_array($existing, $command->sections)) {
+            if (!in_array($existing, $command->sections, true)) {
                 $this->sectionRepository->remove($existing);
             }
         }
 
         foreach ($command->sections as $section) {
-            if (is_null($section->id())) {
+            if (null === $section->id()) {
                 $section->setCalendar(new Calendar(null, $section->title()));
                 $this->sectionRepository->insert($section);
             } else {

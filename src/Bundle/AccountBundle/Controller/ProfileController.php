@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

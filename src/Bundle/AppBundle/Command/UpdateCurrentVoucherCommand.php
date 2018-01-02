@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Command;
 
 use Gyman\Application\Command\UpdateCurrentVoucherCommand as Command;
@@ -10,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateCurrentVoucherCommand extends ContainerAwareCommand
 {
-    /** @var  Logger */
+    /** @var Logger */
     private $logger;
 
     /**
@@ -31,17 +34,17 @@ class UpdateCurrentVoucherCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->logger->addInfo(sprintf("Updating current vouchers in '%s' database", $input->getOption("club")));
+        $this->logger->addInfo(sprintf("Updating current vouchers in '%s' database", $input->getOption('club')));
 
         $command = new Command();
-        $this->getContainer()->get("tactician.commandbus")->handle($command);
-        $data = $this->getContainer()->get("gyman.app.handler.update_current_vouchers")->lastUpdatedData;
+        $this->getContainer()->get('tactician.commandbus')->handle($command);
+        $data = $this->getContainer()->get('gyman.app.handler.update_current_vouchers')->lastUpdatedData;
 
-        $output->writeln(sprintf("Updated %d members:", count($data)));
+        $output->writeln(sprintf('Updated %d members:', count($data)));
 
         /** @var Member $member */
-        foreach($data as $member) {
-            $msg = sprintf("Set current voucher #%s for member %s.", $member->currentVoucher()->id(), $member->email());
+        foreach ($data as $member) {
+            $msg = sprintf('Set current voucher #%s for member %s.', $member->currentVoucher()->id(), $member->email());
             $output->writeln($msg);
             $this->logger->addInfo($msg);
         }

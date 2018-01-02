@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use Gyman\Application\Command\OpenEntryCommand;
@@ -13,6 +16,9 @@ use Mockery as m;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @coversNothing
+ */
 class OpenEntryHandlerTest extends \PHPUnit_Framework_TestCase
 {
     protected function tearDown()
@@ -22,7 +28,8 @@ class OpenEntryHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * user has current voucher with free entries
+     * user has current voucher with free entries.
+     *
      * @test
      */
     public function testHandle()
@@ -38,23 +45,23 @@ class OpenEntryHandlerTest extends \PHPUnit_Framework_TestCase
 
         /** @var EventDispatcherInterface|m\MockInterface $dispatcherMock */
         $dispatcherMock = m::mock(EventDispatcher::class);
-        $dispatcherMock->shouldReceive("dispatch")->times(1)->with(OpenEntryHandler::SUCCESS, $eventMock)->andReturnNull();
+        $dispatcherMock->shouldReceive('dispatch')->times(1)->with(OpenEntryHandler::SUCCESS, $eventMock)->andReturnNull();
 
         $handler = new OpenEntryHandler($memberRepository, $dispatcherMock);
 
         $currentVoucherMock = m::mock(Voucher::class);
-        $currentVoucherMock->shouldReceive("leftEntriesAmount")->times(1)->andReturn(5);
+        $currentVoucherMock->shouldReceive('leftEntriesAmount')->times(1)->andReturn(5);
 
         $memberMock = m::mock(Member::class);
-        $memberMock->shouldReceive("hasCurrentVoucher")->times(1)->andReturnTrue();
-        $memberMock->shouldReceive("currentVoucher")->times(1)->andReturn($currentVoucherMock);
-        $memberMock->shouldReceive("enter")->times(1)->with($entryMock)->andReturnNull();
+        $memberMock->shouldReceive('hasCurrentVoucher')->times(1)->andReturnTrue();
+        $memberMock->shouldReceive('currentVoucher')->times(1)->andReturn($currentVoucherMock);
+        $memberMock->shouldReceive('enter')->times(1)->with($entryMock)->andReturnNull();
 
-        $memberRepository->shouldReceive("save")->times(1)->with($memberMock)->andReturnTrue();
+        $memberRepository->shouldReceive('save')->times(1)->with($memberMock)->andReturnTrue();
 
         $command = new OpenEntryCommand($memberMock);
 
-        $factoryMock->shouldReceive("createFromOpenEntryCommand")->times(1)->with($command)->andReturn($entryMock);
+        $factoryMock->shouldReceive('createFromOpenEntryCommand')->times(1)->with($command)->andReturn($entryMock);
 
         $handler->handle($command);
     }

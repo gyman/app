@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
-use Gyman\Domain\Member;
-use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Application\Command\UpdateMemberCommand;
-use Gyman\Domain\Member\Details\Barcode;
 use Gyman\Application\Repository\MemberRepositoryInterface;
+use Gyman\Bundle\AppBundle\Repository\MemberRepository;
+use Gyman\Domain\Member;
+use Gyman\Domain\Member\Details\Barcode;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -26,13 +29,13 @@ final class UniqueMemberBarcodeValidator extends ConstraintValidator
 
     /**
      * @param UpdateMemberCommand $command
-     * @param Constraint $constraint
+     * @param Constraint          $constraint
      */
     public function validate($command, Constraint $constraint)
     {
         $member = $this->repository->findOneByBarcode(new Barcode($command->barcode));
 
-        if (!is_null($member) && !$this->areTheSame($member, $command)) {
+        if (null !== $member && !$this->areTheSame($member, $command)) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('barcode')
                 ->setParameter('%barcode%', $command->barcode)
@@ -41,8 +44,9 @@ final class UniqueMemberBarcodeValidator extends ConstraintValidator
     }
 
     /**
-     * @param Member $member
+     * @param Member              $member
      * @param UpdateMemberCommand $command
+     *
      * @return bool
      */
     private function areTheSame(Member $member, UpdateMemberCommand $command)

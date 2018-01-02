@@ -1,10 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
 use Gyman\Component\Test\BaseFunctionalTestCase;
 use Gyman\Domain\Member\EmailAddress;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @coversNothing
+ */
 class DefaultControllerTest extends BaseFunctionalTestCase
 {
     /**
@@ -12,7 +17,7 @@ class DefaultControllerTest extends BaseFunctionalTestCase
      */
     public function register_form_renders_properly()
     {
-        $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate("gyman_landing_index"));
+        $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate('gyman_landing_index'));
         $this->assertEquals(200, $this->getStatusCode());
 
         $form = $crawler->filter('form[name="create_club"]')->first();
@@ -34,18 +39,18 @@ class DefaultControllerTest extends BaseFunctionalTestCase
      */
     public function register_form_is_posted_and_club_is_created()
     {
-        $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate("gyman_landing_index"));
+        $crawler = $this->client->request('GET', $this->getContainer()->get('router')->generate('gyman_landing_index'));
         $this->assertEquals(200, $this->getStatusCode());
-https://www.wykop.pl/
+        https://www.wykop.pl/
         $form = $crawler->filter('form[name="create_club"]')->first()->form();
 
         $form->setValues([
-            'create_club[username]' => 'testowy-admin',
-            'create_club[email]'  => 'testowy@admin.pl',
-            'create_club[password]' => 'zaq1@WSXcde3',
+            'create_club[username]'           => 'testowy-admin',
+            'create_club[email]'              => 'testowy@admin.pl',
+            'create_club[password]'           => 'zaq1@WSXcde3',
             'create_club[password_repeat]'    => 'zaq1@WSXcde3',
-            'create_club[club]'   => 'Capoeira Camangula',
-            'create_club[subdomain]'     => 'camangula',
+            'create_club[club]'               => 'Capoeira Camangula',
+            'create_club[subdomain]'          => 'camangula',
         ]);
 
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues());
@@ -55,7 +60,6 @@ https://www.wykop.pl/
         $repository = $this->container->get('doctrine.orm.tenant_entity_manager')->getRepository('Gyman:Member');
 
         return;
-
         /** @var Member $member */
         $member = $repository->findOneByEmailAddress(new EmailAddress('andrzej@gazeta.pl'));
 
@@ -88,7 +92,7 @@ https://www.wykop.pl/
         $this->assertEquals($member->details()->notes(), 'some admin notes');
 
         $this->assertCount(1, $member->sections());
-        $this->assertEquals("Kids 4-8", $member->sections()->first()->title());
+        $this->assertEquals('Kids 4-8', $member->sections()->first()->title());
 
         $this->assertTrue(Globals::checkIfImageExists($member->details()->foto()->foto()));
         unlink(Globals::applyFileDir($member->details()->foto()->foto()));

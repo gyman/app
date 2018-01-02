@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Services;
 
 /**
- * Interface SubdomainProviderInterface
- * @package Gyman\Bundle\AppBundle\Services
+ * Interface SubdomainProviderInterface.
  */
 interface SubdomainProviderInterface
 {

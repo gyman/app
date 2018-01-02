@@ -1,21 +1,23 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Calendar\Event;
 
 use DateTime;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
 use Dende\Calendar\Domain\Calendar\EventInterface;
 use Dende\Calendar\Domain\IdInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gyman\Domain\User;
 use Gyman\Domain\Calendar\Event\Occurrence\Note;
 use Gyman\Domain\Calendar\Event\Occurrence\Subject;
 use Gyman\Domain\Entry;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
+use Gyman\Domain\User;
 
 /**
- * Class Occurrence
- * @package Gyman\Domain\Calendar\Event
+ * Class Occurrence.
  */
 class Occurrence extends BaseOccurrence
 {
@@ -49,22 +51,22 @@ class Occurrence extends BaseOccurrence
         $this->entries = $entries;
     }
 
-    public function instructor() : ?User
+    public function instructor(): ?User
     {
         return $this->instructor;
     }
 
-    public function subject() : Subject
+    public function subject(): Subject
     {
         return $this->subject;
     }
 
-    public function note() : Note
+    public function note(): Note
     {
         return $this->note;
     }
 
-    public function setInstructor(User $user) : void
+    public function setInstructor(User $user): void
     {
         $this->instructor = $user;
     }
@@ -72,7 +74,7 @@ class Occurrence extends BaseOccurrence
     /**
      * @return Collection|Entry[]
      */
-    public function entries() : Collection
+    public function entries(): Collection
     {
         return $this->entries;
     }

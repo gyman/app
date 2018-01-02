@@ -1,12 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 
 /**
- * Class CloseEntryCommand
- * @package Gyman\Application\Command
+ * Class CloseEntryCommand.
  */
 final class CloseEntryCommand
 {
@@ -20,6 +22,7 @@ final class CloseEntryCommand
 
     /**
      * @param Entry $entry
+     *
      * @return CloseEntryCommand
      */
     public static function createFromEntry(Entry $entry)

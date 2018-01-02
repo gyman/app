@@ -1,18 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ReportsBundle\Form;
 
 use DateTime;
 
 /**
- * Class DateFilter
- * @package Gyman\Bundle\ReportsBundle\Form
+ * Class DateFilter.
  */
 class DateFilter
 {
-    /** @var  \DateTime */
+    /** @var \DateTime */
     public $startDate;
 
-    /** @var  \DateTime */
+    /** @var \DateTime */
     public $endDate;
 
     /** @var string */
@@ -20,6 +22,7 @@ class DateFilter
 
     /**
      * DateFilter constructor.
+     *
      * @param DateTime $startDate
      * @param DateTime $endDate
      * @param $strategy

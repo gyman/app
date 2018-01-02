@@ -1,14 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
-use Gyman\Domain\Calendar\Event\Occurrence;
-use Gyman\Domain\Section;
-use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Application\Command\OpenEntryCommand;
+use Gyman\Bundle\AppBundle\Repository\SectionRepository;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,11 +21,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class EntryType
- * @package Gyman\Bundle\AppBundle\Form
+ * Class EntryType.
  */
 final class EntryType extends AbstractType
 {
@@ -39,8 +39,9 @@ final class EntryType extends AbstractType
 
     /**
      * EntryType constructor.
+     *
      * @param OccurrenceRepository $occurrenceRepository
-     * @param SectionRepository $sectionRepository
+     * @param SectionRepository    $sectionRepository
      */
     public function __construct(OccurrenceRepository $occurrenceRepository, SectionRepository $sectionRepository)
     {
@@ -54,7 +55,7 @@ final class EntryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $date = $options["date"];
+        $date = $options['date'];
 
         /** @var Carbon $startDate */
         $startDate = Carbon::instance($date)->setTime(0, 0, 0);
@@ -66,7 +67,7 @@ final class EntryType extends AbstractType
 
         $todayOccurrences = $this->occurrenceRepository->findByPeriod($startDate, $endDate);
 
-        $defaultOccurrences = array_filter($todayOccurrences, function(Occurrence $occurrence) {
+        $defaultOccurrences = array_filter($todayOccurrences, function (Occurrence $occurrence) {
             return $occurrence->isOngoing();
         });
 
@@ -74,23 +75,23 @@ final class EntryType extends AbstractType
 
         $builder
         ->add('occurrence', EntityType::class, [
-            'required' => false,
-            'expanded' => true,
-            "multiple" => false,
-            'label' => 'entries.form.occurrence.label',
-            'class' => 'Gyman\Domain\Calendar\Event\Occurrence',
+            'required'     => false,
+            'expanded'     => true,
+            'multiple'     => false,
+            'label'        => 'entries.form.occurrence.label',
+            'class'        => 'Gyman\Domain\Calendar\Event\Occurrence',
             'choice_label' => function (Occurrence $occurrence) use ($sectionRepository) {
-                $start = $occurrence->startDate()->format("H:i");
-                $stop = $occurrence->endDate()->format("H:i");
+                $start = $occurrence->startDate()->format('H:i');
+                $stop = $occurrence->endDate()->format('H:i');
                 $activity = $occurrence->event()->title();
 
                 /** @var Calendar $calendar */
                 $calendar = $occurrence->event()->calendar();
 
-                return sprintf("%s-%s %s (%s)", $start, $stop, $activity, $calendar->title());
+                return sprintf('%s-%s %s (%s)', $start, $stop, $activity, $calendar->title());
             },
             'choices' => $todayOccurrences,
-            'data' => $defaultOccurrence
+            'data'    => $defaultOccurrence,
         ])
 //        ->add('startDate', 'datetime', [
 //            'widget' => 'single_text',
@@ -102,10 +103,10 @@ final class EntryType extends AbstractType
 //        ])
         ->add('price', IntegerType::class, [
             'label' => 'entries.form.price.label',
-            "attr" => [
-                "min" => 0,
-                "step" => 5,
-            ]
+            'attr'  => [
+                'min'  => 0,
+                'step' => 5,
+            ],
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'entries.form.open_entry.label',
@@ -142,7 +143,7 @@ final class EntryType extends AbstractType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             /** @var OpenEntryCommand $data */
             $data = $event->getData();
-            if ($data->entryType !== Entry::TYPE_PAID) {
+            if (Entry::TYPE_PAID !== $data->entryType) {
                 $data->price = null;
             }
         });
@@ -155,7 +156,7 @@ final class EntryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => OpenEntryCommand::class,
-            'date' => new DateTime()
+            'date'       => new DateTime(),
         ]);
     }
 

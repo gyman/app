@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\BaseBundle\EntityManager;
 
 use Doctrine\ORM\EntityManager;
@@ -8,25 +11,29 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 abstract class BaseManager
 {
     /**
-     * Holds the Doctrine entity manager for database interaction
+     * Holds the Doctrine entity manager for database interaction.
+     *
      * @var EntityManager
      */
     protected $entityManager;
 
     /**
-     * The Fully-Qualified Class Name for our entity
+     * The Fully-Qualified Class Name for our entity.
+     *
      * @var string
      */
     protected $class;
 
     /**
-     * Entity-specific repo, useful for finding entities, for example
+     * Entity-specific repo, useful for finding entities, for example.
+     *
      * @var EntityRepository
      */
     protected $repo;
 
     /**
-     * Holds the Symfony2 event dispatcher service
+     * Holds the Symfony2 event dispatcher service.
+     *
      * @var EventDispatcherInterface
      */
     protected $dispatcher;

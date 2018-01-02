@@ -1,9 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Component\Test;
 
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
+/**
+ * @coversNothing
+ */
 class RestTestCase extends \PHPUnit_Framework_TestCase
 {
     private $json;

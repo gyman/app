@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Member\Details;
 
 /**
- * Class Barcode
- * @package Gyman\Domain
+ * Class Barcode.
  */
 class Barcode
 {
@@ -14,6 +16,7 @@ class Barcode
 
     /**
      * Barcode constructor.
+     *
      * @param string $barcode
      */
     public function __construct($barcode)

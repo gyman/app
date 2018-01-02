@@ -1,14 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Voucher;
 
 /**
- * Class Price
- * @package Gyman\Domain
+ * Class Price.
  */
 class Price
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $amount;
 
@@ -19,18 +21,14 @@ class Price
 
     /**
      * Price constructor.
-     * @param int $amount
+     *
+     * @param int    $amount
      * @param string $currency
      */
     public function __construct($amount, $currency = 'PLN')
     {
         $this->amount = $amount;
         $this->currency = $currency;
-    }
-
-    public static function zero()
-    {
-        return new self(0, 'PLN');
     }
 
     /**
@@ -43,6 +41,11 @@ class Price
         }
 
         return '';
+    }
+
+    public static function zero()
+    {
+        return new self(0, 'PLN');
     }
 
     /**

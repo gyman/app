@@ -1,8 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ChartsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @coversNothing
+ */
 class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()

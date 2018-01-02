@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
 use Carbon\Carbon;
@@ -6,7 +9,6 @@ use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Gyman\Model\View\EntryView;
-use Gyman\Model\View\EventView;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,8 +16,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class DefaultController
- * @package Gyman\Bundle\DashboardBundle\Controller
+ * Class DefaultController.
+ *
  * @Route("/member")
  */
 class MemberController extends Controller
@@ -26,7 +28,7 @@ class MemberController extends Controller
      */
     public function indexAction()
     {
-        $this->denyAccessUnlessGranted("ROLE_MEMBER");
+        $this->denyAccessUnlessGranted('ROLE_MEMBER');
 
         /** @var Member $member */
         $member = $this->getUser()->member();
@@ -36,23 +38,24 @@ class MemberController extends Controller
         $lastEntry = $member->lastEntry();
 
         return [
-            "member" => $member,
-            "entries" => $this->get("gyman.entries.query")->findLastByMember($member, 30),
-            "currentVoucher" => $currentVoucher,
-            "lastEntry" => $lastEntry
+            'member'         => $member,
+            'entries'        => $this->get('gyman.entries.query')->findLastByMember($member, 30),
+            'currentVoucher' => $currentVoucher,
+            'lastEntry'      => $lastEntry,
         ];
     }
 
     /**
      * @Route("/calendar", name="gyman_dashboard_member_calendar", options={"expose"=true})
      */
-    public function getCalendarAction(Request $request){
+    public function getCalendarAction(Request $request)
+    {
         $start = Carbon::parse($request->get('start', 'this week'));
         $end = Carbon::parse($request->get('end', 'next week'));
 //        $events = $this->get('gyman.dashboard.members_query')->get($this->getUser()->member(), $start, $end);
         $entries = $this->get('gyman.entries.query')->findByDates($this->getUser()->member(), $start, $end);
 
-        return new JsonResponse(array_map(function(EntryView $entry) : array {
+        return new JsonResponse(array_map(function (EntryView $entry): array {
             return $entry->toArray();
         }, $entries->toArray()));
     }

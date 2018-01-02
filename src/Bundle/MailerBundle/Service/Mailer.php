@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\MailerBundle\Service;
 
 use Swift_Mailer;
@@ -7,8 +10,8 @@ use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class Mailer
- * @package Gyman\Bundle\MailerBundle\Service
+ * Class Mailer.
+ *
  * @method void setSubject(string $subject)
  * @method void setTo(array $emails)
  */
@@ -41,6 +44,28 @@ class Mailer
 
     /** @var Swift_Message */
     private $message;
+
+    public function __construct(Swift_Mailer $mailer, TranslatorInterface $translator, EngineInterface $templating)
+    {
+        $this->mailer = $mailer;
+        $this->translator = $translator;
+        $this->templating = $templating;
+
+        $this->message = $mailer->createMessage();
+        $this->message->setContentType('text/html');
+    }
+
+    public function __call($method, $arguments)
+    {
+        if (strstr($method, 'set') && method_exists($this->message, $method)) {
+            return call_user_func_array(
+                [$this->message, $method],
+                $arguments
+            );
+        }
+
+        throw new \BadMethodCallException('Method "' . $method . '" does not exist and was not trapped in __call()');
+    }
 
     /**
      * @param array $parameters
@@ -83,27 +108,5 @@ class Mailer
                 $this->message->getSubject()
             )
         );
-    }
-
-    public function __construct(Swift_Mailer $mailer, TranslatorInterface $translator, EngineInterface $templating)
-    {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
-        $this->templating = $templating;
-
-        $this->message = $mailer->createMessage();
-        $this->message->setContentType('text/html');
-    }
-
-    public function __call($method, $arguments)
-    {
-        if (strstr($method, 'set') && method_exists($this->message, $method)) {
-            return call_user_func_array(
-                [$this->message,$method],
-                $arguments
-            );
-        }
-
-        throw new \BadMethodCallException('Method "' . $method . '" does not exist and was not trapped in __call()');
     }
 }

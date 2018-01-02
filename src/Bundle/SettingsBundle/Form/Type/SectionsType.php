@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Gyman\Application\Command\UpdateSectionsCommand;
@@ -9,8 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class SettingsType
- * @package Gyman\Bundle\AppBundle\Form
+ * Class SettingsType.
  */
 final class SectionsType extends AbstractType
 {
@@ -22,14 +24,14 @@ final class SectionsType extends AbstractType
     {
         $builder
             ->add('sections', 'collection', [
-                'type' => new SectionType(),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'label' => false,
+                'type'               => new SectionType(),
+                'allow_add'          => true,
+                'allow_delete'       => true,
+                'label'              => false,
                 'cascade_validation' => true,
             ])
             ->add('add_section', 'button', [
-                'label' => 'add section'
+                'label' => 'add section',
             ])
         ;
     }
@@ -42,9 +44,9 @@ final class SectionsType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => UpdateSectionsCommand::class,
             'csrf_protection' => true,
-            "attr" => [
-                "novalidate" => "novalidate"
-            ]
+            'attr'            => [
+                'novalidate' => 'novalidate',
+            ],
         ]);
     }
 

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Gyman\Application\Command\UpdateSettingsCommand;
@@ -8,11 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class SettingsType
- * @package Gyman\Bundle\AppBundle\Form
+ * Class SettingsType.
  */
 final class SettingsType extends AbstractType
 {
@@ -25,13 +26,13 @@ final class SettingsType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('subdomain', TextType::class, [
-                "disabled" => true,
+                'disabled' => true,
             ])
             ->add('details', ClubDetailsType::class, [
-                "cascade_validation" => true
+                'cascade_validation' => true,
             ])
             ->add('uploadLogo', FileType::class, [
-                'required' => false
+                'required' => false,
             ])
 //            ->add('administrators', 'choice', [
 //                'choices' => ['kowalski', 'nowak', 'dupa'],
@@ -55,7 +56,7 @@ final class SettingsType extends AbstractType
 //                'label' => 'add section'
 //            ])
             ->add('submit', SubmitType::class, [
-                'label' => 'update settings'
+                'label' => 'update settings',
             ])
         ;
     }
@@ -68,9 +69,9 @@ final class SettingsType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => UpdateSettingsCommand::class,
             'csrf_protection' => true,
-            "attr" => [
-                "novalidate" => "novalidate"
-            ]
+            'attr'            => [
+                'novalidate' => 'novalidate',
+            ],
         ]);
     }
 

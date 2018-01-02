@@ -1,14 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form\DataTransformer;
 
 use DateTime;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Fixes start and end date hour in voucher
+ * Fixes start and end date hour in voucher.
  *
  * Class VoucherDateTransformer
- * @package Gyman\Bundle\AppBundle\Form\DataTransformer
  */
 class VoucherDateTransformer implements DataTransformerInterface
 {
@@ -23,8 +25,9 @@ class VoucherDateTransformer implements DataTransformerInterface
     }
 
     /**
+     * @param string $string
+     * @param mixed  $id
      *
-     * @param  string   $string
      * @return DateTime | null
      */
     public function transform($id)
@@ -37,8 +40,9 @@ class VoucherDateTransformer implements DataTransformerInterface
     }
 
     /**
+     * @param DateTime $date
+     * @param mixed    $datetime
      *
-     * @param  DateTime $date
      * @return string
      */
     public function reverseTransform($datetime)
@@ -51,17 +55,17 @@ class VoucherDateTransformer implements DataTransformerInterface
     }
 
     /**
+     * @param DateTime $dateTime
      *
-     * @param  DateTime  $dateTime
      * @return \DateTime
      */
     private function fixHour($dateTime)
     {
         $string = $dateTime->format('Y-m-d');
 
-        if ($this->mode == 'start') {
+        if ('start' === $this->mode) {
             return new DateTime($string . ' 00:00:00');
-        } elseif ($this->mode == 'end') {
+        } elseif ('end' === $this->mode) {
             return new DateTime($string . ' 23:59:59');
         }
     }

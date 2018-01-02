@@ -1,36 +1,42 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Handler;
 
-use Gyman\Application\Command\ClearExpiredCurrentVouchersCommand;
 use Gyman\Application\Command\CloseExpiredEntriesCommand;
-use Gyman\Application\Handler\ClearExpiredCurrentVouchersHandler;
 use Gyman\Application\Handler\CloseExpiredEntriesHandler;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Domain\Member;
 use Mockery as m;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * @coversNothing
+ */
 class CloseExpiredEntriesHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    public function tearDown(){
+    public function tearDown()
+    {
         parent::tearDown();
         m::close();
     }
 
-    public function testHandle() {
+    public function testHandle()
+    {
         $memberMock1 = m::mock(Member::class);
-        $memberMock1->shouldReceive("exitLastEntry")->times(1);
+        $memberMock1->shouldReceive('exitLastEntry')->times(1);
 
         $memberMock2 = m::mock(Member::class);
-        $memberMock2->shouldReceive("exitLastEntry")->times(1);
+        $memberMock2->shouldReceive('exitLastEntry')->times(1);
 
         $memberMock3 = m::mock(Member::class);
-        $memberMock3->shouldReceive("exitLastEntry")->times(1);
+        $memberMock3->shouldReceive('exitLastEntry')->times(1);
 
         $members = [
             $memberMock1,
             $memberMock2,
-            $memberMock3
+            $memberMock3,
         ];
 
         $dispatcher = m::mock(EventDispatcher::class);

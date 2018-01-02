@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
@@ -9,6 +12,6 @@ class UniqueClubSubdomain extends Constraint
 
     public function validatedBy()
     {
-        return get_class($this).'Validator';
+        return get_class($this) . 'Validator';
     }
 }

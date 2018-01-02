@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: uirapuru
  * Date: 09.09.15
- * Time: 22:22
+ * Time: 22:22.
  */
+
 namespace Gyman\Application\Exception;
 
 use Gyman\Domain\Member;

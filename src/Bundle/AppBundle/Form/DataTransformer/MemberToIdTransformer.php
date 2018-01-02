@@ -1,25 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form\DataTransformer;
 
-use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
+use Gyman\Domain\Member;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Fixes start and end date hour in voucher
+ * Fixes start and end date hour in voucher.
  *
  * Class VoucherDateTransformer
- * @package Gyman\Bundle\AppBundle\Form\DataTransformer
  */
 final class MemberToIdTransformer implements DataTransformerInterface
 {
     /**
      * @var MemberRepository
      */
-    protected $memberRepository;
+    private $memberRepository;
 
     /**
      * MemberToIdTransformer constructor.
+     *
      * @param MemberRepository $memberRepository
      */
     public function __construct(MemberRepository $memberRepository)
@@ -29,6 +32,7 @@ final class MemberToIdTransformer implements DataTransformerInterface
 
     /**
      * @param Member $member
+     *
      * @return string
      */
     public function transform($member)
@@ -38,6 +42,7 @@ final class MemberToIdTransformer implements DataTransformerInterface
 
     /**
      * @param string $id
+     *
      * @return Member
      */
     public function reverseTransform($id)

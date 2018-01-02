@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
-use Gyman\Domain\Section;
 use Gyman\Bundle\ClubBundle\Entity\Details;
+use Gyman\Domain\Section;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateSettingsCommand

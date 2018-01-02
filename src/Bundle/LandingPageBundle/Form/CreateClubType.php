@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyman\Bundle\LandingPageBundle\Form;
 
-
-use FOS\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class CreateClubType
- * @package Gyman\Bundle\LandingPageBundle\Form
+ * Class CreateClubType.
  */
 class CreateClubType extends AbstractType
 {

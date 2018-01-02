@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
@@ -22,12 +25,12 @@ class EventsData extends BaseFixture implements ContainerAwareInterface
     /**
      * @return int
      */
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return 10;
     }
 
-    public function insert(array $params = []) : Event
+    public function insert(array $params = []): Event
     {
         Event::setFactoryClass(OccurrenceFactory::class);
 
@@ -52,7 +55,7 @@ class EventsData extends BaseFixture implements ContainerAwareInterface
         $this->container = $container;
     }
 
-    public function getContainer() : ContainerInterface
+    public function getContainer(): ContainerInterface
     {
         return $this->container;
     }

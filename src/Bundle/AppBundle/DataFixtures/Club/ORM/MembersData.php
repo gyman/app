@@ -1,19 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Application\Factory\MemberFactory;
+use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Member;
 
 class MembersData extends BaseFixture
 {
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return 10;
     }
 
-    public function insert(array $params = []) : Member
+    public function insert(array $params = []): Member
     {
         $factoryParams = $params;
         $factoryParams['sections'] = new ArrayCollection();
@@ -24,7 +27,7 @@ class MembersData extends BaseFixture
 
         $member = MemberFactory::createFromArray($factoryParams);
 
-        foreach ($params["sections"] as $sectionName) {
+        foreach ($params['sections'] as $sectionName) {
             $member->sections()->add($this->getReference($sectionName));
         }
 

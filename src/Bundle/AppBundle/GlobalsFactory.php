@@ -1,15 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle;
 
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
 
 class GlobalsFactory
 {
-    /** @var  SubdomainProvider */
+    /** @var SubdomainProvider */
     private $subdomainProvider;
 
     /**
      * GlobalsFactory constructor.
+     *
      * @param SubdomainProvider $subdomainProvider
      */
     public function __construct(SubdomainProvider $subdomainProvider)

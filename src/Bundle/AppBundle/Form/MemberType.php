@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form;
 
-use Gyman\Domain\Section;
-use Gyman\Domain\SectionRepository;
 use Gyman\Application\Command\UpdateMemberCommand;
-use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Member\Details;
+use Gyman\Domain\Member\Details\Belt;
+use Gyman\Domain\Section;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -17,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 final class MemberType extends AbstractType
 {
@@ -65,10 +66,10 @@ final class MemberType extends AbstractType
                 'label'    => 'member.form.starred.label',
             ])
             ->add('sections', EntityType::class, [
-                'class' => Section::class,
-                'required' => true,
-                'multiple' => true,
-                'expanded' => true,
+                'class'        => Section::class,
+                'required'     => true,
+                'multiple'     => true,
+                'expanded'     => true,
                 'choice_label' => 'title',
                 'choice_value' => 'id',
             ])
@@ -83,7 +84,7 @@ final class MemberType extends AbstractType
         ]);
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return 'gyman_member_form';
     }

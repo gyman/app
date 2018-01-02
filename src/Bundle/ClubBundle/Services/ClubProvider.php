@@ -1,14 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Services;
 
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
-use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 
 /**
- * Class ClubProvider
- * @package Gyman\Bundle\ClubBundle\Services
+ * Class ClubProvider.
  */
 class ClubProvider
 {
@@ -27,9 +28,9 @@ class ClubProvider
         $this->clubRepository = $clubRepository;
     }
 
-    public function club() : ?Club
+    public function club(): ?Club
     {
-        if($this->club === null) {
+        if (null === $this->club) {
             $this->club = $this->clubRepository->findOneBySubdomain(
                 $this->subdomainProvider->getSubdomain()
             );

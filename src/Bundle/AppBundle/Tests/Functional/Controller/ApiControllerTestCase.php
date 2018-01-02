@@ -1,13 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
-use Gyman\Domain\Member;
 use Gyman\Component\Test\RestTestCase;
 use Gyman\Component\Test\WebTestCase;
+use Gyman\Domain\Member;
 
 /**
- * Class MemberControllerTest
+ * Class MemberControllerTest.
+ *
  * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ * @coversNothing
  */
 class ApiControllerTestCase extends WebTestCase
 {

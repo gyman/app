@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Menu;
 
 use Knp\Menu\FactoryInterface;

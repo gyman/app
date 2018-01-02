@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,19 +12,24 @@ use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Domain\Member;
 use Mockery as m;
 
+/**
+ * @coversNothing
+ */
 class MemberRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function tearDown(){
+    public function tearDown()
+    {
         parent::tearDown();
         m::close();
     }
-    
-    public function testSaveOneObject(){
+
+    public function testSaveOneObject()
+    {
         $member = MemberFactory::create();
 
         $em = m::mock(EntityManager::class);
-        $em->shouldReceive("persist")->once()->with($member);
-        $em->shouldReceive("flush")->once()->with($member);
+        $em->shouldReceive('persist')->once()->with($member);
+        $em->shouldReceive('flush')->once()->with($member);
 
         $classMetaData = m::mock(ClassMetadata::class);
 
@@ -29,16 +37,17 @@ class MemberRepositoryTest extends \PHPUnit_Framework_TestCase
         $repository->save($member);
     }
 
-    public function testSaveArray(){
+    public function testSaveArray()
+    {
         $members = [
             MemberFactory::create(),
             MemberFactory::create(),
-            MemberFactory::create()
+            MemberFactory::create(),
         ];
 
         $em = m::mock(EntityManager::class);
-        $em->shouldReceive("persist")->times(3);
-        $em->shouldReceive("flush")->once()->withNoArgs();
+        $em->shouldReceive('persist')->times(3);
+        $em->shouldReceive('flush')->once()->withNoArgs();
 
         $classMetaData = m::mock(ClassMetadata::class);
 
@@ -46,16 +55,17 @@ class MemberRepositoryTest extends \PHPUnit_Framework_TestCase
         $repository->save($members);
     }
 
-    public function testSaveCollection(){
+    public function testSaveCollection()
+    {
         $members = new ArrayCollection([
             MemberFactory::create(),
             MemberFactory::create(),
-            MemberFactory::create()
+            MemberFactory::create(),
         ]);
 
         $em = m::mock(EntityManager::class);
-        $em->shouldReceive("persist")->times(3);
-        $em->shouldReceive("flush")->once()->withNoArgs();
+        $em->shouldReceive('persist')->times(3);
+        $em->shouldReceive('flush')->once()->withNoArgs();
 
         $classMetaData = m::mock(ClassMetadata::class);
 
@@ -68,10 +78,11 @@ class MemberRepositoryTest extends \PHPUnit_Framework_TestCase
      * @expectedException \Exception
      * @expectedExceptionMessage Argument is unknown type! Should be Member class or collection/array of Member class!
      */
-    public function testSaveNull(){
+    public function testSaveNull()
+    {
         $em = m::mock(EntityManager::class);
-        $em->shouldReceive("persist")->never();
-        $em->shouldReceive("flush")->never();
+        $em->shouldReceive('persist')->never();
+        $em->shouldReceive('flush')->never();
 
         $classMetaData = m::mock(ClassMetadata::class);
 

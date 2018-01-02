@@ -1,20 +1,24 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Tests\Unit\Services;
 
 use Dende\Calendar\Domain\Calendar;
+use Gyman\Application\Command\UpdateSettingsCommand;
+use Gyman\Application\Handler\UploadClubLogoHandler;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
+use Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Entity\Details;
 use Gyman\Domain\Section;
-use Gyman\Bundle\AppBundle\Services\SettingsUpdateHandler;
-use Gyman\Application\Command\UpdateSettingsCommand;
-use Gyman\Application\Handler\UploadClubLogoHandler;
 use Mockery as m;
 
 /**
- * Class SettingsUpdateHandlerTest
- * @package Gyman\Bundle\AppBundle\Tests\Unit\Services
+ * Class SettingsUpdateHandlerTest.
+ *
+ * @coversNothing
  */
 class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +49,7 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
             $sectionOld3,
             $sectionToRemove1,
             $sectionToRemove2,
-            $sectionToRemove3
+            $sectionToRemove3,
         ];
 
         $newSections = [
@@ -53,7 +57,7 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
             $sectionOld2,
             $sectionOld3,
             $sectionNew1,
-            $sectionNew2
+            $sectionNew2,
         ];
 
         $sectionRepositoryMock = m::mock(SectionRepository::class);
@@ -70,7 +74,7 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
         $sectionRepositoryMock->shouldReceive('insert')->once()->with($sectionNew2);
 
         $details = new Details();
-        $name = "Club";
+        $name = 'Club';
 
         $command = new UpdateSettingsCommand();
         $command->sections = $newSections;
@@ -78,14 +82,14 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
         $command->name = $name;
 
         $club = m::mock(Club::class);
-        $club->shouldReceive("setDetails")->once()->with($details);
-        $club->shouldReceive("updateName")->once()->with($name);
+        $club->shouldReceive('setDetails')->once()->with($details);
+        $club->shouldReceive('updateName')->once()->with($name);
 
         $clubRepositoryMock = m::mock(ClubRepository::class);
-        $clubRepositoryMock->shouldReceive("update")->once()->with($club);
+        $clubRepositoryMock->shouldReceive('update')->once()->with($club);
 
         $logoUploadHandlerMock = m::mock(UploadClubLogoHandler::class);
-        $logoUploadHandlerMock->shouldReceive("handle")->once()->with($command);
+        $logoUploadHandlerMock->shouldReceive('handle')->once()->with($command);
 
         $service = new SettingsUpdateHandler($sectionRepositoryMock, $clubRepositoryMock, $club, $logoUploadHandlerMock);
 

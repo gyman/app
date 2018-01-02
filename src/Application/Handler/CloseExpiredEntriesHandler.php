@@ -1,20 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Application\Command\CloseEntryCommand;
 use Gyman\Application\Command\CloseExpiredEntriesCommand;
-use Gyman\Application\Event\EntryEvent;
+use Gyman\Application\Repository\MemberRepositoryInterface;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
-use Gyman\Domain\Voucher;
-use Gyman\Application\Repository\EntryRepositoryInterface;
-use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class CloseEntryHandler
- * @package Gyman\Domain
+ * Class CloseEntryHandler.
+ *
  * @todo remove
  */
 final class CloseExpiredEntriesHandler
@@ -22,7 +21,7 @@ final class CloseExpiredEntriesHandler
     const SUCCESS = 'gyman.close_entry.success';
     const FAILURE = 'gyman.close_entry.failure';
 
-    /** @var  Member[] */
+    /** @var Member[] */
     public $lastUpdatedData;
 
     /**
@@ -37,8 +36,9 @@ final class CloseExpiredEntriesHandler
 
     /**
      * CreateMember constructor.
+     *
      * @param MemberRepositoryInterface $repository
-     * @param EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(MemberRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
@@ -48,14 +48,14 @@ final class CloseExpiredEntriesHandler
 
     /**
      * @param CloseExpiredEntriesCommand $command
-     * @param UserInterface|null $author
+     * @param UserInterface|null         $author
      */
     public function handle(CloseExpiredEntriesCommand $command, UserInterface $author = null)
     {
         $members = $this->memberRepository->findAllByExpiredLastEntry();
 
         /** @var Member $member */
-        foreach($members as $member) {
+        foreach ($members as $member) {
             $member->exitLastEntry();
         }
 

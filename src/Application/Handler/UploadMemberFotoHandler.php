@@ -1,15 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
-use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Command\UpdateMemberCommand;
+use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
+use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class UploadMemberFotoHandler
- * @package Gyman\Application\Handler
+ * Class UploadMemberFotoHandler.
  */
 class UploadMemberFotoHandler
 {
@@ -40,6 +42,7 @@ class UploadMemberFotoHandler
 
     /**
      * UploadMemberFotoHandler constructor.
+     *
      * @param $uploadDir
      * @param SubdomainProviderInterface $subdomainProvider
      */
@@ -51,22 +54,22 @@ class UploadMemberFotoHandler
 
     /**
      * @param UpdateMemberCommand|CreateMemberCommand $command
+     *
      * @throws \Exception
      */
     public function handle($command)
     {
-        if(!$command instanceof UpdateMemberCommand && !$command instanceof CreateMemberCommand)
-        {
-            throw new \Exception(sprintf("Upload Foto Command can be only %s or %s type"), UpdateMemberCommand::class, CreateMemberCommand::class);
+        if (!$command instanceof UpdateMemberCommand && !$command instanceof CreateMemberCommand) {
+            throw new \Exception(sprintf('Upload Foto Command can be only %s or %s type'), UpdateMemberCommand::class, CreateMemberCommand::class);
         }
 
         $this->destinationDir = $this->createDestinationDir();
         $this->filename = $this->createFilename($command);
         $this->filepath = $this->createFilepath();
 
-        if (!is_null($command->fotoData)) {
+        if (null !== $command->fotoData) {
             $this->handleDataSrc($command);
-        } elseif (!is_null($command->uploadFile)) {
+        } elseif (null !== $command->uploadFile) {
             $this->handleFile($command);
         } else {
             return;
@@ -85,10 +88,10 @@ class UploadMemberFotoHandler
     private function handleDataSrc($command)
     {
         $encodedData = $command->fotoData;
-        $encodedData = str_replace(' ','+',$encodedData);
+        $encodedData = str_replace(' ', '+', $encodedData);
         $encodedData = str_replace('data:image/png;base64,', '', $encodedData);
 
-        $decodedData = base64_decode($encodedData);
+        $decodedData = base64_decode($encodedData, true);
 
         file_put_contents($this->filepath, $decodedData);
     }
@@ -103,6 +106,7 @@ class UploadMemberFotoHandler
 
     /**
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
+     *
      * @return string
      */
     private function createFilename($command)
@@ -111,7 +115,7 @@ class UploadMemberFotoHandler
             '%d-%s.%s',
             $command->id,
             md5(microtime(true)),
-            $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : "jpg"
+            $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : 'jpg'
         );
     }
 
@@ -120,7 +124,7 @@ class UploadMemberFotoHandler
      */
     private function createDestinationDir()
     {
-        $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
+        $destinationDir = rtrim($this->uploadDir, '/\\') . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
 
         if (!file_exists($destinationDir)) {
             mkdir($destinationDir, 0755, true);

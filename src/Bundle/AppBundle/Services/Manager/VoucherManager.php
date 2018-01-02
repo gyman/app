@@ -1,18 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Services\Manager;
 
 use Doctrine\ORM\QueryBuilder;
 use Exception;
-use Gyman\Domain\Member;
-use Gyman\Domain\Voucher;
 use Gyman\Bundle\AppBundle\Event\VoucherCreatedEvent;
 use Gyman\Bundle\AppBundle\Event\VoucherEditedEvent;
 use Gyman\Bundle\AppBundle\VouchersEvents;
 use Gyman\Bundle\BaseBundle\EntityManager\BaseManager;
+use Gyman\Domain\Member;
+use Gyman\Domain\Voucher;
 
 /**
  * @todo: refactor class and move to entitymanagers
  * Manages Vouchers
+ *
  * @method VouchersRepository getRepository() getRepo() Returns entity memberRepository
  */
 class VoucherManager extends BaseManager
@@ -31,7 +35,8 @@ class VoucherManager extends BaseManager
     }
 
     /**
-     * Returns array of all members
+     * Returns array of all members.
+     *
      * @return array
      */
     public function getMembers()
@@ -43,8 +48,10 @@ class VoucherManager extends BaseManager
     }
 
     /**
-     * Returns member by id
-     * @param  int    $id
+     * Returns member by id.
+     *
+     * @param int $id
+     *
      * @return Member
      */
     public function getById($id)
@@ -81,8 +88,8 @@ class VoucherManager extends BaseManager
     }
 
     /**
+     * @param Member $member
      *
-     * @param  Member  $member
      * @return Voucher
      */
     public function createNewVoucherNow(Member $member)
@@ -91,8 +98,8 @@ class VoucherManager extends BaseManager
     }
 
     /**
+     * @param Member $member
      *
-     * @param  Member  $member
      * @return Voucher
      */
     public function createNewVoucherAtEndDate(Member $member)
@@ -101,9 +108,9 @@ class VoucherManager extends BaseManager
     }
 
     /**
+     * @param \Gyman\Domain\Member $member
+     * @param bool                 $usePreviousEndDate
      *
-     * @param  \Gyman\Domain\Member   $member
-     * @param  bool                                        $usePreviousEndDate
      * @return \Gyman\Domain\Voucher
      */
     public function createNewVoucher(Member $member, $usePreviousEndDate = false)
@@ -113,11 +120,11 @@ class VoucherManager extends BaseManager
         $voucher = new Voucher();
         $startDate = new \DateTime();
         if ($currentVoucher) {
-            $startDate = clone($currentVoucher->getEndDate());
+            $startDate = clone $currentVoucher->getEndDate();
             $startDate->add(new \DateInterval('PT1S'));
         }
 
-        $endDate = clone($startDate);
+        $endDate = clone $startDate;
         $endDate->add(new \DateInterval('P1M'));
 
         $voucher->setMember($member);

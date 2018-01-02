@@ -1,23 +1,29 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Command;
 
-use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Bundle\AppBundle\Repository\VoucherRepository;
 use Gyman\Component\Test\BaseFunctionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
+/**
+ * @coversNothing
+ */
 class UpdateCurrentVoucherCommandTest extends BaseFunctionalTestCase
 {
-    public function testCommand() {
+    public function testCommand()
+    {
         /** @var VoucherRepository $repository */
-        $repository = $this->getContainer()->get("gyman.vouchers.repository");
+        $repository = $this->getContainer()->get('gyman.vouchers.repository');
 
         $this->assertCount(1, $repository->findAllNotSetCurrentVouchers());
         $content = $this->runTestedCommand();
-        $this->assertContains("Updated 1 members:", $content);
-        $this->assertContains("for member test12@test2.pl", $content);
+        $this->assertContains('Updated 1 members:', $content);
+        $this->assertContains('for member test12@test2.pl', $content);
 
         $this->assertCount(0, $repository->findAllNotSetCurrentVouchers());
     }
@@ -29,9 +35,9 @@ class UpdateCurrentVoucherCommandTest extends BaseFunctionalTestCase
         $application = new Application($kernel);
         $application->setAutoExit(false);
 
-        $input = new ArrayInput(array(
-            'command' => 'gyman:vouchers:update_current'
-        ));
+        $input = new ArrayInput([
+            'command' => 'gyman:vouchers:update_current',
+        ]);
 
         $output = new BufferedOutput();
         $application->run($input, $output);

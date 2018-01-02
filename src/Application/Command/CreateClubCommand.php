@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -6,42 +9,49 @@ use Symfony\Component\Console\Input\InputInterface;
 class CreateClubCommand
 {
     /**
-     * Username used for logging in
+     * Username used for logging in.
+     *
      * @var string
      */
     public $username;
 
     /**
-     * Email address of user
+     * Email address of user.
+     *
      * @var string
      */
     public $email;
 
     /**
-     * Password for credentials
+     * Password for credentials.
+     *
      * @var string
      */
     public $password;
     /**
-     * Password for credentials
+     * Password for credentials.
+     *
      * @var string
      */
     public $password_repeat;
 
     /**
-     * Clubs name
+     * Clubs name.
+     *
      * @var string
      */
     public $club;
 
     /**
-     * Subdomain used for a club tenant
+     * Subdomain used for a club tenant.
+     *
      * @var string
      */
     public $subdomain;
 
     /**
      * CreateClubCommand constructor.
+     *
      * @param string $username
      * @param string $email
      * @param string $password
@@ -59,6 +69,7 @@ class CreateClubCommand
 
     /**
      * @param InputInterface $input
+     *
      * @return CreateClubCommand
      */
     public static function createFromInput(InputInterface $input)

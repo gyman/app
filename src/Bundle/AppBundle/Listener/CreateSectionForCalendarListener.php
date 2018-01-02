@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
@@ -6,8 +9,8 @@ use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
 
 /**
- * Class CreateSectionForCalendarListener
- * @package Gyman\Bundle\AppBundle\Listener
+ * Class CreateSectionForCalendarListener.
+ *
  * @todo move all logic to new service
  */
 class CreateSectionForCalendarListener
@@ -19,6 +22,7 @@ class CreateSectionForCalendarListener
 
     /**
      * CreateSectionForCalendarListener constructor.
+     *
      * @param SectionRepository $sectionRepository
      */
     public function __construct(SectionRepository $sectionRepository)

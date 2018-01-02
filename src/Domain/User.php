@@ -1,12 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
+
 /**
- * Class User
+ * Class User.
  */
 class User extends BaseUser implements UserInterface, SecurityUserInterface
 {
@@ -44,11 +48,11 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     /**
      * @return string
      */
-    public function getFullname() : ?string
+    public function getFullname(): ?string
     {
         $name = $this->firstname . ' ' . $this->lastname;
 
-        if(trim($name) === '') {
+        if ('' === trim($name)) {
             return null;
         }
 
@@ -97,17 +101,17 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
         $this->member = $member;
     }
 
-    public function invitationToken() : string
+    public function invitationToken(): string
     {
         return $this->invitationToken;
     }
 
-    public function member() : Member
+    public function member(): Member
     {
         return $this->member;
     }
 
-    public function id() : UuidInterface
+    public function id(): UuidInterface
     {
         return $this->id;
     }

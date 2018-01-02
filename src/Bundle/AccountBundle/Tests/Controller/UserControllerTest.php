@@ -1,8 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
 use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
+/**
+ * @coversNothing
+ */
 class UserControllerTest extends BaseTest
 {
     public function testCompleteScenario()
@@ -10,7 +16,6 @@ class UserControllerTest extends BaseTest
         $this->markTestIncomplete();
 
         return;
-
         // Create a new client to browse the application
         $client = static::createClient();
 

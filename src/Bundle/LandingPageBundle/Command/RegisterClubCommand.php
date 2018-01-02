@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyman\Bundle\LandingPageBundle\Command;
 
 use Exception;
@@ -34,18 +36,17 @@ class RegisterClubCommand extends ContainerAwareCommand
 
         $errors = $this->getContainer()->get('validator')->validate($command, ['command']);
 
-        if(0 < $errors->count()) {
+        if (0 < $errors->count()) {
             $msg = 'Encountered some errors:' . PHP_EOL;
             /** @var ConstraintViolation $error */
-            foreach($errors as $error) {
-                $msg.=$error->getMessage() . PHP_EOL;
+            foreach ($errors as $error) {
+                $msg .= $error->getMessage() . PHP_EOL;
             }
 
             throw new Exception($msg);
         }
 
-        $this->getContainer()->get("tactician.commandbus")->handle($command);
-
+        $this->getContainer()->get('tactician.commandbus')->handle($command);
 
 //        $email = $this->getEmail($input, $output);
 //
@@ -88,8 +89,8 @@ class RegisterClubCommand extends ContainerAwareCommand
 
     private function getHostname(InputInterface $input, OutputInterface $output)
     {
-        if(null === $hostName = $input->getArgument('host')) {
-            $choices = array_map(function(Host $host) {
+        if (null === $hostName = $input->getArgument('host')) {
+            $choices = array_map(function (Host $host) {
                 return $host->getAaaUrl();
             }, $this->getContainer()->get('iron.core.repository.host')->findAll());
 
@@ -102,10 +103,11 @@ class RegisterClubCommand extends ContainerAwareCommand
 
     private function getEmail(InputInterface $input, OutputInterface $output)
     {
-        if(null === $email = $input->getArgument('email')) {
+        if (null === $email = $input->getArgument('email')) {
             $question = new Question('Please enter the email');
             $email = $this->getHelper('question')->ask($input, $output, $question);
         }
+
         return $email;
     }
 }

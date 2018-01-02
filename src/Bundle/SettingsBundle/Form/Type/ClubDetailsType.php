@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Gyman\Bundle\ClubBundle\Entity\Details;
@@ -7,11 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class MemberType
- * @package Gyman\Bundle\AppBundle
+ * Class MemberType.
  */
 final class ClubDetailsType extends AbstractType
 {
@@ -41,8 +42,8 @@ final class ClubDetailsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => Details::class,
-            'csrf_protection' => true,
+            'data_class'         => Details::class,
+            'csrf_protection'    => true,
             'cascade_validation' => true,
         ]);
     }

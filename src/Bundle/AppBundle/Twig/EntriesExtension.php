@@ -1,12 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Twig;
 
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 
 /**
- * Class EntriesExtension
- * @package Gyman\Bundle\AppBundle\Twig
+ * Class EntriesExtension.
  */
 class EntriesExtension extends \Twig_Extension
 {
@@ -23,7 +25,8 @@ class EntriesExtension extends \Twig_Extension
 
     /**
      * @param Occurrence $occurrence
-     * @return integer
+     *
+     * @return int
      */
     public function entriesCount(Occurrence $occurrence)
     {
@@ -32,6 +35,7 @@ class EntriesExtension extends \Twig_Extension
 
     /**
      * @param Occurrence $occurrence
+     *
      * @return Entry[]
      */
     public function getEntries(Occurrence $occurrence)

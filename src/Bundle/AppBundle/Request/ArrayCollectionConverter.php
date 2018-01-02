@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Request;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,14 +31,6 @@ class ArrayCollectionConverter implements ParamConverterInterface
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->entityManager;
-    }
-
     public function apply(Request $request, ParamConverter $configuration)
     {
         $name = $configuration->getName();
@@ -46,7 +41,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
         $queredText = $request->attributes->get($name);
 
         // If request parameter is missing or empty then return
-        if (is_null($val = $request->get($name)) || strlen(trim($val)) === 0) {
+        if (null === ($val = $request->get($name)) || 0 === strlen(trim($val))) {
             $request->attributes->set($name, new ArrayCollection());
 
             return;
@@ -62,7 +57,7 @@ class ArrayCollectionConverter implements ParamConverterInterface
             $builder = $repo->$finder();
         }
 
-        $limit = isset($options['limit']) ? $options['limit'] : 10;
+        $limit = $options['limit'] ?? 10;
 
         // Edit the builder and add WHERE IN $items clause
         $fields = $options['field'];
@@ -109,6 +104,14 @@ class ArrayCollectionConverter implements ParamConverterInterface
         } catch (\Doctrine\ORM\Mapping\MappingException $e) {
             return false;
         }
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->entityManager;
     }
 
     protected function getOptions(ConfigurationInterface $configuration)

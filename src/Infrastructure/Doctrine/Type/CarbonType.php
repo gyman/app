@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Infrastructure\Doctrine\Type;
 
 use Carbon\Carbon;
@@ -32,19 +35,19 @@ class CarbonType extends Type
         throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', 'DateTime']);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform) : Carbon
+    public function convertToPHPValue($value, AbstractPlatform $platform): Carbon
     {
-        if ($value === null || $value instanceof \DateTimeInterface) {
+        if (null === $value || $value instanceof \DateTimeInterface) {
             return $value;
         }
 
         $val = DateTime::createFromFormat($platform->getDateTimeFormatString(), $value);
 
-        if ( ! $val) {
+        if (!$val) {
             $val = date_create($value);
         }
 
-        if ( ! $val) {
+        if (!$val) {
             throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeFormatString());
         }
 

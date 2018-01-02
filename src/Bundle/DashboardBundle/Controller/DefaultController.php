@@ -1,18 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\DashboardBundle\Controller;
 
 use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gyman\Application\Command\SearchMemberCommand;
 use Gyman\Application\Command\UpdateOccurrenceDetailsCommand;
 use Gyman\Bundle\AppBundle\Form\SearchType;
 use Gyman\Bundle\AppBundle\Form\UpdateOccurrenceDetailsType;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
-use Doctrine\Common\Collections\Criteria;
-use Gyman\Domain\Entry;
-use Gyman\Domain\Member;
-use Gyman\Application\Command\SearchMemberCommand;
 use Gyman\Domain\MemberView;
 use Gyman\Domain\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -22,8 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class DefaultController
- * @package Gyman\Bundle\DashboardBundle\Controller
+ * Class DefaultController.
  */
 class DefaultController extends Controller
 {
@@ -47,7 +46,7 @@ class DefaultController extends Controller
         $date = new DateTime();
 
         $searchForm = $this->createForm(SearchType::class, new SearchMemberCommand(), [
-            "action" => $this->generateUrl("gyman_members_search")
+            'action' => $this->generateUrl('gyman_members_search'),
         ]);
 
         return [
@@ -67,7 +66,7 @@ class DefaultController extends Controller
     {
         return new Response($this->renderView('DashboardBundle:Default:activities.html.twig', [
                     'date'        => $date,
-                    'occurrences' => $this->getOccurrencesForDay($date)
+                    'occurrences' => $this->getOccurrencesForDay($date),
         ]));
     }
 
@@ -75,33 +74,34 @@ class DefaultController extends Controller
      * @Route("/activity/{id}", name="gyman_dashboard_listClassMembers")
      * @ParamConverter("occurrence", class="Gyman\Domain\Calendar\Event\Occurrence", options={"repository_method" = "findOneById"})
      * @Template("DashboardBundle:Default:listClassMembers.html.twig")
+     *
      * @param Occurrence $occurrence
+     *
      * @return array
      */
     public function listClassMembersAction(Occurrence $occurrence)
     {
-        $memberQuery = $this->get("gyman.members.query");
+        $memberQuery = $this->get('gyman.members.query');
 
         $allMembers = $memberQuery->findAll();
 
-        usort($allMembers, function(MemberView $a, MemberView $b) {
-            if ($a->currentVoucherId() !== null) {
+        usort($allMembers, function (MemberView $a, MemberView $b) {
+            if (null !== $a->currentVoucherId()) {
                 return 1;
             }
 
-            if ($b->currentVoucherId() !== null) {
+            if (null !== $b->currentVoucherId()) {
                 return -1;
             }
 
             return 0;
-
         });
 
         $membersThatEntered = $memberQuery->findMembersThatEntered($occurrence);
 
         if (count($membersThatEntered) > 0) {
             $members = array_filter($allMembers, function (MemberView $member) use ($membersThatEntered) {
-                return !in_array($member, $membersThatEntered);
+                return !in_array($member, $membersThatEntered, true);
             });
         } else {
             $members = $allMembers;
@@ -109,30 +109,32 @@ class DefaultController extends Controller
 
         $instructors = $this->get('gyman.user.repository')->getInstructors();
 
-        $instructors = array_combine(array_map(function(User $instructor) : string {
+        $instructors = array_combine(array_map(function (User $instructor): string {
             $name = $instructor->getFullname();
-            return $name !== null ? $name : $instructor->getUsername();
-        }, $instructors), array_map(function(User $instructor) : string {
+
+            return null !== $name ? $name : $instructor->getUsername();
+        }, $instructors), array_map(function (User $instructor): string {
             return $instructor->id()->toString();
         }, $instructors));
 
         $form = $this->createForm(UpdateOccurrenceDetailsType::class, new UpdateOccurrenceDetailsCommand(
             $occurrence->id(),
-            $occurrence->instructor() ==! null ? $occurrence->instructor()->id() : null,
+            $occurrence->instructor() === !null ? $occurrence->instructor()->id() : null,
             $occurrence->subject(),
             $occurrence->note()
-        ), ["instructors" => $instructors]);
+        ), ['instructors' => $instructors]);
 
         return [
-            "occurrence" => $occurrence,
-            "membersThatEntered"   =>  $membersThatEntered,
-            "allMembers" => $members,
-            "form" => $form->createView()
+            'occurrence'           => $occurrence,
+            'membersThatEntered'   => $membersThatEntered,
+            'allMembers'           => $members,
+            'form'                 => $form->createView(),
         ];
     }
 
     /**
      * @param $date
+     *
      * @return Occurrence[]|ArrayCollection
      */
     private function getOccurrencesForDay($date)

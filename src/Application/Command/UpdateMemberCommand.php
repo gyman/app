@@ -1,15 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Section;
 use Gyman\Domain\Member;
+use Gyman\Domain\Section;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class UpdateMemberCommand
- * @package Gyman\Application\Command
+ * Class UpdateMemberCommand.
  */
 class UpdateMemberCommand
 {
@@ -84,7 +86,7 @@ class UpdateMemberCommand
     public $uploadFile;
 
     /**
-     * @var integer
+     * @var int
      */
     public $id;
 
@@ -95,6 +97,7 @@ class UpdateMemberCommand
 
     /**
      * @param Member $member
+     *
      * @return UpdateMemberCommand
      */
     public static function createFromMember(Member $member)

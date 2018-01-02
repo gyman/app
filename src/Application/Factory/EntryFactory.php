@@ -1,22 +1,26 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Factory;
 
 use DateTime;
-use Gyman\Domain\Entry;
 use Gyman\Application\Command\OpenEntryCommand;
+use Gyman\Domain\Entry;
 use Gyman\Domain\Entry\Price;
 
 /**
- * Class EntryFactory
- * @package Gyman\Bundle\AppBundle\Factory
+ * Class EntryFactory.
  */
 final class EntryFactory
 {
     /**
      * @param $params
+     * @param mixed $array
+     *
      * @return Entry
      */
-    public static function createFromArray($array) : Entry
+    public static function createFromArray($array): Entry
     {
         $template = [
             'startDate'            => new DateTime(),
@@ -52,11 +56,11 @@ final class EntryFactory
     public static function createFromOpenEntryCommand(OpenEntryCommand $command)
     {
         return self::createFromArray([
-            'startDate' => $command->startDate,
-            'endDate'   => null,
-            'price'     => ['amount' => $command->price, 'currency' => 'PLN'],
-            'type'      => $command->entryType,
-            'occurrence' => $command->occurrence
+            'startDate'  => $command->startDate,
+            'endDate'    => null,
+            'price'      => ['amount' => $command->price, 'currency' => 'PLN'],
+            'type'       => $command->entryType,
+            'occurrence' => $command->occurrence,
         ]);
     }
 }

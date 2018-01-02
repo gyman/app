@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Monolog;
 
 use Gyman\Domain\UserInterface;
@@ -17,19 +20,19 @@ class SentryContextProcessor
     {
         $token = $this->tokenStorage->getToken();
 
-        if ($token !== null){
+        if (null !== $token) {
             $user = $token->getUser();
             if ($user instanceof UserInterface) {
-                $record['context']['user'] = array(
+                $record['context']['user'] = [
 //                    'name' => $user->getName(),
                     'username' => $user->getUsername(),
-                    'email' => $user->getEmail(),
-                );
+                    'email'    => $user->getEmail(),
+                ];
             }
         }
 
         // Add various tags
-        $record['context']['tags'] = array('key' => 'value');
+        $record['context']['tags'] = ['key' => 'value'];
 
         // Add various generic context
         $record['extra']['key'] = 'value';

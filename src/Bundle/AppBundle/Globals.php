@@ -1,15 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle;
 
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
- * Class Globals
+ * Class Globals.
  *
  * OK, I know. This one earned me a huge kick in the balls. But hey, life is not perfect. Neither this code is ;)
  *
- * @package Gyman\Bundle\AppBundle
  * @deprecated
  *
  * @todo: remove as quick as possible
@@ -19,34 +20,34 @@ final class Globals
     /**
      * @var
      */
-    protected static $defaultDateTimeFormat = 'Y.m.d H:i:s';
+    private static $defaultDateTimeFormat = 'Y.m.d H:i:s';
 
     /**
      * @var string
      */
-    protected static $defaultDateFormat = 'Y.m.d';
+    private static $defaultDateFormat = 'Y.m.d';
 
     /**
      * @var string
      */
-    protected static $galleryPath;
+    private static $galleryPath;
 
     /**
      * @var Subdomain
      */
-    protected static $subdomain;
+    private static $subdomain;
 
     /**
      * @var string
      */
-    protected static $galleryDir = '/uploads/gallery/';
+    private static $galleryDir = '/uploads/gallery/';
 
     /**
      * @var string
      */
-    protected static $noImage = '/bundles/gymanapp/images/no-profile.gif';
+    private static $noImage = '/bundles/gymanapp/images/no-profile.gif';
 
-    protected static $compareChoices = [
+    private static $compareChoices = [
         'eq'         => 'równy',
         'lt'         => 'wcześniej niż',
         'gt'         => 'później niż',
@@ -61,7 +62,7 @@ final class Globals
         'thisYear'   => 'ten rok',
         'lastYear'   => 'poprzedni rok',
     ];
-    protected static $filtersLabels = [
+    private static $filtersLabels = [
         'Activities'       => 'Zajęcia',
         'Age'              => 'Wiek',
         'Belt'             => 'Kolor pasa',
@@ -121,11 +122,13 @@ final class Globals
     }
 
     /**
-     * Adds relative to DOCUMENT_ROOT path to file
-     * @param  string $string
+     * Adds relative to DOCUMENT_ROOT path to file.
+     *
+     * @param string $string
+     *
      * @return string
      */
-    public static function applyGalleryPath(string $string) : string
+    public static function applyGalleryPath(string $string): string
     {
         if (self::checkIfImageExists($string)) {
             return self::getGalleryPath() . $string;
@@ -135,8 +138,10 @@ final class Globals
     }
 
     /**
-     * Adds absolute phisical path to file
+     * Adds absolute phisical path to file.
+     *
      * @param $string
+     *
      * @return string
      */
     public static function applyFileDir($string)
@@ -192,12 +197,12 @@ final class Globals
         return 'PLN';
     }
 
-    public static function setSubdomain(Subdomain $subdomain) : void
+    public static function setSubdomain(Subdomain $subdomain): void
     {
         self::$subdomain = $subdomain;
     }
 
-    public static function getSubdomain() : Subdomain
+    public static function getSubdomain(): Subdomain
     {
         return self::$subdomain;
     }

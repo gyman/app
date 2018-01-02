@@ -1,20 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gyman\Domain\Section;
 
 /**
- * Class SectionRepository
- * @package Gyman\Bundle\AppBundle\Repository
+ * Class SectionRepository.
  */
 class SectionRepository extends EntityRepository
 {
     /**
      * @param Section $section
-     * @return null
      */
     public function insert(Section $section)
     {

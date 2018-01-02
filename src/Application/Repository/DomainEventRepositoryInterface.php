@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
 use Gyman\Application\Event\DomainEventInterface;
 
 /**
- * Interface DomainEventRepositoryInterface
- * @package Gyman\Domain
+ * Interface DomainEventRepositoryInterface.
  */
 interface DomainEventRepositoryInterface extends RepositoryInterface
 {
@@ -16,7 +18,6 @@ interface DomainEventRepositoryInterface extends RepositoryInterface
 
     /**
      * @param DomainEventInterface $event
-     * @return null
      */
     public function insert(DomainEventInterface $event);
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Dende\MultitenancyBundle\Exception\TenantNotFoundException;
@@ -15,6 +18,7 @@ class RedirectTo404IfClubNotExists
 
     /**
      * RedirectTo404IfClubNotExists constructor.
+     *
      * @param Router $router
      */
     public function __construct(Router $router)
@@ -27,21 +31,21 @@ class RedirectTo404IfClubNotExists
         /** @var TenantNotFoundException $exception */
         $exception = $event->getException();
 
-        if(!$exception instanceof TenantNotFoundException){
+        if (!$exception instanceof TenantNotFoundException) {
             return;
         }
 
         $subdomainName = $exception->getTenantId();
 
-        if($subdomainName === null) {
+        if (null === $subdomainName) {
             return;
         }
 
-        $schemaAndHost = strtr($event->getRequest()->getSchemeAndHttpHost(), [$subdomainName . "." => ""]);
+        $schemaAndHost = strtr($event->getRequest()->getSchemeAndHttpHost(), [$subdomainName . '.' => '']);
 
         $path = $this->router->generate(
-            "gyman_error_club_not_found",
-            ["subdomain" => $subdomainName],
+            'gyman_error_club_not_found',
+            ['subdomain' => $subdomainName],
             Router::ABSOLUTE_PATH
         );
 

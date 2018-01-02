@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Service\Subscriber;
 
 use FOS\UserBundle\Event\FormEvent;
@@ -12,22 +15,21 @@ use Symfony\Component\Routing\Router;
 class RegisteredUserSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var Router $router
+     * @var Router
      */
     private $router;
 
     /**
-     * @var Session $session
+     * @var Session
      */
     private $session;
 
     /**
-     * @var Mailer $mailer
+     * @var Mailer
      */
     private $mailer;
 
     /**
-     *
      * @return type
      */
     public function getRouter()
@@ -36,8 +38,8 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * @param \Symfony\Component\Routing\Router $router
      *
-     * @param  \Symfony\Component\Routing\Router                                       $router
      * @return \Gyman\Bundle\AccountBundle\Service\Subscriber\RegisteredUserSubscriber
      */
     public function setRouter(Router $router)
@@ -72,7 +74,7 @@ class RegisteredUserSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

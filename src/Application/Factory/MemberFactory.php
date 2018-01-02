@@ -1,23 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Factory;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Member;
 use Gyman\Application\Command\CreateMemberCommand;
+use Gyman\Domain\Member;
+use Gyman\Domain\Member\Details;
 use Gyman\Domain\Member\Details\Barcode;
 use Gyman\Domain\Member\Details\Belt;
-use Gyman\Domain\Member\Details;
-use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\Member\Details\Foto;
+use Gyman\Domain\Member\EmailAddress;
 
 /**
- * Class MemberFactory
+ * Class MemberFactory.
  */
 final class MemberFactory implements MemberFactoryInterface
 {
     /**
      * @param $params
+     * @param mixed $array
+     *
      * @return Member
      */
     public static function createFromArray($array)
@@ -80,6 +85,7 @@ final class MemberFactory implements MemberFactoryInterface
 
     /**
      * @param CreateMemberCommand $command
+     *
      * @return Member
      */
     public static function createFromCreateMemberCommand(CreateMemberCommand $command)
@@ -97,7 +103,7 @@ final class MemberFactory implements MemberFactoryInterface
             'belt'             => $command->belt,
             'barcode'          => $command->barcode,
             'starred'          => $command->starred,
-            'sections'         => $command->sections
+            'sections'         => $command->sections,
         ]);
     }
 }

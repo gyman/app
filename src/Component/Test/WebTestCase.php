@@ -1,8 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Component\Test;
 
 use Symfony\Component\BrowserKit\Client;
 
+/**
+ * @coversNothing
+ */
 class WebTestCase extends ContainerAwareTestCase
 {
     /**
@@ -14,14 +20,6 @@ class WebTestCase extends ContainerAwareTestCase
      */
     protected $crawler;
     protected $parsedResponse;
-    protected function loginAs($username)
-    {
-        $this->prepareClient([
-            'PHP_AUTH_USER' => $username,
-            'PHP_AUTH_PW'   => $username,
-            'HTTP_HOST'     => $this->container->getParameter('base_url'),
-        ]);
-    }
 
     public function doLogin($username, $password)
     {
@@ -33,8 +31,26 @@ class WebTestCase extends ContainerAwareTestCase
         $this->client->submit($form);
     }
 
+    public function assertResponseHeaderExists($header)
+    {
+        $this->assertTrue(
+            $this->client->getResponse()->headers->has($header),
+            "Response header '$header' doesn't exist"
+        );
+    }
+
+    protected function loginAs($username)
+    {
+        $this->prepareClient([
+            'PHP_AUTH_USER' => $username,
+            'PHP_AUTH_PW'   => $username,
+            'HTTP_HOST'     => $this->container->getParameter('base_url'),
+        ]);
+    }
+
     /**
-     * @param  array  $server
+     * @param array $server
+     *
      * @return Client
      */
     protected function prepareClient(array $server = [])
@@ -46,6 +62,7 @@ class WebTestCase extends ContainerAwareTestCase
 
         return $client;
     }
+
     protected function assertText(array $expectedMessage, $actualMessage)
     {
         if (isset($expectedMessage['text'])) {
@@ -57,28 +74,34 @@ class WebTestCase extends ContainerAwareTestCase
             }
         }
     }
+
     protected function translate($textToTranslation, $translationParams = [])
     {
         $translator = $this->container->get('translator');
 
         return $translator->trans($textToTranslation, $translationParams);
     }
+
     protected function thenResponseStatusEquals($statusCode)
     {
         $this->assertSame($statusCode, $this->client->getResponse()->getStatusCode());
     }
+
     protected function thenResponseIsJson()
     {
         $data = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertTrue(is_array($data));
+        $this->assertInternalType('array', $data);
         $this->parsedResponse = $data;
     }
+
     protected function thenReturnedElementsCountEquals($expected)
     {
         $this->assertSame($expected, count($this->parsedResponse));
     }
+
     /**
      * @SuppressWarnings(PHPMD.ExitExpression)
+     *
      * @param bool $die
      */
     protected function dumpResponse($die = true)
@@ -88,27 +111,23 @@ class WebTestCase extends ContainerAwareTestCase
             die;
         }
     }
+
     protected function thenJsonResponseContainsKey($key)
     {
         $this->assertContains($key, array_keys($this->parsedResponse));
     }
+
     protected function thenJsonResponseContainsKeyValuePair($key, $value)
     {
-        $this->assertContains($key, array_keys($this->parsedResponse, $value));
+        $this->assertContains($key, array_keys($this->parsedResponse, $value, true));
     }
-    public function assertResponseHeaderExists($header)
-    {
-        $this->assertTrue(
-            $this->client->getResponse()->headers->has($header),
-            "Response header '$header' doesn't exist"
-        );
-    }
+
     /**
      * Get an URI from route & parameters.
      *
-     * @param string  $route    route name
-     * @param array   $params   route parameters
-     * @param boolean $absolute
+     * @param string $route    route name
+     * @param array  $params   route parameters
+     * @param bool   $absolute
      *
      * @return string
      */
@@ -116,6 +135,7 @@ class WebTestCase extends ContainerAwareTestCase
     {
         return $this->container->get('router')->generate($route, $params, $absolute);
     }
+
     /**
      * @return bool
      */
@@ -130,9 +150,7 @@ class WebTestCase extends ContainerAwareTestCase
             'Returned content is not a valid JSON'
         );
     }
-    /**
-     * @return void
-     */
+
     protected function assertContentLocationHeader()
     {
         $this->assertTrue(
@@ -140,6 +158,7 @@ class WebTestCase extends ContainerAwareTestCase
             "'Content-Location' header is missing"
         );
     }
+
     /**
      * @return mixed
      */
@@ -147,13 +166,15 @@ class WebTestCase extends ContainerAwareTestCase
     {
         return $this->client->getResponse()->getContent();
     }
+
     /**
-     * @return integer
+     * @return int
      */
     protected function getStatusCode()
     {
         return $this->client->getResponse()->getStatusCode();
     }
+
     /**
      * @param $method
      * @param $path

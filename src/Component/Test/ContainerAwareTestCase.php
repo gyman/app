@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Component\Test;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;

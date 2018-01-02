@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Exception;
 
 /**
- * Class ExceededMaximumAmountOfEntriesException
- * @package Gyman\Domain
+ * Class ExceededMaximumAmountOfEntriesException.
  */
 class ExceededMaximumAmountOfEntriesException extends \Exception
 {

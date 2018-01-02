@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Repository;
 
 use DateTime;
@@ -10,7 +13,7 @@ use Gyman\Domain\Entry;
 use Traversable;
 
 /**
- * EntryRepository
+ * EntryRepository.
  */
 class EntryRepository extends EntityRepository implements EntryRepositoryInterface
 {
@@ -28,14 +31,14 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
     {
         $em = $this->getEntityManager();
 
-        if($entries instanceof Entry) {
+        if ($entries instanceof Entry) {
             $em->persist($entries);
             $em->flush($entries);
 
             return;
-        } elseif(is_array($entries) || $entries instanceof Traversable) {
+        } elseif (is_array($entries) || $entries instanceof Traversable) {
             /** @var Entry $entry */
-            foreach($entries as $entry) {
+            foreach ($entries as $entry) {
                 $em->persist($entry);
             }
 
@@ -44,7 +47,7 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
             return;
         }
 
-        throw new \Exception("Argument is unknown type! Should be Entry class or collection/array of Entry class!");
+        throw new \Exception('Argument is unknown type! Should be Entry class or collection/array of Entry class!');
     }
 
     /**
@@ -62,7 +65,6 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
     }
 
     /**
-     *
      * @return QueryBuilder
      */
     public function getQuery()
@@ -84,7 +86,6 @@ class EntryRepository extends EntityRepository implements EntryRepositoryInterfa
     }
 
     /**
-     *
      * @return QueryBuilder
      */
     public function getCountByActivitiesQueryBuilder(DateTime $startDate, DateTime $endDate)

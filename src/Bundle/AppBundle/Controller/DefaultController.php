@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Bundle\ClubBundle\Entity\User;
@@ -27,8 +30,8 @@ class DefaultController extends Controller
         }
 
         return [
-            "club" => $this->get('gyman.club.provider')->club(),
-            "csrf_token" => $csrfToken
+            'club'       => $this->get('gyman.club.provider')->club(),
+            'csrf_token' => $csrfToken,
         ];
     }
 
@@ -43,19 +46,21 @@ class DefaultController extends Controller
 
     /**
      * @Route("/login-post-register/{id}", name="gyman_app_login_after_registration")
+     *
      * @param Request $request
-     * @param User $user
+     * @param User    $user
+     *
      * @return Response
      * @ParamConverter("user", class="ClubBundle:User")
      */
     public function loginAfterRegistrationAction(User $user, Request $request)
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), "main", $user->getRoles());
-        $this->get("security.token_storage")->setToken($token);
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
+        $this->get('security.token_storage')->setToken($token);
 
         $event = new InteractiveLoginEvent($request, $token);
-        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+        $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 
-        return $this->redirect($this->generateUrl("gyman_settings", [], Router::ABSOLUTE_PATH));
+        return $this->redirect($this->generateUrl('gyman_settings', [], Router::ABSOLUTE_PATH));
     }
 }

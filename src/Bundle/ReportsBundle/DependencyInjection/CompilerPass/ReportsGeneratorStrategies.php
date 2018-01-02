@@ -1,13 +1,14 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: uirapuru
  * Date: 20.03.16
- * Time: 01:29
+ * Time: 01:29.
  */
 
 namespace Gyman\Bundle\ReportsBundle\DependencyInjection\CompilerPass;
-
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,8 +34,8 @@ class ReportsGeneratorStrategies implements CompilerPassInterface
         foreach ($taggedServices as $id => $tags) {
             foreach ($tags as $attributes) {
                 $definition->addMethodCall('addStrategy', [
-                    $attributes["alias"],
-                    new Reference($id)
+                    $attributes['alias'],
+                    new Reference($id),
                 ]);
             }
         }

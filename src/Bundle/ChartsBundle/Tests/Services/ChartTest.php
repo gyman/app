@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ChartsBundle\Tests\Services;
 
 use DateTime;
@@ -6,10 +9,16 @@ use Doctrine\ORM\EntityRepository;
 use Gyman\Bundle\ChartsBundle\Services\Chart;
 use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
+/**
+ * @coversNothing
+ */
 class ChartTest extends BaseTest
 {
     /**
      * @dataProvider prepareResultsDataProvider
+     *
+     * @param mixed $dataset
+     * @param mixed $expected
      */
     public function testPrepareResults($dataset, $expected)
     {
@@ -23,6 +32,10 @@ class ChartTest extends BaseTest
 
     /**
      * @dataProvider getEntriesByActivityDataProvider
+     *
+     * @param mixed $dataset
+     * @param mixed $days
+     * @param mixed $endDate
      */
     public function testGetEntriesByActivity($dataset, Chart $expected, $days, $endDate)
     {
@@ -45,6 +58,8 @@ class ChartTest extends BaseTest
 
     /**
      * @dataProvider getActivityByFrequencyDataProvider
+     *
+     * @param mixed $dataset
      */
     public function testGetActivityByFrequency($dataset, Chart $expected)
     {
@@ -249,45 +264,6 @@ class ChartTest extends BaseTest
         ];
     }
 
-    private function getEntityManagerMock(EntityRepository $repositoryMock)
-    {
-        $mock = $this->getMockBuilder("Doctrine\ORM\EntityManager")
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $mock->expects($this->once())
-            ->method('getRepository')
-            ->will($this->returnValue($repositoryMock));
-
-        return $mock;
-    }
-
-    private function getEntryRepositoryMock()
-    {
-        $mock = $this->getMockBuilder("Gyman\Bundle\EntriesBundle\Entity\EntryRepository")
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $mock->expects($this->once())
-            ->method('getCountByActivities')
-            ->will($this->returnValue($this->dataset));
-
-        return $mock;
-    }
-
-    private function getActivityRepositoryMock()
-    {
-        $mock = $this->getMockBuilder("Gyman\Bundle\ScheduleBundle\Entity\ActivityRepository")
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $mock->expects($this->once())
-            ->method('getCountByActivities')
-            ->will($this->returnValue($this->dataset));
-
-        return $mock;
-    }
-
     public function prepareResultsDataProvider()
     {
         return [
@@ -332,5 +308,44 @@ class ChartTest extends BaseTest
                 ],
             ],
         ];
+    }
+
+    private function getEntityManagerMock(EntityRepository $repositoryMock)
+    {
+        $mock = $this->getMockBuilder("Doctrine\ORM\EntityManager")
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock->expects($this->once())
+            ->method('getRepository')
+            ->will($this->returnValue($repositoryMock));
+
+        return $mock;
+    }
+
+    private function getEntryRepositoryMock()
+    {
+        $mock = $this->getMockBuilder("Gyman\Bundle\EntriesBundle\Entity\EntryRepository")
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock->expects($this->once())
+            ->method('getCountByActivities')
+            ->will($this->returnValue($this->dataset));
+
+        return $mock;
+    }
+
+    private function getActivityRepositoryMock()
+    {
+        $mock = $this->getMockBuilder("Gyman\Bundle\ScheduleBundle\Entity\ActivityRepository")
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock->expects($this->once())
+            ->method('getCountByActivities')
+            ->will($this->returnValue($this->dataset));
+
+        return $mock;
     }
 }

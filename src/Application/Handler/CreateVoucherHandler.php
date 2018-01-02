@@ -1,21 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Application\Repository\EntryRepositoryInterface;
-use Gyman\Application\Repository\VoucherRepositoryInterface;
-use Gyman\Bundle\AppBundle\Repository\MemberRepository;
-use Gyman\Domain\Entry;
-use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Command\CreateVoucherCommand;
+use Gyman\Application\Factory\VoucherFactory;
+use Gyman\Application\Repository\EntryRepositoryInterface;
+use Gyman\Application\Repository\MemberRepositoryInterface;
+use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
-use Gyman\Application\Repository\MemberRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class CreateVoucherHandler
- * @package Gyman\Domain
+ * Class CreateVoucherHandler.
  */
 class CreateVoucherHandler
 {
@@ -37,12 +37,12 @@ class CreateVoucherHandler
      */
     private $dispatcher;
 
-
     /**
      * CreateMember constructor.
+     *
      * @param MemberRepositoryInterface $repository
-     * @param EntryRepositoryInterface $entriesRepository
-     * @param EventDispatcherInterface $dispatcher
+     * @param EntryRepositoryInterface  $entriesRepository
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(MemberRepositoryInterface $repository, EntryRepositoryInterface $entriesRepository, EventDispatcherInterface $dispatcher)
     {
@@ -53,9 +53,11 @@ class CreateVoucherHandler
 
     /**
      * @param CreateVoucherCommand $createVoucherCommand
-     * @param UserInterface $author
+     * @param UserInterface        $author
+     *
      * @throws \Exception
      * @throws \Gyman\Application\Exception\VouchersAreOverlappingException
+     *
      * @internal param Member $member
      * @internal param Voucher $voucher
      */
@@ -66,15 +68,15 @@ class CreateVoucherHandler
 
         $creditEntries = $voucher->member()->filterCreditEntries();
 
-        if(!is_null($createVoucherCommand->maximumAmount) && $createVoucherCommand->maximumAmount < count($creditEntries)) {
+        if (null !== $createVoucherCommand->maximumAmount && $createVoucherCommand->maximumAmount < count($creditEntries)) {
             throw new \Exception(sprintf(
-                "User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries",
+                'User has %d credit entries to be taken automaticaly from new voucher, you have to add bigger number of maximum amount of entries',
                 count($creditEntries)
             ));
         }
 
-        if(!$creditEntries->isEmpty()) {
-            array_map(function(Entry $entry) use ($voucher) {
+        if (!$creditEntries->isEmpty()) {
+            array_map(function (Entry $entry) use ($voucher) {
                 $entry->payOffWithVoucher($voucher);
             }, $creditEntries->toArray());
         }

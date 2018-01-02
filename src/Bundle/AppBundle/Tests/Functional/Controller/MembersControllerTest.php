@@ -1,16 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
-use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Component\Test\BaseFunctionalTestCase;
-use Gyman\Domain\Member\Details\Belt;
+use Gyman\Domain\Member;
 use Gyman\Domain\Member\Details;
+use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Member\EmailAddress;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class MemberControllerTest
+ * Class MemberControllerTest.
+ *
+ * @coversNothing
  */
 class MembersControllerTest extends BaseFunctionalTestCase
 {
@@ -150,7 +155,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $this->assertEquals($member->details()->notes(), 'some admin notes');
 
         $this->assertCount(1, $member->sections());
-        $this->assertEquals("Kids 4-8", $member->sections()->first()->title());
+        $this->assertEquals('Kids 4-8', $member->sections()->first()->title());
 
         $this->assertTrue(Globals::checkIfImageExists($member->details()->foto()->foto()));
         unlink(Globals::applyFileDir($member->details()->foto()->foto()));
@@ -205,7 +210,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $crawler = $this->client->request($form->getMethod(), $form->getUri(), $form->getPhpValues(), $files);
         $this->assertEquals(200, $this->getStatusCode());
 
-        /** @var Member $member */
+        /* @var Member $member */
         $this->container->get('doctrine.orm.tenant_entity_manager')->refresh($member);
         $this->assertInstanceOf('Gyman\Domain\Member', $member);
 
@@ -238,7 +243,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $this->assertEquals('some admin notes', $member->details()->notes());
 
         $this->assertCount(1, $member->sections());
-        $this->assertEquals("Junior 8-14", $member->sections()->first()->title());
+        $this->assertEquals('Junior 8-14', $member->sections()->first()->title());
 
         $this->assertTrue(Globals::checkIfImageExists($member->details()->foto()->foto()));
         unlink(Globals::applyFileDir($member->details()->foto()->foto()));
@@ -247,6 +252,10 @@ class MembersControllerTest extends BaseFunctionalTestCase
     /**
      * @test
      * @dataProvider getErrorGeneratingForms
+     *
+     * @param mixed $values
+     * @param mixed $elementPath
+     * @param mixed $error
      */
     public function member_edit_form_is_posted_and_error_is_emitted($values, $elementPath, $error)
     {
@@ -287,6 +296,10 @@ class MembersControllerTest extends BaseFunctionalTestCase
     /**
      * @test
      * @dataProvider getErrorGeneratingForms
+     *
+     * @param mixed $values
+     * @param mixed $elementPath
+     * @param mixed $error
      */
     public function new_member_form_is_posted_and_error_is_emitted($values, $elementPath, $error)
     {
@@ -323,6 +336,9 @@ class MembersControllerTest extends BaseFunctionalTestCase
     /**
      * @test
      * @dataProvider memberSearchProvider
+     *
+     * @param mixed $query
+     * @param mixed $findBy
      */
     public function member_search_form_on_dashboard_redirects_to_user($query, $findBy)
     {

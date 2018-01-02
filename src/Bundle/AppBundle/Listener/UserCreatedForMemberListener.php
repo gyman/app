@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Listener;
 
 use Gyman\Application\Event\UserForMemberCreated;
@@ -6,11 +9,12 @@ use Gyman\Bundle\MailerBundle\Service\Mailer;
 
 class UserCreatedForMemberListener
 {
-    /** @var  Mailer */
+    /** @var Mailer */
     protected $mailer;
 
     /**
      * UserCreatedForMemberListener constructor.
+     *
      * @param Mailer $mailer
      */
     public function __construct(Mailer $mailer)
@@ -23,12 +27,12 @@ class UserCreatedForMemberListener
         $user = $event->user();
 
         $this->mailer->setParameters([
-            "token" => $user->invitationToken(),
-            "currentPassword" => $event->currentPassword()
+            'token'           => $user->invitationToken(),
+            'currentPassword' => $event->currentPassword(),
         ]);
 
         $this->mailer->setTo([$user->getEmail() => $user->member()->details()->fullName()]);
-        $this->mailer->setSubject("[gyman.pl] Zaproszenie do rejestracji konta.");
+        $this->mailer->setSubject('[gyman.pl] Zaproszenie do rejestracji konta.');
 
         $this->mailer->sendMail();
     }

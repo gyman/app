@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
+
 use Gyman\Domain\Section;
 
 /**
- * Class SearchMemberCommand
- * @package Gyman\Application\Command
+ * Class SearchMemberCommand.
  */
 class SearchMemberCommand
 {
@@ -19,16 +22,16 @@ class SearchMemberCommand
     public $section;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $hasVoucher;
     /**
-     * @var boolean
+     * @var bool
      */
     public $hasOpenedEntry;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $starred;
 

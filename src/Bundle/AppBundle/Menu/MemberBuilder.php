@@ -1,13 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Menu;
 
 use Gyman\Domain\Member;
-use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class MemberBuilder
 {
@@ -27,14 +27,6 @@ class MemberBuilder
     private $member;
 
     /**
-     * @param Member $member
-     */
-    public function setMember(Member $member)
-    {
-        $this->member = $member;
-    }
-
-    /**
      * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $checker)
@@ -43,13 +35,22 @@ class MemberBuilder
         $this->authorizationChecker = $checker;
     }
 
+    /**
+     * @param Member $member
+     */
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
+    }
+
     public function tabs(RequestStack $requestStack)
     {
         $request = $requestStack->getMasterRequest();
         $menu = $this->factory->createItem('root');
 
         /**
-         * @var Member $member
+         * @var Member
+         *
          * @todo - pobieranie membera z repo, nie z requesta!
          */
         $member = $request->get('member');

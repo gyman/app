@@ -1,11 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultBuilder
 {

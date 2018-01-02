@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Model;
 
 use Carbon\Carbon;
@@ -6,10 +9,12 @@ use DateTime;
 use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Domain\Entry;
-use Gyman\Domain\Voucher;
-use Gyman\Domain\Voucher\Price;
 use Gyman\Domain\Entry\Price as EntryPrice;
+use Gyman\Domain\Voucher;
 
+/**
+ * @coversNothing
+ */
 class VoucherTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -25,13 +30,15 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider overlapsDataProvider
+     *
+     * @param mixed $overlaps
      */
     public function testOverlaps(Voucher $testVoucher, $overlaps)
     {
         $voucher = VoucherFactory::createFromArray([
-            'startDate' => Carbon::parse('2015-6-1 00:00:00'),
-            'endDate'   => Carbon::parse('2015-6-15 23:59:59'),
-            'maximumAmount' => 2
+            'startDate'     => Carbon::parse('2015-6-1 00:00:00'),
+            'endDate'       => Carbon::parse('2015-6-15 23:59:59'),
+            'maximumAmount' => 2,
         ]);
 
         $this->assertEquals($voucher->overlaps($testVoucher), $overlaps);
@@ -170,31 +177,31 @@ class VoucherTest extends \PHPUnit_Framework_TestCase
             ],
             'overlaps fully but no left entries' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => Carbon::parse('2015-6-5 00:00:00'),
-                    'endDate'   => Carbon::parse('2015-6-10 23:59:59'),
+                    'startDate'     => Carbon::parse('2015-6-5 00:00:00'),
+                    'endDate'       => Carbon::parse('2015-6-10 23:59:59'),
                     'maximumAmount' => 2,
-                    'entries' => [
+                    'entries'       => [
                         EntryFactory::createFromArray([
-                            "type" => Entry::TYPE_VOUCHER,
+                            'type' => Entry::TYPE_VOUCHER,
                         ]),
                         EntryFactory::createFromArray([
-                            "type" => Entry::TYPE_VOUCHER,
+                            'type' => Entry::TYPE_VOUCHER,
                         ]),
-                    ]
+                    ],
                 ]),
                 'overlaps' => false,
             ],
             'overlaps fully but voucher closed' => [
                 'testVoucher' => VoucherFactory::createFromArray([
-                    'startDate' => Carbon::parse('2015-6-5 00:00:00'),
-                    'endDate'   => Carbon::parse('2015-6-10 23:59:59'),
+                    'startDate'     => Carbon::parse('2015-6-5 00:00:00'),
+                    'endDate'       => Carbon::parse('2015-6-10 23:59:59'),
                     'maximumAmount' => 2,
-                    'entries' => [
+                    'entries'       => [
                         EntryFactory::createFromArray([
-                            "type" => Entry::TYPE_VOUCHER,
+                            'type' => Entry::TYPE_VOUCHER,
                         ]),
                     ],
-                    'closedAt' => Carbon::now()
+                    'closedAt' => Carbon::now(),
                 ]),
                 'overlaps' => false,
             ],

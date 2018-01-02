@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -15,7 +18,7 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
     protected $manager;
     protected $fixtureFile;
 
-    public function load(ObjectManager $manager) : void
+    public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
         $file = $this->translateClassToFilename($this);
@@ -25,13 +28,13 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
 
         $filename = $dir . '/../Yaml/' . $file;
 
-        if(!is_file($filename) || !is_readable($filename)) {
+        if (!is_file($filename) || !is_readable($filename)) {
             return;
         }
 
         $items = Yaml::parse(file_get_contents($filename));
 
-        if(count($items) === 0) {
+        if (0 === count($items)) {
             return;
         }
 
@@ -44,14 +47,14 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
         $this->manager->flush();
     }
 
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return 1;
     }
 
     abstract public function insert(array $params = []);
 
-    public function translateClassToFilename($object) : string
+    public function translateClassToFilename($object): string
     {
         $classnameArray = explode('\\', get_class($object));
         $class = array_pop($classnameArray);
@@ -60,7 +63,7 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
         return $filename;
     }
 
-    protected function getArrayOfReferences(array $array) : array
+    protected function getArrayOfReferences(array $array): array
     {
         $result = [];
         foreach ($array as $reference) {

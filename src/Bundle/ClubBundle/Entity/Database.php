@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 final class Database
@@ -25,6 +28,7 @@ final class Database
 
     /**
      * Database constructor.
+     *
      * @param string $dbname
      * @param string $username
      * @param string $password
@@ -41,7 +45,7 @@ final class Database
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->dbname;
     }
@@ -49,7 +53,7 @@ final class Database
     /**
      * @return string
      */
-    public function getUsername() : string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -57,7 +61,7 @@ final class Database
     /**
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }

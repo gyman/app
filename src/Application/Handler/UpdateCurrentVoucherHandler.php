@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
 use Gyman\Application\Command\UpdateCurrentVoucherCommand;
@@ -6,22 +9,22 @@ use Gyman\Application\Repository\MemberRepositoryInterface;
 use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Bundle\AppBundle\Repository\VoucherRepository;
-use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 
 class UpdateCurrentVoucherHandler
 {
     public $lastUpdatedData;
-    
-    /** @var  MemberRepository|MemberRepositoryInterface */
+
+    /** @var MemberRepository|MemberRepositoryInterface */
     private $memberRepository;
 
-    /** @var  VoucherRepository|VoucherRepositoryInterface */
+    /** @var VoucherRepository|VoucherRepositoryInterface */
     private $voucherRepository;
 
     /**
      * UpdateCurrentVoucherHandler constructor.
-     * @param MemberRepositoryInterface|MemberRepository $memberRepository
+     *
+     * @param MemberRepositoryInterface|MemberRepository   $memberRepository
      * @param VoucherRepository|VoucherRepositoryInterface $voucherRepository
      */
     public function __construct($memberRepository, $voucherRepository)
@@ -30,12 +33,13 @@ class UpdateCurrentVoucherHandler
         $this->voucherRepository = $voucherRepository;
     }
 
-    public function handle(UpdateCurrentVoucherCommand $command){
+    public function handle(UpdateCurrentVoucherCommand $command)
+    {
         $vouchers = $this->voucherRepository->findAllNotSetCurrentVouchers();
         $members = [];
 
         /** @var Voucher $voucher */
-        foreach($vouchers as $voucher) {
+        foreach ($vouchers as $voucher) {
             $member = $voucher->member();
             $member->setCurrentVoucher($voucher);
             $members[] = $member;

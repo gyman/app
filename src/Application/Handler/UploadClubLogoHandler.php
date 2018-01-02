@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
-use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
-use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Application\Command\UpdateSettingsCommand;
+use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
+use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadClubLogoHandler
@@ -22,6 +24,7 @@ class UploadClubLogoHandler
 
     /**
      * UploadClubLogoHandler constructor.
+     *
      * @param $fotoDestinationDir
      * @param SubdomainProviderInterface $subdomainProvider
      */
@@ -37,7 +40,7 @@ class UploadClubLogoHandler
     public function handle(UpdateSettingsCommand $command)
     {
         if ($command->uploadLogo instanceof UploadedFile) {
-            $destinationDir = rtrim($this->fotoDestinationDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
+            $destinationDir = rtrim($this->fotoDestinationDir, '/\\') . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
 
             if (!file_exists($destinationDir)) {
                 mkdir($destinationDir, 0755);

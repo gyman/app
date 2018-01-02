@@ -1,16 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use DateTime;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Handler\CreateMemberHandler;
 use Gyman\Application\Handler\UploadMemberFotoHandler;
-use Gyman\Domain\Member\EmailAddress;
 use Gyman\Application\Repository\InMemoryMemberRepository;
+use Gyman\Domain\Member\EmailAddress;
 use Mockery as m;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @coversNothing
+ */
 class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 {
     protected function tearDown()
@@ -30,17 +36,17 @@ class CreateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 
         $command = new CreateMemberCommand();
         $command->firstname = 'Grzegorz';
-        $command->lastname  = 'Kaszuba';
+        $command->lastname = 'Kaszuba';
         $command->birthdate = new DateTime('27.09.1984');
-        $command->gender    = 'male';
-        $command->zipcode   = '81-353';
-        $command->phone     = '604 411 089';
-        $command->email     = 'andrzej@gazeta.pl';
-        $command->barcode   = 'new-barcode';
-        $command->belt      = 'purple';
-        $command->notes     = 'updated note';
-        $command->foto      = $md5;
-        $command->sections  = [];
+        $command->gender = 'male';
+        $command->zipcode = '81-353';
+        $command->phone = '604 411 089';
+        $command->email = 'andrzej@gazeta.pl';
+        $command->barcode = 'new-barcode';
+        $command->belt = 'purple';
+        $command->notes = 'updated note';
+        $command->foto = $md5;
+        $command->sections = [];
         $command->uploadFile = new UploadedFile(
             $testFile,
             'original_name.jpg',

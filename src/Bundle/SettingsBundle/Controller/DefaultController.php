@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Controller;
 
 use Exception;
@@ -12,8 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class SettingsController
- * @package Gyman\Bundle\AppBundle\Controller
+ * Class SettingsController.
+ *
  * @Route("/settings")
  */
 class DefaultController extends Controller
@@ -24,8 +27,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->redirectToRoute("gyman_settings_details");
-
+        return $this->redirectToRoute('gyman_settings_details');
 //        $club = $this->get("gyman.club.provider")->club();
 //
 //        if (is_null($club)) {
@@ -75,7 +77,7 @@ class DefaultController extends Controller
 
         $form = $this->createForm(SectionsType::class, $command);
 
-        if ($request->isMethod("POST")) {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -84,13 +86,12 @@ class DefaultController extends Controller
                 $this->addFlash('success', 'flash.sections_updated.success');
 
                 return $this->redirectToRoute('gyman_settings_sections');
-            } else {
-                $this->addFlash('error', 'flash.sections_updated.error');
             }
+            $this->addFlash('error', 'flash.sections_updated.error');
         }
 
         return [
-            "form" => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
@@ -100,9 +101,9 @@ class DefaultController extends Controller
      */
     public function detailsAction(Request $request)
     {
-        $club = $this->get("gyman.club.provider")->club();
+        $club = $this->get('gyman.club.provider')->club();
 
-        if (is_null($club)) {
+        if (null === $club) {
             throw new Exception('No club found in database!');
         }
 
@@ -119,7 +120,7 @@ class DefaultController extends Controller
 
         $form = $this->createForm(SettingsType::class, $command);
 
-        if ($request->isMethod("POST")) {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -128,13 +129,12 @@ class DefaultController extends Controller
                 $this->addFlash('success', 'flash.settings_updated.success');
 
                 return $this->redirectToRoute('gyman_settings');
-            } else {
-                $this->addFlash('error', 'flash.settings_updated.error');
             }
+            $this->addFlash('error', 'flash.settings_updated.error');
         }
 
         return [
-            "form" => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 }

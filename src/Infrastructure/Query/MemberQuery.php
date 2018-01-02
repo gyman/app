@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Infrastructure\Query;
 
 use DateTime;
@@ -17,6 +20,7 @@ class MemberQuery implements MemberQueryInterface
 
     /**
      * MemberView constructor.
+     *
      * @param $connection
      */
     public function __construct(Connection $connection)
@@ -24,7 +28,7 @@ class MemberQuery implements MemberQueryInterface
         $this->connection = $connection;
     }
 
-    public function findAll() : array
+    public function findAll(): array
     {
         $memberTable = Table::MEMBER;
         $voucherTable = Table::VOUCHER;
@@ -51,7 +55,7 @@ ORDER BY
 SQL
 );
 
-        return array_map(function(array $member){
+        return array_map(function (array $member) {
             return new MemberView(
                 $member['id'],
                 $member['lastname'],
@@ -59,19 +63,19 @@ SQL
                 $member['foto'],
                 $member['last_entry_id'],
                 $member['current_voucher_id'],
-                $member['voucher_end_date']? new DateTime($member['voucher_end_date']) : null,
+                $member['voucher_end_date'] ? new DateTime($member['voucher_end_date']) : null,
                 $member['voucher_left_amount']
             );
         }, $result);
     }
 
-    public function findWithVoucher() : array
+    public function findWithVoucher(): array
     {
         $result = $this->connection->fetchAll(sprintf(
             'SELECT m.id, m.firstname, m.lastname, m.foto, m.last_entry_id, m.current_voucher_id FROM %s m WHERE deletedAt IS NULL AND current_voucher_id IS NOT NULL ORDER BY m.lastname ASC',
             Table::MEMBER));
 
-        return array_map(function(array $member){
+        return array_map(function (array $member) {
             return new MemberView(
                 $member['id'],
                 $member['lastname'],
@@ -83,7 +87,7 @@ SQL
         }, $result);
     }
 
-    public function findMembersThatEntered(Occurrence $occurrence) : array
+    public function findMembersThatEntered(Occurrence $occurrence): array
     {
         $result = $this->connection->fetchAll('
 SELECT m.id,
@@ -97,10 +101,10 @@ WHERE m.deletedAt IS NULL
 AND m.id = e.member_id
 AND e.occurrence_id = :occurrence_id
 ORDER BY m.lastname ASC', [
-    ":occurrence_id" => $occurrence->id()->toString()
+    ':occurrence_id' => $occurrence->id()->toString(),
         ]);
-        
-        return array_map(function(array $member){
+
+        return array_map(function (array $member) {
             return new MemberView(
                 $member['id'],
                 $member['lastname'],

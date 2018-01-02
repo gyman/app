@@ -1,17 +1,23 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 use Gyman\Domain\User;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends BaseType
 {
+    public function __construct()
+    {
+        return parent::__construct(User::class);
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
@@ -30,12 +36,6 @@ class UserType extends BaseType
         $builder->get('username')->setDisabled(true);
         $builder->get('email')->setDisabled(true);
         // todo: $builder->add('invoiceData', new InvoiceDataType());
-    }
-
-    public function __construct()
-    {
-
-        return parent::__construct(User::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

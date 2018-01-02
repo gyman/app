@@ -1,15 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Tests\Functional\Controller;
 
 use Carbon\Carbon;
 use DateTime;
-use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Component\Test\BaseFunctionalTestCase;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 
 /**
- * Class EntriesControllerTest
+ * Class EntriesControllerTest.
+ *
+ * @coversNothing
  */
 class EntriesControllerTest extends BaseFunctionalTestCase
 {
@@ -91,14 +96,14 @@ class EntriesControllerTest extends BaseFunctionalTestCase
         $crawler = $this->client->request('GET', sprintf('/entries/member/%s/new', $member->id()));
         $this->assertEquals(200, $this->getStatusCode());
 
-        $occurrence = $this->getContainer()->get("gyman.occurrence.repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
+        $occurrence = $this->getContainer()->get('gyman.occurrence.repository')->findOneBy(['startDate' => new DateTime('today 19:30:00')]);
         $this->assertInstanceOf(Occurrence::class, $occurrence);
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
         $form->setValues([
-            'gyman_entry_form[entryType]' => Entry::TYPE_PAID,
-            'gyman_entry_form[price]'     => '123',
+            'gyman_entry_form[entryType]'  => Entry::TYPE_PAID,
+            'gyman_entry_form[price]'      => '123',
             'gyman_entry_form[occurrence]' => $occurrence->id(),
         ]);
 
@@ -137,12 +142,12 @@ class EntriesControllerTest extends BaseFunctionalTestCase
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
-        $occurrence = $this->getContainer()->get("gyman.occurrence.repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
+        $occurrence = $this->getContainer()->get('gyman.occurrence.repository')->findOneBy(['startDate' => new DateTime('today 19:30:00')]);
         $this->assertInstanceOf(Occurrence::class, $occurrence);
 
         $form->setValues([
-            'gyman_entry_form[entryType]' => Entry::TYPE_VOUCHER,
-            'gyman_entry_form[price]'     => '123',
+            'gyman_entry_form[entryType]'  => Entry::TYPE_VOUCHER,
+            'gyman_entry_form[price]'      => '123',
             'gyman_entry_form[occurrence]' => $occurrence->id(),
         ]);
 
@@ -185,12 +190,12 @@ class EntriesControllerTest extends BaseFunctionalTestCase
 
         $form = $crawler->filter('form[name="gyman_entry_form"]')->first()->form();
 
-        $occurrence = $this->getContainer()->get("gyman.occurrence.repository")->findOneBy(["startDate" => new DateTime("today 19:30:00")]);
+        $occurrence = $this->getContainer()->get('gyman.occurrence.repository')->findOneBy(['startDate' => new DateTime('today 19:30:00')]);
         $this->assertInstanceOf(Occurrence::class, $occurrence);
-        
+
         $form->setValues([
-            'gyman_entry_form[entryType]' => Entry::TYPE_FREE,
-            'gyman_entry_form[price]'     => '123',
+            'gyman_entry_form[entryType]'  => Entry::TYPE_FREE,
+            'gyman_entry_form[price]'      => '123',
             'gyman_entry_form[occurrence]' => $occurrence->id(),
         ]);
 

@@ -1,10 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Entity;
 
 use Carbon\Carbon;
 use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Factory\VoucherFactory;
 
+/**
+ * @coversNothing
+ */
 class MemberTest extends \PHPUnit_Framework_TestCase
 {
     public function testUpdateCurrentVoucher()

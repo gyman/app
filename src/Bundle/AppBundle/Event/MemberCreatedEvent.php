@@ -1,12 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Event;
 
 use Gyman\Domain\Member;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class MemberCreatedEvent
- * @package Gyman\Bundle\AppBundle\Event
+ * Class MemberCreatedEvent.
  */
 class MemberCreatedEvent extends Event
 {

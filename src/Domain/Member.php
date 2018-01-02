@@ -1,22 +1,24 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain;
 
 use Carbon\Carbon;
 use DateTime;
-use Doctrine\Common\Collections\Collection;
-use Gyman\Domain\Calendar\Event\Occurrence;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Exception;
 use Gyman\Application\Exception\MemberHasNoLastEntryException;
 use Gyman\Application\Exception\NoCurrentVoucherForVoucherEntryException;
 use Gyman\Application\Exception\VouchersAreOverlappingException;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Member\Details;
 use Gyman\Domain\Member\EmailAddress;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * Class Member
- * @package Gyman\Domain
+ * Class Member.
  */
 class Member
 {
@@ -76,7 +78,7 @@ class Member
     private $updatedAt;
 
     /**
-     * @var Datetime $deletedAt
+     * @var Datetime
      */
     private $deletedAt;
 
@@ -91,65 +93,13 @@ class Member
     private $salt;
 
     /**
-     * @return bool
-     */
-    public function hasOpenedEntry() : bool
-    {
-        return !is_null($this->lastEntry()) && $this->lastEntry()->isOpened();
-    }
-
-    public function isMale() : bool
-    {
-        return $this->details()->gender() == Details::GENDER_MALE;
-    }
-
-    public function email() : EmailAddress
-    {
-        return $this->email;
-    }
-
-    public function details() : Details
-    {
-        return $this->details;
-    }
-
-    public function vouchers() : Collection
-    {
-        return $this->vouchers;
-    }
-
-    public function lastEntry() : ?Entry
-    {
-        return $this->lastEntry;
-    }
-
-    public function entries() : Collection
-    {
-        return $this->entries;
-    }
-
-    public function sections() : Collection
-    {
-        return $this->sections;
-    }
-
-    public function removeEntry(Entry $entry)
-    {
-        if(!is_null($this->lastEntry()) && $this->lastEntry()->id() === $entry->id()) {
-            $this->lastEntry = null;
-        }
-
-        $this->entries->removeElement($entry);
-    }
-
-    /**
      * @param EmailAddress $email
-     * @param Details $details
+     * @param Details      $details
      * @param $sections
      * @param $vouchers
      * @param $entries
      * @param Voucher $currentVoucher
-     * @param Entry $lastEntry
+     * @param Entry   $lastEntry
      */
     public function __construct(EmailAddress $email, Details $details, $sections = [], $vouchers = [], $entries = [], $currentVoucher = null, $lastEntry = null)
     {
@@ -162,13 +112,66 @@ class Member
         $this->lastEntry = $lastEntry;
     }
 
-    public function id() : UuidInterface
+    /**
+     * @return bool
+     */
+    public function hasOpenedEntry(): bool
+    {
+        return null !== $this->lastEntry() && $this->lastEntry()->isOpened();
+    }
+
+    public function isMale(): bool
+    {
+        return Details::GENDER_MALE === $this->details()->gender();
+    }
+
+    public function email(): EmailAddress
+    {
+        return $this->email;
+    }
+
+    public function details(): Details
+    {
+        return $this->details;
+    }
+
+    public function vouchers(): Collection
+    {
+        return $this->vouchers;
+    }
+
+    public function lastEntry(): ?Entry
+    {
+        return $this->lastEntry;
+    }
+
+    public function entries(): Collection
+    {
+        return $this->entries;
+    }
+
+    public function sections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function removeEntry(Entry $entry)
+    {
+        if (null !== $this->lastEntry() && $this->lastEntry()->id() === $entry->id()) {
+            $this->lastEntry = null;
+        }
+
+        $this->entries->removeElement($entry);
+    }
+
+    public function id(): UuidInterface
     {
         return $this->id;
     }
 
     /**
      * @param Voucher $newVoucher
+     *
      * @throws VouchersAreOverlappingException
      */
     public function addVoucher(Voucher $newVoucher)
@@ -191,16 +194,16 @@ class Member
         $newVoucher->setMember($this);
     }
 
-    public function currentVoucher() : ?Voucher
+    public function currentVoucher(): ?Voucher
     {
         return $this->currentVoucher;
     }
 
-    public function hasCurrentVoucher() : bool
+    public function hasCurrentVoucher(): bool
     {
         $currentVoucher = $this->currentVoucher();
 
-        return !is_null($currentVoucher);
+        return null !== $currentVoucher;
     }
 
     /**
@@ -212,8 +215,8 @@ class Member
      */
     public function enter(Entry $entry)
     {
-        if(is_null($entry->occurrence())) {
-            throw new Exception("Entry must be on purpose, you have to choose activity occurrence to enter to. (\$occurrence is null)");
+        if (null === $entry->occurrence()) {
+            throw new Exception('Entry must be on purpose, you have to choose activity occurrence to enter to. ($occurrence is null)');
         }
 
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
@@ -230,8 +233,7 @@ class Member
             );
         }
 
-        if($this->checkIfAlreadyEntered($entry->occurrence()))
-        {
+        if ($this->checkIfAlreadyEntered($entry->occurrence())) {
             throw new \Exception(
                 sprintf(
                     "Member %s %s (id: %s) already joined this class (occurrence id: %s date: %s, event name: %s)! Can't do it again!",
@@ -239,7 +241,7 @@ class Member
                     $this->details()->lastname(),
                     $this->id(),
                     $entry->occurrence()->id(),
-                    $entry->occurrence()->startDate()->format("Y-m-d H:i:s"),
+                    $entry->occurrence()->startDate()->format('Y-m-d H:i:s'),
                     $entry->occurrence()->event()->title()
                 )
             );
@@ -261,23 +263,23 @@ class Member
     public function exitLastEntry()
     {
         if ($this->hasLastEntry() && $this->lastEntry()->isOpened()) {
-            $this->lastEntry()->closeEntry(new \DateTime("now"));
+            $this->lastEntry()->closeEntry(new \DateTime('now'));
         }
 
         $this->lastEntry = null;
     }
 
-    public function hasLastEntry() : bool
+    public function hasLastEntry(): bool
     {
-        return $this->lastEntry !== null;
+        return null !== $this->lastEntry;
     }
 
     /**
-     * Searches for voucher that is current for actual time and sets it to currentVoucher param
+     * Searches for voucher that is current for actual time and sets it to currentVoucher param.
      */
     public function updateCurrentVoucher()
     {
-        $now = Carbon::parse("now");
+        $now = Carbon::parse('now');
 
         if ($this->hasCurrentVoucher()) {
             $currentVoucher = $this->currentVoucher();
@@ -301,6 +303,7 @@ class Member
                     && !$voucher->isClosed()
                 ) {
                     $this->currentVoucher = $voucher;
+
                     return;
                 }
             }
@@ -334,23 +337,22 @@ class Member
 
     /**
      * @param Occurrence|null $occurrence
+     *
      * @return bool
      */
     public function checkIfAlreadyEntered(Occurrence $occurrence = null)
     {
-        if(is_null($occurrence))
-        {
+        if (null === $occurrence) {
             return false;
         }
 
-        $filtered = $this->entries()->filter(function(Entry $entry) use ($occurrence) {
-
-            if(is_null($entry->occurrence())) // null occurrence can happen if user entered to activity that has deleted occurence from calendar
-            {
+        $filtered = $this->entries()->filter(function (Entry $entry) use ($occurrence) {
+            if (null === $entry->occurrence()) { // null occurrence can happen if user entered to activity that has deleted occurence from calendar
                 return false;
             }
 
             $entryOccurrenceId = $entry->occurrence()->id();
+
             return $entryOccurrenceId === $occurrence->id();
         });
 
@@ -362,7 +364,7 @@ class Member
      */
     public function filterCreditEntries()
     {
-        return $this->entries->filter(function(Entry $entry){
+        return $this->entries->filter(function (Entry $entry) {
             return $entry->isType(Entry::TYPE_CREDIT);
         });
     }
@@ -375,7 +377,7 @@ class Member
         $this->currentVoucher = $voucher;
     }
 
-    public function password() : string
+    public function password(): string
     {
         return $this->password;
     }

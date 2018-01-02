@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,24 +34,24 @@ class TruncateCalendarsCommand extends ContainerAwareCommand
         $toRemove = [];
 
         /** @var Calendar $calendar */
-        while($calendar = array_shift($calendars)) {
-            $similarCalendars = array_filter($calendars, function(Calendar $compareCalendar) use ($calendar) {
+        while ($calendar = array_shift($calendars)) {
+            $similarCalendars = array_filter($calendars, function (Calendar $compareCalendar) use ($calendar) {
                 return strtolower($calendar->name()) === strtolower($compareCalendar->name());
             });
 
-            if(count($similarCalendars) > 0) {
-                $toRemove += array_map(function(Calendar $calendar) { return $calendar->id(); }, $similarCalendars);
+            if (count($similarCalendars) > 0) {
+                $toRemove += array_map(function (Calendar $calendar) { return $calendar->id(); }, $similarCalendars);
             } else {
                 continue;
             }
 
-            if(!in_array($calendar->id(), $toRemove)) {
+            if (!in_array($calendar->id(), $toRemove, true)) {
                 /** @var Calendar $similarCalendar */
-                foreach($similarCalendars as $similarCalendar) {
+                foreach ($similarCalendars as $similarCalendar) {
                     $section = $similarCalendar->section();
                     $events = $similarCalendar->events();
 
-                    $eventsIds = array_map(function(Event $event){ return $event->id(); }, $events->toArray());
+                    $eventsIds = array_map(function (Event $event) { return $event->id(); }, $events->toArray());
 
                     $qb = $em->createQueryBuilder();
                     $q = $qb->update(Event::class, 'e')
@@ -67,10 +70,8 @@ class TruncateCalendarsCommand extends ContainerAwareCommand
                         ->getQuery();
 
                     $p = $q->execute();
-
                 }
             }
-
         }
     }
 }

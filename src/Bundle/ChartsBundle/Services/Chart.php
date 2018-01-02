@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ChartsBundle\Services;
 
 use DateTime;
@@ -12,7 +15,11 @@ class Chart
     public $dateFormat = 'd.m';
 
     /**
-     *
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
      * @param array $series
      * @param array $categories
      * @param array $dateFormat
@@ -23,11 +30,6 @@ class Chart
         $this->categories = $categories;
         $this->dateFormat = $dateFormat;
     }
-
-    /**
-     * @var Doctrine\ORM\EntityManager
-     */
-    private $entityManager;
 
     public function getEntityManager()
     {
@@ -42,9 +44,9 @@ class Chart
     }
 
     /**
+     * @param DateTime $endDate
+     * @param int      $daysBack
      *
-     * @param  DateTime $endDate
-     * @param  integer  $daysBack
      * @return array
      */
     public function getEntriesByActivity(DateTime $endDate, $daysBack = 30)
@@ -55,7 +57,7 @@ class Chart
         $entryRepository = $this->entityManager
             ->getRepository('EntriesBundle:Entry');
 
-        $startDate = clone($endDate);
+        $startDate = clone $endDate;
         $startDate->modify(sprintf('%d days', abs($daysBack) * -1));
 
         $result = $entryRepository->getCountByActivities($startDate, $endDate);
@@ -64,7 +66,7 @@ class Chart
         $activitiesNames = array_keys($preparedResult);
         $endDate->modify('+1 day');
 
-        $tmpStart = clone($startDate);
+        $tmpStart = clone $startDate;
 
         while ($tmpStart < $endDate) {
             $date = $tmpStart->format($this->dateFormat);
@@ -120,8 +122,10 @@ class Chart
     }
 
     /**
-     * Transforms array from db to date-keyed array
-     * @param  array $array
+     * Transforms array from db to date-keyed array.
+     *
+     * @param array $array
+     *
      * @return array
      */
     public function prepareResults(array $array)
@@ -142,9 +146,9 @@ class Chart
     }
 
     /**
+     * @param Highchart $frequencyChart
+     * @param DateTime  $startDate
      *
-     * @param  Highchart $frequencyChart
-     * @param  DateTime  $startDate
      * @return Highchart
      */
     public function getFrequencyChart(Highchart $frequencyChart, DateTime $startDate)

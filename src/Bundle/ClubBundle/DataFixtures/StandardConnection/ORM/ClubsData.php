@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM;
 
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
@@ -9,12 +12,12 @@ class ClubsData extends BaseFixture
 {
     protected $dir = __DIR__;
 
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return -1;
     }
 
-    public function insert(array $params = []) : Club
+    public function insert(array $params = []): Club
     {
         return ClubFactory::createFromArray($params);
     }

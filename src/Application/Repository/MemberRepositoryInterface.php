@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
-use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\Member;
+use Gyman\Domain\Member\EmailAddress;
 
 interface MemberRepositoryInterface extends RepositoryInterface
 {
@@ -13,19 +16,20 @@ interface MemberRepositoryInterface extends RepositoryInterface
 
     /**
      * @param EmailAddress $email
+     *
      * @return Member
      */
     public function findOneByEmailAddress(EmailAddress $email);
 
     /**
      * @param Member $member
+     *
      * @return mixed
      */
     public function remove($member);
 
     /**
      * @param Member $member
-     * @return null
      */
     public function insert($member);
 

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ReportsBundle\Generator\Strategy;
 
 use Carbon\Carbon;
@@ -9,25 +12,25 @@ use Gyman\Domain\Entry;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class All
- * @package Gyman\Bundle\ReportsBundle\Generator\Strategy
+ * Class All.
  */
 class All extends AbstractStrategy
 {
-    /** @var  VoucherRepositoryInterface */
+    /** @var VoucherRepositoryInterface */
     private $vouchersRepository;
 
-    /** @var  EntryRepositoryInterface */
+    /** @var EntryRepositoryInterface */
     private $entriesRepository;
 
-    /** @var  RouterInterface */
+    /** @var RouterInterface */
     private $router;
 
     /**
      * All constructor.
+     *
      * @param VoucherRepositoryInterface $vouchersRepository
-     * @param EntryRepositoryInterface $entriesRepository
-     * @param RouterInterface $router
+     * @param EntryRepositoryInterface   $entriesRepository
+     * @param RouterInterface            $router
      */
     public function __construct(VoucherRepositoryInterface $vouchersRepository, EntryRepositoryInterface $entriesRepository, RouterInterface $router)
     {
@@ -39,8 +42,9 @@ class All extends AbstractStrategy
     /**
      * @return string
      */
-    public function getName(){
-        return "all";
+    public function getName()
+    {
+        return 'all';
     }
 
     public function result(DateFilter $filter)
@@ -48,47 +52,47 @@ class All extends AbstractStrategy
         $startDate = Carbon::instance($filter->startDate)->setTime(0, 0, 0);
         $endDate = Carbon::instance($filter->endDate)->setTime(23, 59, 59);
 
-        $queryBuilderVouchers = $this->vouchersRepository->createQueryBuilder("v");
+        $queryBuilderVouchers = $this->vouchersRepository->createQueryBuilder('v');
 
         $queryBuilderVouchers
             ->select("v.price.amount as price, v.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('karnet') as type, v.id as voucher_id")
-            ->leftJoin("v.member", "m")
-            ->leftJoin("m.sections", "s")
-            ->where("v.createdAt > :startDate")
-            ->andWhere("v.createdAt < :endDate")
-            ->andWhere("v.price.amount is not null")
+            ->leftJoin('v.member', 'm')
+            ->leftJoin('m.sections', 's')
+            ->where('v.createdAt > :startDate')
+            ->andWhere('v.createdAt < :endDate')
+            ->andWhere('v.price.amount is not null')
             ->setParameters([
-                "startDate" => $startDate,
-                "endDate" => $endDate
+                'startDate' => $startDate,
+                'endDate'   => $endDate,
             ])
         ;
 
         $vouchersData = $queryBuilderVouchers->getQuery()->getArrayResult();
-        $vouchersSum = array_sum(array_column($vouchersData, "price"));
+        $vouchersSum = array_sum(array_column($vouchersData, 'price'));
 
-        $queryBuilderEntries = $this->entriesRepository->createQueryBuilder("e");
+        $queryBuilderEntries = $this->entriesRepository->createQueryBuilder('e');
 
         $queryBuilderEntries
             ->select("e.price.amount as price, s.title as section, e.startDate, m.id as member_id, m.details.lastname as member_lastname, m.details.firstname as member_firstname, LOWER('entry') as type")
-            ->leftJoin("e.member", "m")
-            ->leftJoin("m.sections", "s")
-            ->where("e.createdAt > :startDate")
-            ->andWhere("e.createdAt < :endDate")
-            ->andWhere("e.price.amount is not null")
-            ->andWhere("e.type = :type")
+            ->leftJoin('e.member', 'm')
+            ->leftJoin('m.sections', 's')
+            ->where('e.createdAt > :startDate')
+            ->andWhere('e.createdAt < :endDate')
+            ->andWhere('e.price.amount is not null')
+            ->andWhere('e.type = :type')
             ->setParameters([
-                "startDate" => $startDate,
-                "endDate" => $endDate,
-                "type" => Entry::TYPE_PAID
+                'startDate' => $startDate,
+                'endDate'   => $endDate,
+                'type'      => Entry::TYPE_PAID,
             ])
         ;
 
         $entriesData = $queryBuilderEntries->getQuery()->getArrayResult();
-        $entriesSum = array_sum(array_column($entriesData, "price"));
+        $entriesSum = array_sum(array_column($entriesData, 'price'));
 
         $process = function ($data = [], $result = []) {
             foreach ($data as $row) {
-                $cost = floatval($row["price"]);
+                $cost = (float) ($row['price']);
 
 //                if($row["type"] === "karnet") {
 //                    // i'm reaally sorry for this, just temporary
@@ -96,9 +100,9 @@ class All extends AbstractStrategy
 //                }
 
                 $result[] = [
-                    "title" => sprintf("%s %s [%s]", $row["member_lastname"], $row["member_firstname"], $row["type"]),
-                    "sum" => $cost,
-                    "route" => $this->router->generate("gyman_member_edit", ["id" => $row["member_id"]])
+                    'title' => sprintf('%s %s [%s]', $row['member_lastname'], $row['member_firstname'], $row['type']),
+                    'sum'   => $cost,
+                    'route' => $this->router->generate('gyman_member_edit', ['id' => $row['member_id']]),
                 ];
             }
 
@@ -110,8 +114,8 @@ class All extends AbstractStrategy
         $sum = $vouchersSum + $entriesSum;
 
         return [
-            "rows" => $result,
-            "sum" => $sum
+            'rows' => $result,
+            'sum'  => $sum,
         ];
     }
 }

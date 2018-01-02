@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
@@ -6,12 +9,12 @@ use Gyman\Domain\User;
 
 class UsersData extends BaseFixture
 {
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return 20;
     }
 
-    public function insert(array $params = []) : User
+    public function insert(array $params = []): User
     {
         $user = new User();
         $user->setUsername($params['username']);
@@ -22,8 +25,8 @@ class UsersData extends BaseFixture
         $user->setPlainPassword($params['plainPassword']);
         $user->setEnabled($params['enabled']);
 
-        if(array_key_exists("member", $params) && null !== $params["member"]) {
-            $user->setMember($this->getReference($params["member"]));
+        if (array_key_exists('member', $params) && null !== $params['member']) {
+            $user->setMember($this->getReference($params['member']));
         }
 
         return $user;

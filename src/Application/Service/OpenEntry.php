@@ -1,17 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Service;
 
 use Gyman\Application\Event\EntryEvent;
+use Gyman\Application\Repository\EntryRepositoryInterface;
+use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
-use Gyman\Application\Repository\EntryRepositoryInterface;
-use Gyman\Application\Repository\VoucherRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class OpenEntry
- * @package Gyman\Domain
+ * Class OpenEntry.
  */
 class OpenEntry
 {
@@ -30,8 +32,9 @@ class OpenEntry
 
     /**
      * CreateMember constructor.
+     *
      * @param VoucherRepositoryInterface $repository
-     * @param EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface   $dispatcher
      */
     public function __construct(EntryRepositoryInterface $repository, EventDispatcherInterface $dispatcher)
     {
@@ -40,8 +43,8 @@ class OpenEntry
     }
 
     /**
-     * @param Member $member
-     * @param Entry $entry
+     * @param Member        $member
+     * @param Entry         $entry
      * @param UserInterface $author
      */
     public function openEntry(Member $member, Entry $entry, UserInterface $author)

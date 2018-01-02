@@ -1,16 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ClubRepository
- * @package Gyman\Bundle\ClubBundle
+ * Class ClubRepository.
  */
 class ClubRepository extends EntityRepository
 {
     /**
      * @param string $subdomain
+     *
      * @return null|Club
      */
     public function findOneBySubdomain($subdomain)

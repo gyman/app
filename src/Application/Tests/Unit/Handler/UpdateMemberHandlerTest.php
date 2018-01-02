@@ -1,14 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use DateTime;
-use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Command\UpdateMemberCommand;
+use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Handler\UpdateMemberHandler;
 use Mockery as m;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @coversNothing
+ */
 class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -48,16 +54,16 @@ class UpdateMemberHandlerTest extends \PHPUnit_Framework_TestCase
 
         $command = new UpdateMemberCommand();
         $command->firstname = 'Grzegorz';
-        $command->lastname  = 'Kaszuba';
+        $command->lastname = 'Kaszuba';
         $command->birthdate = new DateTime('27.09.1984');
-        $command->gender    = 'male';
-        $command->zipcode   = '81-353';
-        $command->phone     = '604 411 089';
-        $command->email     = 'andrzej@gazeta.pl';
-        $command->barcode   = 'new-barcode';
-        $command->belt      = 'purple';
-        $command->notes     = 'updated note';
-        $command->foto      = $md5;
+        $command->gender = 'male';
+        $command->zipcode = '81-353';
+        $command->phone = '604 411 089';
+        $command->email = 'andrzej@gazeta.pl';
+        $command->barcode = 'new-barcode';
+        $command->belt = 'purple';
+        $command->notes = 'updated note';
+        $command->foto = $md5;
         $command->uploadFile = new UploadedFile(
             $testFile,
             'original_name.jpg',

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Twig;
 
 use Gyman\Domain\Voucher;
@@ -21,11 +24,11 @@ class VoucherExtension extends \Twig_Extension
 
     public function entriesLabelFilter(Voucher $voucher)
     {
-        if ($voucher->getAmount() == 0) {
+        if (0 === $voucher->getAmount()) {
             return $this->translator->trans('voucher.entries.open');
-        } else {
-            return sprintf('%d/%d', $voucher->getAmountLeft(), $voucher->getAmount());
         }
+
+        return sprintf('%d/%d', $voucher->getAmountLeft(), $voucher->getAmount());
     }
 
     public function getName()

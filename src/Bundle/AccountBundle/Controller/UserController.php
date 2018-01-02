@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Controller;
 
 use Gyman\Bundle\AccountBundle\Form\Type\UserType;
@@ -36,6 +39,7 @@ class UserController extends Controller
             'entities' => $entities,
         ];
     }
+
     /**
      * Creates a new User entity.
      *
@@ -64,25 +68,6 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a form to create a User entity.
-     *
-     * @param User $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(User $entity)
-    {
-        $form = $this->createForm(new UserType(), $entity, [
-            'action' => $this->generateUrl('admin_users_create'),
-            'method' => 'POST',
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Create']);
-
-        return $form;
-    }
-
-    /**
      * Displays a form to create a new User entity.
      *
      * @Route("/new", name="admin_users_new")
@@ -92,7 +77,7 @@ class UserController extends Controller
     public function newAction()
     {
         $entity = new User();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return [
             'entity' => $entity,
@@ -106,6 +91,8 @@ class UserController extends Controller
      * @Route("/{id}", name="admin_users_show")
      * @Method("GET")
      * @Template("AccountBundle:User:show.html.twig")
+     *
+     * @param mixed $id
      */
     public function showAction($id)
     {
@@ -131,6 +118,8 @@ class UserController extends Controller
      * @Route("/{id}/edit", name="admin_users_edit")
      * @Method("GET")
      * @Template("AccountBundle:User:edit.html.twig")
+     *
+     * @param mixed $id
      */
     public function editAction($id)
     {
@@ -153,29 +142,13 @@ class UserController extends Controller
     }
 
     /**
-    * Creates a form to edit a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(User $entity)
-    {
-        $form = $this->createForm(new UserType(), $entity, [
-            'action' => $this->generateUrl('admin_users_update', ['id' => $entity->getId()]),
-            'method' => 'PUT',
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Update']);
-
-        return $form;
-    }
-    /**
      * Edits an existing User entity.
      *
      * @Route("/{id}", name="admin_users_update")
      * @Method("PUT")
      * @Template("AccountBundle:User:edit.html.twig")
+     *
+     * @param mixed $id
      */
     public function updateAction(Request $request, $id)
     {
@@ -203,11 +176,14 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ];
     }
+
     /**
      * Deletes a User entity.
      *
      * @Route("/{id}", name="admin_users_delete")
      * @Method("DELETE")
+     *
+     * @param mixed $id
      */
     public function deleteAction(Request $request, $id)
     {
@@ -227,6 +203,44 @@ class UserController extends Controller
         }
 
         return $this->redirect($this->generateUrl('admin_users'));
+    }
+
+    /**
+     * Creates a form to create a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(User $entity)
+    {
+        $form = $this->createForm(new UserType(), $entity, [
+            'action' => $this->generateUrl('admin_users_create'),
+            'method' => 'POST',
+        ]);
+
+        $form->add('submit', 'submit', ['label' => 'Create']);
+
+        return $form;
+    }
+
+    /**
+     * Creates a form to edit a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(User $entity)
+    {
+        $form = $this->createForm(new UserType(), $entity, [
+            'action' => $this->generateUrl('admin_users_update', ['id' => $entity->getId()]),
+            'method' => 'PUT',
+        ]);
+
+        $form->add('submit', 'submit', ['label' => 'Update']);
+
+        return $form;
     }
 
     /**

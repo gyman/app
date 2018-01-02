@@ -1,8 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Tests\Controller;
 
 use Gyman\Bundle\TestBundle\Tests\BaseTest;
 
+/**
+ * @coversNothing
+ */
 class UserAccountTest extends BaseTest
 {
     public function testLogin()
@@ -22,6 +28,7 @@ class UserAccountTest extends BaseTest
         $this->loginFormWasSubmitted('uirapuru', '123');
         $this->assertPageResponseCode(200);
     }
+
     public function testRegister()
     {
         $this->clientIsSettedUp();
@@ -37,6 +44,12 @@ class UserAccountTest extends BaseTest
 
     /**
      * @dataProvider testRegisterDataProvider
+     *
+     * @param mixed $username
+     * @param mixed $password1
+     * @param mixed $password2
+     * @param mixed $email
+     * @param mixed $notice
      */
     public function testRegisterErrors($username, $password1, $password2, $email, $notice)
     {

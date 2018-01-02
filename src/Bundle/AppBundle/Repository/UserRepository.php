@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -8,8 +11,8 @@ use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
 
 /**
- * Class UserRepository
- * @package Gyman\Bundle\ClubBundle\Entity
+ * Class UserRepository.
+ *
  * @method findOneByUsername(string $username)
  */
 class UserRepository extends EntityRepository
@@ -25,7 +28,7 @@ class UserRepository extends EntityRepository
         return $query->getOneOrNullResult();
     }
 
-    public function findOneByInvitationToken(string $token) : UserInterface
+    public function findOneByInvitationToken(string $token): UserInterface
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -36,8 +39,7 @@ class UserRepository extends EntityRepository
         return $query->getOneOrNullResult();
     }
 
-
-    public function getByRolesQueryBuilder(array $roles) : Query
+    public function getByRolesQueryBuilder(array $roles): Query
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -65,7 +67,7 @@ class UserRepository extends EntityRepository
     /**
      * @return array|User[]
      */
-    public function getInstructors() : array
+    public function getInstructors(): array
     {
         return $this->getByRolesQueryBuilder(['ROLE_INSTRUCTOR'])->getResult();
     }
@@ -73,7 +75,7 @@ class UserRepository extends EntityRepository
     /**
      * @return array|User[]
      */
-    public function getAdministrators() : array
+    public function getAdministrators(): array
     {
         $query = $this->getByRolesQueryBuilder(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
 

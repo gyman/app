@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Infrastructure\Doctrine\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -18,8 +21,9 @@ class MoneyType extends Type
     }
 
     /**
-     * @param Money $value
+     * @param Money            $value
      * @param AbstractPlatform $platform
+     *
      * @return string
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
@@ -27,14 +31,13 @@ class MoneyType extends Type
         return money2string($value);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform) : Money
+    public function convertToPHPValue($value, AbstractPlatform $platform): Money
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
         return string2money($value);
-
     }
 
     public function getName()

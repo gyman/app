@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\EntityManager;
 
 use Gyman\Bundle\AppBundle\ClubsEvents;
@@ -9,7 +12,7 @@ class ClubManager extends BaseManager
 {
     public function save($object, $withFlush = true)
     {
-        $isNew = $object->getId() == null ? true : false;
+        $isNew = null === $object->getId() ? true : false;
 
         parent::save($object, $withFlush);
 

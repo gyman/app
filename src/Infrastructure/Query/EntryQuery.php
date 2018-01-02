@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Infrastructure\Query;
 
 use DateTime;
@@ -24,6 +27,7 @@ class EntryQuery implements EntryQueryInterface
 
     /**
      * MemberView constructor.
+     *
      * @param $connection
      */
     public function __construct(Connection $connection)
@@ -33,7 +37,8 @@ class EntryQuery implements EntryQueryInterface
 
     /**
      * @param Member $member
-     * @param int $limit
+     * @param int    $limit
+     *
      * @return Collection|ArrayCollection
      */
     public function findLastByMember(Member $member, int $limit): Collection
@@ -67,7 +72,7 @@ LIMIT $limit
 SQL
 );
 
-        return new ArrayCollection(array_map(function(array $entry){
+        return new ArrayCollection(array_map(function (array $entry) {
             return new EntryView(
                 Uuid::fromString($entry['entry_id']),
                 new DateTime($entry['start_date']),
@@ -75,12 +80,12 @@ SQL
                 new EventView(Uuid::fromString($entry['event_id']), $entry['event_title']),
                 new SectionView(Uuid::fromString($entry['section_id']), $entry['section_title']),
                 new Type($entry['entry_type']),
-                $entry['entry_type'] === Type::TYPE_PAID ? new Price($entry['price_amount'], $entry['price_currency']) : null
+                Type::TYPE_PAID === $entry['entry_type'] ? new Price($entry['price_amount'], $entry['price_currency']) : null
             );
         }, $result));
     }
 
-    public function findByDates(Member $member, DateTime $startDate, DateTime $endDate) : Collection
+    public function findByDates(Member $member, DateTime $startDate, DateTime $endDate): Collection
     {
         $entriesTable = Table::ENTRY;
         $sectionsTable = Table::SECTION;
@@ -89,8 +94,8 @@ SQL
 
         $memberId = $member->id()->toString();
 
-        $startDate = $startDate->format("Y-m-d H:i:s");
-        $endDate = $endDate->format("Y-m-d H:i:s");
+        $startDate = $startDate->format('Y-m-d H:i:s');
+        $endDate = $endDate->format('Y-m-d H:i:s');
 
         $result = $this->connection->fetchAll(
             <<<SQL
@@ -116,7 +121,7 @@ ORDER BY start_date DESC
 SQL
         );
 
-        return new ArrayCollection(array_map(function(array $entry){
+        return new ArrayCollection(array_map(function (array $entry) {
             return new EntryView(
                 Uuid::fromString($entry['entry_id']),
                 new DateTime($entry['start_date']),
@@ -124,7 +129,7 @@ SQL
                 new EventView(Uuid::fromString($entry['event_id']), $entry['event_title']),
                 new SectionView(Uuid::fromString($entry['section_id']), $entry['section_title']),
                 new Type($entry['entry_type']),
-                $entry['entry_type'] === Type::TYPE_PAID ? new Price($entry['price_amount'], $entry['price_currency']) : null
+                Type::TYPE_PAID === $entry['entry_type'] ? new Price($entry['price_amount'], $entry['price_currency']) : null
             );
         }, $result));
     }

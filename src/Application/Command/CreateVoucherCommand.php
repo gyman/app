@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use Gyman\Domain\Member;
 
 /**
- * Class CreateVoucherCommand
- * @package Gyman\Application\Command
+ * Class CreateVoucherCommand.
  */
 class CreateVoucherCommand implements VoucherCommandInterface
 {
@@ -20,7 +22,7 @@ class CreateVoucherCommand implements VoucherCommandInterface
     public $endDate;
 
     /**
-     * @var integer
+     * @var int
      */
     public $maximumAmount = 10;
 

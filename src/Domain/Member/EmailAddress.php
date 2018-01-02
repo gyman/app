@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Member;
 
 /**
- * Class EmailAddress
- * @package Gyman\Domain
+ * Class EmailAddress.
  */
 class EmailAddress
 {
@@ -14,6 +16,7 @@ class EmailAddress
 
     /**
      * MemberEmail constructor.
+     *
      * @param $email
      */
     public function __construct($email)
@@ -22,7 +25,20 @@ class EmailAddress
     }
 
     /**
+     * The __toString method allows a class to decide how it will react when it is converted to a string.
+     *
+     * @return string
+     *
+     * @see http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring
+     */
+    public function __toString()
+    {
+        return $this->email();
+    }
+
+    /**
      * @param $command
+     *
      * @return EmailAddress
      */
     public static function createFromMemberUpdateCommand($command)
@@ -32,9 +48,10 @@ class EmailAddress
 
     /**
      * @param EmailAddress $email
+     *
      * @return bool
      */
-    public function equals(EmailAddress $email)
+    public function equals(self $email)
     {
         return $this->email === $email->email();
     }
@@ -48,21 +65,10 @@ class EmailAddress
     }
 
     /**
-     * The __toString method allows a class to decide how it will react when it is converted to a string.
-     *
-     * @return string
-     * @link http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring
-     */
-    function __toString()
-    {
-        return $this->email();
-    }
-
-    /**
      * @return bool
      */
     public function isInternal()
     {
-        return (bool) strpos($this->email, "@gyman.pl");
+        return (bool) strpos($this->email, '@gyman.pl');
     }
 }

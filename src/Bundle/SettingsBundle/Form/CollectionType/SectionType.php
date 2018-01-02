@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\SettingsBundle\Form\CollectionType;
 
 use Gyman\Domain\Section;
@@ -9,8 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class SectionType
- * @package Gyman\Bundle\AppBundle\Form\CollectionType
+ * Class SectionType.
  */
 final class SectionType extends AbstractType
 {
@@ -23,8 +25,8 @@ final class SectionType extends AbstractType
         $builder
             ->add('id', HiddenType::class)
             ->add('title', TextType::class, [
-                "label" => false,
-                "required" => true,
+                'label'    => false,
+                'required' => true,
             ])
         ;
     }
@@ -35,9 +37,9 @@ final class SectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => Section::class,
-            'csrf_protection' => true,
-            'cascade_validation' => true
+            'data_class'         => Section::class,
+            'csrf_protection'    => true,
+            'cascade_validation' => true,
         ]);
     }
 

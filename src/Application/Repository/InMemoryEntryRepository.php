@@ -1,13 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
+use Exception;
 use Gyman\Domain\Entry;
-use \Exception;
 use Traversable;
 
 /**
- * Class InMemoryEntryRepository
- * @package Gyman\Component\Entrys
+ * Class InMemoryEntryRepository.
  */
 class InMemoryEntryRepository implements EntryRepositoryInterface
 {
@@ -26,7 +28,6 @@ class InMemoryEntryRepository implements EntryRepositoryInterface
 
     /**
      * @param Entry $entry
-     * @return null
      */
     public function remove(Entry $entry)
     {
@@ -41,7 +42,6 @@ class InMemoryEntryRepository implements EntryRepositoryInterface
 
     /**
      * @param Entry $entry
-     * @return null
      */
     public function insert(Entry $entry)
     {
@@ -50,17 +50,19 @@ class InMemoryEntryRepository implements EntryRepositoryInterface
 
     public function save($entry)
     {
-        if($entry instanceof Entry) {
-                $this->insert($entry);
+        if ($entry instanceof Entry) {
+            $this->insert($entry);
+
             return;
-        } elseif(is_array($entry) || $entry instanceof Traversable) {
+        } elseif (is_array($entry) || $entry instanceof Traversable) {
             /** @var Entry $entry */
-            foreach($entry as $entryElement) {
+            foreach ($entry as $entryElement) {
                 $this->insert($entryElement);
             }
+
             return;
         }
 
-        throw new Exception("Uknown type");
+        throw new Exception('Uknown type');
     }
 }

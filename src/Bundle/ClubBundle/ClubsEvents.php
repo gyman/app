@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle;
 
 final class ClubsEvents
 {
     /**
-     * Registered event is thrown each time a new club is created
+     * Registered event is thrown each time a new club is created.
      *
      * @var string
      */

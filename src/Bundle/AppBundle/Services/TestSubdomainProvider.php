@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Services;
 
 final class TestSubdomainProvider implements SubdomainProviderInterface

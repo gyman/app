@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
-use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
 use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
+use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,19 +16,20 @@ class OccurrenceFactory extends BaseOccurrenceFactory implements OccurrenceFacto
 {
     /**
      * @param array $array
+     *
      * @return Occurrence
      */
-    public function createFromArray(array $array = []) : OccurrenceInterface
+    public function createFromArray(array $array = []): OccurrenceInterface
     {
         $template = [
-            'id'   => OccurrenceId::create(),
+            'id'             => OccurrenceId::create(),
             'event'          => null,
             'startDate'      => new DateTime(),
             'duration'       => null,
             'instructor'     => null,
             'subject'        => null,
             'note'           => null,
-            'entries'        => new ArrayCollection()
+            'entries'        => new ArrayCollection(),
         ];
 
         $array = array_merge($template, $array);

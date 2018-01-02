@@ -1,12 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Menu;
 
-use Gyman\Domain\Member;
-use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class LandingBuilder
 {
@@ -61,7 +59,6 @@ class LandingBuilder
                     'class' => '',
                 ],
         ])->setExtra('translation_domain', 'GymanAppBundle');
-
 
         return $menu;
     }

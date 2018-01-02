@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
 use Gyman\Domain\Entry;
 
 /**
- * Interface EntryRepositoryInterface
- * @package Gyman\Domain
+ * Interface EntryRepositoryInterface.
  */
 interface EntryRepositoryInterface extends RepositoryInterface
 {

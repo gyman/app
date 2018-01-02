@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Component\Test;
 
 use Dende\CommonBundle\Tests\BaseFunctionalTest as BaseTest;
@@ -15,10 +18,10 @@ use Gyman\Bundle\ClubBundle\DataFixtures\StandardConnection\ORM\UsersData;
 
 abstract class BaseFunctionalTestCase extends BaseTest
 {
-    /** @var  ReferenceRepository */
+    /** @var ReferenceRepository */
     protected $fixtures;
 
-    /** @var  ReferenceRepository */
+    /** @var ReferenceRepository */
     protected $tenantFixtures;
 
     public function setUp()

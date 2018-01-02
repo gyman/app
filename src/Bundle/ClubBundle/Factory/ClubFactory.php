@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Factory;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
@@ -7,13 +10,13 @@ use Gyman\Bundle\ClubBundle\Entity\Details;
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 
 /**
- * Class ClubFactory
- * @package Gyman\Bundle\ClubBundle
+ * Class ClubFactory.
  */
 class ClubFactory
 {
     /**
      * @param $params
+     *
      * @return Club
      */
     public static function createFromArray($params)

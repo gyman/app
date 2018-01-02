@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Command;
 
 use DateTime;
@@ -8,8 +11,7 @@ use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 
 /**
- * Class OpenEntryCommand
- * @package Gyman\Application\Command
+ * Class OpenEntryCommand.
  */
 final class OpenEntryCommand
 {
@@ -24,7 +26,7 @@ final class OpenEntryCommand
     public $entryType;
 
     /**
-     * @var integer
+     * @var int
      */
     public $price = 20;
 
@@ -45,6 +47,7 @@ final class OpenEntryCommand
 
     /**
      * OpenEntryCommand constructor.
+     *
      * @param Member $member
      */
     public function __construct(Member $member)

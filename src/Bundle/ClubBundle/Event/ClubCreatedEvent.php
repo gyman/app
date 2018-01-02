@@ -1,12 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Event;
 
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class ClubCreatedEvent
- * @package Gyman\Bundle\ClubBundle\Event
+ * Class ClubCreatedEvent.
  */
 class ClubCreatedEvent extends Event
 {

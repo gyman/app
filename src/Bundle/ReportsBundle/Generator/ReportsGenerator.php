@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ReportsBundle\Generator;
 
 use Carbon\Carbon;
@@ -9,8 +12,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class ReportsGenerator
- * @package Gyman\Bundle\ReportsBundle\Generator
+ * Class ReportsGenerator.
  */
 class ReportsGenerator
 {
@@ -22,6 +24,8 @@ class ReportsGenerator
 
     /**
      * ReportsGenerator constructor.
+     *
+     * @param mixed $router
      */
     public function __construct($router)
     {
@@ -33,12 +37,14 @@ class ReportsGenerator
      * @param $name
      * @param StrategyInterface $strategy
      */
-    public function addStrategy($name, StrategyInterface $strategy){
+    public function addStrategy($name, StrategyInterface $strategy)
+    {
         $this->strategies->set($name, $strategy);
     }
 
     /**
      * @param Form $form
+     *
      * @return array
      */
     public function links(Form $form)
@@ -46,35 +52,51 @@ class ReportsGenerator
         $router = $this->router;
 
         $getLink = function (DateTime $startDate, DateTime $endDate) use ($form, $router) {
-            return $router->generate("gyman_reports_index", [
+            return $router->generate('gyman_reports_index', [
                 $form->getName() => [
-                    "startDate" => $startDate->format("d.m.Y"),
-                    "endDate" => $endDate->format("d.m.Y"),
-                    "strategy" => $form->getData()->strategy,
-                    "submit" => null
-                ]
+                    'startDate' => $startDate->format('d.m.Y'),
+                    'endDate'   => $endDate->format('d.m.Y'),
+                    'strategy'  => $form->getData()->strategy,
+                    'submit'    => null,
+                ],
             ]);
         };
 
         return [
-            'todayLink' => $getLink(Carbon::parse("today"), Carbon::parse("today")),
-            'yesterdayLink' => $getLink(Carbon::parse("yesterday"), Carbon::parse("yesterday")),
-            'thisWeekLink' => $getLink(Carbon::parse("this week"), Carbon::parse("this week +6 days")),
-            'lastWeekLink' => $getLink(Carbon::parse("previous week"), Carbon::parse("previous week +6 days")),
-            'thisMonthLink' => $getLink(Carbon::parse("first day of this month"), Carbon::parse("last day of this month")),
-            'lastMonthLink' => $getLink(Carbon::parse("first day of last month"), Carbon::parse("last day of last month")),
+            'todayLink'     => $getLink(Carbon::parse('today'), Carbon::parse('today')),
+            'yesterdayLink' => $getLink(Carbon::parse('yesterday'), Carbon::parse('yesterday')),
+            'thisWeekLink'  => $getLink(Carbon::parse('this week'), Carbon::parse('this week +6 days')),
+            'lastWeekLink'  => $getLink(Carbon::parse('previous week'), Carbon::parse('previous week +6 days')),
+            'thisMonthLink' => $getLink(Carbon::parse('first day of this month'), Carbon::parse('last day of this month')),
+            'lastMonthLink' => $getLink(Carbon::parse('first day of last month'), Carbon::parse('last day of last month')),
         ];
     }
 
     /**
-     * @param $name
-     * @return mixed|null
+     * @param DateFilter $filter
+     *
      * @throws \Exception
+     *
+     * @return mixed
+     */
+    public function result(DateFilter $filter)
+    {
+        $strategy = $this->chooseStrategy($filter->strategy);
+
+        return $strategy->result($filter);
+    }
+
+    /**
+     * @param $name
+     *
+     * @throws \Exception
+     *
+     * @return mixed|null
      */
     private function chooseStrategy($name)
     {
-        foreach($this->strategies as $strategy) {
-            if($strategy->getName() === $name) {
+        foreach ($this->strategies as $strategy) {
+            if ($strategy->getName() === $name) {
                 return $strategy;
             }
         }
@@ -83,16 +105,5 @@ class ReportsGenerator
             "Report generating strategy '%s' not added to strategies chain!",
             $name
         ));
-    }
-
-    /**
-     * @param DateFilter $filter
-     * @return mixed
-     * @throws \Exception
-     */
-    public function result(DateFilter $filter)
-    {
-        $strategy = $this->chooseStrategy($filter->strategy);
-        return $strategy->result($filter);
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use Dende\Calendar\Application\Factory\CalendarFactory as BaseCalendarFactory;
@@ -8,13 +11,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar;
 
 /**
- * Class CalendarFactory
- * @package Dende\Calendar\Application\Factory
+ * Class CalendarFactory.
  */
 class CalendarFactory extends BaseCalendarFactory
 {
-    
-    public function createFromArray(array $array = []) : BaseCalendar
+    public function createFromArray(array $array = []): BaseCalendar
     {
         $template = [
             'calendarId' => CalendarId::create(),

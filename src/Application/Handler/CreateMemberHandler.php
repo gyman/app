@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Event\MemberEvent;
+use Gyman\Application\Factory\MemberFactory;
 use Gyman\Application\Repository\MemberRepositoryInterface;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,9 +33,10 @@ class CreateMemberHandler
 
     /**
      * UpdateMemberHandler constructor.
+     *
      * @param MemberRepositoryInterface $memberRepository
-     * @param UploadMemberFotoHandler $uploadHandler
-     * @param EventDispatcherInterface $dispatcher
+     * @param UploadMemberFotoHandler   $uploadHandler
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(MemberRepositoryInterface $memberRepository, UploadMemberFotoHandler $uploadHandler, EventDispatcherInterface $dispatcher)
     {
@@ -43,7 +47,7 @@ class CreateMemberHandler
 
     /**
      * @param CreateMemberCommand $command
-     * @param null $author
+     * @param null                $author
      */
     public function handle(CreateMemberCommand $command, $author = null)
     {

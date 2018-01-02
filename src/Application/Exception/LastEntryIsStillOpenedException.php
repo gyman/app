@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Exception;
+
 use Gyman\Domain\Entry;
 
 /**
- * Class LastEntryIsStillOpenedException
- * @package Gyman\Domain
+ * Class LastEntryIsStillOpenedException.
  */
 class LastEntryIsStillOpenedException extends \Exception
 {
@@ -18,6 +21,7 @@ class LastEntryIsStillOpenedException extends \Exception
 
     /**
      * LastEntryIsStillOpenedException constructor.
+     *
      * @param Entry $entry
      * @param Entry $lastEntry
      */

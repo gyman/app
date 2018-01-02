@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain;
 
 use Ramsey\Uuid\Uuid;
@@ -14,6 +17,11 @@ class AbstractId implements IdInterface
         $this->id = $id;
     }
 
+    public function __toString(): string
+    {
+        return (string) $this->id;
+    }
+
     public static function create(UuidInterface $id = null): IdInterface
     {
         return $id ? new static($id) : new static(Uuid::uuid4());
@@ -22,11 +30,6 @@ class AbstractId implements IdInterface
     public function id(): string
     {
         return $this->id;
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->id;
     }
 
     public function equals(IdInterface $id): bool

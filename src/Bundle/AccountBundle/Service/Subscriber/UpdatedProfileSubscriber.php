@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Service\Subscriber;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -12,12 +15,12 @@ use Symfony\Component\Routing\Router;
 class UpdatedProfileSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var Router $router
+     * @var Router
      */
     private $router;
 
     /**
-     * @var Session $session
+     * @var Session
      */
     private $session;
 
@@ -30,7 +33,8 @@ class UpdatedProfileSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param  \Symfony\Component\Routing\Router                                       $router
+     * @param \Symfony\Component\Routing\Router $router
+     *
      * @return \Gyman\Bundle\AccountBundle\Service\Subscriber\RegisteredUserSubscriber
      */
     public function setRouter(Router $router)
@@ -53,7 +57,7 @@ class UpdatedProfileSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

@@ -1,9 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Entry;
-use Gyman\Bundle\AppBundle\Services\Manager\VoucherManager;
 use Gyman\Application\Command\CreateVoucherCommand;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -12,7 +13,7 @@ class MaximumAmountGreaterThanCreditEntriesValidator extends ConstraintValidator
 {
     /**
      * @param CreateVoucherCommand $createVoucherCommand
-     * @param Constraint $constraint
+     * @param Constraint           $constraint
      */
     public function validate($createVoucherCommand, Constraint $constraint)
     {

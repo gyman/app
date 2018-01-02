@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Event;
 
 use Exception;
@@ -8,8 +11,7 @@ use Gyman\Domain\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class EntryEvent
- * @package Gyman\Domain
+ * Class EntryEvent.
  */
 class EntryEvent extends Event implements DomainEventInterface
 {
@@ -30,10 +32,11 @@ class EntryEvent extends Event implements DomainEventInterface
 
     /**
      * EntryEvent constructor.
-     * @param Member $member
-     * @param Entry $entry
-     * @param UserInterface $author |null
-     * @param Exception $exception
+     *
+     * @param Member        $member
+     * @param Entry         $entry
+     * @param UserInterface $author    |null
+     * @param Exception     $exception
      */
     public function __construct(Entry $entry, $author = null, $exception = null)
     {

@@ -1,18 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
-use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Application\Event\EntryEvent;
-use Gyman\Domain\Member;
-use Gyman\Domain\UserInterface;
-use Gyman\Domain\Voucher;
+use Gyman\Application\Factory\EntryFactory;
 use Gyman\Application\Repository\MemberRepositoryInterface;
+use Gyman\Domain\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class CreateVoucherHandler
- * @package Gyman\Domain
+ * Class CreateVoucherHandler.
  */
 final class OpenEntryHandler
 {
@@ -31,8 +31,9 @@ final class OpenEntryHandler
 
     /**
      * OpenEntryHandler constructor.
+     *
      * @param MemberRepositoryInterface $memberRepository
-     * @param EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(MemberRepositoryInterface $memberRepository, EventDispatcherInterface $dispatcher)
     {
@@ -41,8 +42,9 @@ final class OpenEntryHandler
     }
 
     /**
-     * @param OpenEntryCommand $command
+     * @param OpenEntryCommand   $command
      * @param UserInterface|null $author
+     *
      * @throws \Exception
      * @throws \Gyman\Application\Exception\NoCurrentVoucherForVoucherEntryException
      */

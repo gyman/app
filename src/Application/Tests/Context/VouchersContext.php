@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Context;
 
 use Behat\Behat\Context\Context;
@@ -8,17 +11,17 @@ use DateTime;
 use Exception;
 use Gyman\Application\Factory\VoucherFactory;
 use Gyman\Application\Member;
-use Gyman\Domain\Voucher;
 use Gyman\Application\Repository\InMemoryDomainEventRepository;
 use Gyman\Application\Repository\InMemoryMemberRepository;
 use Gyman\Application\Repository\InMemoryVoucherRepository;
 use Gyman\Application\Service\SellVoucher;
+use Gyman\Domain\Voucher;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class VouchersContext
- * @package Gyman\Domain
+ * Class VouchersContext.
+ *
  * @property Member $member
  */
 class VouchersContext implements Context
@@ -59,6 +62,7 @@ class VouchersContext implements Context
 
     /**
      * @BeforeScenario
+     *
      * @param BeforeScenarioScope $scope
      */
     public function prepareUseCases(BeforeScenarioScope $scope)
@@ -80,7 +84,7 @@ class VouchersContext implements Context
      */
     public function iGetNotificationAboutSuccessfulVoucherCreation()
     {
-        if ($this->lastNotification !== SellVoucher::SUCCESS) {
+        if (SellVoucher::SUCCESS !== $this->lastNotification) {
             throw new Exception('No success event thrown');
         }
     }
@@ -113,13 +117,16 @@ class VouchersContext implements Context
     {
         $this->lastNotification = $event->getName();
 
-        if ($event->getName() === SellVoucher::SUCCESS) {
+        if (SellVoucher::SUCCESS === $event->getName()) {
             $this->domainEventRepository->insert($event);
         }
     }
 
     /**
      * @Given /^his previous voucher is closed with \'([^\']*)\' equals to date \'([^\']*)\'$/
+     *
+     * @param mixed $field
+     * @param mixed $date
      */
     public function hisPreviousVoucherIsClosedWithEqualsToDate($field, $date)
     {
@@ -131,7 +138,7 @@ class VouchersContext implements Context
         /** @var DateTime $endDate */
         $endDate = $previousVoucher->$field();
 
-        if ($endDate->getTimestamp() != $closingDate->getTimestamp()) {
+        if ($endDate->getTimestamp() !== $closingDate->getTimestamp()) {
             throw new Exception(sprintf(
                 'Dates are not equal. Expected %s actually is %s',
                 $endDate->format('Y-m-d H:i:s'),

@@ -1,17 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Exception;
 
 use Gyman\Domain\Voucher;
 
 class VoucherManagerException extends \Exception
 {
+    const ENDDATE_IN_FUTURE = 1101;
     /**
-     *
      * @var Voucher
      */
     private $voucher;
-
-    const ENDDATE_IN_FUTURE = 1101;
 
     public function __construct($message, $code, $previous, Voucher $voucher)
     {
@@ -20,7 +21,6 @@ class VoucherManagerException extends \Exception
     }
 
     /**
-     *
      * @return Voucher
      */
     public function getVoucher()
@@ -29,8 +29,8 @@ class VoucherManagerException extends \Exception
     }
 
     /**
+     * @param \Gyman\Domain\Voucher $voucher
      *
-     * @param  \Gyman\Domain\Voucher                    $voucher
      * @return \Gyman\Bundle\AppBundle\Exception\VoucherManagerException
      */
     public function setVoucher(Voucher $voucher)

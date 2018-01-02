@@ -1,13 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\GymanAppBundle\Tests\Functional\Controller;
 
+use Gyman\Component\Test\BaseFunctionalTestCase;
 use Gyman\Domain\Calendar;
 use Gyman\Domain\Section;
-use Gyman\Component\Test\BaseFunctionalTestCase;
 
 /**
- * Class SettingsControllerTest
- * @package Gyman\GymanAppBundle\Tests\Functional\Controller
+ * Class SettingsControllerTest.
+ *
+ * @coversNothing
  */
 class SettingsControllerTest extends BaseFunctionalTestCase
 {

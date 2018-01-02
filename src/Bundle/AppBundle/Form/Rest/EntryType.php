@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form\Rest;
 
-use Dende\Calendar\Domain\Calendar;
-use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Command\OpenEntryCommand;
+use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,8 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class EntryType
- * @package Gyman\Bundle\AppBundle\Form\Rest
+ * Class EntryType.
  */
 final class EntryType extends AbstractType
 {
@@ -30,13 +31,13 @@ final class EntryType extends AbstractType
         $builder
         ->add('occurrence', EntityType::class, [
             'required' => true,
-            'class' => 'Gyman\Domain\Calendar\Event\Occurrence',
+            'class'    => 'Gyman\Domain\Calendar\Event\Occurrence',
         ])
         ->add('price', IntegerType::class, [
-            "attr" => [
-                "min" => 0,
-                "step" => 5,
-            ]
+            'attr' => [
+                'min'  => 0,
+                'step' => 5,
+            ],
         ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -65,7 +66,7 @@ final class EntryType extends AbstractType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             /** @var OpenEntryCommand $data */
             $data = $event->getData();
-            if ($data->entryType !== Entry::TYPE_PAID) {
+            if (Entry::TYPE_PAID !== $data->entryType) {
                 $data->price = null;
             }
         });
@@ -101,6 +102,4 @@ final class EntryType extends AbstractType
     {
         return null;
     }
-
-
 }

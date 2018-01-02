@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
@@ -7,11 +10,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueClubSubdomainValidator extends ConstraintValidator
 {
-    /** @var  ClubRepository */
+    /** @var ClubRepository */
     private $clubRepository;
 
     /**
      * UniqueClubSubdomainValidator constructor.
+     *
      * @param ClubRepository $clubRepository
      */
     public function __construct(ClubRepository $clubRepository)
@@ -20,7 +24,7 @@ class UniqueClubSubdomainValidator extends ConstraintValidator
     }
 
     /**
-     * @param mixed $value
+     * @param mixed      $value
      * @param Constraint $constraint
      */
     public function validate($value, Constraint $constraint)

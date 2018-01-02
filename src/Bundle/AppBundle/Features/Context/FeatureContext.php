@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Features\Context;
 
 use Behat\Behat\Context\Step\Then;
@@ -37,6 +40,8 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * @When /^(?:|I )click element "([^"]*)"$/
+     *
+     * @param mixed $locator
      */
     public function iClickElement($locator)
     {
@@ -44,7 +49,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
                 ->getPage()
                 ->find('css', $locator);
 
-        if ($element == null) {
+        if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $locator);
         }
 
@@ -54,6 +59,9 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     /**
      * @When /^(?:|I )will wait to see "(?P<text>(?:[^"]|\\")*)"$/
      * @Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" after time$/
+     *
+     * @param mixed $text
+     * @param mixed $maxWait
      */
     public function iWaitToSee($text, $maxWait = 5)
     {
@@ -81,6 +89,9 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * @Then /^I will wait to see element "([^"]*)" with "(?P<text>(?:[^"]|\\")*)" text$/
+     *
+     * @param mixed $selector
+     * @param mixed $text
      */
     public function iWillWaitToSeeElementWithText($selector, $text)
     {
@@ -112,13 +123,13 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * @Given /^I wait for (\d+) seconds$/
+     *
+     * @param mixed $seconds
      */
     public function iWaitForSeconds($seconds)
     {
-        for ($a = 0; $a < $seconds; $a++) {
+        for ($a = 0; $a < $seconds; ++$a) {
             sleep(1);
         }
-
-        return;
     }
 }

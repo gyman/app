@@ -1,21 +1,25 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Factory;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gyman\Domain\Voucher;
-use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Application\Command\CreateVoucherCommand;
+use Gyman\Bundle\AppBundle\Globals;
+use Gyman\Domain\Voucher;
 use Gyman\Domain\Voucher\Price;
 
 /**
- * Class VoucherFactory
- * @package Gyman\Domain
+ * Class VoucherFactory.
  */
 final class VoucherFactory implements VoucherFactoryInterface
 {
     /**
      * @param $params
+     * @param mixed $array
+     *
      * @return Voucher
      */
     public static function createFromArray($array = [])
@@ -27,7 +31,7 @@ final class VoucherFactory implements VoucherFactoryInterface
             'maximumAmount' => null,
             'entries'       => new ArrayCollection(),
             'member'        => null,
-            'closedAt'      => null
+            'closedAt'      => null,
         ];
 
         $array = array_merge($template, $array);
@@ -56,11 +60,12 @@ final class VoucherFactory implements VoucherFactoryInterface
 
     /**
      * @param CreateVoucherCommand $command
+     *
      * @return Voucher
      */
     public static function createFromVoucherCommand(CreateVoucherCommand $command)
     {
-        $format  = Globals::getDefaultDateTimeFormat();
+        $format = Globals::getDefaultDateTimeFormat();
 
         return self::createFromArray([
             'startDate'           => $command->startDate,

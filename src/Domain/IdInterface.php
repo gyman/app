@@ -1,13 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain;
 
 interface IdInterface
 {
-    public static function create() : IdInterface;
+    public function __toString(): string;
 
-    public function id() : string;
+    public static function create(): self;
 
-    public function __toString() : string;
+    public function id(): string;
 
-    public function equals(IdInterface $id) : bool;
+    public function equals(self $id): bool;
 }

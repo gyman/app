@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
@@ -15,18 +18,18 @@ class OccurrencesData extends BaseFixture implements ContainerAwareInterface
      */
     private $container;
 
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return 20;
     }
 
-    public function insert(array $params = []) : Occurrence
+    public function insert(array $params = []): Occurrence
     {
-        $event = $this->getReference($params["event"]);
+        $event = $this->getReference($params['event']);
 
         $occurrence = $this->getContainer()->get('gyman.occurrence.factory')->createFromArray([
-            'startDate' => new DateTime($params["startDate"]),
-            'duration'  => new OccurrenceDuration($params["minutes"]),
+            'startDate' => new DateTime($params['startDate']),
+            'duration'  => new OccurrenceDuration($params['minutes']),
             'event'     => $event,
         ]);
 
@@ -38,7 +41,7 @@ class OccurrencesData extends BaseFixture implements ContainerAwareInterface
         $this->container = $container;
     }
 
-    public function getContainer() : ContainerInterface
+    public function getContainer(): ContainerInterface
     {
         return $this->container;
     }

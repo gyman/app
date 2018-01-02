@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Model\View;
 
 use Ramsey\Uuid\UuidInterface;
@@ -13,8 +16,9 @@ class EventView
 
     /**
      * EventView constructor.
+     *
      * @param UuidInterface $id
-     * @param string $title
+     * @param string        $title
      */
     public function __construct(UuidInterface $id, string $title)
     {

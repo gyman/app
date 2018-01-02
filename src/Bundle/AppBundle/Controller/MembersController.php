@@ -1,14 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
+use Gyman\Application\Command\CreateMemberCommand;
 use Gyman\Application\Command\CreateUserForMemberCommand;
+use Gyman\Application\Command\SearchMemberCommand;
+use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Bundle\AppBundle\Form\MemberType;
 use Gyman\Bundle\AppBundle\Form\SearchType;
 use Gyman\Domain\Member;
-use Gyman\Application\Command\CreateMemberCommand;
-use Gyman\Application\Command\SearchMemberCommand;
-use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
@@ -25,8 +28,8 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EmailValidator;
 
 /**
- * Class MembersController
- * @package Gyman\Bundle\AppBundle\Controller
+ * Class MembersController.
+ *
  * @Route("/members")
  */
 class MembersController extends Controller
@@ -46,15 +49,14 @@ class MembersController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get("tactician.commandbus")->handle($form->getData());
+                $this->get('tactician.commandbus')->handle($form->getData());
 
                 $this->addFlash('success', 'flash.member_editted.success');
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
-            } else {
-                $this->addFlash('error', 'flash.member_editted.errors');
-                $response->setStatusCode(400);
             }
+            $this->addFlash('error', 'flash.member_editted.errors');
+            $response->setStatusCode(400);
         }
 
         return $response->setContent(
@@ -89,10 +91,9 @@ class MembersController extends Controller
                 return $this->redirectToRoute('gyman_member_edit', [
                     'id' => $this->get('gyman.members.repository')->findOneByEmailAddress(new EmailAddress($command->email))->id(),
                 ]);
-            } else {
-                $this->addFlash('error', 'flash.member_added.errors');
-                $response->setStatusCode(400);
             }
+            $this->addFlash('error', 'flash.member_added.errors');
+            $response->setStatusCode(400);
         }
 
         return $response->setContent($this->renderView('GymanAppBundle:Members:new.html.twig', ['form'     => $form->createView()]));
@@ -106,11 +107,11 @@ class MembersController extends Controller
     public function searchFormAction(Request $request)
     {
         $form = $this->createForm(SearchType::class, new SearchMemberCommand(), [
-            "action" => $this->generateUrl("gyman_members_search"),
+            'action' => $this->generateUrl('gyman_members_search'),
         ]);
 
         return [
-            "form" => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
@@ -126,17 +127,18 @@ class MembersController extends Controller
 
 //        if ($form->isValid()) {
 
-            /** @var Member[] $result */
-            $result = $this->get('gyman.members.repository')->search($form->getData());
+        /** @var Member[] $result */
+        $result = $this->get('gyman.members.repository')->search($form->getData());
 
-            if (count($result) == 1) {
-                /** @var Member $result */
-                $result = $result[0];
-                return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
-            }
+        if (1 === count($result)) {
+            /** @var Member $result */
+            $result = $result[0];
 
-            return [
-                'members' => $result
+            return $this->redirectToRoute('gyman_member_edit', ['id' => $result->id()]);
+        }
+
+        return [
+                'members' => $result,
             ];
 //        }
     }
@@ -155,8 +157,8 @@ class MembersController extends Controller
 //            return $member->email();
 //        }, $result);
 
-        $serializer = $this->get("jms_serializer");
-        $data = $serializer->serialize($result[0], "json");
+        $serializer = $this->get('jms_serializer');
+        $data = $serializer->serialize($result[0], 'json');
 
         return new Response($data);
     }
@@ -164,13 +166,17 @@ class MembersController extends Controller
     /**
      * @Route("/{id}/sendInvitation", name="gyman_member_sendInvitation")
      * @ParamConverter("member", class="Gyman:Member")
+     *
      * @param Member $member
+     *
      * @return RedirectResponse
      */
-    public function sendInvitationAction(Member $member) {
-        if($member->email()->email() === null) {
-            $this->addFlash('error', "Użytkownik nie ma przypisanego adresu email!");
-            return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
+    public function sendInvitationAction(Member $member)
+    {
+        if (null === $member->email()->email()) {
+            $this->addFlash('error', 'Użytkownik nie ma przypisanego adresu email!');
+
+            return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
         }
 
         $validator = new EmailValidator();
@@ -180,11 +186,11 @@ class MembersController extends Controller
         $currentPassword = substr(str_shuffle('abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ1234567890-_/!@#$%^&&**()'), 0, 12);
         $token = hash('sha512', $member->email()->email() . microtime());
 
-        $this->get("tactician.commandbus")->handle(new CreateUserForMemberCommand($member, $token, $currentPassword));
+        $this->get('tactician.commandbus')->handle(new CreateUserForMemberCommand($member, $token, $currentPassword));
 
         $this->addFlash('success', sprintf('Zaproszenie wysłano na adres %s', $member->email()->email()));
 
-        return $this->redirectToRoute('gyman_member_edit', ["id" => $member->id()]);
+        return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
     }
 
     /**
@@ -192,11 +198,12 @@ class MembersController extends Controller
      * @Route("/register/{user}", name="gyman_member_register")
      * @ParamConverter("user", class="Gyman:User", options={"repository_method" = "findOneByInvitationToken"})
      */
-    public function registerAction(UserInterface $user){
+    public function registerAction(UserInterface $user)
+    {
         $em = $this->getDoctrine()->getManager('tenant');
         $this->get('security.token_storage')->setToken(new UsernamePasswordToken($user, $user->getPassword(), 'fos_userbundle', $user->getRoles()));
 
-        $user->setPasswordRequestedAt(new DateTime("now"));
+        $user->setPasswordRequestedAt(new DateTime('now'));
 
         $em->persist($user);
         $em->flush();

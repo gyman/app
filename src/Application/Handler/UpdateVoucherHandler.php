@@ -1,20 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Handler;
 
 use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Application\Event\VoucherEvent;
 use Gyman\Application\Repository\VoucherRepositoryInterface;
-use Gyman\Domain\Entry;
-use Gyman\Application\Factory\VoucherFactory;
-use Gyman\Application\Command\CreateVoucherCommand;
-use Gyman\Domain\Member;
 use Gyman\Domain\UserInterface;
 use Gyman\Domain\Voucher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class UpdateVoucherHandler
- * @package Gyman\Domain
+ * Class UpdateVoucherHandler.
  */
 class UpdateVoucherHandler
 {
@@ -33,8 +31,9 @@ class UpdateVoucherHandler
 
     /**
      * UpdateVoucherHandler constructor.
+     *
      * @param VoucherRepositoryInterface $voucherRepository
-     * @param EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface   $dispatcher
      */
     public function __construct(VoucherRepositoryInterface $voucherRepository, EventDispatcherInterface $dispatcher)
     {
@@ -44,7 +43,7 @@ class UpdateVoucherHandler
 
     /**
      * @param UpdateVoucherCommand $updateVoucherCommand
-     * @param UserInterface|null $author
+     * @param UserInterface|null   $author
      */
     public function handle(UpdateVoucherCommand $updateVoucherCommand, UserInterface $author = null)
     {

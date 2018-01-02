@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Event;
 
 use Gyman\Domain\Member;
@@ -20,9 +23,10 @@ class VoucherEvent extends Event implements DomainEventInterface
 
     /**
      * VoucherEvent constructor.
-     * @param Member $member
-     * @param Voucher $voucher
-     * @param UserInterface $author |null
+     *
+     * @param Member        $member
+     * @param Voucher       $voucher
+     * @param UserInterface $author  |null
      */
     public function __construct(Voucher $voucher, $author = null)
     {

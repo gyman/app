@@ -1,10 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\DashboardBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class Builder
 {
@@ -48,14 +50,14 @@ class Builder
 
         $menu->addChild(
             'dashboard.actions.reports',
-            array(
-                'route' => 'gyman_reports_index',
-                "extras" => array("icon" => 'icomoon-icon-users'),
-                'linkAttributes' => array(
-                    "class" => 'btn btn-block btn-large btn-primary',
-                    "id" => "actionReports"
-                )
-            )
+            [
+                'route'          => 'gyman_reports_index',
+                'extras'         => ['icon' => 'icomoon-icon-users'],
+                'linkAttributes' => [
+                    'class' => 'btn btn-block btn-large btn-primary',
+                    'id'    => 'actionReports',
+                ],
+            ]
         )->setExtra('translation_domain', 'DashboardBundle');
 
         return $menu;

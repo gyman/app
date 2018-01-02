@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Member;
 
 use Gyman\Application\Command\UpdateMemberCommand;
@@ -7,8 +10,7 @@ use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Member\Details\Foto;
 
 /**
- * Class Details
- * @package Gyman\Domain
+ * Class Details.
  */
 class Details
 {
@@ -54,12 +56,12 @@ class Details
     protected $foto;
 
     /**
-     * @var string $zipcode
+     * @var string
      */
     protected $zipcode;
 
     /**
-     * @var string $gender
+     * @var string
      */
     protected $gender;
 
@@ -74,23 +76,24 @@ class Details
     protected $barcode;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $starred;
 
     /**
      * Details constructor.
-     * @param string $firstname
-     * @param string $lastname
+     *
+     * @param string    $firstname
+     * @param string    $lastname
      * @param \DateTime $birthdate
-     * @param string $phone
-     * @param string $notes
-     * @param Foto $foto
-     * @param string $zipcode
-     * @param string $gender
-     * @param Belt $belt
-     * @param Barcode $barcode
-     * @param bool $starred
+     * @param string    $phone
+     * @param string    $notes
+     * @param Foto      $foto
+     * @param string    $zipcode
+     * @param string    $gender
+     * @param Belt      $belt
+     * @param Barcode   $barcode
+     * @param bool      $starred
      */
     public function __construct($firstname, $lastname, \DateTime $birthdate, $phone, $notes, Foto $foto, $zipcode, $gender, Belt $belt, Barcode $barcode, $starred)
     {
@@ -125,7 +128,7 @@ class Details
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isStarred()
     {
@@ -217,7 +220,8 @@ class Details
         return !empty($this->firstname) || !empty($this->lastname);
     }
 
-    public function fullName(){
-        return sprintf("%s %s", $this->firstname(), $this->lastname());
+    public function fullName()
+    {
+        return sprintf('%s %s', $this->firstname(), $this->lastname());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyman\Bundle\LandingPageBundle\Controller;
 
 use Gyman\Application\Command\CreateClubCommand;
@@ -14,7 +16,9 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="gyman_landing_index")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
@@ -22,33 +26,31 @@ class DefaultController extends Controller
         $command = new CreateClubCommand();
         $form = $this->createForm('create_club', $command);
 
-        if($request->isMethod("POST")) {
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $command = $form->getData();
-                $this->get("tactician.commandbus")->handle($command);
+                $this->get('tactician.commandbus')->handle($command);
 
                 /** @var User $user */
                 $user = $this->getDoctrine()->getRepository(User::class)->findOneByUsername($command->username);
                 $userId = $user->getId();
 
-                $this->addFlash("success", "user.created");
+                $this->addFlash('success', 'user.created');
 
                 return $this->redirect(sprintf(
-                    "%s://%s.%s%s",
+                    '%s://%s.%s%s',
                     $request->getScheme(),
                     $command->subdomain,
-                    $this->getParameter("base_url"),
-                    $this->generateUrl("gyman_app_login_after_registration", ["id" => $userId], Router::ABSOLUTE_PATH)
+                    $this->getParameter('base_url'),
+                    $this->generateUrl('gyman_app_login_after_registration', ['id' => $userId], Router::ABSOLUTE_PATH)
                 ));
-
-            } else {
-                $this->addFlash('error', 'user.error_creating_user');
             }
+            $this->addFlash('error', 'user.error_creating_user');
         }
 
         return $this->render('GymanLandingPageBundle:Default:index.html.twig', [
-            "form" => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

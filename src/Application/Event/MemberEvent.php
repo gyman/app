@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Event;
 
 use Gyman\Domain\Member;
@@ -19,7 +22,8 @@ class MemberEvent extends Event implements DomainEventInterface
 
     /**
      * MemberEvent constructor.
-     * @param Member $member
+     *
+     * @param Member        $member
      * @param UserInterface $author|null
      */
     public function __construct(Member $member, $author = null)

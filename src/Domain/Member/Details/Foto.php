@@ -1,12 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Member\Details;
 
-use Gyman\Bundle\AppBundle\Globals;
-use Symfony\Component\VarDumper\VarDumper;
-
 /**
- * Class Foto
- * @package Gyman\Domain
+ * Class Foto.
  */
 class Foto
 {
@@ -17,6 +16,7 @@ class Foto
 
     /**
      * Foto constructor.
+     *
      * @param string $foto
      */
     public function __construct(string $foto = null)
@@ -27,7 +27,7 @@ class Foto
     /**
      * @return string
      */
-    public function foto() : ?string
+    public function foto(): ?string
     {
         return $this->foto;
     }

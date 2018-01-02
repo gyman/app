@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Section;
 
 /**
- * Club
+ * Club.
  */
 class Club
 {
@@ -41,12 +44,13 @@ class Club
 
     /**
      * Club constructor.
-     * @param int $id
-     * @param string $name
+     *
+     * @param int                       $id
+     * @param string                    $name
      * @param ArrayCollection|Section[] $sections
-     * @param Subdomain $subdomain
-     * @param Database $database
-     * @param Details $details
+     * @param Subdomain                 $subdomain
+     * @param Database                  $database
+     * @param Details                   $details
      */
     public function __construct($id, $name, $sections, Subdomain $subdomain, Database $database, Details $details)
     {

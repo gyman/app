@@ -1,19 +1,27 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Twig;
 
-use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Services\Manager\MemberManager;
+use Gyman\Domain\Member;
 
 class CurrentVoucherProgressbarExtension extends \Twig_Extension
 {
     /**
-     *
      * @var Gyman\Bundle\AppBundle\Services\Manager\MemberManager
      */
     private $memberManager;
 
+    private $markup_date = '<div class="progress progress-striped">%%start%% - %%end%%
+                                    <div style="width: %%percentage%%%;" class="bar"></div>
+                                </div>';
+    private $markup_entries = '<div class="progress progress-striped">%%amount_used%%/%%amount_total%% %%amount_word%%
+                                    <div style="width: %%percentage%%%;" class="bar"></div>
+                                </div>';
+
     /**
-     *
      * @return Gyman\Bundle\AppBundle\Services\Manager\MemberManager
      */
     public function getMemberManager()
@@ -22,8 +30,8 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
     }
 
     /**
+     * @param \Gyman\Bundle\AppBundle\Services\Manager\MemberManager $memberManager
      *
-     * @param  \Gyman\Bundle\AppBundle\Services\Manager\MemberManager          $memberManager
      * @return \Gyman\Bundle\AppBundle\Twig\CurrentVoucherProgressBarExtension
      */
     public function setMemberManager(MemberManager $memberManager)
@@ -32,13 +40,6 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
 
         return $this;
     }
-
-    private $markup_date = '<div class="progress progress-striped">%%start%% - %%end%%
-                                    <div style="width: %%percentage%%%;" class="bar"></div>
-                                </div>';
-    private $markup_entries = '<div class="progress progress-striped">%%amount_used%%/%%amount_total%% %%amount_word%%
-                                    <div style="width: %%percentage%%%;" class="bar"></div>
-                                </div>';
 
     public function getFilters()
     {
@@ -66,13 +67,13 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
         $startDate = $voucher->getStartDate();
         $endDate = $voucher->getEndDate();
 
-        if ($endDate != null) {
+        if (null !== $endDate) {
             $totalDays = $startDate->diff($endDate)->days;
             $leftDays = $endDate->diff(new \DateTime())->days;
 
-            $percentage = intval(100 - ($leftDays / $totalDays * 100));
+            $percentage = (int) (100 - ($leftDays / $totalDays * 100));
 
-            if ($leftDays == 1) {
+            if (1 === $leftDays) {
                 $daysWord = $params[1];
             }
 
@@ -92,17 +93,17 @@ class CurrentVoucherProgressbarExtension extends \Twig_Extension
         }
         $amountTotal = $voucher->getAmount();
 
-        if ($amountTotal !== null) {
+        if (null !== $amountTotal) {
             $amountWord = 'wejść';
             $amountLeft = $voucher->getAmountLeft();
 
-            if ($amountLeft == null) {
+            if (null === $amountLeft) {
                 $amountLeft = 0;
             }
 
             $amountUsed = $amountTotal - $amountLeft;
 
-            $percentageAmount = intval(100 - ($amountLeft / $amountTotal * 100));
+            $percentageAmount = (int) (100 - ($amountLeft / $amountTotal * 100));
 
             $result .= str_replace([
                 '%%amount_left%%',

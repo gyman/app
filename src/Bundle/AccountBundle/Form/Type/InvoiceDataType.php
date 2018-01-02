@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class InvoiceDataType extends BaseType
 {

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Command;
 
 use Carbon\Carbon;
@@ -7,7 +10,6 @@ use DateTime;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Repository\EventRepository;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
@@ -38,21 +40,21 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
 
-        list($schedule, $startDate, $endDate) = $this->parseFile($input->getArgument("file"));
+        list($schedule, $startDate, $endDate) = $this->parseFile($input->getArgument('file'));
 
-        if($input->getOption('overwrite')) {
+        if ($input->getOption('overwrite')) {
             $this->clearDb($startDate);
         }
 
         $sections = $this->getSections($schedule);
-        $count = array_sum(array_map(function($dayweek){ return count($dayweek); }, $schedule));
+        $count = array_sum(array_map(function ($dayweek) { return count($dayweek); }, $schedule));
 
         $commandArray = $this->createCommandArray($schedule, $startDate, $endDate, $sections);
         $commandArray = $this->reduceScheduleByRepetitions($commandArray);
 
         $progress = new ProgressBar($output, $count);
-        foreach($commandArray as $command) {
-            $container->get("dende_calendar.handler.create_event")->handle($command);
+        foreach ($commandArray as $command) {
+            $container->get('dende_calendar.handler.create_event')->handle($command);
             $progress->advance();
         }
         $progress->finish();
@@ -63,34 +65,33 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
         try {
             $value = Yaml::parse(file_get_contents($file));
         } catch (ParseException $e) {
-            printf("Unable to parse the YAML string: %s", $e->getMessage());
+            printf('Unable to parse the YAML string: %s', $e->getMessage());
             exit;
         }
 
-        return [$value["schedule"], $value["start"], $value["end"]];
+        return [$value['schedule'], $value['start'], $value['end']];
     }
 
     private function getSections($schedule)
     {
         $container = $this->getContainer();
 
-        $sections = array_unique(call_user_func_array('array_merge', array_values(array_map(function($day) {
+        $sections = array_unique(call_user_func_array('array_merge', array_values(array_map(function ($day) {
             return array_keys($day);
         }, $schedule))));
 
-        /** @var array|Section[] $sections */
-        return array_combine($sections, array_map(function($title) use ($container) {
-            if($section = $container->get("gyman.repository.section")->findOneByTitle($title))
-            {
-                ;
+        /* @var array|Section[] $sections */
+        return array_combine($sections, array_map(function ($title) use ($container) {
+            if ($section = $container->get('gyman.repository.section')->findOneByTitle($title)) {
             } else {
                 $calendar = $container->get('gyman.calendar.factory')->createFromArray([
-                    'title' => $title
+                    'title' => $title,
                 ]);
 
                 $section = new Section(null, $title, $calendar);
-                $container->get("gyman.repository.section")->insert($section);
+                $container->get('gyman.repository.section')->insert($section);
             }
+
             return $section;
         }, $sections));
     }
@@ -101,16 +102,15 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
         $toRemove = [];
 
         /** @var Closure $md5 */
-        $md5 = function(CreateEventCommand $command) {
-            return  md5($command->title . $command->startDate->format("H:i") . $command->duration);
+        $md5 = function (CreateEventCommand $command) {
+            return  md5($command->title . $command->startDate->format('H:i') . $command->duration);
         };
 
         /** @var CreateEventCommand $command */
-        while($command = array_shift($commandsArray)) {
-
+        while ($command = array_shift($commandsArray)) {
             /** @var CreateEventCommand $comparedCommand */
-            foreach($commandsArray as $comparedCommand) {
-                if($md5($command) === $md5($comparedCommand)) {
+            foreach ($commandsArray as $comparedCommand) {
+                if ($md5($command) === $md5($comparedCommand)) {
                     $command->repetitionDays = array_merge($command->repetitionDays, $comparedCommand->repetitionDays);
                     $toRemove[spl_object_hash($comparedCommand)] = $comparedCommand;
                 }
@@ -118,7 +118,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
 
             unset($comparedCommand);
 
-            if(!array_key_exists(spl_object_hash($command), $toRemove)) {
+            if (!array_key_exists(spl_object_hash($command), $toRemove)) {
                 $toSave[] = $command;
             }
         }
@@ -128,16 +128,16 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
         return $toSave;
     }
 
-    private function createCommandArray(array $schedule = [], $startDate, $endDate, array $sections = [])
+    private function createCommandArray(array $schedule, $startDate, $endDate, array $sections = [])
     {
         /** @var CreateEventCommand[]|array $commandArray */
         $commandArray = [];
 
-        foreach($schedule as $dayOfWeek => &$activity) {
-            foreach($activity as $sectionTitle => $hours) {
+        foreach ($schedule as $dayOfWeek => &$activity) {
+            foreach ($activity as $sectionTitle => $hours) {
                 list($startHour, $endHour) = array_values($hours);
 
-                $eventRepetitions = [array_search(strtolower($dayOfWeek), Repetitions::$availableWeekdays)];
+                $eventRepetitions = [array_search(strtolower($dayOfWeek), Repetitions::$availableWeekdays, true)];
 
                 $eventStart = Carbon::parse($startDate)->setTimeFromTimeString($startHour);
                 $eventEnd = Carbon::parse($endDate)->setTimeFromTimeString($endHour);
@@ -147,7 +147,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
                 );
 
                 $eventDuration = $diff->h * 60;
-                $eventDuration+= $diff->i;
+                $eventDuration += $diff->i;
 
                 /** @var Section $section */
                 $section = $sections[$sectionTitle];
@@ -194,8 +194,8 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
 
         $occurrenceRepository->remove($occurrences);
 
-        $events->map(function(Event $event) use ($startDate) {
-            if($event->endDate() > $startDate) {
+        $events->map(function (Event $event) use ($startDate) {
+            if ($event->endDate() > $startDate) {
                 $event->changeEndDate($startDate);
             }
         });

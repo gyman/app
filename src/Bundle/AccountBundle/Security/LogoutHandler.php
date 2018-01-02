@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AccountBundle\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,11 +14,12 @@ class LogoutHandler
 {
     private $sessionLifetime;
 
-    /** @var  RequestStack */
+    /** @var RequestStack */
     private $requestStack;
 
     /**
      * LogoutHandler constructor.
+     *
      * @param RequestStack $requestStack
      */
     public function __construct(RequestStack $requestStack)

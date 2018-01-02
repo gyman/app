@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Tests\Context;
 
 use Behat\Behat\Context\Context;
@@ -55,6 +58,8 @@ class MembersContext implements Context
     /**
      * @Given /^there is no members$/
      * @Then /^I have (\d+) user in voucherRepository$/
+     *
+     * @param mixed $amount
      */
     public function thereIsMembersCount($amount = 0)
     {
@@ -62,13 +67,14 @@ class MembersContext implements Context
 
         $count = count($members);
 
-        if ($count != (int) $amount) {
+        if ($count !== (int) $amount) {
             throw new Exception(sprintf('Expected amount of members: %d, actually: %d', $amount, $count));
         }
     }
 
     /**
      * @When /^I add new member with data:$/
+     *
      * @param TableNode $table
      */
     public function iAddNewMemberWithData(TableNode $table)
@@ -87,7 +93,7 @@ class MembersContext implements Context
      */
     public function iShouldBeNotifiedAboutTheMemberProjectCreationSuccess()
     {
-        if ($this->lastNotification !== CreateMember::SUCCESS) {
+        if (CreateMember::SUCCESS !== $this->lastNotification) {
             throw new Exception('No success event thrown');
         }
     }
@@ -99,7 +105,7 @@ class MembersContext implements Context
     {
         $this->lastNotification = $event->getName();
 
-        if ($event->getName() === CreateMember::SUCCESS) {
+        if (CreateMember::SUCCESS === $event->getName()) {
             $this->domainEventRepository->insert($event);
         }
     }
@@ -119,7 +125,7 @@ class MembersContext implements Context
      */
     public function iShouldBeNotifiedAboutTheMemberProjectCreationFailure()
     {
-        if ($this->lastNotification !== CreateMember::FAILURE) {
+        if (CreateMember::FAILURE !== $this->lastNotification) {
             throw new Exception('No success event thrown');
         }
     }
@@ -132,7 +138,7 @@ class MembersContext implements Context
         $events = $this->domainEventRepository->findAll();
         $event = array_pop($events);
 
-        if (is_null($event) || !$event instanceof MemberEvent || $event->getName() !== CreateMember::SUCCESS) {
+        if (null === $event || !$event instanceof MemberEvent || CreateMember::SUCCESS !== $event->getName()) {
             throw new Exception('Last stored event is incorrect');
         }
     }
@@ -145,7 +151,7 @@ class MembersContext implements Context
         $events = $this->domainEventRepository->findAll();
         $event = array_pop($events);
 
-        if (!is_null($event) && $event instanceof MemberEvent && $event->getName() === CreateMember::FAILURE) {
+        if (null !== $event && $event instanceof MemberEvent && CreateMember::FAILURE === $event->getName()) {
             throw new Exception('Last stored event is incorrect');
         }
     }

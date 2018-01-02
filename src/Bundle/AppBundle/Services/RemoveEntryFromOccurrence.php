@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Services;
 
+use Gyman\Bundle\AppBundle\Repository\EntryRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Entry;
-use Gyman\Bundle\AppBundle\Repository\EntryRepository;
 use Gyman\Domain\Member;
 
 class RemoveEntryFromOccurrence
@@ -15,6 +18,7 @@ class RemoveEntryFromOccurrence
 
     /**
      * RemoveEntryFromOccurrence constructor.
+     *
      * @param EntryRepository $entryRepository
      */
     public function __construct(EntryRepository $entryRepository)
@@ -23,7 +27,7 @@ class RemoveEntryFromOccurrence
     }
 
     /**
-     * @param Member $member
+     * @param Member     $member
      * @param Occurrence $occurrence
      */
     public function remove(Member $member, Occurrence $occurrence)

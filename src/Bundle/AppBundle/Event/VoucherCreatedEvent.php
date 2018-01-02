@@ -1,12 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Event;
 
 use Gyman\Domain\Voucher;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class VoucherCreatedEvent
- * @package Gyman\Bundle\AppBundle\Event
+ * Class VoucherCreatedEvent.
  */
 class VoucherCreatedEvent extends Event
 {

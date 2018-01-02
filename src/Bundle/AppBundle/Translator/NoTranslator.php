@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Translator;
 
 use Symfony\Component\Translation\MessageCatalogue;
@@ -44,6 +47,5 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
 
     public function setConfigCacheFactory()
     {
-
     }
 }

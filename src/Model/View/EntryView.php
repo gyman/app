@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyman\Model\View;
 
 use DateTime;
@@ -32,13 +34,14 @@ class EntryView
 
     /**
      * EntryView constructor.
+     *
      * @param UuidInterface $id
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param EventView $event
-     * @param SectionView $section
-     * @param Type $type
-     * @param Price|null $price
+     * @param DateTime      $startDate
+     * @param DateTime      $endDate
+     * @param EventView     $event
+     * @param SectionView   $section
+     * @param Type          $type
+     * @param Price|null    $price
      */
     public function __construct(UuidInterface $id, DateTime $startDate, DateTime $endDate = null, EventView $event, SectionView $section, Type $type, ?Price $price)
     {
@@ -86,7 +89,7 @@ class EntryView
         return $this->price;
     }
 
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'title'           => $this->event->title(),
@@ -94,7 +97,7 @@ class EntryView
             'end'             => $this->endDate->format('Y-m-d H:i:s'),
             'backgroundColor' => '#ffdddd',
             'textColor'       => 'black',
-            'editable'        => false
+            'editable'        => false,
         ];
-}
+    }
 }

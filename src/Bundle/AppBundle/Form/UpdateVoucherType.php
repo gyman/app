@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Gyman\Application\Command\UpdateVoucherCommand;
-use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\VoucherDateTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -34,14 +36,14 @@ class UpdateVoucherType extends AbstractType
                 ])->addModelTransformer(new VoucherDateTransformer('end'))
             )
         ->add('price', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
+            'attr' => [
+                'min' => 0,
+            ],
         ])
         ->add('maximumAmount', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
+            'attr' => [
+                'min' => 0,
+            ],
         ])
         ->add('update.voucher', SubmitType::class, [
             'attr' => [

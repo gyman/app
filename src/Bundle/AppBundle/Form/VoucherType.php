@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Form;
 
-use Gyman\Domain\Member;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\MemberToIdTransformer;
 use Gyman\Bundle\AppBundle\Form\DataTransformer\VoucherDateTransformer;
-use Gyman\Application\Command\CreateVoucherCommand;
+use Gyman\Domain\Member;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -19,6 +22,7 @@ class VoucherType extends AbstractType
 
     /**
      * VoucherType constructor.
+     *
      * @param $memberRepository
      */
     public function __construct($memberRepository)
@@ -46,20 +50,20 @@ class VoucherType extends AbstractType
                 ])->addModelTransformer(new VoucherDateTransformer('end'))
             )
         ->add('price', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
+            'attr' => [
+                'min' => 0,
+            ],
         ])
         ->add(
             $builder->create('member', HiddenType::class, [
-                "data_class" => null,
-                "data" => $options["member"]
+                'data_class' => null,
+                'data'       => $options['member'],
             ])->addViewTransformer(new MemberToIdTransformer($this->memberRepository))
         )
         ->add('maximumAmount', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
+            'attr' => [
+                'min' => 0,
+            ],
         ])
         ->add('add.voucher', SubmitType::class, [
             'attr' => [
@@ -81,9 +85,9 @@ class VoucherType extends AbstractType
                 'class'      => 'form-horizontal row-fluid',
                 'novalidate' => 'NOVALIDATE',
             ],
-            'method' => 'POST',
+            'method'   => 'POST',
             'memberId' => null,
-            'member' => null
+            'member'   => null,
         ]);
     }
 

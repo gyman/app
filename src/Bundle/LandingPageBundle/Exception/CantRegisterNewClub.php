@@ -1,15 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\LandingPageBundle\Exception;
 
 use Exception;
 
 class CantRegisterNewClub extends Exception
 {
-
     protected $message = "Can't create a new club";
 
     /**
      * CantRegisterNewClub constructor.
+     *
      * @param Exception $e
      */
     public function __construct(Exception $e)

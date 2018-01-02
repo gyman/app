@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
@@ -7,7 +10,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class DateRangeValidator extends ConstraintValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validate($value, Constraint $constraint)
     {
@@ -48,8 +51,9 @@ class DateRangeValidator extends ConstraintValidator
     }
 
     /**
-     * @param  \IntlDateFormatter $formatter
-     * @param  \Datetime          $date
+     * @param \IntlDateFormatter $formatter
+     * @param \Datetime          $date
+     *
      * @return string
      */
     protected function processDate(\IntlDateFormatter $formatter, \Datetime $date)

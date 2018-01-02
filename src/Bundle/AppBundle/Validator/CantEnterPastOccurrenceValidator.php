@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Validator;
 
 use Gyman\Application\Command\OpenEntryCommand;
@@ -9,11 +12,11 @@ final class CantEnterPastOccurrenceValidator extends ConstraintValidator
 {
     /**
      * @param OpenEntryCommand $command
-     * @param Constraint $constraint
+     * @param Constraint       $constraint
      */
     public function validate($command, Constraint $constraint)
     {
-        if (is_null($command->occurrence)) {
+        if (null === $command->occurrence) {
             return;
         }
 

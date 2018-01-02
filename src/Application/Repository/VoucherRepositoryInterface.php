@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Application\Repository;
 
 use Gyman\Domain\Voucher;
@@ -12,19 +15,18 @@ interface VoucherRepositoryInterface extends RepositoryInterface
 
     /**
      * @param Voucher $voucher
+     *
      * @return mixed
      */
     public function remove($voucher);
 
     /**
      * @param Voucher $voucher
-     * @return null
      */
     public function insert($voucher);
 
     /**
      * @param Voucher $voucher
-     * @return null
      */
     public function save(Voucher $voucher);
 }

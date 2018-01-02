@@ -1,14 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Class MemberAdmin
- * @package Gyman\Bundle\AppBundle\Admin
+ * Class MemberAdmin.
  */
 class MemberAdmin extends Admin
 {

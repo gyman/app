@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Domain\Calendar\Event\Occurrence;
 
 class Note
@@ -7,6 +10,7 @@ class Note
 
     /**
      * Subject constructor.
+     *
      * @param $content
      */
     public function __construct(string $content = null)

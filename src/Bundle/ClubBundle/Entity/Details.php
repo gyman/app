@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\ClubBundle\Entity;
 
 class Details
@@ -17,6 +20,7 @@ class Details
 
     /**
      * Details constructor.
+     *
      * @param $address
      * @param $zipcode
      * @param $city

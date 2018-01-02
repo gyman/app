@@ -1,14 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use Gyman\Application\Command\CloseVoucherCommand;
+use Gyman\Application\Command\CreateVoucherCommand;
 use Gyman\Application\Command\UpdateVoucherCommand;
 use Gyman\Bundle\AppBundle\Form\UpdateVoucherType;
 use Gyman\Bundle\AppBundle\Form\VoucherType;
-use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
-use Gyman\Application\Command\CreateVoucherCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,8 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class VouchersController
- * @package Gyman\Bundle\AppBundle
+ * Class VouchersController.
+ *
  * @Route("/vouchers")
  */
 class VouchersController extends Controller
@@ -28,8 +30,10 @@ class VouchersController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("member", class="Gyman:Member")
      * @Template("GymanAppBundle:Vouchers:new.html.twig")
+     *
      * @param Request $request
-     * @param Member $member
+     * @param Member  $member
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function newAction(Request $request, Member $member)
@@ -38,40 +42,39 @@ class VouchersController extends Controller
         $command->member = $member;
 
         $form = $this->createForm(VoucherType::class, $command, [
-                'action' => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
+                'action'   => $this->generateUrl('gyman_voucher_new', ['id' => $member->id()]),
                 'memberId' => $member->id(),
-                'member' => $member
+                'member'   => $member,
         ]);
-        
+
         $creditEntries = $member->filterCreditEntries();
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get("tactician.commandbus")->handle($form->getData());
+                $this->get('tactician.commandbus')->handle($form->getData());
                 $this->addFlash('success', 'flash.voucher_added.success');
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
-            } else {
-                $this->addFlash('error', 'flash.voucher_added.errors');
             }
+            $this->addFlash('error', 'flash.voucher_added.errors');
         } else {
             if (!$creditEntries->isEmpty()) {
-                $this->addFlash('creditEntries', $this->get("translator")->transChoice(
+                $this->addFlash('creditEntries', $this->get('translator')->transChoice(
                     'flash.member_has_credit_entries',
                     count($creditEntries),
                     [
-                        '%creditEntriesCount%' => count($creditEntries)
+                        '%creditEntriesCount%' => count($creditEntries),
                     ]
                 ));
             }
         }
 
         return [
-            'form' => $form->createView(),
+            'form'          => $form->createView(),
             'creditEntries' => $creditEntries,
-            'member' => $member
+            'member'        => $member,
         ];
     }
 
@@ -95,8 +98,8 @@ class VouchersController extends Controller
      */
     public function renderHistoryAction(Member $member)
     {
-        return $this->render("@GymanApp/Vouchers/renderHistory.html.twig", [
-            'vouchers' =>$this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC'])
+        return $this->render('@GymanApp/Vouchers/renderHistory.html.twig', [
+            'vouchers' => $this->get('gyman.vouchers.repository')->findByMember($member, ['startDate' => 'DESC', 'createdAt' => 'DESC']),
         ]);
     }
 
@@ -105,8 +108,10 @@ class VouchersController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("voucher", class="Gyman:Voucher")
      * @Template("GymanAppBundle:Vouchers:update.html.twig")
+     *
      * @param Request $request
      * @param Voucher $voucher
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateAction(Request $request, Voucher $voucher)
@@ -121,18 +126,17 @@ class VouchersController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get("tactician.commandbus")->handle($form->getData());
+                $this->get('tactician.commandbus')->handle($form->getData());
 //                $this->addFlash('success', 'flash.voucher_added.success');
 
                 return $this->redirectToRoute('gyman_voucher_update', ['id' => $voucher->id()]);
-            } else {
-//                $this->addFlash('error', 'flash.voucher_added.errors');
             }
+//                $this->addFlash('error', 'flash.voucher_added.errors');
         }
 
         return [
-            'form' => $form->createView(),
-            'voucher' => $voucher
+            'form'    => $form->createView(),
+            'voucher' => $voucher,
         ];
     }
 }
