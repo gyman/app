@@ -27,7 +27,7 @@
 
       $div.on "image", (event, dataUrl) ->
         $("img#memberFoto").attr 'src', dataUrl
-        $("input#gyman_member_form_fotoData").val dataUrl
+        $("input#member_fotoData").val dataUrl
         $("a[href='#filePane']").trigger "click"
 
     destroyDiv: () ->

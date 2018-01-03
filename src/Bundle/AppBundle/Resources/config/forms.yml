@@ -17,7 +17,7 @@ services:
   gyman.members.member_form_type:
     class: Gyman\Bundle\AppBundle\Form\MemberType
     tags:
-      - { name: form.type, alias: gyman_member_form }
+      - { name: form.type, alias: member }
 
   gyman.members.member_search_form_type:
     class: Gyman\Bundle\AppBundle\Form\SearchType
