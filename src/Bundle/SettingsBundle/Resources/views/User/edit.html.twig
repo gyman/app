@@ -1,8 +1,8 @@
-{% extends 'SettingsBundle::layout.html.twig' %}
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
 
 {% block windowClasses %}col-sm-12 col-md-12{% endblock windowClasses %}
 
-{% block body -%}
+{% block settings_page -%}
     <h1>User edit</h1>
 
     {{ form(edit_form) }}

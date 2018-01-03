@@ -1,4 +1,4 @@
-{% extends "SettingsBundle::layout.html.twig" %}
+{% extends "@GymanSettings/layout.html.twig" %}
 
 {% block title %}{{ "profile.title.your_profile"|trans }} - {{ parent() }}{% endblock %}
 
@@ -18,7 +18,7 @@
     </div>
 {% endmacro %}
 
-{% block content %}
+{% block settings_page %}
     <div class="container">
 
         {{ form_start(form,{action : path("fos_user_profile_edit")}) }}
@@ -129,4 +129,4 @@
         {{ form_end(form) }}
 
     </div>
-{% endblock content %}
+{% endblock settings_page %}

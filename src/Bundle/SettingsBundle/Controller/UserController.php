@@ -6,6 +6,7 @@ use Gyman\Domain\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,12 +58,12 @@ class UserController extends Controller
 
     private function createCreateForm(User $entity) : Form
     {
-        $form = $this->createForm(new UserType(), $entity, [
+        $form = $this->createForm(UserType::class, $entity, [
             'action' => $this->generateUrl('admin_users_create'),
-            'method' => 'POST',
+            'method' => Request::METHOD_POST,
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Create']);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -144,7 +145,7 @@ class UserController extends Controller
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }
@@ -214,7 +215,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_users_delete', ['id' => $id]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', ['label' => 'Delete'])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 }

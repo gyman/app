@@ -54,7 +54,7 @@ class DefaultBuilder
         ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
         $menu->addChild('Użytkownicy', [
-            'route'          => 'gyman_settings_sections',
+            'route'          => 'admin_users',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
