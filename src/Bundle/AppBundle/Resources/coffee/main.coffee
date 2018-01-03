@@ -343,4 +343,6 @@ $(document).ready ->
 
   $("#webcamDiv").webCamPlugin()
 
-  $("input[name=gyman_member_form\\[sections\\]\\[\\]]").onlyOneActivityPlugin()
+  $("input[name=member\\[sections\\]\\[\\]]").onlyOneActivityPlugin()
+
+  return

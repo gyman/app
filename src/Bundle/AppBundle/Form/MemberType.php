@@ -1,8 +1,8 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form;
 
+use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
-use Gyman\Domain\SectionRepository;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Member\Details;
@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 final class MemberType extends AbstractType
 {
@@ -71,6 +70,11 @@ final class MemberType extends AbstractType
                 'expanded' => true,
                 'choice_label' => 'title',
                 'choice_value' => 'id',
+                'query_builder' => function(SectionRepository $repository) {
+                    return $repository->createQueryBuilder('s')
+                        ->orderBy("s.createdAt", 'ASC')
+                        ->where('s.deletedAt IS null');
+                }
             ])
         ;
     }
@@ -85,6 +89,6 @@ final class MemberType extends AbstractType
 
     public function getName() : string
     {
-        return 'gyman_member_form';
+        return 'member';
     }
 }

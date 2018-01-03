@@ -46,7 +46,7 @@ Gyman\Application\Command\UpdateMemberCommand:
     gender: ~
     belt: ~
     starred: ~
-    sections:
-      - Count:
-          max: 1
-          maxMessage: Uczestnik może należeć tylko do 1 sekcji
+#    sections:
+#      - Count:
+#          max: 1
+#          maxMessage: Uczestnik może należeć tylko do 1 sekcji
