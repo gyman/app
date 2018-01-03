@@ -85,6 +85,6 @@ final class MemberType extends AbstractType
 
     public function getName() : string
     {
-        return 'gyman_member_form';
+        return 'member';
     }
 }

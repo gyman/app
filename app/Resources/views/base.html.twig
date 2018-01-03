@@ -13,15 +13,15 @@
 
     {% block stylesheets %}
         {% if app.environment == "prod" %}
-            <link rel="stylesheet" href="/css/vendors.min.css" />
-            <link rel="stylesheet" href="/css/project.min.css" />
+            <link rel="stylesheet" href="{{ asset("/css/vendors.min.css") }}" />
+            <link rel="stylesheet" href="{{ asset("/css/project.min.css") }}" />
         {% else %}
-            <link rel="stylesheet" href="/css/vendors.css" />
-            <link rel="stylesheet" href="/css/project.css" />
+            <link rel="stylesheet" href="{{ asset("/css/vendors.css") }}" />
+            <link rel="stylesheet" href="{{ asset("/css/project.css") }}" />
         {%  endif %}
     {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset("/favicon.ico") }}"/>
 </head>
 
 {% block overraid_body %}
@@ -150,10 +150,10 @@
             {#<script type="text/javascript" src="/js/vendors.min.js"></script>#}
             {#<script type="text/javascript" src="/js/project.min.js"></script>#}
         {#{% else %}#}
-            <script type="text/javascript" src="/js/vendors.js"></script>
-            <script type="text/javascript" src="/js/project.js"></script>
+            <script type="text/javascript" src="{{ asset("/js/vendors.js") }}"></script>
+            <script type="text/javascript" src="{{ asset("/js/project.js") }}"></script>
         {#{% endif %}#}
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ asset('/bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
         {% if app.session.flashbag.has('notice') %}

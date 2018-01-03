@@ -23,7 +23,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first();
+        $form = $crawler->filter('form[name="member"]')->first();
 
         $this->assertCount(25, $form->filter('input, textarea, button, select'));
 
@@ -53,7 +53,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first();
+        $form = $crawler->filter('form[name="member"]')->first();
 
         $this->assertCount(25, $form->filter('input, textarea, button, select'));
 
@@ -81,23 +81,23 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first()->form();
+        $form = $crawler->filter('form[name="member"]')->first()->form();
 
         $form->setValues([
-            'gyman_member_form[firstname]' => 'Andrzej',
-            'gyman_member_form[lastname]'  => 'Kaszuba',
-            'gyman_member_form[birthdate]' => '18.01.1955',
-            'gyman_member_form[gender]'    => 'male',
-            'gyman_member_form[zipcode]'   => '81-353',
-            'gyman_member_form[phone]'     => '600 000 000',
-            'gyman_member_form[email]'     => 'andrzej@gazeta.pl',
-            'gyman_member_form[barcode]'   => '123456789',
-            'gyman_member_form[belt]'      => 'white',
-            'gyman_member_form[notes]'     => 'some admin notes',
-            'gyman_member_form[starred]'   => 1,
+            'member[firstname]' => 'Andrzej',
+            'member[lastname]'  => 'Kaszuba',
+            'member[birthdate]' => '18.01.1955',
+            'member[gender]'    => 'male',
+            'member[zipcode]'   => '81-353',
+            'member[phone]'     => '600 000 000',
+            'member[email]'     => 'andrzej@gazeta.pl',
+            'member[barcode]'   => '123456789',
+            'member[belt]'      => 'white',
+            'member[notes]'     => 'some admin notes',
+            'member[starred]'   => 1,
         ]);
 
-        $form['gyman_member_form[sections][0]']->tick();
+        $form['member[sections][0]']->tick();
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
@@ -107,7 +107,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         );
 
         $files = [
-            'gyman_member_form' => [
+            'member' => [
                 'uploadFile' => $uploadedFile,
             ],
         ];
@@ -170,24 +170,24 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first()->form();
+        $form = $crawler->filter('form[name="member"]')->first()->form();
 
         $form->setValues([
-            'gyman_member_form[firstname]'   => 'Andrzej',
-            'gyman_member_form[lastname]'    => 'Kaszuba',
-            'gyman_member_form[birthdate]'   => '18.01.1955',
-            'gyman_member_form[gender]'      => 'male',
-            'gyman_member_form[zipcode]'     => '81-353',
-            'gyman_member_form[phone]'       => '600 000 000',
-            'gyman_member_form[email]'       => 'andrzej@gazeta.pl',
-            'gyman_member_form[barcode]'     => '123456789',
-            'gyman_member_form[belt]'        => 'white',
-            'gyman_member_form[notes]'       => 'some admin notes',
-            'gyman_member_form[starred]'     => 1,
+            'member[firstname]'   => 'Andrzej',
+            'member[lastname]'    => 'Kaszuba',
+            'member[birthdate]'   => '18.01.1955',
+            'member[gender]'      => 'male',
+            'member[zipcode]'     => '81-353',
+            'member[phone]'       => '600 000 000',
+            'member[email]'       => 'andrzej@gazeta.pl',
+            'member[barcode]'     => '123456789',
+            'member[belt]'        => 'white',
+            'member[notes]'       => 'some admin notes',
+            'member[starred]'     => 1,
         ]);
 
-        $form['gyman_member_form[sections][0]']->untick();
-        $form['gyman_member_form[sections][1]']->tick();
+        $form['member[sections][0]']->untick();
+        $form['member[sections][1]']->tick();
 
         $uploadedFile = new UploadedFile(
             '/tmp/foto.jpg',
@@ -197,7 +197,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         );
 
         $files = [
-            'gyman_member_form' => [
+            'member' => [
                 'uploadFile' => $uploadedFile,
             ],
         ];
@@ -253,7 +253,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $this->prepareFoto();
 
         $files = [
-            'gyman_member_form' => [
+            'member' => [
                 'foto' => new UploadedFile(
                     '/tmp/foto.jpg',
                     'someTestFile.jpg',
@@ -271,7 +271,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first()->form();
+        $form = $crawler->filter('form[name="member"]')->first()->form();
 
         $form->setValues($values);
 
@@ -293,7 +293,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
         $this->prepareFoto();
 
         $files = [
-            'gyman_member_form' => [
+            'member' => [
                 'foto' => new UploadedFile(
                     '/tmp/foto.jpg',
                     'someTestFile.jpg',
@@ -307,7 +307,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
 
         $this->assertEquals(200, $this->getStatusCode());
 
-        $form = $crawler->filter('form[name="gyman_member_form"]')->first()->form();
+        $form = $crawler->filter('form[name="member"]')->first()->form();
 
         $form->setValues($values);
 
@@ -350,16 +350,16 @@ class MembersControllerTest extends BaseFunctionalTestCase
     public function getErrorGeneratingForms()
     {
         $correctData = [
-            'gyman_member_form[firstname]' => 'Andrzej',
-            'gyman_member_form[lastname]'  => 'Kaszuba',
-            'gyman_member_form[birthdate]' => '18.01.1955',
-            'gyman_member_form[gender]'    => 'male',
-            'gyman_member_form[zipcode]'   => '81-353',
-            'gyman_member_form[phone]'     => '600 000 000',
-            'gyman_member_form[email]'     => 'andrzej@gazeta.pl',
-            'gyman_member_form[barcode]'   => '123456789',
-            'gyman_member_form[belt]'      => 'white',
-            'gyman_member_form[notes]'     => 'some admin notes',
+            'member[firstname]' => 'Andrzej',
+            'member[lastname]'  => 'Kaszuba',
+            'member[birthdate]' => '18.01.1955',
+            'member[gender]'    => 'male',
+            'member[zipcode]'   => '81-353',
+            'member[phone]'     => '600 000 000',
+            'member[email]'     => 'andrzej@gazeta.pl',
+            'member[barcode]'   => '123456789',
+            'member[belt]'      => 'white',
+            'member[notes]'     => 'some admin notes',
         ];
 
         return [
@@ -367,7 +367,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[email]' => 'test10@test2.pl',
+                        'member[email]' => 'test10@test2.pl',
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
@@ -377,7 +377,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[firstname]' => null,
+                        'member[firstname]' => null,
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(1) .controls .help-block',
@@ -387,7 +387,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[lastname]' => null,
+                        'member[lastname]' => null,
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(2) .controls .help-block',
@@ -397,7 +397,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[email]' => null,
+                        'member[email]' => null,
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
@@ -407,7 +407,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[email]' => 'errornous-address',
+                        'member[email]' => 'errornous-address',
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(7) .controls .help-block',
@@ -417,7 +417,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[barcode]' => 'abcd12310',
+                        'member[barcode]' => 'abcd12310',
                     ]
                 ),
                 'elementPath' => '#additionalsPane div.control-group.error:nth-child(1) .controls .help-block',
@@ -427,7 +427,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[zipcode]' => 'XYZTAAA',
+                        'member[zipcode]' => 'XYZTAAA',
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(5) .controls .help-block',
@@ -437,7 +437,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[birthdate]' => '2015-01-01',
+                        'member[birthdate]' => '2015-01-01',
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
@@ -447,7 +447,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[birthdate]' => (new \DateTime('+1 day'))->format('d.m.Y'),
+                        'member[birthdate]' => (new \DateTime('+1 day'))->format('d.m.Y'),
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
@@ -457,7 +457,7 @@ class MembersControllerTest extends BaseFunctionalTestCase
                 'values' => array_merge(
                     $correctData,
                     [
-                        'gyman_member_form[birthdate]' => (new \DateTime('-100 years'))->format('d.m.Y'),
+                        'member[birthdate]' => (new \DateTime('-100 years'))->format('d.m.Y'),
                     ]
                 ),
                 'elementPath' => '#detailsPane div.control-group.error:nth-child(3) .controls .help-block',
