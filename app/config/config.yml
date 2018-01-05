@@ -220,3 +220,4 @@ sensio_framework_extra:
 ##          - tenant
 #        security_advisory:
 #          lock_file:            '%kernel.root_dir%/../composer.lock'
+

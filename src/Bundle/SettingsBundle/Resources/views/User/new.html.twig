@@ -1,0 +1,15 @@
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
+
+{% block settings_page -%}
+    <h1>User creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_users') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

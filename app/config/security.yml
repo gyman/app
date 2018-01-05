@@ -45,6 +45,6 @@ security:
         - { path: ^/dashboard/member, role: ROLE_MEMBER }
         - { path: ^/dashboard, roles: [ROLE_MODERATOR, ROLE_MEMBER] }
         - { path: ^/profile, roles: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/settings, role: ROLE_ADMIN }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

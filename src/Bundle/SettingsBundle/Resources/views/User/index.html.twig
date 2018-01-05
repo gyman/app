@@ -1,0 +1,33 @@
+{% extends 'GymanSettingsBundle::layout.html.twig' %}
+
+{% block windowClasses %}col-sm-12 col-md-12{% endblock windowClasses %}
+
+{% block settings_page %}
+    <h1>User list</h1>
+
+    <table class="table table-bordered records_list">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.username }} ({{ entity.email }})</td>
+                <td>{% for role in entity.roles %}{{ role|slice(5)|lower }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+                <td>
+                    <a href="{{ path('admin_users_show', { 'id': entity.id }) }}">show</a> |
+                    <a href="{{ path('admin_users_edit', { 'id': entity.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="form-actions">
+        <a href="{{ path('admin_users_new') }}" class="btn">Dodaj</a>
+    </div>
+{% endblock settings_page %}

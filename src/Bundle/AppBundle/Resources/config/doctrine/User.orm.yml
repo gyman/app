@@ -19,6 +19,7 @@ Gyman\Domain\User:
     sections:
       targetEntity: Gyman\Domain\Section
       mappedBy:   instructor
+      cascade: ["all"]
 
   fields:
     firstname:
