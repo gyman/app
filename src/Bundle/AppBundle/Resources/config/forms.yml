@@ -1,5 +1,12 @@
 ---
 services:
+  gyman.form.type.sections:
+    class: Gyman\Bundle\AppBundle\Form\SectionsCollectionType
+    arguments:
+      - '@doctrine'
+    tags:
+      - { name: form.type, alias: sections }
+
   gyman.vouchers.form.voucher:
     class: Gyman\Bundle\AppBundle\Form\VoucherType
     arguments:

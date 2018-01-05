@@ -6,7 +6,6 @@ use Gyman\Domain\Section;
 use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Domain\Member\Details\Belt;
 use Gyman\Domain\Member\Details;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -63,19 +62,7 @@ final class MemberType extends AbstractType
             ->add('starred', CheckboxType::class, [
                 'label'    => 'member.form.starred.label',
             ])
-            ->add('sections', EntityType::class, [
-                'class' => Section::class,
-                'required' => true,
-                'multiple' => true,
-                'expanded' => true,
-                'choice_label' => 'title',
-                'choice_value' => 'id',
-                'query_builder' => function(SectionRepository $repository) {
-                    return $repository->createQueryBuilder('s')
-                        ->orderBy("s.createdAt", 'ASC')
-                        ->where('s.deletedAt IS null');
-                }
-            ])
+            ->add('sections', SectionsCollectionType::class)
         ;
     }
 

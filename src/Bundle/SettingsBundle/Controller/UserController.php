@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\SettingsBundle\Controller;
 
 use Gyman\Bundle\SettingsBundle\Form\Type\UserType;
+use Gyman\Domain\Section;
 use Gyman\Domain\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -115,7 +116,7 @@ class UserController extends Controller
      * @Route("/{id}/edit", name="admin_users_edit")
      * @Method("GET")
      */
-    public function editAction($id)
+    public function editAction(string $id)
     {
         $em = $this->getDoctrine()->getManager('tenant');
 
@@ -125,30 +126,17 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render("GymanSettingsBundle:User:edit.html.twig", [
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    /**
-    * Creates a form to edit a User entity.
-    */
-    private function createEditForm(User $entity) : Form
-    {
-        $form = $this->createForm(new UserType(), $entity, [
+        $editForm = $this->createForm(UserType::class, $entity, [
             'action' => $this->generateUrl('admin_users_update', ['id' => $entity->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', SubmitType::class, ['label' => 'Update']);
-
-        return $form;
+        return $this->render("GymanSettingsBundle:User:edit.html.twig", [
+            'entity'      => $entity,
+            'form'   => $editForm->createView(),
+        ]);
     }
+
     /**
      * Edits an existing User entity.
      *
@@ -165,8 +153,11 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createForm(UserType::class, $entity, [
+            'action' => $this->generateUrl('admin_users_update', ['id' => $entity->getId()]),
+            'method' => 'PUT',
+        ]);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -177,8 +168,7 @@ class UserController extends Controller
 
         return $this->render("GymanSettingsBundle:User:edit.html.twig", [
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'   => $editForm->createView(),
         ]);
     }
     /**
@@ -207,15 +197,4 @@ class UserController extends Controller
         return $this->redirect($this->generateUrl('admin_users'));
     }
 
-    /**
-     * Creates a form to delete a User entity by id.
-     */
-    private function createDeleteForm($id) : Form
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_users_delete', ['id' => $id]))
-            ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm();
-    }
 }

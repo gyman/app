@@ -11,19 +11,13 @@ use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
  */
 class User extends BaseUser implements UserInterface, SecurityUserInterface
 {
-    /**
-     * @var Uuid
-     */
+    /** @var Uuid */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $firstname;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $lastname;
 
     /** @var Member */
@@ -104,5 +98,32 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     public function sections(): ?Collection
     {
         return $this->sections;
+    }
+
+    public function setSections(array $sections = []) : void
+    {
+        $this->sections = $sections;
+    }
+
+    public function addSection(Section $section) : void
+    {
+        if ($this->sections->contains($section)) {
+            return;
+        }
+
+        $this->sections[] = $section;
+
+        $section->setInstructor($this);
+    }
+
+    public function removeSection(Section $section) : void
+    {
+        if (!$this->sections->contains($section)) {
+            return;
+        }
+
+        $this->sections->removeElement($section);
+
+        $section->setInstructor(null);
     }
 }

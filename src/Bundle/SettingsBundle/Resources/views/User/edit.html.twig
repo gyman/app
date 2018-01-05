@@ -3,16 +3,28 @@
 {% block windowClasses %}col-sm-12 col-md-12{% endblock windowClasses %}
 
 {% block settings_page -%}
-    <h1>User edit</h1>
+    {{ form_start(form) }}
 
-    {{ form(edit_form) }}
+    <div class="row-fluid">
+        <div class="span6">
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
+        </div>
+        <div class="span6">
+            {{ form_row(form.roles) }}
+            {{ form_row(form.sections) }}
+        </div>
+    </div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_users') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="form-actions">
+        <button class="btn">Prześlij</button>
+        <a href="{{ path('admin_users') }}">Powrót do listy</a>
+    </div>
+
+    {{ form_end(form) }}
+
+
 {% endblock %}
