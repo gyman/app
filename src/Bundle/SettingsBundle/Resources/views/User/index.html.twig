@@ -3,24 +3,24 @@
 {% block windowClasses %}col-sm-12 col-md-12{% endblock windowClasses %}
 
 {% block settings_page %}
-    <h1>User list</h1>
-
     <table class="table table-bordered records_list">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Roles</th>
-                <th>Actions</th>
+                <th>Login użytkownika (email)</th>
+                <th>Aktywny</th>
+                <th>Role</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for entity in pagination %}
             <tr>
                 <td>{{ entity.username }} ({{ entity.email }})</td>
+                <td>{%  if entity.isEnabled %}&check;{% endif %}</td>
                 <td>{% for role in entity.roles %}{{ role|slice(5)|lower }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
                 <td>
-                    <a href="{{ path('admin_users_show', { 'id': entity.id }) }}">show</a> |
-                    <a href="{{ path('admin_users_edit', { 'id': entity.id }) }}">edit</a>
+                    <a href="{{ path('admin_users_update', { 'id': entity.id }) }}">edytuj</a> |
+                    <a onclick="confirm('Jesteś pewien? Tego się nie da cofnąć,\na po usunięciu nie można ponownie\nzarejestrować tego adresu email.')" href="{{ path('admin_users_delete', { 'id': entity.id}) }}?page={{ page }}">usuń</a>
                 </td>
             </tr>
         {% endfor %}
@@ -28,6 +28,9 @@
     </table>
 
     <div class="form-actions">
-        <a href="{{ path('admin_users_new') }}" class="btn">Dodaj</a>
+        <div class="pull-right">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <a href="{{ path('admin_users_create') }}" class="btn">Dodaj</a>
     </div>
 {% endblock settings_page %}

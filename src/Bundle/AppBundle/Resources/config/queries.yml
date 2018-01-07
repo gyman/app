@@ -9,3 +9,16 @@ services:
     class:          Gyman\Infrastructure\Query\EntryQuery
     arguments:
       - "@=service('doctrine.orm.tenant_entity_manager').getConnection()"
+
+  gyman.users.query:
+    class:          Gyman\Infrastructure\Query\UserQuery
+    arguments:
+      - "@doctrine.orm.tenant_entity_manager"
+      - "@knp_paginator"
+
+  gyman.section.query:
+    class:          Gyman\Infrastructure\Query\SectionQuery
+    arguments:
+      - "@doctrine.orm.tenant_entity_manager"
+      - "@knp_paginator"
+

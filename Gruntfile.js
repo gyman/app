@@ -98,7 +98,6 @@ module.exports = function (grunt) {
         //"src/Bundle/DashboardBundle/Resources/coffee/SearchInput.coffee",
         //"src/Bundle/DashboardBundle/Resources/coffee/ActionMenu.coffee",
         ////"src/Bundle/DashboardBundle/Resources/coffee/Timeline.coffee", @todo: re-add
-        "src/Bundle/DashboardBundle/Resources/coffee/dashboard.coffee",
 
         //"src/Bundle/AppBundle/Resources/coffee/EditMember.coffee",
         "src/Bundle/AppBundle/Resources/coffee/WebCamPlugin.coffee",

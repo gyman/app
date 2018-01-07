@@ -35,8 +35,8 @@ class DefaultBuilder
 
         $menu->setChildrenAttribute('class', 'bigBtnIcon');
 
-        $menu->addChild('Sekcje', [
-            'route'          => 'gyman_settings_sections',
+        $menu->addChild('Informacje o klubie', [
+            'route'          => 'gyman_settings_details',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
@@ -44,8 +44,8 @@ class DefaultBuilder
             ],
         ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
-        $menu->addChild('Informacje o klubie', [
-            'route'          => 'gyman_settings_details',
+        $menu->addChild('Sekcje', [
+            'route'          => 'gyman_settings_sections',
             'extras'         => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class'            => 'tipB',
@@ -83,26 +83,26 @@ class DefaultBuilder
         return $menu;
     }
 
-    public function navigation(FactoryInterface $factory, array $options)
-    {
-        $menu = $factory->createItem('root');
-
-        $menu->setCurrent(
-            $this->container->get('request')->getRequestUri()
-        );
-
-        $menu->addChild('profile_menu.label.dashboard', ['route' => 'profile_dashboard', 'extras' => ['icon' => 'fa-user']])
-            ->setExtra('translation_domain', 'SettingsBundle');
-
-        $menu->addChild('profile_menu.label.orders', ['route' => 'profile_orders', 'extras' => ['icon' => 'fa-shopping-cart']])
-            ->setExtra('translation_domain', 'SettingsBundle');
-
-        $menu->addChild('profile_menu.label.invoice_data', ['route' => 'profile_invoices', 'extras' => ['icon' => 'fa-envelope-o']])
-            ->setExtra('translation_domain', 'SettingsBundle');
-
-        $menu->addChild('profile_menu.label.buy_subscription', ['route' => 'frontpage_pricing', 'extras' => ['icon' => 'fa-plus']])
-            ->setExtra('translation_domain', 'SettingsBundle');
-
-        return $menu;
-    }
+//    public function navigation(FactoryInterface $factory, array $options)
+//    {
+//        $menu = $factory->createItem('root');
+//
+//        $menu->setCurrent(
+//            $this->container->get('request')->getRequestUri()
+//        );
+//
+//        $menu->addChild('profile_menu.label.dashboard', ['route' => 'profile_dashboard', 'extras' => ['icon' => 'fa-user']])
+//            ->setExtra('translation_domain', 'SettingsBundle');
+//
+//        $menu->addChild('profile_menu.label.orders', ['route' => 'profile_orders', 'extras' => ['icon' => 'fa-shopping-cart']])
+//            ->setExtra('translation_domain', 'SettingsBundle');
+//
+//        $menu->addChild('profile_menu.label.invoice_data', ['route' => 'profile_invoices', 'extras' => ['icon' => 'fa-envelope-o']])
+//            ->setExtra('translation_domain', 'SettingsBundle');
+//
+//        $menu->addChild('profile_menu.label.buy_subscription', ['route' => 'frontpage_pricing', 'extras' => ['icon' => 'fa-plus']])
+//            ->setExtra('translation_domain', 'SettingsBundle');
+//
+//        return $menu;
+//    }
 }

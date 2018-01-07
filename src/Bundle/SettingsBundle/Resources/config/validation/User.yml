@@ -1,0 +1,21 @@
+Gyman\Domain\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: emailCanonical
+            errorPath: email
+            groups: ['create_user', 'update_user']
+            em: tenant
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: usernameCanonical
+            errorPath: username
+            groups: ['create_user', 'update_user']
+            em: tenant
+        - Gyman\Bundle\SettingsBundle\Validator\UserHasToBeInstructorToBeAssignedToSection:
+            groups: ['create_user', 'update_user']
+    properties:
+        email:
+            - Email:
+                groups: ['create_user', 'update_user']
+        plainPassword:
+            - NotBlank:
+                groups: ['create_user']

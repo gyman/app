@@ -10,7 +10,7 @@ fos_user:
         sender_name:    Gyman.pl
     profile:
         form:
-            type:               Gyman\Bundle\SettingsBundle\Form\Type\UserType
+            type:               Gyman\Bundle\SettingsBundle\Form\Type\ProfileType
             name:               fos_user_profile_form
             validation_groups:  [Profile, Default]
     change_password:

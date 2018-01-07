@@ -7,5 +7,11 @@
 {% for flashMessage in app.session.flashbag.get('error') %}
     <div class="alert alert-danger flash-notice">
         {{ flashMessage|trans }}
+
+        <ul>
+        {% for error in form.vars.errors if form is defined and form.vars.errors|length > 0 %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+        </ul>
     </div>
 {% endfor %}

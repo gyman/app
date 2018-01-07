@@ -36,3 +36,7 @@ Gyman\Domain\User:
       type: string
       length: 255
       nullable: true
+
+    deletedAt:
+      type: datetime
+      nullable: true

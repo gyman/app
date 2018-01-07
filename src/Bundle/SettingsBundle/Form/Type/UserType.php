@@ -4,6 +4,7 @@ namespace Gyman\Bundle\SettingsBundle\Form\Type;
 use Gyman\Bundle\AppBundle\Form\SectionsCollectionType;
 use Symfony\Component\Form\AbstractType as BaseType;
 use Gyman\Domain\User;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -30,6 +31,10 @@ class UserType extends BaseType
             ->add('email', EmailType::class, [
                 'label' => 'form.email'
             ])
+            ->add('enabled', CheckboxType::class, [
+                'label' => 'settings.user.enabled',
+                'required' => false
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type'            => PasswordType::class,
                 'error_bubbling'  => true,
@@ -53,9 +58,6 @@ class UserType extends BaseType
                 "by_reference" => false,
             ])
         ;
-
-        $builder->get('username')->setDisabled(true);
-        $builder->get('email')->setDisabled(true);
         // todo: $builder->add('invoiceData', new InvoiceDataType());
     }
 
@@ -74,6 +76,6 @@ class UserType extends BaseType
      */
     public function getName()
     {
-        return 'gyman_user_profile';
+        return 'gyman_settings_user';
     }
 }

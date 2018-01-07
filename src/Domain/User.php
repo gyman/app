@@ -1,14 +1,14 @@
 <?php
 namespace Gyman\Domain;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
-/**
- * Class User
- */
+
 class User extends BaseUser implements UserInterface, SecurityUserInterface
 {
     /** @var Uuid */
@@ -28,6 +28,22 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
 
     /** @var Collection|Section[]|null */
     private $sections;
+
+    /** @var DateTime|null */
+    private $deletedAt;
+
+    public function __construct(?Uuid $id = null, ?string $firstname = null, ?string $lastname = null, ?Member $member = null, ?string $invitationToken = null, Collection $sections = null)
+    {
+        parent::__construct();
+
+        $this->id = $id ?: Uuid::uuid4();
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->member = $member;
+        $this->invitationToken = $invitationToken;
+
+        $this->sections = new ArrayCollection();
+    }
 
     public function firstname() : ?string
     {
@@ -125,5 +141,15 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
         $this->sections->removeElement($section);
 
         $section->setInstructor(null);
+    }
+
+    public function delete() : void
+    {
+        $this->deletedAt = new DateTime();
+    }
+
+    public function isDeleted() : bool
+    {
+        return $this->deletedAt === null;
     }
 }

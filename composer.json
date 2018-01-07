@@ -50,6 +50,7 @@
         "javiereguiluz/easyadmin-bundle": "^1.16@dev",
         "jms/serializer-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
+        "knplabs/knp-paginator-bundle": "^2.8@dev",
         "knplabs/knp-time-bundle": "*",
         "league/tactician-bundle": "^1",
         "liip/monitor-bundle": "^2.3",

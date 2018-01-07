@@ -8,6 +8,7 @@ use Gyman\Application\Command\UpdateSectionCommand;
 use Gyman\Bundle\SettingsBundle\Form\SectionType;
 use Gyman\Domain\Section;
 use Gyman\Domain\Section\SectionId;
+use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,66 +16,82 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
  * @Route("/sections")
  */
 class SectionsController extends Controller
 {
     /**
-     * @Route("/new", name="gyman_settings_sections_add")
-     * @Method({"GET"})
-     * @return Response
-     */
-    public function addAction(Request $request)
-    {
-        $this->get("tactician.commandbus")->handle(new CreateSectionCommand());
-        $this->addFlash("success", "settings.section.created");
-        return $this->redirectToRoute("gyman_settings_sections");
-    }
-
-    /**
      * @Route("/", name="gyman_settings_sections")
      * @Method({"GET"})
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $sections = $this->get('gyman.repository.section')->findAll();
+        $page = $request->query->getInt('page', 1);
+
+        $pagination = $this->get("gyman.section.query")->getAllPaginated($page);
 
         return $this->render('@GymanSettings/Sections/index.html.twig', [
-            "sections" => $sections
+            'pagination' => $pagination,
+            'page' => $page
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="gyman_settings_sections_add")
+     */
+    public function addAction(Request $request)
+    {
+        $section = new Section();
+
+        $form = $this->createForm(SectionType::class, $section, [
+            'action' => $this->generateUrl('gyman_settings_sections_add'),
+            'method' => Request::METHOD_POST,
+            'validation_groups' => ['create_section']
+        ]);
+
+        if($request->isMethod(Request::METHOD_POST)) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager('tenant');
+                $em->persist($section);
+                $em->flush();
+
+                $this->addFlash("success", "settings.section.created");
+                return $this->redirect($this->generateUrl('gyman_settings_sections_edit', ['id' => $section->id()]));
+            } else {
+                $this->addFlash('error', 'settings.section.errors');
+            }
+        }
+
+        return $this->render("GymanSettingsBundle:Sections:new.html.twig", [
+            'entity' => $section,
+            'form'   => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="gyman_settings_sections_edit")
-     * @Method({"GET", "POST"})
      * @ParamConverter("section", class="Gyman\Domain\Section")
      * @return Response
      */
     public function editAction(Section $section, Request $request)
     {
-        $command = new UpdateSectionCommand(
-            $section->id(),
-            $section->instructor() === null ? null : $section->instructor()->id(),
-            $section->title()
-        );
-
         $options = [
-            "instructors" => $this->get("gyman.user.repository")->getInstructorsChoiceArray(),
             "method" => Request::METHOD_POST,
             "action" => $this->generateUrl('gyman_settings_sections_edit', ["id" => $section->id()->toString()]),
-            "sectionId" => $section->id()
         ];
 
-        $form = $this->createForm(SectionType::class, $command, $options);
+        $form = $this->createForm(SectionType::class, $section, $options);
 
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->get("tactician.commandbus")->handle($form->getData());
+                $em = $this->getDoctrine()->getManager('tenant');
+                $em->flush();
                 $this->addFlash("success", "settings.section.updated");
                 return $this->redirectToRoute('gyman_settings_sections');
             } else {

@@ -18,3 +18,5 @@ fos_user.current_password.invalid: 'Podane hasło jest nieprawidłowe'
 fos_user.group.blank: 'Proszę podać nazwę'
 fos_user.group.short: '[-Inf,Inf]Podana nazwa jest za krótka'
 fos_user.group.long: '[-Inf,Inf]Podana nazwa jest za długa'
+
+form.validation.user_is_not_instructor: Użytkownik musi mieć rolę "Instruktor"

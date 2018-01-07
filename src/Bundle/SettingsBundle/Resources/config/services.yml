@@ -42,8 +42,15 @@ services:
     tags:
         - { name: kernel.event_subscriber }
 
-  account_bundle.profile.edit_type:
+  gyman.settings.user:
     class: Gyman\Bundle\SettingsBundle\Form\Type\UserType
+    tags:
+        - {name: form.type, alias: gyman_settings_user }
+
+  gyman.settings.profile:
+    class: Gyman\Bundle\SettingsBundle\Form\Type\ProfileType
+    arguments:
+        - Gyman\Domain\User
     tags:
         - {name: form.type, alias: gyman_user_profile }
 

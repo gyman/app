@@ -1,1 +1,11 @@
-{%  extends '::base.html.twig' %}
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function(){
+            window.activityTab = new ActivityTab()
+        });
+    </script>
+{% endblock javascripts %}

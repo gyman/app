@@ -53,7 +53,7 @@ class Section
     /** @var User */
     protected $instructor;
 
-    public function __construct(SectionId $id = null, string $title = '', ?Calendar $calendar = null, Collection $members = null, int $orderNumber = 999, ?User $instructor)
+    public function __construct(SectionId $id = null, ?string $title = '', ?Calendar $calendar = null, ?Collection $members = null, ?int $orderNumber = 999, ?User $instructor = null)
     {
         $this->sectionId = $id ?: SectionId::create();
         $this->title = $title;

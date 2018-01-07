@@ -1,6 +1,12 @@
 settings:
   header:
     title:  Ustawienia
+    edit_user: Edycja użytkownika
+    new_user: Nowy użytkownik
+  user_deleted:
+    success: "Użytkownik skasowany"
+  user:
+    enabled: Użytkownik aktywny
 
 account.register.header_link_register: Rejestracja
 account.register.header_or: czy
@@ -122,3 +128,13 @@ entry:
         table_header: Wejście
     endDate:
         table_header: Wyjście
+
+
+form:
+  firstname: Imię
+  lastname: Nazwisko
+  update_user:
+    success:  Zapisano zmiany
+    errors: Formularz zawiera błędy
+  create_user:
+    errors: Formularz zawiera błędy

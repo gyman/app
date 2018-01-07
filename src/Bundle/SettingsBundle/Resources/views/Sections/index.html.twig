@@ -8,14 +8,14 @@
         </tr>
         </thead>
         <tbody>
-            {% for section in sections if sections|length > 0 %}
+            {% for section in pagination if pagination|length > 0 %}
                 <tr>
                     <td>{{ section.title }}</td>
                     <td>{{ section.instructor is not null ? section.instructor.fullname|default(section.instructor.email) : '-' }}</td>
                     <td>{{ section.members|length }}</td>
                     <td>
-                        <a href="{{ url("gyman_settings_sections_edit", {id: section.id.toString}) }}">Edit</a>
-                        | <a href="{{ url("gyman_settings_sections_delete", {id: section.id.toString}) }}">Delete</a>
+                        <a href="{{ url("gyman_settings_sections_edit", {id: section.id.toString}) }}">edytuj</a>
+                        | <a href="{{ url("gyman_settings_sections_delete", {id: section.id.toString}) }}">usuń</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -23,6 +23,9 @@
     </table>
 
     <div class="form-actions">
+        <div class="pull-right">
+            {{ knp_pagination_render(pagination) }}
+        </div>
         <a href="{{ url("gyman_settings_sections_add") }}" class="btn">Dodaj</a>
     </div>
 {% endblock settings_page %}

@@ -10,7 +10,7 @@ parameters:
   datetime_format: "Y.m.d H:i:s"
 
   session_lifetime: 86400 # 24 hours
-  no_image: /bundles/gymanapp/images/no-profile.gif
+  no_image: "/bundles/gymanapp/images/no-profile.gif"
 
   galleryDirectory: '%kernel.root_dir%/../web/uploads/gallery/'
   galleryPath: '/uploads/gallery/'
@@ -34,13 +34,13 @@ services:
             - [ addServers, [ '%memcached.servers%' ]]
 
 sentry:
-    dsn: %sentry_url%
-    release: %sentry_revision%
+    dsn: "%sentry_url%"
+    release: "%sentry_revision%"
 
 framework:
     ide: "phpstorm://%%f:%%l"
-    translator:      { fallback: %locale% }
-    secret:          %secret%
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
@@ -53,7 +53,7 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        cookie_lifetime:  %session_lifetime%
+        cookie_lifetime:  "%session_lifetime%"
         gc_maxlifetime: 1800
         handler_id:  ~
 #    assets:
@@ -65,13 +65,13 @@ framework:
 twig:
   form_themes:
     - ::fields.html.twig
-  debug:                  %kernel.debug%
+  debug:                  "%kernel.debug%"
   strict_variables:       false # %kernel.debug%
   globals:
-    sentry_url:           %sentry_url%
-    gallery_dir:          %galleryPath%
-    google_maps_api_key:  %google_maps_api_key%
-    baseUrl:              %base_url%
+    sentry_url:           "%sentry_url%"
+    gallery_dir:          "%galleryPath%"
+    google_maps_api_key:  "%google_maps_api_key%"
+    baseUrl:              "%base_url%"
 
 swiftmailer:
     transport:            "%mailer_transport%"
@@ -221,3 +221,16 @@ sensio_framework_extra:
 #        security_advisory:
 #          lock_file:            '%kernel.root_dir%/../composer.lock'
 
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page                 # page query parameter name
+        sort_field_name: sort           # sort field query parameter name
+        sort_direction_name: direction  # sort direction query parameter name
+        distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        filter_field_name: filterField  # filter field query parameter name
+        filter_value_name: filterValue  # filter value query paameter name
+    template:
+        pagination:   '@KnpPaginator/Pagination/twitter_bootstrap_pagination.html.twig'     # sliding pagination controls template
+        sortable:     '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        filtration:   '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
