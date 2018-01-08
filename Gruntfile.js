@@ -267,12 +267,22 @@ module.exports = function (grunt) {
                 ],
                 dest: "./web/images"
             },
-
+            "quagga": {
+                expand: true,
+                flatten: true,
+                cwd: '',
+                filter: 'isFile',
+                src: [
+                    'node_modules/quagga/dist/quagga.js'
+                ],
+                dest: "./web/js"
+            }
         },
     });
 
     grunt.registerTask('css:development', [
         "copy:datetimepicker",                  // datetimepicker to bootstrap dir
+        "copy:quagga",
         "less:development-vendors",             // compiles *.less from vendors
         "concat:vendors.css",                   // concatenates vendors into one web/css/vendors.css file
         "less:development-project",             // compiles *.less from project into one web/css/project.css file
