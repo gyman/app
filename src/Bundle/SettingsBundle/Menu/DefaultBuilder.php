@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\SettingsBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -25,9 +26,18 @@ class DefaultBuilder
         $this->checker = $authorizationChecker;
     }
 
-    public function main()
+    public function main() : ItemInterface
     {
         $menu = $this->factory->createItem('root');
+
+        $menu->addChild('Twój profil', [
+            'route'          => 'profile_edit',
+            'extras'         => ['icon' => 'fa-user'],
+            'linkAttributes' => [
+                'class'            => 'tipB',
+                'aria-describedby' => 'qtip-21',
+            ],
+        ])->setExtra('translation_domain', 'GymanSettingsBundle');
 
         if (!$this->checker->isGranted('ROLE_ADMIN')) {
             return $menu;
@@ -61,6 +71,8 @@ class DefaultBuilder
                 'aria-describedby' => 'qtip-21',
             ],
         ])->setExtra('translation_domain', 'GymanSettingsBundle');
+
+
 
 //        $menu->addChild('Grafik zajęć', [
 //            'route'          => 'gyman_settings_sections',
