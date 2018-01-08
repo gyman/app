@@ -1,7 +1,16 @@
-{% extends "SettingsBundle::layout.html.twig" %}
+{% extends "GymanSettingsBundle::layout.html.twig" %}
 
-{% block title %}profile.title.edit - {{ parent() }}{% endblock %}
+{% block settings_page_header %}{{ 'settings.header.edit_user'|trans  }}: {{ form.vars.value.getFullname }}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Profile:edit page</h1>
+{% block settings_page -%}
+    {{ form_start(form) }}
+
+    <div class="row-fluid">
+        <div class="span6">
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
 {% endblock %}
