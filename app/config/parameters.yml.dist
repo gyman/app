@@ -18,7 +18,7 @@ parameters:
     debug_redirects:        false
     sentry_url:             http://0@sentry
     sentry_revision:        ~
-    base_url:               localhost
+    base_url:               gyman.vagrant
     sqlite_database_user:     admin
     sqlite_database_password: admin
     google_maps_api_key: ~
