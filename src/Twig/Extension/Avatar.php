@@ -51,6 +51,8 @@ class Avatar extends Twig_Extension
         $dir = rtrim($this->uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $path = rtrim($this->uploadPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
+        $foto = null;
+
         switch(true) {
             case $member instanceof Member:
                 $foto = $member->details()->foto()->foto();
