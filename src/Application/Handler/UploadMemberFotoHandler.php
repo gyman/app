@@ -78,7 +78,7 @@ class UploadMemberFotoHandler
     /**
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
      */
-    private function handleDataSrc($command)
+    private function handleDataSrc(MemberCommandInterface $command)
     {
         $encodedData = $command->fotoData;
         $encodedData = str_replace(' ','+',$encodedData);
@@ -105,7 +105,7 @@ class UploadMemberFotoHandler
     {
         return sprintf(
             '%d-%s.%s',
-            $command->id,
+            $command->id->toString(),
             md5(microtime(true)),
             $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : "jpg"
         );

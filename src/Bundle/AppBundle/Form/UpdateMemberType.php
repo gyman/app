@@ -17,12 +17,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class MemberType extends AbstractType
+class UpdateMemberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', HiddenType::class)
             ->add('firstname', TextType::class, ['label' => 'member.form.firstname.label'])
             ->add('lastname', TextType::class, ['label' => 'member.form.lastname.label'])
             ->add('birthdate', DateType::class, [

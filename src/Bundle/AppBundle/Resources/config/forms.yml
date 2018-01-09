@@ -22,7 +22,7 @@ services:
       - { name: form.type, alias: gyman_voucher_update_form }
 
   gyman.members.member_form_type:
-    class: Gyman\Bundle\AppBundle\Form\MemberType
+    class: Gyman\Bundle\AppBundle\Form\UpdateMemberType
     tags:
       - { name: form.type, alias: member }
 

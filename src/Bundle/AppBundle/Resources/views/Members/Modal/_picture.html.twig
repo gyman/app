@@ -6,7 +6,7 @@
 }) }}
 
 <div class="tab-content">
-    <div id="filePane" class="tab-pane fade in active">
+    <div id="filePane" class="tab-pane fade in">
         <img src="{{ avatar(member) }}" class="thumbnail" id="memberFoto"/>
 
         {{ form_widget(form.uploadFile) }}
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade in" id="webcamDiv">
-        <div id="camera" data-upload-url="" style="width: 240px; height: 300px"></div>
+    <div class="tab-pane fade in active" id="webcamDiv">
+        <div id="camera" data-upload-url="" style="width: 300px; height: 240px"></div>
     </div>
 </div>

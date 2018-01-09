@@ -3,7 +3,8 @@ namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
 use Gyman\Application\Command\CreateUserForMemberCommand;
-use Gyman\Bundle\AppBundle\Form\MemberType;
+use Gyman\Bundle\AppBundle\Form\CreateMemberType;
+use Gyman\Bundle\AppBundle\Form\UpdateMemberType;
 use Gyman\Bundle\AppBundle\Form\SearchType;
 use Gyman\Domain\Member;
 use Gyman\Application\Command\CreateMemberCommand;
@@ -12,6 +13,7 @@ use Gyman\Application\Command\UpdateMemberCommand;
 use Gyman\Domain\Member\EmailAddress;
 use Gyman\Domain\User;
 use Gyman\Domain\UserInterface;
+use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,7 +42,7 @@ class MembersController extends Controller
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
 
-        $form = $this->createForm(MemberType::class, $command);
+        $form = $this->createForm(UpdateMemberType::class, $command);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -71,11 +73,10 @@ class MembersController extends Controller
     public function createAction(Request $request)
     {
         $command = new CreateMemberCommand();
+        $command->id = Uuid::uuid4();
 
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-        $form = $this->createForm(MemberType::class, $command, [
-            'data_class' => CreateMemberCommand::class,
-        ]);
+        $form = $this->createForm(CreateMemberType::class, $command, []);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

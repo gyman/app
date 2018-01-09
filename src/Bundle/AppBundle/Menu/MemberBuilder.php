@@ -130,10 +130,10 @@ class MemberBuilder
         $menu->setChildrenAttribute('id', 'uploadAvatar');
 
         $menu->addChild(
-            'member.modal.tab.picture_label',
+            'member.modal.tab.camera_label',
             [
-                'uri'            => '#filePane',
-                'extras'         => ['icon' => 'icomoon-icon-database'],
+                'uri'            => '#webcamDiv',
+                'extras'         => ['icon' => 'icomoon-icon-camera'],
                 'linkAttributes' => [
                     'class'       => '',
                     'data-toggle' => 'tab',
@@ -145,10 +145,10 @@ class MemberBuilder
         )->setExtra('translation_domain', 'GymanAppBundle');
 
         $menu->addChild(
-            'member.modal.tab.camera_label',
+            'member.modal.tab.picture_label',
             [
-                'uri'            => '#webcamDiv',
-                'extras'         => ['icon' => 'icomoon-icon-camera'],
+                'uri'            => '#filePane',
+                'extras'         => ['icon' => 'icomoon-icon-database'],
                 'linkAttributes' => [
                     'class'       => '',
                     'data-toggle' => 'tab',
