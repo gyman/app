@@ -118,8 +118,12 @@ class MemberBuilder
         return $menu;
     }
 
-    public function picture()
+    public function picture(RequestStack $requestStack)
     {
+        $request = $requestStack->getMasterRequest();
+
+        dump($request->request->all());
+
         $menu = $this->factory->createItem('root');
 
         if (!$this->authorizationChecker->isGranted('ROLE_USER')) {

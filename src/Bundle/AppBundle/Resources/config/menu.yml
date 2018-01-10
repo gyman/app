@@ -39,22 +39,6 @@ services:
     gyman.members.menu.tabs_picture:
       class:            Knp\Menu\MenuItem
       factory:          ['@gyman.members.menu_builder', 'picture']
+      arguments:        ['@request_stack']
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }
-
-#    gyman.default.menu_abstract:
-#        abstract: true
-#        class: Knp\Menu\MenuItem
-#        factory_service: gyman.default.menu_builder
-#        arguments: ["@request_stack"]
-#        scope: request
-#
-#    gyman.default.menu.profile:
-#        parent: gyman.default.menu_abstract
-#        tags:
-#            - { name: knp_menu.menu, alias: main }
-#
-#    gyman.default.menu.profile:
-#        parent: gyman.default.menu_abstract
-#        tags:
-#            - { name: knp_menu.menu, alias: main }
