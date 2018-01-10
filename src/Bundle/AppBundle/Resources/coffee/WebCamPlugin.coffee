@@ -17,7 +17,10 @@
           @setupDiv()
         , 500
 
-      $("a[href='#webcamDiv']").trigger "click"
+      b = setTimeout () =>
+        @setupDiv()
+      , 1000
+
 
     setupDiv: () ->
       $div = @$el.find("div#camera")

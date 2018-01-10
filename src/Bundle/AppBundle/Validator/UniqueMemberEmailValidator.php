@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Validator;
 
+use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Domain\Member;
 use Gyman\Bundle\AppBundle\Repository\MemberRepository;
 use Gyman\Application\Command\UpdateMemberCommand;
@@ -40,12 +41,7 @@ final class UniqueMemberEmailValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param Member $member
-     * @param UpdateMemberCommand $command
-     * @return bool
-     */
-    private function areTheSame(Member $member, UpdateMemberCommand $command)
+    private function areTheSame(Member $member, MemberCommandInterface $command) : bool
     {
         return $member->id() === $command->id;
     }
