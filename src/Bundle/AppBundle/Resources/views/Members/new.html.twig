@@ -1,15 +1,7 @@
 {% extends 'GymanAppBundle::layout.html.twig' %}
 
-{% block title %}
-    {{ parent() }} - Dodaj użytkownika
-{% endblock title %}
-
 {% block content %}
-<div class="heading">
-
-    <h3>Dodaj użytkownika</h3>
-
-</div>
+<div class="heading"><h3>Dodaj użytkownika</h3></div>
 
 <div class="span12">
 {% include "::_flash.html.twig" %}
@@ -23,11 +15,31 @@
 }) }}
 
     <div class="span4">
-        {% if member is defined %}
-        {% include 'GymanAppBundle:Members:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
-        {% else %}
-        {% include 'GymanAppBundle:Members:Modal/_picture.html.twig' with {'form' : form} %}
-        {% endif %}
+        {{ knp_menu_render('gyman.members.menu.tabs_picture', {
+            'template': 'GymanAppBundle:Members:Menu/picture.html.twig',
+            'currentAsLink' : true,
+            'depth' : 1,
+            'currentClass' : 'active'
+        }) }}
+
+        {% set cameraPicture = form.fotoData.vars.value %}
+
+        <div class="tab-content">
+            <div id="filePane" class="tab-pane fade in{% if cameraPicture is not null %} active{% endif %}">
+                <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
+
+                {{ form_widget(form.uploadFile) }}
+
+                <div class="control-group error">
+                    <div class="help-block">
+                        {{ form_errors(form.uploadFile) }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade in{% if cameraPicture is null %} active{% endif %}" id="webcamDiv">
+                <div id="camera" data-upload-url="" style="width: 300px; height: 240px"></div>
+            </div>
+        </div>
     </div>
 
     <div class="span8">
@@ -68,5 +80,9 @@
 {{ form_end(form) }}
 
 </div>
-
 {% endblock content %}
+
+
+{% block title %}
+    {{ parent() }} - Dodaj użytkownika
+{% endblock title %}

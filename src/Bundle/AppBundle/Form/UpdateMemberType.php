@@ -73,8 +73,13 @@ class UpdateMemberType extends AbstractType
         ]);
     }
 
+    public function getBlockPrefix() : string
+    {
+        return "member";
+    }
+
     public function getName() : string
     {
-        return 'member';
+        return 'update_member';
     }
 }

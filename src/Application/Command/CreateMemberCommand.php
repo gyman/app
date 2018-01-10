@@ -67,7 +67,7 @@ final class CreateMemberCommand implements MemberCommandInterface
     public $foto;
 
     /**
-     * @var
+     * @var string
      */
     public $fotoData;
 

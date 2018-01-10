@@ -99,7 +99,7 @@ class MembersController extends Controller
             }
         }
 
-        return $response->setContent($this->renderView('GymanAppBundle:Members:new.html.twig', ['form'     => $form->createView()]));
+        return $response->setContent($this->renderView('GymanAppBundle:Members:new.html.twig', ['form' => $form->createView()]));
     }
 
     /**
