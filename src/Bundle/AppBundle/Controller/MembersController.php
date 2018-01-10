@@ -76,7 +76,10 @@ class MembersController extends Controller
         $command->id = Uuid::uuid4();
 
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
-        $form = $this->createForm(CreateMemberType::class, $command, []);
+        $form = $this->createForm(CreateMemberType::class, $command, [
+            'action' => $this->generateUrl('gyman_member_new'),
+            'method' => Request::METHOD_POST
+        ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

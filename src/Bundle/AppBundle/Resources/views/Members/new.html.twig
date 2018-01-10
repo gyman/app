@@ -19,9 +19,7 @@
         'id' : "memberForm",
         'class' : "form-horizontal row-fluid",
         'novalidate' : 'NOVALIDATE'
-    },
-    action : path('gyman_member_new'),
-    method : 'POST'
+    }
 }) }}
 
     <div class="span4">
@@ -33,11 +31,23 @@
     </div>
 
     <div class="span8">
-        <div class="span6">
-            {% include 'GymanAppBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
-        </div>
-        <div class="span6">
-            {% include 'GymanAppBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
+        <ul class="nav nav-tabs" id="uploadAvatar">
+            <li class="active first">
+                <a href="#detailsPane" class="" data-toggle="tab">
+                    <span class="icon icomoon-icon-profile"></span>
+                    Szczegóły
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="detailsPane" class="tab-pane fade in active">
+                <div class="span5">
+                    {% include 'GymanAppBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
+                </div>
+                <div class="span7">
+                    {% include 'GymanAppBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
+                </div>
+            </div>
         </div>
     </div>
     {{ form_rest(form) }}
