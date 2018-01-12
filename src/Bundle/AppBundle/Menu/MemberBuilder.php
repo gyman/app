@@ -122,8 +122,6 @@ class MemberBuilder
     {
         $request = $requestStack->getMasterRequest();
 
-        dump($request->request->all());
-
         $menu = $this->factory->createItem('root');
 
         if (!$this->authorizationChecker->isGranted('ROLE_USER')) {

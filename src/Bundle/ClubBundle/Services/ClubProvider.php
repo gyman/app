@@ -29,10 +29,10 @@ class ClubProvider
 
     public function club() : ?Club
     {
-        if($this->club === null) {
-            $this->club = $this->clubRepository->findOneBySubdomain(
-                $this->subdomainProvider->getSubdomain()
-            );
+        $subdomain = $this->subdomainProvider->getSubdomain();
+
+        if($subdomain !== null && $this->club === null) {
+            $this->club = $this->clubRepository->findOneBySubdomain($subdomain);
         }
 
         return $this->club;
