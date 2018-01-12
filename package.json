@@ -4,6 +4,7 @@
   "repository": "http://github.com/gyman/app",
   "license": "GPL",
   "dependencies": {
+    "bower": "^1.8.2",
     "clean-css": "~2.2.15",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
