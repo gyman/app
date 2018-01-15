@@ -17,6 +17,11 @@
           @setupDiv()
         , 500
 
+      b = setTimeout () =>
+        @setupDiv()
+      , 1000
+
+
     setupDiv: () ->
       $div = @$el.find("div#camera")
       $div.photobooth()
@@ -24,6 +29,8 @@
       if !$div.data("photobooth").isSupported
         alert "Twoja przeglądarka nie obsługuje kamery"
         return
+
+      $div.data("photobooth").resize 300, 240
 
       $div.on "image", (event, dataUrl) ->
         $("img#memberFoto").attr 'src', dataUrl

@@ -281,7 +281,6 @@ $(document).ready ->
       cont = $this.parent("div").next("div.content")
       cont.slideDown 500, "easeInExpo" #change effect if you want :)
 
-  
   #show minimize and maximize icons
   widget.hover (->
     $(this).find(".title>a").show 50

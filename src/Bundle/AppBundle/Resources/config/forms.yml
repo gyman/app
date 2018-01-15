@@ -21,8 +21,13 @@ services:
     tags:
       - { name: form.type, alias: gyman_voucher_update_form }
 
-  gyman.members.member_form_type:
-    class: Gyman\Bundle\AppBundle\Form\MemberType
+  gyman.form.member_update_form:
+    class: Gyman\Bundle\AppBundle\Form\UpdateMemberType
+    tags:
+      - { name: form.type, alias: member }
+
+  gyman.form.member_create_form:
+    class: Gyman\Bundle\AppBundle\Form\CreateMemberType
     tags:
       - { name: form.type, alias: member }
 

@@ -16,14 +16,16 @@ class VouchersData extends BaseFixture
 
     public function insert(array $array = []) : Voucher
     {
+        /** @var Member $member */
+        $member = $this->getReference($array['member']);
+
         $array['startDate'] = Carbon::parse($array['startDate']);
         $array['endDate'] = Carbon::parse($array['endDate']);
         $array["price"] = ["amount" => $array["price"], "currency" => "PLN"];
+        $array['member'] = $member;
 
         $voucher = VoucherFactory::createFromArray($array);
 
-        /** @var Member $member */
-        $member = $this->getReference($array['member']);
         $member->vouchers()->add($voucher);
         $voucher->setMember($member);
         

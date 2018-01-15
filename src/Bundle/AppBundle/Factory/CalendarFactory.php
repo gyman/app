@@ -27,7 +27,8 @@ class CalendarFactory extends BaseCalendarFactory
         return new Calendar(
             $array['calendarId'],
             $array['title'],
-            new ArrayCollection($array['events'])
+            new ArrayCollection($array['events']),
+            null
         );
     }
 }

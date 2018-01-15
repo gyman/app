@@ -1,15 +1,33 @@
 {% extends 'GymanAppBundle::layout.html.twig' %}
 
-{% block title %}
-    {{ parent() }} - Dodaj użytkownika
-{% endblock title %}
+{% import _self as pane %}
+
+{% macro uploadPane(form) %}
+    {% set cameraPicture = form.fotoData.vars.value %}
+
+    <div id="filePane" class="tab-pane fade in{% if cameraPicture is not null %} active{% endif %}">
+        <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
+
+        {{ form_widget(form.uploadFile) }}
+
+        <div class="control-group error">
+            <div class="help-block">
+                {{ form_errors(form.uploadFile) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro webcamPane(form) %}
+    {% set cameraPicture = form.fotoData.vars.value %}
+
+    <div id="webcamDiv" class="tab-pane fade in{% if cameraPicture is null %} active{% endif %}">
+        <div id="camera" data-upload-url="" style="width: 300px; height: 240px"></div>
+    </div>
+{% endmacro %}
 
 {% block content %}
-<div class="heading">
-
-    <h3>Dodaj użytkownika</h3>
-
-</div>
+<div class="heading"><h3>Dodaj użytkownika</h3></div>
 
 <div class="span12">
 {% include "::_flash.html.twig" %}
@@ -19,23 +37,67 @@
         'id' : "memberForm",
         'class' : "form-horizontal row-fluid",
         'novalidate' : 'NOVALIDATE'
-    },
-    action : path('gyman_member_new'),
-    method : 'POST'
+    }
 }) }}
 
-{%  include "@GymanApp/Members/member_form_inner.html.twig" %}
+    <div class="span4">
+        {{ knp_menu_render('gyman.members.menu.tabs_picture', {
+            'template': 'GymanAppBundle:Members:Menu/picture.html.twig',
+            'currentAsLink' : true,
+            'depth' : 1,
+            'currentClass' : 'active'
+        }) }}
 
-<div class="row-fluid">
-    <div class="span12">
-        <button class="btn btn-large btn-primary pull-right" type="submit">
-            Zapisz
-        </button>
+        {% set cameraPicture = form.fotoData.vars.value %}
+
+        <div class="tab-content">
+            {{ pane.uploadPane(form) }}
+
+            {{ pane.webcamPane(form) }}
+        </div>
+    </div>
+
+    <div class="span8">
+        <ul class="nav nav-tabs" id="uploadAvatar">
+            <li class="active first">
+                <a href="#detailsPane" class="" data-toggle="tab">
+                    <span class="icon icomoon-icon-profile"></span>
+                    Szczegóły
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="detailsPane" class="tab-pane fade in active">
+                <div class="span5">
+                    {% include 'GymanAppBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
+                </div>
+                <div class="span7">
+                    {% include 'GymanAppBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+
+    <div class="row-fluid">
+    <div class="span12 form-actions">
+        <div class="pull-right">
+            <button class="btn btn-primary" type="submit">
+                Zapisz
+            </button>
+            <button class="btn" type="submit">
+                Zapisz i dodaj kolejny
+            </button>
+        </div>
     </div>
 </div>
 
 {{ form_end(form) }}
 
 </div>
-
 {% endblock content %}
+
+
+{% block title %}
+    {{ parent() }} - Dodaj użytkownika
+{% endblock title %}

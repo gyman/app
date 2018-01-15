@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Application\Handler;
 
+use Gyman\Application\Command\MemberCommandInterface;
 use Gyman\Bundle\AppBundle\Services\SubdomainProvider;
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Gyman\Application\Command\CreateMemberCommand;
@@ -53,13 +54,8 @@ class UploadMemberFotoHandler
      * @param UpdateMemberCommand|CreateMemberCommand $command
      * @throws \Exception
      */
-    public function handle($command)
+    public function handle(MemberCommandInterface $command)
     {
-        if(!$command instanceof UpdateMemberCommand && !$command instanceof CreateMemberCommand)
-        {
-            throw new \Exception(sprintf("Upload Foto Command can be only %s or %s type"), UpdateMemberCommand::class, CreateMemberCommand::class);
-        }
-
         $this->destinationDir = $this->createDestinationDir();
         $this->filename = $this->createFilename($command);
         $this->filepath = $this->createFilepath();
@@ -82,7 +78,7 @@ class UploadMemberFotoHandler
     /**
      * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
      */
-    private function handleDataSrc($command)
+    private function handleDataSrc(MemberCommandInterface $command)
     {
         $encodedData = $command->fotoData;
         $encodedData = str_replace(' ','+',$encodedData);
@@ -109,7 +105,7 @@ class UploadMemberFotoHandler
     {
         return sprintf(
             '%d-%s.%s',
-            $command->id,
+            $command->id->toString(),
             md5(microtime(true)),
             $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : "jpg"
         );
