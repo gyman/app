@@ -157,7 +157,33 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+              "database_driver" : "JENKINS_DATABASE_DRIVER",
+              "database_host" : "JENKINS_DATABASE_HOST",
+              "database_port" : "JENKINS_DATABASE_PORT",
+              "database_name" : "JENKINS_DATABASE_NAME",
+              "database_user" : "JENKINS_DATABASE_USER",
+              "database_password" : "JENKINS_DATABASE_PASSWORD",
+              "mailer_transport" : "JENKINS_MAILER_TRANSPORT",
+              "mailer_host" : "JENKINS_MAILER_HOST",
+              "mailer_user" : "JENKINS_MAILER_USER",
+              "mailer_password" : "JENKINS_MAILER_PASSWORD",
+              "mailer_port" : "JENKINS_MAILER_PORT",
+              "locale" : "JENKINS_LOCALE",
+              "secret" : "JENKINS_SECRET",
+              "use_assetic_controller" : "JENKINS_USE_ASSETIC_CONTROLLER",
+              "debug_toolbar" : "JENKINS_DEBUG_TOOLBAR",
+              "debug_redirects" : "JENKINS_DEBUG_REDIRECTS",
+              "sentry_url" : "JENKINS_SENTRY_URL",
+              "sentry_revision" : "JENKINS_SENTRY_REVISION",
+              "base_url" : "JENKINS_BASE_URL",
+              "sqlite_database_user" : "JENKINS_SQLITE_DATABASE_USER",
+              "sqlite_database_password" : "JENKINS_SQLITE_DATABASE_PASSWORD",
+              "google_maps_api_key" : "JENKINS_GOOGLE_MAPS_API_KEY",
+              "maintanance_database_user" : "JENKINS_MAINTANANCE_DATABASE_USER",
+              "maintanance_database_password" : "JENKINS_MAINTANANCE_DATABASE_PASSWORD"
+            }
         },
         "branch-alias": {
             "dev-master": "2.8-dev"
