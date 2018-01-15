@@ -32,7 +32,7 @@ class RegisterClubCommand extends ContainerAwareCommand
     {
         $command = CreateClubCommand::createFromInput($input);
 
-        $errors = $this->getContainer()->get('validator')->validate($command, ['command']);
+        $errors = $this->getContainer()->get('validator')->validate($command, null, ['command']);
 
         if(0 < $errors->count()) {
             $msg = 'Encountered some errors:' . PHP_EOL;

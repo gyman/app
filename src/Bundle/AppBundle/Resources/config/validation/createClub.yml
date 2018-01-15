@@ -1,5 +1,5 @@
 ---
-Gyman\Application\Command\CreateClubCommand:
+Gyman\Application\Command\CreateClubCommandd:
   properties:
     username:
       - NotNull: {groups: ['form', 'command']}
