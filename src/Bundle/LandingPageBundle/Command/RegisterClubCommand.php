@@ -5,7 +5,6 @@ namespace Gyman\Bundle\LandingPageBundle\Command;
 use Exception;
 use Gyman\Application\Command\CreateClubCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
