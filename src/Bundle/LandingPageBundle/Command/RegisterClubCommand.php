@@ -45,43 +45,6 @@ class RegisterClubCommand extends ContainerAwareCommand
 
         $this->getContainer()->get("tactician.commandbus")->handle($command);
 
-
-//        $email = $this->getEmail($input, $output);
-//
-//        $hostname = $this->getHostname($input, $output);
-//
-//        /** @var Host $host */
-//        $host = $this->getContainer()->get('iron.core.repository.host')->findOneByAaaUrl($hostname);
-//
-//        if($input->hasOption('randomize')) {
-//            $email = uniqid('random_', true) . '_' . $email;
-//        }
-//
-//        $customer = $this->getContainer()->get('iron.core.clubFactory.customer')->createFromArray([
-//            'email' => $email,
-//            'host' => $host->getAaaUrl(),
-//            'bo' => 'portal',
-//        ]);
-//
-//        $this->getContainer()->get('iron.core.repository.customer')->insert($customer);
-//
-//        if($input->hasOption('cloud')) {
-//            $this->getContainer()->get('iron.core.host.manager')->setCurrentHostEntity($host);
-//            $user = $this->getContainer()->get('iron.api.cloud.user_manager')->createUser($email, sprintf("_portal_%s", $host->getLocale()));
-//
-//            if(!$user) {
-//                throw new Exception('Something went wrong with creation customer in cloud');
-//            }
-//
-//            $output->writeln('Cloud returned data:');
-//
-//            $table = new Table($output);
-//            $table
-//                ->setHeaders(['username', 'password', 'token'])
-//                ->setRows([[$user->getEmail(), $user->getPassword(), $user->getToken()]]);
-//            $table->render();
-//        }
-
         return 0;
     }
 

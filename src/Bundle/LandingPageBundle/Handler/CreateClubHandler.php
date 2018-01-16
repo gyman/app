@@ -18,10 +18,17 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\Kernel;
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAL\Types\Type;
 
 class CreateClubHandler
 {
     const HOSTS = ["localhost", "%"];
+
+    const MIGRATION_TABLE_NAME = 'migration_versions';
+
+    const MIGRATION_COLUMN_NAME = 'version';
 
     /** @var Kernel */
     private $kernel;
@@ -39,6 +46,9 @@ class CreateClubHandler
     private $defaultConnection;
 
     /** @var Connection */
+    private $tenantConnection;
+
+    /** @var Connection */
     private $maintenanceConnection;
 
     /** @var LoggerInterface */
@@ -47,15 +57,7 @@ class CreateClubHandler
     /** @var UserRepository */
     private $userRepository;
 
-    /**
-     * CreateClubHandler constructor.
-     * @param Kernel $kernel
-     * @param UserManipulator $fosUserManipulator
-     * @param ClubFactory $clubFactory
-     * @param ClubRepository $clubRepository
-     * @param Connection $maintenanceConnection
-     */
-    public function __construct(Kernel $kernel, UserManipulator $fosUserManipulator, ClubFactory $clubFactory, UserRepository $userRepository, ClubRepository $clubRepository, Connection $defaultConnection, Connection $maintenanceConnection, LoggerInterface $logger)
+    public function __construct(Kernel $kernel, UserManipulator $fosUserManipulator, ClubFactory $clubFactory, UserRepository $userRepository, ClubRepository $clubRepository, Connection $defaultConnection, Connection $tenantConnection, Connection $maintenanceConnection, LoggerInterface $logger)
     {
         $this->kernel = $kernel;
         $this->fosUserManipulator = $fosUserManipulator;
@@ -63,6 +65,7 @@ class CreateClubHandler
         $this->userRepository = $userRepository;
         $this->clubRepository = $clubRepository;
         $this->defaultConnection = $defaultConnection;
+        $this->tenantConnection = $tenantConnection;
         $this->maintenanceConnection = $maintenanceConnection;
         $this->logger = $logger;
     }
@@ -85,6 +88,8 @@ class CreateClubHandler
 
             $this->createSchema($command->subdomain);
             $this->loadFixtures($command->subdomain);
+
+            $this->createMigrationsTable();
 
             /** @var User $user */
             $user = $this->createUserEntity($command);
@@ -332,12 +337,23 @@ class CreateClubHandler
         $this->logger->notice('Db created', ['name' => $this->createDbName($subdomain)]);
     }
 
-    /**
-     * @param $subdomain
-     * @return string
-     */
     private function createDbName(string $subdomain) : string
     {
         return sprintf("gyman_%s", $subdomain);
+    }
+
+    private function createMigrationsTable() : void
+    {
+        if ($this->tenantConnection->getSchemaManager()->tablesExist([self::MIGRATION_TABLE_NAME])) {
+            return;
+        }
+
+        $columns = [
+            self::MIGRATION_COLUMN_NAME => new Column(self::MIGRATION_COLUMN_NAME, Type::getType('string'), ['length' => 255]),
+        ];
+
+        $table   = new Table(self::MIGRATION_TABLE_NAME, $columns);
+        $table->setPrimaryKey([self::MIGRATION_COLUMN_NAME]);
+        $this->tenantConnection->getSchemaManager()->createTable($table);
     }
 }

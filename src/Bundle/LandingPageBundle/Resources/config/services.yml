@@ -13,6 +13,7 @@ services:
       - "@gyman.user.repository"
       - "@gyman.club.repository"
       - "@doctrine.dbal.default_connection"
+      - "@doctrine.dbal.tenant_connection"
       - "@doctrine.dbal.maintanance_connection"
       - "@monolog.logger.createNewClub"
     tags:

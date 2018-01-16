@@ -36,6 +36,8 @@ class MigrateTenantsCommand extends ContainerAwareCommand
 
         $output->writeln(sprintf("Migrating %d subdomains:", count($clubs)));
 
+        $exitCode = 0;
+
         foreach($clubs as $club) {
             $output->write(sprintf("%s...", $club));
 
@@ -60,7 +62,8 @@ class MigrateTenantsCommand extends ContainerAwareCommand
             $logger->notice(sprintf('Running command "%s"', json_encode($params)));
 
             if($application->run($commandInput, $commandOutput)) {
-                throw new Exception(sprintf('Error running migration for "%s": %s', $club, $commandOutput->fetch()));
+                $output->writeln("ERROR! Check the logs.");
+                $exitCode = -1;
             }
 
             $logger->debug(sprintf('Command "%s" output:', $params["command"], $commandOutput->fetch()));
@@ -68,6 +71,6 @@ class MigrateTenantsCommand extends ContainerAwareCommand
             $output->writeln("done.");
         }
 
-        return 0;
+        return $exitCode;
     }
 }
