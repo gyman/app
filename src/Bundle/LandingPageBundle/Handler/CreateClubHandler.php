@@ -95,13 +95,13 @@ class CreateClubHandler
             $user = $this->createUserEntity($command);
         }
         catch (CantRegisterNewClubRollback $e) {
-//            $this->rollback($command->subdomain);
             $this->logger->error($e->getMessage());
             throw new CantRegisterNewClub($e);
         } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             throw new CantRegisterNewClub($e);
         } finally {
+            $this->rollback($command->subdomain);
             $this->logger->error(sprintf('Error while creating new database'));
         }
     }
