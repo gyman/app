@@ -18,10 +18,33 @@ class ClubFactory
      */
     public static function createFromArray($params)
     {
+        $params = array_merge($params, [
+            "name" => '',
+            "subdomain" => '',
+            "details" => [
+                "address" => "",
+                "zipcode" => "",
+                "city" => "",
+                "country" => "",
+                "phone_number" => "",
+                "email_address" => "",
+                "opened_from" => "",
+                "opened_till" => "",
+                "logo" => "",
+                "about" => "",
+                "account_number" => "",
+            ],
+            "database" => [
+                "name" => "",
+                "user" => "",
+                "password" => "",
+                "host" => "",
+            ]
+        ]);
+
         return new Club(
             null,
             $params['name'],
-            $params['sections'],
             new Subdomain($params['subdomain']),
             new Database(
                 $params['database']['name'],

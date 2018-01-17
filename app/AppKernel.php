@@ -46,6 +46,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\ReportsBundle\GymanReportsBundle(),
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),
             new Gyman\Bundle\SettingsBundle\GymanSettingsBundle(),
+            new Gyman\Bundle\AdminBundle\AdminBundle(),
 
 	        new Sentry\SentryBundle\SentryBundle(),
         );
