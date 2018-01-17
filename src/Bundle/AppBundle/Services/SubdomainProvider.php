@@ -18,9 +18,16 @@ final class SubdomainProvider implements SubdomainProviderInterface
     private $requestStack;
 
     /**
-     * @var
+     * @var string
      */
     private $baseUrl;
+
+    /**
+     * @var array
+     */
+    private $whiteList = [
+        "admin"
+    ];
 
     /**
      * SubdomainProvider constructor.
@@ -52,10 +59,15 @@ final class SubdomainProvider implements SubdomainProviderInterface
 
         $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
+        if(in_array($subdomain, $this->whiteList)) {
+            return null;
+        }
+
         if($subdomain === $currentHost) {
             return null;
         }
 
         return $subdomain;
     }
+
 }
