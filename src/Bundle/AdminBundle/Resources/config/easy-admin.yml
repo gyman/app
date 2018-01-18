@@ -1,0 +1,4 @@
+easy_admin:
+    entities:
+      Club:
+        class: Gyman\Bundle\ClubBundle\Entity\Club

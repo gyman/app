@@ -2,21 +2,11 @@
 
 namespace Gyman\Bundle\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
-class DefaultController extends Controller
+
+class DefaultController extends BaseAdminController
 {
-    /**
-     * @Route("/",
-     *     name="gyman_admin_index",
-     *     host="admin.{base_url}",
-     *     defaults={"base_url"="%base_url%"},
-     *     requirements={"base_url"="%base_url%"}
-     * )
-     */
-    public function indexAction()
-    {
-        return $this->render('AdminBundle:Default:index.html.twig');
-    }
+
 }
