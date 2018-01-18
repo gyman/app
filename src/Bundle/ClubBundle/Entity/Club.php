@@ -1,12 +1,11 @@
 <?php
 namespace Gyman\Bundle\ClubBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gyman\Domain\Section;
 
-/**
- * Club
- */
 class Club
 {
     /**
@@ -18,11 +17,6 @@ class Club
      * @var string
      */
     protected $name;
-
-    /**
-     * @var ArrayCollection|Section[]
-     */
-    protected $sections;
 
     /**
      * @var Subdomain
@@ -40,6 +34,16 @@ class Club
     protected $details;
 
     /**
+     * @var bool
+     */
+    protected $enabled;
+
+    /**
+     * @var DateTime
+     */
+    protected $deletedAt;
+
+    /**
      * Club constructor.
      * @param int $id
      * @param string $name
@@ -48,7 +52,7 @@ class Club
      * @param Database $database
      * @param Details $details
      */
-    public function __construct($id, $name, $sections, Subdomain $subdomain, Database $database, Details $details)
+    public function __construct($id, ?string $name, ?Collection $sections, Subdomain $subdomain, Database $database, Details $details)
     {
         $this->id = $id;
         $this->name = $name;
@@ -58,64 +62,53 @@ class Club
         $this->details = $details;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
-    /**
-     * @return ArrayCollection|Section[]
-     */
-    public function getSections()
-    {
-        return $this->sections;
-    }
-
-    /**
-     * @return Subdomain
-     */
-    public function getSubdomain()
+    public function getSubdomain() : Subdomain
     {
         return $this->subdomain;
     }
 
-    /**
-     * @return Database
-     */
-    public function getDatabase()
+    public function getDatabase() : Database
     {
         return $this->database;
     }
 
-    /**
-     * @return Details
-     */
-    public function details()
+    public function details() : Details
     {
         return $this->details;
     }
 
-    public function setDetails(Details $details)
+    public function setDetails(Details $details) : void
     {
         $this->details = $details;
     }
 
-    /**
-     * @param string $name
-     */
-    public function updateName($name)
+    public function updateName(string $name) : void
     {
         $this->name = $name;
+    }
+
+    function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function enable() : void
+    {
+        $this->enabled = true;
+    }
+
+    public function disable() : void
+    {
+        $this->enabled = false;
     }
 }

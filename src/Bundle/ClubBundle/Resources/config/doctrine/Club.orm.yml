@@ -18,7 +18,16 @@ Gyman\Bundle\ClubBundle\Entity\Club:
       type: integer
       generator: { strategy: AUTO }
 
+
   fields:
     name:
       type: string
       length: 255
+    enabled:
+      type: boolean
+      nullable: false
+      options:
+        default: true
+    deletedAt:
+      type: datetime
+      nullable: true
