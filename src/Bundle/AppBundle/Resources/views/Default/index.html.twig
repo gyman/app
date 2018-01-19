@@ -31,7 +31,7 @@
                 slotLabelFormat: 'H:00',
                 selectable: false,
                 lang: dende_calendar_lang,
-                events: Routing.generate('dende_calendar_default_getevents', {noroute: true}),
+                events: Routing.generate('dende_calendar_default_getevents', {noroute: true, _subdomain: "{{ app.request.attributes.get("_subdomain") }}" }),
                 contentHeight: "auto",
                 height: "auto",
                 editable: false,
@@ -42,6 +42,8 @@
         });
 
     </script>
+
+    {{ dump(app.request.attributes) }}
 {% endblock javascripts %}
 
 {% block stylesheets %}

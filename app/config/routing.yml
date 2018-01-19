@@ -13,6 +13,13 @@ gyman_app:
     resource: "@GymanAppBundle/Controller/"
     type:     annotation
     prefix:   /
+    host:     "{_subdomain}.{_base_url}"
+    defaults:
+      _subdomain:  dummy-localhost
+      _base_url:   '%base_url%'
+    requirements:
+      _subdomain:  '[a-z0-9\-]{3,}'
+      _base_url:   '%base_url%'
 
 gyman_reports:
     resource: "@GymanReportsBundle/Controller/"
@@ -24,8 +31,14 @@ dashboard:
     type:     annotation
     prefix:   /dashboard
 
-fos_js_routing:
+subdomain_fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    defaults:
+      _subdomain:  dummy-localhost
+      _base_url:   '%base_url%'
+    requirements:
+      _subdomain:  '[a-z0-9\-]{3,}'
+      _base_url:   '%base_url%'
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
@@ -42,7 +55,14 @@ fos_user_group:
 #  defaults:
 #    _format: json
 
-dende_calendar:
-  type: annotation
-  resource: "@DendeCalendarBundle/Controller/DefaultController.php"
-  prefix: calendar
+subdomain_dende_calendar:
+    type: annotation
+    resource: "@DendeCalendarBundle/Controller/DefaultController.php"
+    prefix: calendar
+    host:     "{_subdomain}.{_base_url}"
+    defaults:
+      _subdomain:  dummy-localhost
+      _base_url:   '%base_url%'
+    requirements:
+      _subdomain:  '[a-z0-9\-]{3,}'
+      _base_url:   '%base_url%'

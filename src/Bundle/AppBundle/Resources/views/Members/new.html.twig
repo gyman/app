@@ -5,7 +5,7 @@
 {% macro uploadPane(form) %}
     {% set cameraPicture = form.fotoData.vars.value %}
 
-    <div id="filePane" class="tab-pane fade in{% if cameraPicture is not null %} active{% endif %}">
+    <div id="filePane" class="tab-pane fade in{% if cameraPicture is not empty %} active{% endif %}">
         <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
 
         {{ form_widget(form.uploadFile) }}
@@ -21,8 +21,9 @@
 {% macro webcamPane(form) %}
     {% set cameraPicture = form.fotoData.vars.value %}
 
-    <div id="webcamDiv" class="tab-pane fade in{% if cameraPicture is null %} active{% endif %}">
-        <div id="camera" data-upload-url="" style="width: 300px; height: 240px"></div>
+    <div id="webcamDiv" class="tab-pane fade in{% if cameraPicture is empty %} active{% endif %}">
+        <div id="camera" data-upload-url="" style="background: #f0f0f0; width: 300px; height: 240px"></div>
+        <p><small>Aby zrobić zdjęcie, kliknij ikonę aparatu w prawym górnym rogu zdjęcia</small></p>
     </div>
 {% endmacro %}
 
@@ -51,9 +52,8 @@
         {% set cameraPicture = form.fotoData.vars.value %}
 
         <div class="tab-content">
-            {{ pane.uploadPane(form) }}
-
             {{ pane.webcamPane(form) }}
+            {{ pane.uploadPane(form) }}
         </div>
     </div>
 
@@ -77,20 +77,16 @@
             </div>
         </div>
     </div>
-    {{ form_rest(form) }}
 
     <div class="row-fluid">
     <div class="span12 form-actions">
         <div class="pull-right">
-            <button class="btn btn-primary" type="submit">
-                Zapisz
-            </button>
-            <button class="btn" type="submit">
-                Zapisz i dodaj kolejny
-            </button>
+            {{ form_widget(form.submit) }}
+            {{ form_widget(form.submit_and_add) }}
         </div>
     </div>
 </div>
+{{ form_rest(form) }}
 
 {{ form_end(form) }}
 

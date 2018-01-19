@@ -1,6 +1,6 @@
 server:
   name:       gyman.vagrant
-  ip:         10.10.10.150
+  ip:         10.10.10.158
   ssh_port:   22152
   mysql_port: 13306
   memory:     4096

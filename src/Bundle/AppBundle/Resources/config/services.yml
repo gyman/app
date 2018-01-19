@@ -67,6 +67,7 @@ services:
     arguments:
       - '@=service(parameter("subdomain_provider_service"))'
       - '@dende_multitenancy.tenant_manager'
+      - '@router'
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
 

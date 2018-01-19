@@ -4,6 +4,7 @@ namespace Gyman\Bundle\AppBundle\Listener;
 use Dende\MultitenancyBundle\Manager\TenantManager;
 use Gyman\Bundle\AppBundle\Services\SubdomainProviderInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class SubdomainNameListener
@@ -22,18 +23,20 @@ class SubdomainNameListener
     private $tenantManager;
 
     /**
-     * SubdomainNameListener constructor.
-     * @param SubdomainProviderInterface $subdomainProvider
-     * @param TenantManager $tenantManager
+     * @var RouterInterface
      */
-    public function __construct(SubdomainProviderInterface $subdomainProvider, TenantManager $tenantManager)
+    private $router;
+
+    public function __construct(SubdomainProviderInterface $subdomainProvider, TenantManager $tenantManager, RouterInterface $router)
     {
         $this->subdomainProvider = $subdomainProvider;
         $this->tenantManager = $tenantManager;
+        $this->router = $router;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
     {
+
         if (!$event->isMasterRequest()) { // @todo: get sure if it's needed
             return;
         }
@@ -43,6 +46,8 @@ class SubdomainNameListener
         if($subdomainName === null) {
             return;
         }
+
+        $this->router->getContext()->setParameter('_subdomain', $subdomainName);
 
         $this->tenantManager->switchConnection('tenant', $subdomainName);
     }

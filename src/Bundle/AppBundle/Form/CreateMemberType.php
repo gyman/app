@@ -3,6 +3,7 @@
 namespace Gyman\Bundle\AppBundle\Form;
 
 use Gyman\Application\Command\CreateMemberCommand;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,6 +12,18 @@ class CreateMemberType extends UpdateMemberType
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         parent::buildForm($builder, $options);
+
+        $builder
+            ->add('submit', SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-primary"
+                ]
+            ])
+            ->add('submit_and_add', SubmitType::class, [
+                "attr" => [
+                    "class" => "btn"
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) : void

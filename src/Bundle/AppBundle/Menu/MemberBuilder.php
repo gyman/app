@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Menu;
 
+use function array_key_exists;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
 use Knp\Menu\FactoryInterface;
@@ -122,6 +123,15 @@ class MemberBuilder
     {
         $request = $requestStack->getMasterRequest();
 
+        $data = $request->get("member", []);
+
+        $cameraActive = true;
+
+        if(array_key_exists('fotoData', $data) && $data["fotoData"] !== null)
+        {
+            $cameraActive = false;
+        }
+
         $menu = $this->factory->createItem('root');
 
         if (!$this->authorizationChecker->isGranted('ROLE_USER')) {
@@ -141,7 +151,7 @@ class MemberBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => 'active',
+                    'class' => $cameraActive ? 'active' : ''
                 ],
             ]
         )->setExtra('translation_domain', 'GymanAppBundle');
@@ -156,7 +166,7 @@ class MemberBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => '',
+                    'class' => $cameraActive ? '' : 'active'
                 ],
             ]
         )->setExtra('translation_domain', 'GymanAppBundle');
