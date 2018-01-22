@@ -30,11 +30,6 @@ class TenantProvider implements TenantProviderInterface
      */
     private $tenantId;
 
-    /**
-     * TenantProvider constructor.
-     * @param SubdomainProviderInterface $subdomainProvider
-     * @param ClubRepository $clubRepository
-     */
     public function __construct(SubdomainProviderInterface $subdomainProvider, ClubRepository $clubRepository, $host = 'localhost')
     {
         $this->subdomainProvider = $subdomainProvider;
@@ -55,21 +50,20 @@ class TenantProvider implements TenantProviderInterface
 
         if(is_null($club))
         {
-            return;
+            return null;
         }
 
+        $database = $club->database();
+
         return Tenant::fromArray([
-            'dbname' => $club->getDatabase()->getName(),
-            'username' => $club->getDatabase()->getUsername(),
-            'password' => $club->getDatabase()->getPassword(),
+            'dbname' => $database->dbname(),
+            'username' => $database->username(),
+            'password' => $database->password(),
             'host' => $this->host,
             'path' => null,
         ]);
     }
 
-    /**
-     * @param $id
-     */
     public function setTenantId($id) {
         $this->tenantId = $id;
     }

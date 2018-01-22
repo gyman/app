@@ -9,11 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClubRepository extends EntityRepository
 {
-    /**
-     * @param string $subdomain
-     * @return null|Club
-     */
-    public function findOneBySubdomain(Subdomain $subdomain)
+    public function findOneBySubdomain(Subdomain $subdomain) : ?Club
     {
         return $this->findOneBy(['subdomain.name' => $subdomain->getName()]);
     }

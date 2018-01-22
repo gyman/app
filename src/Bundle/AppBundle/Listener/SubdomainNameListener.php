@@ -41,14 +41,14 @@ class SubdomainNameListener
             return;
         }
 
-        $subdomainName = $this->subdomainProvider->getSubdomain();
+        $subdomain = $this->subdomainProvider->getSubdomain();
 
-        if($subdomainName === null) {
+        if($subdomain === null) {
             return;
         }
 
-        $this->router->getContext()->setParameter('_subdomain', $subdomainName);
+        $this->router->getContext()->setParameter('_subdomain', $subdomain->getName());
 
-        $this->tenantManager->switchConnection('tenant', $subdomainName);
+        $this->tenantManager->switchConnection('tenant', $subdomain);
     }
 }

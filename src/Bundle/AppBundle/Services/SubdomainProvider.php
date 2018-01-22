@@ -2,9 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Services;
 
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class SubdomainProvider
