@@ -2,9 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Services;
 
 use Gyman\Bundle\ClubBundle\Entity\Subdomain;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class SubdomainProvider
@@ -30,11 +28,6 @@ final class SubdomainProvider implements SubdomainProviderInterface
         "admin"
     ];
 
-    /**
-     * SubdomainProvider constructor.
-     * @param RequestStack $requestStack
-     * @param $baseUrl
-     */
     public function __construct(RequestStack $requestStack, $baseUrl)
     {
         $this->requestStack = $requestStack;
