@@ -30,7 +30,7 @@ class UniqueClubSubdomainValidator extends ConstraintValidator
 
         if ($this->clubRepository->findOneBySubdomain($value)) {
             $this->context->buildViolation($constraint->message)
-                ->setParameter('%string%', $value->getName())
+                ->setParameter('%string%', $value->name())
                 ->addViolation();
         }
     }

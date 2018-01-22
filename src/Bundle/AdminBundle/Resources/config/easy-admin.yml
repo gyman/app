@@ -8,7 +8,8 @@ easy_admin:
     datetime: 'd.m.Y H:i:s'
 
   design:
-    form_theme: 'horizontal'
+#    form_theme: 'horizontal'
+    form_theme: 'vertical'
 
     menu:
       - label: Management
@@ -29,11 +30,31 @@ easy_admin:
   entities:
     Club:
       class: Gyman\Bundle\ClubBundle\Entity\Club
-      label:      'User'
+      label:      'Klub'
       list:
-        sort:   ['name', 'ASC']
+        title: 'Zarejestrowane kluby'
+        sort:   ['id', 'ASC']
         fields:
           - {property: 'id', label: 'Id' }
           - {property: 'enabled', label: 'Active', type: 'toggle' }
           - {property: 'name', label: 'Nazwa' }
+          - {property: 'subdomain.name', label: 'Subdomena'}
           - {property: 'details.city', label: 'Miasto'}
+      form:
+        fields:
+          - {type: 'group', css_class: 'col-sm-6', label: 'Podstawowe informacje' }
+          - {property: 'name', label: 'Nazwa' }
+          - {type: 'section', label: Subdomain }
+          - {property: 'subdomain', label: false, type: 'Gyman\Bundle\AppBundle\Form\SubdomainType' }
+          - {type: 'section', label: Database }
+          - {property: 'database', label: false, type: 'Gyman\Bundle\AdminBundle\Form\DatabaseType' }
+          - {type: 'group', css_class: 'col-sm-6', label: 'Szczegóły' }
+          - {property: 'details', label: false, type: 'Gyman\Bundle\SettingsBundle\Form\Type\ClubDetailsType' }
+
+        form_options: { validation_groups: ['Default'] }
+      new:
+        title: 'Dodaj klub'
+        form_options: { validation_groups: ['Default', 'createClub'] }
+      edit:
+        title:  'Edytuj klub'
+        form_options: { validation_groups: ['Default', 'updateClub'] }

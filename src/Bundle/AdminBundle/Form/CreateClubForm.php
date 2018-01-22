@@ -13,64 +13,31 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreateClubForm extends AbstractType implements DataMapperInterface
+class CreateClubForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class)
             ->add('subdomain', TextType::class)
-            ->add('details', ClubDetailsType::class, [
-                "label" => false
-            ])
             ->add('database', DatabaseType::class, [
                 "label" => false
             ])
             ->add('submit', SubmitType::class)
         ;
-
-        $builder->setDataMapper($this);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            "validation_groups" => ["createClub", "updateClub"],
+            "validation_groups" => ["createClub", "Default"],
             "data_class" => Club::class,
-            "empty_data" => null
+            "empty_data" => new Club()
         ]);
     }
 
     public function getBlockPrefix()
     {
-        return 'admin_bundle_create_club_form';
-    }
-
-    /**
-     * @param Club $data
-     * @param FormInterface[]|\Traversable $forms
-     */
-    public function mapDataToForms($data, $forms)
-    {
-        if(null === $data) {
-            return;
-        }
-
-        $forms = iterator_to_array($forms);
-        $forms['name']->setData($data->name());
-        $forms['subdomain']->setData($data->subdomain());
-        $forms['details']->setData($data->details());
-        $forms['database']->setData($data->database());
-    }
-
-    public function mapFormsToData($forms, &$data)
-    {
-        $forms = iterator_to_array($forms);
-        $data = new Club(
-            $forms['name']->getData(),
-            new Subdomain($forms['subdomain']->getData()),
-            $forms['database']->getData(),
-            $forms['details']->getData()
-        );
+        return 'create_club';
     }
 }

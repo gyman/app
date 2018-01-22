@@ -47,7 +47,7 @@ class SubdomainNameListener
             return;
         }
 
-        $this->router->getContext()->setParameter('_subdomain', $subdomain->getName());
+        $this->router->getContext()->setParameter('_subdomain', $subdomain->name());
 
         $this->tenantManager->switchConnection('tenant', $subdomain);
     }

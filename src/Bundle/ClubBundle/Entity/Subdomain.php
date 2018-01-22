@@ -1,10 +1,6 @@
 <?php
 namespace Gyman\Bundle\ClubBundle\Entity;
 
-/**
- * Class Subdomain
- * @package Gyman\Bundle\ClubBundle
- */
 final class Subdomain
 {
     /**
@@ -17,7 +13,7 @@ final class Subdomain
         $this->name = $name;
     }
 
-    public function getName() : ?string
+    public function name() : ?string
     {
         return $this->name;
     }

@@ -49,9 +49,10 @@ class Club
         $this->subdomain = $subdomain;
         $this->database = $database;
         $this->details = $details;
+        $this->enabled = true;
     }
 
-    public function getId() : int
+    public function id() : ?int
     {
         return $this->id;
     }
@@ -100,4 +101,38 @@ class Club
     {
         $this->enabled = false;
     }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param Subdomain $subdomain
+     */
+    public function setSubdomain(Subdomain $subdomain): void
+    {
+        $this->subdomain = $subdomain;
+    }
+
+    /**
+     * @param Database $database
+     */
+    public function setDatabase(Database $database): void
+    {
+        $this->database = $database;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+
+
 }
