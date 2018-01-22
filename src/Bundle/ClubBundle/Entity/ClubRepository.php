@@ -13,9 +13,9 @@ class ClubRepository extends EntityRepository
      * @param string $subdomain
      * @return null|Club
      */
-    public function findOneBySubdomain($subdomain)
+    public function findOneBySubdomain(Subdomain $subdomain)
     {
-        return $this->findOneBy(['subdomain.name' => $subdomain]);
+        return $this->findOneBy(['subdomain.name' => $subdomain->getName()]);
     }
 
     public function update(Club $club)

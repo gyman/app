@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
 
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\VarDumper\VarDumper;
@@ -18,9 +19,16 @@ final class SubdomainProvider implements SubdomainProviderInterface
     private $requestStack;
 
     /**
-     * @var
+     * @var string
      */
     private $baseUrl;
+
+    /**
+     * @var array
+     */
+    private $whiteList = [
+        "admin"
+    ];
 
     /**
      * SubdomainProvider constructor.
@@ -34,9 +42,9 @@ final class SubdomainProvider implements SubdomainProviderInterface
     }
 
     /**
-     * @return string|null
+     * @return Subdomain|null
      */
-    public function getSubdomain() : ?string
+    public function getSubdomain() : ?Subdomain
     {
         $request = $this->requestStack->getCurrentRequest();
 
@@ -52,10 +60,17 @@ final class SubdomainProvider implements SubdomainProviderInterface
 
         $subdomain = str_replace('.' . $this->baseUrl, '', $currentHost);
 
-        if($subdomain === $currentHost) {
+        if(in_array($subdomain, $this->whiteList))
+        {
             return null;
         }
 
-        return $subdomain;
+        if($subdomain === $currentHost)
+        {
+            return null;
+        }
+
+        return new Subdomain($subdomain);
     }
+
 }

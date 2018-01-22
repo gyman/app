@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: fos_user.yml }
     - { resource: doctrine.yml }
+    - { resource: "@AdminBundle/Resources/config/services.yml" }
+    - { resource: "@AdminBundle/Resources/config/easy-admin.yml" }
 
 parameters:
   date_format: "Y.m.d"
