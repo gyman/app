@@ -1,13 +1,13 @@
 ---
-Gyman\Bundle\ClubBundle\Entity:
+Gyman\Bundle\ClubBundle\Entity\Club:
   properties:
     name:
       - NotNull:
-        groups: ['createClub', 'updateClub']
+          groups: ['Default', 'createClub', 'updateClub']
     subdomain:
       - NotNull:
-        groups: ['createClub', 'updateClub']
+          groups: ['Default', 'createClub', 'updateClub']
       - Gyman\Bundle\AppBundle\Validator\UniqueClubSubdomain:
-        groups: ['createClub', 'updateClub']
+          groups: ['Default', 'createClub', 'updateClub']
 
 
