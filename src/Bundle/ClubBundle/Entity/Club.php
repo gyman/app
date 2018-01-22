@@ -43,16 +43,6 @@ class Club
      */
     protected $deletedAt;
 
-    /**
-     * @var bool
-     */
-    protected $enabled;
-
-    /**
-     * @var DateTime
-     */
-    protected $deletedAt;
-
     public function __construct(?string $name = null, ?Subdomain $subdomain = null, ?Database $database = null, ?Details $details = null)
     {
         $this->name = $name;
