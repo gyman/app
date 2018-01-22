@@ -43,20 +43,9 @@ class Club
      */
     protected $deletedAt;
 
-    /**
-     * Club constructor.
-     * @param int $id
-     * @param string $name
-     * @param ArrayCollection|Section[] $sections
-     * @param Subdomain $subdomain
-     * @param Database $database
-     * @param Details $details
-     */
-    public function __construct($id, ?string $name, ?Collection $sections, Subdomain $subdomain, Database $database, Details $details)
+    public function __construct(?string $name = null, ?Subdomain $subdomain = null, ?Database $database = null, ?Details $details = null)
     {
-        $this->id = $id;
         $this->name = $name;
-        $this->sections = $sections;
         $this->subdomain = $subdomain;
         $this->database = $database;
         $this->details = $details;
@@ -67,22 +56,22 @@ class Club
         return $this->id;
     }
 
-    public function getName() : string
+    public function name() : ?string
     {
         return $this->name;
     }
 
-    public function getSubdomain() : Subdomain
+    public function subdomain() : ?Subdomain
     {
         return $this->subdomain;
     }
 
-    public function getDatabase() : Database
+    public function database() : ?Database
     {
         return $this->database;
     }
 
-    public function details() : Details
+    public function details() : ?Details
     {
         return $this->details;
     }
