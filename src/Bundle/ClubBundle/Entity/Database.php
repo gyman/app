@@ -23,14 +23,7 @@ final class Database
      */
     private $host = 'localhost';
 
-    /**
-     * Database constructor.
-     * @param string $dbname
-     * @param string $username
-     * @param string $password
-     * @param string $host
-     */
-    public function __construct(string $dbname, string $username, string $password, string $host)
+    public function __construct(?string $dbname = null, ?string $username = null, ?string $password = null, ?string $host = null)
     {
         $this->dbname = $dbname;
         $this->username = $username;
@@ -38,34 +31,22 @@ final class Database
         $this->host = $host;
     }
 
-    /**
-     * @return string
-     */
-    public function getName() : string
+    public function dbname() : ?string
     {
         return $this->dbname;
     }
 
-    /**
-     * @return string
-     */
-    public function getUsername() : string
+    public function username() : ?string
     {
         return $this->username;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword() : string
+    public function password() : ?string
     {
         return $this->password;
     }
 
-    /**
-     * @return string
-     */
-    public function getHost(): string
+    public function host(): ?string
     {
         return $this->host;
     }

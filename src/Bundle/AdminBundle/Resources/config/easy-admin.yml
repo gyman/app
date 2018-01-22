@@ -1,0 +1,39 @@
+easy_admin:
+
+  site_name: '%base_url% administration panel'
+
+  formats:
+    date:     'd.m.Y'
+    time:     'H:i'
+    datetime: 'd.m.Y H:i:s'
+
+  design:
+    form_theme: 'horizontal'
+
+    menu:
+      - label: Management
+
+      - label:            "Kluby"
+        entity:           "Club"
+        icon:             "address-book-o"
+        params:
+          sortField:      'id'
+          sortDirection:  'ASC'
+        default: true
+
+      - label:            Other
+
+      - label:            Logout
+        route: "fos_user_security_logout"
+
+  entities:
+    Club:
+      class: Gyman\Bundle\ClubBundle\Entity\Club
+      label:      'User'
+      list:
+        sort:   ['name', 'ASC']
+        fields:
+          - {property: 'id', label: 'Id' }
+          - {property: 'enabled', label: 'Active', type: 'toggle' }
+          - {property: 'name', label: 'Nazwa' }
+          - {property: 'details.city', label: 'Miasto'}

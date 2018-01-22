@@ -12,19 +12,12 @@ final class Subdomain
      */
     private $name;
 
-    /**
-     * Subdomain constructor.
-     * @param $name
-     */
-    public function __construct($name)
+    public function __construct(?string $name = null)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->name;
     }

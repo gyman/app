@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe94ed810fa18a1793e98684b918c728",
+    "content-hash": "2e215dc318598811b5b149438ca8584a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -1695,12 +1695,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/javiereguiluz/EasyAdminBundle.git",
-                "reference": "8d84334324bb7998c7c414265c3623636737a5ae"
+                "reference": "aac1732adc3ac1401dc08dca756ea19708a248af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/javiereguiluz/EasyAdminBundle/zipball/8d84334324bb7998c7c414265c3623636737a5ae",
-                "reference": "8d84334324bb7998c7c414265c3623636737a5ae",
+                "url": "https://api.github.com/repos/javiereguiluz/EasyAdminBundle/zipball/aac1732adc3ac1401dc08dca756ea19708a248af",
+                "reference": "aac1732adc3ac1401dc08dca756ea19708a248af",
                 "shasum": ""
             },
             "require": {
@@ -1775,7 +1775,7 @@
                 "backend",
                 "generator"
             ],
-            "time": "2018-01-15T09:17:09+00:00"
+            "time": "2018-01-16T11:38:31+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -6624,16 +6624,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "9513098641797ce5f459dbc1de5a54c29b0ec1fb"
+                "reference": "d107f347d368dd8a384601398280c7c608390ab7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/9513098641797ce5f459dbc1de5a54c29b0ec1fb",
-                "reference": "9513098641797ce5f459dbc1de5a54c29b0ec1fb",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/d107f347d368dd8a384601398280c7c608390ab7",
+                "reference": "d107f347d368dd8a384601398280c7c608390ab7",
                 "shasum": ""
             },
             "require": {
@@ -6669,7 +6669,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2018-01-06T05:27:16+00:00"
+            "time": "2017-03-07T15:42:04+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -7828,7 +7828,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "gyman/supr": 20,
-        "javiereguiluz/easyadmin-bundle": 20,
         "knplabs/knp-paginator-bundle": 20,
         "moneyphp/money": 20,
         "nesbot/carbon": 20,

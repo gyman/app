@@ -1,3 +1,13 @@
+easy_admin_bundle:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    host:     admin.{base_url}
+    defaults:
+      base_url: '%base_url%'
+    requirements:
+      base_url: '%base_url%'
+    prefix:   /
+
 gyman_settings:
     resource: "@GymanSettingsBundle/Controller/"
     type:     annotation

@@ -1,5 +1,6 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Services;
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 
 /**
  * Interface SubdomainProviderInterface
@@ -8,7 +9,7 @@ namespace Gyman\Bundle\AppBundle\Services;
 interface SubdomainProviderInterface
 {
     /**
-     * @return string
+     * @return Subdomain
      */
-    public function getSubdomain();
+    public function getSubdomain() : ?Subdomain;
 }
