@@ -28,6 +28,11 @@ final class SubdomainProvider implements SubdomainProviderInterface
         "admin"
     ];
 
+    /**
+     * SubdomainProvider constructor.
+     * @param RequestStack $requestStack
+     * @param $baseUrl
+     */
     public function __construct(RequestStack $requestStack, $baseUrl)
     {
         $this->requestStack = $requestStack;
@@ -65,4 +70,5 @@ final class SubdomainProvider implements SubdomainProviderInterface
 
         return new Subdomain($subdomain);
     }
+
 }
