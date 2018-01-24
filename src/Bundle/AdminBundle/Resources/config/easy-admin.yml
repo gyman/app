@@ -25,6 +25,12 @@ easy_admin:
       - label:            "Użytkownicy"
         entity:           "User"
 
+      - label:            "Uczestnicy"
+        entity:           "Member"
+
+      - label:            "Karnety"
+        entity:           "Voucher"
+
       - label:            Other
 
       - label:            Logout
@@ -65,5 +71,17 @@ easy_admin:
     User:
       class: Gyman\Domain\User
       label:      'Użytkownicy'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
+
+    Member:
+      class: Gyman\Domain\Member
+      label:      'Uczestnicy'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
+
+    Voucher:
+      class: Gyman\Domain\Voucher
+      label:      'Karnety'
       templates:
         list: '@Admin/EasyAdmin/list.html.twig'
