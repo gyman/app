@@ -1,1 +1,9 @@
 services:
+    kernel.listener.your_listener_name:
+        class: Gyman\Bundle\AdminBundle\Listener\PreListListener
+        arguments:
+          - "@session"
+          - "@dende_multitenancy.tenant_manager"
+          - "@router"
+        tags:
+            - { name: kernel.event_listener, event: easy_admin.pre_initialize, method: onPreListEvent }

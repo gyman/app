@@ -1,0 +1,8 @@
+{% extends '@EasyAdmin/default/list.html.twig' %}
+
+{% block global_actions %}
+    {{ parent() }}
+
+    {{ render(controller("AdminBundle:Default:renderSwitchClubForm")) }}
+
+{% endblock global_actions %}

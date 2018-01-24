@@ -4,6 +4,7 @@ namespace Gyman\Bundle\AppBundle\Services;
 use Dende\MultitenancyBundle\DTO\Tenant;
 use Dende\MultitenancyBundle\Provider\TenantProviderInterface;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
 
 /**
  * Class TenantProvider
@@ -37,16 +38,13 @@ class TenantProvider implements TenantProviderInterface
         $this->host = $host;
     }
 
-    /**
-     * @return Tenant|null
-     */
-    public function getTenant($subdomain = null)
+    public function getTenant(string $subdomain = null) : ?Tenant
     {
         if ($subdomain === null && $this->tenantId === null) {
-            $this->tenantId = $this->subdomainProvider->getSubdomain();
+            $this->tenantId = $this->subdomainProvider->getSubdomain()->name();
         }
 
-        $club = $this->clubRepository->findOneBySubdomain($this->tenantId);
+        $club = $this->clubRepository->findOneBySubdomain(new Subdomain($this->tenantId));
 
         if(is_null($club))
         {
@@ -64,7 +62,7 @@ class TenantProvider implements TenantProviderInterface
         ]);
     }
 
-    public function setTenantId($id) {
+    public function setTenantId(string $id) : void {
         $this->tenantId = $id;
     }
 }

@@ -22,6 +22,9 @@ easy_admin:
           sortDirection:  'ASC'
         default: true
 
+      - label:            "Użytkownicy"
+        entity:           "User"
+
       - label:            Other
 
       - label:            Logout
@@ -58,3 +61,9 @@ easy_admin:
       edit:
         title:  'Edytuj klub'
         form_options: { validation_groups: ['Default', 'updateClub'] }
+
+    User:
+      class: Gyman\Domain\User
+      label:      'Użytkownicy'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
