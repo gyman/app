@@ -23,7 +23,11 @@ easy_admin:
         default: true
 
       - label:            "Użytkownicy"
-        entity:           "User"
+        children:
+          - {label: "Wszyscy", entity: "User" }
+          - {label: "Instruktorzy", entity: "Instructor" }
+          - {label: "Obsługa", entity: "Manager" }
+          - {label: "Admin", entity: "Admin" }
 
       - label:            "Uczestnicy"
         entity:           "Member"
@@ -85,3 +89,21 @@ easy_admin:
       label:      'Karnety'
       templates:
         list: '@Admin/EasyAdmin/list.html.twig'
+
+    Instructor:
+      class: Gyman\Domain\User
+      label: "Instruktorzy"
+      list:
+          dql_filter: 'entity.roles LIKE %%ROLE_INSTRUCTOR%%'
+
+    Manager:
+      class: Gyman\Domain\User
+      label: "Moderatorzy"
+      list:
+          dql_filter: 'entity.roles LIKE "%%ROLE_MODERATOR%%"'
+
+    Admin:
+      class: Gyman\Domain\User
+      label: "Administratorzy"
+      list:
+          dql_filter: 'entity.roles LIKE "%%ROLE_ADMIN%%"'
