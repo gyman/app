@@ -200,28 +200,27 @@ sensio_framework_extra:
 
 #knp_time: ~
 
-#liip_monitor:
-#    mailer:
-#        enabled:              false
-#        recipient:            uirapuruadg@gmail.com
-#        sender:               gyman.pl@gmail.com
-#        subject:              "Health check"
-#        send_on_warning:      true
-#    checks:
-#        php_extensions: [imagick, intl, mcrypt, json]
-#        php_version:
-#          5.6.0: ">="
-##        disk_usage:
-##          warning:              70
-##          critical:             90
-##          path:                 '%kernel.cache_dir%'
-#        symfony_requirements:
-#            file:                 '%kernel.root_dir%/SymfonyRequirements.php'
-#        doctrine_dbal:
-#          - default
-##          - tenant
-#        security_advisory:
-#          lock_file:            '%kernel.root_dir%/../composer.lock'
+liip_monitor:
+    checks:
+        php_extensions: [imagick, intl, mcrypt, json]
+        php_version:
+          7.1.0: ">="
+        writable_directory:
+          - "%kernel.logs_dir%"
+          - "%kernel.cache_dir%"
+        disk_usage:
+          warning:              70
+          critical:             90
+          path:                 '%kernel.cache_dir%'
+        symfony_requirements:
+            file:                 '%kernel.project_dir%/var/SymfonyRequirements.php'
+        doctrine_dbal:
+          - default
+          - maintanance
+#          - tenant
+        security_advisory:
+          lock_file:            '%kernel.root_dir%/../composer.lock'
+        process_running:          [nginx, mysql]
 
 knp_paginator:
     page_range: 5
