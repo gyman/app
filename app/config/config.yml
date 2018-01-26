@@ -202,7 +202,7 @@ sensio_framework_extra:
 
 liip_monitor:
     checks:
-        php_extensions: [imagick, intl, mcrypt, json]
+        php_extensions: [imagick, intl, json]
         php_version:
           7.1.0: ">="
         writable_directory:
