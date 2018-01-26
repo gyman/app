@@ -116,7 +116,7 @@ class UploadMemberFotoHandler
      */
     private function createDestinationDir()
     {
-        $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
+        $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain()->name();
 
         if (!file_exists($destinationDir)) {
             mkdir($destinationDir, 0755, true);
