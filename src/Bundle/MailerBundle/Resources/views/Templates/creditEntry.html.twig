@@ -40,12 +40,12 @@
                                     <p>Twój karnet skończył się {{ lastVoucher.endDate|date("m.d.Y") }} </p>
                                 {% endif %}
 
-                                <p> {# todo: take title and receiver from settings #}
-                                    Prosimy o pilne opłacenie składki członkowskiej:<br />
-                                    Odbiorca: Stowarzyszenie "Rio Grappling Club"<br />
-                                    Tytuł: składka członkowska "<< miesiąc >>" (np. maj)<br />
-                                    Numer konta: {{ club.details.account_number }}<br />
-                                </p>
+                                {% if club.details.account_number is defined %}
+                                    <p> {# todo: take title and receiver from settings #}
+                                        Prosimy o pilne opłacenie składki członkowskiej:<br />
+                                        Numer konta: {{ club.details.account_number }}<br />
+                                    </p>
+                                {% endif %}
 
                                 <p>Nie masz obecnie karnetu, a wejście było typu "kredytowe". Oznacza to,
                                     że przy zakupie karnetu zostanie ono odjęte z puli wejść.</p>
@@ -54,7 +54,7 @@
 
                                 <ul>
                                 {% for creditEntry in creditEntries %}
-                                    <li>{{ creditEntry.startDate|date('d.m.Y H:i') }} - {{ entry.occurrence.event.calendar.name }}</li>
+                                    <li>{{ creditEntry.startDate|date('d.m.Y H:i') }} - {{ entry.occurrence.event.calendar.title }}</li>
                                 {% endfor %}
                                 </ul>
                             {% endif %}
