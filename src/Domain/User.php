@@ -152,4 +152,9 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     {
         return $this->deletedAt === null;
     }
+
+    public function deletedAt(): ?DateTime
+    {
+        return $this->deletedAt;
+    }
 }

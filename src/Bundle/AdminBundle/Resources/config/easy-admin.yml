@@ -1,3 +1,12 @@
+parameters:
+  user_list_fields:
+    - {property: 'enabled', label: 'Active', type: 'toggle' }
+    - {property: 'username', label: 'Nazwa użytkownika' }
+    - {property: 'email', label: 'Email', type: "email"}
+    - {property: 'last_login', label: 'Ostatni login', type: "datetime" }
+    - {property: 'member.id', label: 'Profil uczestnika' }
+    - {property: 'roles', label: 'Role'}
+
 easy_admin:
 
   site_name: '%base_url% administration panel'
@@ -77,7 +86,22 @@ easy_admin:
       label:      'Użytkownicy'
       templates:
         list: '@Admin/EasyAdmin/list.html.twig'
-
+      list:
+        title: 'Wszyscy użytkownicy'
+        sort:   ['id', 'ASC']
+        fields: %user_list_fields%
+      form:
+        help:   'The form view overrides the global help message'
+        fields:
+          - { type: 'group', css_class: 'col-sm-6', label: 'Podstawowe' }
+          - { property: 'firstname' }
+          - { property: 'lastname' }
+          - { property: 'username' }
+          - { property: 'email', type: 'email' }
+          - { property: 'enabled' }
+          - { type: 'group', css_class: 'col-sm-6', label: 'Dodatkowe' }
+          - { property: 'member', type: 'Gyman\Bundle\AdminBundle\Form\MemberType' }
+          - { property: 'roles' }
     Member:
       class: Gyman\Domain\Member
       label:      'Uczestnicy'
@@ -94,16 +118,23 @@ easy_admin:
       class: Gyman\Domain\User
       label: "Instruktorzy"
       list:
-          dql_filter: 'entity.roles LIKE %%ROLE_INSTRUCTOR%%'
+        dql_filter: entity.roles LIKE '%%ROLE_INSTRUCTOR%%'
+        title: 'Użytkownicy z rolą instruktora'
+        fields: %user_list_fields%
 
     Manager:
       class: Gyman\Domain\User
       label: "Moderatorzy"
       list:
-          dql_filter: 'entity.roles LIKE "%%ROLE_MODERATOR%%"'
+        dql_filter: entity.roles LIKE '%%ROLE_MODERATOR%%'
+        title: 'Użytkownicy z rolą moderatora'
+        fields: %user_list_fields%
 
     Admin:
       class: Gyman\Domain\User
       label: "Administratorzy"
       list:
-          dql_filter: 'entity.roles LIKE "%%ROLE_ADMIN%%"'
+        dql_filter: entity.roles LIKE '%%ROLE_ADMIN%%'
+        title: 'Użytkownicy z rolą administratora'
+        fields: %user_list_fields%
+

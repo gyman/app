@@ -42,4 +42,15 @@ class DefaultController extends BaseAdminController
 
         return $this->redirect($data["redirectUrl"]);
     }
+
+    public function createNewUserEntity()
+    {
+        return $this->get('fos_user.user_manager')->createUser();
+    }
+
+    public function persistUserEntity($user)
+    {
+        $this->get('fos_user.user_manager')->updateUser($user, false);
+        parent::persistUserEntity($user);
+    }
 }
