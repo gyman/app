@@ -7,21 +7,20 @@ use Gyman\Bundle\ClubBundle\Entity\Club;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
-class MigrateTenantsCommand extends ContainerAwareCommand
+class RunCommandOnAllTenantsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('gyman:migrate_databases')
-            ->setDescription('Runs migrations on all tenant databases')
-
-            ->addOption("skip-errors")
-            ->addOption("print-errors")
+            ->setName('gyman:iterate_tenants')
+            ->setDescription('Runs command on all tenant databases')
+            ->addArgument("command_to_run", InputArgument::REQUIRED)
         ;
     }
 
@@ -36,11 +35,11 @@ class MigrateTenantsCommand extends ContainerAwareCommand
             return $club->subdomain()->name();
         }, $clubs);
 
-        $output->writeln(sprintf("Migrating %d subdomains:", count($clubs)));
+        $output->writeln(sprintf("Running on %d subdomains:", count($clubs)));
 
         $exitCode = 0;
 
-        $verboseErrors = [];
+        die(var_dump($input));
 
         foreach($clubs as $club) {
             $output->write(sprintf("%s...", $club));
@@ -49,15 +48,8 @@ class MigrateTenantsCommand extends ContainerAwareCommand
             $application->setAutoExit(false);
 
             $params = [
-                '--quiet' => true,
-                '--no-ansi' => true,
-                '--env' => 'prod',
-                '--no-debug' => true,
-                'command' => 'doctrine:migrations:migrate',
-                '--no-interaction' => true,
-                '--configuration' => 'app/DoctrineMigrations/tenant.yml',
-                '--club' => $club,
-                '--verbose' => false
+
+                '--club' => $club
             ];
 
             $commandInput = new ArrayInput($params);
@@ -68,31 +60,15 @@ class MigrateTenantsCommand extends ContainerAwareCommand
 
             $exitCode = $application->run($commandInput, $commandOutput);
 
-            if($input->hasOption("skip-errors")) {
-                $output->writeln("ERROR! skipped");
-
-                $verboseErrors[$club] = $commandOutput->fetch();
-
-            } else {
-                if(0 !== $exitCode) {
-                    $output->writeln("ERROR! Check the logs.");
-                    $output->writeln($commandOutput->fetch());
-                    return $exitCode;
-                }
+            if(0 !== $exitCode) {
+                $output->writeln("ERROR! Check the logs.");
+                $output->writeln($commandOutput->fetch());
+                return $exitCode;
             }
 
             $logger->debug(sprintf('Command "%s" output:', $params["command"], $commandOutput->fetch()));
 
             $output->writeln("done.");
-        }
-
-        if($input->hasOption("print-errors")) {
-            $output->writeln("");
-
-            foreach($verboseErrors as $club => $error) {
-                $output->writeln("Errors on '".$club."'':");
-                $output->writeln($error);
-            }
         }
 
         return 0;

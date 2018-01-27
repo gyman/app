@@ -133,6 +133,4 @@ class Club
     {
         $this->enabled = $enabled;
     }
-
-
 }
