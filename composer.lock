@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e02dfe10cdc620c785d62efa190d6716",
+    "content-hash": "c2e02f050ed8a64be1a9d2c2600cc693",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -1489,12 +1489,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "69c4e001e74d16e6fb3a2037e64c7a79782bcdf2"
+                "reference": "9b3be01d5d03df2b20b5dd955adb72c0ebb3dc9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/69c4e001e74d16e6fb3a2037e64c7a79782bcdf2",
-                "reference": "69c4e001e74d16e6fb3a2037e64c7a79782bcdf2",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9b3be01d5d03df2b20b5dd955adb72c0ebb3dc9c",
+                "reference": "9b3be01d5d03df2b20b5dd955adb72c0ebb3dc9c",
                 "shasum": ""
             },
             "require": {
@@ -1557,7 +1557,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2018-01-23T11:09:51+00:00"
+            "time": "2018-01-25T09:29:07+00:00"
         },
         {
             "name": "gyman/supr",
@@ -1696,12 +1696,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/javiereguiluz/EasyAdminBundle.git",
-                "reference": "0928fb591e927a62b302ffd68c6c7392bb6bce8b"
+                "reference": "59ef2bd3f2d10db0649c40d68785f15ed5234298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/javiereguiluz/EasyAdminBundle/zipball/0928fb591e927a62b302ffd68c6c7392bb6bce8b",
-                "reference": "0928fb591e927a62b302ffd68c6c7392bb6bce8b",
+                "url": "https://api.github.com/repos/javiereguiluz/EasyAdminBundle/zipball/59ef2bd3f2d10db0649c40d68785f15ed5234298",
+                "reference": "59ef2bd3f2d10db0649c40d68785f15ed5234298",
                 "shasum": ""
             },
             "require": {
@@ -1776,7 +1776,7 @@
                 "backend",
                 "generator"
             ],
-            "time": "2018-01-24T19:05:45+00:00"
+            "time": "2018-01-25T18:14:47+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4063,12 +4063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "571a50da1efe333a09146feb8090b1e81b5dfd74"
+                "reference": "85b7e7d12e2d8d897bdba1e0a6496e2c6d700164"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/571a50da1efe333a09146feb8090b1e81b5dfd74",
-                "reference": "571a50da1efe333a09146feb8090b1e81b5dfd74",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/85b7e7d12e2d8d897bdba1e0a6496e2c6d700164",
+                "reference": "85b7e7d12e2d8d897bdba1e0a6496e2c6d700164",
                 "shasum": ""
             },
             "require": {
@@ -4079,10 +4079,14 @@
                 "mockery/mockery": "~0.9.1",
                 "symfony/phpunit-bridge": "~3.3@dev"
             },
+            "suggest": {
+                "ext-intl": "Needed to support internationalized email addresses",
+                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -4110,7 +4114,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-01-23T07:38:39+00:00"
+            "time": "2018-01-24T20:28:46+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -4583,12 +4587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f004895e46f48fb2c369710a66f92e96f5ff4a72"
+                "reference": "05e9682868a818a2680c503b2dc72630ac4ab5fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f004895e46f48fb2c369710a66f92e96f5ff4a72",
-                "reference": "f004895e46f48fb2c369710a66f92e96f5ff4a72",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/05e9682868a818a2680c503b2dc72630ac4ab5fe",
+                "reference": "05e9682868a818a2680c503b2dc72630ac4ab5fe",
                 "shasum": ""
             },
             "require": {
@@ -4729,7 +4733,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-01-23T06:50:41+00:00"
+            "time": "2018-01-25T09:33:05+00:00"
         },
         {
             "name": "twig/extensions",
@@ -5599,12 +5603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d15bf1dc252f61427bb247c31dcd4df6b1c9f07c"
+                "reference": "ab1549f2b38e23ca5af5574cdb8f9bff827a557c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d15bf1dc252f61427bb247c31dcd4df6b1c9f07c",
-                "reference": "d15bf1dc252f61427bb247c31dcd4df6b1c9f07c",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ab1549f2b38e23ca5af5574cdb8f9bff827a557c",
+                "reference": "ab1549f2b38e23ca5af5574cdb8f9bff827a557c",
                 "shasum": ""
             },
             "require": {
@@ -5641,7 +5645,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2018-01-16T09:36:14+00:00"
+            "time": "2018-01-25T17:02:46+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -6008,12 +6012,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "579f4ce846734a1cf55d6a531d00ca07a43e3cda"
+                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/579f4ce846734a1cf55d6a531d00ca07a43e3cda",
-                "reference": "579f4ce846734a1cf55d6a531d00ca07a43e3cda",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e57b3a09784f846411aa7ed664eedb73e3399078",
+                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078",
                 "shasum": ""
             },
             "require": {
@@ -6051,7 +6055,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-12-26T14:43:21+00:00"
+            "time": "2018-01-25T21:31:33+00:00"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -6296,16 +6300,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.5.0",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "7159da1ff4ab5de0c033bab91c9d3f52dd9a7a02"
+                "reference": "cf842904952e64e703800d094cdf34e715a8a3ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7159da1ff4ab5de0c033bab91c9d3f52dd9a7a02",
-                "reference": "7159da1ff4ab5de0c033bab91c9d3f52dd9a7a02",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/cf842904952e64e703800d094cdf34e715a8a3ae",
+                "reference": "cf842904952e64e703800d094cdf34e715a8a3ae",
                 "shasum": ""
             },
             "require": {
@@ -6337,7 +6341,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2017-11-15T21:30:06+00:00"
+            "time": "2017-12-30T13:23:38+00:00"
         },
         {
             "name": "phpmd/phpmd",
@@ -7637,6 +7641,57 @@
             "time": "2018-01-22T14:51:42+00:00"
         },
         {
+            "name": "squizlabs/php_codesniffer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "977feae69ad0323d2aed9407c665a552aea28632"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/977feae69ad0323d2aed9407c665a552aea28632",
+                "reference": "977feae69ad0323d2aed9407c665a552aea28632",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
+            },
+            "bin": [
+                "bin/phpcs",
+                "bin/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2018-01-18T00:31:32+00:00"
+        },
+        {
             "name": "theseer/fdomdocument",
             "version": "1.6.6",
             "source": {
@@ -7722,12 +7777,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "24cbe6a52af9da97880b310d6b65f484c7daf96a"
+                "reference": "2d8468cb4986701fd86d76f112574dc994874548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/24cbe6a52af9da97880b310d6b65f484c7daf96a",
-                "reference": "24cbe6a52af9da97880b310d6b65f484c7daf96a",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/2d8468cb4986701fd86d76f112574dc994874548",
+                "reference": "2d8468cb4986701fd86d76f112574dc994874548",
                 "shasum": ""
             },
             "require": {
@@ -7769,7 +7824,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2018-01-24T18:52:34+00:00"
+            "time": "2018-01-26T19:08:45+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -79,7 +79,8 @@
         "sebastian/phpcpd": "~2",
         "sensiolabs/security-advisories": "dev-master",
         "sensiolabs/security-checker": "^4.1",
-        "vimeo/psalm": "dev-master"
+        "vimeo/psalm": "dev-master",
+        "squizlabs/php_codesniffer" : "*"
     },
     "scripts": {
        "symfony-scripts" : [
