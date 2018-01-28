@@ -1,0 +1,50 @@
+{% macro uploadPane(form) %}
+    {% set cameraPicture = form.fotoData.vars.value %}
+
+    <div id="filePane" class="tab-pane fade in{% if isCameraPaneActive() == false %} active{% endif %}">
+
+        {% if cameraPicture is empty %}
+            {% set cameraPicture = "/bundles/gymanapp/images/no-profile.gif" %}
+        {% endif %}
+
+        <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
+
+        {{ form_widget(form.uploadFile) }}
+
+        <div class="control-group error">
+            <div class="help-block">
+                {{ form_errors(form.uploadFile) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro webcamPane(form) %}
+    {% set cameraPicture = form.fotoData.vars.value %}
+
+    <div id="webcamDiv" class="tab-pane fade in{% if isCameraPaneActive() == true %} active{% endif %}">
+        <div id="camera" data-upload-url="" style="background: #f0f0f0; width: 300px; height: 240px"></div>
+        <p><small>Aby zrobić zdjęcie, kliknij ikonę aparatu w prawym górnym rogu zdjęcia</small></p>
+    </div>
+{% endmacro %}
+
+{% macro pictureJs() %}
+<script>
+    $(function() {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#memberFoto').attr('src', e.target.result);
+                    $('#member_fotoData').val(e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#member_uploadFile").change(function() {
+            readURL(this);
+        });
+    });
+</script>
+{% endmacro %}

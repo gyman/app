@@ -37,7 +37,7 @@ class @EditMember extends @AbstractModal
     @datetimepickerSettings.todayHighlight =  true
     @datetimepickerSettings.endDate = new Date()
 
-    @$datePicker = $("#memberBirthdate").datetimepicker @datetimepickerSettings
+    @$datePicker = $("#member_birthdate").datetimepicker @datetimepickerSettings
 
     @$datePicker.on "changeDate", (ev) =>
       @$datePicker.datetimepicker 'hide'

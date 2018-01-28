@@ -1,31 +1,5 @@
 {% extends 'GymanAppBundle::layout.html.twig' %}
-
-{% import _self as pane %}
-
-{% macro uploadPane(form) %}
-    {% set cameraPicture = form.fotoData.vars.value %}
-
-    <div id="filePane" class="tab-pane fade in{% if cameraPicture is not empty %} active{% endif %}">
-        <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
-
-        {{ form_widget(form.uploadFile) }}
-
-        <div class="control-group error">
-            <div class="help-block">
-                {{ form_errors(form.uploadFile) }}
-            </div>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro webcamPane(form) %}
-    {% set cameraPicture = form.fotoData.vars.value %}
-
-    <div id="webcamDiv" class="tab-pane fade in{% if cameraPicture is empty %} active{% endif %}">
-        <div id="camera" data-upload-url="" style="background: #f0f0f0; width: 300px; height: 240px"></div>
-        <p><small>Aby zrobić zdjęcie, kliknij ikonę aparatu w prawym górnym rogu zdjęcia</small></p>
-    </div>
-{% endmacro %}
+{% import '@GymanApp/Members/_picture.html.twig' as pane %}
 
 {% block content %}
 <div class="heading"><h3>Dodaj użytkownika</h3></div>
@@ -70,6 +44,7 @@
             <div id="detailsPane" class="tab-pane fade in active">
                 <div class="span5">
                     {% include 'GymanAppBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
+                    {{ form_row(form.send_invitation) }}
                 </div>
                 <div class="span7">
                     {% include 'GymanAppBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
@@ -93,7 +68,11 @@
 </div>
 {% endblock content %}
 
-
 {% block title %}
     {{ parent() }} - Dodaj użytkownika
 {% endblock title %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ pane.pictureJs() }}
+{% endblock %}

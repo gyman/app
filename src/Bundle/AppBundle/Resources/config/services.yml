@@ -106,3 +106,8 @@ services:
       calls:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
+
+  gyman.tab_chooser:
+    class: Gyman\Bundle\AppBundle\Menu\TabChooserService
+    arguments:
+      - "@request_stack"

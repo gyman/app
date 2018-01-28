@@ -60,10 +60,10 @@ class UploadMemberFotoHandler
         $this->filename = $this->createFilename($command);
         $this->filepath = $this->createFilepath();
 
-        if (!is_null($command->fotoData)) {
-            $this->handleDataSrc($command);
-        } elseif (!is_null($command->uploadFile)) {
+        if (!is_null($command->uploadFile)) {
             $this->handleFile($command);
+        } else if (!is_null($command->fotoData)) {
+            $this->handleDataSrc($command);
         } else {
             return;
         }

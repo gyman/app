@@ -39,6 +39,8 @@ class MembersController extends Controller
      */
     public function updateAction(Member $member, Request $request)
     {
+        $this->get("gyman.tab_chooser")->setMember($member);
+
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
 

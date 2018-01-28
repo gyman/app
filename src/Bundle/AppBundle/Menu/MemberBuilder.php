@@ -23,25 +23,15 @@ class MemberBuilder
     private $authorizationChecker;
 
     /**
-     * @var Member
+     * @var TabChooserService
      */
-    private $member;
+    private $tabChooser;
 
-    /**
-     * @param Member $member
-     */
-    public function setMember(Member $member)
-    {
-        $this->member = $member;
-    }
-
-    /**
-     * @param FactoryInterface $factory
-     */
-    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $checker)
+    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authorizationChecker, TabChooserService $tabChooser)
     {
         $this->factory = $factory;
-        $this->authorizationChecker = $checker;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->tabChooser = $tabChooser;
     }
 
     public function tabs(RequestStack $requestStack)
@@ -119,18 +109,9 @@ class MemberBuilder
         return $menu;
     }
 
-    public function picture(RequestStack $requestStack)
+    public function picture()
     {
-        $request = $requestStack->getMasterRequest();
-
-        $data = $request->get("member", []);
-
-        $cameraActive = true;
-
-        if(array_key_exists('fotoData', $data) && $data["fotoData"] !== null)
-        {
-            $cameraActive = false;
-        }
+        $isCameraPaneActive = $this->tabChooser->isCameraPaneActive();
 
         $menu = $this->factory->createItem('root');
 
@@ -151,7 +132,7 @@ class MemberBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => $cameraActive ? 'active' : ''
+                    'class' => $isCameraPaneActive ? 'active' : ''
                 ],
             ]
         )->setExtra('translation_domain', 'GymanAppBundle');
@@ -166,7 +147,7 @@ class MemberBuilder
                     'data-toggle' => 'tab',
                 ],
                 'attributes' => [
-                    'class' => $cameraActive ? '' : 'active'
+                    'class' => $isCameraPaneActive ? '' : 'active'
                 ],
             ]
         )->setExtra('translation_domain', 'GymanAppBundle');

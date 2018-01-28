@@ -66,7 +66,7 @@ class Avatar extends Twig_Extension
             return self::NO_PROFILE;
         }
 
-        $file = $this->club->getSubdomain()->getName() . DIRECTORY_SEPARATOR . $foto;
+        $file = $this->club->subdomain()->name() . DIRECTORY_SEPARATOR . $foto;
 
         if(is_file($dir . $file) && file_exists($dir . $file)) {
             return $path . $file;
