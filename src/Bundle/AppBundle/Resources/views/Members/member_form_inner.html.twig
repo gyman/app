@@ -1,11 +1,3 @@
-<div class="span4">
-    {% if member is defined %}
-        {% include 'GymanAppBundle:Members:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
-    {% else %}
-        {% include 'GymanAppBundle:Members:Modal/_picture.html.twig' with {'form' : form} %}
-    {% endif %}
-</div>
-
 <div class="span8">
     {{ knp_menu_render('gyman.members.menu.tabs', {
         'template': 'GymanAppBundle:Members:Menu/tabs.html.twig',

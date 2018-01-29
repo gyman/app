@@ -12,6 +12,13 @@ services:
     tags:
       - { name: twig.extension }
 
+  gyman.app.twig.picture_tabs:
+    class: 'Gyman\Bundle\AppBundle\Twig\PictureTabsExtension'
+    arguments:
+      - "@gyman.tab_chooser"
+    tags:
+      - { name: twig.extension }
+
   gyman.app.twig.avatar:
     class: 'Gyman\Twig\Extension\Avatar'
     arguments:

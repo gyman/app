@@ -67,6 +67,7 @@ services:
     arguments:
       - '@=service(parameter("subdomain_provider_service"))'
       - '@dende_multitenancy.tenant_manager'
+      - '@router'
     tags:
       - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1000 }
 
@@ -105,3 +106,8 @@ services:
       calls:
            - [ setClass, ['Gyman\Domain\Voucher'] ]
            - [ setEntityManager, ['@doctrine.orm.tenant_entity_manager']]
+
+  gyman.tab_chooser:
+    class: Gyman\Bundle\AppBundle\Menu\TabChooserService
+    arguments:
+      - "@request_stack"

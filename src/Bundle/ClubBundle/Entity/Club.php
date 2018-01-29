@@ -1,12 +1,11 @@
 <?php
 namespace Gyman\Bundle\ClubBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gyman\Domain\Section;
 
-/**
- * Club
- */
 class Club
 {
     /**
@@ -18,11 +17,6 @@ class Club
      * @var string
      */
     protected $name;
-
-    /**
-     * @var ArrayCollection|Section[]
-     */
-    protected $sections;
 
     /**
      * @var Subdomain
@@ -40,82 +34,103 @@ class Club
     protected $details;
 
     /**
-     * Club constructor.
-     * @param int $id
-     * @param string $name
-     * @param ArrayCollection|Section[] $sections
-     * @param Subdomain $subdomain
-     * @param Database $database
-     * @param Details $details
+     * @var bool
      */
-    public function __construct($id, $name, $sections, Subdomain $subdomain, Database $database, Details $details)
+    protected $enabled;
+
+    /**
+     * @var DateTime
+     */
+    protected $deletedAt;
+
+    public function __construct(?string $name = null, ?Subdomain $subdomain = null, ?Database $database = null, ?Details $details = null)
     {
-        $this->id = $id;
         $this->name = $name;
-        $this->sections = $sections;
         $this->subdomain = $subdomain;
         $this->database = $database;
         $this->details = $details;
+        $this->enabled = true;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function id() : ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function name() : ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return ArrayCollection|Section[]
-     */
-    public function getSections()
-    {
-        return $this->sections;
-    }
-
-    /**
-     * @return Subdomain
-     */
-    public function getSubdomain()
+    public function subdomain() : ?Subdomain
     {
         return $this->subdomain;
     }
 
-    /**
-     * @return Database
-     */
-    public function getDatabase()
+    public function database() : ?Database
     {
         return $this->database;
     }
 
-    /**
-     * @return Details
-     */
-    public function details()
+    public function details() : ?Details
     {
         return $this->details;
     }
 
-    public function setDetails(Details $details)
+    public function setDetails(Details $details) : void
     {
         $this->details = $details;
+    }
+
+    public function updateName(string $name) : void
+    {
+        $this->name = $name;
+    }
+
+    function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function enable() : void
+    {
+        $this->enabled = true;
+    }
+
+    public function disable() : void
+    {
+        $this->enabled = false;
     }
 
     /**
      * @param string $name
      */
-    public function updateName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param Subdomain $subdomain
+     */
+    public function setSubdomain(Subdomain $subdomain): void
+    {
+        $this->subdomain = $subdomain;
+    }
+
+    /**
+     * @param Database $database
+     */
+    public function setDatabase(Database $database): void
+    {
+        $this->database = $database;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 }

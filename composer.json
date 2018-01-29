@@ -35,7 +35,7 @@
         "php": ">=7.1",
         "braincrafted/bootstrap-bundle": "1.4.2",
         "dende/calendar-bundle": "^1",
-        "dende/multitenancybundle": "1.1.2",
+        "dende/multitenancybundle": "1.1.4",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/dbal": "^2.6",
         "doctrine/doctrine-bundle": "^1.7",
@@ -47,7 +47,7 @@
         "gyman/supr": "dev-master",
         "imagine/imagine": "0.6.*",
         "incenteev/composer-parameter-handler": "^2.1",
-        "javiereguiluz/easyadmin-bundle": "^1.16@dev",
+        "javiereguiluz/easyadmin-bundle": "^1",
         "jms/serializer-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.8@dev",
@@ -79,7 +79,8 @@
         "sebastian/phpcpd": "~2",
         "sensiolabs/security-advisories": "dev-master",
         "sensiolabs/security-checker": "^4.1",
-        "vimeo/psalm": "dev-master"
+        "vimeo/psalm": "dev-master",
+        "squizlabs/php_codesniffer" : "*"
     },
     "scripts": {
        "symfony-scripts" : [
@@ -130,7 +131,7 @@
             "./node_modules/.bin/bower install"
         ],
         "dump-assets" : [
-            "php app/console assets:install web --relative --symlink",
+            "php app/console assets:install web",
             "php app/console fos:js-routing:dump",
             "./node_modules/.bin/grunt development"
         ],
@@ -156,7 +157,33 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+              "database_driver" : "JENKINS_DATABASE_DRIVER",
+              "database_host" : "JENKINS_DATABASE_HOST",
+              "database_port" : "JENKINS_DATABASE_PORT",
+              "database_name" : "JENKINS_DATABASE_NAME",
+              "database_user" : "JENKINS_DATABASE_USER",
+              "database_password" : "JENKINS_DATABASE_PASSWORD",
+              "mailer_transport" : "JENKINS_MAILER_TRANSPORT",
+              "mailer_host" : "JENKINS_MAILER_HOST",
+              "mailer_user" : "JENKINS_MAILER_USER",
+              "mailer_password" : "JENKINS_MAILER_PASSWORD",
+              "mailer_port" : "JENKINS_MAILER_PORT",
+              "locale" : "JENKINS_LOCALE",
+              "secret" : "JENKINS_SECRET",
+              "use_assetic_controller" : "JENKINS_USE_ASSETIC_CONTROLLER",
+              "debug_toolbar" : "JENKINS_DEBUG_TOOLBAR",
+              "debug_redirects" : "JENKINS_DEBUG_REDIRECTS",
+              "sentry_url" : "JENKINS_SENTRY_URL",
+              "sentry_revision" : "JENKINS_SENTRY_REVISION",
+              "base_url" : "JENKINS_BASE_URL",
+              "sqlite_database_user" : "JENKINS_SQLITE_DATABASE_USER",
+              "sqlite_database_password" : "JENKINS_SQLITE_DATABASE_PASSWORD",
+              "google_maps_api_key" : "JENKINS_GOOGLE_MAPS_API_KEY",
+              "maintanance_database_user" : "JENKINS_MAINTANANCE_DATABASE_USER",
+              "maintanance_database_password" : "JENKINS_MAINTANANCE_DATABASE_PASSWORD"
+            }
         },
         "branch-alias": {
             "dev-master": "2.8-dev"

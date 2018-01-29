@@ -4,24 +4,31 @@ namespace Gyman\Bundle\LandingPageBundle\Handler;
 use Doctrine\DBAL\Connection;
 use Exception;
 use FOS\UserBundle\Util\UserManipulator;
+use Gyman\Bundle\AppBundle\Repository\UserRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\Database;
-use Gyman\Bundle\ClubBundle\Entity\User;
-use Gyman\Bundle\ClubBundle\Entity\UserRepository;
 use Gyman\Bundle\LandingPageBundle\Exception\CantRegisterNewClub;
 use Gyman\Application\Command\CreateClubCommand;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
 use Gyman\Bundle\ClubBundle\Factory\ClubFactory;
 use Gyman\Bundle\LandingPageBundle\Exception\CantRegisterNewClubRollback;
+use Gyman\Domain\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\Kernel;
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAL\Types\Type;
 
 class CreateClubHandler
 {
     const HOSTS = ["localhost", "%"];
+
+    const MIGRATION_TABLE_NAME = 'migration_versions';
+
+    const MIGRATION_COLUMN_NAME = 'version';
 
     /** @var Kernel */
     private $kernel;
@@ -39,6 +46,9 @@ class CreateClubHandler
     private $defaultConnection;
 
     /** @var Connection */
+    private $tenantConnection;
+
+    /** @var Connection */
     private $maintenanceConnection;
 
     /** @var LoggerInterface */
@@ -47,15 +57,7 @@ class CreateClubHandler
     /** @var UserRepository */
     private $userRepository;
 
-    /**
-     * CreateClubHandler constructor.
-     * @param Kernel $kernel
-     * @param UserManipulator $fosUserManipulator
-     * @param ClubFactory $clubFactory
-     * @param ClubRepository $clubRepository
-     * @param Connection $maintenanceConnection
-     */
-    public function __construct(Kernel $kernel, UserManipulator $fosUserManipulator, ClubFactory $clubFactory, UserRepository $userRepository, ClubRepository $clubRepository, Connection $defaultConnection, Connection $maintenanceConnection, LoggerInterface $logger)
+    public function __construct(Kernel $kernel, UserManipulator $fosUserManipulator, ClubFactory $clubFactory, UserRepository $userRepository, ClubRepository $clubRepository, Connection $defaultConnection, Connection $tenantConnection, Connection $maintenanceConnection, LoggerInterface $logger)
     {
         $this->kernel = $kernel;
         $this->fosUserManipulator = $fosUserManipulator;
@@ -63,6 +65,7 @@ class CreateClubHandler
         $this->userRepository = $userRepository;
         $this->clubRepository = $clubRepository;
         $this->defaultConnection = $defaultConnection;
+        $this->tenantConnection = $tenantConnection;
         $this->maintenanceConnection = $maintenanceConnection;
         $this->logger = $logger;
     }
@@ -77,19 +80,22 @@ class CreateClubHandler
         try {
             $this->assertDatabaseDoesNotExists($this->createDbName($command->subdomain));
 
-            /** @var User $user */
-            $user = $this->createUserEntity($command);
             /** @var Club $club */
-            $club = $this->createClubEntity($command, $user);
+            $club = $this->createClubEntity($command);
 
             $this->createDatabase($command->subdomain);
             $this->bindMysqlUserToDatabase($club->getDatabase());
 
             $this->createSchema($command->subdomain);
             $this->loadFixtures($command->subdomain);
+
+            $this->createMigrationsTable();
+
+            /** @var User $user */
+            $user = $this->createUserEntity($command);
         }
         catch (CantRegisterNewClubRollback $e) {
-//            $this->rollback($command->subdomain);
+            $this->rollback($command->subdomain);
             $this->logger->error($e->getMessage());
             throw new CantRegisterNewClub($e);
         } catch (Exception $e) {
@@ -100,13 +106,7 @@ class CreateClubHandler
         }
     }
 
-    /**
-     * @param $db
-     * @param $username
-     * @param $password
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    private function bindMysqlUserToDatabase(Database $db)
+    private function bindMysqlUserToDatabase(Database $db) : void
     {
         $createUserQueryTemplate = "CREATE USER %%username%%@'%%host%%' IDENTIFIED BY '%%password%%';";
         $grantQueryTemplate = "GRANT ALL PRIVILEGES ON %%database%%.* TO '%%username%%'@'%%host%%';";
@@ -152,7 +152,7 @@ class CreateClubHandler
         $this->logger->debug('Query run: \'FLUSH PRIVILEGES;\'');
     }
 
-    private function rollback($subdomain)
+    private function rollback(string $subdomain) : void
     {
         $existingDatabases = $this->maintenanceConnection->getSchemaManager()->listDatabases();
 
@@ -189,7 +189,7 @@ class CreateClubHandler
             ->execute();
     }
 
-    private function createSchema($club)
+    private function createSchema(string $club) : void
     {
         try {
             $this->runCommand([
@@ -206,7 +206,7 @@ class CreateClubHandler
         $this->logger->notice('Db schema created', ['name' => $this->createDbName($club)]);
     }
 
-    private function loadFixtures($club)
+    private function loadFixtures(string $club) : void
     {
         $this->runCommand([
             'command' => 'doctrine:fixtures:load',
@@ -220,7 +220,7 @@ class CreateClubHandler
         $this->logger->notice('Fixtures loaded', ['name' => $this->createDbName($club)]);
     }
 
-    private function runCommand(array $params = [])
+    private function runCommand(array $params = []) : void
     {
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
@@ -245,7 +245,7 @@ class CreateClubHandler
         $this->logger->debug(sprintf('Command "%s" output:', $params["command"], $output->fetch()));
     }
 
-    private function createUserEntity(CreateClubCommand $command)
+    private function createUserEntity(CreateClubCommand $command) : User
     {
         if($user = $this->userRepository->findOneByUsername($command->username)) {
             $this->logger->notice('User already exists', ['user' => $user]);
@@ -266,7 +266,7 @@ class CreateClubHandler
         return $user;
     }
 
-    private function createClubEntity(CreateClubCommand $command, User $user)
+    private function createClubEntity(CreateClubCommand $command) : Club
     {
         if(null !== $this->clubRepository->findOneBySubdomain($command->subdomain)) {
             throw new Exception(sprintf('Club entity with subdomain "%s" already exists', $command->subdomain));
@@ -278,12 +278,12 @@ class CreateClubHandler
         $club = $this->clubFactory->createFromArray([
             "name" => $command->club ?: '',
             "sections" => [],
-            "owners" => [$user],
             "subdomain" => $command->subdomain,
             "database" => [
                 "name" => $dbName,
                 "user" => $dbName,
-                "password" => $dbPassword
+                "password" => $dbPassword,
+                "host" => "localhost"
             ],
             "details" => [
                 'address' => null,
@@ -312,7 +312,7 @@ class CreateClubHandler
         return $club;
     }
 
-    private function assertDatabaseDoesNotExists($dbName)
+    private function assertDatabaseDoesNotExists(string $dbName) : void
     {
         $existingDatabases = $this->maintenanceConnection->getSchemaManager()->listDatabases();
 
@@ -321,7 +321,7 @@ class CreateClubHandler
         }
     }
 
-    private function createDatabase($subdomain)
+    private function createDatabase(string $subdomain) : void
     {
         try {
             $this->runCommand([
@@ -337,12 +337,23 @@ class CreateClubHandler
         $this->logger->notice('Db created', ['name' => $this->createDbName($subdomain)]);
     }
 
-    /**
-     * @param $subdomain
-     * @return string
-     */
-    private function createDbName($subdomain)
+    private function createDbName(string $subdomain) : string
     {
         return sprintf("gyman_%s", $subdomain);
+    }
+
+    private function createMigrationsTable() : void
+    {
+        if ($this->tenantConnection->getSchemaManager()->tablesExist([self::MIGRATION_TABLE_NAME])) {
+            return;
+        }
+
+        $columns = [
+            self::MIGRATION_COLUMN_NAME => new Column(self::MIGRATION_COLUMN_NAME, Type::getType('string'), ['length' => 255]),
+        ];
+
+        $table   = new Table(self::MIGRATION_TABLE_NAME, $columns);
+        $table->setPrimaryKey([self::MIGRATION_COLUMN_NAME]);
+        $this->tenantConnection->getSchemaManager()->createTable($table);
     }
 }

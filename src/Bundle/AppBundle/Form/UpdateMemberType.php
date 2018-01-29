@@ -32,6 +32,7 @@ class UpdateMemberType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'choices' => array_combine(Details::$genders, Details::$genders),
                 'label'   => 'member.form.gender.label',
+                'expanded' => true
             ])
             ->add('belt', ChoiceType::class, [
                 'choices'     => array_combine(Belt::$colors, Belt::$colors),

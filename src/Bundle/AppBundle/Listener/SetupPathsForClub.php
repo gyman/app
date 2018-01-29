@@ -5,10 +5,13 @@ use Dende\MultidatabaseBundle\Services\SubdomainProviderInterface;
 use Dende\MultitenancyBundle\Event\PostSwitchConnection;
 use Gyman\Bundle\AppBundle\Globals;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
+use Gyman\Bundle\ClubBundle\Entity\Subdomain;
+use ReflectionObject;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\Router;
+use Twig\ExtensionSet;
 use Twig_Environment;
 
 class SetupPathsForClub
@@ -57,7 +60,17 @@ class SetupPathsForClub
     public function onKernelRequest(PostSwitchConnection $event)
     {
         $subdomainName = $event->getTenantId();
-        $club = $this->clubRepository->findOneBySubdomain($subdomainName);
-        $this->twig->addGlobal('club', $club);
+        $club = $this->clubRepository->findOneBySubdomain(new Subdomain($subdomainName));
+
+        $r = new ReflectionObject($this->twig);
+        $p = $r->getProperty('extensionSet');
+        $p->setAccessible(true);
+
+        /** @var ExtensionSet $extensionSet */
+        $extensionSet = $p->getValue($this->twig);
+
+        if(!$extensionSet->isInitialized() && !array_key_exists('club', $this->twig->getGlobals())) {
+            $this->twig->addGlobal('club', $club);
+        }
     }
 }

@@ -1,4 +1,5 @@
 {% extends 'GymanAppBundle::layout.html.twig' %}
+{% import '@GymanApp/Members/_picture.html.twig' as pane %}
 
 {% block title %}
 {{ parent() }} - edycja użytkownika {{ member.details.firstname ~ ' ' ~ member.details.lastname  }}
@@ -20,6 +21,22 @@
     },
     action : path('gyman_member_edit', {"id" : member.id})
 }) }}
+
+    <div class="span4">
+        {{ knp_menu_render('gyman.members.menu.tabs_picture', {
+            'template': 'GymanAppBundle:Members:Menu/picture.html.twig',
+            'currentAsLink' : true,
+            'depth' : 1,
+            'currentClass' : 'active'
+        }) }}
+
+        {% set cameraPicture = form.fotoData.vars.value %}
+
+        <div class="tab-content">
+            {{ pane.webcamPane(form) }}
+            {{ pane.uploadPane(form, member) }}
+        </div>
+    </div>
 
 {%  include "@GymanApp/Members/member_form_inner.html.twig" %}
 
@@ -45,3 +62,8 @@
 
 </div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ pane.pictureJs() }}
+{% endblock %}

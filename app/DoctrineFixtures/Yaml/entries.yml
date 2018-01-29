@@ -5,4 +5,4 @@ entry-example:
   endDate:    "this week wednesday 16:45"
   price:      ~
   member:     member-example
-  occurrence: occurrence-example-005
+  occurrence: event-example#1

@@ -1,0 +1,140 @@
+parameters:
+  user_list_fields:
+    - {property: 'enabled', label: 'Active', type: 'toggle' }
+    - {property: 'username', label: 'Nazwa użytkownika' }
+    - {property: 'email', label: 'Email', type: "email"}
+    - {property: 'last_login', label: 'Ostatni login', type: "datetime" }
+    - {property: 'member.id', label: 'Profil uczestnika' }
+    - {property: 'roles', label: 'Role'}
+
+easy_admin:
+
+  site_name: '%base_url% administration panel'
+
+  formats:
+    date:     'd.m.Y'
+    time:     'H:i'
+    datetime: 'd.m.Y H:i:s'
+
+  design:
+#    form_theme: 'horizontal'
+    form_theme: 'vertical'
+
+    menu:
+      - label: Management
+
+      - label:            "Kluby"
+        entity:           "Club"
+        icon:             "address-book-o"
+        params:
+          sortField:      'id'
+          sortDirection:  'ASC'
+        default: true
+
+      - label:            "Użytkownicy"
+        children:
+          - {label: "Wszyscy", entity: "User" }
+          - {label: "Instruktorzy", entity: "Instructor" }
+          - {label: "Obsługa", entity: "Manager" }
+          - {label: "Admin", entity: "Admin" }
+
+      - label:            "Uczestnicy"
+        entity:           "Member"
+
+      - label:            "Karnety"
+        entity:           "Voucher"
+
+      - label:            Other
+
+      - label:            Logout
+        route: "fos_user_security_logout"
+
+  entities:
+    Club:
+      class: Gyman\Bundle\ClubBundle\Entity\Club
+      label:      'Klub'
+      list:
+        title: 'Zarejestrowane kluby'
+        sort:   ['id', 'ASC']
+        fields:
+          - {property: 'id', label: 'Id' }
+          - {property: 'enabled', label: 'Active', type: 'toggle' }
+          - {property: 'name', label: 'Nazwa' }
+          - {property: 'subdomain.name', label: 'Subdomena'}
+          - {property: 'details.city', label: 'Miasto'}
+      form:
+        fields:
+          - {type: 'group', css_class: 'col-sm-6', label: 'Podstawowe informacje' }
+          - {property: 'name', label: 'Nazwa' }
+          - {type: 'section', label: Subdomain }
+          - {property: 'subdomain', label: false, type: 'Gyman\Bundle\AppBundle\Form\SubdomainType' }
+          - {type: 'section', label: Database }
+          - {property: 'database', label: false, type: 'Gyman\Bundle\AdminBundle\Form\DatabaseType' }
+          - {type: 'group', css_class: 'col-sm-6', label: 'Szczegóły' }
+          - {property: 'details', label: false, type: 'Gyman\Bundle\SettingsBundle\Form\Type\ClubDetailsType' }
+
+        form_options: { validation_groups: ['Default'] }
+      new:
+        title: 'Dodaj klub'
+        form_options: { validation_groups: ['Default', 'createClub'] }
+      edit:
+        title:  'Edytuj klub'
+        form_options: { validation_groups: ['Default', 'updateClub'] }
+
+    User:
+      class: Gyman\Domain\User
+      label:      'Użytkownicy'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
+      list:
+        title: 'Wszyscy użytkownicy'
+        sort:   ['id', 'ASC']
+        fields: %user_list_fields%
+      form:
+        help:   'The form view overrides the global help message'
+        fields:
+          - { type: 'group', css_class: 'col-sm-6', label: 'Podstawowe' }
+          - { property: 'firstname' }
+          - { property: 'lastname' }
+          - { property: 'username' }
+          - { property: 'email', type: 'email' }
+          - { property: 'enabled' }
+          - { type: 'group', css_class: 'col-sm-6', label: 'Dodatkowe' }
+          - { property: 'member', type: 'Gyman\Bundle\AdminBundle\Form\MemberType' }
+          - { property: 'roles' }
+    Member:
+      class: Gyman\Domain\Member
+      label:      'Uczestnicy'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
+
+    Voucher:
+      class: Gyman\Domain\Voucher
+      label:      'Karnety'
+      templates:
+        list: '@Admin/EasyAdmin/list.html.twig'
+
+    Instructor:
+      class: Gyman\Domain\User
+      label: "Instruktorzy"
+      list:
+        dql_filter: entity.roles LIKE '%%ROLE_INSTRUCTOR%%'
+        title: 'Użytkownicy z rolą instruktora'
+        fields: %user_list_fields%
+
+    Manager:
+      class: Gyman\Domain\User
+      label: "Moderatorzy"
+      list:
+        dql_filter: entity.roles LIKE '%%ROLE_MODERATOR%%'
+        title: 'Użytkownicy z rolą moderatora'
+        fields: %user_list_fields%
+
+    Admin:
+      class: Gyman\Domain\User
+      label: "Administratorzy"
+      list:
+        dql_filter: entity.roles LIKE '%%ROLE_ADMIN%%'
+        title: 'Użytkownicy z rolą administratora'
+        fields: %user_list_fields%
+

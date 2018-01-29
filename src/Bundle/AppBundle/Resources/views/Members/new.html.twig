@@ -1,30 +1,5 @@
 {% extends 'GymanAppBundle::layout.html.twig' %}
-
-{% import _self as pane %}
-
-{% macro uploadPane(form) %}
-    {% set cameraPicture = form.fotoData.vars.value %}
-
-    <div id="filePane" class="tab-pane fade in{% if cameraPicture is not null %} active{% endif %}">
-        <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>
-
-        {{ form_widget(form.uploadFile) }}
-
-        <div class="control-group error">
-            <div class="help-block">
-                {{ form_errors(form.uploadFile) }}
-            </div>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro webcamPane(form) %}
-    {% set cameraPicture = form.fotoData.vars.value %}
-
-    <div id="webcamDiv" class="tab-pane fade in{% if cameraPicture is null %} active{% endif %}">
-        <div id="camera" data-upload-url="" style="width: 300px; height: 240px"></div>
-    </div>
-{% endmacro %}
+{% import '@GymanApp/Members/_picture.html.twig' as pane %}
 
 {% block content %}
 <div class="heading"><h3>Dodaj użytkownika</h3></div>
@@ -51,9 +26,8 @@
         {% set cameraPicture = form.fotoData.vars.value %}
 
         <div class="tab-content">
-            {{ pane.uploadPane(form) }}
-
             {{ pane.webcamPane(form) }}
+            {{ pane.uploadPane(form) }}
         </div>
     </div>
 
@@ -70,6 +44,7 @@
             <div id="detailsPane" class="tab-pane fade in active">
                 <div class="span5">
                     {% include 'GymanAppBundle:Members:Modal/_details.html.twig' with {'form' : form} %}
+                    {{ form_row(form.send_invitation) }}
                 </div>
                 <div class="span7">
                     {% include 'GymanAppBundle:Members:Modal/_additional.html.twig' with {'form' : form} %}
@@ -77,27 +52,27 @@
             </div>
         </div>
     </div>
-    {{ form_rest(form) }}
 
     <div class="row-fluid">
     <div class="span12 form-actions">
         <div class="pull-right">
-            <button class="btn btn-primary" type="submit">
-                Zapisz
-            </button>
-            <button class="btn" type="submit">
-                Zapisz i dodaj kolejny
-            </button>
+            {{ form_widget(form.submit) }}
+            {{ form_widget(form.submit_and_add) }}
         </div>
     </div>
 </div>
+{{ form_rest(form) }}
 
 {{ form_end(form) }}
 
 </div>
 {% endblock content %}
 
-
 {% block title %}
     {{ parent() }} - Dodaj użytkownika
 {% endblock title %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ pane.pictureJs() }}
+{% endblock %}

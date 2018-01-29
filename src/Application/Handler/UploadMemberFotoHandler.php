@@ -60,10 +60,10 @@ class UploadMemberFotoHandler
         $this->filename = $this->createFilename($command);
         $this->filepath = $this->createFilepath();
 
-        if (!is_null($command->fotoData)) {
-            $this->handleDataSrc($command);
-        } elseif (!is_null($command->uploadFile)) {
+        if (!is_null($command->uploadFile)) {
             $this->handleFile($command);
+        } else if (!is_null($command->fotoData)) {
+            $this->handleDataSrc($command);
         } else {
             return;
         }
@@ -116,7 +116,7 @@ class UploadMemberFotoHandler
      */
     private function createDestinationDir()
     {
-        $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain();
+        $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain()->name();
 
         if (!file_exists($destinationDir)) {
             mkdir($destinationDir, 0755, true);

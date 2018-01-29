@@ -23,7 +23,7 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     /** @var Member */
     private $member;
 
-    /** @var string */
+    /** @var string|null */
     private $invitationToken;
 
     /** @var Collection|Section[]|null */
@@ -96,7 +96,7 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
         $this->member = $member;
     }
 
-    public function invitationToken() : string
+    public function invitationToken() : ?string
     {
         return $this->invitationToken;
     }
@@ -151,5 +151,10 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
     public function isDeleted() : bool
     {
         return $this->deletedAt === null;
+    }
+
+    public function deletedAt(): ?DateTime
+    {
+        return $this->deletedAt;
     }
 }

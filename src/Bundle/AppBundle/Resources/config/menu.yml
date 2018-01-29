@@ -17,7 +17,10 @@ services:
 
     gyman.members.menu_builder:
       class: Gyman\Bundle\AppBundle\Menu\MemberBuilder
-      arguments: ['@knp_menu.factory', '@security.authorization_checker']
+      arguments:
+        - '@knp_menu.factory'
+        - '@security.authorization_checker'
+        - '@gyman.tab_chooser'
 
     gyman.landing.menu_builder:
       class: Gyman\Bundle\AppBundle\Menu\LandingBuilder
@@ -39,6 +42,5 @@ services:
     gyman.members.menu.tabs_picture:
       class:            Knp\Menu\MenuItem
       factory:          ['@gyman.members.menu_builder', 'picture']
-      arguments:        ['@request_stack']
       tags:
           - { name: knp_menu.menu, alias: gyman.members.menu.tabs_picture }

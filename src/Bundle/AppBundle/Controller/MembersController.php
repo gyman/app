@@ -39,6 +39,8 @@ class MembersController extends Controller
      */
     public function updateAction(Member $member, Request $request)
     {
+        $this->get("gyman.tab_chooser")->setMember($member);
+
         $response = new Response('Content', 200, ['content-type' => 'text/html']);
         $command = UpdateMemberCommand::createFromMember($member);
 
@@ -90,9 +92,18 @@ class MembersController extends Controller
 
                 $this->addFlash('success', 'flash.member_added.success');
 
-                return $this->redirectToRoute('gyman_member_edit', [
-                    'id' => $this->get('gyman.members.repository')->findOneByEmailAddress(new EmailAddress($command->email))->id(),
-                ]);
+                if($form->get("send_invitation")->getData()) {
+                    $member = $this->get("gyman.members.repository")->findOneByEmailAddress(new EmailAddress($command->email));
+                    $this->sendInvitationAction($member);
+                }
+
+                if($form->get("submit_and_add")->isClicked()) {
+                    return $this->redirectToRoute('gyman_member_new');
+                } else {
+                    return $this->redirectToRoute('gyman_member_edit', [
+                        'id' => $this->get('gyman.members.repository')->findOneByEmailAddress(new EmailAddress($command->email))->id(),
+                    ]);
+                }
             } else {
                 $this->addFlash('error', 'flash.member_added.errors');
                 $response->setStatusCode(400);
