@@ -62,6 +62,8 @@ class Avatar extends Twig_Extension
                 break;
         }
 
+        dump($foto);
+
         if($this->club === null || $foto === null) {
             return self::NO_PROFILE;
         }

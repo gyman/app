@@ -1,10 +1,14 @@
-{% macro uploadPane(form) %}
+{% macro uploadPane(form, member) %}
     {% set cameraPicture = form.fotoData.vars.value %}
 
     <div id="filePane" class="tab-pane fade in{% if isCameraPaneActive() == false %} active{% endif %}">
 
         {% if cameraPicture is empty %}
-            {% set cameraPicture = "/bundles/gymanapp/images/no-profile.gif" %}
+            {% if member is empty %}
+                {% set cameraPicture = "/bundles/gymanapp/images/no-profile.gif" %}
+            {% else %}
+                {% set cameraPicture = avatar(member) %}
+            {% endif %}
         {% endif %}
 
         <img src="{{ cameraPicture }}" class="thumbnail" id="memberFoto"/>

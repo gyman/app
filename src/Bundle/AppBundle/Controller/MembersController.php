@@ -92,6 +92,11 @@ class MembersController extends Controller
 
                 $this->addFlash('success', 'flash.member_added.success');
 
+                if($form->get("send_invitation")->getData()) {
+                    $member = $this->get("gyman.members.repository")->findOneByEmailAddress(new EmailAddress($command->email));
+                    $this->sendInvitationAction($member);
+                }
+
                 if($form->get("submit_and_add")->isClicked()) {
                     return $this->redirectToRoute('gyman_member_new');
                 } else {
