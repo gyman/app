@@ -139,6 +139,9 @@
             "php app/console assets:install web --relative --symlink",
             "php app/console fos:js-routing:dump",
             "./node_modules/.bin/grunt production"
+        ],
+        "create-params" : [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
     "minimum-stability": "dev",
