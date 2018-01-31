@@ -41,22 +41,24 @@
 {%  include "@GymanApp/Members/member_form_inner.html.twig" %}
 
 <div class="row-fluid">
-    <div class="span12">
-        <button class="btn btn-large btn-primary pull-right" type="submit" style="margin-left: 10px">
-            Zapisz
-        </button>
+    <div class="span12 form-actions">
+        <div class="pull-right">
 
-        {% if member.hasOpenedEntry %}
-            <a href="{{ path("gyman_entry_close", {id : member.lastEntry.id}) }}" class="btn btn-large btn-success pull-right" style="margin-left: 10px">{{ "member.form.close_entry"|trans }}</a>
-        {% else %}
-            <a href="{{ path("gyman_entry_new", {id : member.id}) }}" class="btn btn-large btn-success pull-right" style="margin-left: 10px">{{ "member.form.add_entry"|trans }}</a>
-        {% endif %}
+            <a href="{{ path("gyman_member_sendInvitation", {id : member.id}) }}" class="btn">{{ "member.form.send_invitation"|trans }}</a>
 
-        <a href="{{ path("gyman_member_sendInvitation", {id : member.id}) }}" class="btn btn-large btn-success pull-right">{{ "member.form.send_invitation"|trans }}</a>
+            {% if member.hasOpenedEntry %}
+                <a href="{{ path("gyman_entry_close", {id : member.lastEntry.id}) }}" class="btn" style="margin-left: 0px">{{ "member.form.close_entry"|trans }}</a>
+            {% else %}
+                <a href="{{ path("gyman_entry_new", {id : member.id}) }}" class="btn" style="margin-left: 0px">{{ "member.form.add_entry"|trans }}</a>
+            {% endif %}
 
-        {# todo: remove user #}
+            <button class="btn btn-success" type="submit">
+                Zapisz
+            </button>
+        </div>
     </div>
 </div>
+
 
 {{ form_end(form) }}
 

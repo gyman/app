@@ -19,8 +19,8 @@ class CreateMemberType extends UpdateMemberType
             'mapped'    => false
         ]);
 
-//        $builder->remove("belt");
-//        $builder->remove("notes");
+        $builder->remove("belt");
+        $builder->remove("notes");
 
         $builder
             ->add('submit', SubmitType::class, [

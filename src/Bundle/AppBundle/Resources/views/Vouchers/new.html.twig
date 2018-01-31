@@ -12,7 +12,23 @@ Dodaj karnet użytkownikowi {{ member.details.fullName() }}
         <div class="span6">
             {% include "::_flash.html.twig" %}
 
-            {{ form(form) }}
+            {{ form_start(form) }}
+
+            {{ form_row(form.startDate) }}
+            {{ form_row(form.endDate) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.maximumAmount) }}
+
+            <div class="row-fluid">
+                <div class="span12 form-actions">
+                    <div class="pull-right">
+                        <button class="btn btn-large btn-action">Dodaj</button>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
         </div>
         <div class="span6">
             {% for flashMessage in app.session.flashbag.get('creditEntries') %}

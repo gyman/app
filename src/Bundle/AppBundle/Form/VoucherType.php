@@ -33,39 +33,35 @@ class VoucherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add(
-            $builder->create('startDate', DateType::class, [
-                'widget' => 'single_text',
-                'format' => 'dd.MM.yyyy',
-            ])->addModelTransformer(new VoucherDateTransformer('start'))
-        )
             ->add(
-                $builder->create('endDate', DateType::class, [
-                'widget' => 'single_text',
-                'format' => 'dd.MM.yyyy',
-                ])->addModelTransformer(new VoucherDateTransformer('end'))
+                $builder->create('startDate', DateType::class, [
+                    'widget' => 'single_text',
+                    'format' => 'dd.MM.yyyy',
+                ])->addModelTransformer(new VoucherDateTransformer('start'))
             )
-        ->add('price', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
-        ])
-        ->add(
-            $builder->create('member', HiddenType::class, [
-                "data_class" => null,
-                "data" => $options["member"]
-            ])->addViewTransformer(new MemberToIdTransformer($this->memberRepository))
-        )
-        ->add('maximumAmount', IntegerType::class, [
-            "attr" => [
-                "min" => 0
-            ]
-        ])
-        ->add('add.voucher', SubmitType::class, [
-            'attr' => [
-                'class' => 'btn btn-large btn-action',
-            ],
-        ]);
+            ->add(
+                    $builder->create('endDate', DateType::class, [
+                    'widget' => 'single_text',
+                    'format' => 'dd.MM.yyyy',
+                    ])->addModelTransformer(new VoucherDateTransformer('end'))
+                )
+            ->add('price', IntegerType::class, [
+                "attr" => [
+                    "min" => 0
+                ]
+            ])
+            ->add(
+                $builder->create('member', HiddenType::class, [
+                    "data_class" => null,
+                    "data" => $options["member"]
+                ])->addViewTransformer(new MemberToIdTransformer($this->memberRepository))
+            )
+            ->add('maximumAmount', IntegerType::class, [
+                "attr" => [
+                    "min" => 0
+                ]
+            ])
+        ;
     }
 
     /**
