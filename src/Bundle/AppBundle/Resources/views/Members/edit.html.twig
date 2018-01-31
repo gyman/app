@@ -68,4 +68,24 @@
 {% block javascripts %}
     {{ parent() }}
     {{ pane.pictureJs() }}
+
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/jquery-ui-1.9.2.custom.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/gymanreports/js/bootstrap-datetimepicker.min.js") }}"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $("input[name*='birthdate']").datetimepicker({
+                format: 'dd.mm.yyyy',
+                weekStart: 1,
+                autoclose: true,
+                startView: 2,
+                minView: 2,
+                maxView: 2,
+                clearBtn: true,
+                todayBtn: true,
+                todayHighlight: true,
+                language: "pl"
+            });
+        });
+    </script>
 {% endblock %}
