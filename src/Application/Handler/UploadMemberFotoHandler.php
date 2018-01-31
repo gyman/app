@@ -75,24 +75,21 @@ class UploadMemberFotoHandler
         $command->foto = $this->filename;
     }
 
-    /**
-     * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
-     */
     private function handleDataSrc(MemberCommandInterface $command)
     {
         $encodedData = $command->fotoData;
-        $encodedData = str_replace(' ','+',$encodedData);
+        $encodedData = str_replace(' ','+', $encodedData);
         $encodedData = str_replace('data:image/png;base64,', '', $encodedData);
 
         $decodedData = base64_decode($encodedData);
 
+        $this->filepath = str_replace(".jpg", ".png", strtolower($this->filepath));
+        $this->filename = str_replace(".jpg", ".png", strtolower($this->filename));
+
         file_put_contents($this->filepath, $decodedData);
     }
 
-    /**
-     * @param MemberCommandInterface|UpdateMemberCommand|CreateMemberCommand $command
-     */
-    private function handleFile($command)
+    private function handleFile(MemberCommandInterface $command)
     {
         $command->uploadFile->move($this->destinationDir, $this->filename);
     }
@@ -103,18 +100,17 @@ class UploadMemberFotoHandler
      */
     private function createFilename($command)
     {
+        $extension = $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : "jpg";
+
         return sprintf(
             '%d-%s.%s',
             $command->id->toString(),
             md5(microtime(true)),
-            $command->uploadFile instanceof UploadedFile ? strtolower($command->uploadFile->getClientOriginalExtension()) : "jpg"
+            $extension
         );
     }
 
-    /**
-     * @return string
-     */
-    private function createDestinationDir()
+    private function createDestinationDir() : string
     {
         $destinationDir = rtrim($this->uploadDir, "/\\") . DIRECTORY_SEPARATOR . $this->subdomainProvider->getSubdomain()->name();
 
@@ -125,10 +121,7 @@ class UploadMemberFotoHandler
         return $destinationDir;
     }
 
-    /**
-     * @return string
-     */
-    private function createFilepath()
+    private function createFilepath() : string
     {
         return $this->destinationDir . DIRECTORY_SEPARATOR . $this->filename;
     }
