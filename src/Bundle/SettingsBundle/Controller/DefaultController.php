@@ -115,7 +115,7 @@ class DefaultController extends Controller
         );
 
         $command->details = $club->details();
-        $command->name = $club->getName();
+        $command->name = $club->name();
 
         $form = $this->createForm(SettingsType::class, $command);
 
