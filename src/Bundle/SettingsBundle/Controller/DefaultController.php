@@ -110,7 +110,7 @@ class DefaultController extends Controller
         $command->sections = $this->get('gyman.repository.section')->findAll();
         $command->subdomain = sprintf(
             '%s.%s',
-            $club->getSubdomain()->getName(),
+            $club->subdomain()->name(),
             $this->getParameter('base_url')
         );
 
