@@ -13,15 +13,32 @@
     </div><!-- End .heading-->
 
     <div class="form-row row-fluid">
-        <div class="span4">
+        <div class="span6">
             {% include "DashboardBundle:Default:activities.html.twig" %}
-            {#{% include "DashboardBundle:Default:hierarchy.html.twig" %}#}
-            {#<div class="reminder" id="activitiesTab" data-date="{{ date|date("Y-m-d H:i:s") }}"></div>#}
         </div>
 
-        <div class="span4">
-            {% include "DashboardBundle:Default:searchUser.html.twig" %}
-             {#{% include "DashboardBundle:Default:popularActivities.html.twig" %}#}
+        <div class="span6">
+            <div class="reminder" id="searchTab">
+                <h4>Szukaj uczestnika</h4>
+
+                {{ form_start(searchForm, {attr: {class: "input-append", id: "membersSearchAutocompleteForm"}}) }}
+                {{ form_widget(searchForm.query, {attr: {placeholder: "imię/nazwisko uczestnika lub kod", autocomplete: "off", style: "width: 80%; height: 27px"}}) }}
+                <button id="clickToOpenFoundUser" class="add-on btn-warning btn-large">
+                    <i class="icon16 icomoon-icon-search-2"></i>Pokaż
+                </button>
+
+                <div class="hidden">
+                    {{ form_rest(searchForm) }}
+                </div>
+
+                {{ form_end(searchForm) }}
+
+                <a href="{{ path("gyman_members_search_form") }}">Zaawansowane opcje szukania</a>
+            </div>
+
+            {# @todo: translacje! #}
+
+            {#{% include "DashboardBundle:Default:popularActivities.html.twig" %}#}
 
             <div class="reminder">
                 <h4>Zadania</h4>
@@ -33,13 +50,6 @@
                 'currentClass' : 'active'
                 }) }}
             </div>
-        </div>
-
-        <div class="span4">
-            {#<div class="reminder" id="timeline">#}
-                {#<h4>Wydarzenia</h4>#}
-                {#<div id="dashboardTimeline"></div>#}
-            {#</div>#}
         </div>
     </div>
 

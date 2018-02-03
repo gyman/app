@@ -61,16 +61,13 @@ voucher.entries.open: "open"
 
 navigation:
     menu:
-        dashboard: "Panel nawigatora"
-        members: "Uczestnicy"
-        schedule: "Grafik zajęć"
-        vouchers: "Karnety"
-        entries: "Wejścia"
-        analytics: "Analityka"
-        employees: "Pracownicy"
-        clubs_and_sections: "Kluby i sekcje"
-        payments: "Płatności"
-        dontknow: "..."
+        add_member:   "Dodaj uczestnika"
+        sell_voucher: "Sprzedaj karnet"
+        new_entry:    "Dodaj wejście"
+        dashboard:    "Pulpit nawigatora"
+        search:       "Szukanie"
+        reports:      "Raporty"
+
 
 members:
     close_voucher:

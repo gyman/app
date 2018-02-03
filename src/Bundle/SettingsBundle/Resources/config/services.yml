@@ -1,14 +1,4 @@
 services:
-  gyman.settings.menu_builder:
-      class: 'Gyman\Bundle\SettingsBundle\Menu\DefaultBuilder'
-      arguments: ["@knp_menu.factory", "@security.authorization_checker"]
-
-  gyman.settings.menu.main:
-      class:            'Knp\Menu\MenuItem'
-      factory:          ["@gyman.settings.menu_builder", "main"]
-      tags:
-          - { name: knp_menu.menu, alias: main }
-
   gyman.settings.club_settings_type:
     class: 'Gyman\Bundle\SettingsBundle\Form\Type\SettingsType'
     tags:

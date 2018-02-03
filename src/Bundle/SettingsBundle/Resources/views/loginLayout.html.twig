@@ -11,7 +11,7 @@
       <div class="logo-box col-sm-12 col-md-12">
         <div class="logo">
 		  <a href="/">
-			<img src="/assets/images/gyman_logo.png" class="logo-img" alt="">
+			<img src="{{ asset("/assets/images/gyman_logo.png") }}" class="logo-img" alt="">
 		  </a>
 		</div>
       </div>
@@ -28,7 +28,7 @@
 </div>
 
 {% block javascripts %}
-    {#{{ parent() }}#}
+
 {% endblock javascripts %}
 
 </body>

@@ -200,6 +200,12 @@ sensio_framework_extra:
 
 #knp_time: ~
 
+knp_menu:
+    providers:
+        builder_alias: false
+        builder_service: true
+        container_aware: true
+
 liip_monitor:
     checks:
         php_extensions: [imagick, intl, json]

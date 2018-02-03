@@ -9,6 +9,18 @@ services:
         tags:
             - { name: knp_menu.menu, alias: main }
 
+    gyman.default.menu.quickButtons:
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'quickButtons']
+        tags:
+            - { name: knp_menu.menu, alias: quickButtons }
+
+    gyman.default.menu.settings:
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'settings']
+        tags:
+            - { name: knp_menu.menu, alias: settings }
+
     gyman.default.menu.profile:
         class:            Knp\Menu\MenuItem
         factory:          ['@gyman.default.menu_builder', 'profile']
