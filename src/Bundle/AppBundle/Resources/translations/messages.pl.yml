@@ -67,6 +67,8 @@ navigation:
         dashboard:    "Pulpit nawigatora"
         search:       "Szukanie"
         reports:      "Raporty"
+        activities:   "Aktywności"
+        schedule:     "Kalendarz"
 
 
 members:

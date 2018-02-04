@@ -27,6 +27,12 @@ services:
         tags:
             - { name: knp_menu.menu, alias: profile }
 
+    gyman.default.menu.user:
+        class:            Knp\Menu\MenuItem
+        factory:          ['@gyman.default.menu_builder', 'user']
+        tags:
+            - { name: knp_menu.menu, alias: user }
+
     gyman.members.menu_builder:
       class: Gyman\Bundle\AppBundle\Menu\MemberBuilder
       arguments:

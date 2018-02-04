@@ -1,0 +1,17 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+
+{% block body %}
+
+    <div class="heading">
+
+        <h3>Dzisiejsze aktywności</h3>
+
+    </div><!-- End .heading-->
+
+    <div class="form-row row-fluid">
+        <div class="span6">
+            {% include "DashboardBundle:Default:activities.html.twig" %}
+        </div>
+    </div>
+{% endblock body %}

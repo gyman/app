@@ -40,16 +40,10 @@
                         <div class="nav-no-collapse">
                             <ul class="nav pull-right usernav">
                                 <li>
-                                    <a href="{{ path("profile_edit") }}">
-                                        <span class="icon16 icomoon-icon-equalizer-2"></span>
-                                        <span class="txt">
-                                        {{ 'layout.logged_in_as'|trans({'%username%' : app.user.username}) }}
-                                    </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ path("fos_user_security_logout") }}">wyloguj</a>
+                                    <form name="search" method="post" action="{{ path("gyman_members_search") }}" class="form-search">
+                                        <input id="search_query" name="search[query]" class="input-medium search-query nostyle" type="text">
+                                        <button type="submit" class="btn">Szukaj</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>
@@ -102,6 +96,17 @@
 
                 <div class="mainnav">
                     {{ knp_menu_render('settings', {
+                        'currentAsLink' : true,
+                        'template': ':Menu:main.html.twig',
+                    }) }}
+                </div>
+
+                <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+                    <h5 class="title" style="margin-bottom:0">Użytkownik</h5>
+                </div><!-- End .sidenav-widget -->
+
+                <div class="mainnav">
+                    {{ knp_menu_render('user', {
                         'currentAsLink' : true,
                         'template': ':Menu:main.html.twig',
                     }) }}

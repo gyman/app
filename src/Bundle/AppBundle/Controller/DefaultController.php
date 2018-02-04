@@ -1,6 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Controller;
 
+use DateTime;
 use Gyman\Bundle\ClubBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,5 +58,18 @@ class DefaultController extends Controller
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
         return $this->redirect($this->generateUrl("gyman_settings", [], Router::ABSOLUTE_PATH));
+    }
+
+    /**
+     * @Route("/activities", name="gyman_app_activities")
+     */
+    public function activitiesAction() : Response
+    {
+        $date = new DateTime("now");
+
+        return new Response($this->renderView('GymanAppBundle:Default:activities.html.twig', [
+            'date'        => $date,
+            'occurrences' => $this->get('gyman.occurrences.query')->getOccurrencesForDay($date)
+        ]));
     }
 }

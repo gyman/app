@@ -22,3 +22,8 @@ services:
       - "@doctrine.orm.tenant_entity_manager"
       - "@knp_paginator"
 
+  gyman.occurrences.query:
+    class:          Gyman\Infrastructure\Query\OccurrenceQuery
+    arguments:
+      - "@gyman.occurrence.repository"
+
