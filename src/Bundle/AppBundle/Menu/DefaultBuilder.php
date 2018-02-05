@@ -117,6 +117,14 @@ class DefaultBuilder
 
         $menu->setChildrenAttribute('class', '');
 
+        $menu->addChild('navigation.menu.search', [
+            'route' => 'gyman_members_search_form',
+            'extras' => ['icon' => 'fa-user'],
+            'linkAttributes' => [
+                'class' => ''
+            ],
+        ])->setExtra('translation_domain', 'DefaultBundle');
+
         $menu->addChild('navigation.menu.reports', [
             'route' => 'gyman_reports_index',
             'extras' => ['icon' => 'fa-user'],
