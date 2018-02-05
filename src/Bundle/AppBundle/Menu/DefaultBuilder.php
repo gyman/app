@@ -126,7 +126,7 @@ class DefaultBuilder
         ])->setExtra('translation_domain', 'DefaultBundle');
 
         $menu->addChild('navigation.menu.schedule', [
-            'route' => 'gyman_dashboard_member_calendar',
+            'route' => 'dende_calendar_default_index',
             'extras' => ['icon' => 'fa-user'],
             'linkAttributes' => [
                 'class' => ''
