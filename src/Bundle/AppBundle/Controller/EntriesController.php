@@ -20,20 +20,15 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class VouchersController
  * @package Gyman\Bundle\AppBundle
- * @Route("/entries")
+ * @Route("/entry")
  */
 class EntriesController extends Controller
 {
     /**
-     * @Route("/member/{id}/new", name="gyman_entry_new")
+     * @Route("/new", name="gyman_entry_new")
      * @Method({"GET", "POST"})
-     * @ParamConverter("member", class="Gyman:Member")
-     * @Template("GymanAppBundle:Entries:createNewEntry.html.twig")
-     * @param Request $request
-     * @param Member $member
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function createEntryAction(Request $request, Member $member)
+    public function createEntryAction(Request $request, Member $member) : Response
     {
         $form = $this->createForm(EntryType::class, new OpenEntryCommand($member), [
                 'action' => $this->generateUrl('gyman_entry_new', ['id' => $member->id()]),
@@ -54,7 +49,9 @@ class EntriesController extends Controller
             }
         }
 
-        return ['form' => $form->createView()];
+        return $this->render("GymanAppBundle:Entries:createNewEntry.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 
     /**

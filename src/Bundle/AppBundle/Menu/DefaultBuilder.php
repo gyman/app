@@ -86,23 +86,22 @@ class DefaultBuilder
         ])->setExtra('translation_domain', 'DefaultBundle');
 
 
-//        $menu->addChild('navigation.menu.sell_voucher', [
-////            'route' => 'gyman_voucher_new',
-//            'uri' => '/',
-//            'extras' => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class' => ''
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
+        $menu->addChild('navigation.menu.sell_voucher', [
+//            'route' => 'gyman_voucher_new',
+            'uri' => '/',
+            'extras' => ['icon' => 'fa-user'],
+            'linkAttributes' => [
+                'class' => ''
+            ],
+        ])->setExtra('translation_domain', 'DefaultBundle');
 
-//        $menu->addChild('navigation.menu.new_entry', [
-////            'route' => 'gyman_entry_new',
-//            'uri' => '/',
-//            'extras' => ['icon' => 'fa-user'],
-//            'linkAttributes' => [
-//                'class' => ''
-//            ],
-//        ])->setExtra('translation_domain', 'DefaultBundle');
+        $menu->addChild('navigation.menu.new_entry', [
+            'route' => 'gyman_entry_new',
+            'extras' => ['icon' => 'fa-user'],
+            'linkAttributes' => [
+                'class' => ''
+            ],
+        ])->setExtra('translation_domain', 'DefaultBundle');
 
         return $menu;
     }
