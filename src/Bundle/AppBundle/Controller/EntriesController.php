@@ -31,7 +31,7 @@ class EntriesController extends Controller
      */
     public function createEntryAction(Request $request) : Response
     {
-        $form = $this->createForm(CreateEntryType::class, null, [
+        $form = $this->createForm(CreateEntryType::class, new Entry\Command\QuickOpenEntry(), [
             'action' => $this->generateUrl('gyman_entry_new'),
             'method' => Request::METHOD_POST
         ]);
@@ -39,7 +39,7 @@ class EntriesController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            die(var_dump($form->getData()));
+            dump($form->getData());
 
             if ($form->isValid()) {
                 /** @var OpenEntryCommand $command */

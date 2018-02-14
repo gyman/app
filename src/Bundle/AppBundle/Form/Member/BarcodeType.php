@@ -13,17 +13,22 @@ class BarcodeType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('barcode', TextType::class, []);
+        $builder
+            ->add('barcode', TextType::class, [])
+            ->setDataMapper($this)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults([
+            "data_class" => Barcode::class
+        ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix() : string
     {
-        return 'gyman_app_bundle_barcode_type';
+        return 'barcode';
     }
 
     /**

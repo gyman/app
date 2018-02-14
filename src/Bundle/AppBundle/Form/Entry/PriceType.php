@@ -52,7 +52,8 @@ final class PriceType extends AbstractType implements DataMapperInterface
     {
         $forms = iterator_to_array($forms);
         $data = new Price(
-            $forms['price']->getData()
+            $forms['price']->getData(),
+            'PLN'
         );
     }
 }

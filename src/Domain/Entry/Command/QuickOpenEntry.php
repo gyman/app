@@ -3,6 +3,7 @@
 namespace Gyman\Domain\Entry\Command;
 
 use Gyman\Domain\Calendar\Event\Occurrence;
+use Gyman\Domain\Entry;
 use Gyman\Domain\Entry\Price;
 use Gyman\Domain\Member\Details\Barcode;
 
@@ -28,11 +29,11 @@ class QuickOpenEntry
      */
     private $occurrence;
 
-    public function __construct(Barcode $barcode, string $entryType, Price $price, Occurrence $occurrence)
+    public function __construct(?Barcode $barcode = null, ?string $entryType = null, ?Price $price = null, ?Occurrence $occurrence = null)
     {
-        $this->barcode = $barcode;
-        $this->entryType = $entryType;
-        $this->price = $price;
+        $this->barcode = $barcode ?? new Barcode('');
+        $this->entryType = $entryType ?? Entry::TYPE_VOUCHER;
+        $this->price = $price ?? Price::zero();
         $this->occurrence = $occurrence;
     }
 
@@ -51,8 +52,28 @@ class QuickOpenEntry
         return $this->price;
     }
 
-    public function occurrence(): Occurrence
+    public function occurrence(): ?Occurrence
     {
         return $this->occurrence;
+    }
+
+    public function setBarcode(Barcode $barcode): void
+    {
+        $this->barcode = $barcode;
+    }
+
+    public function setEntryType(string $entryType): void
+    {
+        $this->entryType = $entryType;
+    }
+
+    public function setPrice(Price $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function setOccurrence(Occurrence $occurrence): void
+    {
+        $this->occurrence = $occurrence;
     }
 }
