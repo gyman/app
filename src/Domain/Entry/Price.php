@@ -1,7 +1,9 @@
 <?php
 namespace Gyman\Domain\Entry;
 
-class Price{
+class Price
+{
+
     /**
      * @var integer
      */
@@ -12,26 +14,18 @@ class Price{
      */
     protected $currency = 'PLN';
 
-    /**
-     * Price constructor.
-     * @param int $amount
-     * @param string $currency
-     */
-    public function __construct($amount, $currency = 'PLN')
+    public function __construct(int $amount, ?string $currency = 'PLN')
     {
         $this->amount = $amount;
         $this->currency = $currency;
     }
 
-    public static function zero()
+    public static function zero() : self
     {
         return new self(0, 'PLN');
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString() : string
     {
         if ($this->amount() > 0) {
             return sprintf('%s %s', $this->amount, $this->currency);
@@ -40,18 +34,12 @@ class Price{
         return '';
     }
 
-    /**
-     * @return int
-     */
-    public function amount()
+    public function amount() : int
     {
         return $this->amount;
     }
 
-    /**
-     * @return string
-     */
-    public function currency()
+    public function currency() : string
     {
         return $this->currency;
     }

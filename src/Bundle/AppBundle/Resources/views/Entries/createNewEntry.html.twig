@@ -14,15 +14,26 @@
 
         </div>
 
+        {{ form_start(form) }}
+
         <div class="span12">
             {% include "::_flash.html.twig" %}
-            {{ form_start(form) }}
+            {{ form_row(form.barcode.barcode) }}
             {{ form_row(form.entryType) }}
-            {{ form_row(form.price) }}
-            {{ form_rest(form) }}
-            {{ form_end(form) }}
+            {{ form_row(form.price.price) }}
+            {{ form_row(form.occurrence) }}
+
+            <div class="row-fluid">
+                <div class="span12 form-actions">
+                    <div class="pull-right">
+                        {{ form_row(form.add_another) }}
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        {{ form_end(form) }}
     </div>
-
 {% endblock %}

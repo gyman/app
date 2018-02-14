@@ -12,19 +12,12 @@ class Barcode
      */
     protected $barcode;
 
-    /**
-     * Barcode constructor.
-     * @param string $barcode
-     */
-    public function __construct($barcode)
+    public function __construct(string $barcode)
     {
         $this->barcode = $barcode;
     }
 
-    /**
-     * @return string
-     */
-    public function barcode()
+    public function barcode() : string
     {
         return $this->barcode;
     }

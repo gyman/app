@@ -2,6 +2,7 @@
 namespace Gyman\Bundle\AppBundle\Controller;
 
 use DateTime;
+use Gyman\Bundle\AppBundle\Form\CreateEntryType;
 use Gyman\Bundle\AppBundle\Form\EntryType;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Exception\MemberHasNoLastEntryException;
@@ -28,14 +29,17 @@ class EntriesController extends Controller
      * @Route("/new", name="gyman_entry_new")
      * @Method({"GET", "POST"})
      */
-    public function createEntryAction(Request $request, Member $member) : Response
+    public function createEntryAction(Request $request) : Response
     {
-        $form = $this->createForm(EntryType::class, new OpenEntryCommand($member), [
-                'action' => $this->generateUrl('gyman_entry_new', ['id' => $member->id()]),
+        $form = $this->createForm(CreateEntryType::class, null, [
+            'action' => $this->generateUrl('gyman_entry_new'),
+            'method' => Request::METHOD_POST
         ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
+
+            die(var_dump($form->getData()));
 
             if ($form->isValid()) {
                 /** @var OpenEntryCommand $command */

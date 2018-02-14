@@ -7,6 +7,13 @@ services:
     tags:
       - { name: form.type, alias: sections }
 
+  gyman.form.type.occurrences:
+    class: Gyman\Bundle\AppBundle\Form\Occurrence\OccurrenceType
+    arguments:
+      - '@doctrine'
+    tags:
+      - { name: form.type, alias: occurrence }
+
   gyman.vouchers.form.voucher:
     class: Gyman\Bundle\AppBundle\Form\VoucherType
     arguments:

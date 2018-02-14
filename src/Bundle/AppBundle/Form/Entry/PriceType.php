@@ -10,9 +10,7 @@ use Gyman\Domain\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Exception;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,7 +35,7 @@ final class PriceType extends AbstractType implements DataMapperInterface
 
     public function getName() : string
     {
-        return 'gyman_entry_price_form';
+        return 'price';
     }
 
     /**
