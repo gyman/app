@@ -2,6 +2,7 @@
 namespace Gyman\Application\Repository;
 
 use Gyman\Domain\Member;
+use Gyman\Domain\Member\Details\Barcode;
 use Gyman\Domain\Member\EmailAddress;
 
 class InMemoryMemberRepository implements MemberRepositoryInterface
@@ -23,33 +24,27 @@ class InMemoryMemberRepository implements MemberRepositoryInterface
      * @param $email
      * @return Member
      */
-    public function findOneByEmailAddress(EmailAddress $email)
+    public function findOneByEmailAddress(EmailAddress $email) : ?Member
     {
         $address = $email->email();
 
         return array_key_exists($address, $this->members) ? $this->members[$address] : null;
     }
 
-    /**
-     * @param Member $member
-     * @return mixed
-     */
-    public function remove($member)
+    public function remove(Member $member) : void
     {
         unset($this->members[$member->email()->email()]);
     }
 
-    /**
-     * @param Member $member
-     * @return null
-     */
-    public function insert($member)
+    public function insert(Member $member) : void
     {
         $this->members[$member->email()->email()] = $member;
     }
 
-    public function save($member)
+    public function save(Member $member) : void
     {
         $this->insert($member);
     }
+
+    abstract public function findOneByBarcode(Barcode $barcode): ?Member;
 }

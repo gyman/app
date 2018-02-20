@@ -7,7 +7,7 @@ use Gyman\Domain\Entry;
 use Gyman\Domain\Entry\Price;
 use Gyman\Domain\Member\Details\Barcode;
 
-class QuickOpenEntry
+class OpenEntry
 {
     /**
      * @var Barcode

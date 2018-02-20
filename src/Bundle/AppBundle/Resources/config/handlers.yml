@@ -67,6 +67,14 @@ services:
     tags:
         - { name: tactician.handler, command: Gyman\Application\Command\OpenEntryCommand }
 
+  gyman.entries.quick_open_entry:
+    class: Gyman\Domain\Entry\Handler\OpenEntryHandler
+    arguments:
+      - '@gyman.members.repository'
+      - '@event_dispatcher'
+    tags:
+        - { name: tactician.handler, command: Gyman\Domain\Entry\Command\OpenEntry }
+
   gyman.entries.close_entry:
     class: Gyman\Application\Handler\CloseEntryHandler
     arguments:

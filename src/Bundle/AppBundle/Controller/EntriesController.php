@@ -31,7 +31,7 @@ class EntriesController extends Controller
      */
     public function createEntryAction(Request $request) : Response
     {
-        $form = $this->createForm(CreateEntryType::class, new Entry\Command\QuickOpenEntry(), [
+        $form = $this->createForm(CreateEntryType::class, new Entry\Command\OpenEntry(), [
             'action' => $this->generateUrl('gyman_entry_new'),
             'method' => Request::METHOD_POST
         ]);
@@ -39,13 +39,22 @@ class EntriesController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            dump($form->getData());
-
             if ($form->isValid()) {
                 /** @var OpenEntryCommand $command */
                 $command = $form->getData();
-                $this->get('gyman.entries.open_entry')->handle($command, $this->getUser());
+
+                $this->get('tactician.commandbus')->handle($command);
                 $this->addFlash('success', 'flash.entry_opened.success');
+
+                $member = $this->get("gyman.members.repository")->findOneByBarcode($command->barcode());
+
+//                if($form->get("add_another")->isClicked()) {
+//                    return $this->redirectToRoute('gyman_member_new');
+//                } else {
+//                    return $this->redirectToRoute('gyman_member_edit', [
+//                        'id' => $this->get('gyman.members.repository')->findOneByEmailAddress(new EmailAddress($command->email))->id(),
+//                    ]);
+//                }
 
                 return $this->redirectToRoute('gyman_member_edit', ['id' => $member->id()]);
             } else {

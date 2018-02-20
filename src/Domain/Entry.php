@@ -3,6 +3,7 @@ namespace Gyman\Domain;
 
 use Carbon\Carbon;
 use DateTime;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Exception;
 use Gyman\Application\Exception\EntryClosingDateBeforeOpeningException;
@@ -10,6 +11,7 @@ use Gyman\Application\Exception\EntryMustBeVoucherTypeException;
 use Gyman\Application\Exception\NotSupportedEntryType;
 use Gyman\Application\Exception\UnsupportedEntryTypeException;
 use Gyman\Domain\Entry\Price;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -96,7 +98,7 @@ class Entry
      * @param Member $member
      * @throws NotSupportedEntryType
      */
-    public function __construct(DateTime $startDate, $type, $endDate = null, Price $price, Occurrence $occurrence = null, Member $member = null)
+    public function __construct(DateTime $startDate, string $type, ?DateTime $endDate = null, Price $price, Occurrence $occurrence = null, Member $member = null)
     {
         if (!in_array($type, self::$availableTypes)) {
             throw new NotSupportedEntryType($type, self::$availableTypes);
@@ -111,6 +113,15 @@ class Entry
 
         $this->createdAt = new DateTime("now");
         $this->updatedAt = new DateTime("now");
+    }
+
+    public static function create(?UuidInterface $id = null, DateTime $startDate, string $type, ?Price $price = null, OccurrenceInterface $occurrence, Member $member) : self
+    {
+        $entry = new self($startDate, $type, null, $price, $occurrence, $member);
+
+        $entry->id = $id ?? Uuid::uuid4();
+
+        return $entry;
     }
 
     public function startDate() : DateTime

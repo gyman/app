@@ -1,5 +1,0 @@
-Gyman\Domain\Member:
-  relations:
-    -
-        rel: self
-        href: http://acme.com/foo/1

@@ -6,6 +6,7 @@ use Gyman\Bundle\AppBundle\Form\Entry\PriceType;
 use Gyman\Bundle\AppBundle\Form\Member\BarcodeType;
 use Gyman\Bundle\AppBundle\Form\Occurrence\OccurrenceType;
 use Gyman\Domain\Entry;
+use Gyman\Domain\Entry\Command\OpenEntry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -52,7 +53,7 @@ class CreateEntryType extends AbstractType implements DataMapperInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            "data_class" => Entry\Command\QuickOpenEntry::class
+            "data_class" => OpenEntry::class
         ]);
     }
 
@@ -62,7 +63,7 @@ class CreateEntryType extends AbstractType implements DataMapperInterface
     }
 
     /**
-     * @param Entry\Command\QuickOpenEntry $data
+     * @param OpenEntry $data
      * @param \Symfony\Component\Form\FormInterface[]|\Traversable $forms
      */
     public function mapDataToForms($data, $forms)
@@ -78,7 +79,7 @@ class CreateEntryType extends AbstractType implements DataMapperInterface
     public function mapFormsToData($forms, &$data)
     {
         $forms = iterator_to_array($forms);
-        $data = new Entry\Command\QuickOpenEntry(
+        $data = new OpenEntry(
             $forms["barcode"]->getData(),
             $forms["entryType"]->getData(),
             $forms["price"]->getData(),
