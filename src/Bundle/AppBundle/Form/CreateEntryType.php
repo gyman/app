@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateEntryType extends AbstractType implements DataMapperInterface
@@ -44,7 +46,8 @@ class CreateEntryType extends AbstractType implements DataMapperInterface
                 'label'    => 'entries.form.entry_type.label',
             ])
             ->add('add_another', CheckboxType::class, [
-                "mapped" => false
+                "mapped" => false,
+                "required" => false,
             ])
             ->add('submit', SubmitType::class, [])
         ;
