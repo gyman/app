@@ -24,13 +24,11 @@ class OccurrencesData extends BaseFixture implements ContainerAwareInterface
     {
         $event = $this->getReference($params["event"]);
 
-        $occurrence = $this->getContainer()->get('gyman.occurrence.factory')->createFromArray([
-            'startDate' => new DateTime($params["startDate"]),
-            'duration'  => new OccurrenceDuration($params["minutes"]),
-            'event'     => $event,
-        ]);
-
-        return $occurrence;
+        return Occurrence::create(
+            null,
+            new DateTime($params["startDate"]),
+            $event
+        );
     }
 
     public function setContainer(ContainerInterface $container = null)

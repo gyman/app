@@ -79,7 +79,7 @@ class EventsTest  extends BaseFunctionalTestCase
 
         $em->persist($event);
 
-        $occurrences = $this->container->get("gyman.occurrence.factory")->generateCollectionFromEvent($event);
+//        $occurrences = $this->container->get("gyman.occurrence.factory")->generateCollectionFromEvent($event);
 
         $this->container->get("gyman.occurrence.repository")->insertCollection($occurrences);
         $em->flush();

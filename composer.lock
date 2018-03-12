@@ -122,16 +122,16 @@
         },
         {
             "name": "dende/calendar",
-            "version": "2.1.27",
+            "version": "2.1.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "7e5f1dcd31e9d6dd868154a090e7681814f94679"
+                "reference": "59254e8ad0533219b365d89be6815a6d7096bc5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/7e5f1dcd31e9d6dd868154a090e7681814f94679",
-                "reference": "7e5f1dcd31e9d6dd868154a090e7681814f94679",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/59254e8ad0533219b365d89be6815a6d7096bc5e",
+                "reference": "59254e8ad0533219b365d89be6815a6d7096bc5e",
                 "shasum": ""
             },
             "require": {
@@ -166,25 +166,24 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2017-10-31T22:52:57+00:00"
+            "time": "2018-03-11T18:04:51+00:00"
         },
         {
             "name": "dende/calendar-bundle",
-            "version": "1.8.11",
+            "version": "1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/CalendarBundle.git",
-                "reference": "ddb3467dc1a457053fa851cb1496ded6cdfe982c"
+                "reference": "6b4740c4116e4b8c09c9476cfe6ab35bc1f78182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/ddb3467dc1a457053fa851cb1496ded6cdfe982c",
-                "reference": "ddb3467dc1a457053fa851cb1496ded6cdfe982c",
+                "url": "https://api.github.com/repos/UirapuruDende/CalendarBundle/zipball/6b4740c4116e4b8c09c9476cfe6ab35bc1f78182",
+                "reference": "6b4740c4116e4b8c09c9476cfe6ab35bc1f78182",
                 "shasum": ""
             },
             "require": {
-                "braincrafted/bootstrap-bundle": "1.4.2",
-                "dende/calendar": "^2.1",
+                "dende/calendar": ">=2.1.30",
                 "doctrine/data-fixtures": "*",
                 "doctrine/doctrine-bundle": "^1.7",
                 "doctrine/doctrine-fixtures-bundle": "*",
@@ -192,17 +191,17 @@
                 "friendsofsymfony/jsrouting-bundle": "^1.6",
                 "jms/serializer-bundle": "^1.0",
                 "league/tactician-bundle": "^1",
-                "ramsey/uuid-doctrine": "dev-master",
-                "sensio/framework-extra-bundle": "~3.0",
-                "symfony/http-kernel": "^2|^3",
-                "symfony/symfony": "^3"
+                "php": ">=7.1",
+                "ramsey/uuid-doctrine": "*",
+                "sensio/framework-extra-bundle": "~3",
+                "symfony/http-kernel": "^3",
+                "symfony/symfony": "^3.4"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "2.0.*@dev",
                 "liip/functional-test-bundle": "^1",
                 "phpunit/phpunit": "^6",
-                "symfony/monolog-bundle": "^3",
-                "twig/extensions": "1.5"
+                "symfony/monolog-bundle": "^3"
             },
             "type": "library",
             "autoload": {
@@ -217,7 +216,7 @@
                     "email": "uirapuruadg@gmail.com"
                 }
             ],
-            "time": "2017-12-09T08:44:06+00:00"
+            "time": "2018-03-11T23:55:17+00:00"
         },
         {
             "name": "dende/multitenancybundle",
@@ -1776,6 +1775,7 @@
                 "backend",
                 "generator"
             ],
+            "abandoned": "easycorp/easyadmin-bundle",
             "time": "2018-01-25T18:14:47+00:00"
         },
         {

@@ -3,15 +3,20 @@ namespace Gyman\Domain;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar as BaseCalendar;
+use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class Calendar extends BaseCalendar
 {
     /** @var Section */
     protected $section;
 
-    public function __construct($calendarId = null, string $title = '', $events = null, ?Section $section)
+    public function __construct(?UuidInterface $id = null, string $title = '', $events = null, ?Section $section)
     {
-        parent::__construct($calendarId, $title, $events);
+        $this->id = $id ?: Uuid::uuid4();
+        $this->title      = $title;
+        $this->events     = $events ?: new ArrayCollection();
 
         if($section !== null) {
             $this->section = $section;
@@ -29,5 +34,10 @@ class Calendar extends BaseCalendar
     public function updateTitle(string $title) : void
     {
         $this->title = $title;
+    }
+
+    public function id() : UuidInterface
+    {
+        return $this->id;
     }
 }

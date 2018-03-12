@@ -5,12 +5,14 @@ use Carbon\Carbon;
 use Closure;
 use DateTime;
 use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Repository\EventRepository;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
+use Gyman\Domain\Calendar;
 use Gyman\Domain\Calendar\Event;
 use Gyman\Domain\Section;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -51,7 +53,10 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
         $commandArray = $this->reduceScheduleByRepetitions($commandArray);
 
         $progress = new ProgressBar($output, $count);
+
+        /** @var CreateEventCommand $command */
         foreach($commandArray as $command) {
+            $progress->setMessage($command->title);
             $container->get("dende_calendar.handler.create_event")->handle($command);
             $progress->advance();
         }
@@ -84,9 +89,8 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             {
                 ;
             } else {
-                $calendar = $container->get('gyman.calendar.factory')->createFromArray([
-                    'title' => $title
-                ]);
+                $calendar = new Calendar(CalendarId::create(), $title);
+                $container->get("gyman.calendar.repository")->insert($calendar);
 
                 $section = new Section(null, $title, $calendar);
                 $container->get("gyman.repository.section")->insert($section);
@@ -102,7 +106,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
 
         /** @var Closure $md5 */
         $md5 = function(CreateEventCommand $command) {
-            return  md5($command->title . $command->startDate->format("H:i") . $command->duration);
+            return  md5($command->title . $command->startDate->format("H:i") . $command->endDate->format("H:i"));
         };
 
         /** @var CreateEventCommand $command */
@@ -111,7 +115,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             /** @var CreateEventCommand $comparedCommand */
             foreach($commandsArray as $comparedCommand) {
                 if($md5($command) === $md5($comparedCommand)) {
-                    $command->repetitionDays = array_merge($command->repetitionDays, $comparedCommand->repetitionDays);
+                    $command->repetitions = array_merge($command->repetitions, $comparedCommand->repetitions);
                     $toRemove[spl_object_hash($comparedCommand)] = $comparedCommand;
                 }
             }
@@ -142,27 +146,18 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
                 $eventStart = Carbon::parse($startDate)->setTimeFromTimeString($startHour);
                 $eventEnd = Carbon::parse($endDate)->setTimeFromTimeString($endHour);
 
-                $diff = $eventStart->diff(
-                    Carbon::parse($startDate)->setTimeFromTimeString($endHour)
-                );
-
-                $eventDuration = $diff->h * 60;
-                $eventDuration+= $diff->i;
-
                 /** @var Section $section */
                 $section = $sections[$sectionTitle];
                 $calendar = $section->calendar();
 
-                $command = new CreateEventCommand();
-                $command->calendar = $calendar;
-                $command->duration = $eventDuration;
-                $command->startDate = $eventStart;
-                $command->endDate = $eventEnd;
-                $command->repetitionDays = $eventRepetitions;
-                $command->title = $section->title();
-                $command->type = EventType::TYPE_WEEKLY;
-
-                $commandArray[] = $command;
+                $commandArray[] = new CreateEventCommand(
+                    $calendar->id()->id(),
+                    EventType::TYPE_WEEKLY,
+                    $eventStart,
+                    $eventEnd,
+                    $section->title(),
+                    $eventRepetitions
+                );
             }
         }
 
