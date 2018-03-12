@@ -5,16 +5,15 @@ use Carbon\Carbon;
 use Closure;
 use DateTime;
 use Dende\Calendar\Application\Command\CreateEventCommand;
-use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Doctrine\Common\Collections\Criteria;
 use Gyman\Bundle\AppBundle\Repository\EventRepository;
 use Gyman\Bundle\AppBundle\Repository\OccurrenceRepository;
 use Gyman\Domain\Calendar;
 use Gyman\Domain\Calendar\Event;
 use Gyman\Domain\Section;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -56,7 +55,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
 
         /** @var CreateEventCommand $command */
         foreach($commandArray as $command) {
-            $progress->setMessage($command->title);
+            $progress->setMessage($command->title());
             $container->get("dende_calendar.handler.create_event")->handle($command);
             $progress->advance();
         }
@@ -89,7 +88,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             {
                 ;
             } else {
-                $calendar = new Calendar(CalendarId::create(), $title);
+                $calendar = new Calendar(null,  $title, null, null);
                 $container->get("gyman.calendar.repository")->insert($calendar);
 
                 $section = new Section(null, $title, $calendar);
@@ -106,7 +105,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
 
         /** @var Closure $md5 */
         $md5 = function(CreateEventCommand $command) {
-            return  md5($command->title . $command->startDate->format("H:i") . $command->endDate->format("H:i"));
+            return  md5($command->title() . $command->startDate()->format("H:i") . $command->endDate()->format("H:i"));
         };
 
         /** @var CreateEventCommand $command */
@@ -115,7 +114,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             /** @var CreateEventCommand $comparedCommand */
             foreach($commandsArray as $comparedCommand) {
                 if($md5($command) === $md5($comparedCommand)) {
-                    $command->repetitions = array_merge($command->repetitions, $comparedCommand->repetitions);
+//                    $command->repetitions = array_merge($command->repetitions(), $comparedCommand->repetitions());
                     $toRemove[spl_object_hash($comparedCommand)] = $comparedCommand;
                 }
             }
@@ -151,7 +150,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
                 $calendar = $section->calendar();
 
                 $commandArray[] = new CreateEventCommand(
-                    $calendar->id()->id(),
+                    $calendar->id(),
                     EventType::TYPE_WEEKLY,
                     $eventStart,
                     $eventEnd,

@@ -12,6 +12,7 @@ use Gyman\Domain\Calendar\Event\Occurrence\Note;
 use Gyman\Domain\Calendar\Event\Occurrence\Subject;
 use Gyman\Domain\Entry;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class Occurrence
@@ -39,9 +40,9 @@ class Occurrence extends BaseOccurrence
      */
     protected $entries;
 
-    public function __construct(IdInterface $occurrenceId, EventInterface $event, DateTime $startDate = null, OccurrenceDuration $duration = null, User $instructor = null, Subject $subject = null, Note $note = null, ArrayCollection $entries = null)
+    public function __construct(UuidInterface $id = null, EventInterface $event, DateTime $startDate = null, OccurrenceDuration $duration = null, User $instructor = null, Subject $subject = null, Note $note = null, ArrayCollection $entries = null)
     {
-        parent::__construct($occurrenceId, $event, $startDate, $duration);
+        parent::__construct($id, $event, $startDate, $duration);
 
         $this->instructor = $instructor;
         $this->subject = $subject ?: new Subject();

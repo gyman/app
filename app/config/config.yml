@@ -107,9 +107,9 @@ dende_calendar:
   model_manager_name:                   'tenant'
   backend_type:                         'ORM'
   calendar_repository_service_name:     'gyman.calendar.repository'
-  calendar_factory_service_name:        'gyman.calendar.factory'
+#  calendar_factory_service_name:        'gyman.calendar.factory'
   event_repository_service_name:        'gyman.event.repository'
-  event_factory_service_name:           'gyman.event.factory'
+#  event_factory_service_name:           'gyman.event.factory'
   occurrence_repository_service_name:   'gyman.occurrence.repository'
   occurrence_class:                     Gyman\Domain\Calendar\Event\Occurrence
   mapping:
