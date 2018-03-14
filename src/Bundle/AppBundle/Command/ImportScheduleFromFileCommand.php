@@ -114,7 +114,7 @@ class ImportScheduleFromFileCommand extends ContainerAwareCommand
             /** @var CreateEventCommand $comparedCommand */
             foreach($commandsArray as $comparedCommand) {
                 if($md5($command) === $md5($comparedCommand)) {
-//                    $command->repetitions = array_merge($command->repetitions(), $comparedCommand->repetitions());
+                    $command->setRepetitions(array_merge($command->repetitions(), $comparedCommand->repetitions()));
                     $toRemove[spl_object_hash($comparedCommand)] = $comparedCommand;
                 }
             }
