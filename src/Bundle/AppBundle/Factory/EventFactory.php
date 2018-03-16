@@ -2,12 +2,12 @@
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
-use Dende\Calendar\Application\Factory\EventFactory as BaseEventFactory;
-use Dende\Calendar\Domain\Calendar\Event\EventId;
-use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Gyman\Calendar\Application\Factory\EventFactory as BaseEventFactory;
+use Gyman\Calendar\Domain\Calendar\Event\EventId;
+use Gyman\Calendar\Domain\Calendar\Event\EventType;
+use Gyman\Calendar\Domain\Calendar\Event\Repetitions;
 use Gyman\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event as BaseEvent;
+use Gyman\Calendar\Domain\Calendar\Event as BaseEvent;
 use Ramsey\Uuid\Uuid;
 
 /**

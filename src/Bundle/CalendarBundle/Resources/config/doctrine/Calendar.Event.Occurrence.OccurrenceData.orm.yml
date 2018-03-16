@@ -1,0 +1,15 @@
+Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData:
+  type:   embeddable
+  embedded:
+    duration:
+      class: Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration
+      columnPrefix: duration_
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: false
+
+    endDate:
+      type: datetime
+      nullable: false

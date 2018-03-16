@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Member;
 use Gyman\Application\Factory\EntryFactory;
-use Dende\Calendar\Domain\Calendar\EventInterface;
+use Gyman\Calendar\Domain\Calendar\EventInterface;
 
 class EntriesData extends BaseFixture
 {

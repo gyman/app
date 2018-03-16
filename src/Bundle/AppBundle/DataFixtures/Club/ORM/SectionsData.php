@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Calendar\Domain\Calendar;
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Section;
 use Gyman\Domain\Section\SectionId;

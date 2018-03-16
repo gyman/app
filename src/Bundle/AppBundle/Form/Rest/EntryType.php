@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Form\Rest;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Calendar\Domain\Calendar;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Command\OpenEntryCommand;
 use Gyman\Domain\Entry;

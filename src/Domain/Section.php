@@ -55,7 +55,7 @@ class Section
 
     public function __construct(SectionId $id = null, ?string $title = '', ?Calendar $calendar = null, ?Collection $members = null, ?int $orderNumber = 999, ?User $instructor = null)
     {
-        $this->sectionId = $id ?: SectionId::create();
+        $this->id = $id ?: SectionId::create();
         $this->title = $title;
         $this->calendar = $calendar ?: new Calendar(null, $title, null, null);
         $this->members = $members ?: new ArrayCollection();

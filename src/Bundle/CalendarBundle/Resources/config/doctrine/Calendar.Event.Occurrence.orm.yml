@@ -1,0 +1,37 @@
+Gyman\Calendar\Domain\Calendar\Event\Occurrence:
+  type: mappedSuperclass
+  table: occurrences
+  repositoryClass: Gyman\Bundle\CalendarBundle\Repository\ORM\OccurrenceRepository
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
+  embedded:
+    occurrenceData:
+      class: Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData
+      columnPrefix: false
+
+  indexes:
+    index_dende_occurrences_dates:
+      columns:
+        - startDate
+        - endDate
+
+  manyToOne: # occurrence is the owning side!
+    event:
+      targetEntity: Gyman\Calendar\Domain\Calendar\EventInterface
+      inversedBy: occurrences
+      cascade: [all]
+      joinColumns:
+        EventId:
+          name: event_id
+          referencedColumnName: id
+
+  fields:
+    modified:
+      type: boolean

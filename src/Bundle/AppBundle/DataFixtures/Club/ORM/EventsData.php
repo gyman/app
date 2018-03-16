@@ -2,10 +2,10 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\EventId;
-use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Gyman\Calendar\Domain\Calendar\Event;
+use Gyman\Calendar\Domain\Calendar\Event\EventId;
+use Gyman\Calendar\Domain\Calendar\Event\EventType;
+use Gyman\Calendar\Domain\Calendar\Event\Repetitions;
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Bundle\AppBundle\Factory\OccurrenceFactory;
 use Ramsey\Uuid\Uuid;

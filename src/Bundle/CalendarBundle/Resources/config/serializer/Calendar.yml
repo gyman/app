@@ -1,0 +1,25 @@
+---
+Gyman\Calendar\Domain\Calendar:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+    name:
+      expose: true
+    events:
+      expose: false
+  relations:
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_calendar
+      rel: self
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_calendar_events
+      rel: events

@@ -1,0 +1,7 @@
+Gyman\Calendar\Domain\Calendar\Event\EventType:
+  type:   embeddable
+
+  fields:
+    type:
+      type: string
+      length: 255

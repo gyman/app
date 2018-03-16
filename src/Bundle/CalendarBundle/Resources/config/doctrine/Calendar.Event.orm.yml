@@ -1,0 +1,55 @@
+Gyman\Calendar\Domain\Calendar\Event:
+  type: entity
+  inheritanceType: SINGLE_TABLE
+  discriminatorColumn:
+    name: discriminator
+    type: string
+  discriminatorMap:
+    bundle: Gyman\Calendar\Domain\Calendar\Event
+  table: events
+  repositoryClass: Gyman\Bundle\CalendarBundle\Repository\ORM\EventRepository
+
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+
+  indexes:
+    index_dende_events_dates:
+      columns:
+        - startDate
+        - endDate
+
+  embedded:
+    type:
+      class: Gyman\Calendar\Domain\Calendar\Event\EventType
+      columnPrefix: false
+
+    eventData:
+      class: Gyman\Calendar\Domain\Calendar\Event\EventData
+      columnPrefix: false
+
+  manyToOne:  # event is the owning side!
+    calendar:
+      targetEntity: Gyman\Calendar\Domain\Calendar
+      inversedBy: events
+      cascade: [all]
+      joinColumns:
+        CalendarId:
+          name: calendar_id
+          referencedColumnName: id
+          onDelete: SET NULL
+
+  oneToMany:
+    occurrences:
+      targetEntity: Gyman\Calendar\Domain\Calendar\Event\OccurrenceInterface
+      mappedBy: event
+      cascade: [all]
+
+  fields:
+    deletedAt:
+      type: datetime
+      nullable: true

@@ -3,8 +3,8 @@ namespace Gyman\Bundle\ReportsBundle\Form\Type;
 
 use Carbon\Carbon;
 use DateTime;
-use Dende\Calendar\Domain\Calendar;
-use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
+use Gyman\Calendar\Domain\Calendar;
+use Gyman\Bundle\CalendarBundle\Repository\ORM\OccurrenceRepository;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Domain\Section;
 use Gyman\Domain\SectionRepository;

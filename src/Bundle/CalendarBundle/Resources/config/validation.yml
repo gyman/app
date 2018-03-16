@@ -1,0 +1,30 @@
+Gyman\Bundle\CalendarBundle\DTO\UpdateFormData:
+  properties:
+    title:
+      - NotBlank:
+          message: dende_calendar.validation.event_title_cant_be_empty
+    repetitions:
+      - Count:
+          min: 1
+          minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
+          groups: ["weeklyEvent"]
+    occurrenceDates:
+      - Callback:
+          callback: isSameDay
+
+Gyman\Bundle\CalendarBundle\DTO\CreateFormData:
+  properties:
+    newCalendarName:
+      - NotBlank:
+          message: dende_calendar.validation.choose_calendar_or_provide_new_name
+          groups: ["createNewCalendar"]
+
+    title:
+      - NotBlank:
+          message: dende_calendar.validation.event_title_cant_be_empty
+
+    repetitions:
+      - Count:
+          min: 1
+          minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
+          groups: ["weeklyEvent"]

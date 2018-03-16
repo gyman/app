@@ -76,7 +76,7 @@ class Member
     private $updatedAt;
 
     /**
-     * @var Datetime $deletedAt
+     * @var DateTime $deletedAt
      */
     private $deletedAt;
 

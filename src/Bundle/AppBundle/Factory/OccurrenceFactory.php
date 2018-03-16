@@ -2,10 +2,10 @@
 namespace Gyman\Bundle\AppBundle\Factory;
 
 use DateTime;
-use Dende\Calendar\Application\Factory\OccurrenceFactoryInterface;
-use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
-use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
+use Gyman\Calendar\Application\Factory\OccurrenceFactoryInterface;
+use Gyman\Calendar\Application\Factory\OccurrenceFactory as BaseOccurrenceFactory;
+use Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
+use Gyman\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar\Event\Occurrence;
 

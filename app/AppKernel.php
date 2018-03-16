@@ -34,7 +34,6 @@ class AppKernel extends Kernel
             new Liip\MonitorBundle\LiipMonitorBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
 
-            new Dende\CalendarBundle\DendeCalendarBundle(),
             new Dende\MultitenancyBundle\DendeMultitenancyBundle(),
 
             new Gyman\Bundle\DashboardBundle\DashboardBundle(),
@@ -47,7 +46,7 @@ class AppKernel extends Kernel
             new Gyman\Bundle\LandingPageBundle\GymanLandingPageBundle(),
             new Gyman\Bundle\SettingsBundle\GymanSettingsBundle(),
             new Gyman\Bundle\AdminBundle\AdminBundle(),
-
+            new Gyman\Bundle\CalendarBundle\DendeCalendarBundle(),
 	        new Sentry\SentryBundle\SentryBundle(),
         );
 

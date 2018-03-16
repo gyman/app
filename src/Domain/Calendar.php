@@ -2,7 +2,7 @@
 namespace Gyman\Domain;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar as BaseCalendar;
+use Gyman\Calendar\Domain\Calendar as BaseCalendar;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

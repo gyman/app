@@ -42,7 +42,7 @@ class User extends BaseUser implements UserInterface, SecurityUserInterface
         $this->member = $member;
         $this->invitationToken = $invitationToken;
 
-        $this->sections = new ArrayCollection();
+        $this->sections = $sections ?? new ArrayCollection();
     }
 
     public function firstname() : ?string

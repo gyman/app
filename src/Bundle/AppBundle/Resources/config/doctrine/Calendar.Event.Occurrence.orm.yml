@@ -5,7 +5,7 @@ Gyman\Domain\Calendar\Event\Occurrence:
 
   associationOverride:
     event:
-      targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
+      targetEntity: Gyman\Calendar\Domain\Calendar\EventInterface
       inversedBy: occurrences
       cascade: [all]
       joinColumns:

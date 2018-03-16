@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FullCalendar with Dende/CalendarBundle demo</title>
+    {% block stylesheets %}
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
+    {% endblock stylesheets %}
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span24">
+            {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
+        <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
+        <script src='{{ asset("bundles/dendecalendar/js/bootstrap.min.js") }}'></script>
+        <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>
+        <script src='{{ asset("bundles/dendecalendar/js/lang/" ~ lang ~ ".js") }}'></script>
+        <script src='{{ asset("bundles/dendecalendar/js/dendeCalendar.js") }}'></script>
+
+        <script type="text/javascript">
+            var eventClickHandler = function() {};
+            var dende_calendar_lang = '{{ lang }}';
+            var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
+            var minTime = '06:00';
+            var maxTime = '22:00';
+        </script>
+    {% endblock javascripts %}
+</body>
+</html>

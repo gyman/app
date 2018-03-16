@@ -3,7 +3,7 @@ namespace Gyman\Bundle\SettingsBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InvoiceDataType extends BaseType
 {

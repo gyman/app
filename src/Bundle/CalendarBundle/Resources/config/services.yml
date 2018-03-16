@@ -1,0 +1,142 @@
+---
+parameters:
+  dende_calendar.id_generator.class:                Gyman\Calendar\Application\Generator\Doctrine\IdGenerator
+  dende_calendar.calendar_repository.class:         Gyman\Bundle\CalendarBundle\Repository\ORM\CalendarRepository
+  dende_calendar.event_repository.class:            Gyman\Bundle\CalendarBundle\Repository\ORM\EventRepository
+  dende_calendar.occurrences_repository.class:      Gyman\Bundle\CalendarBundle\Repository\ORM\OccurrenceRepository
+  dende_calendar.update_occurrences_manager.class:  Gyman\Calendar\Application\Service\OccurrenceUpdateManager
+
+services:
+  dende_calendar.entity_manager:
+    class:      %doctrine.orm.entity_manager.class%
+    factory:    ['@doctrine', 'getManager']
+    arguments:
+     - '%dende_calendar.model_manager_name%'
+
+# repositories
+
+  dende_calendar.calendar_repository:
+    class: %dende_calendar.calendar_repository.class%
+    factory: ['@dende_calendar.entity_manager', 'getRepository']
+    arguments: ["Calendar:Calendar"]
+
+  dende_calendar.event_repository:
+    class: %dende_calendar.event_repository.class%
+    factory: ['@dende_calendar.entity_manager', "getRepository"]
+    arguments: ['Calendar:Calendar\Event']
+
+  dende_calendar.occurrences_repository:
+    class: %dende_calendar.occurrences_repository.class%
+    factory: ['@dende_calendar.entity_manager', 'getRepository']
+    arguments: ["%resolved_occurrence_class%"]
+
+# custom services
+
+  dende_calendar.occurrences_provider:
+    class: Gyman\Bundle\CalendarBundle\Service\OccurrencesProvider
+    arguments:
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - '@router.default'
+      - 'dende_calendar_default_updateevent'
+
+  dende_calendar.id_generator:
+    class: %dende_calendar.id_generator.class%
+    arguments:
+      - "@dende_calendar.entity_manager"
+
+  dende_calendar.new_calendar_creation:
+    class: 'Gyman\Calendar\Application\Handler\CreateCalendarHandler'
+    arguments:
+      - "@=service(parameter('dende_calendar.calendar_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.calendar_repository_service_name'))"
+      - "@event_dispatcher"
+
+#forms
+
+  dende_calendar.form_type.abstract_event:
+    class: Gyman\Bundle\CalendarBundle\Form\Type\AbstractEventType
+    abstract: true
+
+  dende_calendar.form_type.create_event:
+    class: Gyman\Bundle\CalendarBundle\Form\Type\CreateEventType
+    parent: dende_calendar.form_type.abstract_event
+    tags:
+      - {name: form.type, alias: create_event}
+
+  dende_calendar.form_type.update_event:
+    class: Gyman\Bundle\CalendarBundle\Form\Type\UpdateEventType
+    parent: dende_calendar.form_type.abstract_event
+    tags:
+      - {name: form.type, alias: update_event}
+
+  dende_calendar.form_type.range_dates:
+    class: Gyman\Bundle\CalendarBundle\Form\Type\UpdateEventType\RangeDatesType
+    tags:
+      - {name: form.type, alias: range_dates}
+
+# handlers
+
+  dende_calendar.handler.create_event:
+    class: Gyman\Calendar\Application\Handler\CreateEventHandler
+    arguments:
+      - '@dende_calendar.calendar_repository'
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+    tags:
+      - {name: tactician.handler, command: 'Gyman\Calendar\Application\Command\CreateEventCommand' }
+
+  dende_calendar.handler.update_event:
+    class: Gyman\Calendar\Application\Handler\UpdateEventHandler
+    arguments:
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+    tags:
+      - {name: tactician.handler, command: 'Gyman\Calendar\Application\Command\UpdateEventCommand' }
+
+  dende_calendar.handler.update_occurrence:
+    class: Gyman\Calendar\Application\Handler\UpdateOccurrenceHandler
+    arguments:
+      - "@dende_calendar.manager.update_occurrence"
+    tags:
+      - {name: tactician.handler, command: 'Gyman\Calendar\Application\Command\UpdateOccurrenceCommand' }
+
+  dende_calendar.handler.create_calendar:
+    class: Gyman\Calendar\Application\Handler\CreateCalendarHandler
+    arguments:
+      - '@dende_calendar.calendar_repository'
+      - '@event_dispatcher'
+    tags:
+      - {name: tactician.handler, command: 'Gyman\Calendar\Application\Command\CreateCalendarCommand' }
+
+# update strategies
+
+  dende_calendar.update_strategy.single:
+    class: Gyman\Calendar\Application\Service\UpdateStrategy\Single
+    tags:
+      - {name: dende_calendar.update_strategy }
+
+#  dende_calendar.update_strategy.overwrite:
+#    class: Gyman\Calendar\Application\Handler\UpdateStrategy\Overwrite
+#    tags:
+#      - {name: dende_calendar.update_strategy }
+
+#  dende_calendar.update_strategy.next_inclusive:
+#    class: Gyman\Calendar\Application\Handler\UpdateStrategy\NextInclusive
+#    tags:
+#      - {name: dende_calendar.update_strategy }
+
+# listeners
+
+  dende_calendar.listener.doctrine_event_listener:
+    class: Gyman\Bundle\CalendarBundle\Listener\DoctrineEventListener
+    arguments: ['%dende_calendar.mapping%']
+    tags:
+      - { name: doctrine.event_listener, event: loadClassMetadata, em: '%dende_calendar.model_manager_name%' }
+
+# manager
+
+  dende_calendar.manager.update_occurrence:
+    class: "%dende_calendar.update_occurrences_manager.class%"
+    arguments:
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"

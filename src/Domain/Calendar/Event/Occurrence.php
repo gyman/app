@@ -2,16 +2,16 @@
 namespace Gyman\Domain\Calendar\Event;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
-use Dende\Calendar\Domain\Calendar\EventInterface;
-use Dende\Calendar\Domain\IdInterface;
+use Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
+use Gyman\Calendar\Domain\Calendar\EventInterface;
+use Gyman\Calendar\Domain\IdInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gyman\Domain\User;
 use Gyman\Domain\Calendar\Event\Occurrence\Note;
 use Gyman\Domain\Calendar\Event\Occurrence\Subject;
 use Gyman\Domain\Entry;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
+use Gyman\Calendar\Domain\Calendar\Event\Occurrence as BaseOccurrence;
 use Ramsey\Uuid\UuidInterface;
 
 /**

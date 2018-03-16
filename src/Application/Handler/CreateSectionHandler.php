@@ -3,7 +3,7 @@
 namespace Gyman\Application\Handler;
 
 
-use Dende\Calendar\Domain\Calendar\CalendarId;
+use Gyman\Calendar\Domain\Calendar\CalendarId;
 use Gyman\Application\Command\CreateSectionCommand;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Calendar;

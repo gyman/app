@@ -1,0 +1,51 @@
+dende_calendar:
+  flash:
+    event_creation_error:         "Błąd przy tworzeniu wydarzenia!"
+    event_update_error:           "Nie udało się zaktualizować wydarzenia."
+    event_created_successfully:   "Wydarzenie utworzone!"
+    event_updated_successfully:   "Wydarzenie zostało zaktualizowane!"
+
+  link:
+    back_to_calendar:             "Powrót do kalendarza"
+
+  form:
+    calendar:
+      label:                        "Nazwa kalendarza"
+      placeholder:                  "utwórz nowy kalendarz"
+    new_calendar_name:
+      label:                        "Nazwa kalendarza do utworzenia"
+    type:
+      label:                        "Rodzaj wydarzenia"
+      weekly:                       "co tydzień"
+      single:                       "jednorazowo"
+    start_date:
+      label:                        "Data rozpoczęcia"
+    end_date:
+      label:                        "Data zakończenia"
+    duration:
+      label:                        "Czas trwania (minuty)"
+    title:
+      label:                        "Nazwa (krótki opis)"
+    repetition_days:
+      label:                        "Dni tygodnia, w których wydarzenie się powtarza"
+      monday:                       "poniedziałek"
+      tuesday:                      "wtorek"
+      wednesday:                    "środa"
+      thursday:                     "czwartek"
+      friday:                       "piątek"
+      saturday:                     "sobota"
+      sunday:                       "niedziela"
+    submit:
+      label:                        "Dodaj wydarzenie"
+    submit_update:
+      label:                        "Zaktualizuj wydarzenie"
+    delete_occurrence:
+      label:                        "Usuń tylko to wystąpienie"
+    delete_event:
+      label:                        "Usuń całe wydarzenie"
+    method:
+      label:                        "Metoda aktualizacji wydarzenia"
+      choice:
+        overwrite:                  "Nadpisz całość"
+        nextinclusive:              "Zaktualizuj to i następne wystąpienia"
+        single:                     "Zaktualizuj tylko to wystąpienie"

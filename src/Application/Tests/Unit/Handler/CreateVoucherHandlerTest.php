@@ -2,7 +2,7 @@
 namespace Gyman\Application\Tests\Unit\Handler;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event;
+use Gyman\Calendar\Domain\Calendar\Event;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Gyman\Application\Command\CreateVoucherCommand;
 use Gyman\Application\Factory\EntryFactory;

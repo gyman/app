@@ -2,7 +2,7 @@
 
 namespace Gyman\Application\Handler;
 
-use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
+use Gyman\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Gyman\Application\Command\UpdateOccurrenceDetailsCommand;
 use Gyman\Bundle\AppBundle\Repository\UserRepository;

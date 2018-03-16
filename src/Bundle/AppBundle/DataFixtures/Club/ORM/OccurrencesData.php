@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
+use Gyman\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Gyman\Domain\Calendar\Event\Occurrence;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

@@ -1,0 +1,42 @@
+Gyman\Calendar\Domain\Calendar\Event:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+    title:
+      expose: true
+    type:
+      expose: true
+    startDate:
+      expose: true
+    endDate:
+      expose: true
+    repetitions:
+      expose: true
+    duration:
+      expose: true
+    calendar:
+      expose: false
+
+  relations:
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_event
+      rel: self
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_event_occurrences
+      rel: occurrences
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.calendar().id())
+        route: get_calendar
+      rel: calendar

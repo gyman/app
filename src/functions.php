@@ -4,13 +4,9 @@ namespace Gyman;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeImmutable;
-use Exception;
-use function foo\func;
 use Gyman\Domain\MemberView;
 use Money\Currency;
 use Money\Money;
-use Ramsey\Uuid\Uuid;
-use Wallet\Model\Account\Exception\SpinTimeoutException;
 
 function carbonite(DateTimeImmutable $dateTimeImmutable) : Carbon
 {

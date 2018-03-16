@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Listener;
 
-use Dende\CalendarBundle\Event\CalendarAfterCreationEvent;
+use Gyman\Bundle\CalendarBundle\Event\CalendarAfterCreationEvent;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Domain\Section;
 

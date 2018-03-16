@@ -34,7 +34,6 @@
     "require": {
         "php": ">=7.1",
         "braincrafted/bootstrap-bundle": "1.4.2",
-        "dende/calendar-bundle": "^1",
         "dende/multitenancybundle": "1.1.4",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/dbal": "^2.6",
@@ -58,6 +57,7 @@
         "nesbot/carbon": "dev-master",
         "ob/highcharts-bundle": "1.*",
         "oneup/uploader-bundle": "^1.8",
+        "phpstan/phpstan": "^0.10.0@dev",
         "ramsey/uuid-doctrine": "dev-master",
         "sensio/distribution-bundle": "^5",
         "sensio/framework-extra-bundle": "~3.0",

@@ -63,7 +63,7 @@ class Voucher
     protected $updatedAt;
 
     /**
-     * @var Datetime $deletedAt
+     * @var DateTime $deletedAt
      */
     protected $deletedAt;
 
@@ -72,17 +72,6 @@ class Voucher
      */
     protected $closedAt;
 
-    /**
-     * Voucher constructor.
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param Price $price
-     * @param int $maximumAmount
-     * @param array $entries
-     * @param null $member
-     * @param DateTime $closedAt
-     * @throws VoucherClosingDateBeforeOpeningException
-     */
     public function __construct(DateTime $startDate, ?DateTime $endDate, ?Price $price, int $maximumAmount = 0, ?Collection $entries, Member $member = null, ?DateTime $closedAt)
     {
         if ($startDate->getTimestamp() >= $endDate->getTimestamp()) {

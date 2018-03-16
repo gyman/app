@@ -1,14 +1,14 @@
 <?php
 namespace Gyman\Bundle\AppBundle\DataFixtures\Club\ORM;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Calendar\Domain\Calendar;
 use Gyman\Bundle\AppBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class CalendarsData
- * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
+ * @package Gyman\Bundle\CalendarBundle\Tests\DataFixtures\Standard\ORM
  */
 class CalendarsData extends BaseFixture implements ContainerAwareInterface
 {

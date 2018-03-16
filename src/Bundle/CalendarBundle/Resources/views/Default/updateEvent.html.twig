@@ -1,0 +1,52 @@
+{% extends 'DendeCalendarBundle::layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+
+        {% if form.method is defined %}{{ form_row(form.method) }}{% endif %}
+
+        <fieldset>
+            <legend>Szczegóły wydarzenia</legend>
+
+            <div class="well">
+                {{ form_row(form.eventDates) }}
+                {{ form_row(form.occurrenceDates) }}
+                {{ form_row(form.title) }}
+                {% if form.repetitions is defined %}{{ form_row(form.repetitions) }}{% endif %}
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{{ 'dende_calendar.form.submit_update.label'|trans }}</button>
+            <button type="button" class="btn">Cancel</button>
+
+            {{ form_widget(form.delete_event, {attr: {class: "pull-right btn-danger", style: "margin-left: 5px"}}) }}
+            {% if form.delete_occurrence is defined %}{{ form_widget(form.delete_occurrence, {attr: {class: "pull-right btn-danger"}}) }}{% endif %}
+        </div>
+
+        {{ form_rest(form) }}
+
+
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/dendecalendar/js/locales/bootstrap-datetimepicker.pl.js') }}"></script>
+    <script src="{{ asset('bundles/dendecalendar/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/dendecalendar/js/dendeCalendar.eventForm.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/dendeCalendar.eventForm.css') }}" />
+{% endblock stylesheets %}
+

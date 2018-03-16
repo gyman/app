@@ -1,7 +1,7 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Tests\Unit\Services;
 
-use Dende\Calendar\Domain\Calendar;
+use Gyman\Calendar\Domain\Calendar;
 use Gyman\Bundle\AppBundle\Repository\SectionRepository;
 use Gyman\Bundle\ClubBundle\Entity\Club;
 use Gyman\Bundle\ClubBundle\Entity\ClubRepository;
@@ -91,7 +91,7 @@ class SettingsUpdateHandlerTest extends \PHPUnit_Framework_TestCase
 
         $service->handle($command);
 
-        $this->assertInstanceOf('Dende\Calendar\Domain\Calendar', $sectionNew1->calendar());
-        $this->assertInstanceOf('Dende\Calendar\Domain\Calendar', $sectionNew2->calendar());
+        $this->assertInstanceOf('Gyman\Calendar\Domain\Calendar', $sectionNew1->calendar());
+        $this->assertInstanceOf('Gyman\Calendar\Domain\Calendar', $sectionNew2->calendar());
     }
 }

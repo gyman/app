@@ -1,15 +1,15 @@
 <?php
 namespace Gyman\Bundle\AppBundle\Factory;
 
-use Dende\Calendar\Application\Factory\CalendarFactory as BaseCalendarFactory;
-use Dende\Calendar\Domain\Calendar as BaseCalendar;
-use Dende\Calendar\Domain\Calendar\CalendarId;
+use Gyman\Calendar\Application\Factory\CalendarFactory as BaseCalendarFactory;
+use Gyman\Calendar\Domain\Calendar as BaseCalendar;
+use Gyman\Calendar\Domain\Calendar\CalendarId;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gyman\Domain\Calendar;
 
 /**
  * Class CalendarFactory
- * @package Dende\Calendar\Application\Factory
+ * @package Gyman\Calendar\Application\Factory
  */
 class CalendarFactory extends BaseCalendarFactory
 {

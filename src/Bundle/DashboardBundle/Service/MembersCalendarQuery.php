@@ -2,7 +2,7 @@
 namespace Gyman\Bundle\DashboardBundle\Service;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
+use Gyman\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Gyman\Domain\Entry;
 use Gyman\Domain\Member;
 use Gyman\Domain\Voucher;
